@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllDates } from '../../utils/data.ts';
+
+const dates = getAllDates('en');
+
+const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function getDow(d: string) {
+  const idx = new Date(d + 'T00:00:00').getDay();
+  return dowLabels[idx === 0 ? 6 : idx - 1];
+}
+---
+
+<BaseLayout title="📁 History Archive · INTEL.SYS" lang="en">
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">INTEL<span>.SYS</span></div>
+      <div class="logo-sub">Superpowers · Intel Hub</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Navigation</div>
+        <a href="/en" class="nav-item"><span class="icon">📡</span><span class="label">Home</span></a>
+        <a href="/en/archive" class="nav-item active"><span class="icon">📁</span><span class="label">Archive</span></a>
+        <a href="/en/stats" class="nav-item"><span class="icon">📊</span><span class="label">Stats</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Recent Reports</div>
+        {dates.slice(0, 8).map(d => (
+          <a href={`/en/day/${d}`} class="nav-item-recent"><span>{d}</span></a>
+        ))}
+      </div>
+    </nav>
+    <div class="sidebar-footer">Auto-generated · Every 2h</div>
+  </aside>
+
+  <main class="main">
+    <div class="container">
+      <div class="topbar">
+        <h1 class="topbar-title">📁 History <span>Archive</span></h1>
+        <span class="topbar-meta">{dates.length} days of data</span>
+      </div>
+
+      <div class="archive-grid">
+        {dates.map(d => (
+          <div class="archive-item">
+            <a href={`/en/day/${d}`}>
+              {d}
+              <span class="dow">{getDow(d)}</span>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <footer>📡 INTEL.SYS · Archive</footer>
+    </div>
+  </main>
+
+</div>
+</BaseLayout>

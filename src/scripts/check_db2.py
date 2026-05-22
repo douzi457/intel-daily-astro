@@ -1,0 +1,11 @@
+from db.db import get_conn
+conn = get_conn()
+c = conn.cursor()
+c.execute('SELECT DISTINCT date_key FROM items ORDER BY date_key DESC LIMIT 5')
+rows = c.fetchall()
+print('Recent date_keys:', [r[0] for r in rows])
+c.execute('SELECT COUNT(*) FROM items')
+print('Total rows:', c.fetchone()[0])
+c.execute("SELECT COUNT(*) FROM items WHERE description IS NOT NULL AND description != ''")
+print('With description:', c.fetchone()[0])
+conn.close()

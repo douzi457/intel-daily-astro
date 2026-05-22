@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PLATFORMS, getDayData, getAllDates } from '../utils/data.ts';
+import fs from 'fs';
+import path from 'path';
+
+const DATA_ROOT = path.join(process.cwd(), 'src/data/rewrite/zh');
+
+// 统计所有日期的数据
+let totalItems = 0;
+let platformDist: Record<string, number> = {};
+let dateCount = 0;
+
+if (fs.existsSync(DATA_ROOT)) {
+  const files = fs.readdirSync(DATA_ROOT).filter(f => f.endsWith('.json'));
+  dateCount = files.length;
+  files.forEach(f => {
+    const data = JSON.parse(fs.readFileSync(path.join(DATA_ROOT, f), 'utf-8'));
+    totalItems += data.items.length;
+    data.items.forEach((it: any) => {
+      const p = it.platform || 'other';
+      platformDist[p] = (platformDist[p] || 0) + 1;
+    });
+  });
+}
+
+const sortedPlatforms = Object.entries(platformDist)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 12);
+
+const maxCount = sortedPlatforms[0]?.[1] || 1;
+---
+
+<BaseLayout title="📊 统计面板 · INTEL.SYS">
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">INTEL<span>.SYS</span></div>
+      <div class="logo-sub">Superpowers · 情报站</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">导航</div>
+        <a href="/" class="nav-item"><span class="icon">📡</span><span class="label">首页</span></a>
+        <a href="/archive" class="nav-item"><span class="icon">📁</span><span class="label">归档</span></a>
+        <a href="/stats" class="nav-item active"><span class="icon">📊</span><span class="label">统计</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">自动生成 · 每2小时更新</div>
+  </aside>
+
+  <main class="main">
+    <div class="container">
+
+      <div class="topbar">
+        <h1 class="topbar-title">📊 统计<span>面板</span></h1>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card" style="--accent-color: var(--amber)">
+          <div class="sc-icon">📡</div>
+          <div class="sc-num">{totalItems.toLocaleString()}</div>
+          <div class="sc-lbl">总数据量</div>
+        </div>
+        <div class="stat-card" style="--accent-color: var(--cyan)">
+          <div class="sc-icon">📁</div>
+          <div class="sc-num">{dateCount}</div>
+          <div class="sc-lbl">覆盖天数</div>
+        </div>
+        <div class="stat-card" style="--accent-color: var(--green)">
+          <div class="sc-icon">📬</div>
+          <div class="sc-num">{Object.keys(platformDist).length}</div>
+          <div class="sc-lbl">数据源数</div>
+        </div>
+      </div>
+
+      <div class="section-title">📊 平台分布</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px">
+        {sortedPlatforms.map(([p, cnt]) => {
+          const meta = PLATFORMS[p] || { label: p, color: '#94a3b8', icon: '📌' };
+          const pct = Math.round(cnt / maxCount * 100);
+          return (
+            <div class="plat-row">
+              <div class="plat-label">{meta.icon} {meta.label}</div>
+              <div class="plat-bar">
+                <div class="plat-bar-fill" style={`width:${pct}%;background:${meta.color}`}></div>
+              </div>
+              <div class="plat-count">{cnt}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <footer>📡 INTEL.SYS · 统计面板</footer>
+    </div>
+  </main>
+
+</div>
+</BaseLayout>

@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TABS_EN, TAB_COLORS, PLATFORMS_EN, getDayData, getAllDates } from '../../utils/data.ts';
+
+const today = new Date().toISOString().slice(0, 10);
+const dayData = getDayData(today, 'en');
+
+// Statistics
+const tabCounts: Record<string, number> = {};
+TABS_EN.forEach(t => tabCounts[t] = 0);
+dayData.items.forEach((it: any) => {
+  const tab = it.tab || 'Finance';
+  tabCounts[tab] = (tabCounts[tab] || 0) + 1;
+});
+
+const recentDates = getAllDates('en').slice(0, 7);
+
+const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function getDow(d: string) {
+  const idx = new Date(d + 'T00:00:00').getDay();
+  return dowLabels[idx === 0 ? 6 : idx - 1];
+}
+
+const MODULE_DESCS: Record<string, string> = {
+  'Trending': 'Weibo · TikTok Hot Search',
+  'Finance': '36Kr · WallStreetCN · TouTiao',
+  'Dev': 'GitHub · HN · ProductHunt · V2EX',
+  'Society': 'AI · Startup · Side Project',
+};
+---
+
+<BaseLayout title="📡 INTEL.SYS · Global Intelligence" lang="en">
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">INTEL<span>.SYS</span></div>
+      <div class="logo-sub">Superpowers · Intel Hub</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Navigation</div>
+        <a href="/en" class="nav-item active">
+          <span class="icon">📡</span><span class="label">Home</span>
+        </a>
+        <a href={`/en/day/${today}`} class="nav-item">
+          <span class="icon">📈</span><span class="label">Today</span>
+        </a>
+        <a href="/en/archive" class="nav-item">
+          <span class="icon">📁</span><span class="label">Archive</span>
+        </a>
+        <a href="/en/stats" class="nav-item">
+          <span class="icon">📊</span><span class="label">Stats</span>
+        </a>
+      </div>
+
+      {recentDates.length > 0 && (
+        <div class="nav-section">
+          <div class="nav-section-title">Recent Reports</div>
+          {recentDates.map(d => (
+            <a href={`/en/day/${d}`} class="nav-item-recent">
+              <span>{d}</span><span class="dow">{getDow(d)}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
+
+    <div class="sidebar-footer">
+      Auto-generated · Every 2h<br/>
+      Superpowers Intel System
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+
+      <div class="topbar">
+        <h1 class="topbar-title">📡 Global <span>Intelligence</span> {today}</h1>
+        <span class="topbar-meta">Auto-updated every 2 hours</span>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card" style="--accent-color: var(--amber)">
+          <div class="sc-icon">📡</div>
+          <div class="sc-num">{dayData.items.length}</div>
+          <div class="sc-lbl">Items Today</div>
+        </div>
+        {TABS_EN.map(tab => (
+          <div class="stat-card" style={`--accent-color: ${TAB_COLORS[tab]}`}>
+            <div class="sc-icon">📌</div>
+            <div class="sc-num">{tabCounts[tab] || 0}</div>
+            <div class="sc-lbl">{tab}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Ad Placeholder -->
+      <div class="ad-container ad-banner" style="margin: 20px 0; min-height: 90px; background: var(--surface); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 0.8em; border-radius: var(--radius-lg);">
+        Ad Space: Top Banner (728x90)
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_ID"
+             data-ad-slot="YOUR_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+      </div>
+
+      <div class="section-title">🎯 Key Modules</div>
+      <div class="module-grid">
+        {TABS_EN.map(tab => {
+          const color = TAB_COLORS[tab];
+          return (
+            <a href={`/en/day/${today}?tab=${tab}`} class="module-card"
+               style={`--module-color: ${color}; --module-glow: ${color}30`}>
+              <div class="module-header">
+                <span class="module-icon">📌</span>
+                <span class="module-name">{tab}</span>
+              </div>
+              <div class="module-desc">{MODULE_DESCS[tab]}</div>
+              <div class="module-count">{tabCounts[tab] || 0} Items</div>
+            </a>
+          );
+        })}
+      </div>
+
+      <div class="section-title">📋 Today's Preview</div>
+      <div class="tab-filter">
+        <button class="tab-btn active" data-tab="All">📡 All<span class="cnt">{dayData.items.length}</span></button>
+        {TABS_EN.map(tab => (
+          <button class="tab-btn" data-tab={tab}>📌 {tab}<span class="cnt">{tabCounts[tab] || 0}</span></button>
+        ))}
+      </div>
+      <div class="search-wrap">
+        <input class="search-input" id="q" placeholder="🔍 Search titles/descriptions..." autocomplete="off"/>
+        <span class="result-hint" id="cntHint"></span>
+      </div>
+
+      <div class="item-list" id="itemList">
+        {dayData.items.slice(0, 30).map((it: any, idx: number) => (
+          <>
+            {idx === 10 && (
+              <div class="ad-container ad-in-feed" style="margin: 15px 0; min-height: 100px; background: var(--surface); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 0.8em; border-radius: var(--radius-md); grid-column: 1 / -1;">
+                Ad Space: In-Feed (Native Ad)
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-ad-client="ca-pub-YOUR_ID"
+                     data-ad-slot="YOUR_SLOT"></ins>
+              </div>
+            )}
+            <div class="item-card" data-tab={it.tab} style={`--item-color: ${it.platform_color}`}>
+              <div class="item-idx">{idx + 1}</div>
+              <div class="item-badge"
+                   style={`--badge-bg: ${it.platform_color}22; --badge-color: ${it.platform_color}`}>
+                {it.platform_icon} {PLATFORMS_EN[it.platform] || it.platform}
+              </div>
+              <div class="item-body">
+                <div class="item-title"><a href={it.url} target="_blank">{it.title}</a></div>
+                <div class="item-desc">{it.desc}</div>
+                <div class="item-meta">
+                  {it.hot_stars > 0 && <span class="item-hot">{'🔥'.repeat(it.hot_stars)}</span>}
+                  <span class="item-time">{it.date}</span>
+                </div>
+              </div>
+            </div>
+          </>
+        ))}
+      </div>
+
+      <footer>📡 INTEL.SYS · Global Intelligence Hub · {dayData.items.length} items today</footer>
+    </div>
+  </main>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = (btn as HTMLElement).dataset.tab!;
+      document.querySelectorAll('.item-card').forEach(card => {
+        (card as HTMLElement).classList.toggle('hidden',
+          tab !== 'All' && (card as HTMLElement).dataset.tab !== tab);
+      });
+      updateCount();
+    });
+  });
+
+  const q = document.getElementById('q') as HTMLInputElement;
+  if (q) {
+    q.addEventListener('input', () => {
+      const v = q.value.toLowerCase().trim();
+      document.querySelectorAll('.item-card').forEach(card => {
+        (card as HTMLElement).classList.toggle('hidden',
+          v !== '' && !(card as HTMLElement).textContent!.toLowerCase().includes(v));
+      });
+      updateCount();
+    });
+  }
+
+  function updateCount() {
+    const hint = document.getElementById('cntHint');
+    if (!hint) return;
+    const visible = document.querySelectorAll('.item-card:not(.hidden)').length;
+    hint.textContent = `${visible} items`;
+  }
+  updateCount();
+</script>
+</BaseLayout>
