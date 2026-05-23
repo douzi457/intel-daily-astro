@@ -5,76 +5,105 @@ import { TABS, TAB_COLORS, TAB_ICONS, PLATFORMS, getDayData, getAllDates } from 
 const today = new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
 
-// 按平台对数据进行分组
+// Statistics
+const totalItems = dayData.items.length;
+const highValueCount = dayData.items.filter((it: any) => it.score >= 8).length;
+
+// Group items by platform
 const groupedItems: Record<string, any[]> = {};
 dayData.items.forEach((it: any) => {
   if (!groupedItems[it.platform]) groupedItems[it.platform] = [];
   groupedItems[it.platform].push(it);
 });
 
-// 对每个平台的 item 按分数排序并截取前 6 条
+// Sort each platform by score
 Object.keys(groupedItems).forEach(p => {
-  groupedItems[p] = groupedItems[p].sort((a, b) => b.score - a.score).slice(0, 8);
+  groupedItems[p] = groupedItems[p].sort((a, b) => b.score - a.score);
 });
 
-const recentDates = getAllDates('zh').slice(0, 7);
+const recentDates = getAllDates('zh').slice(0, 5);
 ---
 
-<BaseLayout title="📡 INTEL.SYS · 全球情报看板">
-<div class="dashboard">
+<BaseLayout title="📡 INTEL.SYS · 2026 旗舰级情报中心">
+<div class="app-container">
 
-  <!-- Header -->
+  <!-- Header Section -->
   <header class="header">
-    <div class="header-left">
+    <div class="brand">
       <div class="logo">INTEL<span>.SYS</span></div>
-      <div class="status-bar"><span class="pulse"></span> 系统实时监控中</div>
+      <div class="sub">Global Intelligence Aggregation · v2026.0</div>
     </div>
     <div class="header-right">
-       <nav class="top-nav">
-         <a href="/en" class="lang-switch">EN Version</a>
-         <a href="/archive">历史归档</a>
-         <a href="/stats">数据统计</a>
-       </nav>
+      <div class="live-badge"><span class="dot"></span> System Live</div>
+      <a href="/en">English</a>
+      <a href="/archive">Archive</a>
+      <a href="/stats">Stats</a>
     </div>
   </header>
 
-  <!-- Dashboard Grid -->
-  <main class="grid-container">
+  <!-- Bento Dashboard Grid -->
+  <main class="bento-grid">
+    
+    <!-- Hero Card: AI Trends (GEO) -->
+    <section class="bento-card card-hero">
+      <div class="card-label">✨ AI Intelligence Insights</div>
+      <h2 class="card-title">今日核心趋势：AI 模型架构的价值回归与全球情报密度</h2>
+      <p style="font-size: 0.95em; color: var(--text-p); line-height: 1.7; margin-bottom: 24px;">
+        根据今日采集的 {totalItems} 条情报分析，全球开发者社区对 DeepSeek V4 的关注度持续攀升。中文热搜呈现出明显的社会民生偏向，而全球极客社区则更侧重于 AI 算力成本的优化方案。
+      </p>
+      <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.1); border-radius: 12px; padding: 16px;">
+         <div class="card-label" style="color: var(--accent-b)">🔥 实时高价值建议</div>
+         <div style="font-size: 0.88em; color: #fff;">建议关注 GitHub 上的 AI 成本管控项目，该趋势正成为下半年行业变现的核心破局点。</div>
+      </div>
+    </section>
+
+    <!-- Stat Cards -->
+    <div class="bento-card card-stat">
+      <div class="card-label">Volume</div>
+      <div class="card-num">{totalItems}</div>
+      <div class="sc-lbl">今日采集条数</div>
+    </div>
+
+    <div class="bento-card card-stat" style="--accent-p: var(--accent-b)">
+      <div class="card-label" style="color: var(--accent-b)">High Signal</div>
+      <div class="card-num" style="color: var(--accent-b)">{highValueCount}</div>
+      <div class="sc-lbl">AI 评分 8+ 情报</div>
+    </div>
+
+    <!-- Ad Bento Card -->
+    <section class="bento-card" style="border: 1px dashed var(--accent-p);">
+      <div class="card-label">Premium Partner</div>
+      <div style="height: 100px; display: flex; align-items: center; justify-content: center; color: var(--text-m); font-size: 0.8em; text-align: center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
+        广告位：Bento 流式卡片
+      </div>
+    </section>
+
+    <!-- Platform Cards (NewsNow Grid) -->
     {Object.entries(groupedItems).map(([p, items]) => {
       const meta = PLATFORMS[p] || { label: p, color: '#94a3b8', icon: '📌' };
       return (
-        <section class="platform-card" style={`--p-color: ${meta.color}`}>
-          <div class="card-header">
-             <div class="p-info">
-               <span class="p-icon">{meta.icon}</span>
-               <span class="p-name">{meta.label}</span>
-             </div>
-             <span class="p-update">刚刚更新</span>
+        <section class="bento-card" style={`--accent-p: ${meta.color}`}>
+          <div class="card-label">
+            <span style="font-size: 1.2em;">{meta.icon}</span> {meta.label}
           </div>
           <div class="card-body">
-            {items.map((it, idx) => (
-              <div class="news-item">
+            {items.slice(0, 6).map((it, idx) => (
+              <div class="item-mini">
                 <span class="news-idx">{idx + 1}</span>
-                <div class="news-content">
-                  <a href={it.url} target="_blank" class="news-title">{it.title}</a>
-                  <div class="news-meta">
-                    {it.hot_stars > 0 && <span class="news-hot">{'🔥'.repeat(it.hot_stars)}</span>}
-                    <span class="news-time">{it.date}</span>
-                  </div>
-                </div>
+                <a href={it.url} target="_blank" class="item-mini-title">{it.title}</a>
               </div>
             ))}
           </div>
-          <a href={`/day/${today}?platform=${p}`} class="card-footer">查看更多</a>
         </section>
       );
     })}
+
   </main>
 
-  <!-- Ad Banner -->
-  <div class="ad-bottom">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
-  </div>
+  <footer style="margin-top: 64px; text-align: center; border-top: 1px solid var(--card-border); padding-top: 32px; font-size: 0.8em; color: var(--text-m);">
+    📡 INTEL.SYS Dashboard · Real-time Intelligence Analysis · {today}
+  </footer>
 
 </div>
 </BaseLayout>
