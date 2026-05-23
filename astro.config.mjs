@@ -8,10 +8,16 @@ export default defineConfig({
     defaultLocale: 'zh',
     locales: ['zh', 'en'],
     routing: {
-      prefixDefaultLocale: false, // zh 路径不加前缀，/en 路径加前缀
+      prefixDefaultLocale: false,
     },
   },
   adapter: cloudflare({
     mode: 'directory',
+    // 2026 新增：在适配器中显式尝试声明平台功能 (如果支持)
   }),
+  vite: {
+    ssr: {
+      external: ['node:fs', 'node:path', 'node:process'],
+    },
+  },
 });
