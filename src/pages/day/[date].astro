@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { TABS, TAB_COLORS, TAB_ICONS, getDayData, getAllDates } from '../../utils/data.ts';
+import { PLATFORMS, getDayData, getAllDates } from '../../utils/data.ts';
 
 export async function getStaticPaths() {
   const dates = getAllDates('zh');
@@ -10,152 +10,189 @@ export async function getStaticPaths() {
 const { date } = Astro.params as { date: string };
 const dayData = getDayData(date, 'zh');
 
-// 统计
-const tabCounts: Record<string, number> = {};
-TABS.forEach(t => tabCounts[t] = 0);
-dayData.items.forEach((it: any) => {
-  tabCounts[it.tab || '财经'] = (tabCounts[it.tab || '财经'] || 0) + 1;
-});
+// Statistics
+const totalItems = dayData.items.length;
+const highValueCount = dayData.items.filter((it: any) => it.score >= 8).length;
 
-// 前后日期导航
-const dates = getAllDates('zh');
-const idx = dates.indexOf(date);
-const prevDay = idx < dates.length - 1 ? dates[idx + 1] : null;
-const nextDay = idx > 0 ? dates[idx - 1] : null;
+// Filter featured items
+const sortedByScore = [...dayData.items].sort((a: any, b: any) => b.score - a.score);
+const heroItem = sortedByScore[0];
+
+// Group items for Bento Sections
+const techItems = dayData.items.filter((it: any) => ['github', 'ithome', 'hackernews', 'v2ex', 'producthunt'].includes(it.platform)).slice(0, 8);
+const financeItems = dayData.items.filter((it: any) => ['36kr', 'wallstreetcn', 'toutiao', 'tencent'].includes(it.platform)).slice(0, 8);
+const hotItems = dayData.items.filter((it: any) => ['weibo', 'douyin'].includes(it.platform)).slice(0, 12);
+
+// Remaining items
+const displayedIds = new Set([...techItems, ...financeItems, ...hotItems, heroItem].filter(Boolean).map(it => it.id));
+const remainingItems = dayData.items.filter((it: any) => !displayedIds.has(it.id)).sort((a: any, b: any) => b.score - a.score);
+
+const recentDates = getAllDates('zh').slice(0, 10);
+const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
+function getDow(d: string) {
+  const idx = new Date(d + 'T00:00:00').getDay();
+  return dowLabels[idx === 0 ? 6 : idx - 1];
+}
 ---
 
-<BaseLayout title={`📡 ${date} 情报日报 · INTEL.SYS`}>
-<div class="layout">
+<BaseLayout title={`📡 ${date} 情报日报 · INTEL.SYS`} lang="zh-CN">
+<div class="app-container">
 
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-text">INTEL<span>.SYS</span></div>
-      <div class="logo-sub">Superpowers · 情报站</div>
+  <!-- 顶部栏 -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo">INTEL<span>.SYS</span></div>
+      <div class="sub">历史日报回顾 · {date}</div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-title">导航</div>
-        <a href="/" class="nav-item"><span class="icon">📡</span><span class="label">首页</span></a>
-        <a href={`/day/${date}`} class="nav-item active"><span class="icon">📈</span><span class="label">今日日报</span></a>
-        <a href="/archive" class="nav-item"><span class="icon">📁</span><span class="label">归档</span></a>
-        <a href="/stats" class="nav-item"><span class="icon">📊</span><span class="label">统计</span></a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-title">最近日报</div>
-        {dates.slice(0, 8).map(d => (
-          <a href={`/day/${d}`} class="nav-item-recent">
+    <div class="header-tools">
+      <a href="/" class="tool-link">返回首页</a>
+      <a href="/archive" class="tool-link">归档</a>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+    </div>
+  </header>
+
+  <!-- 便当盒布局网格 (带空位自适应) -->
+  <main class="bento-grid">
+    
+    <!-- 1. 核心看板 -->
+    <section class="bento-card hero-box">
+      <div class="label-group">✨ {date} 核心精选</div>
+      {heroItem ? (
+        <>
+          <h2 class="card-title" style="font-size: 1.8em; margin-bottom: 20px;">
+            <a href={heroItem.url} target="_blank" style="color: inherit;">{heroItem.desc || heroItem.title}</a>
+          </h2>
+          <p class="card-desc">源自 {heroItem.platform_label}，本条情报被 AI 判定为当日最高价值信号。</p>
+        </>
+      ) : <p>当日无精选内容</p>}
+    </section>
+
+    <!-- 2. 统计小方块 -->
+    <div class="bento-card stat-box">
+      <div class="label-group">情报规模</div>
+      <div class="card-num">{totalItems}</div>
+      <div class="sc-lbl">条历史记录</div>
+    </div>
+
+    <!-- 3. 高分信号 -->
+    <div class="bento-card stat-box" style="border-color: var(--accent-b)">
+      <div class="label-group" style="color: var(--accent-b)">信号强度</div>
+      <div class="card-num" style="color: var(--accent-b)">{highValueCount}</div>
+      <div class="sc-lbl">AI 评分 8+</div>
+    </div>
+
+    <!-- 4. 科技开发 (仅在有数据时显示) -->
+    {techItems.length > 0 && (
+      <section class="bento-card list-box">
+        <div class="label-group">💻 科技与开发</div>
+        <div class="card-body">
+          {techItems.map((it: any, idx: number) => (
+            <div class="mini-item">
+              <span class="m-idx">{idx + 1}</span>
+              <div class="m-body">
+                <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+                <span class="m-source">{it.platform_label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- 5. 历史导航 (常驻，防止留空) -->
+    <section class="bento-card visual-box" style="background: rgba(59, 130, 246, 0.03);">
+      <div class="label-group" style="color: var(--accent-b)">📅 其他日期</div>
+      <div class="history-list" style="display: flex; flex-direction: column; gap: 8px;">
+        {recentDates.map(d => (
+          <a href={`/day/${d}`} class={`history-item ${d === date ? 'active-day' : ''}`}>
             <span>{d}</span>
+            <span style="opacity: 0.5; font-size: 0.85em;">{getDow(d)}</span>
           </a>
         ))}
       </div>
-    </nav>
-    <div class="sidebar-footer">自动生成 · 每2小时更新</div>
-  </aside>
+    </section>
 
-  <main class="main">
-    <div class="container">
-
-      <div class="topbar">
-        <h1 class="topbar-title">📡 <span>{date}</span> 情报日报</h1>
-        <span class="topbar-meta">{dayData.items.length} 条内容</span>
-      </div>
-
-      <!-- 导航 -->
-      <div class="day-nav">
-        {prevDay
-          ? <a href={`/day/${prevDay}`}>←</a>
-          : <span style="width:38px;display:inline-block"></span>}
-        <span class="current">{date}</span>
-        {nextDay
-          ? <a href={`/day/${nextDay}`}>→</a>
-          : <span style="width:38px;display:inline-block"></span>}
-      </div>
-
-      <!-- Tab 统计 -->
-      <div class="stats-grid">
-        <div class="stat-card" style="--accent-color: var(--amber)">
-          <div class="sc-icon">📡</div><div class="sc-num">{dayData.items.length}</div><div class="sc-lbl">总计</div>
-        </div>
-        {TABS.map(tab => (
-          <div class="stat-card" style={`--accent-color: ${TAB_COLORS[tab]}`}>
-            <div class="sc-icon">{TAB_ICONS[tab]}</div>
-            <div class="sc-num">{tabCounts[tab] || 0}</div>
-            <div class="sc-lbl">{tab}</div>
-          </div>
-        ))}
-      </div>
-
-      <!-- Tab 筛选 -->
-      <div class="tab-filter">
-        <button class="tab-btn active" data-tab="全部">📡 全部<span class="cnt">{dayData.items.length}</span></button>
-        {TABS.map(tab => (
-          <button class="tab-btn" data-tab={tab}>{TAB_ICONS[tab]} {tab}<span class="cnt">{tabCounts[tab] || 0}</span></button>
-        ))}
-      </div>
-      <div class="search-wrap">
-        <input class="search-input" id="q" placeholder="🔍 搜索标题/描述..." autocomplete="off"/>
-        <span class="result-hint" id="cntHint"></span>
-      </div>
-
-      <!-- 内容列表 -->
-      <div class="item-list" id="itemList">
-        {dayData.items.map((it: any, idx: number) => (
-          <div class="item-card" data-tab={it.tab} style={`--item-color: ${it.platform_color}`}>
-            <div class="item-idx">{idx + 1}</div>
-            <div class="item-badge"
-                 style={`--badge-bg: ${it.platform_color}22; --badge-color: ${it.platform_color}`}>
-              {it.platform_icon} {it.platform_label}
-            </div>
-            <div class="item-body">
-              <div class="item-title"><a href={it.url} target="_blank">{it.title}</a></div>
-              <div class="item-desc">{it.desc}</div>
-              <div class="item-meta">
-                {it.hot_stars > 0 && <span class="item-hot">{'🔥'.repeat(it.hot_stars)}</span>}
-                <span class="item-time">{it.date}</span>
+    <!-- 6. 财经商业 -->
+    {financeItems.length > 0 && (
+      <section class="bento-card list-box">
+        <div class="label-group">📈 财经商业</div>
+        <div class="card-body">
+          {financeItems.map((it: any, idx: number) => (
+            <div class="mini-item">
+              <span class="m-idx">{idx + 1}</span>
+              <div class="m-body">
+                <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+                <span class="m-source">{it.platform_label}</span>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- 7. 热搜 (常驻，作为兜底内容防止布局空洞) -->
+    <section class="bento-card visual-box">
+      <div class="label-group">🔥 实时热点</div>
+      <div class="card-body">
+        {(hotItems.length > 0 ? hotItems : remainingItems.slice(0, 10)).map((it: any) => (
+          <div class="mini-item">
+            <div class="m-body">
+              <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
+              <span class="m-source" style="font-size: 0.7em;">{it.platform_label}</span>
+            </div>
           </div>
         ))}
       </div>
+    </section>
 
-      <footer>📡 INTEL.SYS · {date}</footer>
-    </div>
   </main>
+
+  <!-- 底部全量流 -->
+  <section style="margin-top: 60px;">
+    <div class="label-group" style="margin-bottom: 24px;">🌐 完整信号流 ({date})</div>
+    <div class="bento-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+      {remainingItems.map((it: any) => (
+        <div class="bento-card">
+          <div class="platform-tag" style={`color: ${it.platform_color || 'var(--accent-b)'}; font-size: 0.65em; font-weight: 800; margin-bottom: 10px;`}>
+            {it.platform_label}
+          </div>
+          <a href={it.url} target="_blank" class="m-ai" style="font-size: 1em; margin-bottom: 12px; display: block;">{it.desc || it.title}</a>
+          <div class="card-footer" style="font-size: 0.7em; opacity: 0.5;">
+            <span>SCORE {it.score.toFixed(1)}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <footer style="margin-top: 80px; text-align: center; font-size: 0.8em; color: var(--text-m); padding-bottom: 40px; border-top: 1px solid var(--card-border); padding-top: 40px;">
+    📡 智谱 GLM-5 驱动 · {date} 情报档案
+  </footer>
 
 </div>
 
+<style>
+  .history-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: rgba(255,255,255,0.03);
+    border-radius: 8px; font-size: 0.85em; font-family: var(--font-mono);
+    color: var(--text-p); transition: all 0.2s;
+  }
+  .active-day { border: 1px solid var(--accent-p); background: rgba(168, 85, 247, 0.1); color: #fff; }
+  .tool-link { font-size: 0.85em; font-weight: 600; color: var(--text-p); margin-right: 15px;}
+</style>
+
 <script>
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = (btn as HTMLElement).dataset.tab!;
-      document.querySelectorAll('.item-card').forEach(card => {
-        (card as HTMLElement).classList.toggle('hidden',
-          tab !== '全部' && (card as HTMLElement).dataset.tab !== tab);
-      });
-      updateCount();
-    });
+  const btn = document.getElementById('themeToggle');
+  let theme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  btn!.textContent = theme === 'dark' ? '☀️' : '🌙';
+
+  btn?.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
   });
-
-  const q = document.getElementById('q') as HTMLInputElement;
-  if (q) {
-    q.addEventListener('input', () => {
-      const v = q.value.toLowerCase().trim();
-      document.querySelectorAll('.item-card').forEach(card => {
-        (card as HTMLElement).classList.toggle('hidden',
-          v !== '' && !(card as HTMLElement).textContent!.toLowerCase().includes(v));
-      });
-      updateCount();
-    });
-  }
-
-  function updateCount() {
-    const hint = document.getElementById('cntHint');
-    if (!hint) return;
-    const visible = document.querySelectorAll('.item-card:not(.hidden)').length;
-    hint.textContent = `${visible} 条`;
-  }
-  updateCount();
 </script>
 </BaseLayout>
