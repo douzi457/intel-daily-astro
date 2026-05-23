@@ -5,95 +5,143 @@ import { getDayData, getAllDates, PLATFORMS } from '../utils/data.ts';
 const today = new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
 
-// Mix all items and sort by Score (Primary) and Hot (Secondary)
-const allItems = dayData.items.sort((a: any, b: any) => {
-  if (b.score !== a.score) return b.score - a.score;
-  return b.hot - a.hot;
-});
+// Statistics
+const totalItems = dayData.items.length;
+const highValueCount = dayData.items.filter((it: any) => it.score >= 8).length;
+
+// Filter featured items (Score >= 9) for Hero
+const featuredItems = dayData.items.filter((it: any) => it.score >= 9).slice(0, 1);
+const heroItem = featuredItems[0] || dayData.items.sort((a: any, b: any) => b.score - a.score)[0];
+
+// Group items for Bento Sections
+const techItems = dayData.items.filter((it: any) => ['github', 'ithome', 'hackernews', 'v2ex'].includes(it.platform)).slice(0, 6);
+const financeItems = dayData.items.filter((it: any) => ['36kr', 'wallstreetcn', 'toutiao'].includes(it.platform)).slice(0, 6);
+const hotItems = dayData.items.filter((it: any) => ['weibo', 'douyin'].includes(it.platform)).slice(0, 6);
 
 const recentDates = getAllDates('zh').slice(0, 5);
 ---
 
-<BaseLayout title="📡 INTEL.SYS · AI Semantic Stream">
+<BaseLayout title="📡 INTEL.SYS · 旗舰级情报看板" lang="zh-CN">
 <div class="app-container">
 
-  <!-- Header -->
+  <!-- 顶部栏 -->
   <header class="header">
-    <div class="logo">INTEL<span>.SYS</span></div>
-    <div style="display: flex; gap: 16px; align-items: center;">
-      <a href="/en" style="font-size: 0.85em; font-weight: 600;">EN Version</a>
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
-        <span class="icon-sun" style="display:none">☀️</span>
-        <span class="icon-moon">🌙</span>
-      </button>
+    <div class="brand">
+      <div class="logo">INTEL<span>.SYS</span></div>
+    </div>
+    <div class="header-tools">
+      <div class="live-badge"><span class="pulse-dot"></span> 系统实时监控中</div>
+      <a href="/en" style="font-size: 0.85em; font-weight: 600; color: var(--text-p);">English</a>
+      <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
     </div>
   </header>
 
-  <!-- AI Semantic Grid -->
-  <main class="stream-grid">
-    {allItems.map((it: any) => {
-      const isFeatured = it.score >= 9;
-      const meta = PLATFORMS[it.platform] || { label: it.platform_label, icon: '📌' };
-      return (
-        <article class={`stream-card ${isFeatured ? 'card-featured' : ''}`}>
-          <div class="platform-tag">
-            <span>{meta.icon}</span>
-            <span>{it.platform_label || meta.label}</span>
+  <!-- 便当盒布局网格 -->
+  <main class="bento-grid">
+    
+    <!-- 1. 核心看板 (2x2) -->
+    <section class="bento-card hero-box">
+      <div class="label-group">✨ 今日核心精选</div>
+      <h2 class="card-title" style="font-size: 1.8em; margin-bottom: 20px;">{heroItem?.desc || heroItem?.title}</h2>
+      <p class="card-desc" style="margin-bottom: 32px;">
+        根据 AI 深度分析，今日全球情报密度主要集中在模型成本管控与社会民生热点。{heroItem?.title} 是目前最值得关注的信号。
+      </p>
+      <div style="margin-top: auto; padding: 20px; background: rgba(168, 85, 247, 0.08); border: 1px solid var(--card-stroke); border-radius: 12px;">
+        <div class="label-group" style="color: var(--accent-b)">🔥 实时专家建议</div>
+        <div style="font-size: 0.9em; color: #fff; font-weight: 500;">建议优先布局 AI 成本优化相关赛道，该趋势在开发者社区热度极高。</div>
+      </div>
+    </section>
+
+    <!-- 2. 统计小方块 (1x1) -->
+    <div class="bento-card stat-box">
+      <div class="label-group">采集总量</div>
+      <div class="card-num">{totalItems}</div>
+      <div class="sc-lbl">条实时数据</div>
+    </div>
+
+    <!-- 3. 高分信号 (1x1) -->
+    <div class="bento-card stat-box" style="border-color: var(--accent-b)">
+      <div class="label-group" style="color: var(--accent-b)">高价值信号</div>
+      <div class="card-num" style="color: var(--accent-b)">{highValueCount}</div>
+      <div class="sc-lbl">AI 评分 8+</div>
+    </div>
+
+    <!-- 4. 科技开发前沿 (2x2) -->
+    <section class="bento-card list-box">
+      <div class="label-group">💻 科技开发前沿</div>
+      <div class="card-body">
+        {techItems.map((it: any, idx: number) => (
+          <div class="mini-item">
+            <span class="m-idx">{idx + 1}</span>
+            <div class="m-body">
+              <div class="m-ai">{it.desc || it.title}</div>
+              <a href={it.url} target="_blank" class="m-source">来源: {it.title}</a>
+            </div>
           </div>
-          
-          {/* AI 摘要成为主角 */}
-          <div class="ai-summary">
-            {it.desc || it.title}
+        ))}
+      </div>
+    </section>
+
+    <!-- 5. 广告/合作伙伴 (1x2) -->
+    <section class="bento-card visual-box" style="border: 1px dashed var(--accent-p); justify-content: center; align-items: center;">
+      <div class="label-group">赞助商推广</div>
+      <div style="width: 100%; text-align: center;">
+         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
+         <span style="font-size: 0.7em; color: var(--text-m);">广告位预留</span>
+      </div>
+    </section>
+
+    <!-- 6. 财经与商业 (2x2) -->
+    <section class="bento-card list-box">
+      <div class="label-group">📈 财经与商业</div>
+      <div class="card-body">
+        {financeItems.map((it: any, idx: number) => (
+          <div class="mini-item">
+            <span class="m-idx">{idx + 1}</span>
+            <div class="m-body">
+              <div class="m-ai">{it.desc || it.title}</div>
+              <a href={it.url} target="_blank" class="m-source">来源: {it.title}</a>
+            </div>
           </div>
-          
-          {/* 原始标题缩小显示，作为辅助 */}
-          <a href={it.url} target="_blank" class="news-title">
-             Source: {it.title}
-          </a>
-          
-          <div class="card-footer">
-            <span class="score-badge">SIGNAL {it.score.toFixed(1)}</span>
-            <span>{it.date}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- 7. 全网热搜 (1x2) -->
+    <section class="bento-card visual-box">
+      <div class="label-group">🔥 全网热搜</div>
+      <div class="card-body">
+        {hotItems.map((it: any, idx: number) => (
+          <div class="mini-item">
+            <div class="m-body">
+              <div class="m-ai" style="font-size: 0.85em;">{it.title}</div>
+              <span class="m-source" style="font-size: 0.7em;">{it.platform_label} · {it.date}</span>
+            </div>
           </div>
-        </article>
-      );
-    })}
+        ))}
+      </div>
+    </section>
+
   </main>
 
-  <footer style="margin-top: 80px; text-align: center; font-size: 0.8em; color: var(--text-m);">
-    📡 Powered by Zhipu GLM-4-Air · Semantic Intelligence Hub · {today}
+  <footer style="margin-top: 80px; text-align: center; font-size: 0.8em; color: var(--text-m); padding-bottom: 40px;">
+    📡 智谱 GLM-5 驱动 · 全自动情报看板系统 · {today}
   </footer>
 
 </div>
 
 <script>
-  // Theme Switching Logic
-  const themeToggle = document.getElementById('themeToggle');
-  const sunIcon = document.querySelector('.icon-sun') as HTMLElement;
-  const moonIcon = document.querySelector('.icon-moon') as HTMLElement;
-  
-  // Check local storage or preference
-  let currentTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  updateIcons(currentTheme);
+  // 主题切换逻辑
+  const btn = document.getElementById('themeToggle');
+  let theme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  btn!.textContent = theme === 'dark' ? '☀️' : '🌙';
 
-  themeToggle?.addEventListener('click', () => {
-    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
-    updateIcons(currentTheme);
+  btn?.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
   });
-
-  function updateIcons(theme: string) {
-    if (theme === 'light') {
-      sunIcon.style.display = 'none';
-      moonIcon.style.display = 'block'; // Show moon to switch to dark
-      moonIcon.textContent = '🌙';
-    } else {
-      sunIcon.style.display = 'block'; // Show sun to switch to light
-      sunIcon.textContent = '☀️';
-      moonIcon.style.display = 'none';
-    }
-  }
 </script>
 </BaseLayout>
