@@ -1,20 +1,19 @@
 /* ============================================
-   INTEL.SYS — Precision Bento Architecture
-   Logic: Zero-Gap Grid + Platform-Specific Sizing
+   INTEL.SYS — 2026 Ultimate Bento Dashboard
+   Design: Precision Alignment & Visual Depth
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root {
-  --bg-main:    #030305;
+  --bg-main:    #050508;
   --bg-mesh:    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
                 radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.05) 0, transparent 50%);
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.08) 0, transparent 50%);
   
-  --card-bg:    rgba(15, 15, 23, 0.75);
-  --card-hover: rgba(22, 22, 35, 0.9);
+  --card-bg:    rgba(17, 18, 25, 0.8);
   --card-border: rgba(255, 255, 255, 0.05);
-  --card-stroke: rgba(168, 85, 247, 0.3); 
+  --card-stroke: rgba(168, 85, 247, 0.4); 
   
   --text-h:     #FFFFFF;
   --text-p:     #94A3B8;
@@ -26,21 +25,9 @@
   
   --font-sans:  'Plus Jakarta Sans', sans-serif;
   --font-mono:  'JetBrains Mono', monospace;
-  --radius:     16px;
-
-  /* Precision Grid Logic */
-  --grid-columns: 4;
-  --grid-gap:     20px;
-  --row-height:   200px;
-}
-
-[data-theme="light"] {
-  --bg-main:    #F8FAFC;
-  --card-bg:    #FFFFFF;
-  --card-border: rgba(0, 0, 0, 0.08);
-  --text-h:     #0F172A;
-  --text-p:     #475569;
-  --text-m:     #94A3B8;
+  
+  --grid-gap:   20px;
+  --row-h:      180px; /* 统一行高基准 */
 }
 
 /* ── Base ── */
@@ -52,80 +39,93 @@ body {
   background-attachment: fixed;
   color: var(--text-p);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .app-container {
-  max-width: 1440px; /* Standardized Wide Screen */
+  max-width: 1560px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 40px 48px;
 }
 
-/* ── Bento Master Grid (4 Columns, Fully Filled) ── */
+/* ── Header ── */
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
+.logo { font-size: 1.5em; font-weight: 800; color: #fff; letter-spacing: -1.5px; }
+.logo span { background: linear-gradient(to right, var(--accent-p), var(--accent-b)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* ── Bento Master Grid (Precision Alignment) ── */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  grid-auto-rows: var(--row-height);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: var(--row-h);
   gap: var(--grid-gap);
+  /* 确保底线对齐的关键：强制网格对齐内容 */
+  align-items: stretch;
 }
 
 .bento-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius);
-  padding: 24px;
+  backdrop-filter: blur(24px);
+  border-radius: 20px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
   overflow: hidden;
-  transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all .4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Logic: Platform-Specific Box Sizing */
+/* 视觉聚焦：给核心盒子加上“外光晕” */
+.box-hero { 
+  grid-column: span 2; grid-row: span 2; 
+  border-color: var(--card-stroke);
+  box-shadow: inset 0 0 40px rgba(168, 85, 247, 0.05);
+}
+.box-hero::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-p), transparent);
+}
 
-/* 1. Hero / Insight (2x2) - The Centerpiece */
-.box-hero { grid-column: span 2; grid-row: span 2; border: 1px solid var(--card-stroke); }
-
-/* 2. Hot Search / Trending (1x2) - Slim, Symmetrical Sidebar Style */
-.box-hot { grid-column: span 1; grid-row: span 2; }
-
-/* 3. Deep List / Tech / Finance (2x2) - Wide Content Area */
-.box-deep { grid-column: span 2; grid-row: span 2; }
-
-/* 4. Mini Stats / Small Ads (1x1) - Small Square Units */
+.box-hot { grid-column: span 1; grid-row: span 3; } /* 修长侧栏，对齐下方大盒 */
+.box-deep { grid-column: span 2; grid-row: span 3; } /* 深度长盒 */
 .box-mini { grid-column: span 1; grid-row: span 1; }
+.box-banner { grid-column: span 2; grid-row: span 1; border: 1px dashed var(--accent-b); }
 
-/* 5. Long Horizontal Ad (4x1) - Full Width Row Filler */
-.box-banner { grid-column: span 4; grid-row: span 1; }
-
-/* --- Internal Scrollable Content --- */
+/* ── Internal Scrolling (Clean & Professional) ── */
 .card-body {
   flex: 1;
   overflow-y: auto;
-  padding-right: 6px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--card-border) transparent;
+  margin-right: -10px;
+  padding-right: 10px;
 }
-.card-body::-webkit-scrollbar { width: 4px; }
-.card-body::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+.card-body::-webkit-scrollbar { width: 3px; }
+.card-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
-/* --- Elements --- */
-.label-group { font-size: 0.65em; font-weight: 800; text-transform: uppercase; color: var(--accent-p); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.card-title { font-size: 1.25em; font-weight: 700; color: var(--text-h); margin-bottom: 16px; }
-.card-num { font-family: var(--font-mono); font-size: 3.5em; font-weight: 700; color: var(--text-h); }
+/* ── Typography (The "Elite" Look) ── */
+.label-group { font-size: 0.65em; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-p); margin-bottom: 16px; opacity: 0.8; }
+.card-title { font-size: 1.4em; font-weight: 800; color: #fff; line-height: 1.3; letter-spacing: -0.5px; margin-bottom: 20px; }
+.card-num { font-family: var(--font-mono); font-size: 3.2em; font-weight: 800; color: #fff; letter-spacing: -2px; }
 
-.mini-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
-.m-idx { font-family: var(--font-mono); font-size: 0.75em; color: var(--text-m); width: 14px; }
-.m-ai { font-size: 0.9em; font-weight: 600; color: var(--text-h); line-height: 1.4; display: block; margin-bottom: 2px; text-decoration: none; }
-.m-source { font-size: 0.75em; color: var(--text-m); }
+.mini-item {
+  display: flex; gap: 16px; padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.2s;
+}
+.mini-item:hover { transform: translateX(4px); }
+.m-idx { font-family: var(--font-mono); font-size: 0.75em; font-weight: 700; color: var(--accent-p); width: 18px; padding-top: 4px; }
+.m-body { flex: 1; min-width: 0; }
+.m-ai { font-size: 0.95em; font-weight: 600; color: #fff; line-height: 1.5; margin-bottom: 4px; display: block; text-decoration: none; }
+.m-source { font-size: 0.75em; color: var(--text-m); font-weight: 500; }
 
-/* --- Responsive --- */
+/* ── Responsive ── */
 @media (max-width: 1200px) {
-  :root { --grid-columns: 2; }
-  .box-banner { grid-column: span 2; }
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .box-hot { grid-column: span 1; }
 }
-@media (max-width: 650px) {
-  :root { --grid-columns: 1; }
-  .bento-card { grid-column: span 1 !important; grid-row: auto !important; height: auto; min-height: 200px; }
+@media (max-width: 768px) {
+  .app-container { padding: 24px 20px; }
+  .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .bento-card { grid-column: span 1 !important; grid-row: auto !important; }
 }
