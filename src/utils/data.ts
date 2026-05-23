@@ -35,6 +35,11 @@ export const TAB_COLORS: Record<string, string> = {
   'Trending': '#FF9500', 'Finance': '#3395FF', 'Dev': '#6CCB5F', 'Society': '#2ECC71',
 };
 
+export const TAB_ICONS: Record<string, string> = {
+  '热搜': '🔥', '财经': '📈', '开发': '💻', '公众号': '📮',
+  'Trending': '🔥', 'Finance': '📈', 'Dev': '💻', 'Society': '📮',
+};
+
 // 数据存放路径
 const DATA_ROOT = path.join(process.cwd(), 'src/data/rewrite');
 
