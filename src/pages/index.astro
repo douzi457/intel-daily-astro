@@ -9,16 +9,17 @@ const dayData = getDayData(today, 'zh');
 const totalItems = dayData.items.length;
 const highValueCount = dayData.items.filter((it: any) => it.score >= 8).length;
 
-// Hierarchy Logic
-const sortedByScore = [...dayData.items].sort((a: any, b: any) => b.score - a.score);
-const heroItem = sortedByScore[0];
+// Logic: Sort and Filter
+const sortedItems = [...dayData.items].sort((a: any, b: any) => b.score - a.score);
+const heroItem = sortedItems[0];
 
-// Classification
+// Classification for Bento Blocks
 const techItems = dayData.items.filter((it: any) => ['github', 'ithome', 'hackernews', 'v2ex'].includes(it.platform));
 const financeItems = dayData.items.filter((it: any) => ['36kr', 'wallstreetcn', 'toutiao', 'tencent'].includes(it.platform));
-const hotItems = dayData.items.filter((it: any) => ['weibo', 'douyin'].includes(it.platform));
+const weiboItems = dayData.items.filter((it: any) => it.platform === 'weibo');
+const douyinItems = dayData.items.filter((it: any) => it.platform === 'douyin');
 
-const recentDates = getAllDates('zh').slice(0, 8);
+const recentDates = getAllDates('zh').slice(0, 12);
 ---
 
 <BaseLayout title="📡 INTEL.SYS · 旗舰级情报看板" lang="zh-CN">
@@ -34,10 +35,15 @@ const recentDates = getAllDates('zh').slice(0, 8);
     </div>
   </header>
 
-  <!-- Precision Bento Grid -->
+  <!-- 
+    Bento Grid 4-Column Logic (Tetris Mode):
+    Row 1-2: Hero(2x2) + Weibo(1x2) + Stats(1x1) + Ad(1x1) -> TOTAL 4 COLUMNS
+    Row 3-4: Tech(2x2) + Finance(2x2) -> TOTAL 4 COLUMNS
+    Row 5-6: Douyin(1x2) + History(1x2) + Global(2x2) -> TOTAL 4 COLUMNS
+  -->
   <main class="bento-grid">
     
-    <!-- Row 1: Focus & Hot -->
+    <!-- Hero Box (2x2) -->
     <section class="bento-card box-hero">
       <div class="label-group">✨ 今日头条精选</div>
       {heroItem && (
@@ -48,105 +54,102 @@ const recentDates = getAllDates('zh').slice(0, 8);
       )}
     </section>
 
-    <!-- Symmetrical Trending Sidebar 1 (Hot Search) -->
+    <!-- Weibo (1x2) -->
     <section class="bento-card box-hot">
       <div class="label-group">🔥 微博热搜</div>
       <div class="card-body">
-        {hotItems.filter(i => i.platform === 'weibo').slice(0, 15).map((it, idx) => (
+        {weiboItems.slice(0, 12).map((it, idx) => (
           <div class="mini-item">
             <span class="m-idx">{idx+1}</span>
-            <div class="m-body">
-              <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
-            </div>
+            <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Stat Square 1 -->
+    <!-- Stat Square (1x1) -->
     <div class="bento-card box-mini">
-      <div class="label-group">采集总量</div>
+      <div class="label-group">数据量</div>
       <div class="card-num">{totalItems}</div>
     </div>
 
-    <!-- Row 2 (Auto-fill) -->
-    <!-- Stat Square 2 -->
-    <div class="bento-card box-mini" style="border-color: var(--accent-b)">
-      <div class="label-group" style="color: var(--accent-b)">高分信号</div>
-      <div class="card-num" style="color: var(--accent-b)">{highValueCount}</div>
+    <!-- Native Ad Box (1x1) - Styled like a stat box to be subtle -->
+    <div class="bento-card box-mini" style="border: 1px dashed rgba(255,255,255,0.1);">
+      <div class="label-group">推荐资源</div>
+      <div style="font-size: 0.8em; color: var(--text-p); text-align: center;">
+         <!-- AdSense Code Here -->
+         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT"></ins>
+         <div style="margin-top: 4px; opacity: 0.5;">Sponsored</div>
+      </div>
     </div>
 
-    <!-- Symmetrical Trending Sidebar 2 (TikTok Hot) -->
+    <!-- Tech (2x2) -->
+    <section class="bento-card box-deep">
+      <div class="label-group">💻 科技前沿</div>
+      <div class="card-body">
+        {techItems.slice(0, 15).map((it, idx) => (
+          <div class="mini-item">
+            <span class="m-idx">{idx+1}</span>
+            <div class="m-body">
+              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+              <span class="m-source">源自: {it.platform_label}</span>
+            </div>
+            {/* Embedded Native Ad Every 5 items */}
+            {idx === 4 && <div class="native-ad-line">Sponsored: 高性能云服务器限时优惠</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Finance (2x2) -->
+    <section class="bento-card box-deep">
+      <div class="label-group">📈 财经商业</div>
+      <div class="card-body">
+        {financeItems.slice(0, 15).map((it, idx) => (
+          <div class="mini-item">
+            <span class="m-idx">{idx+1}</span>
+            <div class="m-body">
+              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+              <span class="m-source">源自: {it.platform_label}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- TikTok (1x2) -->
     <section class="bento-card box-hot">
-      <div class="label-group">🎵 抖音热点</div>
+      <div class="label-group">🎵 抖音趋势</div>
       <div class="card-body">
-        {hotItems.filter(i => i.platform === 'douyin').slice(0, 15).map((it, idx) => (
-          <div class="mini-item">
-            <div class="m-body">
-              <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Row 3: Deep Content -->
-    <section class="bento-card box-deep">
-      <div class="label-group">💻 科技开发前沿</div>
-      <div class="card-body">
-        {techItems.slice(0, 20).map((it, idx) => (
+        {douyinItems.slice(0, 12).map((it, idx) => (
           <div class="mini-item">
             <span class="m-idx">{idx+1}</span>
-            <div class="m-body">
-              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
-              <span class="m-source">源自: {it.title}</span>
-            </div>
+            <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
           </div>
         ))}
       </div>
     </section>
 
-    <section class="bento-card box-deep">
-      <div class="label-group">📈 财经商业深度</div>
-      <div class="card-body">
-        {financeItems.slice(0, 20).map((it, idx) => (
-          <div class="mini-item">
-            <span class="m-idx">{idx+1}</span>
-            <div class="m-body">
-              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
-              <span class="m-source">源自: {it.title}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Row 4: Archive & Ads -->
-    <section class="bento-card box-hot" style="background: rgba(59, 130, 246, 0.05);">
-      <div class="label-group" style="color: var(--accent-b)">📅 往期历史</div>
+    <!-- History (1x2) -->
+    <section class="bento-card box-hot" style="background: rgba(168, 85, 247, 0.03);">
+      <div class="label-group" style="color: var(--accent-p)">📅 历史记录</div>
       <div class="card-body">
         {recentDates.map(d => (
-          <a href={`/day/${d}`} style="display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 8px; font-size: 0.85em; font-family: var(--font-mono); color: var(--text-p);">
-            <span>{d}</span>
-          </a>
+          <a href={`/day/${d}`} class="history-item-new">{d}</a>
         ))}
       </div>
     </section>
 
-    <section class="bento-card box-hero" style="border: 1px dashed var(--accent-p);">
-       <div class="label-group">Sponsored Content</div>
-       <div style="flex:1; display: flex; align-items: center; justify-content: center;">
-          <ins class="adsbygoogle" style="display:block; width: 100%;" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
-          <span style="font-size: 0.8em; color: var(--text-m);">广告位招租 / Premium Space</span>
-       </div>
-    </section>
-
-    <section class="bento-card box-hot">
-      <div class="label-group">🌍 全球其他信号</div>
+    <!-- Global Feed (2x2) -->
+    <section class="bento-card box-deep">
+      <div class="label-group">🌍 全球实时信号</div>
       <div class="card-body">
-        {dayData.items.slice(50, 65).map(it => (
+        {sortedItems.slice(30, 50).map((it, idx) => (
           <div class="mini-item">
-             <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.8em;">{it.title}</a>
+            <div class="m-body">
+              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+              <span class="m-source">{it.platform_label} · SIGNAL {it.score}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -159,6 +162,23 @@ const recentDates = getAllDates('zh').slice(0, 8);
   </footer>
 
 </div>
+
+<style>
+  .history-item-new {
+    display: block; padding: 12px; background: rgba(255,255,255,0.03);
+    border-radius: 8px; font-size: 0.85em; font-family: var(--font-mono);
+    color: var(--text-p); margin-bottom: 8px; text-decoration: none;
+    border: 1px solid transparent; transition: all 0.2s;
+  }
+  .history-item-new:hover { border-color: var(--accent-p); color: #fff; background: rgba(168, 85, 247, 0.1); }
+  
+  /* Native ad styling to blend with content */
+  .native-ad-line {
+    font-size: 0.75em; color: var(--accent-b); padding: 8px 12px;
+    background: rgba(59, 130, 246, 0.05); border-radius: 6px;
+    margin: 8px 0; border: 1px solid rgba(59, 130, 246, 0.1);
+  }
+</style>
 
 <script>
   const btn = document.getElementById('themeToggle');
