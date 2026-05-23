@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getDayData, getAllDates, PLATFORMS } from '../utils/data.ts';
+import { TABS, TAB_COLORS, TAB_ICONS, PLATFORMS, getDayData, getAllDates } from '../utils/data.ts';
 
 const today = new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
@@ -9,16 +9,25 @@ const dayData = getDayData(today, 'zh');
 const totalItems = dayData.items.length;
 const highValueCount = dayData.items.filter((it: any) => it.score >= 8).length;
 
-// Filter featured items (Score >= 9) for Hero
-const featuredItems = dayData.items.filter((it: any) => it.score >= 9).slice(0, 1);
-const heroItem = featuredItems[0] || dayData.items.sort((a: any, b: any) => b.score - a.score)[0];
+// Filter featured items
+const sortedByScore = [...dayData.items].sort((a: any, b: any) => b.score - a.score);
+const heroItem = sortedByScore[0];
 
 // Group items for Bento Sections
-const techItems = dayData.items.filter((it: any) => ['github', 'ithome', 'hackernews', 'v2ex'].includes(it.platform)).slice(0, 6);
-const financeItems = dayData.items.filter((it: any) => ['36kr', 'wallstreetcn', 'toutiao'].includes(it.platform)).slice(0, 6);
-const hotItems = dayData.items.filter((it: any) => ['weibo', 'douyin'].includes(it.platform)).slice(0, 6);
+const techItems = dayData.items.filter((it: any) => ['github', 'ithome', 'hackernews', 'v2ex', 'producthunt'].includes(it.platform)).slice(0, 8);
+const financeItems = dayData.items.filter((it: any) => ['36kr', 'wallstreetcn', 'toutiao', 'tencent'].includes(it.platform)).slice(0, 8);
+const hotItems = dayData.items.filter((it: any) => ['weibo', 'douyin'].includes(it.platform)).slice(0, 12);
 
-const recentDates = getAllDates('zh').slice(0, 5);
+// The rest of the items for a "Global Feed" section at the bottom
+const displayedIds = new Set([...techItems, ...financeItems, ...hotItems, heroItem].filter(Boolean).map(it => it.id));
+const remainingItems = dayData.items.filter((it: any) => !displayedIds.has(it.id)).sort((a: any, b: any) => b.score - a.score);
+
+const recentDates = getAllDates('zh').slice(0, 10);
+const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
+function getDow(d: string) {
+  const idx = new Date(d + 'T00:00:00').getDay();
+  return dowLabels[idx === 0 ? 6 : idx - 1];
+}
 ---
 
 <BaseLayout title="📡 INTEL.SYS · 旗舰级情报看板" lang="zh-CN">
@@ -28,10 +37,12 @@ const recentDates = getAllDates('zh').slice(0, 5);
   <header class="header">
     <div class="brand">
       <div class="logo">INTEL<span>.SYS</span></div>
+      <div class="sub">全球实时情报聚合枢纽 · v2026.0</div>
     </div>
     <div class="header-tools">
-      <div class="live-badge"><span class="pulse-dot"></span> 系统实时监控中</div>
-      <a href="/en" style="font-size: 0.85em; font-weight: 600; color: var(--text-p);">English</a>
+      <div class="live-badge"><span class="pulse-dot"></span> 系统在线</div>
+      <a href="/archive" class="tool-link">历史归档</a>
+      <a href="/en" class="tool-link">English</a>
       <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
     </div>
   </header>
@@ -42,65 +53,76 @@ const recentDates = getAllDates('zh').slice(0, 5);
     <!-- 1. 核心看板 (2x2) -->
     <section class="bento-card hero-box">
       <div class="label-group">✨ 今日核心精选</div>
-      <h2 class="card-title" style="font-size: 1.8em; margin-bottom: 20px;">{heroItem?.desc || heroItem?.title}</h2>
-      <p class="card-desc" style="margin-bottom: 32px;">
-        根据 AI 深度分析，今日全球情报密度主要集中在模型成本管控与社会民生热点。{heroItem?.title} 是目前最值得关注的信号。
-      </p>
+      {heroItem ? (
+        <>
+          <h2 class="card-title" style="font-size: 1.8em; margin-bottom: 20px;">
+            <a href={heroItem.url} target="_blank" style="color: inherit;">{heroItem.desc || heroItem.title}</a>
+          </h2>
+          <p class="card-desc" style="margin-bottom: 32px;">
+            今日头号情报源自 {heroItem.platform_label}。AI 深度评估认为该条目具有极高的商业参考价值，建议重点研读原始文档。
+          </p>
+        </>
+      ) : <p>暂无今日核心精选</p>}
       <div style="margin-top: auto; padding: 20px; background: rgba(168, 85, 247, 0.08); border: 1px solid var(--card-stroke); border-radius: 12px;">
-        <div class="label-group" style="color: var(--accent-b)">🔥 实时专家建议</div>
-        <div style="font-size: 0.9em; color: #fff; font-weight: 500;">建议优先布局 AI 成本优化相关赛道，该趋势在开发者社区热度极高。</div>
+        <div class="label-group" style="color: var(--accent-b)">🔥 专家洞察</div>
+        <div style="font-size: 0.9em; color: #fff; font-weight: 500;">当前情报密度正向“跨境出海”与“AI 降本”领域倾斜，建议开发者关注相关 API 动态。</div>
       </div>
     </section>
 
     <!-- 2. 统计小方块 (1x1) -->
     <div class="bento-card stat-box">
-      <div class="label-group">采集总量</div>
+      <div class="label-group">今日规模</div>
       <div class="card-num">{totalItems}</div>
-      <div class="sc-lbl">条实时数据</div>
+      <div class="sc-lbl">条采集情报</div>
     </div>
 
     <!-- 3. 高分信号 (1x1) -->
     <div class="bento-card stat-box" style="border-color: var(--accent-b)">
-      <div class="label-group" style="color: var(--accent-b)">高价值信号</div>
+      <div class="label-group" style="color: var(--accent-b)">深度洞察</div>
       <div class="card-num" style="color: var(--accent-b)">{highValueCount}</div>
-      <div class="sc-lbl">AI 评分 8+</div>
+      <div class="sc-lbl">高分高价值 (8+)</div>
     </div>
 
-    <!-- 4. 科技开发前沿 (2x2) -->
+    <!-- 4. 科技开发 (2x2) -->
     <section class="bento-card list-box">
-      <div class="label-group">💻 科技开发前沿</div>
+      <div class="label-group">💻 科技与开发前沿</div>
       <div class="card-body">
         {techItems.map((it: any, idx: number) => (
           <div class="mini-item">
             <span class="m-idx">{idx + 1}</span>
             <div class="m-body">
-              <div class="m-ai">{it.desc || it.title}</div>
-              <a href={it.url} target="_blank" class="m-source">来源: {it.title}</a>
+              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+              <span class="m-source">源自: {it.title}</span>
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- 5. 广告/合作伙伴 (1x2) -->
-    <section class="bento-card visual-box" style="border: 1px dashed var(--accent-p); justify-content: center; align-items: center;">
-      <div class="label-group">赞助商推广</div>
-      <div style="width: 100%; text-align: center;">
-         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
-         <span style="font-size: 0.7em; color: var(--text-m);">广告位预留</span>
+    <!-- 5. 历史日报导航 (1x2) - 满足用户“以往日期展示”的需求 -->
+    <section class="bento-card visual-box" style="background: rgba(59, 130, 246, 0.03);">
+      <div class="label-group" style="color: var(--accent-b)">📅 历史日报回顾</div>
+      <div class="history-list" style="display: flex; flex-direction: column; gap: 8px;">
+        {recentDates.map(d => (
+          <a href={`/day/${d}`} class="history-item">
+            <span>{d}</span>
+            <span style="opacity: 0.5; font-size: 0.85em;">{getDow(d)}</span>
+          </a>
+        ))}
+        <a href="/archive" style="margin-top: 10px; font-size: 0.8em; color: var(--accent-p); font-weight: 700;">查看全部归档 →</a>
       </div>
     </section>
 
-    <!-- 6. 财经与商业 (2x2) -->
+    <!-- 6. 财经商业 (2x2) -->
     <section class="bento-card list-box">
-      <div class="label-group">📈 财经与商业</div>
+      <div class="label-group">📈 财经与全球商业</div>
       <div class="card-body">
         {financeItems.map((it: any, idx: number) => (
           <div class="mini-item">
             <span class="m-idx">{idx + 1}</span>
             <div class="m-body">
-              <div class="m-ai">{it.desc || it.title}</div>
-              <a href={it.url} target="_blank" class="m-source">来源: {it.title}</a>
+              <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
+              <span class="m-source">源自: {it.title}</span>
             </div>
           </div>
         ))}
@@ -109,29 +131,74 @@ const recentDates = getAllDates('zh').slice(0, 5);
 
     <!-- 7. 全网热搜 (1x2) -->
     <section class="bento-card visual-box">
-      <div class="label-group">🔥 全网热搜</div>
+      <div class="label-group">🔥 全网实时热搜</div>
       <div class="card-body">
-        {hotItems.map((it: any, idx: number) => (
+        {hotItems.map((it: any) => (
           <div class="mini-item">
             <div class="m-body">
-              <div class="m-ai" style="font-size: 0.85em;">{it.title}</div>
-              <span class="m-source" style="font-size: 0.7em;">{it.platform_label} · {it.date}</span>
+              <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
+                <span class="m-source" style="font-size: 0.7em;">{it.platform_label}</span>
+                {it.hot_stars > 0 && <span style="font-size: 0.7em;">{'🔥'.repeat(it.hot_stars)}</span>}
+              </div>
             </div>
           </div>
         ))}
       </div>
     </section>
 
+    <!-- 8. 广告赞助 (1x1) -->
+    <section class="bento-card stat-box" style="border: 1px dashed var(--accent-p); grid-row: span 1;">
+      <div class="label-group">赞助商</div>
+      <div style="width: 100%;">
+         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
+         <span style="font-size: 0.7em; color: var(--text-m);">广告位招租</span>
+      </div>
+    </section>
+
   </main>
 
-  <footer style="margin-top: 80px; text-align: center; font-size: 0.8em; color: var(--text-m); padding-bottom: 40px;">
-    📡 智谱 GLM-5 驱动 · 全自动情报看板系统 · {today}
+  <!-- 底部全量信息流 - 满足用户“信息全部展示”的需求 -->
+  {remainingItems.length > 0 && (
+    <section style="margin-top: 60px;">
+      <div class="label-group" style="margin-bottom: 24px;">🌐 更多全球信号 (语义流)</div>
+      <div class="bento-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        {remainingItems.map((it: any) => (
+          <div class="bento-card">
+            <div class="platform-tag" style={`color: ${it.platform_color || 'var(--accent-b)'}; font-size: 0.65em; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;`}>
+              <span>{it.platform_icon || '📌'}</span>
+              <span>{it.platform_label}</span>
+            </div>
+            <a href={it.url} target="_blank" class="m-ai" style="font-size: 1em; margin-bottom: 12px; display: block;">{it.desc || it.title}</a>
+            <div class="card-footer" style="margin-top: auto; display: flex; justify-content: space-between; font-size: 0.7em; opacity: 0.5; font-family: var(--font-mono);">
+              <span>SCORE {it.score.toFixed(1)}</span>
+              <span>{it.date}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <footer style="margin-top: 80px; text-align: center; font-size: 0.8em; color: var(--text-m); padding-bottom: 40px; border-top: 1px solid var(--card-border); padding-top: 40px;">
+    📡 智谱 GLM-5 驱动 · INTEL.SYS 全自动情报看板 · {today}
   </footer>
 
 </div>
 
+<style>
+  .history-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: rgba(255,255,255,0.03);
+    border-radius: 8px; font-size: 0.85em; font-family: var(--font-mono);
+    color: var(--text-p); transition: all 0.2s;
+  }
+  .history-item:hover { background: rgba(59, 130, 246, 0.1); color: #fff; transform: translateX(4px); }
+  .tool-link { font-size: 0.85em; font-weight: 600; color: var(--text-p); }
+  .tool-link:hover { color: #fff; }
+</style>
+
 <script>
-  // 主题切换逻辑
   const btn = document.getElementById('themeToggle');
   let theme = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', theme);
