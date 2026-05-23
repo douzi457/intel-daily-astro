@@ -1,250 +1,80 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { TABS, TAB_COLORS, TAB_ICONS, getDayData, getAllDates } from '../utils/data.ts';
+import { TABS, TAB_COLORS, TAB_ICONS, PLATFORMS, getDayData, getAllDates } from '../utils/data.ts';
 
 const today = new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
 
-// 统计
-const tabCounts: Record<string, number> = {};
-const tabMax: Record<string, number> = {};
-TABS.forEach(t => { tabCounts[t] = 0; tabMax[t] = 1; });
+// 按平台对数据进行分组
+const groupedItems: Record<string, any[]> = {};
 dayData.items.forEach((it: any) => {
-  const tab = it.tab || '财经';
-  tabCounts[tab] = (tabCounts[tab] || 0) + 1;
+  if (!groupedItems[it.platform]) groupedItems[it.platform] = [];
+  groupedItems[it.platform].push(it);
 });
-TABS.forEach(t => { if (tabCounts[t] > tabMax[t]) tabMax[t] = tabCounts[t]; });
 
-// 最近7天的归档
+// 对每个平台的 item 按分数排序并截取前 6 条
+Object.keys(groupedItems).forEach(p => {
+  groupedItems[p] = groupedItems[p].sort((a, b) => b.score - a.score).slice(0, 8);
+});
+
 const recentDates = getAllDates('zh').slice(0, 7);
-
-const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
-function getDow(d: string) {
-  const idx = new Date(d + 'T00:00:00').getDay();
-  return dowLabels[idx === 0 ? 6 : idx - 1];
-}
-
-const MODULE_DESCS: Record<string, string> = {
-  '热搜': '微博 · 抖音热搜榜单',
-  '财经': '36Kr · 华尔街见闻 · 今日头条',
-  '开发': 'GitHub · HN · ProductHunt · V2EX',
-  '公众号': 'AI · 创业 · 副业精选',
-};
 ---
 
-<BaseLayout title="📡 INTEL.SYS · 每日情报">
-<div class="layout">
+<BaseLayout title="📡 INTEL.SYS · 全球情报看板">
+<div class="dashboard">
 
-  <!-- 侧边栏 -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-text">INTEL<span>.SYS</span></div>
-      <div class="logo-sub">Superpowers · 情报站</div>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">INTEL<span>.SYS</span></div>
+      <div class="status-bar"><span class="pulse"></span> 系统实时监控中</div>
     </div>
-
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-title">导航</div>
-        <a href="/" class="nav-item active">
-          <span class="icon">📡</span><span class="label">首页</span>
-        </a>
-        <a href={`/day/${today}`} class="nav-item">
-          <span class="icon">📈</span><span class="label">今日日报</span>
-        </a>
-        <a href="/archive" class="nav-item">
-          <span class="icon">📁</span><span class="label">归档</span>
-        </a>
-        <a href="/stats" class="nav-item">
-          <span class="icon">📊</span><span class="label">统计</span>
-        </a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">语言 / Language</div>
-        <a href="/en" class="nav-item"><span class="icon">🇺🇸</span><span class="label">English Version</span></a>
-      </div>
-
-      {recentDates.length > 0 && (
-        <div class="nav-section">
-          <div class="nav-section-title">最近日报</div>
-          {recentDates.map(d => (
-            <a href={`/day/${d}`} class="nav-item-recent">
-              <span>{d}</span><span class="dow">{getDow(d)}</span>
-            </a>
-          ))}
-        </div>
-      )}
-    </nav>
-
-    <div class="sidebar-footer">
-      自动生成 · 每2小时更新<br/>
-      Superpowers 情报系统
+    <div class="header-right">
+       <nav class="top-nav">
+         <a href="/en" class="lang-switch">EN Version</a>
+         <a href="/archive">历史归档</a>
+         <a href="/stats">数据统计</a>
+       </nav>
     </div>
-  </aside>
+  </header>
 
-  <!-- 主内容 -->
-  <main class="main">
-    <div class="container">
-
-      <div class="topbar">
-        <h1 class="topbar-title">📡 今日<span>情报</span> {today}</h1>
-        <span class="topbar-meta">系统自动生成 · 每2小时更新</span>
-      </div>
-
-      <!-- 统计卡片 -->
-      <div class="stats-grid">
-        <div class="stat-card" style="--accent-color: var(--amber)">
-          <div class="sc-icon">📡</div>
-          <div class="sc-num">{dayData.items.length}</div>
-          <div class="sc-lbl">今日条数</div>
-        </div>
-        {TABS.map(tab => (
-          <div class="stat-card" style={`--accent-color: ${TAB_COLORS[tab]}`}>
-            <div class="sc-icon">{TAB_ICONS[tab]}</div>
-            <div class="sc-num">{tabCounts[tab] || 0}</div>
-            <div class="sc-lbl">{tab}</div>
+  <!-- Dashboard Grid -->
+  <main class="grid-container">
+    {Object.entries(groupedItems).map(([p, items]) => {
+      const meta = PLATFORMS[p] || { label: p, color: '#94a3b8', icon: '📌' };
+      return (
+        <section class="platform-card" style={`--p-color: ${meta.color}`}>
+          <div class="card-header">
+             <div class="p-info">
+               <span class="p-icon">{meta.icon}</span>
+               <span class="p-name">{meta.label}</span>
+             </div>
+             <span class="p-update">刚刚更新</span>
           </div>
-        ))}
-        <div class="stat-card" style="--accent-color: var(--cyan)">
-          <div class="sc-icon">📁</div>
-          <div class="sc-num">{recentDates.length}</div>
-          <div class="sc-lbl">历史天数</div>
-        </div>
-      </div>
-
-      <!-- 顶部横幅广告位 -->
-      <div class="ad-container ad-banner" style="margin: 20px 0; min-height: 90px; background: var(--surface); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 0.8em; border-radius: var(--radius-lg);">
-        广告位：首页横幅 (728x90)
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-YOUR_ID"
-             data-ad-slot="YOUR_SLOT"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-
-      <!-- 四大模块 -->
-      <div class="section-title">🎯 四大模块</div>
-      <div class="module-grid">
-        {TABS.map(tab => {
-          const color = TAB_COLORS[tab];
-          const pct = tabMax[tab] > 0 ? Math.round((tabCounts[tab] || 0) / tabMax[tab] * 100) : 0;
-          return (
-            <a href={`/day/${today}?tab=${tab}`} class="module-card"
-               style={`--module-color: ${color}; --module-glow: ${color}30`}>
-              <div class="module-header">
-                <span class="module-icon">{TAB_ICONS[tab]}</span>
-                <span class="module-name">{tab}</span>
-              </div>
-              <div class="module-desc">{MODULE_DESCS[tab]}</div>
-              <div class="module-bar"><div class="module-bar-fill" style={`width:${pct}%`}></div></div>
-              <div class="module-count">{tabCounts[tab] || 0} 条内容</div>
-            </a>
-          );
-        })}
-      </div>
-
-      <!-- 内容预览 -->
-      <div class="section-title">📋 今日内容预览</div>
-      <div class="tab-filter">
-        <button class="tab-btn active" data-tab="全部">📡 全部<span class="cnt">{dayData.items.length}</span></button>
-        {TABS.map(tab => (
-          <button class="tab-btn" data-tab={tab}>{TAB_ICONS[tab]} {tab}<span class="cnt">{tabCounts[tab] || 0}</span></button>
-        ))}
-      </div>
-      <div class="search-wrap">
-        <input class="search-input" id="q" placeholder="🔍 搜索标题/描述..." autocomplete="off"/>
-        <span class="result-hint" id="cntHint"></span>
-      </div>
-      <div class="item-list" id="itemList">
-        {dayData.items.slice(0, 30).map((it: any, idx: number) => (
-          <>
-            {idx === 10 && (
-              <div class="ad-container ad-in-feed" style="margin: 15px 0; min-height: 100px; background: var(--surface); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 0.8em; border-radius: var(--radius-md); grid-column: 1 / -1;">
-                广告位：信息流中间 (Native Ad)
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-format="fluid"
-                     data-ad-layout-key="-fb+5w+4e-db+86"
-                     data-ad-client="ca-pub-YOUR_ID"
-                     data-ad-slot="YOUR_SLOT"></ins>
-              </div>
-            )}
-            <div class="item-card" data-tab={it.tab} style={`--item-color: ${it.platform_color}`}>
-              <div class="item-idx">{idx + 1}</div>
-              <div class="item-badge"
-                   style={`--badge-bg: ${it.platform_color}22; --badge-color: ${it.platform_color}`}>
-                {it.platform_icon} {it.platform_label}
-              </div>
-              <div class="item-body">
-                <div class="item-title"><a href={it.url} target="_blank">{it.title}</a></div>
-                <div class="item-desc">{it.desc}</div>
-                <div class="item-meta">
-                  {it.hot_stars > 0 && <span class="item-hot">{'🔥'.repeat(it.hot_stars)}</span>}
-                  <span class="item-time">{it.date}</span>
+          <div class="card-body">
+            {items.map((it, idx) => (
+              <div class="news-item">
+                <span class="news-idx">{idx + 1}</span>
+                <div class="news-content">
+                  <a href={it.url} target="_blank" class="news-title">{it.title}</a>
+                  <div class="news-meta">
+                    {it.hot_stars > 0 && <span class="news-hot">{'🔥'.repeat(it.hot_stars)}</span>}
+                    <span class="news-time">{it.date}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        ))}
-      </div>
-
-      <!-- 福利区 -->
-      <div class="welfare">
-        <div class="section-title">🎁 福利区</div>
-        <div class="welfare-grid">
-          <div class="welfare-item">🔗 <span style="color:var(--text-3); font-size:.9em">待添加福利链接</span></div>
-        </div>
-      </div>
-
-      <!-- 历史归档 -->
-      <div class="section-title" style="margin-top:36px">📁 历史归档</div>
-      <div class="archive-grid">
-        {recentDates.map(d => (
-          <div class="archive-item"><a href={`/day/${d}`}>{d}<span class="dow">{getDow(d)}</span></a></div>
-        ))}
-      </div>
-
-      <footer>📡 INTEL.SYS · Superpowers 情报系统 · {dayData.items.length} 条今日数据</footer>
-    </div>
+            ))}
+          </div>
+          <a href={`/day/${today}?platform=${p}`} class="card-footer">查看更多</a>
+        </section>
+      );
+    })}
   </main>
 
+  <!-- Ad Banner -->
+  <div class="ad-bottom">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
+  </div>
+
 </div>
-
-<script>
-  // Tab 切换
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = (btn as HTMLElement).dataset.tab!;
-      document.querySelectorAll('.item-card').forEach(card => {
-        (card as HTMLElement).classList.toggle('hidden',
-          tab !== '全部' && (card as HTMLElement).dataset.tab !== tab);
-      });
-      updateCount();
-    });
-  });
-
-  // 搜索
-  const q = document.getElementById('q') as HTMLInputElement;
-  if (q) {
-    q.addEventListener('input', () => {
-      const v = q.value.toLowerCase().trim();
-      document.querySelectorAll('.item-card').forEach(card => {
-        (card as HTMLElement).classList.toggle('hidden',
-          v !== '' && !(card as HTMLElement).textContent!.toLowerCase().includes(v));
-      });
-      updateCount();
-    });
-  }
-
-  function updateCount() {
-    const hint = document.getElementById('cntHint');
-    if (!hint) return;
-    const visible = document.querySelectorAll('.item-card:not(.hidden)').length;
-    hint.textContent = `${visible} 条`;
-  }
-  updateCount();
-</script>
 </BaseLayout>
