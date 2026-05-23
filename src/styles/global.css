@@ -28,11 +28,15 @@
   --font-sans:  'Plus Jakarta Sans', system-ui, sans-serif;
   --font-mono:  'JetBrains Mono', monospace;
   --radius:     16px;
+  
+  /* --- New: Spacing & Sizing Constants --- */
+  --grid-gap:   24px;
+  --base-height: 180px; 
 }
 
 [data-theme="light"] {
   --bg-main:    #F8FAFC;
-  --bg-mesh:    radial-gradient(at 0% 0%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+  --bg-mesh:    radial-gradient(circle at 0% 0%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
   --card-bg:    #FFFFFF;
   --card-hover: #F1F5F9;
@@ -77,8 +81,8 @@ body {
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(160px, auto);
-  gap: 20px;
+  grid-auto-rows: var(--base-height);
+  gap: var(--grid-gap);
 }
 
 .bento-card {
@@ -90,17 +94,34 @@ body {
   transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Important to contain scrollable children */
 }
 .bento-card:hover { border-color: var(--accent-p); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
 /* --- Bento Hierarchy --- */
 .hero-box { grid-column: span 2; grid-row: span 2; border: 1px solid var(--card-stroke); background: linear-gradient(135deg, rgba(168, 85, 247, 0.05), transparent); }
-.stat-box { grid-column: span 1; justify-content: center; align-items: center; text-align: center; }
-.list-box { grid-column: span 2; grid-row: span 2; }
+.stat-box { grid-column: span 1; grid-row: span 1; justify-content: center; align-items: center; text-align: center; }
+.list-box { grid-column: span 2; grid-row: span 3; }
 .visual-box { grid-column: span 1; grid-row: span 2; }
+.ad-box { grid-column: span 1; grid-row: span 1; }
+
+/* ── Internal Scrolling for Lists ── */
+.card-body {
+  flex: 1;
+  overflow-y: auto;
+  margin-right: -8px;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--card-border) transparent;
+}
+.card-body::-webkit-scrollbar { width: 4px; }
+.card-body::-webkit-scrollbar-track { background: transparent; }
+.card-body::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
 
 /* ── Card Elements ── */
-.label-group { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 0.65em; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-p); }
+.label-group { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 0.65em; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-p); flex-shrink: 0; }
 .card-title { font-size: 1.2em; font-weight: 700; color: var(--text-h); margin-bottom: 16px; letter-spacing: -0.01em; }
 .card-num { font-family: var(--font-mono); font-size: 3em; font-weight: 700; color: var(--text-h); line-height: 1; margin-bottom: 10px; }
 .card-desc { font-size: 0.9em; color: var(--text-p); line-height: 1.7; }
@@ -112,22 +133,22 @@ body {
 .mini-item:last-child { border-bottom: none; }
 .m-idx { font-family: var(--font-mono); font-size: 0.75em; color: var(--text-m); padding-top: 4px; }
 .m-body { flex: 1; min-width: 0; }
-.m-ai { font-size: 0.95em; font-weight: 600; color: var(--text-h); margin-bottom: 4px; line-height: 1.4; }
+.m-ai { font-size: 0.95em; font-weight: 600; color: var(--text-h); margin-bottom: 4px; line-height: 1.4; display: block; }
 .m-source { font-size: 0.8em; color: var(--text-m); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 .m-source:hover { color: var(--accent-b); }
 
 /* ── Status Dots ── */
 .live-badge { display: flex; align-items: center; gap: 6px; font-size: 0.7em; font-weight: 700; color: var(--accent-g); background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 100px; }
-.pulse-dot { width: 6px; height: 6px; background: var(--accent-g); border-radius: 50%; box-shadow: 0 0 10px var(--accent-g); animation: pulse 2s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.pulse-dot { width: 6px; height: 6px; background: var(--accent-g); border-radius: 50%; box-shadow: 0 0 10px var(--accent-g); animation: blink 2s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 /* ── Responsive ── */
 @media (max-width: 1100px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
+  .bento-card { height: auto; min-height: 240px; }
   .hero-box, .list-box { grid-column: span 2; }
 }
 @media (max-width: 650px) {
   .bento-grid { grid-template-columns: 1fr; }
   .hero-box, .list-box, .stat-box, .visual-box { grid-column: span 1; }
-  .app-container { padding: 20px 16px; }
 }
