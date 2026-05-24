@@ -853,6 +853,24 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent);
 }
 
+.ad-card-img {
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.25s;
+  border: 1px solid var(--border);
+}
+.ad-card-img:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.ad-card-img img {
+  transition: transform 0.3s;
+}
+.ad-card-img:hover img {
+  transform: scale(1.02);
+}
+
 .ad-label {
   font-size: 0.65em;
   font-weight: 600;

@@ -15,6 +15,9 @@ const { title, lang = 'zh-CN' } = Astro.props;
   <meta name="description" content="AI-Powered Intelligence Hub. Real-time global insights, trends, and automated reporting." />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ad58971b03c54dab95ef71e841966a34"}'></script>
+  <!-- End Cloudflare Web Analytics -->
 </head>
 <body>
   <slot />

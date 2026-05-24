@@ -26,3 +26,7 @@ pnpm-debug.log*
 # python cache
 __pycache__/
 *.pyc
+
+# downloaded assets / promo material
+*.zip
+!public/assets/ads/

@@ -167,7 +167,7 @@ function getDow(d: string) {
 
       <!-- Native Ad: 阿里云推广 -->
       {totalItems > 0 && (
-        <a href="https://www.aliyun.com/" target="_blank" rel="noopener" class="ad-card" style="display:block;text-decoration:none;">
+        <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="ad-card" style="display:block;text-decoration:none;">
           <div class="ad-label">—— 赞助内容 ——</div>
           <div class="ad-content">
             <strong>☁️ 阿里云新用户专享</strong> · 爆款云服务器低至 <strong>1折起</strong>
@@ -219,6 +219,37 @@ function getDow(d: string) {
           );
         })}
       </div>
+
+      <!-- Native feed-style ad -->
+      {totalItems > 0 && (
+        <div class="section" style="margin-bottom:0;">
+          <div class="section-header">
+            <div class="section-title" style="font-size:0.9em;">💡 推荐</div>
+          </div>
+          <div class="news-list">
+            <div class="news-item">
+              <span class="news-idx" style="color:var(--accent);">💡</span>
+              <div class="news-body">
+                <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="news-title">腾讯云 AI 焕新季 · 2核2G4M 新客仅 99元/年</a>
+                <div class="news-footer">
+                  <span class="platform-tag" style="color:#3395FF;border-color:#3395FF20;background:#3395FF10;">☁️ 腾讯云</span>
+                  <span class="news-hot" style="color:var(--accent);">推广</span>
+                </div>
+                <div class="news-desc">轻量应用服务器 4核4G3M 首年 79元，限时特惠中</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Native Ad: 腾讯云（自动轮换） -->
+      {totalItems > 0 && (
+        <div id="tencentAd" class="ad-card-img" style="display:block;text-decoration:none;">
+          <a id="tencentAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
+            <img id="tencentAdImg" src="/assets/ads/tencent/banner/ai_banner.png" alt="腾讯云推广" loading="lazy" style="width:100%;height:auto;border-radius:12px;display:block;">
+          </a>
+        </div>
+      )}
 
       <!-- History -->
       {recentDates.length > 0 && (
@@ -287,13 +318,10 @@ function getDow(d: string) {
         </div>
       </div>
 
-      <!-- 广告联盟位（Carbon Ads / AdSense） -->
-      <div class="sidebar-widget ad-slot">
-        <div class="ad-label" style="text-align:center;font-size:0.6em;">—— 广告 ——</div>
-        <div id="ad-zh" style="min-height:90px;display:flex;align-items:center;justify-content:center;font-size:0.75em;color:var(--text-m);">
-          <span>广告位 · 等你来投</span>
-        </div>
-      </div>
+      <!-- 腾讯云推广（侧边栏） -->
+      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="sidebar-widget" style="padding:0;overflow:hidden;border-radius:14px;display:block;">
+        <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="腾讯云 · 轻量服务器 4核4G3M 仅 79元/年" loading="lazy" style="width:100%;height:auto;display:block;">
+      </a>
 
       <!-- 公众号关注 -->
       <div class="sidebar-widget">
@@ -474,6 +502,25 @@ function getDow(d: string) {
     backBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
+
+  // Tencent Cloud banner rotation
+  const adImg = document.getElementById('tencentAdImg');
+  const adLink = document.getElementById('tencentAdLink');
+  if (adImg && adLink) {
+    const promos = [
+      { src: '/assets/ads/tencent/banner/ai_banner.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 AI焕新季 · 2核2G4M 新客 99元/年' },
+      { src: '/assets/ads/tencent/banner/lighthouse_480_300.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 · 轻量服务器 4核4G3M 仅 79元/年' },
+      { src: '/assets/ads/tencent/banner/return_970_250.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 · 推广大使特惠合集' },
+    ];
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % promos.length;
+      const p = promos[idx];
+      adImg.src = p.src;
+      adImg.alt = p.alt;
+      adLink.href = p.href;
+    }, 25000);
   }
 
 </script>
