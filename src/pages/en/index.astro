@@ -33,7 +33,7 @@ const featured = sortedAll.slice(0, 5);
 
 const trending = [...dayData.items]
   .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
-  .slice(0, 8);
+  .slice(0, 10);
 
 const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator'];
 const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
@@ -81,6 +81,8 @@ function getDow(d: string) {
     <div class="header-meta">
       <span class="date-badge">{today}</span>
       <span class="count-badge">{totalItems} briefs</span>
+      <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="badge-link">☁️ Aliyun 1折起</a>
+      <a id="tencentPromo" href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="badge-link tencent">💙 Tencent Cloud 79/yr</a>
     </div>
     <div class="header-actions">
       <a href="/stats" class="lang-btn">📊 Stats</a>
@@ -89,6 +91,15 @@ function getDow(d: string) {
       <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
+
+  <!-- Header thin banner -->
+  {totalItems > 0 && (
+    <div class="header-ad" id="headerAd">
+      <a id="headerAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
+        <img id="headerAdImg" src="/assets/ads/tencent/banner/return_970_90.png" alt="Tencent Cloud" loading="lazy">
+      </a>
+    </div>
+  )}
 
 </div>
 
@@ -154,15 +165,26 @@ function getDow(d: string) {
         )}
       </section>
 
-      <!-- Native Ad: DigitalOcean -->
+      <!-- Native feed-style ad: Tencent Cloud -->
       {totalItems > 0 && (
-        <a href="https://www.digitalocean.com/affiliates" target="_blank" rel="noopener" class="ad-card" style="display:block;text-decoration:none;">
-          <div class="ad-label">—— Sponsored ——</div>
-          <div class="ad-content">
-            <strong>☁️ DigitalOcean</strong> · New users get <strong>$200 credit</strong>
-            <br /><span style="font-size:0.85em;color:var(--text-m);">Reliable cloud infrastructure for dev workloads</span>
+        <div class="section" style="margin-bottom:0;">
+          <div class="section-header">
+            <div class="section-title" style="font-size:0.9em;">💡 Sponsored</div>
           </div>
-        </a>
+          <div class="news-list">
+            <div class="news-item">
+              <span class="news-idx" style="color:var(--accent);">💡</span>
+              <div class="news-body">
+                <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="news-title">Tencent Cloud AI Season · 2C2G4M New Users Only $13.6/yr</a>
+                <div class="news-footer">
+                  <span class="platform-tag" style="color:#3395FF;border-color:#3395FF20;background:#3395FF10;">☁️ Tencent Cloud</span>
+                  <span class="news-hot" style="color:var(--accent);">Ad</span>
+                </div>
+                <div class="news-desc">Lightweight Server 4C4G3M from $10.9/yr, limited-time offer</div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
       <!-- Platform Grid -->
@@ -209,6 +231,15 @@ function getDow(d: string) {
         })}
       </div>
 
+      <!-- Main Tencent Cloud banner (auto-rotation) -->
+      {totalItems > 0 && (
+        <div id="tencentAd" class="ad-card-img" style="display:block;text-decoration:none;">
+          <a id="tencentAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
+            <img id="tencentAdImg" src="/assets/ads/tencent/banner/ai_banner.png" alt="Tencent Cloud" loading="lazy" style="width:100%;height:auto;border-radius:12px;display:block;">
+          </a>
+        </div>
+      )}
+
       <!-- History -->
       {recentDates.length > 0 && (
         <section class="section section-full">
@@ -229,6 +260,34 @@ function getDow(d: string) {
 
     <!-- Sidebar -->
     <aside class="sidebar">
+
+      <!-- Overview -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">📊 Overview</div>
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-cell-value">{totalItems}</div>
+            <div class="stat-cell-label">Today</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{activePlatforms.length}</div>
+            <div class="stat-cell-label">Sources</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{recentDates.length}</div>
+            <div class="stat-cell-label">Days</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
+            <div class="stat-cell-label">High Signals</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tencent Cloud sidebar ad -->
+      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="sidebar-widget" style="padding:0;overflow:hidden;border-radius:14px;display:block;">
+        <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="Tencent Cloud · 4C4G3M from $10.9/yr" loading="lazy" style="width:100%;height:auto;display:block;">
+      </a>
 
       <!-- Platform Distribution -->
       {activePlatforms.length > 0 && (
@@ -252,50 +311,6 @@ function getDow(d: string) {
           })}
         </div>
       )}
-
-      <!-- Mini Stats -->
-      <div class="sidebar-widget">
-        <div class="sidebar-widget-title">📊 Overview</div>
-        <div class="stats-grid">
-          <div class="stat-cell">
-            <div class="stat-cell-value">{totalItems}</div>
-            <div class="stat-cell-label">Today</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{activePlatforms.length}</div>
-            <div class="stat-cell-label">Sources</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{recentDates.length}</div>
-            <div class="stat-cell-label">Days</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
-            <div class="stat-cell-label">High Signals</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ad Network Slot -->
-      <div class="sidebar-widget ad-slot">
-        <div class="ad-label" style="text-align:center;font-size:0.6em;">—— Ad ——</div>
-        <div id="ad-en" style="min-height:90px;display:flex;align-items:center;justify-content:center;font-size:0.75em;color:var(--text-m);">
-          <span>Ad Space · Available</span>
-        </div>
-      </div>
-
-      <!-- Vercel Affiliate -->
-      <div class="sidebar-widget">
-        <a href="https://vercel.com/affiliates" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
-          <div class="ad-card" style="border-style:solid;padding:16px;">
-            <div class="ad-label">Sponsored</div>
-            <div class="ad-content">
-              <strong>▲ Vercel</strong><br />
-              <span style="font-size:0.85em;">Deploy your frontend apps at the edge</span>
-            </div>
-          </div>
-        </a>
-      </div>
 
       <!-- Trending / Top Signals -->
       <div class="sidebar-widget">
@@ -429,6 +444,60 @@ function getDow(d: string) {
     backBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
+
+  // Tencent Cloud banner rotation (main)
+  const adImg = document.getElementById('tencentAdImg');
+  const adLink = document.getElementById('tencentAdLink');
+  if (adImg && adLink) {
+    const promos = [
+      { src: '/assets/ads/tencent/banner/ai_banner.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud AI Season · 2C2G4M New Users $13.6/yr' },
+      { src: '/assets/ads/tencent/banner/lighthouse_480_300.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · Lightweight Server 4C4G3M from $10.9/yr' },
+      { src: '/assets/ads/tencent/banner/return_970_250.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · Ambassador Collection' },
+    ];
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % promos.length;
+      const p = promos[idx];
+      adImg.src = p.src;
+      adImg.alt = p.alt;
+      adLink.href = p.href;
+    }, 25000);
+  }
+
+  // Header thin banner rotation
+  const headerImg = document.getElementById('headerAdImg');
+  const headerLink = document.getElementById('headerAdLink');
+  if (headerImg && headerLink) {
+    const ads = [
+      { src: '/assets/ads/tencent/banner/return_970_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud AI Season' },
+      { src: '/assets/ads/tencent/banner/lighthouse_1200_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · Lightweight Server $10.9/yr' },
+    ];
+    let hi = 0;
+    setInterval(() => {
+      hi = (hi + 1) % ads.length;
+      const p = ads[hi];
+      headerImg.src = p.src;
+      headerImg.alt = p.alt;
+      headerLink.href = p.href;
+    }, 20000);
+  }
+
+  // Header rotating Tencent promo badge
+  const promoEl = document.getElementById('tencentPromo');
+  if (promoEl) {
+    const promos = [
+      { text: '💙 Lightweight Server 4C4G3M $10.9/yr', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
+      { text: '🤖 AI Season 2C2G4M $13.6/yr', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
+      { text: '🎁 Ambassador Deals', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
+    ];
+    let pi = 0;
+    setInterval(() => {
+      pi = (pi + 1) % promos.length;
+      const p = promos[pi];
+      promoEl.textContent = p.text;
+      promoEl.href = p.href;
+    }, 8000);
   }
 
 </script>
