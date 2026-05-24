@@ -2,10 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getDayData, getAllDates } from '../../utils/data.ts';
 
-const today = new Date().toISOString().slice(0, 10);
+const allDates = getAllDates('en');
+const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'en');
 const totalItems = dayData.items.length;
-const recentDates = getAllDates('en').slice(0, 10);
+const recentDates = allDates.slice(0, 10);
 
 const PLATFORM_META: Record<string, { label: string; icon: string; color: string }> = {
   weibo:           { label: 'Weibo',       icon: '🔥', color: '#FF9500' },
@@ -247,7 +248,7 @@ function getDow(d: string) {
             <div class="section-title">📅 History</div>
           </div>
           <div class="history-grid">
-            {recentDates.map(d => (
+            {recentDates.filter(d => d !== today).map(d => (
               <a href={`/en/day/${d}`} class="history-item">
                 <div>{d}</div>
                 <div class="dow">{getDow(d)}</div>

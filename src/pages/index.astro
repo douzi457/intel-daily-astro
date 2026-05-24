@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getDayData, getAllDates } from '../utils/data.ts';
 
-const today = new Date().toISOString().slice(0, 10);
+const allDates = getAllDates('zh');
+const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
 const totalItems = dayData.items.length;
-const recentDates = getAllDates('zh').slice(0, 10);
+const recentDates = allDates.slice(0, 10);
 
 // Platform display metadata
 const PLATFORM_META: Record<string, { label: string; icon: string; color: string }> = {
@@ -258,7 +259,7 @@ function getDow(d: string) {
             <div class="section-title">📅 历史记录</div>
           </div>
           <div class="history-grid">
-            {recentDates.map(d => (
+            {recentDates.filter(d => d !== today).map(d => (
               <a href={`/day/${d}`} class="history-item">
                 <div>{d}</div>
                 <div class="dow">{getDow(d)}</div>
