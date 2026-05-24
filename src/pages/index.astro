@@ -102,7 +102,10 @@ function getDow(d: string) {
     </div>
   </header>
 
-  <!-- Section Nav -->
+</div>
+
+<!-- Section Nav (full viewport width) -->
+<div class="section-nav-wrap">
   <nav class="section-nav" id="sectionNav">
     {NAV_TABS.map(tab => (
       <a href={`#${tab.id}`} data-target={tab.id} class={tab.id === 'featured' ? 'active' : ''}>
@@ -110,6 +113,9 @@ function getDow(d: string) {
       </a>
     ))}
   </nav>
+</div>
+
+<div class="page">
 
   <!-- Content Grid: Main + Sidebar -->
   <div class="content-grid">
@@ -331,18 +337,36 @@ function getDow(d: string) {
         </div>
       </div>
 
-      <!-- Trending Now -->
-      {trending.filter((i: any) => i.hot > 0).length > 0 && (
-        <div class="sidebar-widget">
-          <div class="sidebar-widget-title">🔥 实时热度</div>
-          {trending.map((item, idx) => (
-            <div class="trending-item">
-              <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
-              <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
-            </div>
-          ))}
-        </div>
-      )}
+      <!-- 实时热度 / Top Signals -->
+      <div class="sidebar-widget">
+        {trending.filter((i: any) => i.hot > 0).length > 0 ? (
+          <>
+            <div class="sidebar-widget-title">🔥 实时热度</div>
+            {trending.map((item, idx) => (
+              <div class="trending-item">
+                <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
+                <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <div class="sidebar-widget-title">📡 高分信号</div>
+            {featured.map((item, idx) => {
+              const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+              return (
+                <div class="signal-item">
+                  <span class={`signal-badge ${item.score >= 8 ? 'high' : 'med'}`}>{item.score}</span>
+                  <div>
+                    <span class="signal-source" style={`color:${meta.color}`}>{meta.icon} {meta.label}</span>
+                    <a href={item.url} target="_blank" rel="noopener" class="signal-title">{item.title}</a>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
+      </div>
 
     </aside>
   </div>
