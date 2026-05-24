@@ -28,6 +28,39 @@ def init_db():
             conn.execute("ALTER TABLE items ADD COLUMN en_summary TEXT")
         if 'zh_title' not in cols:
             conn.execute("ALTER TABLE items ADD COLUMN zh_title TEXT")
+
+        # 迁移：UNIQUE(hash) → UNIQUE(hash, date_key)，支持跨日去重
+        schema_check = conn.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name='items'").fetchone()
+        if schema_check and 'UNIQUE(hash)' in schema_check[0] and 'date_key' not in schema_check[0].split('UNIQUE')[1]:
+            conn.executescript("""
+                CREATE TABLE items_new (
+                    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                    title           TEXT NOT NULL,
+                    url             TEXT,
+                    description     TEXT,
+                    source_type     TEXT NOT NULL DEFAULT 'unknown',
+                    original_source TEXT,
+                    hot_value       REAL DEFAULT 0,
+                    score           REAL DEFAULT 0,
+                    frequency       REAL DEFAULT 1,
+                    pub_time        TEXT,
+                    date_key        TEXT NOT NULL,
+                    hash            TEXT NOT NULL,
+                    created_at      TEXT NOT NULL,
+                    ai_summary      TEXT,
+                    en_title        TEXT,
+                    en_summary      TEXT,
+                    zh_title        TEXT,
+                    UNIQUE(hash, date_key)
+                );
+                INSERT OR IGNORE INTO items_new SELECT * FROM items;
+                DROP TABLE items;
+                ALTER TABLE items_new RENAME TO items;
+                CREATE INDEX IF NOT EXISTS idx_date_key ON items(date_key);
+                CREATE INDEX IF NOT EXISTS idx_source ON items(source_type);
+                CREATE INDEX IF NOT EXISTS idx_pub_time ON items(pub_time);
+            """)
+
         conn.commit()
 
 def _hash(title, url=''):
@@ -35,15 +68,15 @@ def _hash(title, url=''):
     return hashlib.md5(s).hexdigest()
 
 def upsert_item(item, date_key):
-    """写入单条item，去重，返回 (added, skipped)"""
+    """写入单条item，同一天内去重，返回 (added, skipped)"""
     title = item.get('title', '')
     url   = item.get('url', '')
     h     = _hash(title, url)
     now   = datetime.now().isoformat()
     with get_conn() as conn:
-        cur = conn.execute("SELECT id FROM items WHERE hash = ?", (h,))
+        cur = conn.execute("SELECT id FROM items WHERE hash = ? AND date_key = ?", (h, date_key))
         if cur.fetchone():
-            return 0, 1  # 已存在，跳过
+            return 0, 1  # 同一天已存在，跳过
         
         conn.execute("""
             INSERT INTO items (title,url,description,source_type,original_source,

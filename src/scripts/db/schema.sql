@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS items (
     date_key        TEXT NOT NULL,  -- YYYY-MM-DD，用于按天查询
     hash            TEXT NOT NULL, -- 标题+URL 的 hash，用于去重
     created_at      TEXT NOT NULL,  -- 入库时间
-    UNIQUE(hash)
+    UNIQUE(hash, date_key)
 );
 
 CREATE INDEX IF NOT EXISTS idx_date_key ON items(date_key);
