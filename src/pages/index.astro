@@ -22,7 +22,7 @@ const PLATFORM_META: Record<string, { label: string; icon: string; color: string
   news_aggregator: { label: '快讯聚合',  icon: '📌', color: '#94A3B8' },
 };
 
-// Group items by platform (preserve all items, no slicing)
+// Group items by platform
 const grouped: Record<string, any[]> = {};
 for (const item of dayData.items) {
   const key = item.platform || 'other';
@@ -30,11 +30,16 @@ for (const item of dayData.items) {
   grouped[key].push(item);
 }
 
-// Featured picks: top 5 items by score (or first 5 if all scores are 0)
+// Featured: top 5 by score
 const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
 const featured = sortedAll.slice(0, 5);
 
-// Display order for platform sections
+// Trending: items with highest hot values
+const trending = [...dayData.items]
+  .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
+  .slice(0, 8);
+
+// Section display order
 const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator'];
 const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
   weibo:           { name: '微博热搜',  icon: '🔥' },
@@ -50,7 +55,24 @@ const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
   news_aggregator: { name: '综合快讯',  icon: '📌' },
 };
 
-// Compact threshold: sections with more than this many items use compact mode
+// Sections that span full width in the bento grid
+const FULL_WIDTH_SECTIONS = new Set(['weibo', 'douyin', 'news_aggregator']);
+
+// Active platforms (those with items)
+const activePlatforms = SECTION_ORDER.filter(p => grouped[p]?.length > 0);
+const maxPlatformCount = Math.max(...activePlatforms.map(p => grouped[p].length), 1);
+
+// Nav tabs (skip platforms with no items)
+const NAV_TABS = [
+  { id: 'featured', label: '精选', icon: '⭐' },
+  ...activePlatforms.map(p => ({
+    id: `platform-${p}`,
+    label: SECTION_CATEGORIES[p]?.name || p,
+    icon: SECTION_CATEGORIES[p]?.icon || '📌',
+  })),
+];
+
+// Compact threshold
 const COMPACT_THRESHOLD = 20;
 
 const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
@@ -60,7 +82,7 @@ function getDow(d: string) {
 }
 ---
 
-<BaseLayout title="📡 INTEL.SYS · 旗舰级情报看板" lang="zh-CN">
+<BaseLayout title="INTEL.SYS · 旗舰级情报看板" lang="zh-CN">
 <div class="page">
 
   <!-- Header -->
@@ -73,146 +95,327 @@ function getDow(d: string) {
       <span class="count-badge">{totalItems} 条情报</span>
     </div>
     <div class="header-actions">
+      <a href="/stats" class="lang-btn">📊 统计</a>
+      <a href="/archive" class="lang-btn">📁 归档</a>
       <a href="/en/" class="lang-btn">English</a>
       <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
     </div>
   </header>
 
-  <!-- Featured Picks -->
-  {featured.length > 0 && (
-    <section class="featured">
-      {featured.map((item, idx) => {
-        const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-        return (
-          <div class="featured-card">
-            <div class="featured-rank">{idx === 0 ? '★ 精选头条' : `#${idx + 1} 推荐`}</div>
-            <div class="featured-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
-            <div class="featured-meta">
-              <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                <span class="tag-icon">{meta.icon}</span>
-                {meta.label}
-              </span>
-              {item.score > 0 && <span class="featured-signal">SIGNAL {item.score}</span>}
+  <!-- Section Nav -->
+  <nav class="section-nav" id="sectionNav">
+    {NAV_TABS.map(tab => (
+      <a href={`#${tab.id}`} data-target={tab.id} class={tab.id === 'featured' ? 'active' : ''}>
+        {tab.icon} {tab.label}
+      </a>
+    ))}
+  </nav>
+
+  <!-- Content Grid: Main + Sidebar -->
+  <div class="content-grid">
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+      <!-- Featured Bento -->
+      <section id="featured" class="featured-bento">
+        {featured.length > 0 && (
+          <>
+            <!-- Hero Card (#1) -->
+            <div class="featured-hero">
+              {(() => {
+                const item = featured[0];
+                const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+                return (
+                  <>
+                    <div class="hero-rank">★ 精选头条</div>
+                    <h2 class="hero-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></h2>
+                    <div class="hero-meta">
+                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                        <span class="tag-icon">{meta.icon}</span>
+                        {meta.label}
+                      </span>
+                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
+                    </div>
+                    {item.desc && <p class="hero-desc">{item.desc}</p>}
+                  </>
+                );
+              })()}
             </div>
-            {item.desc && <div class="featured-desc">{item.desc}</div>}
-          </div>
-        );
-      })}
-    </section>
-  )}
 
-  <!-- Platform Sections (ALL items, no slicing) -->
-  {SECTION_ORDER.filter(p => grouped[p]?.length > 0).map(platform => {
-    const items = grouped[platform];
-    const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
-    const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
-    const isCompact = items.length > COMPACT_THRESHOLD;
-    const initialShow = isCompact ? 20 : items.length;
+            <!-- Side Cards (#2-5) -->
+            {featured.length > 1 && (
+              <div class="featured-side">
+                {featured.slice(1).map((item, idx) => {
+                  const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+                  return (
+                    <div class="featured-mini">
+                      <span class="mini-rank">#{idx + 2} 推荐</span>
+                      <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
+                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                        <span class="tag-icon">{meta.icon}</span>
+                        {meta.label}
+                      </span>
+                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        )}
+      </section>
 
-    return (
-      <section class="section" id={`section-${platform}`}>
-        <div class="section-header">
-          <div class="section-title">
-            <span>{cat.icon}</span>
-            <span>{cat.name}</span>
-            <span class="section-count">{items.length}</span>
+      <!-- Native Ad Banner -->
+      {totalItems > 0 && (
+        <div class="ad-card">
+          <div class="ad-label">—— 赞助内容 ——</div>
+          <div class="ad-content">
+            <strong>☁️ 高性能云服务器</strong> 限时特惠 · 新用户专享<strong> 1折起</strong>
+            <br /><span style="font-size:0.85em;color:var(--text-m);">稳定承载情报采集与分析工作负载</span>
           </div>
         </div>
+      )}
 
-        <div class={`news-list ${isCompact ? 'compact' : ''}`}>
-          {items.slice(0, initialShow).map((item: any, idx: number) => {
-            const hotValue = item.hot || 0;
-            return (
-              <div class="news-item">
-                <span class="news-idx">{idx + 1}</span>
-                <div class="news-body">
-                  <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                  <div class="news-footer">
-                    <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                      <span class="tag-icon">{meta.icon}</span>
-                      {meta.label}
-                    </span>
-                    {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                    {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
+      <!-- Platform Bento Grid -->
+      <div class="platform-grid">
+        {activePlatforms.map(platform => {
+          const items = grouped[platform];
+          const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
+          const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
+          const isCompact = items.length > COMPACT_THRESHOLD;
+          const initialShow = isCompact ? 20 : items.length;
+          const isFullWidth = FULL_WIDTH_SECTIONS.has(platform);
+
+          return (
+            <section class={`section ${isFullWidth ? 'section-full' : ''}`} id={`platform-${platform}`}>
+              <div class="section-header">
+                <div class="section-title">
+                  <span>{cat.icon}</span>
+                  <span>{cat.name}</span>
+                  <span class="section-count">{items.length}</span>
+                </div>
+              </div>
+
+              <div class={`news-list ${isCompact ? 'compact' : ''}`}>
+                {items.slice(0, initialShow).map((item: any, idx: number) => {
+                  const hotValue = item.hot || 0;
+                  return (
+                    <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`}>
+                      <span class="news-idx">{idx + 1}</span>
+                      <div class="news-body">
+                        <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                        <div class="news-footer">
+                          <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                            <span class="tag-icon">{meta.icon}</span>
+                            {meta.label}
+                          </span>
+                          {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
+                          {item.score > 0 && <span class="news-score">SIGNAL <strong>{item.score}</strong></span>}
+                        </div>
+                        {item.desc && <div class="news-desc">{item.desc}</div>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {isCompact && (
+                <>
+                  <button class="expand-btn" data-target={`more-${platform}`}>
+                    展开全部 {items.length} 条
+                  </button>
+                  <div id={`more-${platform}`} class="hidden-items">
+                    <div class="news-list compact">
+                      {items.slice(initialShow).map((item: any, idx: number) => {
+                        const realIdx = initialShow + idx + 1;
+                        return (
+                          <div class="news-item">
+                            <span class="news-idx">{realIdx}</span>
+                            <div class="news-body">
+                              <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                              <div class="news-footer">
+                                <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                                  <span class="tag-icon">{meta.icon}</span>
+                                  {meta.label}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                  {item.desc && <div class="news-desc">{item.desc}</div>}
+                </>
+              )}
+            </section>
+          );
+        })}
+      </div>
+
+      <!-- History -->
+      {recentDates.length > 0 && (
+        <section class="section section-full">
+          <div class="section-header">
+            <div class="section-title">📅 历史记录</div>
+          </div>
+          <div class="history-grid">
+            {recentDates.map(d => (
+              <a href={`/day/${d}`} class="history-item">
+                <div>{d}</div>
+                <div class="dow">{getDow(d)}</div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Platform Distribution -->
+      {activePlatforms.length > 0 && (
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">📊 平台分布</div>
+          {activePlatforms.map(p => {
+            const cnt = grouped[p].length;
+            const meta = PLATFORM_META[p] || { label: p, icon: '📌', color: '#94A3B8' };
+            const pct = Math.round(cnt / maxPlatformCount * 100);
+            return (
+              <div class="dist-item">
+                <div class="dist-header">
+                  <span class="dist-label">{meta.icon} {meta.label}</span>
+                  <span class="dist-count">{cnt}</span>
+                </div>
+                <div class="dist-bar">
+                  <div class="dist-bar-fill" style={`width:${pct}%;background:${meta.color}`}></div>
                 </div>
               </div>
             );
           })}
         </div>
+      )}
 
-        {/* Expand/Collapse for large sections */}
-        {isCompact && (
-          <button class="expand-btn" data-target={`section-${platform}-more`}>
-            展开全部 {items.length} 条
-          </button>
-        )}
-        {isCompact && (
-          <div id={`section-${platform}-more`} class="hidden-items">
-            <div class="news-list compact">
-              {items.slice(initialShow).map((item: any, idx: number) => {
-                const realIdx = initialShow + idx + 1;
-                return (
-                  <div class="news-item">
-                    <span class="news-idx">{realIdx}</span>
-                    <div class="news-body">
-                      <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                      <div class="news-footer">
-                        <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                          <span class="tag-icon">{meta.icon}</span>
-                          {meta.label}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+      <!-- Mini Stats -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">📊 数据概览</div>
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-cell-value">{totalItems}</div>
+            <div class="stat-cell-label">今日情报</div>
           </div>
-        )}
-      </section>
-    );
-  })}
+          <div class="stat-cell">
+            <div class="stat-cell-value">{activePlatforms.length}</div>
+            <div class="stat-cell-label">数据源</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{recentDates.length}</div>
+            <div class="stat-cell-label">覆盖天数</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
+            <div class="stat-cell-label">高价值信号</div>
+          </div>
+        </div>
+      </div>
 
-  <!-- History -->
-  {recentDates.length > 0 && (
-    <section class="section">
-      <div class="section-header">
-        <div class="section-title">📅 历史记录</div>
+      <!-- Sponsored Ad -->
+      <div class="sidebar-widget">
+        <div class="ad-card" style="border-style:solid;padding:16px;">
+          <div class="ad-label">赞助推荐</div>
+          <div class="ad-content">
+            <strong>🤖 AI 驱动的情报平台</strong><br />
+            <span style="font-size:0.85em;">让数据洞察快人一步</span>
+          </div>
+        </div>
       </div>
-      <div class="history-grid">
-        {recentDates.map(d => (
-          <a href={`/day/${d}`} class="history-item">
-            <div>{d}</div>
-            <div class="dow">{getDow(d)}</div>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
+
+      <!-- Trending Now -->
+      {trending.filter((i: any) => i.hot > 0).length > 0 && (
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">🔥 实时热度</div>
+          {trending.map((item, idx) => (
+            <div class="trending-item">
+              <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
+              <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
+            </div>
+          ))}
+        </div>
+      )}
+
+    </aside>
+  </div>
 
   <!-- Footer -->
   <div class="footer">
     📡 智谱 GLM-5 驱动 · INTEL.SYS 旗舰级情报看板<br />
-    每日自动采集 · AI 智能评分
+    每日自动采集 · AI 智能评分 · 原生广告展示
   </div>
 
 </div>
+
+<!-- Back to Top -->
+<button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
+
 </BaseLayout>
+
+<style>
+  /* Smooth scroll for anchor links */
+  html { scroll-behavior: smooth; }
+</style>
 
 <script>
   // Theme toggle
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
     let theme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    btn.addEventListener('click', () => {
+    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
       theme = theme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
-      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  // Section nav active state (IntersectionObserver)
+  const nav = document.getElementById('sectionNav');
+  if (nav) {
+    const links = nav.querySelectorAll('a');
+    const sections = Array.from(links).map(link => {
+      const id = link.getAttribute('data-target');
+      return id ? document.getElementById(id) : null;
+    }).filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          links.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('data-target') === id);
+          });
+        }
+      });
+    }, {
+      rootMargin: '-80px 0px -60% 0px',
+      threshold: 0,
+    });
+
+    sections.forEach(section => {
+      if (section) observer.observe(section);
+    });
+  }
+
+  // Back to top
+  const backBtn = document.getElementById('backToTop');
+  if (backBtn) {
+    window.addEventListener('scroll', () => {
+      backBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    backBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
@@ -226,9 +429,7 @@ function getDow(d: string) {
         target.classList.toggle('show');
         btn.textContent = isHidden
           ? '收起 ↑'
-          : btn.textContent.includes('展开')
-            ? btn.textContent
-            : `展开全部 ${btn.textContent.match(/\d+/)?.[0] || ''} 条`;
+          : `展开全部 ${target.querySelectorAll('.news-item').length + (btn.textContent.match(/\d+/)?.[0] || '0')} 条`;
       }
     });
   });

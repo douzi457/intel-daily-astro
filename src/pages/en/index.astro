@@ -31,6 +31,10 @@ for (const item of dayData.items) {
 const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
 const featured = sortedAll.slice(0, 5);
 
+const trending = [...dayData.items]
+  .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
+  .slice(0, 8);
+
 const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator'];
 const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
   weibo:           { name: 'Weibo Hot Search',  icon: '🔥' },
@@ -46,6 +50,19 @@ const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
   news_aggregator: { name: 'News Digest',       icon: '📌' },
 };
 
+const FULL_WIDTH_SECTIONS = new Set(['weibo', 'douyin', 'news_aggregator']);
+
+const activePlatforms = SECTION_ORDER.filter(p => grouped[p]?.length > 0);
+const maxPlatformCount = Math.max(...activePlatforms.map(p => grouped[p].length), 1);
+const NAV_TABS = [
+  { id: 'featured', label: 'Featured', icon: '⭐' },
+  ...activePlatforms.map(p => ({
+    id: `platform-${p}`,
+    label: SECTION_CATEGORIES[p]?.name || p,
+    icon: SECTION_CATEGORIES[p]?.icon || '📌',
+  })),
+];
+
 const COMPACT_THRESHOLD = 20;
 
 const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -55,10 +72,9 @@ function getDow(d: string) {
 }
 ---
 
-<BaseLayout title="📡 INTEL.SYS · Intelligence Hub" lang="en">
+<BaseLayout title="INTEL.SYS · Intelligence Hub" lang="en">
 <div class="page">
 
-  <!-- Header -->
   <header class="header">
     <div class="header-brand">
       <div class="header-logo">INTEL<span>.SYS</span></div>
@@ -68,144 +84,314 @@ function getDow(d: string) {
       <span class="count-badge">{totalItems} briefs</span>
     </div>
     <div class="header-actions">
+      <a href="/stats" class="lang-btn">📊 Stats</a>
+      <a href="/archive" class="lang-btn">📁 Archive</a>
       <a href="/" class="lang-btn">中文</a>
       <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
 
-  <!-- Featured Picks -->
-  {featured.length > 0 && (
-    <section class="featured">
-      {featured.map((item, idx) => {
-        const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-        return (
-          <div class="featured-card">
-            <div class="featured-rank">{idx === 0 ? '★ Top Pick' : `#${idx + 1} Recommended`}</div>
-            <div class="featured-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
-            <div class="featured-meta">
-              <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                <span class="tag-icon">{meta.icon}</span>
-                {meta.label}
-              </span>
-              {item.score > 0 && <span class="featured-signal">SIGNAL {item.score}</span>}
+  <!-- Section Nav -->
+  <nav class="section-nav" id="sectionNav">
+    {NAV_TABS.map(tab => (
+      <a href={`#${tab.id}`} data-target={tab.id} class={tab.id === 'featured' ? 'active' : ''}>
+        {tab.icon} {tab.label}
+      </a>
+    ))}
+  </nav>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <div class="main-content">
+
+      <!-- Featured Bento -->
+      <section id="featured" class="featured-bento">
+        {featured.length > 0 && (
+          <>
+            <div class="featured-hero">
+              {(() => {
+                const item = featured[0];
+                const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+                return (
+                  <>
+                    <div class="hero-rank">★ Top Pick</div>
+                    <h2 class="hero-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></h2>
+                    <div class="hero-meta">
+                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                        <span class="tag-icon">{meta.icon}</span>
+                        {meta.label}
+                      </span>
+                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
+                    </div>
+                    {item.desc && <p class="hero-desc">{item.desc}</p>}
+                  </>
+                );
+              })()}
             </div>
-            {item.desc && <div class="featured-desc">{item.desc}</div>}
-          </div>
-        );
-      })}
-    </section>
-  )}
 
-  <!-- Platform Sections -->
-  {SECTION_ORDER.filter(p => grouped[p]?.length > 0).map(platform => {
-    const items = grouped[platform];
-    const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
-    const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
-    const isCompact = items.length > COMPACT_THRESHOLD;
-    const initialShow = isCompact ? 20 : items.length;
+            {featured.length > 1 && (
+              <div class="featured-side">
+                {featured.slice(1).map((item, idx) => {
+                  const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+                  return (
+                    <div class="featured-mini">
+                      <span class="mini-rank">#{idx + 2} Pick</span>
+                      <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
+                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                        <span class="tag-icon">{meta.icon}</span>
+                        {meta.label}
+                      </span>
+                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        )}
+      </section>
 
-    return (
-      <section class="section" id={`section-${platform}`}>
-        <div class="section-header">
-          <div class="section-title">
-            <span>{cat.icon}</span>
-            <span>{cat.name}</span>
-            <span class="section-count">{items.length}</span>
+      <!-- Native Ad -->
+      {totalItems > 0 && (
+        <div class="ad-card">
+          <div class="ad-label">—— Sponsored ——</div>
+          <div class="ad-content">
+            <strong>☁️ High-Performance Cloud Servers</strong> · Up to <strong>90% OFF</strong> for new users
+            <br /><span style="font-size:0.85em;color:var(--text-m);">Reliable infrastructure for intelligence workloads</span>
           </div>
         </div>
+      )}
 
-        <div class={`news-list ${isCompact ? 'compact' : ''}`}>
-          {items.slice(0, initialShow).map((item: any, idx: number) => {
-            const hotValue = item.hot || 0;
-            return (
-              <div class="news-item">
-                <span class="news-idx">{idx + 1}</span>
-                <div class="news-body">
-                  <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                  <div class="news-footer">
-                    <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                      <span class="tag-icon">{meta.icon}</span>
-                      {meta.label}
-                    </span>
-                    {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                    {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
+      <!-- Platform Grid -->
+      <div class="platform-grid">
+        {activePlatforms.map(platform => {
+          const items = grouped[platform];
+          const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
+          const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
+          const isCompact = items.length > COMPACT_THRESHOLD;
+          const initialShow = isCompact ? 20 : items.length;
+          const isFullWidth = FULL_WIDTH_SECTIONS.has(platform);
+
+          return (
+            <section class={`section ${isFullWidth ? 'section-full' : ''}`} id={`platform-${platform}`}>
+              <div class="section-header">
+                <div class="section-title">
+                  <span>{cat.icon}</span>
+                  <span>{cat.name}</span>
+                  <span class="section-count">{items.length}</span>
+                </div>
+              </div>
+
+              <div class={`news-list ${isCompact ? 'compact' : ''}`}>
+                {items.slice(0, initialShow).map((item: any, idx: number) => {
+                  const hotValue = item.hot || 0;
+                  return (
+                    <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`}>
+                      <span class="news-idx">{idx + 1}</span>
+                      <div class="news-body">
+                        <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                        <div class="news-footer">
+                          <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                            <span class="tag-icon">{meta.icon}</span>
+                            {meta.label}
+                          </span>
+                          {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
+                          {item.score > 0 && <span class="news-score">SIGNAL <strong>{item.score}</strong></span>}
+                        </div>
+                        {item.desc && <div class="news-desc">{item.desc}</div>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {isCompact && (
+                <>
+                  <button class="expand-btn" data-target={`more-${platform}`}>
+                    Show all {items.length} items
+                  </button>
+                  <div id={`more-${platform}`} class="hidden-items">
+                    <div class="news-list compact">
+                      {items.slice(initialShow).map((item: any, idx: number) => {
+                        const realIdx = initialShow + idx + 1;
+                        return (
+                          <div class="news-item">
+                            <span class="news-idx">{realIdx}</span>
+                            <div class="news-body">
+                              <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                              <div class="news-footer">
+                                <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                                  <span class="tag-icon">{meta.icon}</span>
+                                  {meta.label}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                  {item.desc && <div class="news-desc">{item.desc}</div>}
+                </>
+              )}
+            </section>
+          );
+        })}
+      </div>
+
+      <!-- History -->
+      {recentDates.length > 0 && (
+        <section class="section section-full">
+          <div class="section-header">
+            <div class="section-title">📅 History</div>
+          </div>
+          <div class="history-grid">
+            {recentDates.map(d => (
+              <a href={`/en/day/${d}`} class="history-item">
+                <div>{d}</div>
+                <div class="dow">{getDow(d)}</div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Platform Distribution -->
+      {activePlatforms.length > 0 && (
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">📊 Platform Distribution</div>
+          {activePlatforms.map(p => {
+            const cnt = grouped[p].length;
+            const meta = PLATFORM_META[p] || { label: p, icon: '📌', color: '#94A3B8' };
+            const pct = Math.round(cnt / maxPlatformCount * 100);
+            return (
+              <div class="dist-item">
+                <div class="dist-header">
+                  <span class="dist-label">{meta.icon} {meta.label}</span>
+                  <span class="dist-count">{cnt}</span>
+                </div>
+                <div class="dist-bar">
+                  <div class="dist-bar-fill" style={`width:${pct}%;background:${meta.color}`}></div>
                 </div>
               </div>
             );
           })}
         </div>
+      )}
 
-        {isCompact && (
-          <button class="expand-btn" data-target={`section-${platform}-more`}>
-            Show all {items.length} items
-          </button>
-        )}
-        {isCompact && (
-          <div id={`section-${platform}-more`} class="hidden-items">
-            <div class="news-list compact">
-              {items.slice(initialShow).map((item: any, idx: number) => {
-                const realIdx = initialShow + idx + 1;
-                return (
-                  <div class="news-item">
-                    <span class="news-idx">{realIdx}</span>
-                    <div class="news-body">
-                      <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                      <div class="news-footer">
-                        <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                          <span class="tag-icon">{meta.icon}</span>
-                          {meta.label}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+      <!-- Mini Stats -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">📊 Overview</div>
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-cell-value">{totalItems}</div>
+            <div class="stat-cell-label">Today</div>
           </div>
-        )}
-      </section>
-    );
-  })}
-
-  <!-- History -->
-  {recentDates.length > 0 && (
-    <section class="section">
-      <div class="section-header">
-        <div class="section-title">📅 History</div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{activePlatforms.length}</div>
+            <div class="stat-cell-label">Sources</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{recentDates.length}</div>
+            <div class="stat-cell-label">Days</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
+            <div class="stat-cell-label">High Signals</div>
+          </div>
+        </div>
       </div>
-      <div class="history-grid">
-        {recentDates.map(d => (
-          <a href={`/en/day/${d}`} class="history-item">
-            <div>{d}</div>
-            <div class="dow">{getDow(d)}</div>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
 
-  <!-- Footer -->
+      <!-- Sponsored Ad -->
+      <div class="sidebar-widget">
+        <div class="ad-card" style="border-style:solid;padding:16px;">
+          <div class="ad-label">Sponsored</div>
+          <div class="ad-content">
+            <strong>🤖 AI-Powered Intelligence</strong><br />
+            <span style="font-size:0.85em;">Stay ahead with real-time insights</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending -->
+      {trending.filter((i: any) => i.hot > 0).length > 0 && (
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">🔥 Trending Now</div>
+          {trending.map((item, idx) => (
+            <div class="trending-item">
+              <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
+              <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
+            </div>
+          ))}
+        </div>
+      )}
+
+    </aside>
+  </div>
+
   <div class="footer">
     📡 Powered by Zhipu GLM-5 · INTEL.SYS Intelligence Hub<br />
-    Daily auto-collection · AI-scored
+    Daily auto-collection · AI-scored · Native ads
   </div>
 
 </div>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
 </BaseLayout>
 
+<style>
+  html { scroll-behavior: smooth; }
+</style>
+
 <script>
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
     let theme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    btn.addEventListener('click', () => {
+    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
       theme = theme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
-      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  const nav = document.getElementById('sectionNav');
+  if (nav) {
+    const links = nav.querySelectorAll('a');
+    const sections = Array.from(links).map(link => {
+      const id = link.getAttribute('data-target');
+      return id ? document.getElementById(id) : null;
+    }).filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          links.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('data-target') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(section => {
+      if (section) observer.observe(section);
+    });
+  }
+
+  const backBtn = document.getElementById('backToTop');
+  if (backBtn) {
+    window.addEventListener('scroll', () => {
+      backBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    backBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
@@ -214,8 +400,11 @@ function getDow(d: string) {
       const targetId = btn.getAttribute('data-target');
       const target = document.getElementById(targetId);
       if (target) {
+        const isHidden = !target.classList.contains('show');
         target.classList.toggle('show');
-        btn.textContent = target.classList.contains('show') ? 'Collapse ↑' : btn.textContent.replace('Collapse ↑', 'Show all');
+        btn.textContent = isHidden
+          ? 'Collapse ↑'
+          : `Show all ${target.querySelectorAll('.news-item').length + (btn.textContent.match(/\d+/)?.[0] || '0')} items`;
       }
     });
   });
