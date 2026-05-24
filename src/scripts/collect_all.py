@@ -20,6 +20,13 @@ from db.db import upsert_item, upsert_stats, log_collect, get_conn, _hash
 
 API_KEY = os.environ.get("ZHIPU_API_KEY")
 
+# Baidu Translate
+BAIDU_APP_ID = os.environ.get("BAIDU_TRANSLATE_APP_ID", "")
+BAIDU_SECRET_KEY = os.environ.get("BAIDU_TRANSLATE_SECRET_KEY", "")
+
+# 每日翻译字符上限（百度免费 100 万/月，设 3 万/天留余量）
+DAILY_TRANSLATE_LIMIT = 30000
+
 def log(msg):
     ts = datetime.now().strftime("%H:%M:%S")
     try:
@@ -65,6 +72,49 @@ def get_dual_language_data(title, content):
         match = re.search(r'\{.*\}', res, re.DOTALL)
         return json.loads(match.group())
     except: return None
+
+
+def contains_chinese(text):
+    """检测是否包含中文"""
+    return bool(re.search(r'[一-鿿]', text))
+
+
+def get_daily_translate_usage(date_key):
+    """查询当日已用翻译字符数"""
+    with get_conn() as conn:
+        conn.execute("""CREATE TABLE IF NOT EXISTS translate_usage (date_key TEXT PRIMARY KEY, chars_used INTEGER DEFAULT 0, item_count INTEGER DEFAULT 0)""")
+        r = conn.execute("SELECT chars_used FROM translate_usage WHERE date_key = ?", (date_key,)).fetchone()
+        return r[0] if r else 0
+
+
+def record_translate_usage(date_key, chars):
+    """记录翻译用量"""
+    with get_conn() as conn:
+        conn.execute("""INSERT INTO translate_usage (date_key, chars_used, item_count) VALUES (?, ?, 1) ON CONFLICT(date_key) DO UPDATE SET chars_used = chars_used + ?, item_count = item_count + 1""", (date_key, chars, chars))
+        conn.commit()
+
+
+def baidu_translate(text):
+    """百度翻译 API：英译中"""
+    if not BAIDU_APP_ID or not BAIDU_SECRET_KEY:
+        return None
+    import random, hashlib
+    salt = str(random.randint(10000, 99999))
+    sign = hashlib.md5((BAIDU_APP_ID + text + salt + BAIDU_SECRET_KEY).encode()).hexdigest()
+    try:
+        resp = requests.get("https://fanyi-api.baidu.com/api/trans/vip/translate", params={
+            'q': text, 'from': 'en', 'to': 'zh',
+            'appid': BAIDU_APP_ID, 'salt': salt, 'sign': sign
+        }, timeout=10)
+        data = resp.json()
+        if 'trans_result' in data:
+            return data['trans_result'][0]['dst']
+        if 'error_code' in data:
+            log(f"  百度翻译错误 [{data['error_code']}]: {data.get('error_msg', '')}")
+    except Exception as e:
+        log(f"  百度翻译异常: {e}")
+    return None
+
 
 # ---- Scrapers ----
 
@@ -200,6 +250,19 @@ def collect_all():
                 if isinstance(en, dict):
                     it['en_title'] = en.get('title', '')
                     it['en_summary'] = en.get('summary', '')
+
+            # 百度翻译：英文标题 → 中文（每日限额 30000 字符）
+            if not contains_chinese(it['title']):
+                used = get_daily_translate_usage(today)
+                est = len(it['title']) + 20  # title + 20 字符余量
+                if used + est <= DAILY_TRANSLATE_LIMIT:
+                    zh = baidu_translate(it['title'])
+                    if zh and zh != it['title']:
+                        it['zh_title'] = zh
+                        record_translate_usage(today, est)
+                        log(f"  [CN] Translated: {it['title'][:30]} → {zh[:30]}")
+                else:
+                    pass  # 超出每日限额，跳过翻译
             
             a, s = upsert_item(it, today)
             added_count += a

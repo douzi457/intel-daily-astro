@@ -35,6 +35,8 @@ jobs:
       - name: Run Collection
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          BAIDU_TRANSLATE_APP_ID: ${{ secrets.BAIDU_TRANSLATE_APP_ID }}
+          BAIDU_TRANSLATE_SECRET_KEY: ${{ secrets.BAIDU_TRANSLATE_SECRET_KEY }}
         run: |
           python src/scripts/collect_all.py
 

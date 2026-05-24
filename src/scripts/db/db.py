@@ -26,6 +26,8 @@ def init_db():
             conn.execute("ALTER TABLE items ADD COLUMN en_title TEXT")
         if 'en_summary' not in cols:
             conn.execute("ALTER TABLE items ADD COLUMN en_summary TEXT")
+        if 'zh_title' not in cols:
+            conn.execute("ALTER TABLE items ADD COLUMN zh_title TEXT")
         conn.commit()
 
 def _hash(title, url=''):
@@ -46,8 +48,8 @@ def upsert_item(item, date_key):
         conn.execute("""
             INSERT INTO items (title,url,description,source_type,original_source,
                                hot_value,score,frequency,pub_time,date_key,hash,created_at,
-                               ai_summary, en_title, en_summary)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                               ai_summary, en_title, en_summary, zh_title)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             title, url,
             item.get('description','') or item.get('desc',''),
@@ -60,7 +62,8 @@ def upsert_item(item, date_key):
             date_key, h, now,
             item.get('ai_summary', ''),
             item.get('en_title', ''),
-            item.get('en_summary', '')
+            item.get('en_summary', ''),
+            item.get('zh_title', '')
         ))
         conn.commit()
         return 1, 0

@@ -42,8 +42,12 @@ def dump_lang(day_str, lang='zh'):
         clean_desc = raw_desc.replace("摘要：", "").replace("Summary:", "").strip()
         
         # 3. 语言适配
-        title = r["en_title"] if lang == 'en' and r["en_title"] else r["title"]
-        desc = r["en_summary"] if lang == 'en' and r["en_summary"] else clean_desc
+        if lang == 'zh':
+            title = r["zh_title"] or r["title"]
+            desc = clean_desc
+        else:
+            title = r["en_title"] or r["title"]
+            desc = r["en_summary"] or clean_desc
         
         items.append({
             "id": r["id"],
