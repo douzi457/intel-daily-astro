@@ -22,7 +22,10 @@ API_KEY = os.environ.get("ZHIPU_API_KEY")
 
 def log(msg):
     ts = datetime.now().strftime("%H:%M:%S")
-    print(f"[{ts}] {msg}", flush=True)
+    try:
+        print(f"[{ts}] {msg}", flush=True)
+    except UnicodeEncodeError:
+        print(f"[{ts}] {msg.encode('utf-8', errors='replace').decode('utf-8', errors='replace')}", flush=True)
 
 def call_zhipu(model, prompt, temperature=0.2):
     if not API_KEY: return None
@@ -188,11 +191,15 @@ def collect_all():
             # AI Processing
             log(f"  [AI] Processing: {it['title'][:40]}...")
             dual = get_dual_language_data(it['title'], it.get('desc', ''))
-            if dual:
-                it['score'] = dual.get('score', 5)
-                it['ai_summary'] = dual['zh']['summary']
-                it['en_title'] = dual['en']['title']
-                it['en_summary'] = dual['en']['summary']
+            if isinstance(dual, dict):
+                it['score'] = dual.get('score', 5) or 5
+                zh = dual.get('zh')
+                en = dual.get('en')
+                if isinstance(zh, dict):
+                    it['ai_summary'] = zh.get('summary', '')
+                if isinstance(en, dict):
+                    it['en_title'] = en.get('title', '')
+                    it['en_summary'] = en.get('summary', '')
             
             a, s = upsert_item(it, today)
             added_count += a
