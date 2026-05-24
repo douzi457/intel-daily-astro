@@ -48,6 +48,7 @@ def init_db():
                     hash            TEXT NOT NULL,
                     created_at      TEXT NOT NULL,
                     ai_summary      TEXT,
+                    comments        INTEGER,
                     en_title        TEXT,
                     en_summary      TEXT,
                     zh_title        TEXT,
