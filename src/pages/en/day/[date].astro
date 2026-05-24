@@ -10,7 +10,6 @@ export async function getStaticPaths() {
 const { date } = Astro.params as { date: string };
 const dayData = getDayData(date, 'en');
 
-// Statistics
 const tabCounts: Record<string, number> = {};
 TABS_EN.forEach(t => tabCounts[t] = 0);
 dayData.items.forEach((it: any) => {
@@ -24,135 +23,142 @@ const nextDay = idx > 0 ? dates[idx - 1] : null;
 ---
 
 <BaseLayout title={`📡 ${date} Intelligence Report · INTEL.SYS`} lang="en">
-<div class="layout">
+<div class="page">
 
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-text">INTEL<span>.SYS</span></div>
-      <div class="logo-sub">Superpowers · Intel Hub</div>
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">INTEL<span>.SYS</span></div>
+      <span style="font-size:0.8em;color:var(--text-m);font-weight:500;margin-left:6px;">{date} Report</span>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-title">Navigation</div>
-        <a href="/en" class="nav-item"><span class="icon">📡</span><span class="label">Home</span></a>
-        <a href={`/en/day/${date}`} class="nav-item active"><span class="icon">📈</span><span class="label">Today's Report</span></a>
-        <a href="/en/archive" class="nav-item"><span class="icon">📁</span><span class="label">Archive</span></a>
-        <a href="/en/stats" class="nav-item"><span class="icon">📊</span><span class="label">Stats</span></a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-title">Recent Reports</div>
-        {dates.slice(0, 8).map(d => (
-          <a href={`/en/day/${d}`} class="nav-item-recent">
-            <span>{d}</span>
-          </a>
-        ))}
-      </div>
-    </nav>
-    <div class="sidebar-footer">Auto-generated · Every 2h</div>
-  </aside>
+    <div class="header-meta">
+      <span class="count-badge">{dayData.items.length} items</span>
+    </div>
+    <div class="header-actions">
+      <a href="/en/" class="lang-btn">Home</a>
+      <a href="/en/archive" class="lang-btn">Archive</a>
+      <a href="/" class="lang-btn">中文</a>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
 
-  <main class="main">
-    <div class="container">
+  <!-- Day Navigation -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:32px;">
+    {prevDay ? <a href={`/en/day/${prevDay}`} style="font-size:1.2em;color:var(--text-m);padding:8px 12px;border:1px solid var(--border);border-radius:8px;">←</a> : <span style="width:38px"></span>}
+    <span style="font-size:1.1em;font-weight:700;color:var(--text-h);font-family:var(--font-mono);">{date}</span>
+    {nextDay ? <a href={`/en/day/${nextDay}`} style="font-size:1.2em;color:var(--text-m);padding:8px 12px;border:1px solid var(--border);border-radius:8px;">→</a> : <span style="width:38px"></span>}
+  </div>
 
-      <div class="topbar">
-        <h1 class="topbar-title">📡 <span>{date}</span> Intelligence Report</h1>
-        <span class="topbar-meta">{dayData.items.length} items</span>
+  <!-- Stats -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:32px;">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+      <div style="font-size:1.5em;font-weight:800;color:var(--text-h);font-family:var(--font-mono);">{dayData.items.length}</div>
+      <div style="font-size:0.75em;color:var(--text-m);margin-top:4px;">Total</div>
+    </div>
+    {TABS_EN.map(tab => (
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:1.5em;font-weight:800;color:var(--text-h);font-family:var(--font-mono);">{tabCounts[tab] || 0}</div>
+        <div style="font-size:0.75em;color:var(--text-m);margin-top:4px;">{tab}</div>
       </div>
+    ))}
+  </div>
 
-      <!-- Navigation -->
-      <div class="day-nav">
-        {prevDay
-          ? <a href={`/en/day/${prevDay}`}>←</a>
-          : <span style="width:38px;display:inline-block"></span>}
-        <span class="current">{date}</span>
-        {nextDay
-          ? <a href={`/en/day/${nextDay}`}>→</a>
-          : <span style="width:38px;display:inline-block"></span>}
-      </div>
+  <!-- Search & Filter -->
+  <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;">
+    <input id="searchInput" placeholder="🔍 Search titles..." style="flex:1;min-width:200px;padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-h);font-size:0.85em;font-family:var(--font-sans);" autocomplete="off"/>
+    <span id="resultCount" style="font-size:0.8em;color:var(--text-m);padding:10px 0;"></span>
+  </div>
 
-      <!-- Stats Grid -->
-      <div class="stats-grid">
-        <div class="stat-card" style="--accent-color: var(--amber)">
-          <div class="sc-icon">📡</div><div class="sc-num">{dayData.items.length}</div><div class="sc-lbl">Total</div>
+  <!-- Tab Filter -->
+  <div style="display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;">
+    <button class="tab-btn active" data-tab="All" style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-p);font-size:0.8em;font-weight:600;cursor:pointer;">
+      📡 All <span style="font-family:var(--font-mono);font-size:0.85em;margin-left:4px;opacity:0.6;">{dayData.items.length}</span>
+    </button>
+    {TABS_EN.map(tab => (
+      <button class="tab-btn" data-tab={tab} style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-p);font-size:0.8em;font-weight:600;cursor:pointer;">
+        📌 {tab} <span style="font-family:var(--font-mono);font-size:0.85em;margin-left:4px;opacity:0.6;">{tabCounts[tab] || 0}</span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Items -->
+  <div id="itemList" style="display:flex;flex-direction:column;gap:6px;">
+    {dayData.items.map((it: any, idx: number) => (
+      <div class="news-item" data-tab={it.tab} data-search={it.title + ' ' + (it.desc || '')}>
+        <span class="news-idx">{idx + 1}</span>
+        <div class="news-body">
+          <a href={it.url} target="_blank" rel="noopener" class="news-title">{it.title}</a>
+          <div class="news-footer">
+            <span class="platform-tag" style={`color:${it.platform_color};border-color:${it.platform_color}20;background:${it.platform_color}10`}>
+              <span class="tag-icon">{it.platform_icon || '📌'}</span>
+              {PLATFORMS_EN[it.platform] || it.platform}
+            </span>
+            {it.desc && <span style="font-size:0.75em;color:var(--text-m);">{it.desc}</span>}
+          </div>
         </div>
-        {TABS_EN.map(tab => (
-          <div class="stat-card" style={`--accent-color: ${TAB_COLORS[tab]}`}>
-            <div class="sc-icon">📌</div>
-            <div class="sc-num">{tabCounts[tab] || 0}</div>
-            <div class="sc-lbl">{tab}</div>
-          </div>
-        ))}
       </div>
+    ))}
+  </div>
 
-      <!-- Tab Filter -->
-      <div class="tab-filter">
-        <button class="tab-btn active" data-tab="All">📡 All<span class="cnt">{dayData.items.length}</span></button>
-        {TABS_EN.map(tab => (
-          <button class="tab-btn" data-tab={tab}>📌 {tab}<span class="cnt">{tabCounts[tab] || 0}</span></button>
-        ))}
-      </div>
-      <div class="search-wrap">
-        <input class="search-input" id="q" placeholder="🔍 Search titles/descriptions..." autocomplete="off"/>
-        <span class="result-hint" id="cntHint"></span>
-      </div>
-
-      <!-- Item List -->
-      <div class="item-list" id="itemList">
-        {dayData.items.map((it: any, idx: number) => (
-          <div class="item-card" data-tab={it.tab} style={`--item-color: ${it.platform_color}`}>
-            <div class="item-idx">{idx + 1}</div>
-            <div class="item-badge"
-                 style={`--badge-bg: ${it.platform_color}22; --badge-color: ${it.platform_color}`}>
-              {it.platform_icon} {PLATFORMS_EN[it.platform] || it.platform}
-            </div>
-            <div class="item-body">
-              <div class="item-title"><a href={it.url} target="_blank">{it.title}</a></div>
-              <div class="item-desc">{it.desc}</div>
-              <div class="item-meta">
-                {it.hot_stars > 0 && <span class="item-hot">{'🔥'.repeat(it.hot_stars)}</span>}
-                <span class="item-time">{it.date}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <footer>📡 INTEL.SYS · {date}</footer>
-    </div>
-  </main>
+  <!-- Footer -->
+  <div class="footer">📡 INTEL.SYS · {date}</div>
 
 </div>
 
+<style>
+  .tab-btn.active {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: var(--accent-glow) !important;
+  }
+  #searchInput:focus { outline: none; border-color: var(--accent); }
+</style>
+
 <script>
+  // Theme toggle
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
+    let theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  // Tab filter
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const tab = (btn as HTMLElement).dataset.tab!;
-      document.querySelectorAll('.item-card').forEach(card => {
-        (card as HTMLElement).classList.toggle('hidden',
-          tab !== 'All' && (card as HTMLElement).dataset.tab !== tab);
+      const tab = btn.dataset.tab!;
+      document.querySelectorAll('.news-item').forEach(el => {
+        const cardTab = (el as HTMLElement).dataset.tab;
+        el.style.display = (tab === 'All' || cardTab === tab) ? '' : 'none';
       });
       updateCount();
     });
   });
 
-  const q = document.getElementById('q') as HTMLInputElement;
-  if (q) {
-    q.addEventListener('input', () => {
-      const v = q.value.toLowerCase().trim();
-      document.querySelectorAll('.item-card').forEach(card => {
-        (card as HTMLElement).classList.toggle('hidden',
-          v !== '' && !(card as HTMLElement).textContent!.toLowerCase().includes(v));
+  // Search
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
+      document.querySelectorAll('.news-item').forEach(el => {
+        const searchText = ((el as HTMLElement).dataset.search || '').toLowerCase();
+        el.style.display = q === '' || searchText.includes(q) ? '' : 'none';
       });
       updateCount();
     });
   }
 
   function updateCount() {
-    const hint = document.getElementById('cntHint');
+    const hint = document.getElementById('resultCount');
     if (!hint) return;
-    hint.textContent = `${document.querySelectorAll('.item-card:not(.hidden)').length} items`;
+    hint.textContent = `${document.querySelectorAll('.news-item[style*="display: none"]').length === 0 ? document.querySelectorAll('.news-item').length : document.querySelectorAll('.news-item:not([style*="display: none"])').length} items`;
   }
   updateCount();
 </script>

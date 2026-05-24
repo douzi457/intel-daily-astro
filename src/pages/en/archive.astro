@@ -12,51 +12,52 @@ function getDow(d: string) {
 ---
 
 <BaseLayout title="📁 History Archive · INTEL.SYS" lang="en">
-<div class="layout">
+<div class="page">
 
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-text">INTEL<span>.SYS</span></div>
-      <div class="logo-sub">Superpowers · Intel Hub</div>
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">INTEL<span>.SYS</span></div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-title">Navigation</div>
-        <a href="/en" class="nav-item"><span class="icon">📡</span><span class="label">Home</span></a>
-        <a href="/en/archive" class="nav-item active"><span class="icon">📁</span><span class="label">Archive</span></a>
-        <a href="/en/stats" class="nav-item"><span class="icon">📊</span><span class="label">Stats</span></a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-title">Recent Reports</div>
-        {dates.slice(0, 8).map(d => (
-          <a href={`/en/day/${d}`} class="nav-item-recent"><span>{d}</span></a>
-        ))}
-      </div>
-    </nav>
-    <div class="sidebar-footer">Auto-generated · Every 2h</div>
-  </aside>
-
-  <main class="main">
-    <div class="container">
-      <div class="topbar">
-        <h1 class="topbar-title">📁 History <span>Archive</span></h1>
-        <span class="topbar-meta">{dates.length} days of data</span>
-      </div>
-
-      <div class="archive-grid">
-        {dates.map(d => (
-          <div class="archive-item">
-            <a href={`/en/day/${d}`}>
-              {d}
-              <span class="dow">{getDow(d)}</span>
-            </a>
-          </div>
-        ))}
-      </div>
-
-      <footer>📡 INTEL.SYS · Archive</footer>
+    <div class="header-meta">
+      <span class="count-badge">{dates.length} days</span>
     </div>
-  </main>
+    <div class="header-actions">
+      <a href="/en/" class="lang-btn">← Home</a>
+      <a href="/en/stats" class="lang-btn">📊 Stats</a>
+      <a href="/" class="lang-btn">中文</a>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <div style="margin-bottom:40px;">
+    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 History Archive</h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">
+    {dates.map(d => (
+      <a href={`/en/day/${d}`} class="history-item">
+        <div>{d}</div>
+        <div class="dow">{getDow(d)}</div>
+      </a>
+    ))}
+  </div>
+
+  <div class="footer">📡 INTEL.SYS · Archive</div>
 
 </div>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    let theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+</script>
 </BaseLayout>

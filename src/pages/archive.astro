@@ -12,51 +12,51 @@ function getDow(d: string) {
 ---
 
 <BaseLayout title="📁 历史归档 · INTEL.SYS">
-<div class="layout">
+<div class="page">
 
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-text">INTEL<span>.SYS</span></div>
-      <div class="logo-sub">Superpowers · 情报站</div>
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">INTEL<span>.SYS</span></div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-title">导航</div>
-        <a href="/" class="nav-item"><span class="icon">📡</span><span class="label">首页</span></a>
-        <a href="/archive" class="nav-item active"><span class="icon">📁</span><span class="label">归档</span></a>
-        <a href="/stats" class="nav-item"><span class="icon">📊</span><span class="label">统计</span></a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-title">最近日报</div>
-        {dates.slice(0, 8).map(d => (
-          <a href={`/day/${d}`} class="nav-item-recent"><span>{d}</span></a>
-        ))}
-      </div>
-    </nav>
-    <div class="sidebar-footer">自动生成 · 每2小时更新</div>
-  </aside>
-
-  <main class="main">
-    <div class="container">
-      <div class="topbar">
-        <h1 class="topbar-title">📁 历史<span>归档</span></h1>
-        <span class="topbar-meta">{dates.length} 天历史数据</span>
-      </div>
-
-      <div class="archive-grid">
-        {dates.map(d => (
-          <div class="archive-item">
-            <a href={`/day/${d}`}>
-              {d}
-              <span class="dow">{getDow(d)}</span>
-            </a>
-          </div>
-        ))}
-      </div>
-
-      <footer>📡 INTEL.SYS · 历史归档</footer>
+    <div class="header-meta">
+      <span class="count-badge">{dates.length} 天数据</span>
     </div>
-  </main>
+    <div class="header-actions">
+      <a href="/" class="lang-btn">← 首页</a>
+      <a href="/stats" class="lang-btn">📊 统计</a>
+      <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
+    </div>
+  </header>
+
+  <div style="margin-bottom:40px;">
+    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 历史归档</h1>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">
+    {dates.map(d => (
+      <a href={`/day/${d}`} class="history-item">
+        <div>{d}</div>
+        <div class="dow">{getDow(d)}</div>
+      </a>
+    ))}
+  </div>
+
+  <div class="footer">📡 INTEL.SYS · 历史归档</div>
 
 </div>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    let theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+</script>
 </BaseLayout>

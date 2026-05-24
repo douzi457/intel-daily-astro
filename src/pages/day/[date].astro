@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { PLATFORMS, getDayData, getAllDates } from '../../utils/data.ts';
+import { getDayData, getAllDates } from '../../utils/data.ts';
 
 export async function getStaticPaths() {
   const dates = getAllDates('zh');
@@ -9,25 +9,50 @@ export async function getStaticPaths() {
 
 const { date } = Astro.params as { date: string };
 const dayData = getDayData(date, 'zh');
-
-// Statistics
 const totalItems = dayData.items.length;
-const highValueCount = dayData.items.filter((it: any) => it.score >= 8).length;
+const recentDates = getAllDates('zh').slice(0, 12);
 
-// Filter featured items
-const sortedByScore = [...dayData.items].sort((a: any, b: any) => b.score - a.score);
-const heroItem = sortedByScore[0];
+const PLATFORM_META: Record<string, { label: string; icon: string; color: string }> = {
+  weibo:           { label: '微博',     icon: '🔥', color: '#FF9500' },
+  hackernews:      { label: 'HackerNews', icon: '⚡', color: '#FF6600' },
+  github:          { label: 'GitHub',   icon: '🐙', color: '#6CCB5F' },
+  producthunt:     { label: 'ProductHunt', icon: '🚀', color: '#DA5430' },
+  v2ex:            { label: 'V2EX',     icon: '💬', color: '#4CAF50' },
+  ithome:          { label: 'IT之家',   icon: '💻', color: '#0090D8' },
+  '36kr':          { label: '36氪',     icon: '📊', color: '#4A90E2' },
+  wallstreetcn:    { label: '华尔街见闻', icon: '📈', color: '#3395FF' },
+  toutiao:         { label: '今日头条',  icon: '📰', color: '#E63946' },
+  douyin:          { label: '抖音',     icon: '🎵', color: '#00F2EA' },
+  news_aggregator: { label: '快讯聚合',  icon: '📌', color: '#94A3B8' },
+};
 
-// Group items for Bento Sections
-const techItems = dayData.items.filter((it: any) => ['github', 'ithome', 'hackernews', 'v2ex', 'producthunt'].includes(it.platform)).slice(0, 8);
-const financeItems = dayData.items.filter((it: any) => ['36kr', 'wallstreetcn', 'toutiao', 'tencent'].includes(it.platform)).slice(0, 8);
-const hotItems = dayData.items.filter((it: any) => ['weibo', 'douyin'].includes(it.platform)).slice(0, 12);
+const grouped: Record<string, any[]> = {};
+for (const item of dayData.items) {
+  const key = item.platform || 'other';
+  if (!grouped[key]) grouped[key] = [];
+  grouped[key].push(item);
+}
 
-// Remaining items
-const displayedIds = new Set([...techItems, ...financeItems, ...hotItems, heroItem].filter(Boolean).map(it => it.id));
-const remainingItems = dayData.items.filter((it: any) => !displayedIds.has(it.id)).sort((a: any, b: any) => b.score - a.score);
+const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
+const featured = sortedAll.slice(0, 5);
 
-const recentDates = getAllDates('zh').slice(0, 10);
+const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator'];
+const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
+  weibo:           { name: '微博热搜',  icon: '🔥' },
+  hackernews:      { name: '开发者社区', icon: '💻' },
+  github:          { name: '开源项目',  icon: '🐙' },
+  producthunt:     { name: '新品发布',  icon: '🚀' },
+  v2ex:            { name: 'V2EX 热议', icon: '💬' },
+  ithome:          { name: '科技资讯',  icon: '💻' },
+  '36kr':          { name: '商业快讯',  icon: '📊' },
+  wallstreetcn:    { name: '财经洞察',  icon: '📈' },
+  toutiao:         { name: '热点资讯',  icon: '📰' },
+  douyin:          { name: '抖音热榜',  icon: '🎵' },
+  news_aggregator: { name: '综合快讯',  icon: '📌' },
+};
+
+const COMPACT_THRESHOLD = 20;
+
 const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
 function getDow(d: string) {
   const idx = new Date(d + 'T00:00:00').getDay();
@@ -36,163 +61,176 @@ function getDow(d: string) {
 ---
 
 <BaseLayout title={`📡 ${date} 情报日报 · INTEL.SYS`} lang="zh-CN">
-<div class="app-container">
+<div class="page">
 
-  <!-- 顶部栏 -->
+  <!-- Header -->
   <header class="header">
-    <div class="brand">
-      <div class="logo">INTEL<span>.SYS</span></div>
-      <div class="sub">历史日报回顾 · {date}</div>
+    <div class="header-brand">
+      <div class="header-logo">INTEL<span>.SYS</span></div>
+      <span style="font-size:0.8em;color:var(--text-m);font-weight:500;margin-left:6px;">日报 · {date}</span>
     </div>
-    <div class="header-tools">
-      <a href="/" class="tool-link">返回首页</a>
-      <a href="/archive" class="tool-link">归档</a>
-      <button id="themeToggle" class="theme-toggle">🌙</button>
+    <div class="header-meta">
+      <span class="count-badge">{totalItems} 条情报</span>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="lang-btn">← 返回首页</a>
+      <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
     </div>
   </header>
 
-  <!-- 便当盒布局网格 (带空位自适应) -->
-  <main class="bento-grid">
-    
-    <!-- 1. 核心看板 -->
-    <section class="bento-card hero-box">
-      <div class="label-group">✨ {date} 核心精选</div>
-      {heroItem ? (
-        <>
-          <h2 class="card-title" style="font-size: 1.8em; margin-bottom: 20px;">
-            <a href={heroItem.url} target="_blank" style="color: inherit;">{heroItem.desc || heroItem.title}</a>
-          </h2>
-          <p class="card-desc">源自 {heroItem.platform_label}，本条情报被 AI 判定为当日最高价值信号。</p>
-        </>
-      ) : <p>当日无精选内容</p>}
-    </section>
-
-    <!-- 2. 统计小方块 -->
-    <div class="bento-card stat-box">
-      <div class="label-group">情报规模</div>
-      <div class="card-num">{totalItems}</div>
-      <div class="sc-lbl">条历史记录</div>
-    </div>
-
-    <!-- 3. 高分信号 -->
-    <div class="bento-card stat-box" style="border-color: var(--accent-b)">
-      <div class="label-group" style="color: var(--accent-b)">信号强度</div>
-      <div class="card-num" style="color: var(--accent-b)">{highValueCount}</div>
-      <div class="sc-lbl">AI 评分 8+</div>
-    </div>
-
-    <!-- 4. 科技开发 (仅在有数据时显示) -->
-    {techItems.length > 0 && (
-      <section class="bento-card list-box">
-        <div class="label-group">💻 科技与开发</div>
-        <div class="card-body">
-          {techItems.map((it: any, idx: number) => (
-            <div class="mini-item">
-              <span class="m-idx">{idx + 1}</span>
-              <div class="m-body">
-                <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
-                <span class="m-source">{it.platform_label}</span>
-              </div>
+  <!-- Featured Picks -->
+  {featured.length > 0 && (
+    <section class="featured">
+      {featured.map((item, idx) => {
+        const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+        return (
+          <div class="featured-card">
+            <div class="featured-rank">{idx === 0 ? '★ 精选头条' : `#${idx + 1} 推荐`}</div>
+            <div class="featured-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
+            <div class="featured-meta">
+              <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                <span class="tag-icon">{meta.icon}</span>
+                {meta.label}
+              </span>
+              {item.score > 0 && <span class="featured-signal">SIGNAL {item.score}</span>}
             </div>
-          ))}
-        </div>
-      </section>
-    )}
+            {item.desc && <div class="featured-desc">{item.desc}</div>}
+          </div>
+        );
+      })}
+    </section>
+  )}
 
-    <!-- 5. 历史导航 (常驻，防止留空) -->
-    <section class="bento-card visual-box" style="background: rgba(59, 130, 246, 0.03);">
-      <div class="label-group" style="color: var(--accent-b)">📅 其他日期</div>
-      <div class="history-list" style="display: flex; flex-direction: column; gap: 8px;">
+  <!-- Platform Sections -->
+  {SECTION_ORDER.filter(p => grouped[p]?.length > 0).map(platform => {
+    const items = grouped[platform];
+    const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
+    const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
+    const isCompact = items.length > COMPACT_THRESHOLD;
+    const initialShow = isCompact ? 20 : items.length;
+
+    return (
+      <section class="section" id={`section-${platform}`}>
+        <div class="section-header">
+          <div class="section-title">
+            <span>{cat.icon}</span>
+            <span>{cat.name}</span>
+            <span class="section-count">{items.length}</span>
+          </div>
+        </div>
+
+        <div class={`news-list ${isCompact ? 'compact' : ''}`}>
+          {items.slice(0, initialShow).map((item: any, idx: number) => {
+            const hotValue = item.hot || 0;
+            return (
+              <div class="news-item">
+                <span class="news-idx">{idx + 1}</span>
+                <div class="news-body">
+                  <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                  <div class="news-footer">
+                    <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                      <span class="tag-icon">{meta.icon}</span>
+                      {meta.label}
+                    </span>
+                    {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
+                    {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
+                  </div>
+                  {item.desc && <div class="news-desc">{item.desc}</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {isCompact && (
+          <button class="expand-btn" data-target={`section-${platform}-more`}>
+            展开全部 {items.length} 条
+          </button>
+        )}
+        {isCompact && (
+          <div id={`section-${platform}-more`} class="hidden-items">
+            <div class="news-list compact">
+              {items.slice(initialShow).map((item: any, idx: number) => {
+                const realIdx = initialShow + idx + 1;
+                return (
+                  <div class="news-item">
+                    <span class="news-idx">{realIdx}</span>
+                    <div class="news-body">
+                      <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                      <div class="news-footer">
+                        <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                          <span class="tag-icon">{meta.icon}</span>
+                          {meta.label}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  })}
+
+  <!-- History -->
+  {recentDates.length > 0 && (
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">📅 其他日期</div>
+      </div>
+      <div class="history-grid">
         {recentDates.map(d => (
-          <a href={`/day/${d}`} class={`history-item ${d === date ? 'active-day' : ''}`}>
-            <span>{d}</span>
-            <span style="opacity: 0.5; font-size: 0.85em;">{getDow(d)}</span>
+          <a href={`/day/${d}`} class={`history-item ${d === date ? 'history-item-active' : ''}`}>
+            <div>{d}</div>
+            <div class="dow">{getDow(d)}</div>
           </a>
         ))}
       </div>
     </section>
+  )}
 
-    <!-- 6. 财经商业 -->
-    {financeItems.length > 0 && (
-      <section class="bento-card list-box">
-        <div class="label-group">📈 财经商业</div>
-        <div class="card-body">
-          {financeItems.map((it: any, idx: number) => (
-            <div class="mini-item">
-              <span class="m-idx">{idx + 1}</span>
-              <div class="m-body">
-                <a href={it.url} target="_blank" class="m-ai">{it.desc || it.title}</a>
-                <span class="m-source">{it.platform_label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <!-- 7. 热搜 (常驻，作为兜底内容防止布局空洞) -->
-    <section class="bento-card visual-box">
-      <div class="label-group">🔥 实时热点</div>
-      <div class="card-body">
-        {(hotItems.length > 0 ? hotItems : remainingItems.slice(0, 10)).map((it: any) => (
-          <div class="mini-item">
-            <div class="m-body">
-              <a href={it.url} target="_blank" class="m-ai" style="font-size: 0.85em;">{it.title}</a>
-              <span class="m-source" style="font-size: 0.7em;">{it.platform_label}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-  </main>
-
-  <!-- 底部全量流 -->
-  <section style="margin-top: 60px;">
-    <div class="label-group" style="margin-bottom: 24px;">🌐 完整信号流 ({date})</div>
-    <div class="bento-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
-      {remainingItems.map((it: any) => (
-        <div class="bento-card">
-          <div class="platform-tag" style={`color: ${it.platform_color || 'var(--accent-b)'}; font-size: 0.65em; font-weight: 800; margin-bottom: 10px;`}>
-            {it.platform_label}
-          </div>
-          <a href={it.url} target="_blank" class="m-ai" style="font-size: 1em; margin-bottom: 12px; display: block;">{it.desc || it.title}</a>
-          <div class="card-footer" style="font-size: 0.7em; opacity: 0.5;">
-            <span>SCORE {it.score.toFixed(1)}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <footer style="margin-top: 80px; text-align: center; font-size: 0.8em; color: var(--text-m); padding-bottom: 40px; border-top: 1px solid var(--card-border); padding-top: 40px;">
+  <!-- Footer -->
+  <div class="footer">
     📡 智谱 GLM-5 驱动 · {date} 情报档案
-  </footer>
+  </div>
 
 </div>
+</BaseLayout>
 
 <style>
-  .history-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 14px; background: rgba(255,255,255,0.03);
-    border-radius: 8px; font-size: 0.85em; font-family: var(--font-mono);
-    color: var(--text-p); transition: all 0.2s;
+  .history-item-active {
+    border-color: var(--accent) !important;
+    background: var(--accent-glow) !important;
+    color: var(--accent) !important;
   }
-  .active-day { border: 1px solid var(--accent-p); background: rgba(168, 85, 247, 0.1); color: #fff; }
-  .tool-link { font-size: 0.85em; font-weight: 600; color: var(--text-p); margin-right: 15px;}
 </style>
 
 <script>
   const btn = document.getElementById('themeToggle');
-  let theme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-  btn!.textContent = theme === 'dark' ? '☀️' : '🌙';
-
-  btn?.addEventListener('click', () => {
-    theme = theme === 'dark' ? 'light' : 'dark';
+  if (btn) {
+    let theme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
     btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  document.querySelectorAll('.expand-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.classList.toggle('show');
+        btn.textContent = target.classList.contains('show')
+          ? '收起 ↑'
+          : `展开全部 ${btn.textContent.match(/\d+/)?.[0] || ''} 条`;
+      }
+    });
   });
 </script>
-</BaseLayout>

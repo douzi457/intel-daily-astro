@@ -1,81 +1,222 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { TABS_EN, TAB_COLORS, PLATFORMS_EN, PLATFORMS, getDayData, getAllDates } from '../../utils/data.ts';
+import { getDayData, getAllDates } from '../../utils/data.ts';
 
 const today = new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'en');
+const totalItems = dayData.items.length;
+const recentDates = getAllDates('en').slice(0, 10);
 
-// Group items by platform for the "Intelligence Wall" layout
-const groupedItems: Record<string, any[]> = {};
-dayData.items.forEach((it: any) => {
-  if (!groupedItems[it.platform]) groupedItems[it.platform] = [];
-  groupedItems[it.platform].push(it);
-});
+const PLATFORM_META: Record<string, { label: string; icon: string; color: string }> = {
+  weibo:           { label: 'Weibo',       icon: '🔥', color: '#FF9500' },
+  hackernews:      { label: 'HackerNews',  icon: '⚡', color: '#FF6600' },
+  github:          { label: 'GitHub',      icon: '🐙', color: '#6CCB5F' },
+  producthunt:     { label: 'ProductHunt', icon: '🚀', color: '#DA5430' },
+  v2ex:            { label: 'V2EX',        icon: '💬', color: '#4CAF50' },
+  ithome:          { label: 'IT Home',     icon: '💻', color: '#0090D8' },
+  '36kr':          { label: '36Kr',        icon: '📊', color: '#4A90E2' },
+  wallstreetcn:    { label: 'WallStreetCN', icon: '📈', color: '#3395FF' },
+  toutiao:         { label: 'TouTiao',     icon: '📰', color: '#E63946' },
+  douyin:          { label: 'Douyin',      icon: '🎵', color: '#00F2EA' },
+  news_aggregator: { label: 'News Feed',   icon: '📌', color: '#94A3B8' },
+};
 
-// Sort each platform by score and take top 8
-Object.keys(groupedItems).forEach(p => {
-  groupedItems[p] = groupedItems[p].sort((a: any, b: any) => b.score - a.score).slice(0, 8);
-});
+const grouped: Record<string, any[]> = {};
+for (const item of dayData.items) {
+  const key = item.platform || 'other';
+  if (!grouped[key]) grouped[key] = [];
+  grouped[key].push(item);
+}
 
-const recentDates = getAllDates('en').slice(0, 7);
+const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
+const featured = sortedAll.slice(0, 5);
+
+const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator'];
+const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
+  weibo:           { name: 'Weibo Hot Search',  icon: '🔥' },
+  hackernews:      { name: 'Dev Community',     icon: '💻' },
+  github:          { name: 'Open Source',       icon: '🐙' },
+  producthunt:     { name: 'New Products',      icon: '🚀' },
+  v2ex:            { name: 'V2EX Hot',          icon: '💬' },
+  ithome:          { name: 'Tech News',         icon: '💻' },
+  '36kr':          { name: 'Business Flash',    icon: '📊' },
+  wallstreetcn:    { name: 'Finance Insights',  icon: '📈' },
+  toutiao:         { name: 'Hot Topics',        icon: '📰' },
+  douyin:          { name: 'Douyin Trending',   icon: '🎵' },
+  news_aggregator: { name: 'News Digest',       icon: '📌' },
+};
+
+const COMPACT_THRESHOLD = 20;
+
+const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function getDow(d: string) {
+  const idx = new Date(d + 'T00:00:00').getDay();
+  return dowLabels[idx === 0 ? 6 : idx - 1];
+}
 ---
 
-<BaseLayout title="📡 INTEL.SYS · Global Intelligence Hub" lang="en">
-<div class="dashboard">
+<BaseLayout title="📡 INTEL.SYS · Intelligence Hub" lang="en">
+<div class="page">
 
   <!-- Header -->
   <header class="header">
-    <div class="header-left">
-      <div class="logo">INTEL<span>.SYS</span></div>
-      <div class="status-bar"><span class="pulse"></span> System Monitoring...</div>
+    <div class="header-brand">
+      <div class="header-logo">INTEL<span>.SYS</span></div>
     </div>
-    <div class="header-right">
-       <nav class="top-nav">
-         <a href="/" class="lang-switch">中文版</a>
-         <a href="/en/archive">Archive</a>
-         <a href="/en/stats">Statistics</a>
-       </nav>
+    <div class="header-meta">
+      <span class="date-badge">{today}</span>
+      <span class="count-badge">{totalItems} briefs</span>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="lang-btn">中文</a>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
 
-  <!-- Dashboard Grid -->
-  <main class="grid-container">
-    {Object.entries(groupedItems).map(([p, items]) => {
-      const meta = PLATFORMS[p] || { label: p, color: '#94a3b8', icon: '📌' };
-      const label = PLATFORMS_EN[p] || meta.label;
-      return (
-        <section class="platform-card" style={`--p-color: ${meta.color}`}>
-          <div class="card-header">
-             <div class="p-info">
-               <span class="p-icon">{meta.icon}</span>
-               <span class="p-name">{label}</span>
-             </div>
-             <span class="p-update">Just updated</span>
+  <!-- Featured Picks -->
+  {featured.length > 0 && (
+    <section class="featured">
+      {featured.map((item, idx) => {
+        const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+        return (
+          <div class="featured-card">
+            <div class="featured-rank">{idx === 0 ? '★ Top Pick' : `#${idx + 1} Recommended`}</div>
+            <div class="featured-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
+            <div class="featured-meta">
+              <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                <span class="tag-icon">{meta.icon}</span>
+                {meta.label}
+              </span>
+              {item.score > 0 && <span class="featured-signal">SIGNAL {item.score}</span>}
+            </div>
+            {item.desc && <div class="featured-desc">{item.desc}</div>}
           </div>
-          <div class="card-body">
-            {items.map((it, idx) => (
+        );
+      })}
+    </section>
+  )}
+
+  <!-- Platform Sections -->
+  {SECTION_ORDER.filter(p => grouped[p]?.length > 0).map(platform => {
+    const items = grouped[platform];
+    const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
+    const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
+    const isCompact = items.length > COMPACT_THRESHOLD;
+    const initialShow = isCompact ? 20 : items.length;
+
+    return (
+      <section class="section" id={`section-${platform}`}>
+        <div class="section-header">
+          <div class="section-title">
+            <span>{cat.icon}</span>
+            <span>{cat.name}</span>
+            <span class="section-count">{items.length}</span>
+          </div>
+        </div>
+
+        <div class={`news-list ${isCompact ? 'compact' : ''}`}>
+          {items.slice(0, initialShow).map((item: any, idx: number) => {
+            const hotValue = item.hot || 0;
+            return (
               <div class="news-item">
                 <span class="news-idx">{idx + 1}</span>
-                <div class="news-content">
-                  <a href={it.url} target="_blank" class="news-title">{it.title}</a>
-                  <div class="news-meta">
-                    {it.hot_stars > 0 && <span class="news-hot">{'🔥'.repeat(it.hot_stars)}</span>}
-                    <span class="news-time">{it.date}</span>
+                <div class="news-body">
+                  <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                  <div class="news-footer">
+                    <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                      <span class="tag-icon">{meta.icon}</span>
+                      {meta.label}
+                    </span>
+                    {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
+                    {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
                   </div>
+                  {item.desc && <div class="news-desc">{item.desc}</div>}
                 </div>
               </div>
-            ))}
-          </div>
-          <a href={`/en/day/${today}?platform=${p}`} class="card-footer">View More</a>
-        </section>
-      );
-    })}
-  </main>
+            );
+          })}
+        </div>
 
-  <!-- Ad Banner -->
-  <div class="ad-bottom">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins>
+        {isCompact && (
+          <button class="expand-btn" data-target={`section-${platform}-more`}>
+            Show all {items.length} items
+          </button>
+        )}
+        {isCompact && (
+          <div id={`section-${platform}-more`} class="hidden-items">
+            <div class="news-list compact">
+              {items.slice(initialShow).map((item: any, idx: number) => {
+                const realIdx = initialShow + idx + 1;
+                return (
+                  <div class="news-item">
+                    <span class="news-idx">{realIdx}</span>
+                    <div class="news-body">
+                      <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                      <div class="news-footer">
+                        <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                          <span class="tag-icon">{meta.icon}</span>
+                          {meta.label}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  })}
+
+  <!-- History -->
+  {recentDates.length > 0 && (
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">📅 History</div>
+      </div>
+      <div class="history-grid">
+        {recentDates.map(d => (
+          <a href={`/en/day/${d}`} class="history-item">
+            <div>{d}</div>
+            <div class="dow">{getDow(d)}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Footer -->
+  <div class="footer">
+    📡 Powered by Zhipu GLM-5 · INTEL.SYS Intelligence Hub<br />
+    Daily auto-collection · AI-scored
   </div>
 
 </div>
 </BaseLayout>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    let theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  document.querySelectorAll('.expand-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.classList.toggle('show');
+        btn.textContent = target.classList.contains('show') ? 'Collapse ↑' : btn.textContent.replace('Collapse ↑', 'Show all');
+      }
+    });
+  });
+</script>

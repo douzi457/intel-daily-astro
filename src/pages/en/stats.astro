@@ -6,7 +6,6 @@ import path from 'path';
 
 const DATA_ROOT = path.join(process.cwd(), 'src/data/rewrite/en');
 
-// Statistics across all dates
 let totalItems = 0;
 let platformDist: Record<string, number> = {};
 let dateCount = 0;
@@ -32,70 +31,83 @@ const maxCount = sortedPlatforms[0]?.[1] || 1;
 ---
 
 <BaseLayout title="📊 Data Stats · INTEL.SYS" lang="en">
-<div class="layout">
+<div class="page">
 
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-text">INTEL<span>.SYS</span></div>
-      <div class="logo-sub">Superpowers · Intel Hub</div>
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">INTEL<span>.SYS</span></div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-title">Navigation</div>
-        <a href="/en" class="nav-item"><span class="icon">📡</span><span class="label">Home</span></a>
-        <a href="/en/archive" class="nav-item"><span class="icon">📁</span><span class="label">Archive</span></a>
-        <a href="/en/stats" class="nav-item active"><span class="icon">📊</span><span class="label">Stats</span></a>
-      </div>
-    </nav>
-    <div class="sidebar-footer">Auto-generated · Every 2h</div>
-  </aside>
+    <div class="header-meta">
+      <span class="count-badge">{totalItems.toLocaleString()} items / {dateCount} days</span>
+    </div>
+    <div class="header-actions">
+      <a href="/en/" class="lang-btn">← Home</a>
+      <a href="/en/archive" class="lang-btn">📁 Archive</a>
+      <a href="/" class="lang-btn">中文</a>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
 
-  <main class="main">
-    <div class="container">
+  <div style="margin-bottom:40px;">
+    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📊 Data Stats</h1>
+  </div>
 
-      <div class="topbar">
-        <h1 class="topbar-title">📊 Data <span>Stats</span></h1>
-      </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:40px;">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-size:2em;font-weight:800;color:var(--text-h);font-family:var(--font-mono);">{totalItems.toLocaleString()}</div>
+      <div style="font-size:0.8em;color:var(--text-m);margin-top:6px;">Total Items</div>
+    </div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-size:2em;font-weight:800;color:var(--text-h);font-family:var(--font-mono);">{dateCount}</div>
+      <div style="font-size:0.8em;color:var(--text-m);margin-top:6px;">Days Covered</div>
+    </div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-size:2em;font-weight:800;color:var(--text-h);font-family:var(--font-mono);">{Object.keys(platformDist).length}</div>
+      <div style="font-size:0.8em;color:var(--text-m);margin-top:6px;">Sources</div>
+    </div>
+  </div>
 
-      <div class="stats-grid">
-        <div class="stat-card" style="--accent-color: var(--amber)">
-          <div class="sc-icon">📡</div>
-          <div class="sc-num">{totalItems.toLocaleString()}</div>
-          <div class="sc-lbl">Total Items</div>
-        </div>
-        <div class="stat-card" style="--accent-color: var(--cyan)">
-          <div class="sc-icon">📁</div>
-          <div class="sc-num">{dateCount}</div>
-          <div class="sc-lbl">Days Covered</div>
-        </div>
-        <div class="stat-card" style="--accent-color: var(--green)">
-          <div class="sc-icon">📬</div>
-          <div class="sc-num">{Object.keys(platformDist).length}</div>
-          <div class="sc-lbl">Sources</div>
-        </div>
-      </div>
-
+  <div class="section">
+    <div class="section-header">
       <div class="section-title">📊 Platform Distribution</div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px">
-        {sortedPlatforms.map(([p, cnt]) => {
-          const meta = PLATFORMS[p] || { label: p, color: '#94a3b8', icon: '📌' };
-          const label = PLATFORMS_EN[p] || meta.label;
-          const pct = Math.round(cnt / maxCount * 100);
-          return (
-            <div class="plat-row">
-              <div class="plat-label">{meta.icon} {label}</div>
-              <div class="plat-bar">
-                <div class="plat-bar-fill" style={`width:${pct}%;background:${meta.color}`}></div>
-              </div>
-              <div class="plat-count">{cnt}</div>
-            </div>
-          );
-        })}
-      </div>
-
-      <footer>📡 INTEL.SYS · Statistics</footer>
     </div>
-  </main>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;">
+      {sortedPlatforms.map(([p, cnt]) => {
+        const meta = PLATFORMS[p] || { label: p, color: '#94a3b8', icon: '📌' };
+        const label = PLATFORMS_EN[p] || meta.label;
+        const pct = Math.round(cnt / maxCount * 100);
+        return (
+          <div style="display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);">
+            <div style="min-width:120px;font-size:0.85em;font-weight:600;color:var(--text-p);display:flex;align-items:center;gap:6px;">
+              <span>{meta.icon}</span>
+              <span>{label}</span>
+            </div>
+            <div style="flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
+              <div style={`height:100%;width:${pct}%;background:${meta.color};border-radius:4px;`}></div>
+            </div>
+            <div style="min-width:50px;text-align:right;font-family:var(--font-mono);font-size:0.8em;font-weight:600;color:var(--text-m);">{cnt.toLocaleString()}</div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <div class="footer">📡 INTEL.SYS · Statistics</div>
 
 </div>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    let theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  }
+</script>
 </BaseLayout>
