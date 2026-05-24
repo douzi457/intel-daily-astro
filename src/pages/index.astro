@@ -30,9 +30,9 @@ for (const item of dayData.items) {
   grouped[key].push(item);
 }
 
-// Featured: top 5 by score
+// Featured: top 3 by score
 const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
-const featured = sortedAll.slice(0, 5);
+const featured = sortedAll.slice(0, 3);
 
 // Trending: items with highest hot values
 const trending = [...dayData.items]
@@ -138,7 +138,7 @@ function getDow(d: string) {
                         <span class="tag-icon">{meta.icon}</span>
                         {meta.label}
                       </span>
-                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
+                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>信号 {item.score}</span>}
                     </div>
                     {item.desc && <p class="hero-desc">{item.desc}</p>}
                   </>
@@ -159,7 +159,7 @@ function getDow(d: string) {
                         <span class="tag-icon">{meta.icon}</span>
                         {meta.label}
                       </span>
-                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
+                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>信号 {item.score}</span>}
                     </div>
                   );
                 })}
@@ -211,7 +211,7 @@ function getDow(d: string) {
                             {meta.label}
                           </span>
                           {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                          {item.score > 0 && <span class="news-score">SIGNAL <strong>{item.score}</strong></span>}
+                          {item.score > 0 && <span class="news-score">信号 <strong>{item.score}</strong></span>}
                         </div>
                         {item.desc && <div class="news-desc">{item.desc}</div>}
                       </div>

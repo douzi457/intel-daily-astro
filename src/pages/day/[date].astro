@@ -92,7 +92,7 @@ function getDow(d: string) {
                 <span class="tag-icon">{meta.icon}</span>
                 {meta.label}
               </span>
-              {item.score > 0 && <span class="featured-signal">SIGNAL {item.score}</span>}
+              {item.score > 0 && <span class="featured-signal">信号 {item.score}</span>}
             </div>
             {item.desc && <div class="featured-desc">{item.desc}</div>}
           </div>
@@ -132,7 +132,7 @@ function getDow(d: string) {
                         {meta.label}
                       </span>
                       {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                      {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
+                      {item.score > 0 && <span class="news-score">信号 {item.score}</span>}
                     </div>
                     {item.desc && <div class="news-desc">{item.desc}</div>}
                   </div>
