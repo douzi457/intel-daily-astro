@@ -30,9 +30,9 @@ for (const item of dayData.items) {
   grouped[key].push(item);
 }
 
-// Featured: top 3 by score
+// Featured: top 5 by score (3 in hero + 2 in side)
 const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
-const featured = sortedAll.slice(0, 3);
+const featured = sortedAll.slice(0, 5);
 
 // Trending: items with highest hot values
 const trending = [...dayData.items]
@@ -120,40 +120,36 @@ function getDow(d: string) {
     <!-- Main Content -->
     <div class="main-content">
 
-      <!-- Featured Bento -->
+      <!-- Featured Bento: hero (3 stacked) + side (2 mini) -->
       <section id="featured" class="featured-bento">
         {featured.length > 0 && (
           <>
-            <!-- Hero Card (#1) -->
             <div class="featured-hero">
-              {(() => {
-                const item = featured[0];
+              {featured.slice(0, 3).map((item, idx) => {
                 const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
                 return (
-                  <>
-                    <div class="hero-rank">★ 精选头条</div>
-                    <h2 class="hero-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></h2>
-                    <div class="hero-meta">
+                  <div class="hero-entry">
+                    <div class="hero-entry-rank">{idx === 0 ? '★ 精选头条' : `#${idx + 1} 精选`}</div>
+                    <div class="hero-entry-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
+                    <div class="hero-entry-meta">
                       <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
                         <span class="tag-icon">{meta.icon}</span>
                         {meta.label}
                       </span>
                       {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>信号 {item.score}</span>}
                     </div>
-                    {item.desc && <p class="hero-desc">{item.desc}</p>}
-                  </>
+                  </div>
                 );
-              })()}
+              })}
             </div>
 
-            <!-- Side Cards (#2-5) -->
-            {featured.length > 1 && (
+            {featured.length > 3 && (
               <div class="featured-side">
-                {featured.slice(1).map((item, idx) => {
+                {featured.slice(3).map((item, idx) => {
                   const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
                   return (
                     <div class="featured-mini">
-                      <span class="mini-rank">#{idx + 2} 推荐</span>
+                      <span class="mini-rank">#{idx + 4} 推荐</span>
                       <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
                       <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
                         <span class="tag-icon">{meta.icon}</span>
@@ -350,8 +346,45 @@ function getDow(d: string) {
 </BaseLayout>
 
 <style>
-  /* Smooth scroll for anchor links */
   html { scroll-behavior: smooth; }
+
+  /* Hero: 3 entries stacked */
+  .featured-hero {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px;
+  }
+  .hero-entry {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-entry:last-child {
+    border-bottom: none;
+  }
+  .hero-entry-rank {
+    font-family: var(--font-mono);
+    font-size: 0.6em;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  .hero-entry-title {
+    font-size: 0.88em;
+    font-weight: 700;
+    color: var(--text-h);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .hero-entry-title a:hover {
+    color: var(--accent);
+  }
+  .hero-entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
 </style>
 
 <script>
