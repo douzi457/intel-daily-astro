@@ -132,6 +132,15 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent);
   background: var(--accent-glow);
 }
+.header-meta .badge-link.tencent {
+  color: #60A5FA;
+  background: rgba(96, 165, 250, 0.08);
+  border-color: rgba(96, 165, 250, 0.2);
+}
+.header-meta .badge-link.tencent:hover {
+  border-color: #60A5FA;
+  background: rgba(96, 165, 250, 0.15);
+}
 
 .header-actions {
   display: flex;

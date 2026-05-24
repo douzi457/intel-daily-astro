@@ -94,6 +94,7 @@ function getDow(d: string) {
     <div class="header-meta">
       <span class="count-badge">{totalItems} 条情报</span>
       <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="badge-link">☁️ 阿里云 1折起</a>
+      <a id="tencentPromo" href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="badge-link tencent">💙 腾讯云 79元/年</a>
     </div>
     <div class="header-actions">
       <a href="/" class="lang-btn">← 返回首页</a>
@@ -533,6 +534,23 @@ function getDow(d: string) {
       headerImg.alt = p.alt;
       headerLink.href = p.href;
     }, 20000);
+  }
+
+  // Header rotating Tencent promo badge
+  const promoEl = document.getElementById('tencentPromo');
+  if (promoEl) {
+    const promos = [
+      { text: '💙 轻量服务器 4核4G3M 79元/年', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
+      { text: '🤖 AI焕新季 2核2G4M 99元/年', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
+      { text: '🎁 推广大使特惠合集', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
+    ];
+    let pi = 0;
+    setInterval(() => {
+      pi = (pi + 1) % promos.length;
+      const p = promos[pi];
+      promoEl.textContent = p.text;
+      promoEl.href = p.href;
+    }, 8000);
   }
 </script>
 </BaseLayout>
