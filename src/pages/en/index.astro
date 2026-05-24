@@ -50,7 +50,7 @@ const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
   news_aggregator: { name: 'News Digest',       icon: '📌' },
 };
 
-const FULL_WIDTH_SECTIONS = new Set(['weibo', 'douyin', 'news_aggregator']);
+const FULL_WIDTH_SECTIONS = new Set(['news_aggregator']);
 
 const activePlatforms = SECTION_ORDER.filter(p => grouped[p]?.length > 0);
 const maxPlatformCount = Math.max(...activePlatforms.map(p => grouped[p].length), 1);
