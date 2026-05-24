@@ -4,6 +4,14 @@ on:
   schedule:
     - cron: '0 */3 * * *' # 每 3 小时运行一次
   workflow_dispatch: # 支持手动触发
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - 'src/pages/**'
+      - 'src/scripts/**'
+      - 'src/styles/**'
+      - 'src/layouts/**'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
