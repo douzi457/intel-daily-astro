@@ -51,7 +51,7 @@ const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
   news_aggregator: { name: '综合快讯',  icon: '📌' },
 };
 
-const COMPACT_THRESHOLD = 20;
+const FULL_WIDTH_SECTIONS = new Set(['weibo', 'douyin', 'news_aggregator']);
 
 const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
 function getDow(d: string) {
@@ -102,77 +102,48 @@ function getDow(d: string) {
   )}
 
   <!-- Platform Sections -->
-  {SECTION_ORDER.filter(p => grouped[p]?.length > 0).map(platform => {
-    const items = grouped[platform];
-    const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
-    const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
-    const isCompact = items.length > COMPACT_THRESHOLD;
-    const initialShow = isCompact ? 20 : items.length;
+  <div class="platform-grid">
+    {SECTION_ORDER.filter(p => grouped[p]?.length > 0).map(platform => {
+      const items = grouped[platform];
+      const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
+      const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
+      const isFullWidth = FULL_WIDTH_SECTIONS.has(platform);
 
-    return (
-      <section class="section" id={`section-${platform}`}>
-        <div class="section-header">
-          <div class="section-title">
-            <span>{cat.icon}</span>
-            <span>{cat.name}</span>
-            <span class="section-count">{items.length}</span>
-          </div>
-        </div>
-
-        <div class={`news-list ${isCompact ? 'compact' : ''}`}>
-          {items.slice(0, initialShow).map((item: any, idx: number) => {
-            const hotValue = item.hot || 0;
-            return (
-              <div class="news-item">
-                <span class="news-idx">{idx + 1}</span>
-                <div class="news-body">
-                  <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                  <div class="news-footer">
-                    <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                      <span class="tag-icon">{meta.icon}</span>
-                      {meta.label}
-                    </span>
-                    {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                    {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
-                  </div>
-                  {item.desc && <div class="news-desc">{item.desc}</div>}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {isCompact && (
-          <button class="expand-btn" data-target={`section-${platform}-more`}>
-            展开全部 {items.length} 条
-          </button>
-        )}
-        {isCompact && (
-          <div id={`section-${platform}-more`} class="hidden-items">
-            <div class="news-list compact">
-              {items.slice(initialShow).map((item: any, idx: number) => {
-                const realIdx = initialShow + idx + 1;
-                return (
-                  <div class="news-item">
-                    <span class="news-idx">{realIdx}</span>
-                    <div class="news-body">
-                      <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                      <div class="news-footer">
-                        <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                          <span class="tag-icon">{meta.icon}</span>
-                          {meta.label}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+      return (
+        <section class={`platform-section ${isFullWidth ? 'section-full' : ''}`} id={`platform-${platform}`}>
+          <div class="section-header">
+            <div class="section-title">
+              <span>{cat.icon}</span>
+              <span>{cat.name}</span>
+              <span class="section-count">{items.length}</span>
             </div>
           </div>
-        )}
-      </section>
-    );
-  })}
+          <div class="news-list">
+            {items.map((item: any, idx: number) => {
+              const hotValue = item.hot || 0;
+              return (
+                <div class="news-item">
+                  <span class="news-idx">{idx + 1}</span>
+                  <div class="news-body">
+                    <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
+                    <div class="news-footer">
+                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                        <span class="tag-icon">{meta.icon}</span>
+                        {meta.label}
+                      </span>
+                      {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
+                      {item.score > 0 && <span class="news-score">SIGNAL {item.score}</span>}
+                    </div>
+                    {item.desc && <div class="news-desc">{item.desc}</div>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    })}
+  </div>
 
   <!-- History -->
   {recentDates.length > 0 && (
@@ -182,7 +153,7 @@ function getDow(d: string) {
       </div>
       <div class="history-grid">
         {recentDates.map(d => (
-          <a href={`/day/${d}`} class={`history-item ${d === date ? 'history-item-active' : ''}`}>
+          <a href={`/day/${d}`} class="history-item">
             <div>{d}</div>
             <div class="dow">{getDow(d)}</div>
           </a>
@@ -192,45 +163,26 @@ function getDow(d: string) {
   )}
 
   <!-- Footer -->
-  <div class="footer">
-    📡 智谱 GLM-5 驱动 · {date} 情报档案
-  </div>
+  <div class="footer">📡 INTEL.SYS · {date} 情报日报</div>
 
 </div>
-</BaseLayout>
 
 <style>
-  .history-item-active {
-    border-color: var(--accent) !important;
-    background: var(--accent-glow) !important;
-    color: var(--accent) !important;
-  }
+  html { scroll-behavior: smooth; }
 </style>
 
 <script>
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
     let theme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    btn.addEventListener('click', () => {
+    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
       theme = theme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
-      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
     });
   }
-
-  document.querySelectorAll('.expand-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.classList.toggle('show');
-        btn.textContent = target.classList.contains('show')
-          ? '收起 ↑'
-          : `展开全部 ${btn.textContent.match(/\d+/)?.[0] || ''} 条`;
-      }
-    });
-  });
 </script>
+</BaseLayout>

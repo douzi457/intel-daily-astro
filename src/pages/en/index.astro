@@ -63,7 +63,6 @@ const NAV_TABS = [
   })),
 ];
 
-const COMPACT_THRESHOLD = 20;
 
 const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 function getDow(d: string) {
@@ -174,12 +173,10 @@ function getDow(d: string) {
           const items = grouped[platform];
           const cat = SECTION_CATEGORIES[platform] || { name: platform, icon: '📌' };
           const meta = PLATFORM_META[platform] || { label: platform, icon: '📌', color: '#94A3B8' };
-          const isCompact = items.length > COMPACT_THRESHOLD;
-          const initialShow = isCompact ? 20 : items.length;
           const isFullWidth = FULL_WIDTH_SECTIONS.has(platform);
 
           return (
-            <section class={`section ${isFullWidth ? 'section-full' : ''}`} id={`platform-${platform}`}>
+            <section class={`platform-section ${isFullWidth ? 'section-full' : ''}`} id={`platform-${platform}`}>
               <div class="section-header">
                 <div class="section-title">
                   <span>{cat.icon}</span>
@@ -187,9 +184,8 @@ function getDow(d: string) {
                   <span class="section-count">{items.length}</span>
                 </div>
               </div>
-
-              <div class={`news-list ${isCompact ? 'compact' : ''}`}>
-                {items.slice(0, initialShow).map((item: any, idx: number) => {
+              <div class="news-list">
+                {items.map((item: any, idx: number) => {
                   const hotValue = item.hot || 0;
                   return (
                     <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`}>
@@ -210,35 +206,6 @@ function getDow(d: string) {
                   );
                 })}
               </div>
-
-              {isCompact && (
-                <>
-                  <button class="expand-btn" data-target={`more-${platform}`}>
-                    Show all {items.length} items
-                  </button>
-                  <div id={`more-${platform}`} class="hidden-items">
-                    <div class="news-list compact">
-                      {items.slice(initialShow).map((item: any, idx: number) => {
-                        const realIdx = initialShow + idx + 1;
-                        return (
-                          <div class="news-item">
-                            <span class="news-idx">{realIdx}</span>
-                            <div class="news-body">
-                              <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                              <div class="news-footer">
-                                <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                                  <span class="tag-icon">{meta.icon}</span>
-                                  {meta.label}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </>
-              )}
             </section>
           );
         })}
@@ -419,17 +386,4 @@ function getDow(d: string) {
     });
   }
 
-  document.querySelectorAll('.expand-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const target = document.getElementById(targetId);
-      if (target) {
-        const isHidden = !target.classList.contains('show');
-        target.classList.toggle('show');
-        btn.textContent = isHidden
-          ? 'Collapse ↑'
-          : `Show all ${target.querySelectorAll('.news-item').length + (btn.textContent.match(/\d+/)?.[0] || '0')} items`;
-      }
-    });
-  });
 </script>
