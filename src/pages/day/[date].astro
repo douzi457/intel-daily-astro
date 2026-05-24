@@ -37,7 +37,7 @@ const featured = sortedAll.slice(0, 5);
 
 const trending = [...dayData.items]
   .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
-  .slice(0, 8);
+  .slice(0, 10);
 
 const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator'];
 const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
@@ -277,57 +277,6 @@ function getDow(d: string) {
     <!-- Sidebar -->
     <aside class="sidebar">
 
-      <!-- Platform Distribution -->
-      {activePlatforms.length > 0 && (
-        <div class="sidebar-widget">
-          <div class="sidebar-widget-title">📊 平台分布</div>
-          {activePlatforms.map(p => {
-            const cnt = grouped[p].length;
-            const meta = PLATFORM_META[p] || { label: p, icon: '📌', color: '#94A3B8' };
-            const pct = Math.round(cnt / maxPlatformCount * 100);
-            return (
-              <div class="dist-item">
-                <div class="dist-header">
-                  <span class="dist-label">{meta.icon} {meta.label}</span>
-                  <span class="dist-count">{cnt}</span>
-                </div>
-                <div class="dist-bar">
-                  <div class="dist-bar-fill" style={`width:${pct}%;background:${meta.color}`}></div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <!-- Mini Stats -->
-      <div class="sidebar-widget">
-        <div class="sidebar-widget-title">📊 数据概览</div>
-        <div class="stats-grid">
-          <div class="stat-cell">
-            <div class="stat-cell-value">{totalItems}</div>
-            <div class="stat-cell-label">当日情报</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{activePlatforms.length}</div>
-            <div class="stat-cell-label">数据源</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{recentDates.length}</div>
-            <div class="stat-cell-label">覆盖天数</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
-            <div class="stat-cell-label">高价值信号</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 腾讯云推广（侧边栏） -->
-      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="sidebar-widget" style="padding:0;overflow:hidden;border-radius:14px;display:block;">
-        <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="腾讯云 · 轻量服务器 4核4G3M 仅 79元/年" loading="lazy" style="width:100%;height:auto;display:block;">
-      </a>
-
       <!-- 公众号关注 -->
       <div class="sidebar-widget">
         <div class="sidebar-widget-title">📢 豆子实验室</div>
@@ -363,6 +312,57 @@ function getDow(d: string) {
           </a>
         </div>
       </div>
+
+      <!-- 腾讯云推广（侧边栏） -->
+      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="sidebar-widget" style="padding:0;overflow:hidden;border-radius:14px;display:block;">
+        <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="腾讯云 · 轻量服务器 4核4G3M 仅 79元/年" loading="lazy" style="width:100%;height:auto;display:block;">
+      </a>
+
+      <!-- Mini Stats -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">📊 数据概览</div>
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-cell-value">{totalItems}</div>
+            <div class="stat-cell-label">当日情报</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{activePlatforms.length}</div>
+            <div class="stat-cell-label">数据源</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{recentDates.length}</div>
+            <div class="stat-cell-label">覆盖天数</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
+            <div class="stat-cell-label">高价值信号</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platform Distribution -->
+      {activePlatforms.length > 0 && (
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">📊 平台分布</div>
+          {activePlatforms.map(p => {
+            const cnt = grouped[p].length;
+            const meta = PLATFORM_META[p] || { label: p, icon: '📌', color: '#94A3B8' };
+            const pct = Math.round(cnt / maxPlatformCount * 100);
+            return (
+              <div class="dist-item">
+                <div class="dist-header">
+                  <span class="dist-label">{meta.icon} {meta.label}</span>
+                  <span class="dist-count">{cnt}</span>
+                </div>
+                <div class="dist-bar">
+                  <div class="dist-bar-fill" style={`width:${pct}%;background:${meta.color}`}></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <!-- Trending / Top Signals -->
       <div class="sidebar-widget">
