@@ -90,6 +90,7 @@ function getDow(d: string) {
     <div class="header-meta">
       <span class="date-badge">{today}</span>
       <span class="count-badge">{totalItems} 条情报</span>
+      <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="badge-link">☁️ 阿里云 1折起</a>
     </div>
     <div class="header-actions">
       <a href="/stats" class="lang-btn">📊 统计</a>
@@ -98,6 +99,15 @@ function getDow(d: string) {
       <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
     </div>
   </header>
+
+  <!-- Header thin banner -->
+  {totalItems > 0 && (
+    <div class="header-ad" id="headerAd">
+      <a id="headerAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
+        <img id="headerAdImg" src="/assets/ads/tencent/banner/return_970_90.png" alt="腾讯云推广" loading="lazy">
+      </a>
+    </div>
+  )}
 
 </div>
 
@@ -164,17 +174,6 @@ function getDow(d: string) {
           </>
         )}
       </section>
-
-      <!-- Native Ad: 阿里云推广 -->
-      {totalItems > 0 && (
-        <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="ad-card" style="display:block;text-decoration:none;">
-          <div class="ad-label">—— 赞助内容 ——</div>
-          <div class="ad-content">
-            <strong>☁️ 阿里云新用户专享</strong> · 爆款云服务器低至 <strong>1折起</strong>
-            <br /><span style="font-size:0.85em;color:var(--text-m);">稳定承载情报采集与分析工作负载</span>
-          </div>
-        </a>
-      )}
 
       <!-- Platform Bento Grid -->
       <div class="platform-grid">
@@ -504,7 +503,7 @@ function getDow(d: string) {
     });
   }
 
-  // Tencent Cloud banner rotation
+  // Tencent Cloud banner rotation (main)
   const adImg = document.getElementById('tencentAdImg');
   const adLink = document.getElementById('tencentAdLink');
   if (adImg && adLink) {
@@ -521,6 +520,24 @@ function getDow(d: string) {
       adImg.alt = p.alt;
       adLink.href = p.href;
     }, 25000);
+  }
+
+  // Header thin banner rotation
+  const headerImg = document.getElementById('headerAdImg');
+  const headerLink = document.getElementById('headerAdLink');
+  if (headerImg && headerLink) {
+    const ads = [
+      { src: '/assets/ads/tencent/banner/return_970_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 AI焕新季' },
+      { src: '/assets/ads/tencent/banner/lighthouse_1200_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 · 轻量服务器 79元/年' },
+    ];
+    let hi = 0;
+    setInterval(() => {
+      hi = (hi + 1) % ads.length;
+      const p = ads[hi];
+      headerImg.src = p.src;
+      headerImg.alt = p.alt;
+      headerLink.href = p.href;
+    }, 20000);
   }
 
 </script>

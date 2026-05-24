@@ -116,6 +116,23 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-p);
 }
 
+.header-meta .badge-link {
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.header-meta .badge-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -890,6 +907,31 @@ a { color: inherit; text-decoration: none; }
 .ad-content strong {
   color: var(--accent);
   font-weight: 800;
+}
+
+/* ── Header Ad (thin banner below header) ── */
+.header-ad {
+  margin-top: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+.header-ad:hover {
+  border-color: var(--accent);
+}
+.header-ad a {
+  display: block;
+  text-decoration: none;
+}
+.header-ad img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s;
+}
+.header-ad:hover img {
+  transform: scale(1.01);
 }
 
 /* ── Platform Distribution (sidebar) ── */
