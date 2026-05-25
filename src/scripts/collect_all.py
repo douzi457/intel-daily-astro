@@ -212,8 +212,9 @@ def collect_rss():
 # ---- Main ----
 
 def collect_all():
-    today = date.today().strftime("%Y-%m-%d")
-    log(f"=== Global Collection: {today} ===")
+    tz = timezone(timedelta(hours=8))
+    today = datetime.now(tz).strftime("%Y-%m-%d")
+    log(f"=== Global Collection: {today} (Asia/Shanghai) ===")
     
     scrapers = [
         ('News Aggregator', collect_news_agg),
