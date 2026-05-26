@@ -1,0 +1,309 @@
+---
+// Calendar Widget — replaces simple history lists with interactive month calendar
+// Props:
+//   dates: string[]  — available dates (YYYY-MM-DD)
+//   basePath: string — link prefix, e.g. '/day/' or '/en/day/'
+//   locale: 'zh' | 'en'
+//   currentDate?: string — optional, the currently viewed date to highlight
+
+const { dates, basePath, locale = 'zh', currentDate } = Astro.props as {
+  dates: string[];
+  basePath: string;
+  locale?: string;
+  currentDate?: string;
+};
+
+// Group dates by month
+const monthDays: Record<string, Set<number>> = {};
+const today = new Date().toISOString().slice(0, 10);
+for (const d of dates) {
+  const key = d.slice(0, 7); // YYYY-MM
+  if (!monthDays[key]) monthDays[key] = new Set();
+  monthDays[key].add(parseInt(d.slice(8, 10)));
+}
+
+// All months sorted descending
+const allMonths = Object.keys(monthDays).sort().reverse();
+
+// Generate calendar grid for a month
+function getMonthGrid(year: number, month: number) {
+  const daysInMonth = new Date(year, month, 0).getDate();
+  let startDow = new Date(year, month - 1, 1).getDay(); // 0=Sun
+  startDow = startDow === 0 ? 6 : startDow - 1; // convert to Mon=0
+
+  const cells: ({ day: number; isToday: boolean; hasData: boolean; dateStr: string } | null)[] = [];
+  // Leading empty cells
+  for (let i = 0; i < startDow; i++) cells.push(null);
+  // Day cells
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    cells.push({
+      day: d,
+      isToday: dateStr === today,
+      hasData: monthDays[`${year}-${String(month).padStart(2, '0')}`]?.has(d) || false,
+      dateStr,
+    });
+  }
+  return cells;
+}
+
+// Month name display
+function monthLabel(year: number, month: number) {
+  if (locale === 'zh') {
+    return `${year}年${month}月`;
+  }
+  const names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return `${names[month - 1]} ${year}`;
+}
+
+const dowLabels = locale === 'zh'
+  ? ['一', '二', '三', '四', '五', '六', '日']
+  : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+const emptyLabel = locale === 'zh' ? '暂无数据' : 'No data';
+const prevLabel = locale === 'zh' ? '← 上月' : '← Prev';
+const nextLabel = locale === 'zh' ? '下月 →' : 'Next →';
+const allLabel = locale === 'zh' ? '📅 日历' : '📅 Calendar';
+---
+
+<div class="calendar-widget" id="calendarWidget">
+  <div class="calendar-header">
+    <div class="calendar-title">{allLabel}</div>
+    <div class="calendar-nav" id="calendarNav">
+      <button class="cal-nav-btn" id="calPrev" aria-label={prevLabel}>{prevLabel}</button>
+      <span class="cal-month-label" id="calMonthLabel"></span>
+      <button class="cal-nav-btn" id="calNext" aria-label={nextLabel}>{nextLabel}</button>
+    </div>
+  </div>
+
+  <div class="calendar-body" id="calendarBody">
+    {allMonths.length === 0 && <div class="cal-empty">{emptyLabel}</div>}
+
+    {allMonths.map((m, mi) => {
+      const [yearStr, monthStr] = m.split('-');
+      const year = parseInt(yearStr);
+      const month = parseInt(monthStr);
+      const cells = getMonthGrid(year, month);
+
+      return (
+        <div class="cal-month" data-month={m} style={`display:${mi === 0 ? 'block' : 'none'}`}>
+          <div class="cal-dow-row">
+            {dowLabels.map(dow => <div class="cal-dow">{dow}</div>)}
+          </div>
+          <div class="cal-grid">
+            {cells.map((cell, ci) => {
+              if (!cell) return <div class="cal-cell cal-empty-cell"></div>;
+              const isActive = cell.dateStr === currentDate;
+              const classes = [
+                'cal-cell',
+                cell.isToday ? 'cal-today' : '',
+                cell.hasData ? 'cal-has-data' : '',
+                isActive ? 'cal-active' : '',
+              ].filter(Boolean).join(' ');
+              return (
+                <a
+                  href={cell.hasData ? `${basePath}${cell.dateStr}` : '#'}
+                  class={classes}
+                  data-date={cell.dateStr}
+                >
+                  <span class="cal-day-num">{cell.day}</span>
+                  {cell.hasData && <span class="cal-dot"></span>}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .calendar-widget {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .calendar-title {
+    font-size: 0.85em;
+    font-weight: 700;
+    color: var(--text-h);
+  }
+
+  .calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cal-nav-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.72em;
+    font-weight: 600;
+    color: var(--text-p);
+    cursor: pointer;
+    transition: all 0.12s;
+    font-family: inherit;
+  }
+  .cal-nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .cal-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .cal-month-label {
+    font-size: 0.82em;
+    font-weight: 700;
+    color: var(--text-h);
+    min-width: 100px;
+    text-align: center;
+    font-family: var(--font-mono);
+  }
+
+  .cal-empty {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-m);
+    font-size: 0.85em;
+  }
+
+  .cal-dow-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+
+  .cal-dow {
+    text-align: center;
+    font-size: 0.68em;
+    font-weight: 600;
+    color: var(--text-m);
+    padding: 4px 0;
+    font-family: var(--font-mono);
+  }
+
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .cal-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 2px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.12s;
+    min-height: 36px;
+    position: relative;
+  }
+
+  .cal-empty-cell {
+    pointer-events: none;
+  }
+
+  .cal-day-num {
+    font-size: 0.78em;
+    font-weight: 500;
+    color: var(--text-p);
+    line-height: 1.2;
+  }
+
+  .cal-cell.cal-has-data .cal-day-num {
+    font-weight: 700;
+    color: var(--text-h);
+  }
+
+  .cal-cell.cal-has-data:hover {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .cal-cell.cal-has-data:hover .cal-day-num {
+    color: var(--accent);
+  }
+
+  .cal-cell.cal-today .cal-day-num {
+    color: var(--accent);
+  }
+
+  .cal-cell.cal-today {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .cal-cell.cal-active {
+    background: var(--accent-glow);
+  }
+
+  .cal-cell.cal-active .cal-day-num {
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .cal-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .cal-cell.cal-active .cal-dot {
+    opacity: 1;
+    background: var(--accent);
+  }
+</style>
+
+<script>
+  (function() {
+    const container = document.getElementById('calendarWidget');
+    if (!container) return;
+
+    const months = container.querySelectorAll('.cal-month');
+    const monthLabel = document.getElementById('calMonthLabel');
+    const prevBtn = document.getElementById('calPrev');
+    const nextBtn = document.getElementById('calNext');
+    let currentIndex = 0;
+
+    function showMonth(idx) {
+      if (idx < 0 || idx >= months.length) return;
+      currentIndex = idx;
+      months.forEach((m, i) => {
+        (m as HTMLElement).style.display = i === idx ? 'block' : 'none';
+      });
+      const active = months[idx] as HTMLElement;
+      monthLabel!.textContent = active.dataset.month || '';
+      prevBtn!.disabled = idx === 0;
+      nextBtn!.disabled = idx >= months.length - 1;
+    }
+
+    if (months.length > 0) {
+      prevBtn!.addEventListener('click', () => showMonth(currentIndex - 1));
+      nextBtn!.addEventListener('click', () => showMonth(currentIndex + 1));
+      showMonth(0);
+    }
+  })();
+</script>

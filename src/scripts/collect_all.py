@@ -16,7 +16,7 @@ SKILLS_DIR = BASE_DIR / "skills"
 
 # 将核心模块加入路径
 sys.path.insert(0, str(BASE_DIR))
-from db.db import upsert_item, upsert_stats, log_collect, get_conn, _hash
+from db.db import upsert_item, upsert_stats, log_collect, get_conn, _hash, record_source_health
 
 API_KEY = os.environ.get("ZHIPU_API_KEY")
 
@@ -295,26 +295,40 @@ def collect_all():
     log(f"=== Global Collection: {today} (Asia/Shanghai) ===")
     
     scrapers = [
-        ('News Aggregator', collect_news_agg),
-        ('Weibo', collect_weibo),
-        ('Douyin', collect_douyin),
-        ('Reddit', collect_reddit),
-        ('RSS', collect_rss)
+        ('news_aggregator', 'News Aggregator', collect_news_agg),
+        ('weibo', 'Weibo', collect_weibo),
+        ('douyin', 'Douyin', collect_douyin),
+        ('reddit', 'Reddit', collect_reddit),
+        ('rss', 'RSS', collect_rss)
     ]
-    
+
     added_count = 0
     skip_count = 0
-    
-    for name, fn in scrapers:
+
+    for src_key, name, fn in scrapers:
         log(f"Running {name}...")
-        items = fn()
-        log(f"  Found {len(items)} items")
-        
+        t0 = time.time()
+        error_msg = ''
+        status = 'success'
+        try:
+            items = fn()
+        except Exception as e:
+            items = []
+            error_msg = f"{type(e).__name__}: {str(e)[:200]}"
+            status = 'error'
+            log(f"  ERROR: {error_msg}")
+        duration = int((time.time() - t0) * 1000)
+        log(f"  Found {len(items)} items ({duration}ms)")
+
+        source_added = 0
+        source_skipped = 0
+
         for it in items:
             h = _hash(it['title'], it.get('url', ''))
             with get_conn() as conn:
                 if conn.execute("SELECT id FROM items WHERE hash = ?", (h,)).fetchone():
                     skip_count += 1
+                    source_skipped += 1
                     continue
             
             # AI Processing
@@ -348,7 +362,12 @@ def collect_all():
             a, s = upsert_item(it, today)
             added_count += a
             skip_count += s
+            source_added += a
+            source_skipped += s
             if a > 0: time.sleep(0.5)
+
+        log(f"  [{src_key}] +{source_added}, skipped {source_skipped}, status={status}")
+        record_source_health(today, src_key, status, len(items), source_added, error_msg, duration)
 
     # Stats
     with get_conn() as conn:
@@ -358,6 +377,18 @@ def collect_all():
     # Export
     log("Exporting JSONs...")
     subprocess.run([sys.executable, str(SCRIPTS_DIR / "dump_astro_json.py")], cwd=str(SCRIPTS_DIR))
+
+    # Export source health data
+    log("Exporting source health...")
+    try:
+        from db.db import get_source_health
+        health_data = get_source_health(today)
+        health_out = SCRIPTS_DIR.parent.parent / "src" / "data" / "rewrite" / "source-health.json"
+        import json as _json
+        with open(health_out, "w", encoding="utf-8") as f:
+            _json.dump({"date": today, "sources": [dict(h) for h in health_data]}, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        log(f"  Health export error: {e}")
 
     # Generate today's focus
     log("Generating today's focus...")

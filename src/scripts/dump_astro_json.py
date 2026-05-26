@@ -1,7 +1,8 @@
 # dump_astro_json.py
 # 2026 Pro Intelligence Engine - Data Exporter
-import sqlite3, json, os
+import sqlite3, json, os, re
 from pathlib import Path
+from difflib import SequenceMatcher
 
 BASE_DIR = Path(__file__).parent
 DB = BASE_DIR / "db" / "intel.db"
@@ -29,6 +30,66 @@ PLATFORM_META = {
     "163":          {"label": "网易新闻", "color": "#DE1A1A", "icon": "📰"},
     "chuangye":     {"label": "创业邦",  "color": "#FF6B35", "icon": "🚀"},
 }
+
+def _clean_title(title):
+    """去掉常见来源后缀，保留核心标题用于相似度匹配"""
+    title = re.sub(r'\s*[-–—|]\s*(36氪|知乎|B站|IT之家|华尔街见闻|今日头条|腾讯新闻|网易新闻|澎湃新闻|观察者网|创业邦|财联社|百度贴吧|贴吧|微博|抖音|V2EX|GitHub|HackerNews|ProductHunt).*$', '', title)
+    title = re.sub(r'\s*[-–—|]\s*(36Kr|IT Home|WallStreetCN|TouTiao|Tencent News|NetEase|The Paper|Guancha|Cyzone|Cailianshe|Baidu Tieba|Baidu|Zhihu|Bilibili).*$', '', title)
+    title = re.sub(r'[^\w一-鿿]', '', title)  # 去标点，只留字母数字中文
+    return title.strip().lower()[:50]
+
+def dedup_items(items):
+    """同分类内按标题相似度聚合，合并同一事件的多个来源"""
+    by_cat: dict[str, list] = {}
+    for item in items:
+        by_cat.setdefault(item.get('category', '其他'), []).append(item)
+
+    result = []
+    for cat, cat_items in by_cat.items():
+        cat_items.sort(key=lambda x: x.get('score', 0), reverse=True)
+        used = set()
+
+        for i, primary in enumerate(cat_items):
+            if i in used:
+                continue
+            used.add(i)
+            cluster = [primary]
+            clean_i = _clean_title(primary.get('title', ''))
+
+            for j, other in enumerate(cat_items):
+                if j in used or i == j:
+                    continue
+                clean_j = _clean_title(other.get('title', ''))
+                # 短标题放宽阈值，长标题严格一点
+                min_len = min(len(clean_i), len(clean_j))
+                threshold = 0.5 if min_len < 15 else 0.55
+                if SequenceMatcher(None, clean_i, clean_j).ratio() > threshold:
+                    cluster.append(other)
+                    used.add(j)
+
+            if len(cluster) > 1:
+                # 取评分最高的为主条目
+                cluster.sort(key=lambda x: x.get('score', 0), reverse=True)
+                primary = dict(cluster[0])
+                seen = set()
+                merged = []
+                for ci in cluster:
+                    src = ci.get('platform', '')
+                    if src and src not in seen:
+                        seen.add(src)
+                        merged.append({
+                            'platform': src,
+                            'label': ci.get('platform_label', ''),
+                            'color': ci.get('platform_color', ''),
+                            'icon': ci.get('platform_icon', ''),
+                            'url': ci.get('url', ''),
+                        })
+                primary['merged_sources'] = merged
+                result.append(primary)
+            else:
+                result.append(primary)
+
+    return result
 
 def dump_lang(day_str, lang='zh'):
     if not DB.exists(): return
@@ -73,11 +134,16 @@ def dump_lang(day_str, lang='zh'):
             "category": r["category"] or "其他"
         })
 
+    # ── 同事件多源合并 ──
+    total = len(items)
+    items = dedup_items(items)
+    deduped = total - len(items)
+
     out_dir = OUT_BASE / lang
     out_dir.mkdir(exist_ok=True, parents=True)
     with open(out_dir / f"{day_str}.json", "w", encoding="utf-8") as f:
         json.dump({"date": day_str, "items": items}, f, ensure_ascii=False, indent=2)
-    print(f"  {lang} - {day_str}: {len(items)} items exported.")
+    print(f"  {lang} - {day_str}: {len(items)} items (deduped {deduped}) exported.")
 
 def dump_all():
     conn = sqlite3.connect(DB)

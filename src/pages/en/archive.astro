@@ -1,14 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllDates } from '../../utils/data.ts';
+import CalendarWidget from '../../components/CalendarWidget.astro';
 
 const dates = getAllDates('en');
-
-const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-function getDow(d: string) {
-  const idx = new Date(d + 'T00:00:00').getDay();
-  return dowLabels[idx === 0 ? 6 : idx - 1];
-}
 ---
 
 <BaseLayout title="📁 History Archive · INTEL.SYS" lang="en">
@@ -33,16 +28,9 @@ function getDow(d: string) {
     <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 History Archive</h1>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">
-    {dates.map(d => (
-      <a href={`/en/day/${d}`} class="history-item">
-        <div>{d}</div>
-        <div class="dow">{getDow(d)}</div>
-      </a>
-    ))}
-  </div>
+  <CalendarWidget dates={dates} basePath="/en/day/" locale="en" />
 
-  <div class="footer">📡 INTEL.SYS · Archive</div>
+  <div class="footer" style="margin-top:40px;">📡 INTEL.SYS · Archive</div>
 
 </div>
 

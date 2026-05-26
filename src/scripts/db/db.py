@@ -168,5 +168,76 @@ def get_recent_collects(limit=20):
         """, (limit,)).fetchall()
         return [dict(r) for r in rows]
 
+# ── Source Health Monitoring ──
+
+def init_source_health_table():
+    """创建 source_health 表（如果不存在）"""
+    with get_conn() as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS source_health (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date_key TEXT NOT NULL,
+                source TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'unknown',
+                items_found INTEGER DEFAULT 0,
+                items_added INTEGER DEFAULT 0,
+                error_message TEXT,
+                duration_ms INTEGER DEFAULT 0,
+                created_at TEXT NOT NULL
+            )
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_source_health_date
+            ON source_health(date_key)
+        """)
+        conn.commit()
+
+def record_source_health(date_key, source, status, items_found=0, items_added=0, error_message='', duration_ms=0):
+    """记录单个来源的采集健康状态"""
+    now = datetime.now().isoformat()
+    with get_conn() as conn:
+        conn.execute("""
+            INSERT INTO source_health (date_key, source, status, items_found, items_added, error_message, duration_ms, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (date_key, source, status, items_found, items_added, error_message[:500], duration_ms, now))
+        conn.commit()
+
+def get_source_health(date_key=None, limit=30):
+    """获取来源健康状态，可按日期筛选"""
+    with get_conn() as conn:
+        if date_key:
+            rows = conn.execute("""
+                SELECT * FROM source_health
+                WHERE date_key = ?
+                ORDER BY source
+            """, (date_key,)).fetchall()
+        else:
+            rows = conn.execute("""
+                SELECT * FROM source_health
+                ORDER BY created_at DESC
+                LIMIT ?
+            """, (limit,)).fetchall()
+        return [dict(r) for r in rows]
+
+def get_source_success_rates(days=7):
+    """获取各来源近 N 天的成功率统计"""
+    with get_conn() as conn:
+        rows = conn.execute("""
+            SELECT
+                source,
+                COUNT(*) as total_runs,
+                SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) as success_count,
+                SUM(CASE WHEN status = 'error' THEN 1 ELSE 0 END) as error_count,
+                SUM(items_found) as total_items_found,
+                SUM(items_added) as total_items_added,
+                ROUND(AVG(duration_ms)) as avg_duration_ms
+            FROM source_health
+            WHERE date_key >= date('now', ? || ' days', '+8 hours')
+            GROUP BY source
+            ORDER BY source
+        """, (f'-{days}',)).fetchall()
+        return [dict(r) for r in rows]
+
 # 初始化
 init_db()
+init_source_health_table()

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getDayData, getAllDates, CATEGORIES, CATEGORY_ORDER } from '../../utils/data.ts';
+import CalendarWidget from '../../components/CalendarWidget.astro';
 
 const allDates = getAllDates('en');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
@@ -198,17 +199,27 @@ function getDow(d: string) {
               <div class="news-list">
                 {items.map((item: any, idx: number) => {
                   const hotValue = item.hot || 0;
-                  const platformMeta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+                  const sources = item.merged_sources || [item];
+                  const primarySource = sources[0];
+                  const extraSources = sources.slice(1);
                   return (
                     <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`}>
                       <span class="news-idx">{idx + 1}</span>
                       <div class="news-body">
                         <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
                         <div class="news-footer">
-                          <span class="platform-tag" style={`color:${platformMeta.color};border-color:${platformMeta.color}20;background:${platformMeta.color}10`}>
-                            <span class="tag-icon">{platformMeta.icon}</span>
-                            {platformMeta.label}
-                          </span>
+                          <div class="source-tags">
+                            <span class="platform-tag" style={`color:${primarySource.color};border-color:${primarySource.color}20;background:${primarySource.color}10`}>
+                              <span class="tag-icon">{primarySource.icon}</span>
+                              {primarySource.label}
+                            </span>
+                            {extraSources.map((s: any) => (
+                              <span class="platform-tag platform-tag-sm" style={`color:${s.color};border-color:${s.color}20;background:${s.color}10`} title={s.label}>
+                                <span class="tag-icon">{s.icon}</span>
+                              </span>
+                            ))}
+                            {item.merged_sources && <span class="merge-count">+{extraSources.length}</span>}
+                          </div>
                           {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
                           {item.score > 0 && <span class="news-score">SIGNAL <strong>{item.score}</strong></span>}
                         </div>
@@ -232,20 +243,10 @@ function getDow(d: string) {
         </div>
       )}
 
-      <!-- History -->
-      {recentDates.length > 0 && (
+      <!-- Calendar -->
+      {allDates.length > 0 && (
         <section class="section section-full">
-          <div class="section-header">
-            <div class="section-title">📅 History</div>
-          </div>
-          <div class="history-grid">
-            {recentDates.filter(d => d !== today).map(d => (
-              <a href={`/en/day/${d}`} class="history-item">
-                <div>{d}</div>
-                <div class="dow">{getDow(d)}</div>
-              </a>
-            ))}
-          </div>
+          <CalendarWidget dates={allDates} basePath="/en/day/" locale="en" />
         </section>
       )}
     </div>

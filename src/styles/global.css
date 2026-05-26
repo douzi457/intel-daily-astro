@@ -259,6 +259,30 @@ a { color: inherit; text-decoration: none; }
 
 .platform-tag .tag-icon { font-size: 0.9em; }
 
+.source-tags {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.platform-tag-sm {
+  padding: 3px 6px;
+  font-size: 0.68em;
+}
+
+.merge-count {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  font-weight: 600;
+  color: var(--text-m);
+  padding: 1px 6px;
+  background: var(--bg);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  line-height: 1.4;
+}
+
 .featured-desc {
   font-size: 0.82em;
   color: var(--text-m);

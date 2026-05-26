@@ -5,13 +5,14 @@ import fs from 'fs';
 import path from 'path';
 
 const DATA_ROOT = path.join(process.cwd(), 'src/data/rewrite/zh');
+const HEALTH_PATH = path.join(process.cwd(), 'src/data/rewrite/source-health.json');
 
 let totalItems = 0;
 let platformDist: Record<string, number> = {};
 let dateCount = 0;
 
 if (fs.existsSync(DATA_ROOT)) {
-  const files = fs.readdirSync(DATA_ROOT).filter(f => f.endsWith('.json'));
+  const files = fs.readdirSync(DATA_ROOT).filter(f => f.endsWith('.json') && f !== 'source-health.json');
   dateCount = files.length;
   files.forEach(f => {
     const data = JSON.parse(fs.readFileSync(path.join(DATA_ROOT, f), 'utf-8'));
@@ -28,6 +29,24 @@ const sortedPlatforms = Object.entries(platformDist)
   .slice(0, 12);
 
 const maxCount = sortedPlatforms[0]?.[1] || 1;
+
+// Source health data
+let healthSources: any[] = [];
+let healthDate = '';
+try {
+  const healthRaw = JSON.parse(fs.readFileSync(HEALTH_PATH, 'utf-8'));
+  healthDate = healthRaw.date || '';
+  healthSources = healthRaw.sources || [];
+} catch {}
+
+// Platform metadata for health display
+const SOURCE_LABELS: Record<string, { label: string; icon: string }> = {
+  news_aggregator: { label: '新闻聚合', icon: '📡' },
+  weibo: { label: '微博', icon: '🔥' },
+  douyin: { label: '抖音', icon: '🎵' },
+  reddit: { label: 'Reddit', icon: '💬' },
+  rss: { label: 'RSS订阅', icon: '📰' },
+};
 ---
 
 <BaseLayout title="📊 统计面板 · INTEL.SYS">
@@ -92,6 +111,49 @@ const maxCount = sortedPlatforms[0]?.[1] || 1;
       })}
     </div>
   </div>
+
+  <!-- Source Health Monitoring -->
+  {healthSources.length > 0 && (
+    <div class="section" style="margin-top:32px;">
+      <div class="section-header">
+        <div class="section-title">💚 来源健康监控</div>
+        <span class="section-count" style="font-size:0.72em;color:var(--text-m);">{healthDate || ''}</span>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;">
+          {healthSources.map((s: any) => {
+            const meta = SOURCE_LABELS[s.source] || { label: s.source, icon: '📌' };
+            const isOk = s.status === 'success';
+            const isError = s.status === 'error';
+            const statusIcon = isOk ? '✅' : isError ? '❌' : '⚠️';
+            const statusColor = isOk ? '#22C55E' : isError ? '#EF4444' : '#F59E0B';
+            return (
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span style="font-size:0.85em;font-weight:600;color:var(--text-h);display:flex;align-items:center;gap:6px;">
+                    <span>{meta.icon}</span>
+                    <span>{meta.label}</span>
+                  </span>
+                  <span style={`font-size:0.72em;font-weight:600;padding:2px 8px;border-radius:4px;background:${statusColor}15;color:${statusColor};`}>
+                    {statusIcon} {isOk ? '正常' : isError ? '异常' : '告警'}
+                  </span>
+                </div>
+                <div style="display:flex;gap:12px;font-size:0.72em;color:var(--text-m);">
+                  <span>📦 {s.items_found} 条</span>
+                  {s.duration_ms > 0 && <span>⏱ {Math.round(s.duration_ms / 1000)}s</span>}
+                </div>
+                {s.error_message && (
+                  <div style="font-size:0.7em;color:#EF4444;padding:6px 8px;background:rgba(239,68,68,0.08);border-radius:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                    {s.error_message}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  )}
 
   <div class="footer">📡 INTEL.SYS · 统计面板</div>
 
