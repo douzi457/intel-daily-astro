@@ -3,6 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getDayData, getAllDates } from '../../utils/data.ts';
 import articles from '../../data/gzh-articles.json';
 
+let focusData: any = null;
+try {
+  const mod = await import('../../data/today-focus.json');
+  focusData = mod.default;
+} catch {}
+
 const filteredArticles = articles.filter(a => a.title);
 
 export async function getStaticPaths() {
@@ -135,6 +141,37 @@ function getDow(d: string) {
 </div>
 
 <div class="page">
+
+  <!-- Today's Focus (only if matches this day) -->
+  {focusData && focusData.date === date && focusData.highlights && focusData.highlights.length > 0 && (
+    <div class="focus-section">
+      <div class="focus-header">
+        <span class="focus-title">📋 今日重点</span>
+        <span class="focus-date">{focusData.date}</span>
+      </div>
+      {focusData.summary && <div class="focus-summary">{focusData.summary}</div>}
+      {focusData.trends && focusData.trends.length > 0 && (
+        <div class="focus-trends">
+          {focusData.trends.map((t: string) => <span class="trend-tag">{t}</span>)}
+        </div>
+      )}
+      <div class="focus-list">
+        {focusData.highlights.map((h: any) => (
+          <a href={h.url || '#'} target="_blank" rel="noopener" class="focus-item">
+            <span class="focus-rank">#{h.rank}</span>
+            <div class="focus-body">
+              <div class="focus-item-title">{h.title}</div>
+              <div class="focus-meta">
+                <span class="focus-reason">⚡ {h.reason}</span>
+                {h.insight && <span class="focus-insight">💡 {h.insight}</span>}
+                {h.source && <span class="focus-source">{h.source}</span>}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 
   <!-- Content Grid -->
   <div class="content-grid">

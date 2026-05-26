@@ -209,6 +209,79 @@ def collect_rss():
         except: continue
     return items
 
+# ---- Focus Generation ----
+
+def generate_focus(date_key):
+    """使用 AI 生成今日重点：TOP5 亮点 + 趋势关键词"""
+    focus_dir = BASE_DIR.parent.parent / "src" / "data"
+    focus_dir.mkdir(exist_ok=True, parents=True)
+
+    with get_conn() as conn:
+        rows = conn.execute("""
+            SELECT title, url, score, ai_summary, source_type
+            FROM items
+            WHERE date_key = ? AND score >= 5
+            ORDER BY score DESC
+            LIMIT 20
+        """, (date_key,)).fetchall()
+
+    if len(rows) < 3:
+        log(f"  [Focus] 数据不足 ({len(rows)}条)，跳过")
+        return
+
+    items_text = "\n".join([
+        f"{i+1}. [{r['source_type']}] {r['title']} (评分:{r['score']}) | {r['ai_summary'] or '无摘要'}"
+        for i, r in enumerate(rows)
+    ])
+
+    prompt = f"""你是豆子实验室的首席编辑。分析以下今日情报，输出最有价值的发现。
+
+今日情报列表（按AI评分排序）：
+{items_text}
+
+请以 JSON 格式返回（不要包含其他内容）：
+{{
+  "summary": "今日整体趋势一句话总结（20字以内）",
+  "highlights": [
+    {{
+      "rank": 1,
+      "title": "原标题",
+      "reason": "为什么重要（20字以内）",
+      "insight": "深度解读或背后趋势（40字以内）",
+      "source": "来源",
+      "url": "原文链接"
+    }}
+  ],
+  "trends": ["趋势关键词1", "趋势关键词2", "趋势关键词3"]
+}}
+
+要求：
+- 选最重要的 5 条，不是评分最高的 5 条
+- reason 写这条信息为什么对读者重要
+- insight 写背后的含义或趋势信号
+- trends 写 3 个今日最值得关注的关键词趋势
+"""
+
+    result = call_zhipu("glm-4-air", prompt)
+    if not result:
+        log("  [Focus] AI 无返回")
+        return
+
+    try:
+        match = re.search(r'\{.*\}', result, re.DOTALL)
+        if not match:
+            log("  [Focus] 未找到 JSON")
+            return
+        data = json.loads(match.group())
+        data['date'] = date_key
+        data['generated_at'] = datetime.now().isoformat()
+
+        with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        log(f"  [Focus] 生成 {len(data.get('highlights', []))} 条重点 ✓")
+    except Exception as e:
+        log(f"  [Focus] 解析失败: {e}")
+
 # ---- Main ----
 
 def collect_all():
@@ -278,6 +351,11 @@ def collect_all():
     # Export
     log("Exporting JSONs...")
     subprocess.run([sys.executable, str(SCRIPTS_DIR / "dump_astro_json.py")], cwd=str(SCRIPTS_DIR))
+
+    # Generate today's focus
+    log("Generating today's focus...")
+    generate_focus(today)
+
     log(f"=== Finished: +{added_count}, skipped {skip_count} ===")
 
 if __name__ == "__main__":
