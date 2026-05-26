@@ -24,6 +24,17 @@
       "created_at": "2026-05-26T19:51:44.795904"
     },
     {
+      "id": 43,
+      "date_key": "2026-05-27",
+      "source": "douyin",
+      "status": "success",
+      "items_found": 10,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 1735,
+      "created_at": "2026-05-26T22:15:47.364077"
+    },
+    {
       "id": 31,
       "date_key": "2026-05-27",
       "source": "news_aggregator",
@@ -44,6 +55,17 @@
       "error_message": "",
       "duration_ms": 25178,
       "created_at": "2026-05-26T19:51:30.746464"
+    },
+    {
+      "id": 41,
+      "date_key": "2026-05-27",
+      "source": "news_aggregator",
+      "status": "success",
+      "items_found": 101,
+      "items_added": 20,
+      "error_message": "",
+      "duration_ms": 28446,
+      "created_at": "2026-05-26T22:15:33.759884"
     },
     {
       "id": 34,
@@ -68,6 +90,17 @@
       "created_at": "2026-05-26T19:51:45.476831"
     },
     {
+      "id": 44,
+      "date_key": "2026-05-27",
+      "source": "reddit",
+      "status": "success",
+      "items_found": 0,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 237,
+      "created_at": "2026-05-26T22:15:47.603486"
+    },
+    {
       "id": 35,
       "date_key": "2026-05-27",
       "source": "rss",
@@ -90,6 +123,17 @@
       "created_at": "2026-05-26T19:51:48.406664"
     },
     {
+      "id": 45,
+      "date_key": "2026-05-27",
+      "source": "rss",
+      "status": "success",
+      "items_found": 0,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 3375,
+      "created_at": "2026-05-26T22:15:50.980416"
+    },
+    {
       "id": 32,
       "date_key": "2026-05-27",
       "source": "weibo",
@@ -110,6 +154,17 @@
       "error_message": "",
       "duration_ms": 994,
       "created_at": "2026-05-26T19:51:42.476150"
+    },
+    {
+      "id": 42,
+      "date_key": "2026-05-27",
+      "source": "weibo",
+      "status": "success",
+      "items_found": 52,
+      "items_added": 5,
+      "error_message": "",
+      "duration_ms": 1376,
+      "created_at": "2026-05-26T22:15:45.625948"
     }
   ]
 }
