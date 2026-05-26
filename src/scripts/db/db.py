@@ -28,6 +28,8 @@ def init_db():
             conn.execute("ALTER TABLE items ADD COLUMN en_summary TEXT")
         if 'zh_title' not in cols:
             conn.execute("ALTER TABLE items ADD COLUMN zh_title TEXT")
+        if 'category' not in cols:
+            conn.execute("ALTER TABLE items ADD COLUMN category TEXT DEFAULT '其他'")
 
         # 迁移：UNIQUE(hash) → UNIQUE(hash, date_key)，支持跨日去重
         schema_check = conn.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name='items'").fetchone()
@@ -82,8 +84,8 @@ def upsert_item(item, date_key):
         conn.execute("""
             INSERT INTO items (title,url,description,source_type,original_source,
                                hot_value,score,frequency,pub_time,date_key,hash,created_at,
-                               ai_summary, en_title, en_summary, zh_title)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                               ai_summary, en_title, en_summary, zh_title, category)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             title, url,
             item.get('description','') or item.get('desc',''),
@@ -97,7 +99,8 @@ def upsert_item(item, date_key):
             item.get('ai_summary', ''),
             item.get('en_title', ''),
             item.get('en_summary', ''),
-            item.get('zh_title', '')
+            item.get('zh_title', ''),
+            item.get('category', '其他')
         ))
         conn.commit()
         return 1, 0

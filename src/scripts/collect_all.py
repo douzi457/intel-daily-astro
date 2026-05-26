@@ -47,7 +47,7 @@ def call_zhipu(model, prompt, temperature=0.2):
         return None
 
 def get_dual_language_data(title, content):
-    """使用 GLM-4-Air 处理双语和评分"""
+    """使用 GLM-4-Air 处理双语、评分和分类"""
     prompt = f"""
     You are an expert intelligence analyst. Analyze the following content:
     Title: {title}
@@ -58,10 +58,12 @@ def get_dual_language_data(title, content):
     2. Provide a concise Chinese summary (under 30 words).
     3. Translate title to English.
     4. Provide a concise English summary.
+    5. Classify into EXACTLY ONE category from: AI模型, 开源项目, 融资并购, 政策监管, 商业动态, 技术突破, 安全隐私, 其他
 
     Return EXACTLY in this JSON format:
     {{
       "score": number,
+      "category": "AI模型",
       "zh": {{"summary": "中文摘要"}},
       "en": {{"title": "English Title", "summary": "English Summary"}}
     }}
@@ -325,6 +327,8 @@ def collect_all():
                 if isinstance(en, dict):
                     it['en_title'] = en.get('title', '')
                     it['en_summary'] = en.get('summary', '')
+                cat = dual.get('category', '')
+                it['category'] = cat if cat in ('AI模型','开源项目','融资并购','政策监管','商业动态','技术突破','安全隐私') else '其他'
 
             # 百度翻译：英文标题 → 中文（每日限额 30000 字符）
             if not contains_chinese(it['title']):

@@ -54,13 +54,14 @@ def dump_lang(day_str, lang='zh'):
             "title": title,
             "desc": desc,
             "url": r["url"],
-            "platform": source_key, # 这里改用 source_key 保证了前端的分组正确
+            "platform": source_key,
             "platform_label": meta["label"],
             "platform_color": meta["color"],
             "platform_icon": meta["icon"],
             "hot": r["hot_value"] or 0,
             "date": r["date_key"],
-            "score": r["score"] or 0
+            "score": r["score"] or 0,
+            "category": r["category"] or "其他"
         })
 
     out_dir = OUT_BASE / lang

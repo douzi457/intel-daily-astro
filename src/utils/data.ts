@@ -40,6 +40,20 @@ export const TAB_ICONS: Record<string, string> = {
   'Trending': '🔥', 'Finance': '📈', 'Dev': '💻', 'Society': '📮',
 };
 
+// ── AI 话题分类元数据 ──
+export const CATEGORIES: Record<string, { label: string; labelEn: string; icon: string; color: string }> = {
+  'AI模型':   { label: 'AI模型', labelEn: 'AI Models', icon: '🤖', color: '#A78BFA' },
+  '开源项目': { label: '开源项目', labelEn: 'Open Source', icon: '🐙', color: '#6CCB5F' },
+  '融资并购': { label: '融资并购', labelEn: 'Funding', icon: '💰', color: '#F59E0B' },
+  '政策监管': { label: '政策监管', labelEn: 'Policy', icon: '⚖️', color: '#EF4444' },
+  '商业动态': { label: '商业动态', labelEn: 'Business', icon: '📊', color: '#3395FF' },
+  '技术突破': { label: '技术突破', labelEn: 'Tech Breakthrough', icon: '🔬', color: '#10B981' },
+  '安全隐私': { label: '安全隐私', labelEn: 'Security', icon: '🔒', color: '#F97316' },
+  '其他':     { label: '其他资讯', labelEn: 'Other', icon: '📌', color: '#94A3B8' },
+};
+
+export const CATEGORY_ORDER = ['AI模型', '开源项目', '融资并购', '政策监管', '商业动态', '技术突破', '安全隐私', '其他'];
+
 // 数据存放路径
 const DATA_ROOT = path.join(process.cwd(), 'src/data/rewrite');
 
