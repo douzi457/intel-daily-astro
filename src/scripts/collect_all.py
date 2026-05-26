@@ -213,7 +213,7 @@ def collect_rss():
 
 def generate_focus(date_key):
     """使用 AI 生成今日重点：TOP5 亮点 + 趋势关键词"""
-    focus_dir = BASE_DIR.parent.parent / "src" / "data"
+    focus_dir = BASE_DIR.parent.parent / "src" / "data" / "rewrite"
     focus_dir.mkdir(exist_ok=True, parents=True)
 
     with get_conn() as conn:

@@ -5,7 +5,7 @@ import articles from '../data/gzh-articles.json';
 
 let focusData: any = null;
 try {
-  const mod = await import('../data/today-focus.json');
+  const mod = await import('../data/rewrite/today-focus.json');
   focusData = mod.default;
 } catch {} // 文件首次部署前不存在是正常的
 

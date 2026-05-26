@@ -54,5 +54,6 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add src/data/rewrite/
           git add src/scripts/db/intel.db
+          git add -f src/data/rewrite/today-focus.json
           git commit -m "Auto-update intelligence data: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push
