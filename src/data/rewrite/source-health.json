@@ -1,335 +1,60 @@
 {
-  "date": "2026-05-26",
+  "date": "2026-05-27",
   "sources": [
     {
-      "id": 3,
-      "date_key": "2026-05-26",
+      "id": 33,
+      "date_key": "2026-05-27",
       "source": "douyin",
       "status": "success",
       "items_found": 10,
       "items_added": 1,
       "error_message": "",
-      "duration_ms": 1912,
-      "created_at": "2026-05-26T06:49:45.684967"
+      "duration_ms": 1703,
+      "created_at": "2026-05-26T17:53:22.093052"
     },
     {
-      "id": 8,
-      "date_key": "2026-05-26",
-      "source": "douyin",
-      "status": "success",
-      "items_found": 10,
-      "items_added": 2,
-      "error_message": "",
-      "duration_ms": 1165,
-      "created_at": "2026-05-26T07:43:09.233760"
-    },
-    {
-      "id": 13,
-      "date_key": "2026-05-26",
-      "source": "douyin",
-      "status": "success",
-      "items_found": 10,
-      "items_added": 1,
-      "error_message": "",
-      "duration_ms": 1549,
-      "created_at": "2026-05-26T08:21:19.674492"
-    },
-    {
-      "id": 18,
-      "date_key": "2026-05-26",
-      "source": "douyin",
-      "status": "success",
-      "items_found": 10,
-      "items_added": 1,
-      "error_message": "",
-      "duration_ms": 1245,
-      "created_at": "2026-05-26T08:28:59.519647"
-    },
-    {
-      "id": 23,
-      "date_key": "2026-05-26",
-      "source": "douyin",
-      "status": "success",
-      "items_found": 10,
-      "items_added": 6,
-      "error_message": "",
-      "duration_ms": 2383,
-      "created_at": "2026-05-26T13:06:50.978205"
-    },
-    {
-      "id": 28,
-      "date_key": "2026-05-26",
-      "source": "douyin",
-      "status": "success",
-      "items_found": 10,
-      "items_added": 4,
-      "error_message": "",
-      "duration_ms": 1690,
-      "created_at": "2026-05-26T14:33:48.794841"
-    },
-    {
-      "id": 1,
-      "date_key": "2026-05-26",
-      "source": "news_aggregator",
-      "status": "success",
-      "items_found": 102,
-      "items_added": 40,
-      "error_message": "",
-      "duration_ms": 39756,
-      "created_at": "2026-05-26T06:46:38.090699"
-    },
-    {
-      "id": 6,
-      "date_key": "2026-05-26",
-      "source": "news_aggregator",
-      "status": "success",
-      "items_found": 103,
-      "items_added": 40,
-      "error_message": "",
-      "duration_ms": 24421,
-      "created_at": "2026-05-26T07:40:36.957336"
-    },
-    {
-      "id": 11,
-      "date_key": "2026-05-26",
-      "source": "news_aggregator",
-      "status": "success",
-      "items_found": 93,
-      "items_added": 25,
-      "error_message": "",
-      "duration_ms": 58270,
-      "created_at": "2026-05-26T08:19:08.736484"
-    },
-    {
-      "id": 16,
-      "date_key": "2026-05-26",
-      "source": "news_aggregator",
-      "status": "success",
-      "items_found": 93,
-      "items_added": 17,
-      "error_message": "",
-      "duration_ms": 60545,
-      "created_at": "2026-05-26T08:28:29.074657"
-    },
-    {
-      "id": 21,
-      "date_key": "2026-05-26",
-      "source": "news_aggregator",
-      "status": "success",
-      "items_found": 100,
-      "items_added": 55,
-      "error_message": "",
-      "duration_ms": 29555,
-      "created_at": "2026-05-26T13:02:24.629536"
-    },
-    {
-      "id": 26,
-      "date_key": "2026-05-26",
+      "id": 31,
+      "date_key": "2026-05-27",
       "source": "news_aggregator",
       "status": "success",
       "items_found": 101,
-      "items_added": 39,
+      "items_added": 42,
       "error_message": "",
-      "duration_ms": 33211,
-      "created_at": "2026-05-26T14:32:41.422774"
+      "duration_ms": 22198,
+      "created_at": "2026-05-26T17:52:21.597233"
     },
     {
-      "id": 4,
-      "date_key": "2026-05-26",
+      "id": 34,
+      "date_key": "2026-05-27",
       "source": "reddit",
       "status": "success",
       "items_found": 0,
       "items_added": 0,
       "error_message": "",
-      "duration_ms": 370,
-      "created_at": "2026-05-26T06:49:46.057627"
+      "duration_ms": 182,
+      "created_at": "2026-05-26T17:53:22.277275"
     },
     {
-      "id": 9,
-      "date_key": "2026-05-26",
-      "source": "reddit",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 333,
-      "created_at": "2026-05-26T07:43:09.569126"
-    },
-    {
-      "id": 14,
-      "date_key": "2026-05-26",
-      "source": "reddit",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 619,
-      "created_at": "2026-05-26T08:21:20.295636"
-    },
-    {
-      "id": 19,
-      "date_key": "2026-05-26",
-      "source": "reddit",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 675,
-      "created_at": "2026-05-26T08:29:00.197405"
-    },
-    {
-      "id": 24,
-      "date_key": "2026-05-26",
-      "source": "reddit",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 304,
-      "created_at": "2026-05-26T13:06:51.284133"
-    },
-    {
-      "id": 29,
-      "date_key": "2026-05-26",
-      "source": "reddit",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 652,
-      "created_at": "2026-05-26T14:33:49.448819"
-    },
-    {
-      "id": 5,
-      "date_key": "2026-05-26",
+      "id": 35,
+      "date_key": "2026-05-27",
       "source": "rss",
       "status": "success",
       "items_found": 0,
       "items_added": 0,
       "error_message": "",
-      "duration_ms": 3360,
-      "created_at": "2026-05-26T06:49:49.419392"
+      "duration_ms": 2688,
+      "created_at": "2026-05-26T17:53:24.967588"
     },
     {
-      "id": 10,
-      "date_key": "2026-05-26",
-      "source": "rss",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 2594,
-      "created_at": "2026-05-26T07:43:12.164796"
-    },
-    {
-      "id": 15,
-      "date_key": "2026-05-26",
-      "source": "rss",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 3506,
-      "created_at": "2026-05-26T08:21:23.811954"
-    },
-    {
-      "id": 20,
-      "date_key": "2026-05-26",
-      "source": "rss",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 3170,
-      "created_at": "2026-05-26T08:29:03.369934"
-    },
-    {
-      "id": 25,
-      "date_key": "2026-05-26",
-      "source": "rss",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 4382,
-      "created_at": "2026-05-26T13:06:55.667830"
-    },
-    {
-      "id": 30,
-      "date_key": "2026-05-26",
-      "source": "rss",
-      "status": "success",
-      "items_found": 0,
-      "items_added": 0,
-      "error_message": "",
-      "duration_ms": 3080,
-      "created_at": "2026-05-26T14:33:52.530720"
-    },
-    {
-      "id": 2,
-      "date_key": "2026-05-26",
+      "id": 32,
+      "date_key": "2026-05-27",
       "source": "weibo",
       "status": "success",
       "items_found": 50,
-      "items_added": 31,
+      "items_added": 24,
       "error_message": "",
-      "duration_ms": 1280,
-      "created_at": "2026-05-26T06:49:37.368454"
-    },
-    {
-      "id": 7,
-      "date_key": "2026-05-26",
-      "source": "weibo",
-      "status": "success",
-      "items_found": 51,
-      "items_added": 15,
-      "error_message": "",
-      "duration_ms": 881,
-      "created_at": "2026-05-26T07:42:58.944894"
-    },
-    {
-      "id": 12,
-      "date_key": "2026-05-26",
-      "source": "weibo",
-      "status": "success",
-      "items_found": 51,
-      "items_added": 18,
-      "error_message": "",
-      "duration_ms": 1069,
-      "created_at": "2026-05-26T08:21:12.262740"
-    },
-    {
-      "id": 17,
-      "date_key": "2026-05-26",
-      "source": "weibo",
-      "status": "success",
-      "items_found": 52,
-      "items_added": 5,
-      "error_message": "",
-      "duration_ms": 1123,
-      "created_at": "2026-05-26T08:28:53.964277"
-    },
-    {
-      "id": 22,
-      "date_key": "2026-05-26",
-      "source": "weibo",
-      "status": "success",
-      "items_found": 50,
-      "items_added": 43,
-      "error_message": "",
-      "duration_ms": 1204,
-      "created_at": "2026-05-26T13:06:22.436331"
-    },
-    {
-      "id": 27,
-      "date_key": "2026-05-26",
-      "source": "weibo",
-      "status": "success",
-      "items_found": 51,
-      "items_added": 20,
-      "error_message": "",
-      "duration_ms": 1055,
-      "created_at": "2026-05-26T14:33:36.266007"
+      "duration_ms": 974,
+      "created_at": "2026-05-26T17:53:18.305669"
     }
   ]
 }
