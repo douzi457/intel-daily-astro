@@ -1,45 +1,777 @@
-name: Global Daily Intelligence
+你现在其实已经不是“做了一个静态网页”这么简单了。
+你已经搭出了一个：
 
-on:
-  schedule:
-    - cron: '0 */2 * * *'
-  workflow_dispatch:
+> 自动化 AI 情报生产流水线
 
-jobs:
-  collect:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # 获取完整历史以便 rebase
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
 
-      - name: Install Dependencies
-        run: |
-          pip install requests beautifulsoup4
 
-      - name: Run Global Collection
-        env:
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-        run: python src/scripts/collect_all.py
+而且：
 
-      - name: Sync and Deploy Data
-        run: |
-          git config --local user.email "bot@intel-daily.com"
-          git config --local user.name "Intelligence Bot"
-          git add src/data/rewrite/
-          # 先拉取远程修改，防止冲突
-          git pull --rebase origin main
-          git commit -m "update: dual-language data $(date)" || exit 0
-          git push origin main
+GitHub Actions → 定时任务
+
+信息抓取
+
+翻译 API
+
+AI 摘要
+
+AI 评分
+
+Cloudflare Pages 静态部署
+
+
+这一套，本质已经是：
+
+“低成本 AI 媒体系统”
+
+很多人还停留在：
+
+手动复制
+
+WordPress
+
+RSS 阅读器
+
+
+你已经进入：
+
+自动化内容生产
+
+AI加工
+
+静态化分发
+
+全球 CDN
+
+
+阶段了。
+
+问题不是：
+
+> “技术行不行”
+
+
+
+而是：
+
+“产品感”和“信息价值感”还没建立起来。
+
+你现在的问题，我可以很明确地说：
+
+
+---
+
+你不是缺技术
+
+你缺的是：
+
+「编辑策略 + 信息结构 + SEO结构」
+
+这个是很多程序员型产品都会卡住的地方。
+
+因为：
+
+程序员会想：
+
+我采集了很多内容
+
+但用户真正想的是：
+
+今天最重要的是什么？
+
+
+---
+
+一、你当前架构，其实已经非常适合 SEO
+
+你这个架构：
+
+GitHub Action
+→ 生成 Markdown/JSON
+→ 静态页面
+→ Cloudflare Pages
+
+这是：
+
+极其适合 SEO 的。
+
+因为：
+
+静态页面
+
+CDN
+
+极快
+
+可预渲染
+
+Google喜欢
+
+Cloudflare全球加速
+
+
+很多 Next.js 动态站，SEO 还没你好。
+
+
+---
+
+二、你现在最大的 SEO 问题
+
+不是技术。
+
+而是：
+
+页面“没有搜索价值”。
+
+
+---
+
+举个例子
+
+你现在页面可能像：
+
+2026-05-25 Daily
+
+然后里面：
+
+400条资讯
+
+Google 会认为：
+
+资讯聚合页
+
+这种页面：
+
+SEO 很弱。
+
+因为：
+
+没有中心主题
+
+没有关键词聚焦
+
+没有深度
+
+没有结构化内容
+
+
+
+---
+
+三、SEO 真正需要的是什么？
+
+Google 现在越来越重视：
+
+“主题权威”
+
+而不是：
+
+“内容数量”
+
+
+---
+
+所以你必须：
+
+从：
+
+每日聚合
+
+变成：
+
+「专题情报」
+
+
+---
+
+四、你最应该增加的东西（非常关键）
+
+1. AI 生成“今日重点”
+
+这是 SEO 核心。
+
+
+---
+
+现在：
+
+400条新闻
+
+
+---
+
+应该：
+
+页面顶部：
+
+今日 AI 行业最重要的 5 件事
+
+例如：
+
+1. OpenAI 推出 xxx
+2. 华为 AI 芯片突破
+3. DeepSeek 新模型
+4. CUDA 替代趋势增强
+5. AI Agent 商业化开始
+
+然后：
+
+AI 自动写：
+
+总结
+
+趋势
+
+影响
+
+关联
+
+
+
+---
+
+这才有 SEO 价值。
+
+因为：
+
+Google 会认为：
+
+这不是 RSS
+这是分析内容
+
+
+---
+
+五、你现在 GEO（Generative Engine Optimization）其实有机会
+
+这个比 SEO 更重要。
+
+未来：
+
+不是 Google 搜索。
+
+而是：
+
+ChatGPT
+
+Gemini
+
+Claude
+
+Perplexity
+
+AI 搜索
+
+
+引用谁。
+
+
+---
+
+GEO 核心是什么？
+
+AI 能不能理解你页面。
+
+
+---
+
+你现在的问题：
+
+你的页面：
+
+信息太散。
+
+AI 很难提炼：
+
+这个页面核心讲什么？
+
+
+---
+
+所以：
+
+你必须：
+
+给 AI 明确结构。
+
+
+---
+
+六、你应该立刻加的 GEO 结构
+
+页面顶部：
+
+今日AI情报摘要
+
+
+---
+
+然后：
+
+<h1>2026年5月25日AI情报日报</h1>
+
+<h2>今日重点</h2>
+
+<h2>今日趋势</h2>
+
+<h2>重要项目</h2>
+
+<h2>AI Agent</h2>
+
+<h2>开源模型</h2>
+
+
+---
+
+AI 最喜欢：
+
+结构化内容。
+
+
+---
+
+七、你现在页面最大的 UX 问题
+
+用户不知道看什么。
+
+这个非常致命。
+
+
+---
+
+用户打开后：
+
+应该：
+
+3 秒知道：
+
+今天最重要的是啥
+
+
+---
+
+你现在像：
+
+信息仓库
+
+
+---
+
+应该变成：
+
+AI编辑部
+
+
+---
+
+八、你最应该做的页面改造（非常重要）
+
+当前：
+
+标题
+来源
+评分
+简介
+
+
+---
+
+应该：
+
+增加：
+
+1. 今日最重要（TOP5）
+
+固定在顶部。
+
+
+---
+
+2. AI趋势分析
+
+例如：
+
+今天出现频率最高：
+
+- AI Agent
+- MCP
+- CUDA替代
+- OpenAI
+
+
+---
+
+3. 热点词云
+
+这个很重要。
+
+用户会觉得：
+
+这是情报系统
+
+
+---
+
+4. AI观点
+
+例如：
+
+今天AI Agent相关新闻增加42%，
+说明市场开始进入应用爆发期。
+
+
+---
+
+九、你最缺的是“编辑感”
+
+这个非常重要。
+
+现在：
+
+像机器生成。
+
+
+---
+
+你必须：
+
+让用户感觉：
+
+有人在帮我筛选
+
+哪怕实际上是 AI。
+
+
+---
+
+十、真正的核心问题：
+
+你没有建立：
+
+“为什么必须每天看你”
+
+
+---
+
+用户为什么看 Hacker News？
+
+不是因为新闻。
+
+而是：
+
+“圈层感 + 价值感”
+
+
+---
+
+所以你应该：
+
+建立特色。
+
+例如：
+
+方向1
+
+AI创业情报
+
+
+---
+
+方向2
+
+AI Agent
+
+
+---
+
+方向3
+
+中文AI圈热点
+
+
+---
+
+方向4
+
+赚钱机会情报
+
+这个很适合你。
+
+
+---
+
+十一、你现在非常适合做：
+
+“AI淘金日报”
+
+这个比泛资讯更强。
+
+
+---
+
+比如：
+
+每日：
+
+今天值得关注的：
+
+1. 新开源项目
+2. 可商业化工具
+3. 爆款方向
+4. 赚钱机会
+5. 增长案例
+
+这个：
+
+公众号会非常好做。
+
+
+---
+
+十二、你现在公众号挂文章是对的
+
+但：
+
+不够强。
+
+
+---
+
+你应该：
+
+每日报：
+
+免费版（网站）
+
+然后：
+
+深度版（公众号）
+
+
+---
+
+例如：
+
+网站：
+
+OpenAI发布新模型
+
+公众号：
+
+这个模型意味着什么？
+普通人如何利用？
+有哪些赚钱机会？
+
+
+---
+
+十三、页面设计，你真正该学谁？
+
+你不该学：
+
+传统博客。
+
+
+---
+
+你应该学：
+
+信息终端
+
+例如：
+
+[Perplexity](https://www.perplexity.ai?utm_source=chatgpt.com)
+
+[Linear](https://linear.app?utm_source=chatgpt.com)
+
+[Readwise Reader](https://readwise.io/read?utm_source=chatgpt.com)
+
+[Hacker News](https://news.ycombinator.com?utm_source=chatgpt.com)
+
+[Glasp](https://glasp.co?utm_source=chatgpt.com)
+
+
+
+---
+
+十四、你现在最适合的页面结构
+
+顶部
+
+今日重点（AI生成）
+
+
+---
+
+中间
+
+趋势分析
+
+
+---
+
+然后
+
+分类情报
+
+
+---
+
+最后
+
+全部信息流
+
+
+---
+
+十五、你非常适合增加：
+
+「关联推荐」
+
+例如：
+
+用户看：
+
+Claude Code
+
+下面：
+
+相关：
+Cursor
+Windsurf
+OpenHands
+OpenCode
+
+
+---
+
+十六、技术层最值得升级的地方
+
+1. embedding 去重
+
+你现在：
+
+一定很多重复。
+
+
+---
+
+2. AI聚类
+
+例如：
+
+400条新闻
+
+AI归类成：
+
+今天其实就20个热点
+
+这个价值会瞬间提高。
+
+
+---
+
+十七、你现在其实已经进入：
+
+“媒体产品”
+
+阶段了。
+
+不是：
+
+我部署了一个网站
+
+而是：
+
+我在运营一个AI媒体系统
+
+思维一定要切换。
+
+
+---
+
+十八、你最应该立刻做的 3 个功能
+
+第一：
+
+今日重点 TOP10
+
+（AI自动生成）
+
+
+---
+
+第二：
+
+AI趋势总结
+
+
+---
+
+第三：
+
+AI聚类
+
+例如：
+
+今天 400 条
+实际属于 23 个热点
+
+
+---
+
+十九、真正能拉开差距的东西
+
+不是：
+
+抓更多源。
+
+而是：
+
+「AI信息压缩能力」
+
+因为：
+
+所有人都信息过载。
+
+谁能：
+
+总结
+
+提炼
+
+分类
+
+判断
+
+关联
+
+
+谁就有价值。
+
+
+---
+
+二十、你现在已经离“有价值”不远了
+
+因为：
+
+你已经解决了最难的：
+
+自动化内容生产。
+
+而大多数人：
+
+还停留在：
+
+今天写什么
+
+你下一步：
+
+不是继续：
+
+加RSS
+
+而是：
+
+提高“信息价值密度”。

@@ -230,7 +230,7 @@ def generate_focus(date_key):
         return
 
     items_text = "\n".join([
-        f"{i+1}. [{r['source_type']}] {r['title']} (评分:{r['score']}) | {r['ai_summary'] or '无摘要'}"
+        f"{i+1}. [{r['source_type']}] {r['title']} (评分:{r['score']}) | {r['ai_summary'] or '无摘要'} | 链接: {r['url'] or '无'}"
         for i, r in enumerate(rows)
     ])
 

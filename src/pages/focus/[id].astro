@@ -1,0 +1,306 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  let focusData: any = null;
+  try {
+    const mod = await import('../../data/rewrite/today-focus.json');
+    focusData = mod.default;
+  } catch {}
+
+  if (!focusData?.highlights) return [];
+
+  return focusData.highlights.map((h: any) => ({
+    params: { id: String(h.rank) },
+    props: { item: h, date: focusData.date, trends: focusData.trends, summary: focusData.summary },
+  }));
+}
+
+const { item, date, trends, summary } = Astro.props as any;
+const isExternalUrl = item.url && item.url !== '原文链接' && item.url.startsWith('http');
+const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
+---
+
+<BaseLayout title={`${item.title} · 豆子实验室今日重点`} lang="zh-CN">
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": item.title,
+  "description": item.insight || item.reason,
+  "datePublished": date,
+  "url": pageUrl,
+  "isPartOf": { "@type": "WebPage", "url": "https://daily.dianda.dpdns.org/" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://daily.dianda.dpdns.org/" }
+})}></script>
+
+<div class="focus-page">
+  <header class="focus-header-bar">
+    <a href="/" class="focus-logo">← 豆子实验室</a>
+    <span class="focus-header-tag">今日重点</span>
+  </header>
+
+  <div class="focus-content">
+    <!-- Breadcrumb -->
+    <div class="focus-breadcrumb">
+      <a href="/">首页</a>
+      <span class="crumb-sep">/</span>
+      <span>今日重点</span>
+    </div>
+
+    <!-- Detail Card -->
+    <article class="focus-detail-card">
+      <div class="focus-detail-rank">#{item.rank} 精选</div>
+      <h1 class="focus-detail-title">{item.title}</h1>
+      <div class="focus-detail-reason">⚡ {item.reason}</div>
+      {item.insight && <div class="focus-detail-insight">💡 {item.insight}</div>}
+      <div class="focus-detail-meta">
+        {item.source && <span class="meta-chip">{item.source}</span>}
+        <span class="meta-chip">{date}</span>
+      </div>
+      <div class="focus-detail-actions">
+        {isExternalUrl && (
+          <a href={item.url} target="_blank" rel="noopener" class="btn-primary">📄 查看原文</a>
+        )}
+        <a href="/" class="btn-secondary">📋 全部情报</a>
+      </div>
+    </article>
+
+    <!-- Today's Trend -->
+    {summary && (
+      <div class="focus-trend-box">
+        <div class="trend-box-title">📊 今日趋势</div>
+        <p class="trend-box-summary">{summary}</p>
+        {trends && trends.length > 0 && (
+          <div class="trend-box-tags">
+            {trends.map((t: string) => <span class="trend-tag">{t}</span>)}
+          </div>
+        )}
+        <a href="/" class="trend-box-link">查看今日完整情报 →</a>
+      </div>
+    )}
+
+    <!-- Ad -->
+    <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="focus-ad">
+      <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="腾讯云推广" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px;">
+    </a>
+
+    <!-- Footer -->
+    <div class="focus-footer">
+      <a href="/">← 返回首页</a>
+      <span class="focus-footer-desc">每日 AI 情报聚合 · 豆子实验室</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .focus-page {
+    min-height: 100vh;
+    background: var(--bg);
+  }
+  .focus-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .focus-logo {
+    font-size: 0.85em;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .focus-logo:hover { color: var(--text-h); }
+  .focus-header-tag {
+    font-size: 0.68em;
+    padding: 2px 10px;
+    background: rgba(167,139,250,0.12);
+    border-radius: 20px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .focus-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  .focus-breadcrumb {
+    font-size: 0.72em;
+    color: var(--text-m);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .focus-breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .focus-breadcrumb a:hover { text-decoration: underline; }
+  .crumb-sep { color: var(--border-hover); }
+
+  .focus-detail-card {
+    background: linear-gradient(135deg, rgba(167,139,250,0.06), rgba(96,165,250,0.04));
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+  }
+  .focus-detail-rank {
+    font-size: 0.68em;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .focus-detail-title {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: var(--text-h);
+    line-height: 1.45;
+    margin: 0 0 16px 0;
+  }
+  .focus-detail-reason {
+    font-size: 0.85em;
+    color: var(--accent-alt);
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .focus-detail-insight {
+    font-size: 0.82em;
+    color: var(--text-p);
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .focus-detail-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    font-size: 0.7em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: var(--text-m);
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+  .focus-detail-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    background: var(--accent);
+    color: #fff;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    background: var(--bg-card);
+    color: var(--text-p);
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .focus-trend-box {
+    padding: 20px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 20px;
+  }
+  .trend-box-title {
+    font-size: 0.75em;
+    font-weight: 700;
+    color: var(--text-m);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+  .trend-box-summary {
+    font-size: 0.85em;
+    color: var(--text-p);
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+  }
+  .trend-box-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .trend-box-link {
+    display: inline-block;
+    font-size: 0.78em;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .trend-box-link:hover { text-decoration: underline; }
+
+  .focus-ad {
+    display: block;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .focus-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 12px;
+  }
+  .focus-footer a {
+    font-size: 0.8em;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .focus-footer a:hover { text-decoration: underline; }
+  .focus-footer-desc {
+    font-size: 0.7em;
+    color: var(--text-m);
+  }
+
+  @media (max-width: 640px) {
+    .focus-content { padding: 16px 14px 40px; }
+    .focus-detail-card { padding: 20px 16px; }
+    .focus-detail-title { font-size: 1em; }
+    .focus-detail-actions { flex-direction: column; }
+    .btn-primary, .btn-secondary { justify-content: center; }
+    .focus-footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+
+</BaseLayout>

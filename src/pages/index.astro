@@ -150,7 +150,7 @@ function getDow(d: string) {
       )}
       <div class="focus-list">
         {focusData.highlights.map((h: any) => (
-          <a href={h.url || '#'} target="_blank" rel="noopener" class="focus-item">
+          <a href={`/focus/${h.rank}/`} class="focus-item">
             <span class="focus-rank">#{h.rank}</span>
             <div class="focus-body">
               <div class="focus-item-title">{h.title}</div>
