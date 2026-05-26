@@ -248,6 +248,7 @@ def generate_focus(date_key):
       "title": "原标题",
       "reason": "为什么重要（20字以内）",
       "insight": "深度解读或背后趋势（40字以内）",
+      "summary": "浓缩原文要点生成一段60字以内的中文摘要",
       "source": "来源",
       "url": "原文链接"
     }}
