@@ -13,7 +13,16 @@
       "hot": 9504.0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/technology/comments/1tgqn9u/arizona_students_boo_former_google_ceo_eric/"
+        }
+      ]
     },
     {
       "id": 418,
@@ -67,20 +76,6 @@
       "platform_color": "#94a3b8",
       "platform_icon": "📌",
       "hot": 3116.0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 422,
-      "title": "University of Arizona students boo Eric Schmidt’s AI cheerleading during commencement | Silicon Valley can’t seem to read the room",
-      "desc": "亚利桑那大学学生在毕业典礼上向埃里克·施密特的AI煽动言论喝倒彩",
-      "url": "https://reddit.com/r/technology/comments/1tgnq3v/university_of_arizona_students_boo_eric_schmidts/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 3069.0,
       "date": "2026-05-19",
       "score": 0,
       "category": "其他"
@@ -1063,21 +1058,16 @@
       "hot": 1.0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 532,
-      "title": "I built a tiny CLI that checks repos for risky AI-agent instructions",
-      "desc": "我构建了一个小CLI来检查仓库中的危险AI代理指令",
-      "url": "https://reddit.com/r/github/comments/1th3vpa/i_built_a_tiny_cli_that_checks_repos_for_risky/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 1.0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/github/comments/1th3wk7/i_built_a_tiny_cli_that_checks_repos_for_risky/"
+        }
+      ]
     },
     {
       "id": 533,
@@ -1609,7 +1599,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3815461631041030"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772579"
+        }
+      ]
     },
     {
       "id": 863,
@@ -1696,20 +1702,6 @@
       "category": "其他"
     },
     {
-      "id": 869,
-      "title": "中金：美联储年内或难以降息",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772579",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 870,
       "title": "伊朗战争影响蔓延：欧美按揭贷款利率大幅飙升",
       "desc": "",
@@ -1763,7 +1755,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://clickclickclick.click/"
+        },
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/cli-market"
+        }
+      ]
     },
     {
       "id": 874,
@@ -2043,7 +2051,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/searchad-ai"
+        }
+      ]
     },
     {
       "id": 894,
@@ -2085,7 +2102,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/polarity-2"
+        },
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://polypad.amplify.com/"
+        }
+      ]
     },
     {
       "id": 897,
@@ -2099,7 +2132,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/anyframe-2"
+        }
+      ]
     },
     {
       "id": 898,
@@ -2113,7 +2155,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/capture-6"
+        },
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/LocalLLaMA/comments/1theffd/qwen_is_cooking_hard/"
+        }
+      ]
     },
     {
       "id": 899,
@@ -2620,20 +2678,6 @@
       "category": "其他"
     },
     {
-      "id": 935,
-      "title": "Voiser AI",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/voiser-ai-text-to-speech",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 936,
       "title": "Origio",
       "desc": "",
@@ -2925,7 +2969,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": ""
+        }
+      ]
     },
     {
       "id": 957,
@@ -2936,20 +2989,6 @@
       "platform_label": "抖音热搜",
       "platform_color": "#00F2EA",
       "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 958,
-      "title": "Click (2016)",
-      "desc": "",
-      "url": "https://clickclickclick.click/",
-      "platform": "hackernews",
-      "platform_label": "HN",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
@@ -3023,7 +3062,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3815578328424201"
+        }
+      ]
     },
     {
       "id": 964,
@@ -3037,7 +3085,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3815573869518595"
+        }
+      ]
     },
     {
       "id": 965,
@@ -3068,38 +3125,10 @@
       "category": "其他"
     },
     {
-      "id": 967,
-      "title": "沪深两市成交额突破5000亿元",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3815555552271875",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 968,
       "title": "三星工会与管理层在谈判中缩小了部分分歧，以避免罢工",
       "desc": "",
       "url": "https://36kr.com/newsflashes/3815551389474305",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 969,
-      "title": "创业板指跌逾1%",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3815546944216839",
       "platform": "36kr",
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
@@ -3586,20 +3615,6 @@
       "category": "其他"
     },
     {
-      "id": 1004,
-      "title": "挑战冒���豆角",
-      "desc": "",
-      "url": "",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 1005,
       "title": "交换你镜头里的夏天",
       "desc": "",
@@ -3625,7 +3640,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://www.tuhs.org/pipermail/tuhs/2026-May/033750.html"
+        }
+      ]
     },
     {
       "id": 1007,
@@ -3779,7 +3803,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3815691745599240"
+        }
+      ]
     },
     {
       "id": 1018,
@@ -4633,7 +4666,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://cursor.com/blog/composer-2-5"
+        },
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/cursor"
+        }
+      ]
     },
     {
       "id": 1079,
@@ -4703,7 +4752,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3815804204244742"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3105825"
+        }
+      ]
     },
     {
       "id": 1084,
@@ -4724,20 +4789,6 @@
       "title": "多款贵州茅台酒将上架i茅台",
       "desc": "",
       "url": "https://36kr.com/newsflashes/3815785759497986",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1086,
-      "title": "沪深两市成交额突破2万亿元",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3815769403022852",
       "platform": "36kr",
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
@@ -4808,20 +4859,6 @@
       "title": "日本国债收益率再度上涨 反映债券市场进一步走弱",
       "desc": "",
       "url": "https://wallstreetcn.com/articles/3772605",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1092,
-      "title": "助力人工智能发展，我国正前瞻布局一批数据领域前沿标准",
-      "desc": "",
-      "url": "https://wallstreetcn.com/livenews/3105825",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -5406,34 +5443,6 @@
       "category": "其他"
     },
     {
-      "id": 1134,
-      "title": "Peter Neumann has died",
-      "desc": "",
-      "url": "https://www.tuhs.org/pipermail/tuhs/2026-May/033748.html",
-      "platform": "hackernews",
-      "platform_label": "HN",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1135,
-      "title": "Polypad",
-      "desc": "",
-      "url": "https://polypad.amplify.com/",
-      "platform": "hackernews",
-      "platform_label": "HN",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 1136,
       "title": "CtrlOps",
       "desc": "",
@@ -5518,20 +5527,6 @@
       "category": "其他"
     },
     {
-      "id": 1142,
-      "title": "Hanami",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/hanami-2",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 1143,
       "title": "ShioriCode",
       "desc": "",
@@ -5578,20 +5573,6 @@
       "title": "市场监管总局：已完成民营经济促进法配套任务38项",
       "desc": "",
       "url": "https://36kr.com/newsflashes/3815937145101825",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1147,
-      "title": "恒指收涨0.48%，恒生科技指数涨0.26%",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3815936228843272",
       "platform": "36kr",
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
@@ -5795,7 +5776,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3105913"
+        }
+      ]
     },
     {
       "id": 1162,
@@ -6218,20 +6208,6 @@
       "category": "其他"
     },
     {
-      "id": 1192,
-      "title": "Qwen is cooking hard",
-      "desc": "I am waiting for 122B and new 27B",
-      "url": "https://reddit.com/r/LocalLLaMA/comments/1theffd/qwen_is_cooking_hard/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 165.0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 1193,
       "title": "What is the point of MoE models, beyond being faster?",
       "desc": "Hi. Besides the fact that an xByA MoE models runs as fast as a yA models but produces better results, what are other benefits of pursuing an MoE architecture and not a dense one with e.g. x/2 (or x/3) parameters? \n\n\nGiven that we need enough RAM for xB parameter anyway, aren't MoEs at a disadvantage when RAM is scarce, like the current situation?\n\nAnd thinking of limit cases, is there a limit on x/y, so that it doesn't make sense e.g. to train a 100B1A MoE model?\n\nThanks.",
@@ -6400,34 +6376,6 @@
       "category": "其他"
     },
     {
-      "id": 1205,
-      "title": "Lyricly",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/lyricly-your-music-everywhere-on-mac",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1206,
-      "title": "Composer 2.5",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/cursor",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 1207,
       "title": "Starchild-1 by Odyssey",
       "desc": "",
@@ -6439,35 +6387,16 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1208,
-      "title": "Agora-1 by Odyssey",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/odyssey-5",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1209,
-      "title": "CLI Market",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/cli-market",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/odysseyml-starchild-1-model"
+        }
+      ]
     },
     {
       "id": 1210,
@@ -6509,7 +6438,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3816054853164807"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772631"
+        }
+      ]
     },
     {
       "id": 1213,
@@ -6523,7 +6468,23 @@
       "hot": 0,
       "date": "2026-05-19",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3816048925155074"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772633"
+        }
+      ]
     },
     {
       "id": 1214,
@@ -6666,38 +6627,10 @@
       "category": "其他"
     },
     {
-      "id": 1224,
-      "title": "哔哩哔哩第一季度净营收为人民币74.7亿元，预期74.6亿元",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772633",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 1225,
       "title": "全球债市抛售加剧亚洲资本外流，印尼、菲律宾、印度货币跌至历史低位",
       "desc": "",
       "url": "https://wallstreetcn.com/articles/3772626",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1226,
-      "title": "国产存储巨头长江存储，宣布IPO！",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772627",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -6978,20 +6911,6 @@
       "title": "中矿资源：拟定增募资不超过52亿元，用于津巴布韦年产10万吨硫酸锂等项目",
       "desc": "",
       "url": "https://wallstreetcn.com/livenews/3105980",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-19",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 1247,
-      "title": "30年期美债收益率，下一站5.5%？",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772631",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",

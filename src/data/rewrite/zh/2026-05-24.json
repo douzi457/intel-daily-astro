@@ -279,7 +279,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260523A08XHS00"
+        },
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7643252412261876267/"
+        }
+      ]
     },
     {
       "id": 4406,
@@ -349,7 +365,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260523A08II400"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/636.htm"
+        }
+      ]
     },
     {
       "id": 4423,
@@ -363,7 +395,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3108461"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E4%B9%8C%E5%85%8B%E5%85%B0%E9%A6%96%E9%83%BD%E5%9F%BA%E8%BE%85%E9%81%AD%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A9%BA%E8%A2%AD"
+        }
+      ]
     },
     {
       "id": 4424,
@@ -422,20 +470,6 @@
       "category": "其他"
     },
     {
-      "id": 4442,
-      "title": "针对山西通洲集团留神峪煤矿瓦斯爆炸事故，国务院事故调查组将较真碰硬开展事故调查",
-      "desc": "国务院将严肃调查山西煤矿瓦斯爆炸事故",
-      "url": "https://www.toutiao.com/group/7643252412261876267/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4445,
       "title": "日本首相高市早苗23日分别用中文、日文和英文发文说：“惊悉贵国山西省发生煤矿爆炸事故，造成重大灾害，对此深感悲痛。谨对遇难者致以深切哀悼，并向遇难者家属致以哀思。同时，向受灾人民致以衷心慰问。”\n\n评几句：山西矿难带来的伤亡令人无比痛心，高市早苗公开发文哀悼遇难者、慰问受灾民众，是国际社会面对重大人",
       "desc": "高市早苗就山西矿难致哀悼慰问",
@@ -475,7 +509,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E6%97%B6247%E4%BA%BA%E4%B8%8B%E4%BA%95%E4%BB%85%E8%AE%B0%E5%BD%95124%E4%BA%BA"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E6%97%B6247%E4%BA%BA%E4%B8%8B%E4%BA%95%E4%BB%85%E8%AE%B0%E5%BD%95124%E4%BA%BA"
+        }
+      ]
     },
     {
       "id": 4449,
@@ -510,20 +560,6 @@
       "title": "美国白宫附近传出数十声枪响",
       "desc": "美国白宫附近传出数十声枪响，引发安全警报。",
       "url": "https://www.douyin.com/search/%E7%BE%8E%E5%9B%BD%E7%99%BD%E5%AE%AB%E9%99%84%E8%BF%91%E4%BC%A0%E5%87%BA%E6%95%B0%E5%8D%81%E5%A3%B0%E6%9E%AA%E5%93%8D",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4506,
-      "title": "乌克兰首都基辅遭大规模空袭",
-      "desc": "基辅遭大规模空袭，局势紧张",
-      "url": "https://www.douyin.com/search/%E4%B9%8C%E5%85%8B%E5%85%B0%E9%A6%96%E9%83%BD%E5%9F%BA%E8%BE%85%E9%81%AD%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A9%BA%E8%A2%AD",
       "platform": "douyin",
       "platform_label": "抖音热搜",
       "platform_color": "#00F2EA",
@@ -615,7 +651,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772995"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=DeepSeek%E5%B4%A9%E4%BA%86"
+        }
+      ]
     },
     {
       "id": 4533,
@@ -696,20 +748,6 @@
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
       "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4576,
-      "title": "煤矿爆炸时247人下井仅记录124人",
-      "desc": "煤矿爆炸致247人下井仅记录124人，数据严重不符",
-      "url": "https://www.douyin.com/search/%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E6%97%B6247%E4%BA%BA%E4%B8%8B%E4%BA%95%E4%BB%85%E8%AE%B0%E5%BD%95124%E4%BA%BA",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
@@ -1133,7 +1171,30 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260524A09EDX00"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/642.htm"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E5%8F%91%E5%B0%84%E5%9C%86%E6%BB%A1%E6%88%90%E5%8A%9F"
+        }
+      ]
     },
     {
       "id": 4690,
@@ -1147,7 +1208,30 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260524A08DH100"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E9%87%8D%E5%BA%86%E6%B0%B8%E5%B7%9D%E6%9A%B4%E9%9B%A8%E8%87%B43%E6%AD%BB17%E5%A4%B1%E8%81%94"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E9%87%8D%E5%BA%86%E6%B0%B8%E5%B7%9D%E7%89%B9%E5%A4%A7%E6%9A%B4%E9%9B%A8"
+        }
+      ]
     },
     {
       "id": 4691,
@@ -1178,52 +1262,10 @@
       "category": "其他"
     },
     {
-      "id": 4697,
-      "title": "神舟二十三号载人飞船发射取得圆满成功",
-      "desc": "神舟二十三号载人飞船发射成功",
-      "url": "https://www.ithome.com/0/954/642.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4698,
-      "title": "点火起飞！神舟二十三号载人飞船发射升空",
-      "desc": "神舟二十三号载人飞船成功发射升空",
-      "url": "https://www.ithome.com/0/954/641.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4701,
       "title": "“死了么”App 被“收编”：改名“在么在么”，用于独居、空巢老人监测",
       "desc": "“死了么”App更名“在么在么”，专注独居老人监测",
       "url": "https://www.ithome.com/0/954/638.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4702,
-      "title": "长安汽车内幕交易案：5 名员工获利 400 余万，被罚 1669 万元",
-      "desc": "长安汽车5名员工内幕交易获利400余万，被罚1669万元",
-      "url": "https://www.ithome.com/0/954/636.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
       "platform_color": "#0090D8",
@@ -1259,7 +1301,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7643346379830264366/"
+        }
+      ]
     },
     {
       "id": 4720,
@@ -1284,20 +1335,6 @@
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
       "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4749,
-      "title": "神舟二十三号发射圆满成功",
-      "desc": "神舟二十三号发射圆满成功",
-      "url": "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E5%8F%91%E5%B0%84%E5%9C%86%E6%BB%A1%E6%88%90%E5%8A%9F",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
@@ -1416,20 +1453,6 @@
       "category": "其他"
     },
     {
-      "id": 4763,
-      "title": "因口角与同事大打出手，男子将其打倒后又用拖把杆进行击打！不料对方一个月后脑梗去世；法院判决：被告人获刑10年，赔偿28万元",
-      "desc": "男子因口角殴打同事致其脑梗死亡，被判刑10年并赔偿28万元。",
-      "url": "https://www.toutiao.com/group/7643427979808358952/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4782,
       "title": "美国海关与边境保护局指令3340-049B：电子设备的边境搜查",
       "desc": "CBP电子设备边境搜查指令，规范执法边界",
@@ -1480,20 +1503,6 @@
       "platform_label": "HN",
       "platform_color": "#FF6600",
       "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4796,
-      "title": "重庆永川暴雨致3死17失联",
-      "desc": "重庆永川暴雨引发灾害，致3人死亡17人失联",
-      "url": "https://www.douyin.com/search/%E9%87%8D%E5%BA%86%E6%B0%B8%E5%B7%9D%E6%9A%B4%E9%9B%A8%E8%87%B43%E6%AD%BB17%E5%A4%B1%E8%81%94",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
       "hot": 0,
       "date": "2026-05-24",
       "score": 8.0,
@@ -1805,7 +1814,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/545.htm"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%BB%99%E9%98%BF%E5%AC%B7%E7%9A%84%E6%83%85%E4%B9%A6%E7%A5%A8%E6%88%BF%E7%A0%B4%E5%8D%81%E4%BA%BF"
+        }
+      ]
     },
     {
       "id": 4434,
@@ -1906,20 +1931,6 @@
       "category": "其他"
     },
     {
-      "id": 4499,
-      "title": "重庆永川暴雨致17失联1死",
-      "desc": "重庆永川暴雨致17人失联1人死亡",
-      "url": "https://www.douyin.com/search/%E9%87%8D%E5%BA%86%E6%B0%B8%E5%B7%9D%E6%9A%B4%E9%9B%A8%E8%87%B417%E5%A4%B1%E8%81%941%E6%AD%BB",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
       "id": 4501,
       "title": "武契奇抵京",
       "desc": "武契奇抵达北京，中塞关系再进一步",
@@ -1931,7 +1942,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E6%AD%A6%E5%A5%91%E5%A5%87%E6%8A%B5%E4%BA%AC"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%AD%A6%E5%A5%91%E5%A5%87%E6%8A%B5%E4%BA%AC"
+        }
+      ]
     },
     {
       "id": 4502,
@@ -2197,7 +2224,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7643257626456850982/"
+        }
+      ]
     },
     {
       "id": 4588,
@@ -2337,7 +2373,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773004"
+        },
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260524A08D6J00"
+        }
+      ]
     },
     {
       "id": 4634,
@@ -2376,20 +2428,6 @@
       "platform_label": "IT之家",
       "platform_color": "#0090D8",
       "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 4645,
-      "title": "美国总统特朗普重大宣布，美国国务卿鲁比奥、以总理内塔尼亚胡、伊朗总统佩泽希齐扬最新表态，美以伊冲突（5月24日）最新消息汇总",
-      "desc": "特朗普宣布重大消息，美以伊领导人最新表态，冲突最新动态汇总。",
-      "url": "https://www.toutiao.com/group/7643362341102371379/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
       "hot": 0,
       "date": "2026-05-24",
       "score": 7.0,
@@ -2466,20 +2504,6 @@
       "category": "其他"
     },
     {
-      "id": 4694,
-      "title": "什么情况下，本轮AI大行情会结束？",
-      "desc": "分析AI行情结束的触发因素，如技术瓶颈、监管收紧或市场情绪转变。",
-      "url": "https://view.inews.qq.com/a/20260524A08D6J00",
-      "platform": "news_aggregator",
-      "platform_label": "news_aggregator",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
       "id": 4700,
       "title": "为遵守欧盟法规，古尔曼称苹果 iOS 27 将允许第三方投屏协议替代 AirPlay",
       "desc": "为遵守欧盟法规，苹果iOS 27将允许第三方投屏协议替代AirPlay",
@@ -2533,7 +2557,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/7%E5%8F%AA%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%83%AD%E9%97%A8%E8%82%A1%E6%8B%9F%E5%A5%97%E7%8E%B0127%E4%BA%BF"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=7%E5%8F%AA%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%83%AD%E9%97%A8%E8%82%A1%E6%8B%9F%E5%A5%97%E7%8E%B0%E8%BF%91127%E4%BA%BF"
+        }
+      ]
     },
     {
       "id": 4780,
@@ -2771,7 +2811,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 6.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260524A097QA00"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3108518"
+        }
+      ]
     },
     {
       "id": 4695,
@@ -2788,20 +2844,6 @@
       "category": "其他"
     },
     {
-      "id": 4696,
-      "title": "特朗普告诉美方代表：不要急于达成协议",
-      "desc": "特朗普劝美方代表勿急于达成协议",
-      "url": "https://wallstreetcn.com/livenews/3108518",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
       "id": 4699,
       "title": "古尔曼：苹果 watchOS 27 更新将主要关注稳定性、较小优化，而不是引入重大新功能",
       "desc": "古尔曼称watchOS 27更新侧重稳定性和小优化，无重大新功能",
@@ -2810,20 +2852,6 @@
       "platform_label": "IT之家",
       "platform_color": "#0090D8",
       "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 4721,
-      "title": "7只半导体热门股拟套现近127亿",
-      "desc": "7只半导体热门股拟套现近127亿",
-      "url": "https://s.weibo.com/weibo?q=7%E5%8F%AA%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%83%AD%E9%97%A8%E8%82%A1%E6%8B%9F%E5%A5%97%E7%8E%B0%E8%BF%91127%E4%BA%BF",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
       "hot": 0,
       "date": "2026-05-24",
       "score": 6.0,
@@ -2897,7 +2925,23 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 6.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%88%AB%E5%85%8B%E8%87%B3%E5%A2%83E7%E4%B8%8A%E5%B8%82%E9%A6%96%E6%9C%88%E4%BA%A4%E4%BB%98%E7%A0%B4%E4%B8%87"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/632.htm"
+        }
+      ]
     },
     {
       "id": 4799,
@@ -2967,7 +3011,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 5.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%8E%8B%E9%B9%A4%E6%A3%A3%20%E6%B2%88%E6%9C%88"
+        }
+      ]
     },
     {
       "id": 4483,
@@ -3317,7 +3370,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%88%92%E6%9C%8D%E6%96%87%E5%AD%A6%E4%B8%8B%E6%B2%89%E5%87%BA%E5%9C%88"
+        }
+      ]
     },
     {
       "id": 4464,
@@ -3408,20 +3470,6 @@
       "title": "女子因漏放吸管辱骂砸打店员",
       "desc": "女子因漏放吸管辱骂砸打店员",
       "url": "https://s.weibo.com/weibo?q=%E5%A5%B3%E5%AD%90%E5%9B%A0%E6%BC%8F%E6%94%BE%E5%90%B8%E7%AE%A1%E8%BE%B1%E9%AA%82%E7%A0%B8%E6%89%93%E5%BA%97%E5%91%98",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4482,
-      "title": "给阿嬷的情书票房破十亿",
-      "desc": "电影《给阿嬷的情书》票房突破十亿",
-      "url": "https://s.weibo.com/weibo?q=%E7%BB%99%E9%98%BF%E5%AC%B7%E7%9A%84%E6%83%85%E4%B9%A6%E7%A5%A8%E6%88%BF%E7%A0%B4%E5%8D%81%E4%BA%BF",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -3555,7 +3603,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7637334886671516179/"
+        }
+      ]
     },
     {
       "id": 4546,
@@ -3632,20 +3689,6 @@
       "title": "野泳男子嬉戏中将4名女孩逼向深水区",
       "desc": "男子野泳嬉戏将4名女孩逼向深水区",
       "url": "https://s.weibo.com/weibo?q=%E9%87%8E%E6%B3%B3%E7%94%B7%E5%AD%90%E5%AC%89%E6%88%8F%E4%B8%AD%E5%B0%864%E5%90%8D%E5%A5%B3%E5%AD%A9%E9%80%BC%E5%90%91%E6%B7%B1%E6%B0%B4%E5%8C%BA",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4570,
-      "title": "重庆永川特大暴雨",
-      "desc": "重庆永川遭遇特大暴雨，造成严重灾害。",
-      "url": "https://s.weibo.com/weibo?q=%E9%87%8D%E5%BA%86%E6%B0%B8%E5%B7%9D%E7%89%B9%E5%A4%A7%E6%9A%B4%E9%9B%A8",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -3779,7 +3822,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7634958375533249043/"
+        }
+      ]
     },
     {
       "id": 4649,
@@ -4146,20 +4198,6 @@
       "category": "其他"
     },
     {
-      "id": 4792,
-      "title": "东北一女子嫁云南18年不回家，母亲退休去探望，见到女婿她疑惑",
-      "desc": "女子嫁云南18年未归，母亲探望见女婿生疑",
-      "url": "https://www.toutiao.com/group/7634056378599916066/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 4794,
       "title": "网红主播把假一赔万当成口号",
       "desc": "网红主播以假一赔万为口号，吸引消费者。",
@@ -4174,38 +4212,10 @@
       "category": "其他"
     },
     {
-      "id": 4444,
-      "title": "当120斤的辣目洋子穿上体操服！白花花的大肉腿好美",
-      "desc": "辣目洋子穿体操服展示身材，赞美其腿部线条",
-      "url": "https://www.toutiao.com/group/7641408602179174947/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
       "id": 4451,
       "title": "两个淡人生了个浓人宝宝",
       "desc": "两个性格平淡的人生了个性格浓烈的宝宝",
       "url": "https://s.weibo.com/weibo?q=%E4%B8%A4%E4%B8%AA%E6%B7%A1%E4%BA%BA%E7%94%9F%E4%BA%86%E4%B8%AA%E6%B5%93%E4%BA%BA%E5%AE%9D%E5%AE%9D",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 4452,
-      "title": "武契奇抵京",
-      "desc": "武契奇抵达北京",
-      "url": "https://s.weibo.com/weibo?q=%E6%AD%A6%E5%A5%91%E5%A5%87%E6%8A%B5%E4%BA%AC",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4255,7 +4265,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%9D%8E%E6%99%A8%E9%83%91%E6%81%BA%E8%B7%91%E7%94%B7%E5%81%9C%E5%AE%A3%E4%BA%86"
+        }
+      ]
     },
     {
       "id": 4463,
@@ -4706,20 +4725,6 @@
       "category": "其他"
     },
     {
-      "id": 4672,
-      "title": "苗苗转发李晨郑恺跑男停宣",
-      "desc": "苗苗转发李晨郑恺跑男停宣",
-      "url": "https://s.weibo.com/weibo?q=%E8%8B%97%E8%8B%97%E8%BD%AC%E5%8F%91%E6%9D%8E%E6%99%A8%E9%83%91%E6%81%BA%E8%B7%91%E7%94%B7%E5%81%9C%E5%AE%A3",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
       "id": 4675,
       "title": "王欣瑜法网开门红",
       "desc": "王欣瑜在法网首战获胜",
@@ -4745,21 +4750,16 @@
       "hot": 0,
       "date": "2026-05-24",
       "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 4714,
-      "title": "直播神23发射",
-      "desc": "直播神舟23号发射",
-      "url": "https://s.weibo.com/weibo?q=%E7%9B%B4%E6%92%AD%E7%A5%9E23%E5%8F%91%E5%B0%84",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%A5%9E23%E5%8F%91%E5%B0%84%E6%88%90%E5%8A%9F"
+        }
+      ]
     },
     {
       "id": 4717,
@@ -4794,20 +4794,6 @@
       "title": "LGD以下克上WBG",
       "desc": "LGD以下克上击败WBG",
       "url": "https://s.weibo.com/weibo?q=LGD%E4%BB%A5%E4%B8%8B%E5%85%8B%E4%B8%8AWBG",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 4723,
-      "title": "神23发射圆满成功",
-      "desc": "神23发射成功",
-      "url": "https://s.weibo.com/weibo?q=%E7%A5%9E23%E5%8F%91%E5%B0%84%E5%9C%86%E6%BB%A1%E6%88%90%E5%8A%9F",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5056,20 +5042,6 @@
       "category": "其他"
     },
     {
-      "id": 4456,
-      "title": "DeepSeek崩了",
-      "desc": "DeepSeek服务崩溃",
-      "url": "https://s.weibo.com/weibo?q=DeepSeek%E5%B4%A9%E4%BA%86",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
       "id": 4468,
       "title": "五月天阿信道歉",
       "desc": "五月天阿信道歉",
@@ -5154,20 +5126,6 @@
       "category": "其他"
     },
     {
-      "id": 4492,
-      "title": "不舒服文学",
-      "desc": "内容重复，无实质信息",
-      "url": "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%88%92%E6%9C%8D%E6%96%87%E5%AD%A6",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
       "id": 4496,
       "title": "鹿晗不允许邓超自己丑",
       "desc": "鹿晗不让邓超自丑",
@@ -5214,20 +5172,6 @@
       "title": "苗苗工作室回应",
       "desc": "苗苗工作室回应，内容重复无实质信息。",
       "url": "https://s.weibo.com/weibo?q=%E8%8B%97%E8%8B%97%E5%B7%A5%E4%BD%9C%E5%AE%A4%E5%9B%9E%E5%BA%94",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 4553,
-      "title": "王鹤棣曾让沈月吸二手烟",
-      "desc": "王鹤棣曾让沈月吸二手烟",
-      "url": "https://s.weibo.com/weibo?q=%E7%8E%8B%E9%B9%A4%E6%A3%A3%E6%9B%BE%E8%AE%A9%E6%B2%88%E6%9C%88%E5%90%B8%E4%BA%8C%E6%89%8B%E7%83%9F",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5798,20 +5742,6 @@
       "category": "其他"
     },
     {
-      "id": 4795,
-      "title": "原声纯享版神23发射",
-      "desc": "无实质内容的重复标题",
-      "url": "https://s.weibo.com/weibo?q=%E5%8E%9F%E5%A3%B0%E7%BA%AF%E4%BA%AB%E7%89%88%E7%A5%9E23%E5%8F%91%E5%B0%84",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
       "id": 4441,
       "title": "第 56 届 IEEE ISCAS 会议在上海召开，华为董事何庭波、中国科大潘建伟院士发表演讲",
       "desc": "",
@@ -5858,20 +5788,6 @@
       "title": "vivo Y600 Turbo 手机外围配置预热：内置 9000mAh 蓝海电池，宣称支持 30 个应用后台保活",
       "desc": "",
       "url": "https://www.ithome.com/0/954/617.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-24",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 4706,
-      "title": "别克至境 E7 上市首月交付破万，刷新合资新能源最快交付纪录",
-      "desc": "",
-      "url": "https://www.ithome.com/0/954/632.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
       "platform_color": "#0090D8",

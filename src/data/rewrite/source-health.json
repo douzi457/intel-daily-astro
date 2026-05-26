@@ -1,0 +1,60 @@
+{
+  "date": "2026-05-26",
+  "sources": [
+    {
+      "id": 3,
+      "date_key": "2026-05-26",
+      "source": "douyin",
+      "status": "success",
+      "items_found": 10,
+      "items_added": 1,
+      "error_message": "",
+      "duration_ms": 1912,
+      "created_at": "2026-05-26T06:49:45.684967"
+    },
+    {
+      "id": 1,
+      "date_key": "2026-05-26",
+      "source": "news_aggregator",
+      "status": "success",
+      "items_found": 102,
+      "items_added": 40,
+      "error_message": "",
+      "duration_ms": 39756,
+      "created_at": "2026-05-26T06:46:38.090699"
+    },
+    {
+      "id": 4,
+      "date_key": "2026-05-26",
+      "source": "reddit",
+      "status": "success",
+      "items_found": 0,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 370,
+      "created_at": "2026-05-26T06:49:46.057627"
+    },
+    {
+      "id": 5,
+      "date_key": "2026-05-26",
+      "source": "rss",
+      "status": "success",
+      "items_found": 0,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 3360,
+      "created_at": "2026-05-26T06:49:49.419392"
+    },
+    {
+      "id": 2,
+      "date_key": "2026-05-26",
+      "source": "weibo",
+      "status": "success",
+      "items_found": 50,
+      "items_added": 31,
+      "error_message": "",
+      "duration_ms": 1280,
+      "created_at": "2026-05-26T06:49:37.368454"
+    }
+  ]
+}

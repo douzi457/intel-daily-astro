@@ -69,7 +69,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 5.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/our-stories"
+        }
+      ]
     },
     {
       "id": 4132,
@@ -167,7 +176,23 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 5.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%B0%8F%E7%B1%B3YU7GT%E9%A6%96%E5%8F%91%E8%AF%84%E6%B5%8B"
+        },
+        {
+          "platform": "v2ex",
+          "label": "V2EX",
+          "color": "#4CAF50",
+          "icon": "💬",
+          "url": "https://www.v2ex.com/t/1214634"
+        }
+      ]
     },
     {
       "id": 4139,
@@ -237,7 +262,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 5.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%AE%98%E6%96%B9%E9%80%9A%E6%8A%A5%E7%83%A4%E8%82%89%E5%BA%97%E5%8F%8C%E5%B1%82%E7%A2%97%E5%80%92%E5%87%BA%E6%B4%97%E7%A2%97%E6%B0%B4"
+        }
+      ]
     },
     {
       "id": 4144,
@@ -335,7 +369,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3107567"
+        }
+      ]
     },
     {
       "id": 3292,
@@ -391,7 +434,23 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/953/667.htm"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772869"
+        }
+      ]
     },
     {
       "id": 3296,
@@ -937,7 +996,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772862"
+        }
+      ]
     },
     {
       "id": 3335,
@@ -951,21 +1019,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3336,
-      "title": "美国驻丹麦大使：特朗普已排除对格陵兰岛使用武力",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772863",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3107589"
+        }
+      ]
     },
     {
       "id": 3337,
@@ -993,7 +1056,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772859"
+        }
+      ]
     },
     {
       "id": 3339,
@@ -1161,7 +1233,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772866"
+        }
+      ]
     },
     {
       "id": 3351,
@@ -1304,20 +1385,6 @@
       "category": "其他"
     },
     {
-      "id": 3361,
-      "title": "蔚来李斌：汽车行业成本压力大，蔚来成交均价超过宝马、奥迪",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772869",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3362,
       "title": "土耳其法院判决“颠覆”最大反对党，股指暴跌6%，国有行紧急抛售60亿美元捍卫里拉",
       "desc": "",
@@ -1332,38 +1399,10 @@
       "category": "其他"
     },
     {
-      "id": 3363,
-      "title": "IBM收涨12%，创近一年最大涨幅，特朗普政府宣布20亿美元量子计算扶持计划",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772866",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3364,
       "title": "报道：OPEC+或在6月7日会议上将7月石油产量提高18.8万桶/日",
       "desc": "",
       "url": "https://wallstreetcn.com/articles/3772864",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3365,
-      "title": "特朗普密集谈伊朗、关税与AI，称美国将获得伊浓缩铀、重申伊不能拥有核武",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772862",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -1738,34 +1777,6 @@
       "category": "其他"
     },
     {
-      "id": 3392,
-      "title": "Arm收涨16%！市值破3000亿美元大关，孙正义豪赚2200亿美元",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772859",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3393,
-      "title": "报道：OpenAI一季度收入57亿美元",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772872",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3394,
       "title": "Steam 喜加一：原价 76 元《汽车修理工模拟 2018》免费领，好评率 89%",
       "desc": "",
@@ -1959,7 +1970,23 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=u17%E4%B8%96%E7%95%8C%E6%9D%AF"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/U17%E4%B8%96%E7%95%8C%E6%9D%AF%E6%8A%BD%E7%AD%BE%E7%BB%93%E6%9E%9C%E5%87%BA%E7%82%89"
+        }
+      ]
     },
     {
       "id": 3408,
@@ -2687,7 +2714,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3819781474341256"
+        }
+      ]
     },
     {
       "id": 3460,
@@ -2925,7 +2961,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%A5%B3%E5%AD%90%E6%94%B622%E4%B8%87%E5%BD%A9%E7%A4%BC%E6%8B%89%E9%BB%91%E5%87%86%E6%96%B0%E9%83%8E"
+        }
+      ]
     },
     {
       "id": 3477,
@@ -3121,7 +3166,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772882"
+        }
+      ]
     },
     {
       "id": 3491,
@@ -3261,7 +3315,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3819868855095424"
+        }
+      ]
     },
     {
       "id": 3501,
@@ -3331,7 +3394,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3819853603443079"
+        }
+      ]
     },
     {
       "id": 3506,
@@ -3415,7 +3487,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772886"
+        }
+      ]
     },
     {
       "id": 3512,
@@ -3464,20 +3545,6 @@
       "title": "边涨边撤！全球投资者大幅撤离韩国股市，5月已流出220亿",
       "desc": "",
       "url": "https://wallstreetcn.com/articles/3772883",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3516,
-      "title": "OpenAI今日交表，最快9月上市？Altman：上市时机仍存变数",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772882",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -3625,7 +3692,23 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/953/741.htm"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%BE%AE%E4%BF%A1%E5%9B%9E%E5%BA%94%E5%8F%AA%E8%83%BD%E6%92%A4%E5%9B%9E2%E5%88%86%E9%92%9F%E5%86%85%E6%B6%88%E6%81%AF"
+        }
+      ]
     },
     {
       "id": 3527,
@@ -3653,7 +3736,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7642388965848285706/"
+        }
+      ]
     },
     {
       "id": 3529,
@@ -3712,20 +3804,6 @@
       "category": "其他"
     },
     {
-      "id": 3533,
-      "title": "U17世界杯抽签结果出炉",
-      "desc": "",
-      "url": "https://www.douyin.com/search/U17%E4%B8%96%E7%95%8C%E6%9D%AF%E6%8A%BD%E7%AD%BE%E7%BB%93%E6%9E%9C%E5%87%BA%E7%82%89",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3534,
       "title": "张雪将拍卖冠军赛车和奖杯",
       "desc": "",
@@ -3751,27 +3829,22 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%BE%8E%E6%B9%96%E6%B5%B7%E6%88%98"
+        }
+      ]
     },
     {
       "id": 3536,
       "title": "走近第二十二届文博会",
       "desc": "走近第二十二届文博会",
       "url": "https://s.weibo.com/weibo?q=%E8%B5%B0%E8%BF%91%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%B1%8A%E6%96%87%E5%8D%9A%E4%BC%9A",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3537,
-      "title": "赵丽颖澎湖海战海报",
-      "desc": "赵丽颖澎湖海战海报",
-      "url": "https://s.weibo.com/weibo?q=%E8%B5%B5%E4%B8%BD%E9%A2%96%E6%BE%8E%E6%B9%96%E6%B5%B7%E6%88%98%E6%B5%B7%E6%8A%A5",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -3835,7 +3908,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%9B%9B%E4%B8%96%E5%A4%A9%E4%B8%8B"
+        }
+      ]
     },
     {
       "id": 3542,
@@ -4048,38 +4130,10 @@
       "category": "其他"
     },
     {
-      "id": 3557,
-      "title": "女子收22万彩礼扔掉结婚证称没结婚",
-      "desc": "女子收22万彩礼扔掉结婚证称没结婚",
-      "url": "https://s.weibo.com/weibo?q=%E5%A5%B3%E5%AD%90%E6%94%B622%E4%B8%87%E5%BD%A9%E7%A4%BC%E6%89%94%E6%8E%89%E7%BB%93%E5%A9%9A%E8%AF%81%E7%A7%B0%E6%B2%A1%E7%BB%93%E5%A9%9A",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3558,
       "title": "肖战两天只休息了2.5小时",
       "desc": "肖战两天只休息了2.5小时",
       "url": "https://s.weibo.com/weibo?q=%E8%82%96%E6%88%98%E4%B8%A4%E5%A4%A9%E5%8F%AA%E4%BC%91%E6%81%AF%E4%BA%862.5%E5%B0%8F%E6%97%B6",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3559,
-      "title": "盛世天下女帝篇定档6月",
-      "desc": "盛世天下女帝篇定档6月",
-      "url": "https://s.weibo.com/weibo?q=%E7%9B%9B%E4%B8%96%E5%A4%A9%E4%B8%8B%E5%A5%B3%E5%B8%9D%E7%AF%87%E5%AE%9A%E6%A1%A36%E6%9C%88",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4314,20 +4368,6 @@
       "category": "其他"
     },
     {
-      "id": 3576,
-      "title": "恒指午间休盘涨1.22%，恒生科技指数涨2.08%",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3819938114932868",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3577,
       "title": "机构：一季度拉美智能手机市场同比增长3%至3480万部",
       "desc": "",
@@ -4374,20 +4414,6 @@
       "title": "年终600万奖金后，海力士员工：这嘴角根本压不住一点",
       "desc": "",
       "url": "https://wallstreetcn.com/charts/41959114",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3581,
-      "title": "创业板涨2%，算力硬件大爆发，PCB、光模块齐涨，恒科指涨超2%，联想暴涨16%，智谱狂飙20%",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772886",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -4706,34 +4732,6 @@
       "category": "其他"
     },
     {
-      "id": 3604,
-      "title": "沪深两市成交额连续第30个交易日突破2万亿元",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3820016187478148",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3605,
-      "title": "“女孩被离异父母双双拒收”，辽宁沈阳警方：系为博取流量，拍摄虚假视频，号主已被行政处罚",
-      "desc": "",
-      "url": "https://www.toutiao.com/group/7642489813102297663/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3606,
       "title": "阿联酋指伊朗！三架无人机袭阿联酋，两架被拦一架击中核电站外！",
       "desc": "",
@@ -4756,20 +4754,6 @@
       "platform_label": "今日头条",
       "platform_color": "#E63946",
       "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3608,
-      "title": "微信回应只能撤回2分钟内消息",
-      "desc": "微信回应只能撤回2分钟内消息",
-      "url": "https://s.weibo.com/weibo?q=%E5%BE%AE%E4%BF%A1%E5%9B%9E%E5%BA%94%E5%8F%AA%E8%83%BD%E6%92%A4%E5%9B%9E2%E5%88%86%E9%92%9F%E5%86%85%E6%B6%88%E6%81%AF",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
@@ -5333,27 +5317,22 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/nugget-ai"
+        }
+      ]
     },
     {
       "id": 3649,
       "title": "Zero Assist",
       "desc": "",
       "url": "https://www.producthunt.com/products/zero-assist",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3650,
-      "title": "AGG Identify",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/agg-identify",
       "platform": "producthunt",
       "platform_label": "ProductHunt",
       "platform_color": "#DA5430",
@@ -5571,7 +5550,23 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3820077216010374"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/953/927.htm"
+        }
+      ]
     },
     {
       "id": 3666,
@@ -5599,7 +5594,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3820060067303815"
+        }
+      ]
     },
     {
       "id": 3668,
@@ -5686,20 +5690,6 @@
       "category": "其他"
     },
     {
-      "id": 3674,
-      "title": "创业板涨超2%，算力硬件大爆发，PCB、光模块齐涨，恒科指涨超2%，联想暴涨16%，智谱狂飙30%",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772886",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3675,
       "title": "谷歌CEO：算力瓶颈就是个连环套，到处都是、此起彼伏",
       "desc": "",
@@ -5722,20 +5712,6 @@
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
       "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3677,
-      "title": "深圳：2026 年智能家居和其他智能产品给予 15% 补贴，最高补贴不超 1500 元",
-      "desc": "",
-      "url": "https://www.ithome.com/0/953/927.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
@@ -5823,7 +5799,23 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/953/905.htm"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%BC%85%E5%8C%97%E9%AD%8F%E5%AE%B6%E7%8A%AF%E7%BD%AA%E9%9B%86%E5%9B%A2%E4%B8%BB%E6%A1%88%E4%B8%80%E5%AE%A1%E5%BC%80%E5%BA%AD"
+        }
+      ]
     },
     {
       "id": 3684,
@@ -5900,20 +5892,6 @@
       "title": "Auto Posts",
       "desc": "",
       "url": "https://www.producthunt.com/products/auto-posts",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3690,
-      "title": "whosthere",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/whosthere",
       "platform": "producthunt",
       "platform_label": "ProductHunt",
       "platform_color": "#DA5430",
@@ -6218,20 +6196,6 @@
       "category": "其他"
     },
     {
-      "id": 3712,
-      "title": "女子曝烤肉店双层碗倒出大量洗碗水",
-      "desc": "女子曝烤肉店双层碗倒出大量洗碗水",
-      "url": "https://s.weibo.com/weibo?q=%E5%A5%B3%E5%AD%90%E6%9B%9D%E7%83%A4%E8%82%89%E5%BA%97%E5%8F%8C%E5%B1%82%E7%A2%97%E5%80%92%E5%87%BA%E5%A4%A7%E9%87%8F%E6%B4%97%E7%A2%97%E6%B0%B4",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3713,
       "title": "有韩国媒体道歉了",
       "desc": "有韩国媒体道歉了",
@@ -6250,20 +6214,6 @@
       "title": "谢娜栀子花大战菠萝蜜是真的",
       "desc": "谢娜栀子花大战菠萝蜜是真的",
       "url": "https://s.weibo.com/weibo?q=%E8%B0%A2%E5%A8%9C%E6%A0%80%E5%AD%90%E8%8A%B1%E5%A4%A7%E6%88%98%E8%8F%A0%E8%90%9D%E8%9C%9C%E6%98%AF%E7%9C%9F%E7%9A%84",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3715,
-      "title": "缅北魏家犯罪集团主案一审开庭",
-      "desc": "缅北魏家犯罪集团主案一审开庭",
-      "url": "https://s.weibo.com/weibo?q=%E7%BC%85%E5%8C%97%E9%AD%8F%E5%AE%B6%E7%8A%AF%E7%BD%AA%E9%9B%86%E5%9B%A2%E4%B8%BB%E6%A1%88%E4%B8%80%E5%AE%A1%E5%BC%80%E5%BA%AD",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -6481,7 +6431,16 @@
       "hot": 0,
       "date": "2026-05-22",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/suprsend"
+        }
+      ]
     },
     {
       "id": 3731,
@@ -6680,20 +6639,6 @@
       "category": "其他"
     },
     {
-      "id": 3745,
-      "title": "Prosed",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/prosed-turn-your-content-into-a-book",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3746,
       "title": "iPromise - AI focus buddy for deep work.",
       "desc": "",
@@ -6778,20 +6723,6 @@
       "category": "其他"
     },
     {
-      "id": 3752,
-      "title": "“无尽方舟”完成数千万种子轮融资",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3820238599672199",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 3753,
       "title": "中国化学：目前氢氟酸产品在试生产阶段",
       "desc": "",
@@ -6824,20 +6755,6 @@
       "title": "乘联分会：5月狭义乘用车零售预计152万辆，新能源预计95万辆",
       "desc": "",
       "url": "https://36kr.com/newsflashes/3820228917317764",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3756,
-      "title": "赛百味在合肥成立新餐饮管理公司，注册资本1000万",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3820227012890756",
       "platform": "36kr",
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
@@ -6908,20 +6825,6 @@
       "title": "用过马应龙的湿厕纸后，无法忍受普通的厕纸了",
       "desc": "",
       "url": "https://www.v2ex.com/t/1214566",
-      "platform": "v2ex",
-      "platform_label": "V2EX",
-      "platform_color": "#4CAF50",
-      "platform_icon": "💬",
-      "hot": 0,
-      "date": "2026-05-22",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 3762,
-      "title": "怎么没人讨论昨晚小米的 YU7 GT",
-      "desc": "",
-      "url": "https://www.v2ex.com/t/1214634",
       "platform": "v2ex",
       "platform_label": "V2EX",
       "platform_color": "#4CAF50",

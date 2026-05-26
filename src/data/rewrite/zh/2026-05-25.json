@@ -13,7 +13,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 9.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/652.htm"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%BB%8A%E5%B9%B4%E9%A6%96%E4%B8%AA%E7%BA%A2%E8%89%B2%E5%B1%B1%E6%B4%AA%E7%81%BE%E5%AE%B3%E9%A2%84%E8%AD%A6"
+        }
+      ]
     },
     {
       "id": 4944,
@@ -265,21 +281,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4869,
-      "title": "神舟二十三号成功对接空间站",
-      "desc": "神舟二十三号成功对接空间站，任务圆满完成",
-      "url": "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E6%88%90%E5%8A%9F%E5%AF%B9%E6%8E%A5%E7%A9%BA%E9%97%B4%E7%AB%99",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7643496848786784810/"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E6%88%90%E5%8A%9F%E5%AF%B9%E6%8E%A5%E7%A9%BA%E9%97%B4%E7%AB%99"
+        }
+      ]
     },
     {
       "id": 4873,
@@ -335,7 +353,30 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824028118962304"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773020"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8F%91%E8%A1%A8%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%9F%AC%E5%AE%9A%E5%BE%8B"
+        }
+      ]
     },
     {
       "id": 4884,
@@ -356,34 +397,6 @@
       "title": "从Anthropic收入爆增到OpenAI长期锁算力，AI需求“垂直爆发式”增长，供应瓶颈无处不在",
       "desc": "AI需求垂直爆发式增长，供应瓶颈凸显，Anthropic收入激增，OpenAI长期锁算力。",
       "url": "https://wallstreetcn.com/articles/3773018",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4887,
-      "title": "华为正式发表半导体领域新定律",
-      "desc": "华为发布半导体领域新定律，推动技术创新",
-      "url": "https://wallstreetcn.com/articles/3773020",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4888,
-      "title": "华为正式发表半导体领域新定律，晶体管密度与系统性能通过逻辑折叠技术实现新突破",
-      "desc": "华为推出半导体新定律，通过逻辑折叠技术提升晶体管密度与系统性能",
-      "url": "https://wallstreetcn.com/livenews/3108603",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -506,20 +519,6 @@
       "category": "其他"
     },
     {
-      "id": 4905,
-      "title": "神舟二十三号载人飞船发射升空",
-      "desc": "神舟二十三号载人飞船成功发射升空",
-      "url": "https://www.toutiao.com/group/7643536068876239414/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4907,
       "title": "60秒回顾神舟二十三号发射精彩瞬间 （记者：新华社前方报道组；编导：龙泠宇）#神舟二十三号  #秀我中国 #60秒回顾神舟二十三号发射精彩瞬间",
       "desc": "神舟二十三号发射精彩瞬间回顾",
@@ -559,7 +558,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E7%AC%AC8%E6%AC%A1%E5%A4%AA%E7%A9%BA%E4%BC%9A%E5%B8%88"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E5%90%8D%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E5%B0%86%E5%9C%A8%E5%A4%AA%E7%A9%BA%E5%87%BA%E5%B7%AE%E4%B8%80%E5%B9%B4"
+        }
+      ]
     },
     {
       "id": 4941,
@@ -629,7 +644,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824296477249929"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/855.htm"
+        }
+      ]
     },
     {
       "id": 4958,
@@ -702,20 +733,6 @@
       "category": "其他"
     },
     {
-      "id": 4974,
-      "title": "马斯克宣布 Grok V9-Medium 1.5T 模型完成训练：加入大量 Cursor 数据，两到三周内发布",
-      "desc": "马斯克宣布Grok V9-Medium 1.5T模型完成训练，加入Cursor数据，两三周内发布",
-      "url": "https://www.ithome.com/0/954/855.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4975,
       "title": "TrendForce：主要 NAND 原厂 2026 年几无新增产能，供给短缺预计持续全年",
       "desc": "2026年主要NAND原厂几乎无新增产能，供给短缺预计持续全年",
@@ -772,20 +789,6 @@
       "category": "其他"
     },
     {
-      "id": 5035,
-      "title": "第一视角看神舟二十三号发射",
-      "desc": "神舟二十三号发射第一视角记录",
-      "url": "https://www.douyin.com/search/%E7%AC%AC%E4%B8%80%E8%A7%86%E8%A7%92%E7%9C%8B%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E5%8F%91%E5%B0%84",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 5051,
       "title": "天机智能完成 10 亿元 B 轮及 B+ 轮融资：高瓴、美团联合领投，腾讯等跟投",
       "desc": "天机智能获10亿元B轮及B+轮融资，高瓴美团领投，腾讯跟投",
@@ -825,7 +828,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/874.htm"
+        },
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824355984494980"
+        }
+      ]
     },
     {
       "id": 5055,
@@ -1469,7 +1488,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E6%AD%A6%E5%A5%91%E5%A5%87%E5%BC%80%E5%A7%8B%E8%AE%BF%E5%8D%8E"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%AD%A6%E5%A5%91%E5%A5%87%E6%80%BB%E7%BB%9F%E8%AE%BF%E5%8D%8E%E6%AC%A2%E8%BF%8E%E4%BB%AA%E5%BC%8F"
+        }
+      ]
     },
     {
       "id": 4875,
@@ -1483,7 +1518,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824053542326402"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773021"
+        }
+      ]
     },
     {
       "id": 4878,
@@ -1508,20 +1559,6 @@
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
       "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 4886,
-      "title": "寒武纪涨逾11%，股价刷新历史新高，总市值超9000亿元",
-      "desc": "寒武纪股价涨超11%，创历史新高，总市值超9000亿元",
-      "url": "https://wallstreetcn.com/articles/3773021",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
@@ -1553,7 +1590,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773010"
+        }
+      ]
     },
     {
       "id": 4892,
@@ -1592,20 +1638,6 @@
       "platform_label": "HN",
       "platform_color": "#FF6600",
       "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 4947,
-      "title": "市场监管总局无条件批准长安汽车与江铃集团收购江铃控股股权案等",
-      "desc": "市场监管总局批准长安汽车与江铃集团收购江铃控股股权",
-      "url": "https://36kr.com/newsflashes/3824355984494980",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
@@ -1875,7 +1907,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E9%A9%AC%E5%88%BA103%3A82%E9%9B%B7%E9%9C%86"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E9%A9%AC%E5%88%BA2%E6%AF%942%E9%9B%B7%E9%9C%86"
+        }
+      ]
     },
     {
       "id": 5034,
@@ -2186,20 +2234,6 @@
       "category": "其他"
     },
     {
-      "id": 5093,
-      "title": "特朗普称美伊协议基本谈成，油价跳水，全球股市走强，日股指新高，金银齐涨",
-      "desc": "特朗普称美伊协议基本谈成，油价大跌，全球股市上涨，日股创新高，金银齐涨",
-      "url": "https://wallstreetcn.com/articles/3773010",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
       "id": 5094,
       "title": "三星内部分歧愈演愈烈，非芯片部门工会申请禁令阻投票",
       "desc": "三星非芯片部门工会申请禁令，阻止内部投票，内部分歧加剧。",
@@ -2312,20 +2346,6 @@
       "category": "其他"
     },
     {
-      "id": 5138,
-      "title": "一名中国航天员将在太空出差一年",
-      "desc": "中国航天员将执行为期一年的太空任务",
-      "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E5%90%8D%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E5%B0%86%E5%9C%A8%E5%A4%AA%E7%A9%BA%E5%87%BA%E5%B7%AE%E4%B8%80%E5%B9%B4",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
       "id": 5141,
       "title": "山西煤矿爆炸瞬间监控曝光",
       "desc": "山西煤矿爆炸监控画面曝光，揭示事故瞬间",
@@ -2337,7 +2357,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E7%9E%AC%E9%97%B4%E7%9B%91%E6%8E%A7%E6%9B%9D%E5%85%89"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E7%9E%AC%E9%97%B4%E7%9B%91%E6%8E%A7%E6%9B%9D%E5%85%89"
+        }
+      ]
     },
     {
       "id": 5145,
@@ -2351,7 +2387,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1360393/"
+        }
+      ]
     },
     {
       "id": 5157,
@@ -2365,7 +2410,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824653132206729"
+        }
+      ]
     },
     {
       "id": 5165,
@@ -2421,7 +2475,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3108887"
+        },
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824665348821640"
+        }
+      ]
     },
     {
       "id": 5169,
@@ -2760,20 +2830,6 @@
       "category": "其他"
     },
     {
-      "id": 4942,
-      "title": "迪吉里杜作为阻塞性睡眠呼吸暂停的替代疗法（2006）",
-      "desc": "研究显示吹奏迪吉里杜管可能对阻塞性睡眠呼吸暂停有辅助治疗效果。",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1360393/",
-      "platform": "hackernews",
-      "platform_label": "HN",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
       "id": 4949,
       "title": "胖东来在许昌成立乐予文化娱乐公司",
       "desc": "胖东来在许昌成立乐予文化娱乐公司",
@@ -2908,48 +2964,6 @@
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
       "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 5155,
-      "title": "5天3板风华高科：未与英伟达直接开展业务合作",
-      "desc": "风华高科澄清未与英伟达直接合作，股价连续三日涨停",
-      "url": "https://36kr.com/newsflashes/3824665348821640",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 5161,
-      "title": "国联绿色科技（无锡）股份有限公司向港交所提交上市申请书",
-      "desc": "国联绿色科技向港交所提交上市申请",
-      "url": "https://36kr.com/newsflashes/3824638527148675",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 5163,
-      "title": "闪回科技有限公司在港交所提交上市申请",
-      "desc": "闪回科技在港交所提交上市申请",
-      "url": "https://36kr.com/newsflashes/3824629493731721",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
       "hot": 0,
       "date": "2026-05-25",
       "score": 6.0,
@@ -3348,34 +3362,6 @@
       "category": "其他"
     },
     {
-      "id": 4839,
-      "title": "中国航天员第8次太空会师",
-      "desc": "中国航天员第八次太空会师",
-      "url": "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E7%AC%AC8%E6%AC%A1%E5%A4%AA%E7%A9%BA%E4%BC%9A%E5%B8%88",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4841,
-      "title": "今年首个红色山洪灾害预警",
-      "desc": "今年首个红色山洪灾害预警发布",
-      "url": "https://s.weibo.com/weibo?q=%E4%BB%8A%E5%B9%B4%E9%A6%96%E4%B8%AA%E7%BA%A2%E8%89%B2%E5%B1%B1%E6%B4%AA%E7%81%BE%E5%AE%B3%E9%A2%84%E8%AD%A6",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 4843,
       "title": "洪涛回应歌手淘汰庾澄庆",
       "desc": "洪涛回应歌手淘汰庾澄庆",
@@ -3527,7 +3513,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%BA%8E%E6%AD%A3%E8%B0%88%E7%BB%99%E9%98%BF%E5%AC%B7%E7%9A%84%E6%83%85%E4%B9%A6"
+        }
+      ]
     },
     {
       "id": 4913,
@@ -3667,7 +3662,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E9%BA%92%E9%BA%9F2026%E6%89%8B%E6%9C%BA%E8%8A%AF%E7%89%87%E4%BB%8A%E7%A7%8B%E9%9D%A2%E4%B8%96"
+        }
+      ]
     },
     {
       "id": 4943,
@@ -3692,34 +3696,6 @@
       "platform_label": "V2EX",
       "platform_color": "#4CAF50",
       "platform_icon": "💬",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4984,
-      "title": "山西煤矿爆炸瞬间监控曝光",
-      "desc": "山西煤矿爆炸监控画面曝光，揭示事故瞬间",
-      "url": "https://s.weibo.com/weibo?q=%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E7%9E%AC%E9%97%B4%E7%9B%91%E6%8E%A7%E6%9B%9D%E5%85%89",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4990,
-      "title": "华为发表半导体韬定律",
-      "desc": "华为发布半导体韬定律，内容未详述",
-      "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8F%91%E8%A1%A8%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%9F%AC%E5%AE%9A%E5%BE%8B",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
@@ -3796,20 +3772,6 @@
       "category": "其他"
     },
     {
-      "id": 5009,
-      "title": "给阿嬷的情书豆瓣涨至9.2",
-      "desc": "《给阿嬷的情书》豆瓣评分升至9.2",
-      "url": "https://s.weibo.com/weibo?q=%E7%BB%99%E9%98%BF%E5%AC%B7%E7%9A%84%E6%83%85%E4%B9%A6%E8%B1%86%E7%93%A3%E6%B6%A8%E8%87%B39.2",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 5010,
       "title": "神童减重37kg大变样",
       "desc": "神童减重37公斤，外貌变化显著。",
@@ -3870,20 +3832,6 @@
       "title": "李飞让时代少年团不要看粉丝的分析",
       "desc": "李飞告诫时代少年团勿看粉丝分析",
       "url": "https://s.weibo.com/weibo?q=%E6%9D%8E%E9%A3%9E%E8%AE%A9%E6%97%B6%E4%BB%A3%E5%B0%91%E5%B9%B4%E5%9B%A2%E4%B8%8D%E8%A6%81%E7%9C%8B%E7%B2%89%E4%B8%9D%E7%9A%84%E5%88%86%E6%9E%90",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 5028,
-      "title": "华为高管回应半导体领域新突破",
-      "desc": "华为高管回应半导体领域新突破",
-      "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E9%AB%98%E7%AE%A1%E5%9B%9E%E5%BA%94%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%A2%86%E5%9F%9F%E6%96%B0%E7%AA%81%E7%A0%B4",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4216,20 +4164,6 @@
       "category": "其他"
     },
     {
-      "id": 5197,
-      "title": "武契奇总统访华欢迎仪式",
-      "desc": "武契奇总统访华欢迎仪式",
-      "url": "https://s.weibo.com/weibo?q=%E6%AD%A6%E5%A5%91%E5%A5%87%E6%80%BB%E7%BB%9F%E8%AE%BF%E5%8D%8E%E6%AC%A2%E8%BF%8E%E4%BB%AA%E5%BC%8F",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 5199,
       "title": "伊朗亿万豪门千金或让丈夫净身出户",
       "desc": "伊朗豪门千金或让丈夫离婚时净身出户",
@@ -4258,20 +4192,6 @@
       "category": "其他"
     },
     {
-      "id": 5210,
-      "title": "麒麟2026芯片性能大幅提升",
-      "desc": "麒麟2026芯片性能显著提升",
-      "url": "https://s.weibo.com/weibo?q=%E9%BA%92%E9%BA%9F2026%E8%8A%AF%E7%89%87%E6%80%A7%E8%83%BD%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 5212,
       "title": "康师傅回应1瓶水蜜桃0.01克水蜜桃汁",
       "desc": "康师傅回应水蜜桃汁含量争议",
@@ -4283,7 +4203,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%BA%B7%E5%B8%88%E5%82%85%E5%9B%9E%E5%BA%941%E7%93%B6%E6%B0%B4%E8%9C%9C%E6%A1%830.01%E5%85%8B%E6%B0%B4%E8%9C%9C%E6%A1%83%E6%B1%81"
+        }
+      ]
     },
     {
       "id": 5216,
@@ -4549,7 +4478,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E8%82%96%E6%88%98%E5%90%8C%E6%AC%BE%E8%8D%A3%E8%80%80600%E5%8F%91%E5%B8%83"
+        }
+      ]
     },
     {
       "id": 4914,
@@ -4626,20 +4564,6 @@
       "title": "黄金白银又拉涨",
       "desc": "黄金白银价格再次上涨",
       "url": "https://s.weibo.com/weibo?q=%E9%BB%84%E9%87%91%E7%99%BD%E9%93%B6%E5%8F%88%E6%8B%89%E6%B6%A8",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 4938,
-      "title": "华为半导体领域新突破",
-      "desc": "华为半导体领域新突破",
-      "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%A2%86%E5%9F%9F%E6%96%B0%E7%AA%81%E7%A0%B4",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4976,20 +4900,6 @@
       "title": "幼儿园家长接力赛混入国家队",
       "desc": "幼儿园家长接力赛混入国家队，引发争议",
       "url": "https://s.weibo.com/weibo?q=%E5%B9%BC%E5%84%BF%E5%9B%AD%E5%AE%B6%E9%95%BF%E6%8E%A5%E5%8A%9B%E8%B5%9B%E6%B7%B7%E5%85%A5%E5%9B%BD%E5%AE%B6%E9%98%9F",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 5120,
-      "title": "1瓶康师傅水蜜桃只有0.01克水蜜桃汁",
-      "desc": "康师傅水蜜桃饮料仅含0.01克水蜜桃汁",
-      "url": "https://s.weibo.com/weibo?q=1%E7%93%B6%E5%BA%B7%E5%B8%88%E5%82%85%E6%B0%B4%E8%9C%9C%E6%A1%83%E5%8F%AA%E6%9C%890.01%E5%85%8B%E6%B0%B4%E8%9C%9C%E6%A1%83%E6%B1%81",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5543,7 +5453,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 1.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%90%B4%E6%B3%BD%E6%9E%97%E4%B9%9F%E4%B8%8D%E8%88%92%E6%9C%8D%E4%BA%86"
+        }
+      ]
     },
     {
       "id": 4997,
@@ -5606,20 +5525,6 @@
       "title": "杨紫今天穿了李祯的衣服",
       "desc": "杨紫今日穿着李祯的衣服。",
       "url": "https://s.weibo.com/weibo?q=%E6%9D%A8%E7%B4%AB%E4%BB%8A%E5%A4%A9%E7%A9%BF%E4%BA%86%E6%9D%8E%E7%A5%AF%E7%9A%84%E8%A1%A3%E6%9C%8D",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 5008,
-      "title": "马刺2比2雷霆",
-      "desc": "马刺与雷霆系列赛战成2比2平",
-      "url": "https://s.weibo.com/weibo?q=%E9%A9%AC%E5%88%BA2%E6%AF%942%E9%9B%B7%E9%9C%86",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5756,20 +5661,6 @@
       "category": "其他"
     },
     {
-      "id": 5121,
-      "title": "秦岚也不舒服了",
-      "desc": "秦岚身体不适",
-      "url": "https://s.weibo.com/weibo?q=%E7%A7%A6%E5%B2%9A%E4%B9%9F%E4%B8%8D%E8%88%92%E6%9C%8D%E4%BA%86",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
       "id": 5122,
       "title": "曝朱梓骁恋情",
       "desc": "朱梓骁恋情曝光",
@@ -5820,20 +5711,6 @@
       "platform_label": "ProductHunt",
       "platform_color": "#DA5430",
       "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 5196,
-      "title": "荣耀600价格",
-      "desc": "内容重复，无实际信息",
-      "url": "https://s.weibo.com/weibo?q=%E8%8D%A3%E8%80%80600%E4%BB%B7%E6%A0%BC",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
       "hot": 0,
       "date": "2026-05-25",
       "score": 1.0,

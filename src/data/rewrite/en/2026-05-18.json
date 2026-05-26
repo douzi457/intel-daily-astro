@@ -629,7 +629,16 @@
       "hot": 137.0,
       "date": "2026-05-18",
       "score": 10.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/github/comments/1jy8rea/promote_your_projects_here_selfpromotion/"
+        }
+      ]
     },
     {
       "id": 251,
@@ -769,7 +778,16 @@
       "hot": 0,
       "date": "2026-05-18",
       "score": 10.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/github/comments/1tdl7iq/github_changes/"
+        }
+      ]
     },
     {
       "id": 266,
@@ -839,7 +857,16 @@
       "hot": 10.0,
       "date": "2026-05-18",
       "score": 10.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/Python/comments/1t8r5sf/sunday_daily_thread_whats_everyone_working_on/"
+        }
+      ]
     },
     {
       "id": 275,
@@ -853,21 +880,16 @@
       "hot": 9.0,
       "date": "2026-05-18",
       "score": 10.0,
-      "category": "其他"
-    },
-    {
-      "id": 278,
-      "title": "Sunday Daily Thread: What's everyone working on this week?",
-      "desc": "# Weekly Thread: What's Everyone Working On This W...",
-      "url": "https://reddit.com/r/Python/comments/1tf9lf0/sunday_daily_thread_whats_everyone_working_on/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 4.0,
-      "date": "2026-05-18",
-      "score": 10.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/Python/comments/1tg62ej/monday_daily_thread_project_ideas/"
+        }
+      ]
     },
     {
       "id": 279,
@@ -895,7 +917,16 @@
       "hot": 8.0,
       "date": "2026-05-18",
       "score": 10.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/Python/comments/1tedia6/saturday_daily_thread_resource_request_and/"
+        }
+      ]
     },
     {
       "id": 281,
@@ -907,20 +938,6 @@
       "platform_color": "#94a3b8",
       "platform_icon": "📌",
       "hot": 0,
-      "date": "2026-05-18",
-      "score": 10.0,
-      "category": "其他"
-    },
-    {
-      "id": 282,
-      "title": "Friday Daily Thread: r/Python Meta and Free-Talk Fridays",
-      "desc": "# Weekly Thread: Meta Discussions and Free Talk Fr...",
-      "url": "https://reddit.com/r/Python/comments/1tdfo9l/friday_daily_thread_rpython_meta_and_freetalk/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 14.0,
       "date": "2026-05-18",
       "score": 10.0,
       "category": "其他"
@@ -949,20 +966,6 @@
       "platform_color": "#94a3b8",
       "platform_icon": "📌",
       "hot": 179.0,
-      "date": "2026-05-18",
-      "score": 10.0,
-      "category": "其他"
-    },
-    {
-      "id": 286,
-      "title": "Thursday Daily Thread: Python Careers, Courses, and Furthering Education!",
-      "desc": "# Weekly Thread: Professional Use, Jobs, and Educa...",
-      "url": "https://reddit.com/r/Python/comments/1tchdya/thursday_daily_thread_python_careers_courses_and/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 8.0,
       "date": "2026-05-18",
       "score": 10.0,
       "category": "其他"
@@ -1010,20 +1013,6 @@
       "category": "其他"
     },
     {
-      "id": 293,
-      "title": "Tuesday Daily Thread: Advanced questions",
-      "desc": "# Weekly Wednesday Thread: Advanced Questions 🐍",
-      "url": "https://reddit.com/r/Python/comments/1takwge/tuesday_daily_thread_advanced_questions/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 8.0,
-      "date": "2026-05-18",
-      "score": 10.0,
-      "category": "其他"
-    },
-    {
       "id": 295,
       "title": "Three packages copy-pasted my AGPL code to PyPI and named me in their description. PyPI won't act",
       "desc": "I published repowise on PyPI a few weeks ago. It g...",
@@ -1033,20 +1022,6 @@
       "platform_color": "#94a3b8",
       "platform_icon": "📌",
       "hot": 218.0,
-      "date": "2026-05-18",
-      "score": 10.0,
-      "category": "其他"
-    },
-    {
-      "id": 296,
-      "title": "Monday Daily Thread: Project ideas!",
-      "desc": "# Weekly Thread: Project Ideas 💡",
-      "url": "https://reddit.com/r/Python/comments/1t9n1pu/monday_daily_thread_project_ideas/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 7.0,
       "date": "2026-05-18",
       "score": 10.0,
       "category": "其他"
@@ -1299,20 +1274,6 @@
       "platform_color": "#94a3b8",
       "platform_icon": "📌",
       "hot": 1257.0,
-      "date": "2026-05-18",
-      "score": 9.0,
-      "category": "其他"
-    },
-    {
-      "id": 199,
-      "title": "[D] Self-Promotion Thread",
-      "desc": "Please post your personal projects, startups, prod...",
-      "url": "https://reddit.com/r/MachineLearning/comments/1t1d2m0/d_selfpromotion_thread/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 9.0,
       "date": "2026-05-18",
       "score": 9.0,
       "category": "其他"
@@ -1826,20 +1787,6 @@
       "title": "Where is the pinned megathread.",
       "desc": "I was asked to promote my github in the pinned meg...",
       "url": "https://reddit.com/r/github/comments/1teq6ta/where_is_the_pinned_megathread/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 0,
-      "date": "2026-05-18",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 269,
-      "title": "is GitHub down??",
-      "desc": "GitHub down",
-      "url": "https://reddit.com/r/github/comments/1tdjvc0/is_github_down/",
       "platform": "reddit",
       "platform_label": "reddit",
       "platform_color": "#94a3b8",
@@ -2379,27 +2326,22 @@
       "hot": 1.0,
       "date": "2026-05-18",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/github/comments/1tfvqea/removed_by_reddit/"
+        }
+      ]
     },
     {
       "id": 265,
       "title": "A good tool(IMO), but does it jave a use case?",
       "desc": "good tool IMO but does",
       "url": "https://reddit.com/r/github/comments/1tdofpd/a_good_toolimo_but_does_it_jave_a_use_case/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 0,
-      "date": "2026-05-18",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 294,
-      "title": "[ Removed by Reddit ]",
-      "desc": "[ Removed by Reddit on account of violating the [c...",
-      "url": "https://reddit.com/r/Python/comments/1tase87/removed_by_reddit/",
       "platform": "reddit",
       "platform_label": "reddit",
       "platform_color": "#94a3b8",

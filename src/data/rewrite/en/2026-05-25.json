@@ -125,21 +125,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4812,
-      "title": "Henan's 15th Five-Year Plan: Accelerating Construction of Zhongyuan Quantum Valley and Satellite Industrial Parks",
-      "desc": "Henan to boost Zhongyuan Quantum Valley and satellite industrial parks",
-      "url": "https://36kr.com/newsflashes/3823931952566657",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3823935406707077"
+        }
+      ]
     },
     {
       "id": 4815,
@@ -167,7 +162,37 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260525A01OEE00"
+        },
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7643496848786784810/"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E6%88%90%E5%8A%9F%E5%AF%B9%E6%8E%A5%E7%A9%BA%E9%97%B4%E7%AB%99"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%A5%9E21%E7%A5%9E23%E8%88%AA%E5%A4%A9%E5%91%98%E5%85%A8%E5%AE%B6%E7%A6%8F"
+        }
+      ]
     },
     {
       "id": 4823,
@@ -254,34 +279,6 @@
       "category": "其他"
     },
     {
-      "id": 4836,
-      "title": "Shenzhou-23 Launch Successful",
-      "desc": "China's space program achieves another milestone with the successful launch of Shenzhou-23",
-      "url": "https://www.toutiao.com/group/7643496848786784810/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4869,
-      "title": "Shenzhou-23 Successfully Docks with Space Station",
-      "desc": "Shenzhou-23 successfully docks with the space station, mission accomplished",
-      "url": "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E6%88%90%E5%8A%9F%E5%AF%B9%E6%8E%A5%E7%A9%BA%E9%97%B4%E7%AB%99",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4873,
       "title": "Gaode Store Location Skill Integrated into Dingding Wukong",
       "desc": "Gaode's store location skill integrated into Dingding Wukong enhances enterprise site selection efficiency",
@@ -321,7 +318,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824044595679619"
+        }
+      ]
     },
     {
       "id": 4881,
@@ -335,7 +341,37 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824028118962304"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773020"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/677.htm"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8F%91%E8%A1%A8%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%9F%AC%E5%AE%9A%E5%BE%8B"
+        }
+      ]
     },
     {
       "id": 4884,
@@ -356,34 +392,6 @@
       "title": "From Anthropic's Revenue Surge to OpenAI's Long-Term Compute Lockup, AI Demand Experiences Vertical Explosive Growth with Supply Bottlenecks Everywhere",
       "desc": "AI demand is surging vertically, with supply bottlenecks evident as Anthropic's revenue spikes and OpenAI secures long-term compute resources.",
       "url": "https://wallstreetcn.com/articles/3773018",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4887,
-      "title": "Huawei Announces New Law in Semiconductor Field",
-      "desc": "Huawei introduces a new law in semiconductors to drive technological innovation.",
-      "url": "https://wallstreetcn.com/articles/3773020",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
-      "id": 4888,
-      "title": "Huawei Unveils New Semiconductor Law, Breakthrough in Transistor Density and System Performance via Logic Folding Technology",
-      "desc": "Huawei achieves breakthrough in transistor density and system performance using logic folding technology.",
-      "url": "https://wallstreetcn.com/livenews/3108603",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -464,20 +472,6 @@
       "category": "其他"
     },
     {
-      "id": 4900,
-      "title": "Huawei Unveils Semiconductor Tao's Law: High-end Chip Transistor Density to Reach 1.4nm Equivalent by 2031",
-      "desc": "Huawei's Tao's Law predicts high-end chip transistor density will match 1.4nm process by 2031.",
-      "url": "https://www.ithome.com/0/954/677.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4902,
       "title": "Turing Quantum Completes Full-Stack Domestic Adaptation of Optical Quantum Computing, Deeply Compatible with Domestic GPUs like Hygon and Moore Threads",
       "desc": "Turing Quantum achieves full-stack domestic adaptation of optical quantum computing, deeply compatible with domestic GPUs like Hygon and Moore Threads",
@@ -506,20 +500,6 @@
       "category": "其他"
     },
     {
-      "id": 4905,
-      "title": "Shenzhou-23 Manned Spacecraft Launches Successfully",
-      "desc": "Shenzhou-23 manned spacecraft successfully launches into space",
-      "url": "https://www.toutiao.com/group/7643536068876239414/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4907,
       "title": "60-Second Review of Shenzhou 23 Launch Highlights",
       "desc": "Highlights of the Shenzhou 23 launch in 60 seconds",
@@ -531,7 +511,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7643497755863679515/"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E7%AC%AC%E4%B8%80%E8%A7%86%E8%A7%92%E7%9C%8B%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E5%8F%91%E5%B0%84"
+        }
+      ]
     },
     {
       "id": 4924,
@@ -559,7 +555,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E7%AC%AC8%E6%AC%A1%E5%A4%AA%E7%A9%BA%E4%BC%9A%E5%B8%88"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E5%90%8D%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E5%B0%86%E5%9C%A8%E5%A4%AA%E7%A9%BA%E5%87%BA%E5%B7%AE%E4%B8%80%E5%B9%B4"
+        }
+      ]
     },
     {
       "id": 4941,
@@ -629,7 +641,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824296477249929"
+        },
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/855.htm"
+        }
+      ]
     },
     {
       "id": 4958,
@@ -702,20 +730,6 @@
       "category": "其他"
     },
     {
-      "id": 4974,
-      "title": "Musk Announces Grok V9-Medium 1.5T Model Training Complete with Cursor Data, Release in 2-3 Weeks",
-      "desc": "Musk confirms Grok V9-Medium 1.5T model trained with Cursor data, set for release in 2-3 weeks.",
-      "url": "https://www.ithome.com/0/954/855.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 4975,
       "title": "TrendForce: Major NAND Manufacturers to Have No New Capacity Additions in 2026, Supply Shortage Expected to Persist Throughout the Year",
       "desc": "Major NAND manufacturers will have no new capacity additions in 2026, with supply shortages expected to persist throughout the year.",
@@ -772,20 +786,6 @@
       "category": "其他"
     },
     {
-      "id": 5035,
-      "title": "First-Person View of Shenzhou-23 Launch",
-      "desc": "First-person perspective recording of the Shenzhou-23 launch.",
-      "url": "https://www.douyin.com/search/%E7%AC%AC%E4%B8%80%E8%A7%86%E8%A7%92%E7%9C%8B%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E5%8F%91%E5%B0%84",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 8.0,
-      "category": "其他"
-    },
-    {
       "id": 5051,
       "title": "Tianji AI Raises 1 Billion RMB in B and B+ Rounds Led by Hillhouse and Meituan",
       "desc": "Tianji AI secures 1 billion RMB in B and B+ funding, co-led by Hillhouse and Meituan, with Tencent participating.",
@@ -825,7 +825,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/954/874.htm"
+        },
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824355984494980"
+        }
+      ]
     },
     {
       "id": 5055,
@@ -881,7 +897,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%BE%8E%E4%BC%8A%E5%B0%B1%E5%BC%80%E6%94%BE%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1%E8%BE%BE%E6%88%90%E4%B8%80%E8%87%B4"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773045"
+        }
+      ]
     },
     {
       "id": 5075,
@@ -951,7 +983,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3108772"
+        },
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824637550121608"
+        }
+      ]
     },
     {
       "id": 5096,
@@ -1217,7 +1265,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 8.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/955/022.htm"
+        }
+      ]
     },
     {
       "id": 5185,
@@ -1483,21 +1540,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 4878,
-      "title": "Jupanshi Completes New Round of 100 Million Yuan Financing",
-      "desc": "Jupanshi secures 100 million yuan funding, reflecting market confidence in its technological potential.",
-      "url": "https://36kr.com/newsflashes/3824042643771523",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824053542326402"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773021"
+        }
+      ]
     },
     {
       "id": 4882,
@@ -1508,20 +1567,6 @@
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
       "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 4886,
-      "title": "Cambricon Surges Over 11%, Hits Record High, Market Value Exceeds 900 Billion Yuan",
-      "desc": "Cambricon's stock price rises over 11%, reaching a record high with a market value exceeding 900 billion yuan.",
-      "url": "https://wallstreetcn.com/articles/3773021",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
@@ -1553,7 +1598,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3773010"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E7%89%B9%E6%9C%97%E6%99%AE%E7%A7%B0%E7%BE%8E%E4%BC%8A%E5%8D%8F%E8%AE%AE%E2%80%9C%E6%9C%AA%E8%B0%88%E5%A6%A5%E2%80%9D"
+        }
+      ]
     },
     {
       "id": 4892,
@@ -1592,20 +1653,6 @@
       "platform_label": "HN",
       "platform_color": "#FF6600",
       "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 4947,
-      "title": "SAM Unconditionally Approves Changan Auto and Jiangling Group's Acquisition of Jiangling Holding Equity",
-      "desc": "SAM approves Changan Auto and Jiangling Group's acquisition of Jiangling Holding equity without conditions",
-      "url": "https://36kr.com/newsflashes/3824355984494980",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
@@ -1875,7 +1922,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E9%A9%AC%E5%88%BA103%3A82%E9%9B%B7%E9%9C%86"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E9%A9%AC%E5%88%BA2%E6%AF%942%E9%9B%B7%E9%9C%86"
+        }
+      ]
     },
     {
       "id": 5034,
@@ -1959,7 +2022,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824360889831811"
+        }
+      ]
     },
     {
       "id": 5048,
@@ -2186,20 +2258,6 @@
       "category": "其他"
     },
     {
-      "id": 5093,
-      "title": "Trump Says US-Iran Deal Nearly Reached, Oil Prices Plummet, Global Stocks Rally, Nikkei Hits High, Gold and Silver Rise",
-      "desc": "Trump's announcement of a near US-Iran deal caused oil prices to drop, global stocks to surge, Nikkei to hit a new high, and gold and silver to rise.",
-      "url": "https://wallstreetcn.com/articles/3773010",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
       "id": 5094,
       "title": "Samsung Internal Disputes Escalate as Non-Chip Division Union Seeks Injunction to Block Vote",
       "desc": "Samsung's internal conflicts intensify as non-chip division union files for injunction to halt voting.",
@@ -2312,20 +2370,6 @@
       "category": "其他"
     },
     {
-      "id": 5138,
-      "title": "Chinese Astronaut to Spend a Year in Space",
-      "desc": "A Chinese astronaut will undertake a one-year mission in space",
-      "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E5%90%8D%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E5%B0%86%E5%9C%A8%E5%A4%AA%E7%A9%BA%E5%87%BA%E5%B7%AE%E4%B8%80%E5%B9%B4",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
       "id": 5141,
       "title": "Shanxi Coal Mine Explosion Surveillance Footage Exposed",
       "desc": "Surveillance footage of Shanxi coal mine explosion reveals the moment of the accident.",
@@ -2337,7 +2381,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E7%9E%AC%E9%97%B4%E7%9B%91%E6%8E%A7%E6%9B%9D%E5%85%89"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E7%9E%AC%E9%97%B4%E7%9B%91%E6%8E%A7%E6%9B%9D%E5%85%89"
+        }
+      ]
     },
     {
       "id": 5145,
@@ -2351,7 +2411,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1360393/"
+        }
+      ]
     },
     {
       "id": 5157,
@@ -2421,7 +2490,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 7.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3108887"
+        },
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3824665348821640"
+        }
+      ]
     },
     {
       "id": 5169,
@@ -2512,20 +2597,6 @@
       "title": "TSMC Denies Cutting Employee Dividends: This Year's Increase Will Exceed Last Year's",
       "desc": "TSMC denies reducing employee dividends, stating this year's increase will surpass last year's.",
       "url": "https://www.ithome.com/0/955/026.htm",
-      "platform": "ithome",
-      "platform_label": "IT之家",
-      "platform_color": "#0090D8",
-      "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 7.0,
-      "category": "其他"
-    },
-    {
-      "id": 5181,
-      "title": "Honor 600 Pro Phone Released: Features '3D Galaxy Aesthetic Design', National Subsidy Price 3399-4199 Yuan",
-      "desc": "Honor 600 Pro with 3D Galaxy design, priced at 3399-4199 yuan after national subsidy",
-      "url": "https://www.ithome.com/0/955/023.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
       "platform_color": "#0090D8",
@@ -2676,38 +2747,10 @@
       "category": "其他"
     },
     {
-      "id": 4872,
-      "title": "Trump Says US-Iran Deal Not Reached",
-      "desc": "Trump claims the US-Iran agreement has not been finalized.",
-      "url": "https://www.douyin.com/search/%E7%89%B9%E6%9C%97%E6%99%AE%E7%A7%B0%E7%BE%8E%E4%BC%8A%E5%8D%8F%E8%AE%AE%E2%80%9C%E6%9C%AA%E8%B0%88%E5%A6%A5%E2%80%9D",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
       "id": 4879,
       "title": "Central Bank Conducts 258 Billion Yuan 7-Day Reverse Repo Operation Today",
       "desc": "The central bank conducted a 258 billion yuan 7-day reverse repo operation today.",
       "url": "https://36kr.com/newsflashes/3824036334440583",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 4880,
-      "title": "A-Share Major Indices Open Higher, Coal Stocks Strengthen",
-      "desc": "A-Share major indices opened higher, with coal stocks showing strong performance",
-      "url": "https://36kr.com/newsflashes/3824032113824135",
       "platform": "36kr",
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
@@ -2754,20 +2797,6 @@
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
       "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 4942,
-      "title": "Didgeridoo Playing as Alternative Treatment for Obstructive Sleep Apnea",
-      "desc": "Study suggests didgeridoo playing may help treat obstructive sleep apnea.",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1360393/",
-      "platform": "hackernews",
-      "platform_label": "HN",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
       "hot": 0,
       "date": "2026-05-25",
       "score": 6.0,
@@ -2900,34 +2929,6 @@
       "category": "其他"
     },
     {
-      "id": 5091,
-      "title": "Iran: No Imminent Agreement with US, Strait of Hormuz Management to Be Between Iran and Oman",
-      "desc": "Iran denies an impending US deal, stating Strait of Hormuz management will be handled solely with Oman.",
-      "url": "https://wallstreetcn.com/articles/3773045",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
-      "id": 5155,
-      "title": "Fenghua High-Tech: No Direct Business Cooperation with NVIDIA",
-      "desc": "Fenghua High-Tech clarifies no direct partnership with NVIDIA, despite stock surge.",
-      "url": "https://36kr.com/newsflashes/3824665348821640",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 6.0,
-      "category": "其他"
-    },
-    {
       "id": 5161,
       "title": "Guolian Green Technology (Wuxi) Co., Ltd. Submits Listing Application to HKEX",
       "desc": "Guolian Green Technology applies for listing on HKEX",
@@ -3023,7 +3024,23 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 6.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/A%E8%82%A1%E8%8A%AF%E7%89%87%E8%82%A1%E5%BC%BA%E5%8A%BF%E6%8B%89%E5%8D%87"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=A%E8%82%A1%E4%B8%A4%E5%A4%A7%E6%9D%BF%E5%9D%97%E7%88%86%E5%8F%91"
+        }
+      ]
     },
     {
       "id": 4820,
@@ -3306,20 +3323,6 @@
       "category": "其他"
     },
     {
-      "id": 5162,
-      "title": "Bycloud Materials: No Framework Agreement Signed with LandSpace, Not Supplier of 'Zhuque 3' Reusable Rocket Thermal Protection System",
-      "desc": "Bycloud Materials denies signing any framework agreement with LandSpace and is not the supplier of the thermal protection system for the 'Zhuque 3' reusable rocket.",
-      "url": "https://36kr.com/newsflashes/3824637550121608",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 5.0,
-      "category": "其他"
-    },
-    {
       "id": 5203,
       "title": "Single Update for Main Character",
       "desc": "Repeated content with no substantive information",
@@ -3348,20 +3351,6 @@
       "category": "其他"
     },
     {
-      "id": 4839,
-      "title": "Chinese Astronauts' 8th Space Rendezvous",
-      "desc": "Chinese astronauts meet in space for the 8th time",
-      "url": "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E8%88%AA%E5%A4%A9%E5%91%98%E7%AC%AC8%E6%AC%A1%E5%A4%AA%E7%A9%BA%E4%BC%9A%E5%B8%88",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 4841,
       "title": "First Red-Level Flash Flood Warning of the Year",
       "desc": "The first red-level flash flood warning has been issued this year.",
@@ -3387,7 +3376,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%B4%AA%E6%B6%9B%E5%9B%9E%E5%BA%94%E6%AD%8C%E6%89%8B%E6%B7%98%E6%B1%B0%E5%BA%BE%E6%BE%84%E5%BA%86"
+        }
+      ]
     },
     {
       "id": 4844,
@@ -3415,7 +3413,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E9%A6%99%E6%B8%AF%E5%B8%82%E6%B0%91%E7%9C%8B%E7%A5%9E23%E5%8F%91%E5%B0%84%E6%BF%80%E5%8A%A8%E5%88%B0%E5%8F%AB%E7%A0%B4%E5%96%89%E5%92%99"
+        }
+      ]
     },
     {
       "id": 4852,
@@ -3527,7 +3534,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%BA%8E%E6%AD%A3%E8%B0%88%E7%BB%99%E9%98%BF%E5%AC%B7%E7%9A%84%E6%83%85%E4%B9%A6"
+        }
+      ]
     },
     {
       "id": 4913,
@@ -3555,27 +3571,22 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=68%E5%B2%81%E7%94%B7%E5%AD%90%E8%A2%AB%E6%9B%9D%E5%87%BA%E8%BD%A890%E5%90%8E%E8%BD%AC%E8%B4%A6%E8%BF%914800%E4%B8%87"
+        }
+      ]
     },
     {
       "id": 4920,
       "title": "12306 Responds to Woman Singing Loudly in Train Carriage",
       "desc": "12306 addresses incident of a woman singing loudly in a train carriage",
       "url": "https://s.weibo.com/weibo?q=12306%E5%9B%9E%E5%BA%94%E5%A5%B3%E5%AD%90%E5%9C%A8%E8%BD%A6%E5%8E%A2%E5%86%85%E5%A4%A7%E5%A3%B0%E5%94%B1%E6%AD%8C",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4921,
-      "title": "Hong Kong Youth Cheer for Shenzhou 23 Astronauts",
-      "desc": "Hong Kong youth express support for Shenzhou 23 astronauts.",
-      "url": "https://s.weibo.com/weibo?q=%E9%A6%99%E6%B8%AF%E9%9D%92%E5%B9%B4%E4%B8%BA%E7%A5%9E23%E8%88%AA%E5%A4%A9%E5%91%98%E5%8A%A0%E6%B2%B9",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -3698,34 +3709,6 @@
       "category": "其他"
     },
     {
-      "id": 4984,
-      "title": "Shanxi Coal Mine Explosion Surveillance Footage Exposed",
-      "desc": "Surveillance footage of Shanxi coal mine explosion reveals the moment of the accident.",
-      "url": "https://s.weibo.com/weibo?q=%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E7%88%86%E7%82%B8%E7%9E%AC%E9%97%B4%E7%9B%91%E6%8E%A7%E6%9B%9D%E5%85%89",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 4990,
-      "title": "Huawei Publishes Semiconductor Tao's Law",
-      "desc": "Huawei announced a semiconductor law, details unspecified",
-      "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8F%91%E8%A1%A8%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%9F%AC%E5%AE%9A%E5%BE%8B",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
       "id": 4992,
       "title": "Take a Week Off Before Resigning",
       "desc": "Take a week off before resigning to ensure a smooth transition.",
@@ -3786,20 +3769,6 @@
       "title": "42-Year-Old 'Most Beautiful Lawyer' Chi Zonglin Dies in Car Accident",
       "desc": "Chi Zonglin, a 42-year-old lawyer known as the 'most beautiful,' died in a car accident.",
       "url": "https://s.weibo.com/weibo?q=42%E5%B2%81%E6%9C%80%E7%BE%8E%E5%A5%B3%E5%BE%8B%E5%B8%88%E8%BF%9F%E5%AE%97%E7%90%B3%E8%BD%A6%E7%A5%B8%E5%8E%BB%E4%B8%96",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 3.0,
-      "category": "其他"
-    },
-    {
-      "id": 5009,
-      "title": "Love Letter to Grandma",
-      "desc": "Love Letter to Grandma's Douban rating rises to 9.2",
-      "url": "https://s.weibo.com/weibo?q=%E7%BB%99%E9%98%BF%E5%AC%B7%E7%9A%84%E6%83%85%E4%B9%A6%E8%B1%86%E7%93%A3%E6%B6%A8%E8%87%B39.2",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4283,7 +4252,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%BA%B7%E5%B8%88%E5%82%85%E5%9B%9E%E5%BA%941%E7%93%B6%E6%B0%B4%E8%9C%9C%E6%A1%830.01%E5%85%8B%E6%B0%B4%E8%9C%9C%E6%A1%83%E6%B1%81"
+        }
+      ]
     },
     {
       "id": 5216,
@@ -4325,7 +4303,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 3.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E8%82%96%E6%88%98%E5%87%BA%E9%81%93%E8%87%B3%E4%BB%8A%E8%B6%B3%E8%BF%B9%E5%9C%B0%E5%9B%BE"
+        }
+      ]
     },
     {
       "id": 5225,
@@ -4468,20 +4455,6 @@
       "category": "其他"
     },
     {
-      "id": 4867,
-      "title": "68-Year-Old Man Cheating with 90s-Born Woman, Says Never Considered Divorce",
-      "desc": "68-year-old man involved with younger woman, denies divorce plans",
-      "url": "https://s.weibo.com/weibo?q=68%E5%B2%81%E7%94%B7%E5%AD%90%E5%87%BA%E8%BD%A890%E5%90%8E%E7%A7%B0%E4%BB%8E%E6%B2%A1%E6%83%B3%E8%BF%87%E7%A6%BB%E5%A9%9A",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
       "id": 4868,
       "title": "Fan Zhendong Advances to German Bundesliga Semifinals",
       "desc": "Fan Zhendong competes in the German Bundesliga semifinals.",
@@ -4538,20 +4511,6 @@
       "category": "其他"
     },
     {
-      "id": 4910,
-      "title": "Xiao Zhan's Honor 600 Released",
-      "desc": "Xiao Zhan's co-branded Honor 600 smartphone launched",
-      "url": "https://s.weibo.com/weibo?q=%E8%82%96%E6%88%98%E5%90%8C%E6%AC%BE%E8%8D%A3%E8%80%80600%E5%8F%91%E5%B8%83",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
       "id": 4914,
       "title": "Panda Without Black Eye Rings Spotted",
       "desc": "Rare panda without black eye rings discovered, drawing attention",
@@ -4570,20 +4529,6 @@
       "title": "NBA Best Team",
       "desc": "NBA best team information, too brief",
       "url": "https://s.weibo.com/weibo?q=NBA%E6%9C%80%E4%BD%B3%E9%98%B5%E5%AE%B9",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 4922,
-      "title": "Wen Zhengrong Responds to Zhang Yishang's Elimination",
-      "desc": "Wen Zhengrong addresses Zhang Yishang's elimination.",
-      "url": "https://s.weibo.com/weibo?q=%E6%B8%A9%E5%B3%A5%E5%B5%98%E5%8F%91%E6%96%87%E5%9B%9E%E5%BA%94%E5%BC%A0%E8%89%BA%E4%B8%8A%E6%B7%98%E6%B1%B0",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4626,20 +4571,6 @@
       "title": "Gold and Silver Rally Again",
       "desc": "Gold and silver prices surge once more",
       "url": "https://s.weibo.com/weibo?q=%E9%BB%84%E9%87%91%E7%99%BD%E9%93%B6%E5%8F%88%E6%8B%89%E6%B6%A8",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 4938,
-      "title": "Huawei's New Breakthrough in Semiconductor Field",
-      "desc": "Huawei achieves a new breakthrough in semiconductors.",
-      "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8D%8A%E5%AF%BC%E4%BD%93%E9%A2%86%E5%9F%9F%E6%96%B0%E7%AA%81%E7%A0%B4",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4885,7 +4816,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E5%8F%91%E5%B8%83%E4%BC%9A%E5%AE%9A%E6%A1%A3"
+        }
+      ]
     },
     {
       "id": 5071,
@@ -4913,7 +4853,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=KPL%E8%BF%90%E5%8A%A8%E4%BC%9A"
+        }
+      ]
     },
     {
       "id": 5110,
@@ -4924,20 +4873,6 @@
       "platform_label": "今日头条",
       "platform_color": "#E63946",
       "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 5111,
-      "title": "Huawei Chips",
-      "desc": "Minimal information about Huawei chips, lacking substance.",
-      "url": "https://s.weibo.com/weibo?q=%E5%8D%8E%E4%B8%BA%E8%8A%AF%E7%89%87",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
       "hot": 0,
       "date": "2026-05-25",
       "score": 2.0,
@@ -4969,7 +4904,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%9B%BE%E6%B2%9B%E6%85%88%E5%9B%A2%E6%83%B3%E5%94%B1%E6%90%81%E6%B5%85"
+        }
+      ]
     },
     {
       "id": 5119,
@@ -4986,38 +4930,10 @@
       "category": "其他"
     },
     {
-      "id": 5120,
-      "title": "1 bottle of Master Peach contains only 0.01g peach juice",
-      "desc": "Master Peach drink contains only 0.01g of peach juice",
-      "url": "https://s.weibo.com/weibo?q=1%E7%93%B6%E5%BA%B7%E5%B8%88%E5%82%85%E6%B0%B4%E8%9C%9C%E6%A1%83%E5%8F%AA%E6%9C%890.01%E5%85%8B%E6%B0%B4%E8%9C%9C%E6%A1%83%E6%B1%81",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
       "id": 5127,
       "title": "The Genius Who First Used Receipts as Wallpaper",
       "desc": "Creative and practical idea to use receipts as wallpaper",
       "url": "https://s.weibo.com/weibo?q=%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%83%B3%E5%88%B0%E7%94%A8%E5%B0%8F%E7%A5%A8%E5%BD%93%E5%A3%81%E7%BA%B8%E7%9A%84%E6%98%AF%E5%A4%A9%E6%89%8D",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
-      "id": 5132,
-      "title": "Two Major A-Share Sectors Surge",
-      "desc": "Two major sectors in China's stock market experience a sharp rally.",
-      "url": "https://s.weibo.com/weibo?q=A%E8%82%A1%E4%B8%A4%E5%A4%A7%E6%9D%BF%E5%9D%97%E7%88%86%E5%8F%91",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5123,7 +5039,16 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 2.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%BC%A0%E6%9C%88%E5%9B%A2%E5%AE%89%E5%B4%8E%E5%9B%A2%E6%92%9E%E9%80%89%E6%AD%8C"
+        }
+      ]
     },
     {
       "id": 5204,
@@ -5224,20 +5149,6 @@
       "category": "其他"
     },
     {
-      "id": 5219,
-      "title": "Wang Meng Team Song Selection",
-      "desc": "Wang Meng's team chooses a song",
-      "url": "https://s.weibo.com/weibo?q=%E7%8E%8B%E6%BF%9B%E5%9B%A2%E9%80%89%E6%AD%8C",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 2.0,
-      "category": "其他"
-    },
-    {
       "id": 5220,
       "title": "Dong Xuan and Zhang Wei Yi Have Been Dating for a Year After Marriage",
       "desc": "Dong Xuan and Zhang Wei Yi continue their relationship a year after getting married.",
@@ -5312,20 +5223,6 @@
       "title": "Drink Now",
       "desc": "Repetitive title with no substantial content",
       "url": "https://s.weibo.com/weibo?q=%E7%8E%B0%E5%9C%A8%E5%96%9D%E7%A7%92%E9%B2%9C",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 4846,
-      "title": "Shenzhou 21 and 23 Astronauts Family Photo",
-      "desc": "Family photo of Shenzhou 21 and 23 astronauts",
-      "url": "https://s.weibo.com/weibo?q=%E7%A5%9E21%E7%A5%9E23%E8%88%AA%E5%A4%A9%E5%91%98%E5%85%A8%E5%AE%B6%E7%A6%8F",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5434,20 +5331,6 @@
       "category": "其他"
     },
     {
-      "id": 4919,
-      "title": "Petsie Tseng Injured",
-      "desc": "Petsie Tseng is injured",
-      "url": "https://s.weibo.com/weibo?q=%E6%9B%BE%E6%B2%9B%E6%85%88%20%E5%8F%97%E4%BC%A4",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
       "id": 4923,
       "title": "How Small Are Actors' Faces?",
       "desc": "Title repeated, no actual content",
@@ -5515,27 +5398,22 @@
       "hot": 0,
       "date": "2026-05-25",
       "score": 1.0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%BB%BB%E6%95%8F%E8%A7%89%E5%BE%97%E9%82%93%E8%B6%85%E4%B8%8D%E5%A4%AA%E8%88%92%E6%9C%8D"
+        }
+      ]
     },
     {
       "id": 4994,
       "title": "Wang Hedi's Agent's Moments",
       "desc": "Content of Wang Hedi's agent's social media moments",
       "url": "https://s.weibo.com/weibo?q=%E7%8E%8B%E9%B9%A4%E6%A3%A3%E7%BB%8F%E7%BA%AA%E4%BA%BA%E6%9C%8B%E5%8F%8B%E5%9C%88",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 4996,
-      "title": "Wu Zelin is also uncomfortable",
-      "desc": "Wu Zelin is feeling unwell",
-      "url": "https://s.weibo.com/weibo?q=%E5%90%B4%E6%B3%BD%E6%9E%97%E4%B9%9F%E4%B8%8D%E8%88%92%E6%9C%8D%E4%BA%86",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5616,20 +5494,6 @@
       "category": "其他"
     },
     {
-      "id": 5008,
-      "title": "Spurs 2-2 Thunder",
-      "desc": "Spurs and Thunder are tied 2-2 in the series",
-      "url": "https://s.weibo.com/weibo?q=%E9%A9%AC%E5%88%BA2%E6%AF%942%E9%9B%B7%E9%9C%86",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
       "id": 5013,
       "title": "Tian Liang and Ye Yiqi's 14-Year-Old Son's Looks",
       "desc": "Discussion about the appearance of Tian Liang and Ye Yiqi's 14-year-old son",
@@ -5690,20 +5554,6 @@
       "title": "Family Business Drama Troupe",
       "desc": "Family Business Drama Troupe",
       "url": "https://s.weibo.com/weibo?q=%E5%AE%B6%E4%B8%9A%E8%BF%BD%E5%89%A7%E5%9B%A2",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 5026,
-      "title": "Fearless Sports Meet Live Stream",
-      "desc": "Live stream information for the Fearless Sports Meet",
-      "url": "https://s.weibo.com/weibo?q=%E6%97%A0%E7%95%8F%E8%BF%90%E5%8A%A8%E4%BC%9A%E7%9B%B4%E6%92%AD",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -5886,20 +5736,6 @@
       "title": "Zheng Qinwen vs Khwariniska",
       "desc": "Zheng Qinwen vs Khwariniska",
       "url": "https://s.weibo.com/weibo?q=%E9%83%91%E9%92%A6%E6%96%87vs%E8%B5%AB%E7%93%A6%E6%9E%97%E6%96%AF%E5%8D%A1",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-25",
-      "score": 1.0,
-      "category": "其他"
-    },
-    {
-      "id": 5214,
-      "title": "Honor Launch Event",
-      "desc": "No substantial content in the Honor launch event",
-      "url": "https://s.weibo.com/weibo?q=%E8%8D%A3%E8%80%80%E5%8F%91%E5%B8%83%E4%BC%9A",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",

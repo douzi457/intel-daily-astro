@@ -111,7 +111,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "news_aggregator",
+          "label": "news_aggregator",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://view.inews.qq.com/a/20260520A09SBI00"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E4%B8%AD%E4%BF%84%E7%AD%BE%E7%BD%B2%E5%B9%B6%E5%8F%91%E8%A1%A8%E8%81%94%E5%90%88%E5%A3%B0%E6%98%8E%E6%9C%89%E4%BD%95%E6%B7%B1%E6%84%8F"
+        }
+      ]
     },
     {
       "id": 2341,
@@ -576,20 +592,6 @@
       "category": "其他"
     },
     {
-      "id": 2374,
-      "title": "中俄签署并发表联合声明有何深意",
-      "desc": "",
-      "url": "https://www.douyin.com/search/%E4%B8%AD%E4%BF%84%E7%AD%BE%E7%BD%B2%E5%B9%B6%E5%8F%91%E8%A1%A8%E8%81%94%E5%90%88%E5%A3%B0%E6%98%8E%E6%9C%89%E4%BD%95%E6%B7%B1%E6%84%8F",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2375,
       "title": "上海男篮客胜北京夺赛点",
       "desc": "",
@@ -853,7 +855,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%A6%8F%E5%BB%BA%E6%BC%B3%E5%B7%9E%E6%B3%A1%E8%8D%AF%E6%9D%A8%E6%A2%85%E4%BA%8B%E4%BB%B65%E4%BA%BA%E8%A2%AB%E5%88%91%E6%8B%98"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E6%BC%B3%E5%B7%9E%E2%80%9C%E8%8D%AF%E6%B0%B4%E6%9D%A8%E6%A2%85%E2%80%9D%E4%BA%8B%E4%BB%B65%E4%BA%BA%E8%A2%AB%E5%88%91%E6%8B%98"
+        }
+      ]
     },
     {
       "id": 2394,
@@ -1175,7 +1193,16 @@
       "hot": 187.0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/technology/comments/1tiu5pm/disney_sued_over_facial_recognition_technology_at/"
+        }
+      ]
     },
     {
       "id": 2417,
@@ -1287,7 +1314,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/github/comments/1tit39a/does_anyone_else_use_cline/"
+        }
+      ]
     },
     {
       "id": 2425,
@@ -1301,7 +1337,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/github/comments/1tiviij/hacker/"
+        },
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/tacet"
+        }
+      ]
     },
     {
       "id": 2426,
@@ -1441,7 +1493,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%B8%AD%E4%BF%84%E5%85%83%E9%A6%96%E4%BC%9A%E6%99%A4%E6%88%90%E6%9E%9C%E6%96%87%E4%BB%B6%E6%B8%85%E5%8D%95"
+        }
+      ]
     },
     {
       "id": 2436,
@@ -1455,7 +1516,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture/"
+        },
+        {
+          "platform": "reddit",
+          "label": "reddit",
+          "color": "#94a3b8",
+          "icon": "📌",
+          "url": "https://reddit.com/r/artificial/comments/1tixhbv/an_openai_model_has_disproved_a_central/"
+        }
+      ]
     },
     {
       "id": 2437,
@@ -1539,7 +1616,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772763"
+        }
+      ]
     },
     {
       "id": 2443,
@@ -1567,7 +1653,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/articles/3772760"
+        }
+      ]
     },
     {
       "id": 2445,
@@ -1623,7 +1718,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "toutiao",
+          "label": "今日头条",
+          "color": "#E63946",
+          "icon": "📰",
+          "url": "https://www.toutiao.com/group/7641989005931741702/"
+        }
+      ]
     },
     {
       "id": 2449,
@@ -1724,20 +1828,6 @@
       "category": "其他"
     },
     {
-      "id": 2456,
-      "title": "Disney sued over facial recognition at parks",
-      "desc": "",
-      "url": "https://reddit.com/r/technology/comments/1tiyc4t/disney_sued_over_facial_recognition_at_parks/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 80.0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2457,
       "title": "A city at the center of an AI data center frenzy just voted to ban them",
       "desc": "",
@@ -1775,20 +1865,6 @@
       "platform_color": "#94a3b8",
       "platform_icon": "📌",
       "hot": 5.0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2460,
-      "title": "An OpenAI model has disproved a central conjecture in discrete geometry",
-      "desc": "",
-      "url": "https://reddit.com/r/artificial/comments/1tixhbv/an_openai_model_has_disproved_a_central/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 39.0,
       "date": "2026-05-21",
       "score": 0,
       "category": "其他"
@@ -1875,7 +1951,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%A4%A9%E7%8C%AB618%E7%8E%B0%E8%B4%A7%E5%BC%80%E5%8D%96%E5%8F%A0%E5%88%B8%E4%BB%B7%E6%9B%B4%E4%BD%8E"
+        }
+      ]
     },
     {
       "id": 2467,
@@ -1903,7 +1988,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E4%BA%9A%E6%B4%B2%E8%89%BA%E6%9C%AF%E7%94%B5%E5%BD%B1%E8%8A%82"
+        }
+      ]
     },
     {
       "id": 2469,
@@ -1917,7 +2011,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E6%AD%8C%E6%89%8B2026"
+        }
+      ]
     },
     {
       "id": 2470,
@@ -2099,35 +2202,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2483,
-      "title": "英伟达电话会：CFO称需求在加速",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772763",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2484,
-      "title": "英伟达Q1营收超预期但不够亮眼，指引再新高，新增800亿回购 | 财报见闻",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772760",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/member/articles/3772761"
+        }
+      ]
     },
     {
       "id": 2485,
@@ -2232,20 +2316,6 @@
       "title": "Versioned humanity: existential risk with AI",
       "desc": "Honestly I'd like you guys to check out my blog and share what you think. I'd appreciate the feedback, your opinions, thoughts, disagreements, are welcome.\n\nHope you check it out, my first blog.\n\nhttps://ilovehumanity9.blogspot.com/2026/05/are-we-witnessing-end-of-humanity.html",
       "url": "https://reddit.com/r/artificial/comments/1tizw3p/versioned_humanity_existential_risk_with_ai/",
-      "platform": "reddit",
-      "platform_label": "reddit",
-      "platform_color": "#94a3b8",
-      "platform_icon": "📌",
-      "hot": 1.0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2493,
-      "title": "Does anyone else wish GitHub's billing page showed per-repo and per-workflow cost breakdown?",
-      "desc": "The current billing page shows:\n\n* Total minutes used (org-level)\n* Breakdown by OS (Linux/Windows/macOS)\n* That's it.\n\nWhat I actually need:\n\n* Which of my 30 repos is consuming the most minutes?\n* Which specific workflow is the most expensive?\n* Which team member is triggering the most costly runs?\n* Is my bill trending up or down week over week?\n\nI end up pulling data from the API manually every month to build a spreadsheet for my manager. Am I the only one who finds the native billing insuff",
-      "url": "https://reddit.com/r/github/comments/1tj0huc/does_anyone_else_wish_githubs_billing_page_showed/",
       "platform": "reddit",
       "platform_label": "reddit",
       "platform_color": "#94a3b8",
@@ -2477,7 +2547,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3818231393633412"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E8%8B%B1%E4%BC%9F%E8%BE%BEQ1%E5%87%80%E5%88%A9%E6%B6%A6583%E4%BA%BF%E7%BE%8E%E5%85%83"
+        }
+      ]
     },
     {
       "id": 2510,
@@ -2508,20 +2594,6 @@
       "category": "其他"
     },
     {
-      "id": 2512,
-      "title": "5月21日会员早报：美国正为“拿下”古巴做准备 伊朗放狠话要让战火外溢",
-      "desc": "",
-      "url": "https://wallstreetcn.com/member/articles/3772761",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2513,
       "title": "美伊冲突降温，WTI原油大跌5.5%，美股全线收涨，美债收益率下跌，英伟达绩后下跌",
       "desc": "",
@@ -2540,20 +2612,6 @@
       "title": "贝索斯专访：为亿万富翁辩护，反对过早监管AI，特朗普\"比第一任期更成熟\"",
       "desc": "",
       "url": "https://wallstreetcn.com/articles/3772766",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2515,
-      "title": "英伟达Q1营收超预期增85%、指引再新高仍不够亮眼，新增回购800亿且大幅上调股息 | 财报见闻",
-      "desc": "",
-      "url": "https://wallstreetcn.com/articles/3772760",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -2771,7 +2829,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E5%B0%8F%E6%BB%A1"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E4%BB%8A%E5%A4%A9%E6%98%AF%E5%B0%8F%E6%BB%A1"
+        }
+      ]
     },
     {
       "id": 2531,
@@ -2799,7 +2873,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E8%8B%B1%E4%BC%9F%E8%BE%BE%E8%B4%A2%E6%8A%A5"
+        },
+        {
+          "platform": "douyin",
+          "label": "抖音热搜",
+          "color": "#00F2EA",
+          "icon": "🎵",
+          "url": "https://www.douyin.com/search/%E8%8B%B1%E4%BC%9F%E8%BE%BE%E8%B4%A2%E6%8A%A5"
+        }
+      ]
     },
     {
       "id": 2533,
@@ -2883,7 +2973,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "hackernews",
+          "label": "HN",
+          "color": "#FF6600",
+          "icon": "⚡",
+          "url": "https://github.com/kageroumado/phosphene"
+        }
+      ]
     },
     {
       "id": 2539,
@@ -3009,7 +3108,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3818345406596225"
+        }
+      ]
     },
     {
       "id": 2548,
@@ -3093,7 +3201,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "v2ex",
+          "label": "V2EX",
+          "color": "#4CAF50",
+          "icon": "💬",
+          "url": "https://www.v2ex.com/t/1214005"
+        },
+        {
+          "platform": "producthunt",
+          "label": "ProductHunt",
+          "color": "#DA5430",
+          "icon": "🚀",
+          "url": "https://www.producthunt.com/products/google-antigravity"
+        }
+      ]
     },
     {
       "id": 2554,
@@ -3502,48 +3626,6 @@
       "category": "其他"
     },
     {
-      "id": 2583,
-      "title": "今天是小满",
-      "desc": "",
-      "url": "https://www.douyin.com/search/%E4%BB%8A%E5%A4%A9%E6%98%AF%E5%B0%8F%E6%BB%A1",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2584,
-      "title": "英伟达财报",
-      "desc": "",
-      "url": "https://www.douyin.com/search/%E8%8B%B1%E4%BC%9F%E8%BE%BE%E8%B4%A2%E6%8A%A5",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2585,
-      "title": "漳州“药水杨梅”事件5人被刑拘",
-      "desc": "",
-      "url": "https://www.douyin.com/search/%E6%BC%B3%E5%B7%9E%E2%80%9C%E8%8D%AF%E6%B0%B4%E6%9D%A8%E6%A2%85%E2%80%9D%E4%BA%8B%E4%BB%B65%E4%BA%BA%E8%A2%AB%E5%88%91%E6%8B%98",
-      "platform": "douyin",
-      "platform_label": "抖音热搜",
-      "platform_color": "#00F2EA",
-      "platform_icon": "🎵",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2586,
       "title": "小学退回全损雨伞家委会致歉赔偿",
       "desc": "小学退回全损雨伞家委会致歉赔偿",
@@ -3768,34 +3850,6 @@
       "category": "其他"
     },
     {
-      "id": 2602,
-      "title": "网传歌手2026第一期选曲",
-      "desc": "网传歌手2026第一期选曲",
-      "url": "https://s.weibo.com/weibo?q=%E7%BD%91%E4%BC%A0%E6%AD%8C%E6%89%8B2026%E7%AC%AC%E4%B8%80%E6%9C%9F%E9%80%89%E6%9B%B2",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2603,
-      "title": "英伟达Q1净利润583亿美元",
-      "desc": "英伟达Q1净利润583亿美元",
-      "url": "https://s.weibo.com/weibo?q=%E8%8B%B1%E4%BC%9F%E8%BE%BEQ1%E5%87%80%E5%88%A9%E6%B6%A6583%E4%BA%BF%E7%BE%8E%E5%85%83",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2604,
       "title": "泡药杨梅事件后卖惨无法挽回信任",
       "desc": "泡药杨梅事件后卖惨无法挽回信任",
@@ -3846,20 +3900,6 @@
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
       "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2608,
-      "title": "Show HN: I reverse engineered Apple's video wallpapers",
-      "desc": "",
-      "url": "https://github.com/kageroumado/phosphene",
-      "platform": "hackernews",
-      "platform_label": "HN",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
@@ -4213,7 +4253,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3107058"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%89%B9%E6%96%AF%E6%8B%89%E7%9B%91%E7%9D%A3%E7%89%88FSD%E5%85%A5%E5%8D%8E"
+        }
+      ]
     },
     {
       "id": 2634,
@@ -4468,38 +4524,10 @@
       "category": "其他"
     },
     {
-      "id": 2652,
-      "title": "特斯拉监督版FSD入华",
-      "desc": "特斯拉监督版FSD入华",
-      "url": "https://s.weibo.com/weibo?q=%E7%89%B9%E6%96%AF%E6%8B%89%E7%9B%91%E7%9D%A3%E7%89%88FSD%E5%85%A5%E5%8D%8E",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2653,
       "title": "小满节气里的烟火诗意",
       "desc": "小满节气里的烟火诗意",
       "url": "https://s.weibo.com/weibo?q=%E5%B0%8F%E6%BB%A1%E8%8A%82%E6%B0%94%E9%87%8C%E7%9A%84%E7%83%9F%E7%81%AB%E8%AF%97%E6%84%8F",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2654,
-      "title": "天猫618补贴价更低",
-      "desc": "天猫618补贴价更低",
-      "url": "https://s.weibo.com/weibo?q=%E5%A4%A9%E7%8C%AB618%E8%A1%A5%E8%B4%B4%E4%BB%B7%E6%9B%B4%E4%BD%8E",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4675,21 +4703,16 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2667,
-      "title": "特朗普回应中俄元首会晤",
-      "desc": "特朗普回应中俄元首会晤",
-      "url": "https://s.weibo.com/weibo?q=%E7%89%B9%E6%9C%97%E6%99%AE%E5%9B%9E%E5%BA%94%E4%B8%AD%E4%BF%84%E5%85%83%E9%A6%96%E4%BC%9A%E6%99%A4",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=%E7%AD%89%E6%B4%9B%E5%85%8B%E7%8E%8B%E5%9B%BD%E5%BC%80%E9%97%A8"
+        }
+      ]
     },
     {
       "id": 2668,
@@ -4808,20 +4831,6 @@
       "title": "刘宇宁618红包",
       "desc": "刘宇宁618红包",
       "url": "https://s.weibo.com/weibo?q=%E5%88%98%E5%AE%87%E5%AE%81618%E7%BA%A2%E5%8C%85",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2677,
-      "title": "洛克王国致歉",
-      "desc": "洛克王国致歉",
-      "url": "https://s.weibo.com/weibo?q=%E6%B4%9B%E5%85%8B%E7%8E%8B%E5%9B%BD%E8%87%B4%E6%AD%89",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4983,27 +4992,29 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3818579986170756"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3107163"
+        }
+      ]
     },
     {
       "id": 2689,
       "title": "南亚科：2-3年后产能将比目前增加80%至100%",
       "desc": "",
       "url": "https://36kr.com/newsflashes/3818569570485379",
-      "platform": "36kr",
-      "platform_label": "36Kr",
-      "platform_color": "#4A90E2",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2690,
-      "title": "韩国KOSPI指数日内涨超8%",
-      "desc": "",
-      "url": "https://36kr.com/newsflashes/3818567415661447",
       "platform": "36kr",
       "platform_label": "36Kr",
       "platform_color": "#4A90E2",
@@ -5060,20 +5071,6 @@
       "title": "报道称特朗普政府已开始制定对古巴军事行动方案",
       "desc": "",
       "url": "https://wallstreetcn.com/livenews/3107164",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2695,
-      "title": "特斯拉陶琳：最后一批Model S/X车型下线，工厂将转为人型机器人生产线",
-      "desc": "",
-      "url": "https://wallstreetcn.com/livenews/3107163",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -5868,20 +5865,6 @@
       "category": "其他"
     },
     {
-      "id": 2752,
-      "title": "Google Antigravity 2.0",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/google-antigravity",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
       "id": 2753,
       "title": "Vivaldi 8.0",
       "desc": "",
@@ -5914,20 +5897,6 @@
       "title": "CatchAll by NewsCatcher",
       "desc": "",
       "url": "https://www.producthunt.com/products/catchall",
-      "platform": "producthunt",
-      "platform_label": "ProductHunt",
-      "platform_color": "#DA5430",
-      "platform_icon": "🚀",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2756,
-      "title": "Tacet",
-      "desc": "",
-      "url": "https://www.producthunt.com/products/tacet",
       "platform": "producthunt",
       "platform_label": "ProductHunt",
       "platform_color": "#DA5430",
@@ -6117,7 +6086,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "36kr",
+          "label": "36Kr",
+          "color": "#4A90E2",
+          "icon": "📊",
+          "url": "https://36kr.com/newsflashes/3818678530507905"
+        },
+        {
+          "platform": "wallstreetcn",
+          "label": "华尔街见闻",
+          "color": "#3395FF",
+          "icon": "📈",
+          "url": "https://wallstreetcn.com/livenews/3107255"
+        }
+      ]
     },
     {
       "id": 2770,
@@ -6152,20 +6137,6 @@
       "title": "韩国5月前20天芯片出口大增202%，DRAM出口额同比飙升498%",
       "desc": "",
       "url": "https://wallstreetcn.com/articles/3772803",
-      "platform": "wallstreetcn",
-      "platform_label": "华尔街见闻",
-      "platform_color": "#3395FF",
-      "platform_icon": "📈",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2773,
-      "title": "千问3.7刷出了Artificial Analysis国产模型榜首",
-      "desc": "",
-      "url": "https://wallstreetcn.com/livenews/3107255",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
       "platform_color": "#3395FF",
@@ -6411,7 +6382,23 @@
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
-      "category": "其他"
+      "category": "其他",
+      "merged_sources": [
+        {
+          "platform": "ithome",
+          "label": "IT之家",
+          "color": "#0090D8",
+          "icon": "💻",
+          "url": "https://www.ithome.com/0/953/381.htm"
+        },
+        {
+          "platform": "weibo",
+          "label": "微博热搜",
+          "color": "#FF9500",
+          "icon": "🔥",
+          "url": "https://s.weibo.com/weibo?q=AI%E6%94%BB%E7%A0%B480%E5%B9%B4%E6%95%B0%E5%AD%A6%E9%9A%BE%E9%A2%98"
+        }
+      ]
     },
     {
       "id": 2791,
@@ -6422,20 +6409,6 @@
       "platform_label": "IT之家",
       "platform_color": "#0090D8",
       "platform_icon": "💻",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2792,
-      "title": "男子在一工地偷了价值超20万元的电缆，偷完还返回现场帮民警分析作案经过：100多米的电缆必须剪开装车走；“太懂了”引起民警怀疑后被捕",
-      "desc": "",
-      "url": "https://www.toutiao.com/group/7642182125139034659/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
       "hot": 0,
       "date": "2026-05-21",
       "score": 0,
@@ -6922,34 +6895,6 @@
       "title": "这才是内娱艺人该有的营业态度",
       "desc": "这才是内娱艺人该有的营业态度",
       "url": "https://s.weibo.com/weibo?q=%E8%BF%99%E6%89%8D%E6%98%AF%E5%86%85%E5%A8%B1%E8%89%BA%E4%BA%BA%E8%AF%A5%E6%9C%89%E7%9A%84%E8%90%A5%E4%B8%9A%E6%80%81%E5%BA%A6",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2828,
-      "title": "AI攻破80年数学难题",
-      "desc": "AI攻破80年数学难题",
-      "url": "https://s.weibo.com/weibo?q=AI%E6%94%BB%E7%A0%B480%E5%B9%B4%E6%95%B0%E5%AD%A6%E9%9A%BE%E9%A2%98",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-21",
-      "score": 0,
-      "category": "其他"
-    },
-    {
-      "id": 2829,
-      "title": "亚洲艺术电影节红毯",
-      "desc": "亚洲艺术电影节红毯",
-      "url": "https://s.weibo.com/weibo?q=%E4%BA%9A%E6%B4%B2%E8%89%BA%E6%9C%AF%E7%94%B5%E5%BD%B1%E8%8A%82%E7%BA%A2%E6%AF%AF",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
