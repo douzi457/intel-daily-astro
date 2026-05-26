@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import json
 import requests
@@ -24,7 +25,7 @@ API_KEY = os.environ.get("ZHIPU_API_KEY")
 BAIDU_APP_ID = os.environ.get("BAIDU_TRANSLATE_APP_ID", "")
 BAIDU_SECRET_KEY = os.environ.get("BAIDU_TRANSLATE_SECRET_KEY", "")
 
-# 每日翻译字符上限（百度免费 100 万/月，设 3 万/天留余量）
+# 每日翻译字符上限（百度免费 100 万/月,设 3 万/天留余量）
 DAILY_TRANSLATE_LIMIT = 30000
 
 def log(msg):
@@ -35,7 +36,7 @@ def log(msg):
         print(f"[{ts}] {msg.encode('utf-8', errors='replace').decode('utf-8', errors='replace')}", flush=True)
 
 def retry(times=3, delay=2):
-    """重试装饰器：函数失败时重试，间隔 delay 秒"""
+    """重试装饰器:函数失败时重试,间隔 delay 秒"""
     def decorator(fn):
         def wrapper(*args, **kwargs):
             last_err = None
@@ -64,7 +65,7 @@ def call_zhipu(model, prompt, temperature=0.2):
         return None
 
 def get_dual_language_data(title, content):
-    """使用 GLM-4-Air 处理双语、评分和分类"""
+    """使用 GLM-4-Air 处理双语,评分和分类"""
     prompt = f"""
     You are an expert intelligence analyst and news classifier.
 
@@ -95,16 +96,8 @@ def get_dual_language_data(title, content):
       "zh": {{"summary": "中文摘要"}},
       "en": {{"title": "English Title", "summary": "English Summary"}}
     }}
-    """: AI模型, 开源项目, 融资并购, 政策监管, 商业动态, 技术突破, 安全隐私, 其他
-
-    Return EXACTLY in this JSON format:
-    {{
-      "score": number,
-      "category": "AI模型",
-      "zh": {{"summary": "中文摘要"}},
-      "en": {{"title": "English Title", "summary": "English Summary"}}
-    }}
     """
+
     res = call_zhipu("glm-4-air", prompt)
     if not res: return None
     try:
@@ -118,7 +111,7 @@ def contains_chinese(text):
     return bool(re.search(r'[一-鿿]', text))
 
 def override_category(title, ai_category):
-    """关键词规则覆盖 AI 分类，只在非常确定的情况下覆盖"""
+    """关键词规则覆盖 AI 分类,只在非常确定的情况下覆盖"""
     rules = [
         (r'融资|收购|并购|IPO上市|种子轮|A轮融资|B轮融资|C轮融资|战略投资', '融资并购'),
         (r'开源|GitHub\s+|发布\s+[vV]\d|release\s+\d', '开源项目'),
@@ -128,7 +121,7 @@ def override_category(title, ai_category):
     for pattern, cat in rules:
         if re.search(pattern, title):
             return cat
-    return ai_category(r'[一-鿿]', text))
+    return ai_category
 
 
 def get_daily_translate_usage(date_key):
@@ -147,7 +140,7 @@ def record_translate_usage(date_key, chars):
 
 
 def baidu_translate(text):
-    """百度翻译 API：英译中"""
+    """百度翻译 API:英译中"""
     if not BAIDU_APP_ID or not BAIDU_SECRET_KEY:
         return None
     import random, hashlib
@@ -268,7 +261,7 @@ def collect_rss():
 # ---- Focus Generation ----
 
 def generate_focus(date_key):
-    """使用 AI 生成今日重点：TOP5 亮点 + 趋势关键词"""
+    """使用 AI 生成今日重点:TOP5 亮点 + 趋势关键词"""
     focus_dir = BASE_DIR.parent.parent / "src" / "data" / "rewrite"
     focus_dir.mkdir(exist_ok=True, parents=True)
 
@@ -282,7 +275,7 @@ def generate_focus(date_key):
         """, (date_key,)).fetchall()
 
     if len(rows) < 3:
-        log(f"  [Focus] 数据不足 ({len(rows)}条)，跳过")
+        log(f"  [Focus] 数据不足 ({len(rows)}条),跳过")
         return
 
     items_text = "\n".join([
@@ -290,15 +283,15 @@ def generate_focus(date_key):
         for i, r in enumerate(rows)
     ])
 
-    prompt = f"""你是豆子实验室的首席编辑。分析以下今日情报，输出最有价值的发现。
+    prompt = f"""你是豆子实验室的首席编辑。分析以下今日情报,输出最有价值的发现。
 
-今日情报列表（按AI评分排序）：
+今日情报列表（按AI评分排序）:
 {items_text}
 
-请以 JSON 格式返回（不要包含其他内容）：
+请以 JSON 格式返回（不要包含其他内容）:
 {{
   "summary": "今日整体趋势一句话总结（20字以内）",
-  "trendAnalysis": "今日趋势解读：分析今日资讯中占比最高的方向、值得关注的变化（60-100字，要有数据感，如'占比最高''环比上升''集中爆发'等。这段文字会直接展示给读者，要写得像编辑手记，有洞察力）",
+  "trendAnalysis": "今日趋势解读:分析今日资讯中占比最高的方向,值得关注的变化（60-100字,要有数据感,如'占比最高''环比上升''集中爆发'等。这段文字会直接展示给读者,要写得像编辑手记,有洞察力）",
   "highlights": [
     {{
       "rank": 1,
@@ -313,12 +306,12 @@ def generate_focus(date_key):
   "trends": ["趋势关键词1", "趋势关键词2", "趋势关键词3"]
 }}
 
-要求：
-- 选最重要的 5 条，不是评分最高的 5 条
+要求:
+- 选最重要的 5 条,不是评分最高的 5 条
 - reason 写这条信息为什么对读者重要
 - insight 写背后的含义或趋势信号
 - trends 写 3 个今日最值得关注的关键词趋势
-- trendAnalysis 要写得像编辑手记，有洞察力，不要套话
+- trendAnalysis 要写得像编辑手记,有洞察力,不要套话
 """
 
     result = call_zhipu("glm-4-air", prompt)
@@ -342,23 +335,23 @@ def generate_focus(date_key):
                 log(f"    Enriching #{h['rank']}: {h['title'][:40]}...")
                 article_text = fetch_article_text(url)
                 if article_text and len(article_text) > 100:
-                    enrich_prompt = f"""你是资深的行业分析师。阅读以下文章，生成背景解读。
+                    enrich_prompt = f"""你是资深的行业分析师。阅读以下文章,生成背景解读。
 
-标题：{h['title']}
-正文内容：
+标题:{h['title']}
+正文内容:
 {article_text[:1500]}
 
-请以 JSON 格式返回（不要包含其他内容）：
+请以 JSON 格式返回（不要包含其他内容）:
 {{
-  "background": "背景解读：用40-60字说明读者需要了解的前置背景",
-  "context": "深层分析：用80-120字说明这条信息在更大图景中的意义",
+  "background": "背景解读:用40-60字说明读者需要了解的前置背景",
+  "context": "深层分析:用80-120字说明这条信息在更大图景中的意义",
   "key_points": ["要点1（15字以内）", "要点2", "要点3", "要点4", "要点5"]
 }}
 
-要求：
+要求:
 - background 写读者理解这篇文章需要知道什么背景
 - context 写背后的趋势信号或行业影响
-- key_points 写3-5个关键要点，每个15字以内
+- key_points 写3-5个关键要点,每个15字以内
 """
                     enrich_result = call_zhipu("glm-4-air", enrich_prompt)
                     if enrich_result:
@@ -377,7 +370,8 @@ def generate_focus(date_key):
 
         with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        log(f"  [Focus] generated {len(data.get('highlights', []))} highlights")except Exception as e:
+        log(f"  [Focus] generated {len(data.get('highlights', []))} highlights")
+    except Exception as e:
         log(f"  [Focus] 解析失败: {e}")
 
 # ---- Main ----
@@ -441,7 +435,7 @@ def collect_all():
                 cat = override_category(it['title'], cat)
                 it['category'] = cat
 
-            # 百度翻译：英文标题 → 中文（每日限额 30000 字符）
+            # 百度翻译:英文标题 → 中文（每日限额 30000 字符）
             if not contains_chinese(it['title']):
                 used = get_daily_translate_usage(today)
                 est = len(it['title']) + 20  # title + 20 字符余量
@@ -452,7 +446,7 @@ def collect_all():
                         record_translate_usage(today, est)
                         log(f"  [CN] Translated: {it['title'][:30]} → {zh[:30]}")
                 else:
-                    pass  # 超出每日限额，跳过翻译
+                    pass  # 超出每日限额,跳过翻译
             
             a, s = upsert_item(it, today)
             added_count += a
