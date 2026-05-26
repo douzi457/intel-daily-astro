@@ -19,6 +19,15 @@ PLATFORM_META = {
     "douyin":       {"label": "抖音热搜", "color": "#00F2EA", "icon": "🎵"},
     "v2ex":         {"label": "V2EX",    "color": "#4CAF50", "icon": "💬"},
     "producthunt":  {"label": "ProductHunt", "color": "#DA5430", "icon": "🚀"},
+    "bilibili":     {"label": "B站",     "color": "#FB7299", "icon": "📺"},
+    "zhihu":        {"label": "知乎",    "color": "#0066FF", "icon": "💡"},
+    "baidu":        {"label": "百度热搜", "color": "#2932E1", "icon": "🔍"},
+    "tieba":        {"label": "百度贴吧", "color": "#4B90E0", "icon": "📋"},
+    "cailianshe":   {"label": "财联社",  "color": "#C71A1A", "icon": "📡"},
+    "pengpai":      {"label": "澎湃新闻", "color": "#E60012", "icon": "📱"},
+    "guancha":      {"label": "观察者网", "color": "#2B5797", "icon": "👁️"},
+    "163":          {"label": "网易新闻", "color": "#DE1A1A", "icon": "📰"},
+    "chuangye":     {"label": "创业邦",  "color": "#FF6B35", "icon": "🚀"},
 }
 
 def dump_lang(day_str, lang='zh'):

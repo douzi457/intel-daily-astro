@@ -133,7 +133,7 @@ def run_py(script, *args):
 def collect_news_agg():
     script = SKILLS_DIR / "news-aggregator-skill" / "scripts" / "fetch_news.py"
     if not script.exists(): return []
-    sources = ['hackernews','github','producthunt','36kr','tencent','v2ex','wallstreetcn','ithome','toutiao']
+    sources = ['hackernews','github','producthunt','36kr','tencent','v2ex','wallstreetcn','ithome','toutiao','bilibili','zhihu','baidu','tieba','cailianshe','pengpai','guancha','163','chuangye']
     items = []
     for src in sources:
         res = run_py(script, "--source", src, "--limit", "10")

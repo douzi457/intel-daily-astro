@@ -428,6 +428,76 @@ def fetch_163(limit=5, keyword=None):
         return filter_items(items, keyword)[:limit]
     except: return []
 
+def fetch_zhihu(limit=5, keyword=None):
+    """知乎热榜 API"""
+    try:
+        url = "https://www.zhihu.com/api/v3/feed/topstory/hot-lists/total?limit=50"
+        headers = {**HEADERS, "Referer": "https://www.zhihu.com/hot"}
+        resp = requests.get(url, headers=headers, timeout=10)
+        data = resp.json()
+        items = []
+        for item in data.get('data', [])[:limit]:
+            target = item.get('target', {})
+            title = target.get('title', '') or target.get('question', {}).get('title', '')
+            id_ = target.get('id', '')
+            url_str = f"https://www.zhihu.com/question/{id_}" if id_ else ''
+            heat = target.get('heat', 0) or (item.get('detail_text', ''))
+            items.append({"source": "知乎", "title": title, "url": url_str, "heat": str(heat), "time": ""})
+        return filter_items(items, keyword)[:limit]
+    except: return []
+
+def fetch_baidu(limit=5, keyword=None):
+    """百度热搜 API"""
+    try:
+        url = "https://top.baidu.com/api/board?tab=realtime"
+        headers = {**HEADERS, "Referer": "https://top.baidu.com/"}
+        resp = requests.get(url, headers=headers, timeout=10)
+        data = resp.json()
+        items = []
+        for item in data.get('data', {}).get('cards', [])[:limit]:
+            word = item.get('word', '') or item.get('query', '')
+            hot = item.get('hotScore', 0) or item.get('heat', 0)
+            url_str = f"https://www.baidu.com/s?wd={requests.utils.quote(word)}" if word else ''
+            if word:
+                items.append({"source": "百度热搜", "title": word, "url": url_str, "heat": str(hot), "time": ""})
+        return filter_items(items, keyword)[:limit]
+    except: return []
+
+def fetch_tieba(limit=5, keyword=None):
+    """百度贴吧热门话题 API"""
+    try:
+        url = "https://tieba.baidu.com/hottopic/browse/topicList"
+        headers = {**HEADERS, "Referer": "https://tieba.baidu.com/"}
+        resp = requests.get(url, headers=headers, timeout=10)
+        data = resp.json()
+        items = []
+        for item in data.get('data', {}).get('topicList', [])[:limit]:
+            title = item.get('topicName', '')
+            url_str = item.get('topicUrl', '') or f"https://tieba.baidu.com/f?kw={requests.utils.quote(title)}"
+            heat = item.get('discussNum', 0)
+            if title:
+                items.append({"source": "百度贴吧", "title": title, "url": url_str, "heat": f"{heat}", "time": ""})
+        return filter_items(items, keyword)[:limit]
+    except: return []
+
+def fetch_cailianshe(limit=5, keyword=None):
+    """财联社电报 API"""
+    try:
+        url = "https://www.cls.cn/api/telegraph/getNewsList?category=all"
+        headers = {**HEADERS, "Referer": "https://www.cls.cn/"}
+        resp = requests.post(url, headers=headers, json={"category": "all"}, timeout=10)
+        data = resp.json()
+        items = []
+        for item in data.get('data', {}).get('roll_data', [])[:limit]:
+            title = item.get('title', '') or item.get('content', '')[:80]
+            id_ = item.get('id', '')
+            url_str = f"https://www.cls.cn/telegraph/{id_}" if id_ else ''
+            ctime = item.get('ctime', '')
+            if title:
+                items.append({"source": "财联社", "title": title, "url": url_str, "heat": "", "time": str(ctime)})
+        return filter_items(items, keyword)[:limit]
+    except: return []
+
 def main():
     parser = argparse.ArgumentParser()
     sources_map = {
@@ -436,7 +506,9 @@ def main():
         'wallstreetcn': fetch_wallstreetcn, 'producthunt': fetch_producthunt,
         'ithome': fetch_ithome, 'chuangye': fetch_chuangye,
         'toutiao': fetch_toutiao, 'bilibili': fetch_bilibili,
-        'pengpai': fetch_pengpai, 'guancha': fetch_guancha, '163': fetch_163
+        'pengpai': fetch_pengpai, 'guancha': fetch_guancha, '163': fetch_163,
+        'zhihu': fetch_zhihu, 'baidu': fetch_baidu,
+        'tieba': fetch_tieba, 'cailianshe': fetch_cailianshe,
     }
     
     parser.add_argument('--source', default='all', help='Source(s) to fetch from (comma-separated)')

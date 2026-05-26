@@ -18,6 +18,15 @@ export const PLATFORMS: Record<string, { label: string; color: string; tab: stri
   producthunt:  { label: 'ProductHunt', color: '#DA5430', tab: '开发', icon: '🚀' },
   v2ex:         { label: 'V2EX',    color: '#4CAF50', tab: '开发',  icon: '💬' },
   gzh:          { label: '公众号',  color: '#2ECC71', tab: '公众号', icon: '📮' },
+  bilibili:     { label: 'B站',     color: '#FB7299', tab: '热搜',  icon: '📺' },
+  zhihu:        { label: '知乎',     color: '#0066FF', tab: '热搜',  icon: '💡' },
+  baidu:        { label: '百度热搜', color: '#2932E1', tab: '热搜',  icon: '🔍' },
+  tieba:        { label: '百度贴吧', color: '#4B90E0', tab: '热搜',  icon: '📋' },
+  cailianshe:   { label: '财联社',   color: '#C71A1A', tab: '财经',  icon: '📡' },
+  pengpai:      { label: '澎湃新闻', color: '#E60012', tab: '财经',  icon: '📱' },
+  guancha:      { label: '观察者网', color: '#2B5797', tab: '财经',  icon: '👁️' },
+  '163':        { label: '网易新闻', color: '#DE1A1A', tab: '财经',  icon: '📰' },
+  chuangye:     { label: '创业邦',   color: '#FF6B35', tab: '财经',  icon: '🚀' },
 };
 
 // 英文标签映射 (用于英文版展示)
@@ -25,6 +34,9 @@ export const PLATFORMS_EN: Record<string, string> = {
   weibo: 'Weibo', douyin: 'TikTok China', wallstreetcn: 'WallStreetCN', '36kr': '36Kr',
   toutiao: 'TouTiao', tencent: 'Tencent News', ithome: 'IT Home', github: 'GitHub',
   hackernews: 'HackerNews', producthunt: 'ProductHunt', v2ex: 'V2EX', gzh: 'WeChat OA',
+  bilibili: 'Bilibili', zhihu: 'Zhihu', baidu: 'Baidu Hot', tieba: 'Baidu Tieba',
+  cailianshe: 'Cailianshe', pengpai: 'The Paper', guancha: 'Guancha', '163': 'NetEase News',
+  chuangye: 'Cyzone',
 };
 
 export const TABS = ['热搜', '财经', '开发', '公众号'];
