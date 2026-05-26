@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getDayData, getAllDates, CATEGORIES, CATEGORY_ORDER } from '../utils/data.ts';
+import { getDayData, getAllDates } from '../utils/data.ts';
 import CalendarWidget from '../components/CalendarWidget.astro';
 import articles from '../data/gzh-articles.json';
 
@@ -42,10 +42,36 @@ const PLATFORM_META: Record<string, { label: string; icon: string; color: string
   chuangye:        { label: '创业邦',   icon: '🚀', color: '#FF6B35' },
 };
 
-// Group items by AI category
+// Section display order (platform-based)
+const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator', 'bilibili', 'zhihu', 'baidu', 'tieba', 'cailianshe', 'pengpai', 'guancha', '163', 'chuangye'];
+
+const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
+  weibo:           { name: '微博热搜',  icon: '🔥' },
+  hackernews:      { name: '开发者社区', icon: '💻' },
+  github:          { name: '开源项目',  icon: '🐙' },
+  producthunt:     { name: '新品发布',  icon: '🚀' },
+  v2ex:            { name: 'V2EX 热议', icon: '💬' },
+  ithome:          { name: '科技资讯',  icon: '💻' },
+  '36kr':          { name: '商业科技',  icon: '📊' },
+  wallstreetcn:    { name: '华尔街见闻', icon: '📈' },
+  toutiao:         { name: '今日头条',  icon: '📰' },
+  douyin:          { name: '抖音',     icon: '🎵' },
+  news_aggregator: { name: '快讯聚合',  icon: '📌' },
+  bilibili:        { name: 'B站',      icon: '📺' },
+  zhihu:           { name: '知乎',     icon: '💡' },
+  baidu:           { name: '百度热搜', icon: '🔍' },
+  tieba:           { name: '百度贴吧', icon: '📋' },
+  cailianshe:      { name: '财联社',   icon: '📡' },
+  pengpai:         { name: '澎湃新闻', icon: '📱' },
+  guancha:         { name: '观察者网', icon: '👁️' },
+  '163':           { name: '网易新闻', icon: '📰' },
+  chuangye:        { name: '创业邦',   icon: '🚀' },
+};
+
+// Group items by platform
 const grouped: Record<string, any[]> = {};
 for (const item of dayData.items) {
-  const key = item.category || '其他';
+  const key = item.platform || 'other';
   if (!grouped[key]) grouped[key] = [];
   grouped[key].push(item);
 }
@@ -59,17 +85,16 @@ const trending = [...dayData.items]
   .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
   .slice(0, 10);
 
-// Active categories (those with items)
-const activeCategories = CATEGORY_ORDER.filter(c => grouped[c]?.length > 0);
-const maxCategoryCount = Math.max(...activeCategories.map(c => grouped[c].length), 1);
+// Active sections (those with items)
+const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
 
-// Nav tabs (skip categories with no items)
+// Nav tabs
 const NAV_TABS = [
   { id: 'featured', label: '精选', icon: '⭐' },
-  ...activeCategories.map(c => ({
-    id: `category-${c}`,
-    label: CATEGORIES[c]?.label || c,
-    icon: CATEGORIES[c]?.icon || '📌',
+  ...activeSections.map(s => ({
+    id: `section-${s}`,
+    label: SECTION_CATEGORIES[s]?.name || s,
+    icon: SECTION_CATEGORIES[s]?.icon || '📌',
   })),
 ];
 
@@ -211,18 +236,19 @@ function getDow(d: string) {
         )}
       </section>
 
-      <!-- Category Bento Grid -->
+      <!-- Platform Bento Grid -->
       <div class="platform-grid">
-        {activeCategories.map(category => {
-          const items = grouped[category];
-          const cat = CATEGORIES[category] || { label: category, icon: '📌', color: '#94A3B8' };
+        {activeSections.map(sectionKey => {
+          const items = grouped[sectionKey];
+          const sec = SECTION_CATEGORIES[sectionKey] || { name: sectionKey, icon: '📌' };
+          const meta = PLATFORM_META[sectionKey] || { label: sectionKey, color: '#94a3b8', icon: '📌' };
 
           return (
-            <section class="platform-section" id={`category-${category}`}>
+            <section class="platform-section" id={`section-${sectionKey}`}>
               <div class="section-header">
                 <div class="section-title">
-                  <span>{cat.icon}</span>
-                  <span style={`color:${cat.color}`}>{cat.label}</span>
+                  <span>{sec.icon}</span>
+                  <span style={`color:${meta.color}`}>{sec.name}</span>
                   <span class="section-count">{items.length}</span>
                 </div>
               </div>
@@ -370,8 +396,8 @@ function getDow(d: string) {
             <div class="stat-cell-label">今日情报</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-cell-value">{activeCategories.length}</div>
-            <div class="stat-cell-label">分类</div>
+            <div class="stat-cell-value">{activeSections.length}</div>
+            <div class="stat-cell-label">信息来源</div>
           </div>
           <div class="stat-cell">
             <div class="stat-cell-value">{recentDates.length}</div>
@@ -384,23 +410,24 @@ function getDow(d: string) {
         </div>
       </div>
 
-      <!-- 分类分布 -->
-      {activeCategories.length > 0 && (
+      <!-- 来源分布 -->
+      {activeSections.length > 0 && (
         <div class="sidebar-widget">
-          <div class="sidebar-widget-title">📊 分类分布</div>
-          {activeCategories.map(c => {
-            const cnt = grouped[c].length;
-            const cat = CATEGORIES[c] || { label: c, icon: '📌', color: '#94A3B8' };
-            const pct = Math.round(cnt / maxCategoryCount * 100);
+          <div class="sidebar-widget-title">🌐 信息来源</div>
+          {activeSections.map(s => {
+            const cnt = grouped[s].length;
+            const meta = PLATFORM_META[s] || { label: s, icon: '📌', color: '#94A3B8' };
             return (
               <div class="dist-item">
                 <div class="dist-header">
-                  <span class="dist-label">{cat.icon} {cat.label}</span>
+                  <span class="dist-label">{meta.icon} {meta.label}</span>
                   <span class="dist-count">{cnt}</span>
                 </div>
-                <div class="dist-bar">
-                  <div class="dist-bar-fill" style={`width:${pct}%;background:${cat.color}`}></div>
-                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
               </div>
             );
           })}

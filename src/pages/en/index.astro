@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getDayData, getAllDates, CATEGORIES, CATEGORY_ORDER } from '../../utils/data.ts';
+import { getDayData, getAllDates } from '../../utils/data.ts';
 import CalendarWidget from '../../components/CalendarWidget.astro';
 
 const allDates = getAllDates('en');
@@ -32,9 +32,34 @@ const PLATFORM_META: Record<string, { label: string; icon: string; color: string
   chuangye:        { label: 'Cyzone',      icon: '🚀', color: '#FF6B35' },
 };
 
+const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator', 'bilibili', 'zhihu', 'baidu', 'tieba', 'cailianshe', 'pengpai', 'guancha', '163', 'chuangye'];
+
+const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
+  weibo:           { name: 'Weibo Hot',    icon: '🔥' },
+  hackernews:      { name: 'Dev Community', icon: '💻' },
+  github:          { name: 'Open Source',  icon: '🐙' },
+  producthunt:     { name: 'New Products', icon: '🚀' },
+  v2ex:            { name: 'V2EX',         icon: '💬' },
+  ithome:          { name: 'Tech News',    icon: '💻' },
+  '36kr':          { name: '36Kr',         icon: '📊' },
+  wallstreetcn:    { name: 'WallStreetCN', icon: '📈' },
+  toutiao:         { name: 'TouTiao',      icon: '📰' },
+  douyin:          { name: 'Douyin',       icon: '🎵' },
+  news_aggregator: { name: 'News Feed',    icon: '📌' },
+  bilibili:        { name: 'Bilibili',     icon: '📺' },
+  zhihu:           { name: 'Zhihu',        icon: '💡' },
+  baidu:           { name: 'Baidu Hot',    icon: '🔍' },
+  tieba:           { name: 'Baidu Tieba',  icon: '📋' },
+  cailianshe:      { name: 'Cailianshe',   icon: '📡' },
+  pengpai:         { name: 'The Paper',    icon: '📱' },
+  guancha:         { name: 'Guancha',      icon: '👁️' },
+  '163':           { name: 'NetEase News', icon: '📰' },
+  chuangye:        { name: 'Cyzone',       icon: '🚀' },
+};
+
 const grouped: Record<string, any[]> = {};
 for (const item of dayData.items) {
-  const key = item.category || '其他';
+  const key = item.platform || 'other';
   if (!grouped[key]) grouped[key] = [];
   grouped[key].push(item);
 }
@@ -46,14 +71,20 @@ const trending = [...dayData.items]
   .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
   .slice(0, 10);
 
-const activeCategories = CATEGORY_ORDER.filter(c => grouped[c]?.length > 0);
-const maxCategoryCount = Math.max(...activeCategories.map(c => grouped[c].length), 1);
+const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
+
+// Pre-compute featured sidebar items to avoid Astro template parser issues
+const featuredSideItems = featured.slice(3).map((item: any) => {
+  const meta = PLATFORM_META[item.platform] || ({ label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' } as any);
+  return { item, meta };
+});
+
 const NAV_TABS = [
   { id: 'featured', label: 'Featured', icon: '⭐' },
-  ...activeCategories.map(c => ({
-    id: `category-${c}`,
-    label: CATEGORIES[c]?.labelEn || c,
-    icon: CATEGORIES[c]?.icon || '📌',
+  ...activeSections.map(s => ({
+    id: `section-${s}`,
+    label: SECTION_CATEGORIES[s]?.name || s,
+    icon: SECTION_CATEGORIES[s]?.icon || '📌',
   })),
 ];
 
@@ -120,7 +151,7 @@ function getDow(d: string) {
           <>
             <div class="featured-hero">
               {featured.slice(0, 3).map((item, idx) => {
-                const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
+                const meta = PLATFORM_META[item.platform] || ({ label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' });
                 return (
                   <div class="hero-entry">
                     <div class="hero-entry-rank">{idx === 0 ? '★ Top Pick' : `#${idx + 1} Pick`}</div>
@@ -137,22 +168,19 @@ function getDow(d: string) {
               })}
             </div>
 
-            {featured.length > 3 && (
+            {featuredSideItems.length > 0 && (
               <div class="featured-side">
-                {featured.slice(3).map((item, idx) => {
-                  const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-                  return (
-                    <div class="featured-mini">
-                      <span class="mini-rank">#{idx + 4} Pick</span>
-                      <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
-                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
-                        <span class="tag-icon">{meta.icon}</span>
-                        {meta.label}
-                      </span>
-                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
-                    </div>
-                  );
-                })}
+                {featuredSideItems.map((entry, i) => (
+                  <div class="featured-mini">
+                    <span class="mini-rank">#{i + 4} Pick</span>
+                    <a href={entry.item.url} target="_blank" rel="noopener" class="mini-title">{entry.item.title}</a>
+                    <span class="platform-tag" style={`color:${entry.meta.color};border-color:${entry.meta.color}20;background:${entry.meta.color}10`}>
+                      <span class="tag-icon">{entry.meta.icon}</span>
+                      {entry.meta.label}
+                    </span>
+                    {entry.item.score > 0 && <span class={`signal-badge ${entry.item.score >= 8 ? 'high' : entry.item.score >= 6 ? 'med' : ''}`}>SIGNAL {entry.item.score}</span>}
+                  </div>
+                ))}
               </div>
             )}
           </>
@@ -181,18 +209,19 @@ function getDow(d: string) {
         </div>
       )}
 
-      <!-- Category Grid -->
+      <!-- Platform Grid -->
       <div class="platform-grid">
-        {activeCategories.map(category => {
-          const items = grouped[category];
-          const cat = CATEGORIES[category] || { label: category, labelEn: category, icon: '📌', color: '#94A3B8' };
+        {activeSections.map(sectionKey => {
+          const items = grouped[sectionKey];
+          const sec = SECTION_CATEGORIES[sectionKey] || { name: sectionKey, icon: '📌' };
+          const meta = PLATFORM_META[sectionKey] || { label: sectionKey, color: '#94a3b8', icon: '📌' };
 
           return (
-            <section class="platform-section" id={`category-${category}`}>
+            <section class="platform-section" id={`section-${sectionKey}`}>
               <div class="section-header">
                 <div class="section-title">
-                  <span>{cat.icon}</span>
-                  <span style={`color:${cat.color}`}>{cat.labelEn}</span>
+                  <span>{sec.icon}</span>
+                  <span style={`color:${meta.color}`}>{sec.name}</span>
                   <span class="section-count">{items.length}</span>
                 </div>
               </div>
@@ -221,7 +250,7 @@ function getDow(d: string) {
                             {item.merged_sources && <span class="merge-count">+{extraSources.length}</span>}
                           </div>
                           {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                          {item.score > 0 && <span class="news-score">SIGNAL <strong>{item.score}</strong></span>}
+                          {item.score > 0 && <span class="news-score">Signal <strong>{item.score}</strong></span>}
                         </div>
                         {item.desc && <div class="news-desc">{item.desc}</div>}
                       </div>
@@ -263,8 +292,8 @@ function getDow(d: string) {
             <div class="stat-cell-label">Today</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-cell-value">{activeCategories.length}</div>
-            <div class="stat-cell-label">Topics</div>
+            <div class="stat-cell-value">{activeSections.length}</div>
+            <div class="stat-cell-label">Sources</div>
           </div>
           <div class="stat-cell">
             <div class="stat-cell-value">{recentDates.length}</div>
@@ -282,22 +311,18 @@ function getDow(d: string) {
         <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="Tencent Cloud · 4C4G3M from $10.9/yr" loading="lazy" style="width:100%;height:auto;display:block;">
       </a>
 
-      <!-- Category Distribution -->
-      {activeCategories.length > 0 && (
+      <!-- Source Distribution -->
+      {activeSections.length > 0 && (
         <div class="sidebar-widget">
-          <div class="sidebar-widget-title">📊 Category Distribution</div>
-          {activeCategories.map(c => {
-            const cnt = grouped[c].length;
-            const cat = CATEGORIES[c] || { label: c, labelEn: c, icon: '📌', color: '#94A3B8' };
-            const pct = Math.round(cnt / maxCategoryCount * 100);
+          <div class="sidebar-widget-title">🌐 Sources</div>
+          {activeSections.map(s => {
+            const cnt = grouped[s].length;
+            const meta = PLATFORM_META[s] || { label: s, icon: '📌', color: '#94A3B8' };
             return (
               <div class="dist-item">
                 <div class="dist-header">
-                  <span class="dist-label">{cat.icon} {cat.labelEn}</span>
+                  <span class="dist-label">{meta.icon} {meta.label}</span>
                   <span class="dist-count">{cnt}</span>
-                </div>
-                <div class="dist-bar">
-                  <div class="dist-bar-fill" style={`width:${pct}%;background:${cat.color}`}></div>
                 </div>
               </div>
             );

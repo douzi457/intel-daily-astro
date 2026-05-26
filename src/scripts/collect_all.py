@@ -77,17 +77,27 @@ def get_dual_language_data(title, content):
     2. Chinese summary (under 30 words).
     3. Translate title to English.
     4. English summary (under 30 words).
-    5. Classify into EXACTLY ONE category from the list below.
+    5. Classify into EXACTLY ONE category from the list below. Use the MOST SPECIFIC category that fits.
 
-    CATEGORY DEFINITIONS (read carefully):
-    - AI模型: AI products, LLMs, AI research, AI applications. Examples: GPT-5, Sora, Claude, AI coding tools, AGI. NOT business news about AI companies.
-    - 开源项目: Open source repos, major releases, community milestones. Examples: new GitHub project, framework version release.
-    - 融资并购: Funding rounds, acquisitions, IPOs, investments. Examples: startup raises $10M, company acquires rival.
-    - 政策监管: Laws, regulations, compliance, antitrust, lawsuits by regulators. Examples: EU AI Act, antitrust probe.
-    - 商业动态: Earnings, market trends, partnerships, industry analysis. Examples: company quarterly report, market share shift.
-    - 技术突破: Hardware, science, engineering (NON-AI). Examples: new chip architecture, battery breakthrough, physics discovery.
-    - 安全隐私: Data breaches, vulnerabilities, cyber attacks, privacy. Examples: zero-day exploit, data leak, ransomware.
-    - 其他: Everything else.
+    CATEGORIES (choose EXACTLY ONE):
+    - AI模型 / AI Model: any AI product, LLM, AI research paper, AI application, AI tool.
+      Examples: GPT-5, Claude, Sora, AI coding tools, AGI, AI chip, AI model release.
+    - 开源项目 / Open Source: open source repos, major releases, community projects.
+      Examples: new GitHub project, framework release, open source tool launch.
+    - 融资并购 / Funding & M&A: funding rounds, acquisitions, IPOs, investments, funding news.
+      Examples: startup raises $10M, company acquires rival, IPO filing.
+    - 政策监管 / Policy & Regulation: laws, regulations, compliance, antitrust, government rules.
+      Examples: EU AI Act, antitrust probe, data regulation, sanctions.
+    - 商业动态 / Business: earnings, market trends, partnerships, company news, industry analysis.
+      Examples: quarterly report, market share shift, partnership announcement, restructuring.
+    - 技术突破 / Tech Breakthrough: hardware, science, engineering breakthroughs (NON-AI tech).
+      Examples: new chip architecture, battery breakthrough, physics discovery, biotech.
+    - 安全隐私 / Security & Privacy: data breaches, vulnerabilities, cyber attacks, privacy.
+      Examples: zero-day exploit, data leak, ransomware, CVE disclosure.
+    - 其他 / Other: only when NONE of the above categories match. Use as LAST resort.
+
+    RULES:
+    - If the title mentions AI/GPT/LLM/Claude/OpenAI/an AI product → ALWAYS use "AI模型"
 
     Return EXACTLY this JSON format:
     {{
@@ -114,9 +124,11 @@ def override_category(title, ai_category):
     """关键词规则覆盖 AI 分类,只在非常确定的情况下覆盖"""
     rules = [
         (r'融资|收购|并购|IPO上市|种子轮|A轮融资|B轮融资|C轮融资|战略投资', '融资并购'),
-        (r'开源|GitHub\s+|发布\s+[vV]\d|release\s+\d', '开源项目'),
-        (r'漏洞|泄露|数据泄露|安全漏洞|黑客|勒索病毒|CVE-\d', '安全隐私'),
-        (r'反垄断|监管|立法|合规|禁令|起诉|罚款\s+[0-9]', '政策监管'),
+        (r'开源|GitHub\s+|发布\s+[vV]\d|release\s+\d|npm\s+|pypi\s+|crates\.io', '开源项目'),
+        (r'漏洞|泄露|数据泄露|安全漏洞|黑客|勒索病毒|CVE-\d|零日|0day|后门|木马', '安全隐私'),
+        (r'反垄断|监管|立法|合规|禁令|起诉|罚款\s+[0-9]|制裁|法案', '政策监管'),
+        (r'(?i)\bGPT\b|Claude|OpenAI|Anthropic|Gemini|LLaMA|Sora|ChatGPT|Copilot|Diffusion|Transformer'
+         r'|AI\s+模型|大模型|大语言模型|人工智能|智能体|AGI|多模态|AIGC', 'AI模型'),
     ]
     for pattern, cat in rules:
         if re.search(pattern, title):
