@@ -12,11 +12,11 @@ export async function getStaticPaths() {
 
   return focusData.highlights.map((h: any) => ({
     params: { id: String(h.rank) },
-    props: { item: h, date: focusData.date, trends: focusData.trends, summary: focusData.summary },
+    props: { item: h, date: focusData.date, trends: focusData.trends, summary: focusData.summary, trendAnalysis: focusData.trendAnalysis },
   }));
 }
 
-const { item, date, trends, summary } = Astro.props as any;
+const { item, date, trends, summary, trendAnalysis } = Astro.props as any;
 const isExternalUrl = item.url && item.url !== '原文链接' && item.url.startsWith('http');
 const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
 ---
@@ -72,6 +72,9 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
       <div class="focus-trend-box">
         <div class="trend-box-title">📊 今日趋势</div>
         <p class="trend-box-summary">{summary}</p>
+        {trendAnalysis && (
+          <div class="focus-analysis" style="margin-bottom:10px;">📊 {trendAnalysis}</div>
+        )}
         {trends && trends.length > 0 && (
           <div class="trend-box-tags">
             {trends.map((t: string) => <span class="trend-tag">{t}</span>)}

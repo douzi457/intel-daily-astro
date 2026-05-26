@@ -244,6 +244,7 @@ def generate_focus(date_key):
 请以 JSON 格式返回（不要包含其他内容）：
 {{
   "summary": "今日整体趋势一句话总结（20字以内）",
+  "trendAnalysis": "今日趋势解读：分析今日资讯中占比最高的方向、值得关注的变化（60-100字，要有数据感，如'占比最高''环比上升''集中爆发'等。这段文字会直接展示给读者，要写得像编辑手记，有洞察力）",
   "highlights": [
     {{
       "rank": 1,
@@ -263,6 +264,7 @@ def generate_focus(date_key):
 - reason 写这条信息为什么对读者重要
 - insight 写背后的含义或趋势信号
 - trends 写 3 个今日最值得关注的关键词趋势
+- trendAnalysis 要写得像编辑手记，有洞察力，不要套话
 """
 
     result = call_zhipu("glm-4-air", prompt)

@@ -129,6 +129,9 @@ function getDow(d: string) {
           {focusData.trends.map((t: string) => <span class="trend-tag">{t}</span>)}
         </div>
       )}
+      {focusData.trendAnalysis && (
+        <div class="focus-analysis">📊 {focusData.trendAnalysis}</div>
+      )}
       <div class="focus-list">
         {focusData.highlights.map((h: any) => (
           <a href={`/focus/${h.rank}/`} class="focus-item">
