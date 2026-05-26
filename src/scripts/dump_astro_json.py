@@ -39,13 +39,19 @@ def _clean_title(title):
     return title.strip().lower()[:50]
 
 def _normalize_url(url):
-    """标准化 URL：去协议、去尾斜杠、去参数、去片段"""
+    """标准化 URL：去协议、去尾斜杠、去跟踪参数、去片段"""
     if not url:
         return ''
-    url = re.sub(r'^https?://', '', url)
-    url = re.sub(r'\?.*$', '', url)
-    url = re.sub(r'#.*$', '', url)
-    return url.rstrip('/').lower()
+    from urllib.parse import urlparse, urlencode, parse_qs
+    parsed = urlparse(url)
+    # 只去掉常见跟踪参数，保留有意义的 query（如 weibo?q=关键词）
+    tracking_params = {'utm_source','utm_medium','utm_campaign','utm_term','utm_content','ref','from','cps_key','redirect','scene','source','tab'}
+    clean_query = '&'.join(f'{k}={v}' for k, v in parse_qs(parsed.query).items() if k.lower() not in tracking_params)
+    path = parsed.path.rstrip('/').lower() if parsed.path else ''
+    host = parsed.netloc.lower()
+    if clean_query:
+        return f'{host}{path}?{clean_query}'
+    return f'{host}{path}'
 
 def dedup_items(items):
     """两重去重：URL 级别 + 标题相似度聚合"""
@@ -82,14 +88,15 @@ def dedup_items(items):
             primary['merged_sources'] = merged
             url_deduped.append(primary)
     
-    # 第二重：同分类内按标题相似度聚合
+    # 第二重：同平台+同分类内按标题相似度聚合（不再跨平台合并）
     items = url_deduped
-    by_cat: dict[str, list] = {}
+    by_group: dict[str, list] = {}
     for item in items:
-        by_cat.setdefault(item.get('category', '其他'), []).append(item)
+        group_key = f"{item.get('platform', 'unknown')}|{item.get('category', '其他')}"
+        by_group.setdefault(group_key, []).append(item)
 
     result = []
-    for cat, cat_items in by_cat.items():
+    for group_key, cat_items in by_group.items():
         cat_items.sort(key=lambda x: x.get('score', 0), reverse=True)
         used = set()
 
