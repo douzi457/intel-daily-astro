@@ -38,8 +38,52 @@ def _clean_title(title):
     title = re.sub(r'[^\w一-鿿]', '', title)  # 去标点，只留字母数字中文
     return title.strip().lower()[:50]
 
+def _normalize_url(url):
+    """标准化 URL：去协议、去尾斜杠、去参数、去片段"""
+    if not url:
+        return ''
+    url = re.sub(r'^https?://', '', url)
+    url = re.sub(r'\?.*$', '', url)
+    url = re.sub(r'#.*$', '', url)
+    return url.rstrip('/').lower()
+
 def dedup_items(items):
-    """同分类内按标题相似度聚合，合并同一事件的多个来源"""
+    """两重去重：URL 级别 + 标题相似度聚合"""
+    # 第一重：同 URL 合并（不同源抓了同一篇文章）
+    url_map: dict[str, list] = {}
+    for item in items:
+        nu = _normalize_url(item.get('url', ''))
+        if nu:
+            url_map.setdefault(nu, []).append(item)
+    
+    used_urls = set()
+    url_deduped = []
+    for item in items:
+        nu = _normalize_url(item.get('url', ''))
+        if not nu or nu not in url_map or len(url_map[nu]) == 1:
+            url_deduped.append(item)
+        elif nu not in used_urls:
+            used_urls.add(nu)
+            cluster = sorted(url_map[nu], key=lambda x: x.get('score', 0), reverse=True)
+            primary = dict(cluster[0])
+            seen = set()
+            merged = []
+            for ci in cluster:
+                src = ci.get('platform', '')
+                if src and src not in seen:
+                    seen.add(src)
+                    merged.append({
+                        'platform': src,
+                        'label': ci.get('platform_label', ''),
+                        'color': ci.get('platform_color', ''),
+                        'icon': ci.get('platform_icon', ''),
+                        'url': ci.get('url', ''),
+                    })
+            primary['merged_sources'] = merged
+            url_deduped.append(primary)
+    
+    # 第二重：同分类内按标题相似度聚合
+    items = url_deduped
     by_cat: dict[str, list] = {}
     for item in items:
         by_cat.setdefault(item.get('category', '其他'), []).append(item)

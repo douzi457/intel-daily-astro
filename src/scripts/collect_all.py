@@ -34,6 +34,23 @@ def log(msg):
     except UnicodeEncodeError:
         print(f"[{ts}] {msg.encode('utf-8', errors='replace').decode('utf-8', errors='replace')}", flush=True)
 
+def retry(times=3, delay=2):
+    """重试装饰器：函数失败时重试，间隔 delay 秒"""
+    def decorator(fn):
+        def wrapper(*args, **kwargs):
+            last_err = None
+            for i in range(times):
+                try:
+                    return fn(*args, **kwargs)
+                except Exception as e:
+                    last_err = e
+                    if i < times - 1:
+                        log(f"  Retry {fn.__name__} ({i+1}/{times}): {e}")
+                        time.sleep(delay * (i + 1))
+            raise last_err
+        return wrapper
+    return decorator
+
 def call_zhipu(model, prompt, temperature=0.2):
     if not API_KEY: return None
     url = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
@@ -49,16 +66,36 @@ def call_zhipu(model, prompt, temperature=0.2):
 def get_dual_language_data(title, content):
     """使用 GLM-4-Air 处理双语、评分和分类"""
     prompt = f"""
-    You are an expert intelligence analyst. Analyze the following content:
+    You are an expert intelligence analyst and news classifier.
+
     Title: {title}
     Content: {content[:300]}
 
-    Tasks:
-    1. Score from 0-10 based on value.
-    2. Provide a concise Chinese summary (under 30 words).
+    TASKS:
+    1. Score from 0-10 based on informational value to tech/business readers.
+    2. Chinese summary (under 30 words).
     3. Translate title to English.
-    4. Provide a concise English summary.
-    5. Classify into EXACTLY ONE category from: AI模型, 开源项目, 融资并购, 政策监管, 商业动态, 技术突破, 安全隐私, 其他
+    4. English summary (under 30 words).
+    5. Classify into EXACTLY ONE category from the list below.
+
+    CATEGORY DEFINITIONS (read carefully):
+    - AI模型: AI products, LLMs, AI research, AI applications. Examples: GPT-5, Sora, Claude, AI coding tools, AGI. NOT business news about AI companies.
+    - 开源项目: Open source repos, major releases, community milestones. Examples: new GitHub project, framework version release.
+    - 融资并购: Funding rounds, acquisitions, IPOs, investments. Examples: startup raises $10M, company acquires rival.
+    - 政策监管: Laws, regulations, compliance, antitrust, lawsuits by regulators. Examples: EU AI Act, antitrust probe.
+    - 商业动态: Earnings, market trends, partnerships, industry analysis. Examples: company quarterly report, market share shift.
+    - 技术突破: Hardware, science, engineering (NON-AI). Examples: new chip architecture, battery breakthrough, physics discovery.
+    - 安全隐私: Data breaches, vulnerabilities, cyber attacks, privacy. Examples: zero-day exploit, data leak, ransomware.
+    - 其他: Everything else.
+
+    Return EXACTLY this JSON format:
+    {{
+      "score": <number>,
+      "category": "<one category above>",
+      "zh": {{"summary": "中文摘要"}},
+      "en": {{"title": "English Title", "summary": "English Summary"}}
+    }}
+    """: AI模型, 开源项目, 融资并购, 政策监管, 商业动态, 技术突破, 安全隐私, 其他
 
     Return EXACTLY in this JSON format:
     {{
@@ -79,6 +116,19 @@ def get_dual_language_data(title, content):
 def contains_chinese(text):
     """检测是否包含中文"""
     return bool(re.search(r'[一-鿿]', text))
+
+def override_category(title, ai_category):
+    """关键词规则覆盖 AI 分类，只在非常确定的情况下覆盖"""
+    rules = [
+        (r'融资|收购|并购|IPO上市|种子轮|A轮融资|B轮融资|C轮融资|战略投资', '融资并购'),
+        (r'开源|GitHub\s+|发布\s+[vV]\d|release\s+\d', '开源项目'),
+        (r'漏洞|泄露|数据泄露|安全漏洞|黑客|勒索病毒|CVE-\d', '安全隐私'),
+        (r'反垄断|监管|立法|合规|禁令|起诉|罚款\s+[0-9]', '政策监管'),
+    ]
+    for pattern, cat in rules:
+        if re.search(pattern, title):
+            return cat
+    return ai_category(r'[一-鿿]', text))
 
 
 def get_daily_translate_usage(date_key):
@@ -144,6 +194,7 @@ def collect_news_agg():
             items.extend(res)
     return items
 
+@retry(times=2, delay=3)
 def collect_weibo():
     try:
         url = "https://weibo.com/ajax/side/hotSearch"
@@ -164,6 +215,7 @@ def collect_weibo():
         return items
     except: return []
 
+@retry(times=2, delay=3)
 def collect_douyin():
     script = SKILLS_DIR / "douyin-hot" / "scripts" / "douyin_json.js"
     if not script.exists(): return []
@@ -179,6 +231,7 @@ def collect_douyin():
         } for i in res if isinstance(i, dict)]
     except: return []
 
+@retry(times=2, delay=3)
 def collect_reddit():
     subs = ['technology', 'programming', 'MachineLearning', 'artificial', 'github', 'Python', 'LocalLLaMA']
     items = []
@@ -198,6 +251,7 @@ def collect_reddit():
         except: continue
     return items
 
+@retry(times=2, delay=3)
 def collect_rss():
     feeds = [('36Kr', 'https://36kr.com/feed'), ('少数派', 'https://sspai.com/feed'), ('阮一峰', 'http://feeds.feedburner.com/ruanyifeng')]
     items = []
@@ -281,10 +335,49 @@ def generate_focus(date_key):
         data['date'] = date_key
         data['generated_at'] = datetime.now().isoformat()
 
+        # Content Enrichment: fetch full article + AI background for each highlight
+        for h in data.get('highlights', []):
+            url = h.get('url', '')
+            if url and url.startswith('http'):
+                log(f"    Enriching #{h['rank']}: {h['title'][:40]}...")
+                article_text = fetch_article_text(url)
+                if article_text and len(article_text) > 100:
+                    enrich_prompt = f"""你是资深的行业分析师。阅读以下文章，生成背景解读。
+
+标题：{h['title']}
+正文内容：
+{article_text[:1500]}
+
+请以 JSON 格式返回（不要包含其他内容）：
+{{
+  "background": "背景解读：用40-60字说明读者需要了解的前置背景",
+  "context": "深层分析：用80-120字说明这条信息在更大图景中的意义",
+  "key_points": ["要点1（15字以内）", "要点2", "要点3", "要点4", "要点5"]
+}}
+
+要求：
+- background 写读者理解这篇文章需要知道什么背景
+- context 写背后的趋势信号或行业影响
+- key_points 写3-5个关键要点，每个15字以内
+"""
+                    enrich_result = call_zhipu("glm-4-air", enrich_prompt)
+                    if enrich_result:
+                        try:
+                            em = re.search(r'\{.*\}', enrich_result, re.DOTALL)
+                            if em:
+                                enrich_data = json.loads(em.group())
+                                h['background'] = enrich_data.get('background', '')
+                                h['context'] = enrich_data.get('context', '')
+                                h['key_points'] = enrich_data.get('key_points', [])
+                                log(f"      Background added for #{h['rank']}")
+                        except Exception:
+                            pass
+                else:
+                    log(f"    Skip enrichment for #{h['rank']}: no content fetched")
+
         with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        log(f"  [Focus] 生成 {len(data.get('highlights', []))} 条重点 ✓")
-    except Exception as e:
+        log(f"  [Focus] generated {len(data.get('highlights', []))} highlights")except Exception as e:
         log(f"  [Focus] 解析失败: {e}")
 
 # ---- Main ----
@@ -344,7 +437,9 @@ def collect_all():
                     it['en_title'] = en.get('title', '')
                     it['en_summary'] = en.get('summary', '')
                 cat = dual.get('category', '')
-                it['category'] = cat if cat in ('AI模型','开源项目','融资并购','政策监管','商业动态','技术突破','安全隐私') else '其他'
+                cat = cat if cat in ('AI模型','开源项目','融资并购','政策监管','商业动态','技术突破','安全隐私') else '其他'
+                cat = override_category(it['title'], cat)
+                it['category'] = cat
 
             # 百度翻译：英文标题 → 中文（每日限额 30000 字符）
             if not contains_chinese(it['title']):

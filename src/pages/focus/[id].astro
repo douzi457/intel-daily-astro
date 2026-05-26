@@ -55,6 +55,20 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
       <div class="focus-detail-reason">⚡ {item.reason}</div>
       {item.insight && <div class="focus-detail-insight">💡 {item.insight}</div>}
       {item.summary && <div class="focus-detail-summary-text">📝 {item.summary}</div>}
+      {item.background && <div class="focus-background-section">
+        <div class="focus-bg-title">📖 背景解读</div>
+        <p class="focus-bg-text">{item.background}</p>
+      </div>}
+      {item.context && <div class="focus-background-section">
+        <div class="focus-bg-title">🔍 深层分析</div>
+        <p class="focus-bg-text">{item.context}</p>
+      </div>}
+      {item.key_points && item.key_points.length > 0 && <div class="focus-key-points">
+        <div class="focus-bg-title">🎯 关键要点</div>
+        <ul class="focus-key-list">
+          {item.key_points.map((kp: string) => <li class="focus-key-item">{kp}</li>)}
+        </ul>
+      </div>}
       <div class="focus-detail-meta">
         {item.source && <span class="meta-chip">{item.source}</span>}
         <span class="meta-chip">{date}</span>
@@ -196,6 +210,56 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
     margin-bottom: 16px;
     line-height: 1.6;
   }
+
+  .focus-background-section {
+    margin-bottom: 16px;
+  }
+  .focus-bg-title {
+    font-size: 0.72em;
+    font-weight: 700;
+    color: var(--text-m);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .focus-bg-text {
+    font-size: 0.85em;
+    color: var(--text-p);
+    line-height: 1.65;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    margin: 0;
+  }
+  .focus-key-points {
+    margin-bottom: 16px;
+  }
+  .focus-key-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .focus-key-item {
+    font-size: 0.82em;
+    color: var(--text-p);
+    padding: 8px 12px 8px 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.4;
+    position: relative;
+  }
+  .focus-key-item::before {
+    content: '▸';
+    position: absolute;
+    left: 10px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
   .focus-detail-meta {
     display: flex;
     gap: 8px;
