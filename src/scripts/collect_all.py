@@ -289,64 +289,83 @@ def generate_focus(date_key):
 """
 
     result = call_zhipu("glm-4-air", prompt)
-    if not result:
-        log("  [Focus] AI 无返回")
-        return
+    if result:
+        try:
+            match = re.search(r'\{.*\}', result, re.DOTALL)
+            if match:
+                data = json.loads(match.group())
+                data['date'] = date_key
+                data['generated_at'] = datetime.now().isoformat()
+                # Content Enrichment
+                for h in data.get('highlights', []):
+                    url = h.get('url', '')
+                    if url and url.startswith('http'):
+                        log(f"    Enriching #{h['rank']}: {h['title'][:40]}...")
+                        article_text = fetch_article_text(url)
+                        if article_text and len(article_text) > 100:
+                            enrich_prompt = f"""你是资深的行业分析师。阅读以下文章,生成背景解读。
 
-    try:
-        match = re.search(r'\{.*\}', result, re.DOTALL)
-        if not match:
-            log("  [Focus] 未找到 JSON")
-            return
-        data = json.loads(match.group())
-        data['date'] = date_key
-        data['generated_at'] = datetime.now().isoformat()
+    标题:{h['title']}
+    正文内容:
+    {article_text[:1500]}
 
-        # Content Enrichment: fetch full article + AI background for each highlight
-        for h in data.get('highlights', []):
-            url = h.get('url', '')
-            if url and url.startswith('http'):
-                log(f"    Enriching #{h['rank']}: {h['title'][:40]}...")
-                article_text = fetch_article_text(url)
-                if article_text and len(article_text) > 100:
-                    enrich_prompt = f"""你是资深的行业分析师。阅读以下文章,生成背景解读。
+    请以 JSON 格式返回（不要包含其他内容）:
+    {{
+      "background": "背景解读:用40-60字说明读者需要了解的前置背景",
+      "context": "深层分析:用80-120字说明这条信息在更大图景中的意义",
+      "key_points": ["要点1（15字以内）", "要点2", "要点3", "要点4", "要点5"]
+    }}
 
-标题:{h['title']}
-正文内容:
-{article_text[:1500]}
+    要求:
+    - background 写读者理解这篇文章需要知道什么背景
+    - context 写背后的趋势信号或行业影响
+    - key_points 写3-5个关键要点,每个15字以内
+    """
+                            enrich_result = call_zhipu("glm-4-air", enrich_prompt)
+                            if enrich_result:
+                                try:
+                                    em = re.search(r'\{.*\}', enrich_result, re.DOTALL)
+                                    if em:
+                                        enrich_data = json.loads(em.group())
+                                        h['background'] = enrich_data.get('background', '')
+                                        h['context'] = enrich_data.get('context', '')
+                                        h['key_points'] = enrich_data.get('key_points', [])
+                                        log(f"      Background added for #{h['rank']}")
+                                except Exception:
+                                    pass
+                        else:
+                            log(f"    Skip enrichment for #{h['rank']}: no content fetched")
 
-请以 JSON 格式返回（不要包含其他内容）:
-{{
-  "background": "背景解读:用40-60字说明读者需要了解的前置背景",
-  "context": "深层分析:用80-120字说明这条信息在更大图景中的意义",
-  "key_points": ["要点1（15字以内）", "要点2", "要点3", "要点4", "要点5"]
-}}
+                with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                log(f"  [Focus] generated {len(data.get('highlights', []))} highlights")
+                return
+        except Exception as e:
+            log(f"  [Focus] AI 解析失败: {e}")
 
-要求:
-- background 写读者理解这篇文章需要知道什么背景
-- context 写背后的趋势信号或行业影响
-- key_points 写3-5个关键要点,每个15字以内
-"""
-                    enrich_result = call_zhipu("glm-4-air", enrich_prompt)
-                    if enrich_result:
-                        try:
-                            em = re.search(r'\{.*\}', enrich_result, re.DOTALL)
-                            if em:
-                                enrich_data = json.loads(em.group())
-                                h['background'] = enrich_data.get('background', '')
-                                h['context'] = enrich_data.get('context', '')
-                                h['key_points'] = enrich_data.get('key_points', [])
-                                log(f"      Background added for #{h['rank']}")
-                        except Exception:
-                            pass
-                else:
-                    log(f"    Skip enrichment for #{h['rank']}: no content fetched")
-
-        with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        log(f"  [Focus] generated {len(data.get('highlights', []))} highlights")
-    except Exception as e:
-        log(f"  [Focus] 解析失败: {e}")
+    # Fallback: direct top-5 by score
+    log("  [Focus] AI 失败,使用评分降级方案")
+    fallback = {
+        "date": date_key,
+        "generated_at": datetime.now().isoformat(),
+        "summary": f"今日 {len(rows)} 条高价值资讯",
+        "trendAnalysis": "AI 生成暂不可用,以下为今日评分最高的资讯。",
+        "highlights": [],
+        "trends": []
+    }
+    for i, r in enumerate(rows[:5]):
+        fallback["highlights"].append({
+            "rank": i + 1,
+            "title": r['title'],
+            "reason": f"信号强度 {r['score']}",
+            "insight": (r['ai_summary'] or '')[:40],
+            "summary": (r['ai_summary'] or '')[:60],
+            "source": r['source_type'],
+            "url": r['url'] or ''
+        })
+    with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
+        json.dump(fallback, f, ensure_ascii=False, indent=2)
+    log(f"  [Focus] fallback generated {len(fallback['highlights'])} highlights")
 
 # ---- Main ----
 
