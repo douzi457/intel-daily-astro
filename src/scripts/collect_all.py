@@ -2,6 +2,7 @@
 import os
 import json
 import requests
+from bs4 import BeautifulSoup
 import time
 import subprocess
 import sys
@@ -27,6 +28,11 @@ BAIDU_SECRET_KEY = os.environ.get("BAIDU_TRANSLATE_SECRET_KEY", "")
 
 # 每日翻译字符上限（百度免费 100 万/月,设 3 万/天留余量）
 DAILY_TRANSLATE_LIMIT = 30000
+
+# 通用请求头
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
 
 def log(msg):
     ts = datetime.now().strftime("%H:%M:%S")
@@ -150,7 +156,7 @@ def run_py(script, *args):
 def collect_news_agg():
     script = SKILLS_DIR / "news-aggregator-skill" / "scripts" / "fetch_news.py"
     if not script.exists(): return []
-    sources = ['hackernews','github','producthunt','36kr','tencent','v2ex','wallstreetcn','ithome','toutiao','bilibili','zhihu','baidu','tieba','cailianshe','pengpai','guancha','163','chuangye']
+    sources = ['hackernews','producthunt','36kr','tencent','v2ex','wallstreetcn','ithome','toutiao','bilibili','zhihu','baidu','tieba','cailianshe','pengpai','guancha','163','chuangye']
     items = []
     for src in sources:
         res = run_py(script, "--source", src, "--limit", "10")
@@ -159,6 +165,22 @@ def collect_news_agg():
                 it['source_type'] = 'news_aggregator'
                 it['original_source'] = src
             items.extend(res)
+    # GitHub Trending: 提额到30,且一天只采一次
+    with get_conn() as conn:
+        today_github = conn.execute(
+            "SELECT COUNT(*) FROM items WHERE date_key = ? AND original_source = 'github'",
+            (datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d"),)
+        ).fetchone()[0]
+    if today_github == 0:
+        log("  GitHub: first run today, fetching with --limit 30")
+        res = run_py(script, "--source", "github", "--limit", "30")
+        if isinstance(res, list):
+            for it in res:
+                it['source_type'] = 'news_aggregator'
+                it['original_source'] = 'github'
+            items.extend(res)
+    else:
+        log(f"  GitHub: already {today_github} items today, skip")
     return items
 
 @retry(times=2, delay=3)
@@ -202,10 +224,36 @@ def collect_douyin():
 def collect_reddit():
     subs = ['technology', 'programming', 'MachineLearning', 'artificial', 'github', 'Python', 'LocalLLaMA']
     items = []
+    reddit_ua = 'intel-daily-astro/1.0 (by /u/douzi457)'
+    oauth = None
+
+    # 尝试 OAuth (如果环境变量配置了)
+    client_id = os.environ.get("REDDIT_CLIENT_ID", "")
+    client_secret = os.environ.get("REDDIT_CLIENT_SECRET", "")
+    if client_id and client_secret:
+        try:
+            auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
+            data = {'grant_type': 'client_credentials'}
+            resp = requests.post('https://www.reddit.com/api/v1/access_token',
+                                 auth=auth, data=data, headers={'User-Agent': reddit_ua}, timeout=10)
+            if resp.ok:
+                oauth = resp.json().get('access_token')
+                log(f"  Reddit: OAuth token obtained")
+        except Exception as e:
+            log(f"  Reddit: OAuth failed ({e}), falling back")
+
     for sub in subs:
         try:
-            url = f"https://www.reddit.com/r/{sub}/hot/.json?limit=10"
-            resp = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=15)
+            headers = {'User-Agent': reddit_ua}
+            if oauth:
+                url = f"https://oauth.reddit.com/r/{sub}/hot?limit=10"
+                headers['Authorization'] = f'Bearer {oauth}'
+            else:
+                url = f"https://www.reddit.com/r/{sub}/hot/.json?limit=10"
+            resp = requests.get(url, headers=headers, timeout=15)
+            if resp.status_code != 200:
+                log(f"  Reddit r/{sub}: HTTP {resp.status_code}, skip")
+                continue
             posts = resp.json()['data']['children']
             for p in posts:
                 d = p['data']
@@ -215,21 +263,83 @@ def collect_reddit():
                     'url': f"https://reddit.com{d.get('permalink', '')}",
                     'hot_value': d.get('score', 0), 'frequency': 1
                 })
-        except: continue
+        except Exception as e:
+            log(f"  Reddit r/{sub}: {e}")
+            continue
+
+    # Fallback: PushShift.io (如果 OAuth 和直接 API 都没拿到数据)
+    if not items:
+        log("  Reddit: trying PushShift.io fallback...")
+        for sub in subs:
+            try:
+                url = f"https://api.pushshift.io/reddit/submission/search?subreddit={sub}&size=10&sort=desc&sort_type=created_utc"
+                resp = requests.get(url, headers={'User-Agent': reddit_ua}, timeout=15)
+                if resp.status_code != 200:
+                    continue
+                for d in resp.json().get('data', []):
+                    items.append({
+                        'source_type': 'reddit', 'original_source': f'reddit/{sub}',
+                        'title': d.get('title', ''), 'desc': d.get('selftext', '')[:500],
+                        'url': f"https://reddit.com{d.get('permalink', '')}",
+                        'hot_value': d.get('score', 0), 'frequency': 1
+                    })
+            except:
+                continue
+        if items:
+            log(f"  Reddit: got {len(items)} items via PushShift.io")
+
     return items
 
 @retry(times=2, delay=3)
 def collect_rss():
-    feeds = [('36Kr', 'https://36kr.com/feed'), ('少数派', 'https://sspai.com/feed'), ('阮一峰', 'http://feeds.feedburner.com/ruanyifeng')]
+    feeds = [
+        ('36Kr', 'https://36kr.com/feed'),
+        ('少数派', 'https://sspai.com/feed'),
+        ('阮一峰', 'http://feeds.feedburner.com/ruanyifeng'),
+        ('Solidot', 'https://solidot.org/feed'),
+        ('GeekPark', 'https://www.geekpark.net/rss'),
+    ]
     items = []
     for name, url in feeds:
         try:
-            resp = requests.get(url, timeout=15)
-            titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', resp.text)
-            links = re.findall(r'<link>(.*?)</link>', resp.text)
-            for t, l in zip(titles[:10], links[:10]):
-                items.append({'source_type': 'rss', 'original_source': name, 'title': t, 'desc': '', 'url': l, 'hot_value': 0, 'frequency': 1})
-        except: continue
+            resp = requests.get(url, headers=HEADERS, timeout=15)
+            if not resp.ok:
+                log(f"  RSS {name}: HTTP {resp.status_code}, skip")
+                continue
+            # 用 BeautifulSoup 的 xml 解析器提取 RSS 条目
+            soup = BeautifulSoup(resp.content, 'xml') if 'xml' in (resp.text[:100] or '') else BeautifulSoup(resp.content, 'html.parser')
+            entries = soup.find_all('item') or soup.find_all('entry')
+            if not entries:
+                # 尝试给 feedburner 的 ATOM 格式用
+                feed = soup.find('feed')
+                if feed:
+                    entries = feed.find_all('entry')
+            count = 0
+            for entry in entries:
+                if count >= 10:
+                    break
+                title_tag = entry.find('title')
+                if not title_tag or not title_tag.get_text(strip=True):
+                    continue
+                title = title_tag.get_text(strip=True)
+                link_tag = entry.find('link')
+                url_val = ''
+                if link_tag:
+                    url_val = link_tag.get('href', '') or link_tag.get_text(strip=True)
+                if not url_val:
+                    # 有些 RSS 用 <link>text</link>
+                    url_val = entry.find('link').get_text(strip=True) if entry.find('link') else ''
+                if title and url_val:
+                    items.append({
+                        'source_type': 'rss', 'original_source': name,
+                        'title': title, 'desc': '',
+                        'url': url_val, 'hot_value': 0, 'frequency': 1
+                    })
+                    count += 1
+            log(f"  RSS {name}: {count} items")
+        except Exception as e:
+            log(f"  RSS {name}: {e}")
+            continue
     return items
 
 # ---- Focus Generation ----
@@ -245,7 +355,7 @@ def generate_focus(date_key):
             FROM items
             WHERE date_key = ? AND score >= 5
             ORDER BY score DESC
-            LIMIT 20
+            LIMIT 5
         """, (date_key,)).fetchall()
 
     if len(rows) < 3:
