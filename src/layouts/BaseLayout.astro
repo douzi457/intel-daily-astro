@@ -21,5 +21,37 @@ const { title, lang = 'zh-CN' } = Astro.props;
 </head>
 <body>
   <slot />
+  <script>
+    // Theme & Scheme system
+    (function() {
+      const theme = localStorage.getItem('theme') || 'dark';
+      const scheme = localStorage.getItem('scheme') || 'ink';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-scheme', scheme);
+
+      // Theme toggle
+      const themeBtn = document.getElementById('themeToggle');
+      if (themeBtn) {
+        themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        themeBtn.addEventListener('click', () => {
+          const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+        });
+      }
+
+      // Scheme picker
+      document.querySelectorAll('.scheme-dot').forEach(dot => {
+        dot.classList.toggle('active', dot.dataset.scheme === scheme);
+        dot.addEventListener('click', () => {
+          document.querySelectorAll('.scheme-dot').forEach(d => d.classList.remove('active'));
+          dot.classList.add('active');
+          document.documentElement.setAttribute('data-scheme', dot.dataset.scheme);
+          localStorage.setItem('scheme', dot.dataset.scheme);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

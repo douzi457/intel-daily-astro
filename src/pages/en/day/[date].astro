@@ -114,6 +114,13 @@ function getDow(d: string) {
       <a id="tencentPromo" href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="badge-link tencent">💙 Tencent Cloud 79/yr</a>
     </div>
     <div class="header-actions">
+      <div class="scheme-picker">
+        <button class="scheme-dot active" data-scheme="ink" title="Ink Classic" style="--dot-color:#a78bfa"></button>
+        <button class="scheme-dot" data-scheme="indigo" title="Indigo" style="--dot-color:#818cf8"></button>
+        <button class="scheme-dot" data-scheme="forest" title="Forest" style="--dot-color:#6ee7b7"></button>
+        <button class="scheme-dot" data-scheme="kraft" title="Kraft" style="--dot-color:#fbbf24"></button>
+        <button class="scheme-dot" data-scheme="dune" title="Dune" style="--dot-color:#f472b6"></button>
+      </div>
       <a href="/en/" class="lang-btn">← Home</a>
       <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
     </div>
@@ -429,19 +436,6 @@ function getDow(d: string) {
 </style>
 
 <script>
-  const themeBtn = document.getElementById('themeToggle');
-  if (themeBtn) {
-    let theme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    themeBtn.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    });
-  }
-
   const nav = document.getElementById('sectionNav');
   if (nav) {
     const links = nav.querySelectorAll('a');
