@@ -203,7 +203,7 @@ function getDow(d: string) {
                     <div class="hero-entry-rank">{idx === 0 ? '★ 精选头条' : `#${idx + 1} 精选`}</div>
                     <div class="hero-entry-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
                     <div class="hero-entry-meta">
-                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                      <span class="platform-tag" style={`--tag-color:${meta.color}`}>
                         <span class="tag-icon">{meta.icon}</span>
                         {meta.label}
                       </span>
@@ -222,7 +222,7 @@ function getDow(d: string) {
                     <div class="featured-mini">
                       <span class="mini-rank">#{idx + 4} 推荐</span>
                       <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
-                      <span class="platform-tag" style={`color:${meta.color};border-color:${meta.color}20;background:${meta.color}10`}>
+                      <span class="platform-tag" style={`--tag-color:${meta.color}`}>
                         <span class="tag-icon">{meta.icon}</span>
                         {meta.label}
                       </span>
@@ -259,18 +259,18 @@ function getDow(d: string) {
                   const primarySource = sources[0];
                   const extraSources = sources.slice(1);
                   return (
-                    <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`}>
+                    <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
                       <span class="news-idx">{idx + 1}</span>
                       <div class="news-body">
                         <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
                         <div class="news-footer">
                           <div class="source-tags">
-                            <span class="platform-tag" style={`color:${primarySource.color};border-color:${primarySource.color}20;background:${primarySource.color}10`}>
+                            <span class="platform-tag" style={`--tag-color:${primarySource.color}`}>
                               <span class="tag-icon">{primarySource.icon}</span>
                               {primarySource.label}
                             </span>
                             {extraSources.map((s: any) => (
-                              <span class="platform-tag platform-tag-sm" style={`color:${s.color};border-color:${s.color}20;background:${s.color}10`} title={s.label}>
+                              <span class="platform-tag platform-tag-sm" style={`--tag-color:${s.color}`} title={s.label}>
                                 <span class="tag-icon">{s.icon}</span>
                               </span>
                             ))}
@@ -297,12 +297,12 @@ function getDow(d: string) {
             <div class="section-title" style="font-size:0.9em;">💡 推荐</div>
           </div>
           <div class="news-list">
-            <div class="news-item">
+            <div class="news-item" style="--tag-color:#3395FF">
               <span class="news-idx" style="color:var(--accent);">💡</span>
               <div class="news-body">
                 <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="news-title">腾讯云 AI 焕新季 · 2核2G4M 新客仅 99元/年</a>
                 <div class="news-footer">
-                  <span class="platform-tag" style="color:#3395FF;border-color:#3395FF20;background:#3395FF10;">☁️ 腾讯云</span>
+                  <span class="platform-tag" style="--tag-color:#3395FF">☁️ 腾讯云</span>
                   <span class="news-hot" style="color:var(--accent);">推广</span>
                 </div>
                 <div class="news-desc">轻量应用服务器 4核4G3M 首年 79元，限时特惠中</div>
