@@ -1,11 +1,20 @@
 {
   "date": "2026-05-28",
-  "generated_at": "2026-05-27T19:57:10.956677",
+  "generated_at": "2026-05-27T22:26:18.509224",
   "summary": "今日 5 条高价值资讯",
   "trendAnalysis": "AI 生成暂不可用,以下为今日评分最高的资讯。",
   "highlights": [
     {
       "rank": 1,
+      "title": "Snowflake盘后暴涨超30%，与AWS签订60亿美元采购协议",
+      "reason": "信号强度 9.0",
+      "insight": "Snowflake与AWS签60亿美元协议，盘后暴涨超30%",
+      "summary": "Snowflake与AWS签60亿美元协议，盘后暴涨超30%",
+      "source": "news_aggregator",
+      "url": "https://wallstreetcn.com/articles/3773285"
+    },
+    {
+      "rank": 2,
       "title": "PostHog will train AI models with your data (opted-in by default)",
       "reason": "信号强度 8.0",
       "insight": "PostHog默认使用用户数据训练AI模型，引发隐私担忧",
@@ -14,7 +23,7 @@
       "url": "https://posthog.com/blog/training-ai-models"
     },
     {
-      "rank": 2,
+      "rank": 3,
       "title": "Matrix Multiplications on GPUs Run Faster When Given \"Predictable\" Data (2024)",
       "reason": "信号强度 8.0",
       "insight": "GPU矩阵乘法在可预测数据下运行更快",
@@ -23,7 +32,7 @@
       "url": "https://www.thonking.ai/p/strangely-matrix-multiplications"
     },
     {
-      "rank": 3,
+      "rank": 4,
       "title": "Theseus: Translating Win32 to WASM",
       "reason": "信号强度 8.0",
       "insight": "Theseus项目：将Win32系统移植到WASM，提升跨平台兼容性",
@@ -32,22 +41,13 @@
       "url": "https://neugierig.org/software/blog/2026/05/theseus-wasm.html"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "title": "Bluedot 2.1",
       "reason": "信号强度 8.0",
       "insight": "Bluedot 2.1：智能疫情预警系统升级",
       "summary": "Bluedot 2.1：智能疫情预警系统升级",
       "source": "news_aggregator",
       "url": "https://www.producthunt.com/products/bluedot-2"
-    },
-    {
-      "rank": 5,
-      "title": "香港金管局：新增三项监管措施，内地开户核查倒查至2023年1月",
-      "reason": "信号强度 8.0",
-      "insight": "香港金管局新增监管措施，内地开户核查追溯至2023年1月",
-      "summary": "香港金管局新增监管措施，内地开户核查追溯至2023年1月",
-      "source": "news_aggregator",
-      "url": "https://view.inews.qq.com/a/20260527A09X7700"
     }
   ],
   "trends": []
