@@ -36,7 +36,7 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
 
 <div class="focus-page">
   <header class="focus-header-bar">
-    <a href="/" class="focus-logo">← 豆子实验室</a>
+    <a href="/" class="focus-logo"><img src="/icon.svg" alt="" width="24" height="24" style="vertical-align:middle;"> 豆子实验室</a>
     <span class="focus-header-tag">今日重点</span>
   </header>
 
@@ -133,16 +133,20 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
     margin: 0 auto;
   }
   .focus-logo {
-    font-size: 0.85em;
+    font-size: 0.9em;
     font-weight: 700;
     color: var(--accent);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-brand);
   }
   .focus-logo:hover { color: var(--text-h); }
   .focus-header-tag {
     font-size: 0.68em;
     padding: 2px 10px;
-    background: rgba(167,139,250,0.12);
+    background: var(--accent-glow);
     border-radius: 20px;
     color: var(--accent);
     font-weight: 600;
