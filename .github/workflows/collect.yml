@@ -1,9 +1,9 @@
-name: Daily Intelligence Collection
+name: Daily RSS Collection
 
 on:
   schedule:
-    - cron: '0 */3 * * *' # 每 3 小时运行一次
-  workflow_dispatch: # 支持手动触发
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -30,32 +30,24 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 lxml
+          pip install requests
 
-      - name: Run Collection
+      - name: Run RSS Collection
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
           BAIDU_TRANSLATE_APP_ID: ${{ secrets.BAIDU_TRANSLATE_APP_ID }}
           BAIDU_TRANSLATE_SECRET_KEY: ${{ secrets.BAIDU_TRANSLATE_SECRET_KEY }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         run: |
-          python src/scripts/collect_all.py
+          python src/scripts/collect_rss.py
 
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add src/data/rewrite/
-          git add src/scripts/db/intel.db
           git add -f src/data/rewrite/today-focus.json
           git commit -m "Auto-update intelligence data: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push

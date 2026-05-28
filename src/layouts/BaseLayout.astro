@@ -22,12 +22,10 @@ const { title, lang = 'zh-CN' } = Astro.props;
 <body>
   <slot />
   <script>
-    // Theme & Scheme system
+    // Theme system
     (function() {
       const theme = localStorage.getItem('theme') || 'dark';
-      const scheme = localStorage.getItem('scheme') || 'ink';
       document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.setAttribute('data-scheme', scheme);
 
       // Theme toggle
       const themeBtn = document.getElementById('themeToggle');
@@ -41,16 +39,8 @@ const { title, lang = 'zh-CN' } = Astro.props;
         });
       }
 
-      // Scheme picker
-      document.querySelectorAll('.scheme-dot').forEach(dot => {
-        dot.classList.toggle('active', dot.dataset.scheme === scheme);
-        dot.addEventListener('click', () => {
-          document.querySelectorAll('.scheme-dot').forEach(d => d.classList.remove('active'));
-          dot.classList.add('active');
-          document.documentElement.setAttribute('data-scheme', dot.dataset.scheme);
-          localStorage.setItem('scheme', dot.dataset.scheme);
-        });
-      });
+      // Scheme picker (removed — single brand scheme)
+      const scheme = 'ink';
     })();
   </script>
 </body>
