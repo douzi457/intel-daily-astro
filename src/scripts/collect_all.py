@@ -453,29 +453,11 @@ def generate_focus(date_key):
         except Exception as e:
             log(f"  [Focus] AI 解析失败: {e}")
 
-    # Fallback: direct top-5 by score
-    log("  [Focus] AI 失败,使用评分降级方案")
-    fallback = {
-        "date": date_key,
-        "generated_at": datetime.now().isoformat(),
-        "summary": f"今日 {len(rows)} 条高价值资讯",
-        "trendAnalysis": "AI 生成暂不可用,以下为今日评分最高的资讯。",
-        "highlights": [],
-        "trends": []
-    }
-    for i, r in enumerate(rows[:5]):
-        fallback["highlights"].append({
-            "rank": i + 1,
-            "title": r['title'],
-            "reason": f"信号强度 {r['score']}",
-            "insight": (r['ai_summary'] or '')[:40],
-            "summary": (r['ai_summary'] or '')[:60],
-            "source": r['source_type'],
-            "url": r['url'] or ''
-        })
+    # Fallback: AI 失败,写入空数据（前端自动隐藏今日重点区块）
+    log("  [Focus] AI 失败,跳过今日重点")
+    fallback = {"date": date_key, "generated_at": datetime.now().isoformat(), "highlights": [], "trends": []}
     with open(focus_dir / "today-focus.json", "w", encoding="utf-8") as f:
         json.dump(fallback, f, ensure_ascii=False, indent=2)
-    log(f"  [Focus] fallback generated {len(fallback['highlights'])} highlights")
 
 # ---- Main ----
 
