@@ -120,16 +120,25 @@ a { color: inherit; text-decoration: none; }
 }
 
 .header-logo {
+  font-family: var(--font-brand);
   font-size: 1.35em;
   font-weight: 800;
   color: var(--text-h);
   letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .header-logo span {
   background: linear-gradient(135deg, var(--accent), var(--accent-alt));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.header-logo img {
+  width: 32px;
+  height: 32px;
 }
 
 .header-meta {
