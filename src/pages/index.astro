@@ -248,7 +248,7 @@ function getDow(d: string) {
           const meta = PLATFORM_META[sectionKey] || { label: sectionKey, color: '#94a3b8', icon: '📌' };
 
           return (
-            <section class="platform-section" id={`section-${sectionKey}`}>
+            <section class="platform-section" id={`section-${sectionKey}`} style={`--pf-color:${meta.color}`}>
               <div class="section-header">
                 <div class="section-title">
                   <span>{sec.icon}</span>

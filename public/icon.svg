@@ -1,15 +1,19 @@
 <svg width="153" height="153" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="153" height="153" rx="28" fill="#F14D42"/>
-  <!-- Radar / signal waves representing "intelligence" -->
-  <circle cx="76.5" cy="65" r="42" stroke="white" stroke-width="5" fill="none" opacity="0.25"/>
-  <circle cx="76.5" cy="65" r="26" stroke="white" stroke-width="4" fill="none" opacity="0.45"/>
-  <circle cx="76.5" cy="65" r="11" fill="white"/>
-  <!-- Dish antenna -->
-  <path d="M76.5 76 L76.5 106" stroke="white" stroke-width="5" stroke-linecap="round"/>
-  <path d="M60 94 Q76.5 110 93 94" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <!-- Signal arcs -->
-  <path d="M50 43 Q65 28 76.5 28" stroke="white" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.6"/>
-  <path d="M103 43 Q88 28 76.5 28" stroke="white" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.6"/>
-  <!-- Bottom accent bar -->
-  <rect x="46" y="125" width="61" height="4" rx="2" fill="white" opacity="0.6"/>
+  <!-- Bold "D" letters forming an abstract intelligence/radar shape -->
+  <!-- Outer circle ring -->
+  <circle cx="76.5" cy="68" r="38" stroke="white" stroke-width="5.5" fill="none" opacity="0.3"/>
+  <!-- Inner circle -->
+  <circle cx="76.5" cy="68" r="22" stroke="white" stroke-width="4" fill="none" opacity="0.5"/>
+  <!-- Center dot -->
+  <circle cx="76.5" cy="68" r="7" fill="white"/>
+  <!-- Signal lines radiating outward -->
+  <line x1="76.5" y1="22" x2="76.5" y2="10" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="114" y1="46" x2="123" y2="39" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="114" y1="90" x2="123" y2="97" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="76.5" y1="114" x2="76.5" y2="126" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="39" y1="90" x2="30" y2="97" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="39" y1="46" x2="30" y2="39" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Bottom bar -->
+  <rect x="50" y="127" width="53" height="4" rx="2" fill="white" opacity="0.5"/>
 </svg>
