@@ -55,7 +55,11 @@ const SOURCE_LABELS: Record<string, { label: string; icon: string }> = {
 
   <header class="header">
     <div class="header-brand">
-      <div class="header-logo"><img src="/icon.svg" alt="" width="32" height="32">豆子实验室<span>.数据面板</span></div>
+      <img src="/icon.svg" alt="" width="36" height="36">
+      <div class="header-logo-text">
+        <span class="logo-line1">每日<span class="logo-accent">情</span>报</span>
+        <span class="logo-line2"><span class="logo-accent">豆子</span><span class="logo-dot">·</span>实验室</span>
+      </div>
     </div>
     <div class="header-meta">
       <span class="count-badge">{totalItems.toLocaleString()} 条 / {dateCount} 天</span>

@@ -119,26 +119,39 @@ a { color: inherit; text-decoration: none; }
   gap: 10px;
 }
 
-.header-logo {
+.header-brand img {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Two-line logo like newsnow */
+.header-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+.logo-line1 {
   font-family: var(--font-brand);
   font-size: 1.35em;
-  font-weight: 800;
+  line-height: 1.1;
   color: var(--text-h);
-  letter-spacing: -0.5px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
 }
-
-.header-logo span {
-  background: linear-gradient(135deg, var(--accent), var(--accent-alt));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.logo-line2 {
+  font-size: 0.72em;
+  font-weight: 800;
+  color: var(--text-m);
+  letter-spacing: 0.5px;
+  font-family: var(--font-sans);
+  line-height: 1.2;
 }
-
-.header-logo img {
-  width: 32px;
-  height: 32px;
+.logo-accent {
+  color: var(--accent);
+}
+.logo-dot {
+  color: var(--text-m);
+  opacity: 0.35;
 }
 
 .header-meta {
@@ -401,10 +414,8 @@ a { color: inherit; text-decoration: none; }
 .news-list {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border);
-  border-radius: 14px;
   overflow: hidden;
-  background: var(--bg-card);
+  background: transparent;
 }
 
 .news-item {
@@ -575,12 +586,16 @@ a { color: inherit; text-decoration: none; }
 .section-nav {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 4px;
   display: flex;
   gap: 2px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
 }
 .section-nav::-webkit-scrollbar { display: none; }
 
@@ -766,15 +781,16 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
-/* ── Platform Section (equal-height cards with internal scroll) ── */
+/* ── Platform Section (newsnow-style glass card) ── */
 .platform-section {
   display: flex;
   flex-direction: column;
   max-height: 480px;
   overflow: hidden;
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
 }
 
 .platform-section .section-header {
@@ -842,8 +858,9 @@ a { color: inherit; text-decoration: none; }
 
 .sidebar-widget {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
   padding: 20px;
 }
 
