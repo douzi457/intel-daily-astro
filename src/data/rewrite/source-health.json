@@ -46,6 +46,17 @@
       "created_at": "2026-05-28T01:35:03.116590"
     },
     {
+      "id": 98,
+      "date_key": "2026-05-28",
+      "source": "douyin",
+      "status": "success",
+      "items_found": 10,
+      "items_added": 1,
+      "error_message": "",
+      "duration_ms": 1223,
+      "created_at": "2026-05-28T01:53:07.506207"
+    },
+    {
       "id": 76,
       "date_key": "2026-05-28",
       "source": "news_aggregator",
@@ -88,6 +99,17 @@
       "error_message": "",
       "duration_ms": 24703,
       "created_at": "2026-05-28T01:33:15.612487"
+    },
+    {
+      "id": 96,
+      "date_key": "2026-05-28",
+      "source": "news_aggregator",
+      "status": "success",
+      "items_found": 90,
+      "items_added": 13,
+      "error_message": "",
+      "duration_ms": 34871,
+      "created_at": "2026-05-28T01:52:41.035558"
     },
     {
       "id": 79,
@@ -134,6 +156,17 @@
       "created_at": "2026-05-28T01:35:05.635974"
     },
     {
+      "id": 99,
+      "date_key": "2026-05-28",
+      "source": "reddit",
+      "status": "success",
+      "items_found": 0,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 30950,
+      "created_at": "2026-05-28T01:53:38.458115"
+    },
+    {
       "id": 80,
       "date_key": "2026-05-28",
       "source": "rss",
@@ -178,6 +211,17 @@
       "created_at": "2026-05-28T01:35:21.862131"
     },
     {
+      "id": 100,
+      "date_key": "2026-05-28",
+      "source": "rss",
+      "status": "success",
+      "items_found": 26,
+      "items_added": 0,
+      "error_message": "",
+      "duration_ms": 7655,
+      "created_at": "2026-05-28T01:53:46.119133"
+    },
+    {
       "id": 77,
       "date_key": "2026-05-28",
       "source": "weibo",
@@ -220,6 +264,17 @@
       "error_message": "",
       "duration_ms": 907,
       "created_at": "2026-05-28T01:34:54.592876"
+    },
+    {
+      "id": 97,
+      "date_key": "2026-05-28",
+      "source": "weibo",
+      "status": "success",
+      "items_found": 52,
+      "items_added": 7,
+      "error_message": "",
+      "duration_ms": 1223,
+      "created_at": "2026-05-28T01:53:03.683508"
     }
   ]
 }
