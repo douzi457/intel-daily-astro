@@ -8,10 +8,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/**'
-      - 'src/pages/**'
       - 'src/scripts/**'
-      - 'src/styles/**'
-      - 'src/layouts/**'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
