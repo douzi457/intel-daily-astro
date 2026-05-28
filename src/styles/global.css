@@ -29,7 +29,7 @@
 
 /* ── Color Schemes ── */
 
-/* Ink (默认) — 暖暗色 + 紫罗兰强调 */
+/* Ink (默认) — 暗色调 + 红色强调（NewsNow 品牌色） */
 :root {
   --bg: #0a0a0c;
   --bg-card: #18181b;
@@ -39,10 +39,10 @@
   --text-h: #fafafa;
   --text-p: #a1a1aa;
   --text-m: #52525b;
-  --accent: #a78bfa;
-  --accent-alt: #60a5fa;
-  --accent-glow: rgba(167, 139, 250, 0.08);
-  --accent-gradient: linear-gradient(135deg, #a78bfa, #60a5fa);
+  --accent: #F14D42;
+  --accent-alt: #FF6B6B;
+  --accent-glow: rgba(241, 77, 66, 0.08);
+  --accent-gradient: linear-gradient(135deg, #F14D42, #FF6B6B);
   --news-line: transparent;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
@@ -58,10 +58,10 @@
   --text-h: #09090b;
   --text-p: #52525b;
   --text-m: #a1a1aa;
-  --accent: #7c3aed;
-  --accent-alt: #2563eb;
-  --accent-glow: rgba(124, 58, 237, 0.06);
-  --accent-gradient: linear-gradient(135deg, #7c3aed, #2563eb);
+  --accent: #E53935;
+  --accent-alt: #D32F2F;
+  --accent-glow: rgba(229, 57, 53, 0.06);
+  --accent-gradient: linear-gradient(135deg, #E53935, #D32F2F);
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
@@ -231,7 +231,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
   color: var(--accent);
   background: var(--accent-glow);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
   border-radius: 20px;
   padding: 4px 12px;
   text-decoration: none;
@@ -243,13 +243,13 @@ a { color: inherit; text-decoration: none; }
   background: var(--accent-glow);
 }
 .header-meta .badge-link.tencent {
-  color: #60A5FA;
-  background: rgba(96, 165, 250, 0.08);
-  border-color: rgba(96, 165, 250, 0.2);
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 .header-meta .badge-link.tencent:hover {
-  border-color: #60A5FA;
-  background: rgba(96, 165, 250, 0.15);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .header-actions {
@@ -346,7 +346,7 @@ a { color: inherit; text-decoration: none; }
 
 .featured-card:first-child {
   grid-column: 1 / -1;
-  border-color: rgba(167, 139, 250, 0.2);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
   background: linear-gradient(135deg, var(--accent-glow), transparent);
 }
 
@@ -724,7 +724,7 @@ a { color: inherit; text-decoration: none; }
 
 .featured-hero {
   background: linear-gradient(135deg, var(--accent-glow), transparent);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
   border-radius: 16px;
   padding: 28px;
   transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
@@ -744,9 +744,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 .featured-hero:hover {
-  border-color: rgba(167, 139, 250, 0.4);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(167, 139, 250, 0.1);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .hero-rank {
@@ -1315,8 +1315,8 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Today's Focus ── */
 .focus-section {
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.06), rgba(96, 165, 250, 0.04));
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  background: linear-gradient(135deg, var(--accent-glow), color-mix(in srgb, var(--accent) 4%, transparent));
+  border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
   border-radius: 14px;
   padding: 20px 22px;
   margin-bottom: 20px;
@@ -1356,8 +1356,8 @@ a { color: inherit; text-decoration: none; }
 .trend-tag {
   font-size: 0.7em;
   padding: 3px 10px;
-  background: rgba(167, 139, 250, 0.1);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  background: var(--accent-glow);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
   border-radius: 20px;
   color: var(--accent);
   font-weight: 500;
@@ -1368,7 +1368,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-p);
   padding: 10px 14px;
   margin-bottom: 14px;
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.06), rgba(96, 165, 250, 0.06));
+  background: linear-gradient(135deg, var(--accent-glow), color-mix(in srgb, var(--accent) 4%, transparent));
   border-left: 3px solid var(--accent);
   border-radius: 0 8px 8px 0;
 }
@@ -1442,6 +1442,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 [data-theme="light"] .focus-section {
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.04), rgba(96, 165, 250, 0.03));
-  border-color: rgba(167, 139, 250, 0.2);
+  background: linear-gradient(135deg, var(--accent-glow), color-mix(in srgb, var(--accent) 3%, transparent));
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
 }
