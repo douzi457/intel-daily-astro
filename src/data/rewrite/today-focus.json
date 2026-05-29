@@ -1,58 +1,58 @@
 {
-  "summary": "AI巨头融资与算力突破成焦点",
-  "trendAnalysis": "今日AI领域呈现资本与技术创新双轮驱动态势，Anthropic 965亿美元估值与阿里GPU求解器突破，显示AI算力需求激增，同时用户对AI搜索替代方案需求上升，DuckDuckGo安装量增长30%印证这一趋势。",
+  "summary": "AI芯片与算力突破成焦点",
+  "trendAnalysis": "今日资讯中AI芯片与算力领域占比最高，阿里、比亚迪相继发布突破性芯片技术，Anthropic融资额达65亿美元，显示AI基础设施正迎来集中爆发期，环比上升明显。",
   "highlights": [
     {
       "rank": 1,
-      "title": "Anthropic raises $65B in Series H funding at $965B post-money valuation",
-      "reason": "AI融资创纪录",
-      "insight": "资本向头部AI企业集中",
-      "summary": "Anthropic获65亿美元H轮融资，估值达965亿美元，创AI企业融资新高。",
-      "source": "hackernews",
-      "url": "https://news.ycombinator.com/item?id=48313048"
-    },
-    {
-      "rank": 2,
       "title": "阿里达摩院首次发布GPU版本求解器 突破亿级变量“不可解”难题",
-      "reason": "算力技术突破",
-      "insight": "GPU加速计算成趋势",
-      "summary": "阿里达摩院发布GPU求解器，成功突破亿级变量计算难题，提升算力效率。",
+      "reason": "AI算力突破性进展",
+      "insight": "GPU求解器将大幅提升复杂问题处理能力",
+      "summary": "阿里达摩院发布GPU求解器，成功突破亿级变量难题，为AI计算提供新范式。",
       "source": "cailianshe",
       "url": "https://www.cls.cn/detail/2384059"
     },
     {
+      "rank": 2,
+      "title": "Anthropic raises $65B in Series H funding at $965B post-money valuation",
+      "reason": "AI巨头融资创纪录",
+      "insight": "AI行业估值泡沫显现",
+      "summary": "Anthropic获65亿美元H轮融资，估值达965亿美元，创AI融资新纪录。",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/item?id=48313048"
+    },
+    {
       "rank": 3,
-      "title": "Snowflake盘后暴涨超30%，与AWS签订60亿美元采购协议",
-      "reason": "云服务需求激增",
-      "insight": "企业云支出扩大",
-      "summary": "Snowflake与AWS签订60亿美元采购协议，盘后股价暴涨超30%，反映云服务需求强劲。",
-      "source": "wallstreetcn",
-      "url": "https://wallstreetcn.com/articles/3773285"
+      "title": "比亚迪发布自研4nm智驾芯片，王传福：智能汽车上的芯片我们都能提供",
+      "reason": "汽车芯片自主突破",
+      "insight": "国产芯片加速替代",
+      "summary": "比亚迪发布4nm智驾芯片，实现智能汽车芯片全自研，打破国外垄断。",
+      "source": "tencent",
+      "url": "https://view.inews.qq.com/a/20260528A09IT500"
     },
     {
       "rank": 4,
-      "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
-      "reason": "用户隐私需求上升",
-      "insight": "AI搜索引发替代需求",
-      "summary": "Google转型AI搜索后，DuckDuckGo安装量增长最高达30%，用户对隐私搜索需求增加。",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=84415"
+      "title": "一个程序员眼中的 AI 核心概念，讲透 LLM 、Agent 、MCP 、Skill 、RAG...",
+      "reason": "AI技术体系梳理",
+      "insight": "AI技术标准化加速",
+      "summary": "程序员视角解析AI核心概念，涵盖LLM、Agent等关键技术，助力技术落地。",
+      "source": "juejin",
+      "url": "https://juejin.cn/post/7643288575245664265"
     },
     {
       "rank": 5,
-      "title": "轨道上的中国火箭残骸急剧增加",
-      "reason": "太空安全风险",
-      "insight": "太空治理亟待加强",
-      "summary": "中国火箭残骸急剧增加，引发轨道安全担忧，太空碎片管理问题凸显。",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=84416"
+      "title": "codecrafters-io / build-your-own-x",
+      "reason": "开源技术教育创新",
+      "insight": "开发者生态繁荣",
+      "summary": "开源项目教你构建各种工具和系统，推动开发者技术能力提升。",
+      "source": "github",
+      "url": "https://github.com/codecrafters-io/build-your-own-x"
     }
   ],
   "trends": [
-    "AI融资",
-    "算力突破",
-    "隐私搜索"
+    "AI芯片",
+    "大模型融资",
+    "自主可控"
   ],
   "date": "2026-05-29",
-  "generated_at": "2026-05-29T02:22:53.390890"
+  "generated_at": "2026-05-29T07:06:08.176787"
 }
