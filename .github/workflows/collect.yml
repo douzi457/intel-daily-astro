@@ -13,6 +13,9 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+permissions:
+  contents: write
+
 jobs:
   collect_and_deploy:
     runs-on: ubuntu-latest
@@ -42,10 +45,9 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git pull --rebase
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add src/data/rewrite/
-          git add -f src/data/rewrite/today-focus.json
           git commit -m "Auto-update intelligence data: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
-          git push
+          git pull --rebase origin main
+          git push origin main
