@@ -3,20 +3,6 @@
   "items": [
     {
       "id": 1,
-      "url": "https://news.ycombinator.com/item?id=48328184",
-      "platform": "hackernews",
-      "platform_label": "HackerNews",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 9,
-      "category": "AI模型",
-      "title": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
-      "desc": "High-performance C++/CUDA LLM inference engine Tiny-vLLM"
-    },
-    {
-      "id": 2,
       "url": "https://wallstreetcn.com/articles/3773393",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -30,7 +16,7 @@
       "desc": "Dell Q1 revenue up 88%, AI revenue surges 757%, full-year guidance raised"
     },
     {
-      "id": 3,
+      "id": 2,
       "url": "https://www.solidot.org/story?sid=84416",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -44,7 +30,7 @@
       "desc": "China's rocket debris surge raises orbital safety concerns"
     },
     {
-      "id": 4,
+      "id": 3,
       "url": "https://www.solidot.org/story?sid=84415",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -58,7 +44,7 @@
       "desc": "DuckDuckGo installs rose up to 30% after Google's AI search shift"
     },
     {
-      "id": 5,
+      "id": 4,
       "url": "https://www.solidot.org/story?sid=84414",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -69,10 +55,10 @@
       "score": 8,
       "category": "其他",
       "title": "Dropbox 创始人卸任 CEO 一职",
-      "desc": "Dropbox founder steps down as CEO, marking transition."
+      "desc": "Dropbox founder steps down as CEO"
     },
     {
-      "id": 6,
+      "id": 5,
       "url": "https://www.solidot.org/story?sid=84412",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -86,6 +72,20 @@
       "desc": "Netherlands blocks US firm's acquisition of key digital supplier"
     },
     {
+      "id": 6,
+      "url": "https://www.solidot.org/story?sid=84410",
+      "platform": "solidot",
+      "platform_label": "Solidot",
+      "platform_color": "#555555",
+      "platform_icon": "🔗",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "其他",
+      "title": "维基媒体基金会解雇工会组织者引发社区抗议",
+      "desc": "Wikimedia fires union organizer, sparking community protests"
+    },
+    {
       "id": 7,
       "url": "https://www.solidot.org/story?sid=83855",
       "platform": "solidot",
@@ -97,7 +97,7 @@
       "score": 8,
       "category": "其他",
       "title": "【重磅推荐】2026 年度 NVIDIA 创业企业展示现已启动招募！",
-      "desc": "NVIDIA 2026 startup program now open"
+      "desc": "NVIDIA launches 2026 startup program recruitment"
     },
     {
       "id": 8,
@@ -125,7 +125,7 @@
       "score": 8,
       "category": "其他",
       "title": "Valve 大幅提高 Steam Deck 掌机的售价",
-      "desc": "Valve significantly raises Steam Deck prices, drawing market attention."
+      "desc": "Valve significantly raises Steam Deck prices, impacting market."
     },
     {
       "id": 10,
@@ -153,7 +153,7 @@
       "score": 8,
       "category": "其他",
       "title": "《使命召唤：现代战争 4》官宣：首度登陆任天堂 Switch 2，10 月 23 日发售",
-      "desc": "Call of Duty: MW4 comes to Switch 2, Oct 23 release"
+      "desc": "Call of Duty 4 comes to Switch 2, Oct 23 release"
     },
     {
       "id": 12,
@@ -167,7 +167,7 @@
       "score": 8,
       "category": "消费电子",
       "title": "华为余承东：全新途灵龙行平台首创全域融合架构、全链路八大冗余设计，为 L3 时代做好了准备",
-      "desc": "Huawei's Yu Chengdong unveils Linglong platform with integrated architecture and redundancy for L3 era"
+      "desc": "Huawei's Yu Chengdong unveils Tuling Longxing platform with full-domain fusion and redundancy for L3 era"
     },
     {
       "id": 13,
@@ -181,7 +181,7 @@
       "score": 8,
       "category": "AI模型",
       "title": "极氪制造，Waymo 首款 robotaxi 专用车“Ojai”上路服务",
-      "desc": "Zeekr builds Waymo's first dedicated robotaxi Ojai, now in service"
+      "desc": "Zeekr's first dedicated robotaxi 'Ojai' for Waymo now in service"
     },
     {
       "id": 14,
@@ -195,7 +195,7 @@
       "score": 8,
       "category": "其他",
       "title": "腾讯混元发布 Hy-Memory：打造记忆力超强的 Agent 第二大脑",
-      "desc": "Tencent Hunyuan launches Hy-Memory, a powerful memory system for Agent's second brain"
+      "desc": "Tencent Hyunyuan launches Hy-Memory to boost Agent memory as a second brain"
     },
     {
       "id": 15,
@@ -223,7 +223,7 @@
       "score": 8,
       "category": "消费电子",
       "title": "赵长江：智界 V9 将首批升级华为乾崑智驾 ADS 5，该系统采用面向自动驾驶的 WEWA 2.0 架构",
-      "desc": "Zhijie V9 to get Huawei ADS 5 with WEWA 2.0 first"
+      "desc": "Zhijie V9 to first upgrade to Huawei ADS 5 with WEWA 2.0"
     },
     {
       "id": 17,
@@ -241,6 +241,20 @@
     },
     {
       "id": 18,
+      "url": "https://www.zaochenbao.com/news/china/202605/2872828.html",
+      "platform": "news_aggregator",
+      "platform_label": "新闻聚合",
+      "platform_color": "#94A3B8",
+      "platform_icon": "📡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "其他",
+      "title": "拼多多第一季总营收低于预期 在美股价大跌10%",
+      "desc": "Pinduoduo Q1 revenue misses expectations, US stock plunges 10%"
+    },
+    {
+      "id": 19,
       "url": "https://www.cls.cn/detail/2385558",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -251,10 +265,10 @@
       "score": 8,
       "category": "其他",
       "title": "上证50、科创50等指数调整样本，华虹公司、源杰科技等热门股被纳入多条指数",
-      "desc": "Shanghai 50, STAR 50 indices adjust; HH, YJ Tech added"
+      "desc": "Shanghai 50, STAR 50 indices adjust; HH, Yuanjie added"
     },
     {
-      "id": 19,
+      "id": 20,
       "url": "https://www.cls.cn/detail/2385411",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -265,10 +279,10 @@
       "score": 8,
       "category": "其他",
       "title": "三星电子、SK海力士触发意外抛售 多只基金因持仓上限规则调整组合",
-      "desc": "Samsung, SK Hynix hit by forced sales due to fund limits"
+      "desc": "Samsung SK Hynix hit by forced sales due to fund holding limits"
     },
     {
-      "id": 20,
+      "id": 21,
       "url": "https://www.cls.cn/detail/2385496",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -282,7 +296,7 @@
       "desc": "STAR50 down 5%, semiconductors slump, real estate surges"
     },
     {
-      "id": 21,
+      "id": 22,
       "url": "https://www.cls.cn/detail/2385636",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -293,10 +307,10 @@
       "score": 8,
       "category": "其他",
       "title": "万亿资产券商座次重排，百家券商各列入哪个梯队？",
-      "desc": "Securities firms' asset rankings shift, top tier reshuffled"
+      "desc": "Securities firms' asset rankings shift, reshuffling top tiers"
     },
     {
-      "id": 22,
+      "id": 23,
       "url": "https://github.com/harry0703/MoneyPrinterTurbo",
       "platform": "github",
       "platform_label": "GitHub",
@@ -307,10 +321,10 @@
       "score": 8,
       "category": "其他",
       "title": "harry0703 /      MoneyPrinterTurbo",
-      "desc": "Open-source AI tool for quick, high-quality video generation."
+      "desc": "MoneyPrinterTurbo: AI tool for quick video content creation"
     },
     {
-      "id": 23,
+      "id": 24,
       "url": "https://news.ycombinator.com/item?id=48326802",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -321,10 +335,10 @@
       "score": 8,
       "category": "其他",
       "title": "SQLite is all you need for durable workflows",
-      "desc": "SQLite suffices for durable workflows, simplifying tech stacks."
+      "desc": "SQLite enables durable workflows with simplicity and efficiency"
     },
     {
-      "id": 24,
+      "id": 25,
       "url": "https://news.ycombinator.com/item?id=48325340",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -338,7 +352,7 @@
       "desc": "Mistral AI Summit in Paris highlights tech advances and business applications"
     },
     {
-      "id": 25,
+      "id": 26,
       "url": "https://news.ycombinator.com/item?id=48327962",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -349,21 +363,7 @@
       "score": 8,
       "category": "AI模型",
       "title": "Shift will clean homes for free to train future robots",
-      "desc": "Shift offers free home cleaning to train future robots"
-    },
-    {
-      "id": 26,
-      "url": "https://news.ycombinator.com/item?id=48328365",
-      "platform": "hackernews",
-      "platform_label": "HackerNews",
-      "platform_color": "#FF6600",
-      "platform_icon": "⚡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 8,
-      "category": "其他",
-      "title": "The California state assembly has passed the 'Protect Our Games Act'",
-      "desc": "California passes 'Protect Our Games Act' impacting gaming industry"
+      "desc": "Shift offers free home cleaning to train future robots."
     },
     {
       "id": 27,
@@ -381,6 +381,20 @@
     },
     {
       "id": 28,
+      "url": "https://news.ycombinator.com/item?id=48328184",
+      "platform": "hackernews",
+      "platform_label": "HackerNews",
+      "platform_color": "#FF6600",
+      "platform_icon": "⚡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "AI模型",
+      "title": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
+      "desc": "High-performance LLM inference engine Tiny-vLLM in C++/CUDA"
+    },
+    {
+      "id": 29,
       "url": "https://news.ycombinator.com/item?id=48325306",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -394,7 +408,7 @@
       "desc": "Liquid AI unveils 8B-A1B MoE model trained on 38T data"
     },
     {
-      "id": 29,
+      "id": 30,
       "url": "https://news.ycombinator.com/item?id=48324499",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -405,10 +419,10 @@
       "score": 8,
       "category": "其他",
       "title": "GTA 6 Developers Unionize",
-      "desc": "GTA 6 developers unionize, signaling rising labor awareness in gaming industry."
+      "desc": "GTA 6 developers unionize, signaling growing labor awareness in gaming industry."
     },
     {
-      "id": 30,
+      "id": 31,
       "url": "https://juejin.cn/post/7644206599271858226",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -422,7 +436,7 @@
       "desc": "SpringBoot 3.x database performance optimization guide"
     },
     {
-      "id": 31,
+      "id": 32,
       "url": "https://juejin.cn/post/7644845137235689472",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -436,7 +450,7 @@
       "desc": "Lagou founder quits after 13-year struggle, company collapses"
     },
     {
-      "id": 32,
+      "id": 33,
       "url": "https://juejin.cn/post/7644205077851308070",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -447,10 +461,24 @@
       "score": 8,
       "category": "AI模型",
       "title": "呆老师亲授前端转全栈+AI 开发的学习图谱",
-      "desc": "Frontend to full-stack+AI learning roadmap, highly practical"
+      "desc": "Frontend to full-stack+AI development roadmap"
     },
     {
-      "id": 33,
+      "id": 34,
+      "url": "https://juejin.cn/post/7644085410189082634",
+      "platform": "juejin",
+      "platform_label": "掘金",
+      "platform_color": "#0078F0",
+      "platform_icon": "💎",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "其他",
+      "title": "3行代码接入！魔珐星云让我3分钟搭出可交互数字人",
+      "desc": "Mofa Nebula builds interactive digital humans in 3 mins"
+    },
+    {
+      "id": 35,
       "url": "https://juejin.cn/post/7643721690566688804",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -461,10 +489,10 @@
       "score": 8,
       "category": "其他",
       "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "desc": "Exploring Speculation Rules API for seamless 0ms page transitions."
+      "desc": "Exploring Speculation Rules API for instant, seamless page navigation."
     },
     {
-      "id": 34,
+      "id": 36,
       "url": "https://juejin.cn/post/7643821395647627291",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -478,7 +506,35 @@
       "desc": "Compose architecture upgrade supports per-item ViewModel"
     },
     {
-      "id": 35,
+      "id": 37,
+      "url": "https://juejin.cn/post/7644480592969023531",
+      "platform": "juejin",
+      "platform_label": "掘金",
+      "platform_color": "#0078F0",
+      "platform_icon": "💎",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "AI模型",
+      "title": "AI 时代，谷歌都在 Android 官方做了哪些支持？",
+      "desc": "Google's Android AI support includes Gemini integration, AI tools, and developer APIs."
+    },
+    {
+      "id": 38,
+      "url": "https://juejin.cn/post/7644367780077191220",
+      "platform": "juejin",
+      "platform_label": "掘金",
+      "platform_color": "#0078F0",
+      "platform_icon": "💎",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "AI模型",
+      "title": "推行AI写代码一年后，Code Review变成了新的加班理由",
+      "desc": "AI coding boosts efficiency, but code review becomes new overtime"
+    },
+    {
+      "id": 39,
       "url": "https://sspai.com/post/109741",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -492,7 +548,7 @@
       "desc": "Free, open-source macOS screenshot tool with annotation and image bed support."
     },
     {
-      "id": 36,
+      "id": 40,
       "url": "https://sspai.com/post/110106",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -503,10 +559,24 @@
       "score": 8,
       "category": "AI模型",
       "title": "Await：五分钟，把点子变成 iPhone 小组件",
-      "desc": "Await: Turn ideas into iPhone widgets in 5 mins"
+      "desc": "Await turns ideas into iPhone widgets in 5 minutes"
     },
     {
-      "id": 37,
+      "id": 41,
+      "url": "https://sspai.com/post/110120",
+      "platform": "sspai",
+      "platform_label": "少数派",
+      "platform_color": "#D33A2C",
+      "platform_icon": "📱",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 8,
+      "category": "其他",
+      "title": "什么才是「好」的 Android 音频输出？从一台旧日 Xperia 说起",
+      "desc": "Analyzing Android audio output quality through an old Xperia example"
+    },
+    {
+      "id": 42,
       "url": "https://sspai.com/post/110368",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -520,7 +590,7 @@
       "desc": "Harmony Smart launches M9, Nio unveils ES9"
     },
     {
-      "id": 38,
+      "id": 43,
       "url": "https://sspai.com/post/108618",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -531,10 +601,10 @@
       "score": 8,
       "category": "其他",
       "title": "客制化键盘｜近期值得一看的套件与键帽：怪诞主题、复古创新与静电容",
-      "desc": "Custom keyboard kits: quirky, retro, and capacitive"
+      "desc": "Custom keyboards: quirky, retro, and capacitive options"
     },
     {
-      "id": 39,
+      "id": 44,
       "url": "https://view.inews.qq.com/a/20260529A09NMA00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -545,10 +615,10 @@
       "score": 8,
       "category": "其他",
       "title": "国产存储双雄冲刺资本市场，A股硬科技赛道静待“超级时刻”",
-      "desc": "Chinese storage giants eye IPO, boosting A-tech stocks"
+      "desc": "China's storage giants eye A-list debut, tech sector poised for breakthrough"
     },
     {
-      "id": 40,
+      "id": 45,
       "url": "https://m.thepaper.cn/newsDetail_forward_33262014",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -559,10 +629,10 @@
       "score": 8,
       "category": "其他",
       "title": "江西赣州公布一轿车追尾致3死事故调查报告：事发前司机激活智驾并双手脱离方向盘",
-      "desc": "Ganzhou crash: Driver activated autopilot, hands off wheel, 3 killed"
+      "desc": "Ganzhou crash: Driver activated autopilot without hands on wheel, killing 3"
     },
     {
-      "id": 41,
+      "id": 46,
       "url": "https://m.thepaper.cn/newsDetail_forward_33267701",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -576,7 +646,7 @@
       "desc": "Shenzhou-21 landing engine tech explained"
     },
     {
-      "id": 42,
+      "id": 47,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354704&amp;topic_name=%E5%AE%98%E6%96%B9%E5%87%BA%E6%89%8B%2CAI%E5%90%B8%E9%99%84%E9%81%AD%E5%88%91%E4%BA%8B%E6%89%93%E5%87%BB",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -587,10 +657,10 @@
       "score": 8,
       "category": "AI模型",
       "title": "官方出手,AI吸附遭刑事打击",
-      "desc": "Crackdown on AI data scraping with criminal penalties"
+      "desc": "Crackdown on AI data scraping leads to criminal charges"
     },
     {
-      "id": 43,
+      "id": 48,
       "url": "https://www.toutiao.com/trending/7644908963393179199/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -601,10 +671,10 @@
       "score": 8,
       "category": "其他",
       "title": "某国网攻中国高校动用41种武器装备",
-      "desc": "Country targeted Chinese universities with 41 cyber weapons"
+      "desc": "Country targeted Chinese universities with 41 cyberattack tools"
     },
     {
-      "id": 44,
+      "id": 49,
       "url": "https://wallstreetcn.com/articles/3773407",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -618,7 +688,7 @@
       "desc": "Dell's strong earnings: AI servers and all four businesses surged"
     },
     {
-      "id": 45,
+      "id": 50,
       "url": "https://wallstreetcn.com/articles/3773437",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -629,10 +699,10 @@
       "score": 8,
       "category": "消费电子",
       "title": "美伊停火预期提振，美股高开，半导体股普涨，戴尔暴涨33%，油价承压，金银齐涨",
-      "desc": "US-Iran truce boosts stocks, semis surge, Dell jumps 33%, oil dips, gold/silver rise"
+      "desc": "US-Iran truce hopes boost stocks, semis surge, Dell jumps 33%, oil dips, gold/silver rise"
     },
     {
-      "id": 46,
+      "id": 51,
       "url": "https://wallstreetcn.com/articles/3773412",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -643,10 +713,10 @@
       "score": 8,
       "category": "消费电子",
       "title": "创业板跌超2%，科创50重挫逾5%，电力、消费拉升，芯片半导体集体下挫，恒指涨近1%，联想集团再涨超20%",
-      "desc": "ChiNext down 2%, STAR 50 down 5%, power/consumer up, chips down, Hang Seng up 1%, Lenovo up 20%"
+      "desc": "ChiNext down 2%, STAR 50 slumps 5%, power/consumer up, chips down, Hang Seng up 1%, Lenovo up 20%"
     },
     {
-      "id": 47,
+      "id": 52,
       "url": "https://wallstreetcn.com/articles/3773389",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -660,7 +730,7 @@
       "desc": "Anthropic valued at $965B, surpassing OpenAI with 18x PS ratio."
     },
     {
-      "id": 48,
+      "id": 53,
       "url": "https://s.weibo.com/weibo?q=%23%E5%8F%88%E4%B8%80%E5%A4%A7%E5%9B%BD%E9%87%8D%E5%99%A8%E7%A1%AC%E6%A0%B8%E5%88%B7%E5%B1%8F%23&t=31&band_rank=3&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
@@ -671,10 +741,10 @@
       "score": 8,
       "category": "其他",
       "title": "又一大国重器硬核刷屏",
-      "desc": "China's major tech breakthrough highlights strength"
+      "desc": "China's major tech breakthrough gains global attention"
     },
     {
-      "id": 49,
+      "id": 54,
       "url": "https://xueqiu.com/s/00700",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -685,10 +755,10 @@
       "score": 8,
       "category": "其他",
       "title": "腾讯控股",
-      "desc": "Tencent Holdings, Chinese tech giant, diversified business"
+      "desc": "Tencent Holdings operates in social, gaming, fintech, and more."
     },
     {
-      "id": 50,
+      "id": 55,
       "url": "https://www.zhihu.com/question/2043624630074835147",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -699,10 +769,10 @@
       "score": 8,
       "category": "其他",
       "title": "2026 年 5 月 29 日新格伦火箭在发射台上发生大规模爆炸，可能的原因是什么？将会产生哪些影响？",
-      "desc": "New Glenn rocket explosion on launch pad, likely technical, impacts space industry progress."
+      "desc": "New Glenn rocket explosion on launch pad, likely technical failure, impacts space industry."
     },
     {
-      "id": 51,
+      "id": 56,
       "url": "https://www.zhihu.com/question/2043628658565309846",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -716,7 +786,7 @@
       "desc": "Goldman Sachs: Global oil stocks near 73-day supply warning level"
     },
     {
-      "id": 52,
+      "id": 57,
       "url": "http://www.ruanyifeng.com/blog/2026/05/weekly-issue-398.html",
       "platform": "ruanyifeng",
       "platform_label": "ruanyifeng",
@@ -727,7 +797,7 @@
       "score": 8,
       "category": "其他",
       "title": "科技爱好者周刊（第 398 期）：Token 费用难以负担",
-      "desc": "Token costs too high, Week 398 discusses affordability issues",
+      "desc": "High token costs discussed in issue 398 of Tech Weekly, exploring solutions.",
       "merged_sources": [
         {
           "platform": "ruanyifeng",
@@ -739,7 +809,7 @@
       ]
     },
     {
-      "id": 53,
+      "id": 58,
       "url": "http://www.ruanyifeng.com/blog/2026/05/weekly-issue-397.html",
       "platform": "ruanyifeng",
       "platform_label": "ruanyifeng",
@@ -762,7 +832,7 @@
       ]
     },
     {
-      "id": 54,
+      "id": 59,
       "url": "http://www.ruanyifeng.com/blog/2026/05/weekly-issue-396.html",
       "platform": "ruanyifeng",
       "platform_label": "ruanyifeng",
@@ -773,7 +843,7 @@
       "score": 8,
       "category": "其他",
       "title": "科技爱好者周刊（第 396 期）：互联网通信的替代方案",
-      "desc": "Internet communication alternatives, tech and business insights",
+      "desc": "Alternatives to internet communication, high tech value",
       "merged_sources": [
         {
           "platform": "ruanyifeng",
@@ -785,7 +855,7 @@
       ]
     },
     {
-      "id": 55,
+      "id": 60,
       "url": "https://www.solidot.org/story?sid=84417",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -796,10 +866,10 @@
       "score": 7,
       "category": "其他",
       "title": "《巫师3》将于明年推出新资料片《旧时曲》",
-      "desc": "The Witcher 3 to release new expansion 'Blood and Wine'"
+      "desc": "The Witcher 3 to release new expansion 'Blood and Wine' next year"
     },
     {
-      "id": 56,
+      "id": 61,
       "url": "https://www.solidot.org/story?sid=84413",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -813,7 +883,7 @@
       "desc": "Language errors may identify paper mill articles"
     },
     {
-      "id": 57,
+      "id": 62,
       "url": "https://www.solidot.org/story?sid=84411",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -824,24 +894,10 @@
       "score": 7,
       "category": "AI模型",
       "title": "教宗的首份通谕被怀疑部分是在 AI 帮助下撰写的",
-      "desc": "Pope's first encyclical suspected AI-assisted, sparking tech-ethics debate"
+      "desc": "Pope's first encyclical suspected to have AI assistance, sparking debate"
     },
     {
-      "id": 58,
-      "url": "https://www.solidot.org/story?sid=84410",
-      "platform": "solidot",
-      "platform_label": "Solidot",
-      "platform_color": "#555555",
-      "platform_icon": "🔗",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "其他",
-      "title": "维基媒体基金会解雇工会组织者引发社区抗议",
-      "desc": "Wikimedia Foundation fired union organizer, sparking protests."
-    },
-    {
-      "id": 59,
+      "id": 63,
       "url": "https://www.solidot.org/story?sid=84409",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -852,10 +908,10 @@
       "score": 7,
       "category": "其他",
       "title": "伊朗逐步恢复全球联网",
-      "desc": "Iran gradually restores global internet access, impacting international comms and business."
+      "desc": "Iran gradually restores global internet access, impacting comms and biz."
     },
     {
-      "id": 60,
+      "id": 64,
       "url": "https://www.solidot.org/story?sid=84426",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -866,10 +922,10 @@
       "score": 7,
       "category": "其他",
       "title": "Last.fm 独立运营",
-      "desc": "Last.fm operates independently, focusing on music data and community"
+      "desc": "Last.fm operates independently, not part of Sony Music"
     },
     {
-      "id": 61,
+      "id": 65,
       "url": "https://www.solidot.org/story?sid=84425",
       "platform": "solidot",
       "platform_label": "Solidot",
@@ -880,10 +936,10 @@
       "score": 7,
       "category": "其他",
       "title": "黄仁勋将成为最新一位加入清华经管顾问委员会的美国企业高管",
-      "desc": "Jensen Huang joins Tsinghua EMBA advisory council"
+      "desc": "Nvidia's Jensen Huang joins Tsinghua EMBA advisory council, highlighting US-China tech ties"
     },
     {
-      "id": 62,
+      "id": 66,
       "url": "https://www.ithome.com/0/956/823.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -894,10 +950,10 @@
       "score": 7,
       "category": "其他",
       "title": "零零科技发布全球首款 100% 防水飞行相机哈浮 AQUA，8999 元起",
-      "desc": "Lingling Tech launches world's first 100% waterproof drone camera Hafoo AQUA, starting at ¥8999."
+      "desc": "Lingling Tech launches world's first 100% waterproof drone camera AQUA, starting at ¥8999."
     },
     {
-      "id": 63,
+      "id": 67,
       "url": "https://www.ithome.com/0/956/819.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -908,10 +964,10 @@
       "score": 7,
       "category": "消费电子",
       "title": "小米汽车官宣明日开启 YU7 GT 首批车主交付",
-      "desc": "Xiaomi to deliver first batch of YU7 GT cars tomorrow"
+      "desc": "Xiaomi to start YU7 GT deliveries tomorrow"
     },
     {
-      "id": 64,
+      "id": 68,
       "url": "https://www.ithome.com/0/956/818.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -922,10 +978,10 @@
       "score": 7,
       "category": "其他",
       "title": "“用机器人取代餐厅人工岗位”梦碎，曾与达美乐合作的初创公司 Picnic 倒闭",
-      "desc": "Robot startup Picnic, once partnered with Domino's, collapses"
+      "desc": "Robotics startup Picnic, partnered with Domino's, collapses, ending automated dining dreams."
     },
     {
-      "id": 65,
+      "id": 69,
       "url": "https://www.ithome.com/0/956/807.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -939,7 +995,7 @@
       "desc": "Lenovo teases ThinkBook X AI 2026: ~1kg, 12.9mm thin"
     },
     {
-      "id": 66,
+      "id": 70,
       "url": "https://www.ithome.com/0/956/805.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -950,10 +1006,24 @@
       "score": 7,
       "category": "其他",
       "title": "宏碁推出 Predator Atlas 8 掌机：8\" FHD+ 120Hz 500nits 触屏",
-      "desc": "Acer launches Predator Atlas 8 handheld with 8-inch FHD+ 120Hz touchscreen."
+      "desc": "Acer launches Predator Atlas 8 handheld with 8\" FHD+ 120Hz touchscreen"
     },
     {
-      "id": 67,
+      "id": 71,
+      "url": "https://www.zaochenbao.com/news/politics/202605/2872838.html",
+      "platform": "news_aggregator",
+      "platform_label": "新闻聚合",
+      "platform_color": "#94A3B8",
+      "platform_icon": "📡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 7,
+      "category": "AI模型",
+      "title": "AI巨头淡化失业风险 称“就业末日”言过其实",
+      "desc": "AI giants downplay unemployment risk, calling 'job apocalypse' exaggerated"
+    },
+    {
+      "id": 72,
       "url": "https://www.zaochenbao.com/news/politics/202605/2872834.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -967,7 +1037,7 @@
       "desc": "Europe cuts US military reliance, Asia increases investment"
     },
     {
-      "id": 68,
+      "id": 73,
       "url": "https://www.zaochenbao.com/news/china/202605/2872830.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -978,24 +1048,10 @@
       "score": 7,
       "category": "其他",
       "title": "辽宁舰远海训练搭载歼35？中国国防部未正面回应",
-      "desc": "Liaoning carrier's J-35 deployment unconfirmed by MOD"
+      "desc": "Liaoning carrier's J-35 deployment unconfirmed by China"
     },
     {
-      "id": 69,
-      "url": "https://www.zaochenbao.com/news/china/202605/2872828.html",
-      "platform": "news_aggregator",
-      "platform_label": "新闻聚合",
-      "platform_color": "#94A3B8",
-      "platform_icon": "📡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "其他",
-      "title": "拼多多第一季总营收低于预期 在美股价大跌10%",
-      "desc": "Pinduoduo Q1 revenue misses expectations, US stock plunges 10%"
-    },
-    {
-      "id": 70,
+      "id": 74,
       "url": "https://www.zaochenbao.com/news/china/202605/2872826.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -1009,7 +1065,7 @@
       "desc": "Chinese astronauts hand over space station keys"
     },
     {
-      "id": 71,
+      "id": 75,
       "url": "https://www.cls.cn/detail/2385809",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -1023,7 +1079,7 @@
       "desc": "Tech stocks dip due to high valuations, policy shifts, earnings, sentiment"
     },
     {
-      "id": 72,
+      "id": 76,
       "url": "https://www.cls.cn/detail/2385444",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -1034,10 +1090,10 @@
       "score": 7,
       "category": "其他",
       "title": "【每日收评】创业板指震荡下挫跌超2%，科技赛道集体陷入调整，电力、大消费逆势活跃",
-      "desc": "ChiNext down 2%+, tech stocks slump, power, consumer sectors rise"
+      "desc": "ChiNext down 2%, tech stocks slump, power, consumer sectors rise."
     },
     {
-      "id": 73,
+      "id": 77,
       "url": "https://www.cls.cn/detail/2385789",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -1048,10 +1104,10 @@
       "score": 7,
       "category": "其他",
       "title": "停火预期提振市场 美股期指上涨 戴尔盘前暴涨约34% | 今夜看点",
-      "desc": "Ceasefire hopes boost markets, US futures up, Dell surges 34% premarket."
+      "desc": "Ceasefire hopes boost markets, US futures rise, Dell surges 34% premarket."
     },
     {
-      "id": 74,
+      "id": 78,
       "url": "https://www.cls.cn/detail/2385536",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -1065,7 +1121,7 @@
       "desc": "Shanghai Index up 60% in June over 10 years; tech, consumer sectors strong"
     },
     {
-      "id": 75,
+      "id": 79,
       "url": "https://www.cls.cn/detail/2385505",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -1079,7 +1135,7 @@
       "desc": "Multi-capital rushes for Jinkong Power, northbound and institutions buy BOE A"
     },
     {
-      "id": 76,
+      "id": 80,
       "url": "https://www.coolapk.com/feed/72044018",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1093,7 +1149,7 @@
       "desc": "vivo S60 series launched, starting at ¥2899"
     },
     {
-      "id": 77,
+      "id": 81,
       "url": "https://www.coolapk.com/feed/72047797",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1104,10 +1160,10 @@
       "score": 7,
       "category": "其他",
       "title": "新的一波又来了，券到6.1截止，下一波得等到11号了，依往年的经验，好价基本五月底六月初这个阶段了，就这两天了，感觉最后一波了好价了，看到好价就入吧，别等啦 #红米k90promax# #REDMITurbo5Max#",
-      "desc": "Xiaomi K90 Pro Max and Turbo 5 Max promo ends June 1st, grab deals now."
+      "desc": "Xiaomi K90 Pro Max and Turbo 5 Max sale ends June 1, buy now for best deals."
     },
     {
-      "id": 78,
+      "id": 82,
       "url": "https://www.coolapk.com/feed/72038854",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1121,7 +1177,7 @@
       "desc": "Honor WIN Turbo launched, starting at 2699 yuan"
     },
     {
-      "id": 79,
+      "id": 83,
       "url": "https://www.coolapk.com/feed/72047501",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1132,10 +1188,10 @@
       "score": 7,
       "category": "其他",
       "title": "【2283元红米K90Promax】",
-      "desc": "Redmi K90 Pro Max priced at 2283 yuan, specs unspecified"
+      "desc": "Redmi K90 Pro Max priced at 2283 yuan, specs revealed."
     },
     {
-      "id": 80,
+      "id": 84,
       "url": "https://www.coolapk.com/feed/72035813",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1146,10 +1202,10 @@
       "score": 7,
       "category": "消费电子",
       "title": "2026 W21国内手机市场份额曝光：苹果华为vivo前三",
-      "desc": "2026 W21 China phone market: Apple, Huawei, Vivo top 3"
+      "desc": "2026 W21 China smartphone market: Apple, Huawei, Vivo top 3."
     },
     {
-      "id": 81,
+      "id": 85,
       "url": "https://www.coolapk.com/feed/72047576",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1160,10 +1216,10 @@
       "score": 7,
       "category": "AI模型",
       "title": "『来酷 Air 14 发布：首发国补晒单 2999.15 元』",
-      "desc": "Leku Air 14 launch with national subsidy at ¥2999.15"
+      "desc": "Laike Air 14 launched at 2999.15 yuan with subsidy"
     },
     {
-      "id": 82,
+      "id": 86,
       "url": "https://www.coolapk.com/feed/72033010",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1174,10 +1230,10 @@
       "score": 7,
       "category": "消费电子",
       "title": "小米17T系列6月上旬国内发布：\"回家\"后的首款产品",
-      "desc": "Xiaomi 17T series to launch in early June, first product after return"
+      "desc": "Xiaomi 17T series to launch in early June, first product after return."
     },
     {
-      "id": 83,
+      "id": 87,
       "url": "https://www.coolapk.com/feed/72033294",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -1188,24 +1244,10 @@
       "score": 7,
       "category": "消费电子",
       "title": "金标系统201  手机设置的wifi打广告？？？？百年难见？？？？？？没更新金标前从来没发现，那么逆天？？？目前我发现开关在（我问客服了，离谱他说得你在有商家wifi服务附近才有这个开关，没在商家wifi附近开关不显示[汗][汗][汗]）-（设置~WLAN-右上角三个点~WLAN显示设置-免密连接商家网络），得你附近有美团合作的商家wifi然后自动显示出来，点击进去需要登录美团",
-      "desc": "Jinbiao system 201 adds WiFi ads, visible near商家WiFi and requires Meitou login."
+      "desc": "Golden System 201 adds ad-enabled WiFi, visible near商家 stores and requires Meituo login."
     },
     {
-      "id": 84,
-      "url": "https://github.com/microsoft/markitdown",
-      "platform": "github",
-      "platform_label": "GitHub",
-      "platform_color": "#6CCB5F",
-      "platform_icon": "🐙",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "其他",
-      "title": "microsoft /      markitdown",
-      "desc": "Microsoft launches MarkItDown to enhance document processing."
-    },
-    {
-      "id": 85,
+      "id": 88,
       "url": "https://github.com/run-llama/liteparse",
       "platform": "github",
       "platform_label": "GitHub",
@@ -1216,10 +1258,10 @@
       "score": 7,
       "category": "其他",
       "title": "run-llama /      liteparse",
-      "desc": "Lightweight parser for Llama models, optimizing performance and resources."
+      "desc": "Lightweight parser for Llama models, optimizing performance and resources"
     },
     {
-      "id": 86,
+      "id": 89,
       "url": "https://github.com/Biohub/esm",
       "platform": "github",
       "platform_label": "GitHub",
@@ -1230,10 +1272,10 @@
       "score": 7,
       "category": "其他",
       "title": "Biohub /      esm",
-      "desc": "Biohub partners with esm to advance biotech innovation."
+      "desc": "Biohub partners with esm, likely in biotech and business info sharing."
     },
     {
-      "id": 87,
+      "id": 90,
       "url": "https://news.ycombinator.com/item?id=48324712",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -1244,10 +1286,10 @@
       "score": 7,
       "category": "其他",
       "title": "The dead economy theory",
-      "desc": "Dead economy theory: Causes and impacts of economic stagnation"
+      "desc": "Dead economy theory: tech/business implications"
     },
     {
-      "id": 88,
+      "id": 91,
       "url": "https://news.ycombinator.com/item?id=48327809",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -1258,10 +1300,24 @@
       "score": 7,
       "category": "其他",
       "title": "On Rendering Diffs",
-      "desc": "On technical/business value of rendering diffs"
+      "desc": "Technical and business insights on rendering diffs"
     },
     {
-      "id": 89,
+      "id": 92,
+      "url": "https://news.ycombinator.com/item?id=48328365",
+      "platform": "hackernews",
+      "platform_label": "HackerNews",
+      "platform_color": "#FF6600",
+      "platform_icon": "⚡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 7,
+      "category": "其他",
+      "title": "The California state assembly has passed the 'Protect Our Games Act'",
+      "desc": "California passes 'Protect Our Games Act' for gaming industry"
+    },
+    {
+      "id": 93,
       "url": "https://news.ycombinator.com/item?id=48323869",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -1275,7 +1331,7 @@
       "desc": "Framework 12's value proposition is questionable, hard to justify purchase"
     },
     {
-      "id": 90,
+      "id": 94,
       "url": "https://news.ycombinator.com/item?id=48325624",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -1286,10 +1342,24 @@
       "score": 7,
       "category": "其他",
       "title": "Show HN: TV Explorer. Adding advanced UI to free online TV",
-      "desc": "Advanced UI for free online TV, enhancing user experience."
+      "desc": "Advanced UI for free online TV, enhancing user experience"
     },
     {
-      "id": 91,
+      "id": 95,
+      "url": "https://bbs.hupu.com/639571457.html",
+      "platform": "hupu",
+      "platform_label": "虎扑",
+      "platform_color": "#D32F2F",
+      "platform_icon": "🏀",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 7,
+      "category": "其他",
+      "title": "除了探探，Soul，还有什么这类的软件",
+      "desc": "Similar apps to Tantan and Soul"
+    },
+    {
+      "id": 96,
       "url": "https://bbs.hupu.com/639574799.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -1300,10 +1370,10 @@
       "score": 7,
       "category": "其他",
       "title": "八年从机务到博士，人生逆袭了吗",
-      "desc": "From mechanic to PhD in eight years, a career transformation journey"
+      "desc": "From mechanic to PhD: an inspiring journey"
     },
     {
-      "id": 92,
+      "id": 97,
       "url": "https://news.ifeng.com/c/8tWmtJhAndY",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -1317,7 +1387,7 @@
       "desc": "US to deploy 3 Global Hawk drones in Japan"
     },
     {
-      "id": 93,
+      "id": 98,
       "url": "https://news.ifeng.com/c/8tWRTMZFyMV",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -1331,7 +1401,7 @@
       "desc": "Myanmar cracks down on telecom fraud hubs, 77 buildings sealed"
     },
     {
-      "id": 94,
+      "id": 99,
       "url": "https://news.ifeng.com/c/8tWvvzgUmG4",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -1342,10 +1412,10 @@
       "score": 7,
       "category": "其他",
       "title": "日本加速勾连菲律宾，有何图谋？",
-      "desc": "Japan's accelerated ties with Philippines signal strategic goals"
+      "desc": "Japan's closer ties with Philippines aim to boost regional influence"
     },
     {
-      "id": 95,
+      "id": 100,
       "url": "https://juejin.cn/post/7644135664520511497",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -1356,10 +1426,10 @@
       "score": 7,
       "category": "其他",
       "title": "通义灵码不仅改名，还要收费了！！！",
-      "desc": "Tongyi Lingmaa renamed and starts charging"
+      "desc": "Tongyi Lingma rebranded and now charges fees"
     },
     {
-      "id": 96,
+      "id": 101,
       "url": "https://juejin.cn/post/7644097131994054690",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -1373,21 +1443,7 @@
       "desc": "MiMo offers 820B Tokens in 3-day limited event"
     },
     {
-      "id": 97,
-      "url": "https://juejin.cn/post/7644085410189082634",
-      "platform": "juejin",
-      "platform_label": "掘金",
-      "platform_color": "#0078F0",
-      "platform_icon": "💎",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "其他",
-      "title": "3行代码接入！魔珐星云让我3分钟搭出可交互数字人",
-      "desc": "Mofa Nebula builds interactive digital humans in 3 mins with 3 lines of code"
-    },
-    {
-      "id": 98,
+      "id": 102,
       "url": "https://juejin.cn/post/7644135664519741449",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -1398,10 +1454,10 @@
       "score": 7,
       "category": "AI模型",
       "title": "从零开始:前端转型AI agent直到就业第十八天-第五十六天",
-      "desc": "Frontend to AI agent career journey"
+      "desc": "Frontend to AI agent journey: learning path and job prep insights."
     },
     {
-      "id": 99,
+      "id": 103,
       "url": "https://juejin.cn/post/7644918322454593546",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -1415,35 +1471,7 @@
       "desc": "Claude Opus 4.8 test shows AI's progress in admitting ignorance"
     },
     {
-      "id": 100,
-      "url": "https://juejin.cn/post/7644480592969023531",
-      "platform": "juejin",
-      "platform_label": "掘金",
-      "platform_color": "#0078F0",
-      "platform_icon": "💎",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "AI模型",
-      "title": "AI 时代，谷歌都在 Android 官方做了哪些支持？",
-      "desc": "Google integrates AI into Android, enhancing user and developer support."
-    },
-    {
-      "id": 101,
-      "url": "https://juejin.cn/post/7644367780077191220",
-      "platform": "juejin",
-      "platform_label": "掘金",
-      "platform_color": "#0078F0",
-      "platform_icon": "💎",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "AI模型",
-      "title": "推行AI写代码一年后，Code Review变成了新的加班理由",
-      "desc": "AI coding leads to new overtime from Code Review"
-    },
-    {
-      "id": 102,
+      "id": 104,
       "url": "https://sspai.com/post/110156",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1454,7 +1482,7 @@
       "score": 7,
       "category": "其他",
       "title": "派评 | 近期值得关注的 App",
-      "desc": "Recommended apps to watch, featuring practical and emerging tools.",
+      "desc": "Recommended apps for tech/business users, focusing on utility and emerging trends.",
       "merged_sources": [
         {
           "platform": "sspai",
@@ -1466,7 +1494,7 @@
       ]
     },
     {
-      "id": 103,
+      "id": 105,
       "url": "https://sspai.com/post/110044",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1480,7 +1508,7 @@
       "desc": "6 useful and fun browser extensions recommended."
     },
     {
-      "id": 104,
+      "id": 106,
       "url": "https://sspai.com/post/110009",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1503,7 +1531,7 @@
       ]
     },
     {
-      "id": 105,
+      "id": 107,
       "url": "https://sspai.com/post/109869",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1514,10 +1542,10 @@
       "score": 7,
       "category": "AI模型",
       "title": "当 AI 成为角色：漫谈我的 SillyTavern 使用经验",
-      "desc": "Personal SillyTavern experience: AI role-playing insights and practical use."
+      "desc": "Personal SillyTavern experience: AI role-playing insights and applications."
     },
     {
-      "id": 106,
+      "id": 108,
       "url": "https://sspai.com/post/109743",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1528,10 +1556,10 @@
       "score": 7,
       "category": "其他",
       "title": "打破虚拟与现实的边界，这 6 款网页解谜游戏值得一试",
-      "desc": "6 web puzzle games to blur virtual and reality"
+      "desc": "Six web puzzle games blurring virtual and reality"
     },
     {
-      "id": 107,
+      "id": 109,
       "url": "https://sspai.com/post/109777",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1542,10 +1570,10 @@
       "score": 7,
       "category": "其他",
       "title": "为什么我觉得好的东西，媒体评测却给了低分？",
-      "desc": "Why personal views differ from media reviews"
+      "desc": "Reasons for personal vs. media rating differences"
     },
     {
-      "id": 108,
+      "id": 110,
       "url": "https://sspai.com/post/109550",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1556,10 +1584,10 @@
       "score": 7,
       "category": "其他",
       "title": "你真的需要墨水屏设备吗？",
-      "desc": "E-ink devices: practicality vs. market demand"
+      "desc": "Evaluating e-ink devices' practicality and market demand"
     },
     {
-      "id": 109,
+      "id": 111,
       "url": "https://sspai.com/post/109227",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1570,24 +1598,10 @@
       "score": 7,
       "category": "其他",
       "title": "App+1 | 有太多香水不知道用哪个？我做了一款能帮你选香水的记录 App",
-      "desc": "An app to help users choose perfumes, solving selection dilemmas."
+      "desc": "An app to help users choose perfumes and record preferences."
     },
     {
-      "id": 110,
-      "url": "https://sspai.com/post/110120",
-      "platform": "sspai",
-      "platform_label": "少数派",
-      "platform_color": "#D33A2C",
-      "platform_icon": "📱",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 7,
-      "category": "其他",
-      "title": "什么才是「好」的 Android 音频输出？从一台旧日 Xperia 说起",
-      "desc": "Analyzing Android audio output quality via old Xperia's technical aspects."
-    },
-    {
-      "id": 111,
+      "id": 112,
       "url": "https://sspai.com/post/110425",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1598,10 +1612,10 @@
       "score": 7,
       "category": "其他",
       "title": "派早报：Sony 发布 Bravia 2026 款电视产品等",
-      "desc": "Sony unveils Bravia 2026 TV lineup"
+      "desc": "Sony launches Bravia 2026 TV lineup"
     },
     {
-      "id": 112,
+      "id": 113,
       "url": "https://sspai.com/post/110370",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -1612,10 +1626,10 @@
       "score": 7,
       "category": "AI模型",
       "title": "AI Agent 干中学，「造轮子」让我学会了什么？",
-      "desc": "AI Agent development: Technical insights and business value from building from scratch"
+      "desc": "AI Agent practice: Technical insights and business value from building from scratch"
     },
     {
-      "id": 113,
+      "id": 114,
       "url": "https://view.inews.qq.com/a/20260529A096EU00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -1626,10 +1640,10 @@
       "score": 7,
       "category": "其他",
       "title": "智谱和Minimax，为何市值差了4000多亿港元？",
-      "desc": "Zhipu and Minimax differ in market cap due to business strategy and funding."
+      "desc": "Zhipu and Minimax differ in market cap due to business models, funding, and positioning."
     },
     {
-      "id": 114,
+      "id": 115,
       "url": "https://view.inews.qq.com/a/20260529A08PWC00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -1643,7 +1657,7 @@
       "desc": "Claude model mistakenly identifies as DeepSeek, sparking debate on model distillation"
     },
     {
-      "id": 115,
+      "id": 116,
       "url": "https://view.inews.qq.com/a/20260529A0847400",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -1654,10 +1668,10 @@
       "score": 7,
       "category": "安全",
       "title": "趁小马科斯还在位，日本以“罕见速度”推进对菲律宾安全合作",
-      "desc": "Japan rapidly boosts security ties with Philippines amid Marcos' term"
+      "desc": "Japan rapidly boosts security ties with Philippines amid Marcos term."
     },
     {
-      "id": 116,
+      "id": 117,
       "url": "https://m.thepaper.cn/newsDetail_forward_33255027",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -1668,10 +1682,10 @@
       "score": 7,
       "category": "其他",
       "title": "“军费消耗强度历史之最”，五张图看清美国对伊之战代价有多大",
-      "desc": "Five charts reveal the historic cost of US-Iraq war spending"
+      "desc": "Five charts reveal the historical cost of US-Iraq war military spending"
     },
     {
-      "id": 117,
+      "id": 118,
       "url": "https://m.thepaper.cn/newsDetail_forward_33261390",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -1682,10 +1696,10 @@
       "score": 7,
       "category": "其他",
       "title": "“超载客车追尾致13死”背后：“黑车”长途载客普遍，多个“拼车群”揽客",
-      "desc": "Black cars and ride-sharing groups lead to fatal accident"
+      "desc": "Black cars common for long-haul rides, group chat bookings lead to fatal crash"
     },
     {
-      "id": 118,
+      "id": 119,
       "url": "https://m.thepaper.cn/newsDetail_forward_33198299",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -1696,10 +1710,10 @@
       "score": 7,
       "category": "其他",
       "title": "财晓得｜上海，凭什么被拍了千万遍？",
-      "desc": "Shanghai's economy, culture, and global appeal make it a top filming destination"
+      "desc": "Shanghai's unique charm and economic vitality make it a frequent filming location"
     },
     {
-      "id": 119,
+      "id": 120,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354712&amp;topic_name=%E5%AE%98%E5%AE%A3%21LPL%E7%BC%BA%E5%B8%AD26%E5%B1%8A%E4%BA%9A%E8%BF%90%E4%BC%9A",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -1713,7 +1727,7 @@
       "desc": "LPL absent from 26th Asian Games, esports not included"
     },
     {
-      "id": 120,
+      "id": 121,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354697&amp;topic_name=%E5%8F%8B%E5%95%86%E4%BD%9C%E6%AD%BB%2C%E9%9B%B7%E8%9B%87%E7%99%BD%E6%8D%A1%E5%A4%A7%E8%AE%A2%E5%8D%95",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -1724,10 +1738,10 @@
       "score": 7,
       "category": "其他",
       "title": "友商作死,雷蛇白捡大订单",
-      "desc": "Competitor's mistake leads to Razer's big order win"
+      "desc": "Razer benefits from rival's mistake with big order"
     },
     {
-      "id": 121,
+      "id": 122,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354682&amp;topic_name=%E6%AF%94%E4%BA%9A%E8%BF%AA%E6%99%BA%E9%A9%BE%E5%87%BA%E4%BA%8B%E5%85%A8%E9%A2%9D%E8%B5%94%E4%BB%98",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -1738,24 +1752,24 @@
       "score": 7,
       "category": "智能汽车",
       "title": "比亚迪智驾出事全额赔付",
-      "desc": "BYD offers full compensation for smart driving accidents"
+      "desc": "BYD offers full compensation for autonomous driving accidents"
     },
     {
-      "id": 122,
-      "url": "https://www.toutiao.com/trending/7645130450575196187/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
+      "id": 123,
+      "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354705&amp;topic_name=%E6%B7%B1%E8%93%9D%E6%BB%91%E8%B7%AA%E5%A4%AA%E6%99%9A%2C%E7%8E%A9%E5%AE%B6%E4%B8%8D%E4%B9%B0%E8%B4%A6",
+      "platform": "tieba",
+      "platform_label": "百度贴吧",
+      "platform_color": "#4B90E0",
+      "platform_icon": "📋",
       "hot": 0,
       "date": "2026-05-30",
       "score": 7,
       "category": "其他",
-      "title": "心率与寿命有关系吗",
-      "desc": "Heart rate correlates with lifespan; lower resting heart rate may mean longer life."
+      "title": "深蓝滑跪太晚,玩家不买账",
+      "desc": "Deep Blue's apology too late, players dissatisfied"
     },
     {
-      "id": 123,
+      "id": 124,
       "url": "https://wallstreetcn.com/articles/3773313",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -1766,10 +1780,10 @@
       "score": 7,
       "category": "其他",
       "title": "美伊停火传言搅动市场，美股三大指数收创新高，黄金深V反转，原油震荡走平",
-      "desc": "US-Iran ceasefire rumors boost stocks, gold rebounds, oil flat"
+      "desc": "US-Iran ceasefire talk boosts stocks, gold rebounds, oil flat"
     },
     {
-      "id": 124,
+      "id": 125,
       "url": "https://wallstreetcn.com/articles/3773416",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -1780,10 +1794,10 @@
       "score": 7,
       "category": "其他",
       "title": "从英特尔、美光、到戴尔--“白宫股神”名不虚传，“先买再吹”屡试不爽",
-      "desc": "White House stock guru's tech stock calls prove accurate"
+      "desc": "White House stock guru accurately predicts tech stocks like Intel, Micron, Dell, using buy-then-hype strategy"
     },
     {
-      "id": 125,
+      "id": 126,
       "url": "https://wallstreetcn.com/articles/3773415",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -1794,10 +1808,10 @@
       "score": 7,
       "category": "其他",
       "title": "一群赌徒，比华尔街更早知道世界会发生什么",
-      "desc": "Gamblers predict global events earlier than Wall Street, revealing market asymmetry"
+      "desc": "Gamblers predict global events earlier than Wall Street via market fluctuations."
     },
     {
-      "id": 126,
+      "id": 127,
       "url": "https://xueqiu.com/s/MU",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -1808,10 +1822,24 @@
       "score": 7,
       "category": "其他",
       "title": "美光科技",
-      "desc": "Micron Technology is a leading global memory chip maker, specializing in DRAM and NAND flash."
+      "desc": "Micron is a leading global memory chip manufacturer."
     },
     {
-      "id": 127,
+      "id": 128,
+      "url": "https://www.zhihu.com/question/2043777043955807460",
+      "platform": "zhihu",
+      "platform_label": "知乎",
+      "platform_color": "#0066FF",
+      "platform_icon": "💡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 7,
+      "category": "其他",
+      "title": "释永信一审被判有期徒刑 24 年，涉案金额过亿，哪些信息值得关注？如何从法律角度解读？",
+      "desc": "Yongxin sentenced to 24 years, over 100M involved; legal focus on procedure and sentencing."
+    },
+    {
+      "id": 129,
       "url": "https://www.zhihu.com/question/2043658069372925943",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1825,7 +1853,7 @@
       "desc": "Yen weakest currency, sparks market debate"
     },
     {
-      "id": 128,
+      "id": 130,
       "url": "https://www.zhihu.com/question/2042642736826816309",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1839,7 +1867,7 @@
       "desc": "Haidilao restores beef topping supply, reflecting operational strategy adjustment."
     },
     {
-      "id": 129,
+      "id": 131,
       "url": "https://www.zhihu.com/question/2043644166786082651",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1850,10 +1878,10 @@
       "score": 7,
       "category": "其他",
       "title": "如何看待博主爆料 2026 名古屋亚运会中国电竞代表队将仅参加 2 个项目，其中疑不包含《英雄联盟》？",
-      "desc": "China's esports team may only compete in 2 events at 2026 Asiad, excluding LoL"
+      "desc": "China's esports team may only compete in 2 events, excluding LoL at 2026 Asiad"
     },
     {
-      "id": 130,
+      "id": 132,
       "url": "https://www.zhihu.com/question/2043515093007303790",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1867,7 +1895,7 @@
       "desc": "Claude4.8Opus suspected of distilling Chinese open-source models"
     },
     {
-      "id": 131,
+      "id": 133,
       "url": "https://www.zhihu.com/question/20443913",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1881,7 +1909,7 @@
       "desc": "Low prices due to mass production, automation, and efficient supply chains."
     },
     {
-      "id": 132,
+      "id": 134,
       "url": "https://www.zhihu.com/question/2043093805394547810",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1892,10 +1920,10 @@
       "score": 7,
       "category": "其他",
       "title": "老伯因信浑身没劲即缺钾，连续半月每天吃三四根香蕉‌险丧命，浑身没劲真是缺钾吗？盲目补钾可能有哪些问题？",
-      "desc": "Man nearly died from excessive banana intake due to potassium imbalance"
+      "desc": "Elderly's banana overdose nearly fatal;盲目补钾风险高"
     },
     {
-      "id": 133,
+      "id": 135,
       "url": "https://www.zhihu.com/question/2043451953171132948",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1909,7 +1937,7 @@
       "desc": "14 scammed working Shanghai Metro unpaid, highlights job fraud detection challenges."
     },
     {
-      "id": 134,
+      "id": 136,
       "url": "https://www.zhihu.com/question/2043702700794013075",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1923,7 +1951,7 @@
       "desc": "Japan evacuates residents in drill, seen as Taiwan conflict rehearsal"
     },
     {
-      "id": 135,
+      "id": 137,
       "url": "https://www.zhihu.com/question/2043381658175501842",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -1937,7 +1965,7 @@
       "desc": "XPeng lost 1.87B in Q1, high R&D costs, sales pressure"
     },
     {
-      "id": 136,
+      "id": 138,
       "url": "https://www.ithome.com/0/956/813.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -1948,24 +1976,10 @@
       "score": 6,
       "category": "其他",
       "title": "鸿蒙智行官宣粤港澳车展将展出 13 款车型，展台面积达 5000㎡",
-      "desc": "Harmony Auto to showcase 13 models at Guangdong-HK-Macau Auto Show"
+      "desc": "Harmony Auto showcases 13 models at Guangdong-HK-Macau Auto Show"
     },
     {
-      "id": 137,
-      "url": "https://www.zaochenbao.com/news/politics/202605/2872838.html",
-      "platform": "news_aggregator",
-      "platform_label": "新闻聚合",
-      "platform_color": "#94A3B8",
-      "platform_icon": "📡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 6,
-      "category": "AI模型",
-      "title": "AI巨头淡化失业风险 称“就业末日”言过其实",
-      "desc": "AI giants downplay unemployment risks, calling 'job apocalypse' exaggerated"
-    },
-    {
-      "id": 138,
+      "id": 139,
       "url": "https://www.cls.cn/detail/2385586",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -1979,7 +1993,7 @@
       "desc": "Tech funds losing money, investors mock 'standing in light'"
     },
     {
-      "id": 139,
+      "id": 140,
       "url": "https://news.ycombinator.com/item?id=48319524",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -1990,38 +2004,10 @@
       "score": 6,
       "category": "其他",
       "title": "Show HN: Zot – Yet another coding agent harness",
-      "desc": "Zot: Another coding agent tool to streamline development."
-    },
-    {
-      "id": 140,
-      "url": "https://bbs.hupu.com/639571457.html",
-      "platform": "hupu",
-      "platform_label": "虎扑",
-      "platform_color": "#D32F2F",
-      "platform_icon": "🏀",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 6,
-      "category": "其他",
-      "title": "除了探探，Soul，还有什么这类的软件",
-      "desc": "Social apps like Tantan and Soul"
+      "desc": "Zot: Another coding agent to boost productivity"
     },
     {
       "id": 141,
-      "url": "https://news.ifeng.com/c/8tWtCZfg2nz",
-      "platform": "ifeng",
-      "platform_label": "凤凰网",
-      "platform_color": "#FF6600",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 6,
-      "category": "其他",
-      "title": "特朗普如何让一个格陵兰激进独立斗士变成“爱国者”",
-      "desc": "Trump influenced a Greenland independence activist to become a patriot"
-    },
-    {
-      "id": 142,
       "url": "https://juejin.cn/post/7644026750097883179",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -2035,7 +2021,7 @@
       "desc": "Flutter multi-window progress delayed, 3.44 not yet released"
     },
     {
-      "id": 143,
+      "id": 142,
       "url": "https://view.inews.qq.com/a/20260529A0A7JF00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2046,10 +2032,10 @@
       "score": 6,
       "category": "其他",
       "title": "媒体曝女大学生因恋爱被家人骗进戒网瘾学校，当地：该机构未经审批",
-      "desc": "Woman deceived into unapproved rehab by family over romance"
+      "desc": "Woman deceived by family into unapproved rehab school"
     },
     {
-      "id": 144,
+      "id": 143,
       "url": "https://m.thepaper.cn/newsDetail_forward_33262351",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -2063,7 +2049,7 @@
       "desc": "Scenic spots blocking provincial roads for fees sparks debate"
     },
     {
-      "id": 145,
+      "id": 144,
       "url": "https://m.thepaper.cn/newsDetail_forward_33262119",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -2074,10 +2060,10 @@
       "score": 6,
       "category": "其他",
       "title": "日本自卫队员赴德就俄乌冲突“取经”",
-      "desc": "Japanese Self-Defense Force members visit Germany to learn from Russia-Ukraine conflict"
+      "desc": "Japanese Self-Defense Force members visit Germany to learn from Ukraine conflict"
     },
     {
-      "id": 146,
+      "id": 145,
       "url": "https://m.thepaper.cn/newsDetail_forward_33260666",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -2088,7 +2074,21 @@
       "score": 6,
       "category": "AI模型",
       "title": "莫言接受央媒专访：有志气的作家不会屈服于AI压力，还是要坚持原创",
-      "desc": "Mo Yan urges writers to resist AI pressure and uphold originality"
+      "desc": "Mo Yan urges writers to resist AI pressure and stick to originality."
+    },
+    {
+      "id": 146,
+      "url": "https://m.thepaper.cn/newsDetail_forward_33262002",
+      "platform": "pengpai",
+      "platform_label": "澎湃新闻",
+      "platform_color": "#E60012",
+      "platform_icon": "📱",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 6,
+      "category": "其他",
+      "title": "夺取加沙70%区域、扩大在黎战区：以色列多线作战破坏美伊和平？",
+      "desc": "Israel expands Gaza, Lebanon operations, risking US-Iran peace."
     },
     {
       "id": 147,
@@ -2102,7 +2102,7 @@
       "score": 6,
       "category": "其他",
       "title": "B站商城擦边产品遭质疑",
-      "desc": "B站商城's borderline products spark controversy over platform oversight"
+      "desc": "B站商城 faces controversy over suggestive products"
     },
     {
       "id": 148,
@@ -2120,20 +2120,6 @@
     },
     {
       "id": 149,
-      "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354705&amp;topic_name=%E6%B7%B1%E8%93%9D%E6%BB%91%E8%B7%AA%E5%A4%AA%E6%99%9A%2C%E7%8E%A9%E5%AE%B6%E4%B8%8D%E4%B9%B0%E8%B4%A6",
-      "platform": "tieba",
-      "platform_label": "百度贴吧",
-      "platform_color": "#4B90E0",
-      "platform_icon": "📋",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 6,
-      "category": "其他",
-      "title": "深蓝滑跪太晚,玩家不买账",
-      "desc": "Deep Blue's late apology angers players"
-    },
-    {
-      "id": 150,
       "url": "https://www.toutiao.com/trending/7644920674053537833/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -2144,7 +2130,21 @@
       "score": 6,
       "category": "其他",
       "title": "越来越多的日本人办理“死后离婚”",
-      "desc": "Rising 'post-mortem divorce' trend in Japan reflects shifting social norms"
+      "desc": "Japan's rising trend of 'post-mortem divorce' impacts inheritance and norms"
+    },
+    {
+      "id": 150,
+      "url": "https://www.toutiao.com/trending/7645130450575196187/",
+      "platform": "toutiao",
+      "platform_label": "今日头条",
+      "platform_color": "#E63946",
+      "platform_icon": "📰",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 6,
+      "category": "其他",
+      "title": "心率与寿命有关系吗",
+      "desc": "Heart rate and lifespan have a complex, multifactorial relationship."
     },
     {
       "id": 151,
@@ -2162,48 +2162,34 @@
     },
     {
       "id": 152,
-      "url": "https://github.com/byoungd/English-level-up-tips",
-      "platform": "github",
-      "platform_label": "GitHub",
-      "platform_color": "#6CCB5F",
-      "platform_icon": "🐙",
+      "url": "https://www.chongbuluo.com/thread-24455-1-1.html",
+      "platform": "chongbuluo",
+      "platform_label": "虫部落",
+      "platform_color": "#4A90E2",
+      "platform_icon": "🔍",
       "hot": 0,
       "date": "2026-05-30",
       "score": 5,
       "category": "其他",
-      "title": "byoungd /      English-level-up-tips",
-      "desc": "Basic English learning tips for tech/business readers"
+      "title": "27岁普通女生，裸辞去学一门技术，冲动了嘛？",
+      "desc": "27-year-old quits job to learn tech: impulsive or calculated?"
     },
     {
       "id": 153,
-      "url": "https://github.com/Crosstalk-Solutions/project-nomad",
-      "platform": "github",
-      "platform_label": "GitHub",
-      "platform_color": "#6CCB5F",
-      "platform_icon": "🐙",
+      "url": "https://www.toutiao.com/trending/7644946487860232219/",
+      "platform": "toutiao",
+      "platform_label": "今日头条",
+      "platform_color": "#E63946",
+      "platform_icon": "📰",
       "hot": 0,
       "date": "2026-05-30",
       "score": 5,
       "category": "其他",
-      "title": "Crosstalk-Solutions /      project-nomad",
-      "desc": "Project involves cross-platform solutions, limited info"
+      "title": "省级“十五五”规划纲要看点之一",
+      "desc": "Analysis of provincial 15th Five-Year Plan key points"
     },
     {
       "id": 154,
-      "url": "https://bbs.hupu.com/639575718.html",
-      "platform": "hupu",
-      "platform_label": "虎扑",
-      "platform_color": "#D32F2F",
-      "platform_icon": "🏀",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 5,
-      "category": "其他",
-      "title": "哈哈哈，笑死我了",
-      "desc": "No value, pure entertainment"
-    },
-    {
-      "id": 155,
       "url": "https://wallstreetcn.com/articles/3773398",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -2214,11 +2200,11 @@
       "score": 5,
       "category": "其他",
       "title": "华尔街见闻早餐FM-Radio | 2026年5月29日",
-      "desc": "Wallstreet Breakfast FM-Radio | May 29, 2026"
+      "desc": "Wall Street Breakfast FM-Radio | May 29, 2026"
     },
     {
-      "id": 156,
-      "url": "https://xueqiu.com/s/DELL",
+      "id": 155,
+      "url": "https://xueqiu.com/s/MSFT",
       "platform": "xueqiu",
       "platform_label": "雪球",
       "platform_color": "#FF6B35",
@@ -2227,11 +2213,11 @@
       "date": "2026-05-30",
       "score": 5,
       "category": "其他",
-      "title": "戴尔科技",
-      "desc": "Dell Technologies: Global IT solutions provider, hardware, software, services."
+      "title": "微软",
+      "desc": ""
     },
     {
-      "id": 157,
+      "id": 156,
       "url": "https://xueqiu.com/s/SZ300476",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -2242,10 +2228,10 @@
       "score": 5,
       "category": "其他",
       "title": "胜宏科技",
-      "desc": "Shenghong Technology is an electronics manufacturer specializing in PCBs."
+      "desc": "Shenghong Technology is an electronics manufacturer with limited info value."
     },
     {
-      "id": 158,
+      "id": 157,
       "url": "https://www.ithome.com/0/956/817.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -2256,10 +2242,10 @@
       "score": 3,
       "category": "其他",
       "title": "Epic 喜加二：《孤星猎人》《Calico》游戏免费领取",
-      "desc": "Epic offers free games: 'Lone Hunter' and 'Calico'."
+      "desc": "Epic free games: 'Lonely Star Hunter' and 'Calico'"
     },
     {
-      "id": 159,
+      "id": 158,
       "url": "https://www.ithome.com/0/956/815.htm",
       "platform": "ithome",
       "platform_label": "IT之家",
@@ -2270,10 +2256,10 @@
       "score": 3,
       "category": "其他",
       "title": "人类并非宇宙唯一：斯皮尔伯格全新科幻电影《揭秘日》定档 6 月 12 日上映",
-      "desc": "Spielberg's sci-fi film 'Disclosure Day' set for June 12 release"
+      "desc": "Spielberg's new sci-fi film 'Disclosure Day' set for June 12 release"
     },
     {
-      "id": 160,
+      "id": 159,
       "url": "https://www.zaochenbao.com/news/politics/202605/2872839.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2284,10 +2270,10 @@
       "score": 3,
       "category": "其他",
       "title": "特朗普就海峡控制权警告阿曼 不守规矩将被“炸毁”",
-      "desc": "Trump warns Oman over strait control, threatens destruction"
+      "desc": "Trump warns Oman Strait control will be destroyed if rules not followed."
     },
     {
-      "id": 161,
+      "id": 160,
       "url": "https://www.zaochenbao.com/news/politics/202605/2872836.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2298,10 +2284,10 @@
       "score": 3,
       "category": "其他",
       "title": "美媒：美军完成对古巴军事部署 只等特朗普一声令下",
-      "desc": "US military deployed to Cuba, awaiting Trump's order"
+      "desc": "US military deployed in Cuba, awaiting Trump's order"
     },
     {
-      "id": 162,
+      "id": 161,
       "url": "https://www.zaochenbao.com/news/politics/202605/2872835.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2315,7 +2301,7 @@
       "desc": "Zelensky visits Sweden to discuss air defense pact"
     },
     {
-      "id": 163,
+      "id": 162,
       "url": "https://www.zaochenbao.com/news/china/202605/2872833.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2329,7 +2315,7 @@
       "desc": "Private disaster relief may disrupt social stability"
     },
     {
-      "id": 164,
+      "id": 163,
       "url": "https://www.zaochenbao.com/news/china/202605/2872832.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2340,10 +2326,10 @@
       "score": 3,
       "category": "其他",
       "title": "河南女子抽奖赢世界杯门票决定转售 网民称愿付50万人民币",
-      "desc": "Henan woman resells World Cup tickets for 500k yuan"
+      "desc": "Henan woman resells World Cup ticket for 500k yuan"
     },
     {
-      "id": 165,
+      "id": 164,
       "url": "https://www.zaochenbao.com/news/china/202605/2872831.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2354,10 +2340,10 @@
       "score": 3,
       "category": "其他",
       "title": "美网红陕西搭便车视频走红 当事司机：怕他们是间谍",
-      "desc": "US influencer's hitchhiking video goes viral, driver suspected spies"
+      "desc": "US vlogger's hitchhiking video in Shaanxi goes viral, driver suspected spies"
     },
     {
-      "id": 166,
+      "id": 165,
       "url": "https://www.zaochenbao.com/news/taiwan/202605/2872829.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -2368,24 +2354,10 @@
       "score": 3,
       "category": "其他",
       "title": "台海升温内外交困 赖清德如何破局？| 世界大解说",
-      "desc": "Taiwan tensions rise, Lai faces domestic and external challenges"
+      "desc": "Taiwan tensions rise, Lai Ching-te faces challenges, seeking solutions."
     },
     {
-      "id": 167,
-      "url": "https://www.zaochenbao.com/news/china/202605/2872825.html",
-      "platform": "news_aggregator",
-      "platform_label": "新闻聚合",
-      "platform_color": "#94A3B8",
-      "platform_icon": "📡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "中国最高检：对个人极端等重大恶性犯罪快捕快诉从重从严惩治",
-      "desc": "China's top prosecutor vows swift, severe punishment for extreme crimes"
-    },
-    {
-      "id": 168,
+      "id": 166,
       "url": "https://www.chongbuluo.com/thread-24394-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -2396,10 +2368,10 @@
       "score": 3,
       "category": "其他",
       "title": "Linux.do 邀请码发放",
-      "desc": "Linux.do invite code distribution, community event"
+      "desc": "Linux.do invite code release, low value"
     },
     {
-      "id": 169,
+      "id": 167,
       "url": "https://www.chongbuluo.com/thread-24271-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -2410,10 +2382,10 @@
       "score": 3,
       "category": "其他",
       "title": "网盘资源搜索小程序（永久免费使用）",
-      "desc": "Free cloud drive search mini-program"
+      "desc": "Free cloud drive search tool, limited features"
     },
     {
-      "id": 170,
+      "id": 168,
       "url": "https://www.chongbuluo.com/thread-24194-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -2424,24 +2396,10 @@
       "score": 3,
       "category": "其他",
       "title": "最近逛论坛逛上瘾了，有没有推荐的论坛",
-      "desc": "Asking for forum recommendations, lacks specific value"
+      "desc": "Asking for forum recommendations, low value"
     },
     {
-      "id": 171,
-      "url": "https://www.chongbuluo.com/thread-24455-1-1.html",
-      "platform": "chongbuluo",
-      "platform_label": "虫部落",
-      "platform_color": "#4A90E2",
-      "platform_icon": "🔍",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "27岁普通女生，裸辞去学一门技术，冲动了嘛？",
-      "desc": "Woman quitting job to learn tech: impulsive or calculated?"
-    },
-    {
-      "id": 172,
+      "id": 169,
       "url": "https://www.cls.cn/detail/2385674",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -2455,7 +2413,7 @@
       "desc": "Ding Xiangqiang appointed Party Secretary of NFRA"
     },
     {
-      "id": 173,
+      "id": 170,
       "url": "https://www.cls.cn/detail/2385610",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -2466,10 +2424,10 @@
       "score": 3,
       "category": "其他",
       "title": "68920元/平 江苏省诞生新单价“地王”",
-      "desc": "Jiangsu sets new land price record at 68920/sqm"
+      "desc": "Jiangsu sets new land price record at 68,920 yuan/sqm"
     },
     {
-      "id": 174,
+      "id": 171,
       "url": "https://www.cls.cn/detail/2385699",
       "platform": "cailianshe",
       "platform_label": "财联社",
@@ -2480,10 +2438,10 @@
       "score": 3,
       "category": "其他",
       "title": "涉案金额过亿 释永信一审被判有期徒刑24年",
-      "desc": "Yixin sentenced to 24 years in $100M case"
+      "desc": "Yixin Shi sentenced to 24 years for over 100M case"
     },
     {
-      "id": 175,
+      "id": 172,
       "url": "https://www.coolapk.com/feed/72036164",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -2494,10 +2452,10 @@
       "score": 3,
       "category": "消费电子",
       "title": "小米15后盖凸起的真正原因？",
-      "desc": "Reason for Xiaomi 15's back cover bump unclear, possibly design or散热。"
+      "desc": "Reason for Xiaomi 15's back cover bulge unclear, possibly design or散热。"
     },
     {
-      "id": 176,
+      "id": 173,
       "url": "https://www.coolapk.com/feed/72007823",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -2511,7 +2469,7 @@
       "desc": "Sister dislikes Xiaomi 15 for iPhone X due to peer pressure"
     },
     {
-      "id": 177,
+      "id": 174,
       "url": "https://www.coolapk.com/feed/72047653",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -2525,7 +2483,21 @@
       "desc": "5999 yuan car model reappears on Taobao"
     },
     {
-      "id": 178,
+      "id": 175,
+      "url": "https://github.com/microsoft/markitdown",
+      "platform": "github",
+      "platform_label": "GitHub",
+      "platform_color": "#6CCB5F",
+      "platform_icon": "🐙",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 3,
+      "category": "其他",
+      "title": "microsoft /      markitdown",
+      "desc": "Microsoft acquires Markitdown to integrate Markdown tools"
+    },
+    {
+      "id": 176,
       "url": "https://github.com/EveryInc/compound-engineering-plugin",
       "platform": "github",
       "platform_label": "GitHub",
@@ -2536,38 +2508,10 @@
       "score": 3,
       "category": "其他",
       "title": "EveryInc /      compound-engineering-plugin",
-      "desc": "EveryInc compound-engineering-plugin, limited tech info"
+      "desc": "EveryInc compound-engineering-plugin, limited technical info."
     },
     {
-      "id": 179,
-      "url": "https://github.com/twentyhq/twenty",
-      "platform": "github",
-      "platform_label": "GitHub",
-      "platform_color": "#6CCB5F",
-      "platform_icon": "🐙",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "twentyhq /      twenty",
-      "desc": "TwentyHQ is an open-source project, details unclear."
-    },
-    {
-      "id": 180,
-      "url": "https://github.com/anthropics/claude-code",
-      "platform": "github",
-      "platform_label": "GitHub",
-      "platform_color": "#6CCB5F",
-      "platform_icon": "🐙",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "anthropics /      claude-code",
-      "desc": "Anthropic/Claude code content, limited informational value"
-    },
-    {
-      "id": 181,
+      "id": 177,
       "url": "https://github.com/Leonxlnx/taste-skill",
       "platform": "github",
       "platform_label": "GitHub",
@@ -2578,10 +2522,10 @@
       "score": 3,
       "category": "其他",
       "title": "Leonxlnx /      taste-skill",
-      "desc": "Tech project, limited value"
+      "desc": "A repository about taste-skill, limited content"
     },
     {
-      "id": 182,
+      "id": 178,
       "url": "https://github.com/galilai-group/stable-worldmodel",
       "platform": "github",
       "platform_label": "GitHub",
@@ -2595,8 +2539,8 @@
       "desc": "Galilai Group's stable-worldmodel project lacks detailed information"
     },
     {
-      "id": 183,
-      "url": "https://github.com/DigitalPlatDev/FreeDomain",
+      "id": 179,
+      "url": "https://github.com/byoungd/English-level-up-tips",
       "platform": "github",
       "platform_label": "GitHub",
       "platform_color": "#6CCB5F",
@@ -2604,12 +2548,26 @@
       "hot": 0,
       "date": "2026-05-30",
       "score": 3,
-      "category": "AI模型",
-      "title": "DigitalPlatDev /      FreeDomain",
-      "desc": "Limited info on DigitalPlatDev/FreeDomain, low value."
+      "category": "其他",
+      "title": "byoungd /      English-level-up-tips",
+      "desc": "Basic English tips, lacks depth for tech/business readers."
     },
     {
-      "id": 184,
+      "id": 180,
+      "url": "https://github.com/Crosstalk-Solutions/project-nomad",
+      "platform": "github",
+      "platform_label": "GitHub",
+      "platform_color": "#6CCB5F",
+      "platform_icon": "🐙",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 3,
+      "category": "其他",
+      "title": "Crosstalk-Solutions /      project-nomad",
+      "desc": "Project title, no substantial info"
+    },
+    {
+      "id": 181,
       "url": "https://news.ycombinator.com/item?id=48328932",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -2623,7 +2581,7 @@
       "desc": "Reasons for collecting DLES unclear, low informational value"
     },
     {
-      "id": 185,
+      "id": 182,
       "url": "https://bbs.hupu.com/639576579.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -2637,7 +2595,7 @@
       "desc": "Vague content, lacks specifics"
     },
     {
-      "id": 186,
+      "id": 183,
       "url": "https://bbs.hupu.com/639566429.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -2651,7 +2609,7 @@
       "desc": "Is a 120km commute worth the time and effort?"
     },
     {
-      "id": 187,
+      "id": 184,
       "url": "https://bbs.hupu.com/639574362.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -2662,10 +2620,10 @@
       "score": 3,
       "category": "其他",
       "title": "都觉得辅警没前途，那为什么依然那么多人愿意当辅警？",
-      "desc": "Low barriers and stability attract辅警 despite limited prospects."
+      "desc": "Despite limited prospects, many still choose to be auxiliary police"
     },
     {
-      "id": 188,
+      "id": 185,
       "url": "https://bbs.hupu.com/639579669.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -2679,7 +2637,7 @@
       "desc": "Comparison of The Homelander and Superman, clear gap"
     },
     {
-      "id": 189,
+      "id": 186,
       "url": "https://news.ifeng.com/c/8tWTwiBm9R3",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -2693,7 +2651,7 @@
       "desc": "US lawmaker criticizes Zelensky, says US not an ATM"
     },
     {
-      "id": 190,
+      "id": 187,
       "url": "https://news.ifeng.com/c/8tWwzy1f6k3",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -2707,7 +2665,7 @@
       "desc": "Iranian speaker says missiles, not dialogue, will force concessions"
     },
     {
-      "id": 191,
+      "id": 188,
       "url": "https://news.ifeng.com/c/8tWa6lFGrPh",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -2721,7 +2679,7 @@
       "desc": "Mohammed Ouda beheaded upon taking office, limited details."
     },
     {
-      "id": 192,
+      "id": 189,
       "url": "https://news.ifeng.com/c/8tWfucOUUMk",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -2735,7 +2693,7 @@
       "desc": "Few reporters at Shangri-La Dialogue, rare scene"
     },
     {
-      "id": 193,
+      "id": 190,
       "url": "https://news.ifeng.com/c/8tWAEnAqbm8",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -2749,7 +2707,21 @@
       "desc": "Shangri-La Dialogue opens, Vietnam's president makes first speech"
     },
     {
-      "id": 194,
+      "id": 191,
+      "url": "https://news.ifeng.com/c/8tWtCZfg2nz",
+      "platform": "ifeng",
+      "platform_label": "凤凰网",
+      "platform_color": "#FF6600",
+      "platform_icon": "📰",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 3,
+      "category": "其他",
+      "title": "特朗普如何让一个格陵兰激进独立斗士变成“爱国者”",
+      "desc": "Trump turned a Greenland independence activist into a supporter"
+    },
+    {
+      "id": 192,
       "url": "https://news.ifeng.com/c/8tWge9FIhO7",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -2763,7 +2735,7 @@
       "desc": "First batch arrives in Canada, US closely monitoring"
     },
     {
-      "id": 195,
+      "id": 193,
       "url": "https://juejin.cn/post/7644135664519921673",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -2777,7 +2749,7 @@
       "desc": "Why experienced coders don't build their own mini-programs?"
     },
     {
-      "id": 196,
+      "id": 194,
       "url": "https://sspai.com/post/110046",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -2788,7 +2760,7 @@
       "score": 3,
       "category": "其他",
       "title": "本周看什么 | 最近值得一看的 7 部作品",
-      "desc": "7 recent works worth watching, including films and books.",
+      "desc": "7 recent works recommended, limited tech/business relevance.",
       "merged_sources": [
         {
           "platform": "sspai",
@@ -2800,7 +2772,7 @@
       ]
     },
     {
-      "id": 197,
+      "id": 195,
       "url": "https://sspai.com/prime/story/how-to-renovate-a-rental-bedroom",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -2811,10 +2783,10 @@
       "score": 3,
       "category": "其他",
       "title": "住久了没意思（三）：打造能好好放松的卧室",
-      "desc": "Bedroom relaxation tips, practical but shallow"
+      "desc": "Bedroom relaxation tips, low business value"
     },
     {
-      "id": 198,
+      "id": 196,
       "url": "https://sspai.com/prime/story/hair-dye-tutorial",
       "platform": "sspai",
       "platform_label": "少数派",
@@ -2828,7 +2800,21 @@
       "desc": "Basic guide to hair dyeing and care for beginners"
     },
     {
-      "id": 199,
+      "id": 197,
+      "url": "https://sspai.com/post/108334",
+      "platform": "sspai",
+      "platform_label": "少数派",
+      "platform_color": "#D33A2C",
+      "platform_icon": "📱",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 3,
+      "category": "其他",
+      "title": "免费试读 | 零基础美术启蒙，该如何准备适合的美术器材",
+      "desc": "Guide to art supplies for beginners"
+    },
+    {
+      "id": 198,
       "url": "https://view.inews.qq.com/a/20260529A09P6C00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2839,10 +2825,10 @@
       "score": 3,
       "category": "其他",
       "title": "涉案金额过亿 释永信一审被判有期徒刑24年",
-      "desc": "Yixin sentenced to 24 years in $100M case"
+      "desc": "Yixin sentenced to 24 years for over-100M case"
     },
     {
-      "id": 200,
+      "id": 199,
       "url": "https://view.inews.qq.com/a/20260529A0B7QU00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2853,10 +2839,10 @@
       "score": 3,
       "category": "其他",
       "title": "特朗普就结束伊朗战事提出条件",
-      "desc": "Trump sets terms to end Iran conflict"
+      "desc": "Trump sets conditions to end Iran conflict"
     },
     {
-      "id": 201,
+      "id": 200,
       "url": "https://view.inews.qq.com/a/20260529A07D0U00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2870,7 +2856,7 @@
       "desc": "Canada warship transits Taiwan Strait, MFA responds"
     },
     {
-      "id": 202,
+      "id": 201,
       "url": "https://view.inews.qq.com/a/20260529A09PWU00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2881,10 +2867,10 @@
       "score": 3,
       "category": "其他",
       "title": "丁向群任国家金融监督管理总局党委书记  曾在人保、太平工作多年",
-      "desc": "Ding Xiangqui appointed as Party Secretary of NFRA, worked at PICC and Taiping. "
+      "desc": "Ding Xiangqiao appointed as Party Secretary of NFRA, formerly at PICC and Taiping. "
     },
     {
-      "id": 203,
+      "id": 202,
       "url": "https://view.inews.qq.com/a/20260529A0A48600",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2898,7 +2884,7 @@
       "desc": "Shenzhou-21 crew mission successful"
     },
     {
-      "id": 204,
+      "id": 203,
       "url": "https://view.inews.qq.com/a/20260529A07OPQ00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2912,7 +2898,7 @@
       "desc": "New food safety rules for kindergartens start June 1"
     },
     {
-      "id": 205,
+      "id": 204,
       "url": "https://view.inews.qq.com/a/20260529A08PCD00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2923,10 +2909,10 @@
       "score": 3,
       "category": "其他",
       "title": "全国十大“最有钱”的城市，4座存款超10万亿",
-      "desc": "Top 10 richest Chinese cities, 4 with deposits over 10 trillion"
+      "desc": "Top 10 richest Chinese cities, four with deposits over 10 trillion"
     },
     {
-      "id": 206,
+      "id": 205,
       "url": "https://view.inews.qq.com/a/20260529A094FV00",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2937,10 +2923,10 @@
       "score": 3,
       "category": "其他",
       "title": "“香会”现场记者“直球”提问澳防长：与日本走近会否影响中澳关系？",
-      "desc": "Reporter asks Australian defense minister on Japan ties impact"
+      "desc": "Shangri-La Q&A: Australian defense minister on Japan ties' impact on China relations"
     },
     {
-      "id": 207,
+      "id": 206,
       "url": "https://view.inews.qq.com/a/20260529A097P400",
       "platform": "tencent",
       "platform_label": "腾讯新闻",
@@ -2954,7 +2940,7 @@
       "desc": "US lawmaker criticizes Zelensky, says US not an ATM"
     },
     {
-      "id": 208,
+      "id": 207,
       "url": "https://m.thepaper.cn/newsDetail_forward_33254066",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -2965,10 +2951,10 @@
       "score": 3,
       "category": "其他",
       "title": "美以伊战争启示录｜从“知心好友”到“偶遇的熟人”：欧美右翼盟友裂痕渐深",
-      "desc": "Right-wing allies in Europe and US fracture over US-Iran ties"
+      "desc": "US-Europe right-wing allies drift apart over Iran war"
     },
     {
-      "id": 209,
+      "id": 208,
       "url": "https://m.thepaper.cn/newsDetail_forward_33261653",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -2979,10 +2965,10 @@
       "score": 3,
       "category": "其他",
       "title": "中使馆：64名被菲方羁押的中国公民获释",
-      "desc": "64 Chinese citizens detained in Philippines released"
+      "desc": "64 Chinese citizens released from Philippines"
     },
     {
-      "id": 210,
+      "id": 209,
       "url": "https://m.thepaper.cn/newsDetail_forward_33264407",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -2993,24 +2979,10 @@
       "score": 3,
       "category": "其他",
       "title": "乘客车内排泄司机花1000元换座椅？滴滴出行回应",
-      "desc": "Passenger soiled car, driver spent 1k on seat, Didi responds"
+      "desc": "Passenger soiled car, driver claimed 1000 yuan, Didi intervened"
     },
     {
-      "id": 211,
-      "url": "https://m.thepaper.cn/newsDetail_forward_33262002",
-      "platform": "pengpai",
-      "platform_label": "澎湃新闻",
-      "platform_color": "#E60012",
-      "platform_icon": "📱",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "夺取加沙70%区域、扩大在黎战区：以色列多线作战破坏美伊和平？",
-      "desc": "Israel expands military operations, risking regional stability"
-    },
-    {
-      "id": 212,
+      "id": 210,
       "url": "https://m.thepaper.cn/newsDetail_forward_33262511",
       "platform": "pengpai",
       "platform_label": "澎湃新闻",
@@ -3021,10 +2993,10 @@
       "score": 3,
       "category": "其他",
       "title": "中国人保董事长丁向群任国家金融监督管理总局党委书记",
-      "desc": "PICC Chairman Ding Xiangqian appointed as SBG Secretary"
+      "desc": "PICC Chairman Ding Xiangqiang appointed as SBG Secretary"
     },
     {
-      "id": 213,
+      "id": 211,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354688&amp;topic_name=%E7%BE%8E%E5%9B%BD%E5%B9%B4%E8%BD%BB%E4%BA%BA%E8%A1%97%E5%A4%B4%E6%9A%B4%E6%8F%8D%E6%9C%BA%E5%99%A8%E4%BA%BA",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -3035,10 +3007,10 @@
       "score": 3,
       "category": "其他",
       "title": "美国年轻人街头暴揍机器人",
-      "desc": "US youths violently attack robot on street"
+      "desc": "US youth violently attack robot on street"
     },
     {
-      "id": 214,
+      "id": 212,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354689&amp;topic_name=%E8%AE%B0%E8%80%85%E6%9A%97%E8%AE%BF%E4%BB%A3%E5%AD%95%E7%AA%9D%E7%82%B9%E8%A2%AB%E6%89%93%E9%AA%A8%E6%8A%98",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -3049,10 +3021,10 @@
       "score": 3,
       "category": "其他",
       "title": "记者暗访代孕窝点被打骨折",
-      "desc": "Journalist beaten after undercover visit to surrogacy den"
+      "desc": "Journalist beaten and fractured while undercover at surrogacy den"
     },
     {
-      "id": 215,
+      "id": 213,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354707&amp;topic_name=%E9%9F%A9%E5%9B%BD%E4%BA%BA%E9%A6%8B%E5%93%AD%E4%B8%AD%E5%9B%BD%E9%B2%9C%E8%8D%94%E6%9E%9D",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -3066,7 +3038,7 @@
       "desc": "South Koreans crave Chinese fresh lychees"
     },
     {
-      "id": 216,
+      "id": 214,
       "url": "https://tieba.baidu.com/hottopic/browse/hottopic?topic_id=28354706&amp;topic_name=%E9%AA%91%E6%89%8B%E6%8C%82%E9%A4%90%E5%83%8F%E4%BE%9B%E5%93%81%2C%E9%A1%BE%E5%AE%A2%E7%A0%B4%E9%98%B2",
       "platform": "tieba",
       "platform_label": "百度贴吧",
@@ -3077,10 +3049,10 @@
       "score": 3,
       "category": "其他",
       "title": "骑手挂餐像供品,顾客破防",
-      "desc": "Food delivery arrangement angers customer, sparks service debate"
+      "desc": "Food delivery rider's action angers customer, highlighting service issues"
     },
     {
-      "id": 217,
+      "id": 215,
       "url": "https://www.toutiao.com/trending/7645233974461169683/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -3094,21 +3066,7 @@
       "desc": "India warns Bollywood against mocking China"
     },
     {
-      "id": 218,
-      "url": "https://www.toutiao.com/trending/7644946487860232219/",
-      "platform": "toutiao",
-      "platform_label": "今日头条",
-      "platform_color": "#E63946",
-      "platform_icon": "📰",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "省级“十五五”规划纲要看点之一",
-      "desc": "Provincial 15th Five-Year Plan highlights, policy-focused"
-    },
-    {
-      "id": 219,
+      "id": 216,
       "url": "https://www.toutiao.com/trending/7645299648730746418/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -3119,10 +3077,10 @@
       "score": 3,
       "category": "其他",
       "title": "航天员张陆从太空带回一个苹果",
-      "desc": "Astronaut Zhang Lu brings an apple from space, symbolic over technical."
+      "desc": "Astronaut Zhang Lu brought an apple back from space, symbolic over technical."
     },
     {
-      "id": 220,
+      "id": 217,
       "url": "https://www.toutiao.com/trending/7644919647942217258/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -3133,10 +3091,10 @@
       "score": 3,
       "category": "其他",
       "title": "33岁环卫女工回应考上硕士研究生",
-      "desc": "33-year-old sanitation worker gets master's degree, inspiring story."
+      "desc": "33-year-old sanitation worker gets master's degree"
     },
     {
-      "id": 221,
+      "id": 218,
       "url": "https://www.toutiao.com/trending/7644786880849182729/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -3147,10 +3105,10 @@
       "score": 3,
       "category": "AI模型",
       "title": "广东夏季高考用AI批卷系不实传言",
-      "desc": "False rumor about AI grading in Guangdong Gaokao"
+      "desc": "Guangdong summer exam AI grading rumor debunked"
     },
     {
-      "id": 222,
+      "id": 219,
       "url": "https://www.toutiao.com/trending/7644338065212801075/",
       "platform": "toutiao",
       "platform_label": "今日头条",
@@ -3161,10 +3119,10 @@
       "score": 3,
       "category": "其他",
       "title": "张雪机车位列超级杆位赛第二名",
-      "desc": "Zhang Xue motorcycle secures 2nd in Super Pole"
+      "desc": "Zhang Xue motorcycle secures 2nd in Super Pole Race"
     },
     {
-      "id": 223,
+      "id": 220,
       "url": "https://wallstreetcn.com/articles/3773469",
       "platform": "wallstreetcn",
       "platform_label": "华尔街见闻",
@@ -3175,10 +3133,10 @@
       "score": 3,
       "category": "其他",
       "title": "特朗普称将作伊朗战事最终决定、霍尔木兹和伊核以外问题已达成一致，伊媒称其言论“真假参半”",
-      "desc": "Trump to decide Iran war, Hormuz and nuke issues partially agreed, Iranian media doubts his claims."
+      "desc": "Trump to decide Iran war, Iranian media calls his claims mixed"
     },
     {
-      "id": 224,
+      "id": 221,
       "url": "https://s.weibo.com/weibo?q=%E9%A5%BF%E7%9D%80%E5%85%A5%E7%9D%A1%E5%AF%B9%E8%83%83%E8%82%A0%E6%9B%B4%E5%A5%BD%E5%90%97&t=31&band_rank=6&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
@@ -3189,10 +3147,10 @@
       "score": 3,
       "category": "其他",
       "title": "饿着入睡对胃肠更好吗",
-      "desc": "Sleeping hungry may harm the stomach; eat moderately before bed."
+      "desc": "Sleeping hungry may harm the stomach; a small snack is better."
     },
     {
-      "id": 225,
+      "id": 222,
       "url": "https://s.weibo.com/weibo?q=%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E4%B8%80%E6%88%B7%E4%B8%80%E6%A2%AF&t=31&band_rank=8&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
@@ -3203,10 +3161,24 @@
       "score": 3,
       "category": "其他",
       "title": "重新定义一户一梯",
-      "desc": "Redefining one household per elevator"
+      "desc": "Redefining one household per elevator concept"
     },
     {
-      "id": 226,
+      "id": 223,
+      "url": "https://xueqiu.com/s/DELL",
+      "platform": "xueqiu",
+      "platform_label": "雪球",
+      "platform_color": "#FF6B35",
+      "platform_icon": "📊",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 3,
+      "category": "其他",
+      "title": "戴尔科技",
+      "desc": "Limited Dell Tech info, lacks in-depth analysis."
+    },
+    {
+      "id": 224,
       "url": "https://xueqiu.com/s/INTC",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -3217,10 +3189,10 @@
       "score": 3,
       "category": "其他",
       "title": "英特尔",
-      "desc": "Intel company information, content not detailed"
+      "desc": "Brief intro to Intel, limited info."
     },
     {
-      "id": 227,
+      "id": 225,
       "url": "https://xueqiu.com/s/09992",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -3234,7 +3206,21 @@
       "desc": "Pop Mart is a trendy toy brand known for blind boxes."
     },
     {
-      "id": 228,
+      "id": 226,
+      "url": "https://xueqiu.com/s/ORCL",
+      "platform": "xueqiu",
+      "platform_label": "雪球",
+      "platform_color": "#FF6B35",
+      "platform_icon": "📊",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 3,
+      "category": "其他",
+      "title": "甲骨文",
+      "desc": "Oracle Bone Script is ancient Chinese writing."
+    },
+    {
+      "id": 227,
       "url": "https://xueqiu.com/s/SZ000725",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -3245,10 +3231,10 @@
       "score": 3,
       "category": "其他",
       "title": "京东方A",
-      "desc": "BOE A: Display technology company, business covers display devices"
+      "desc": "BOE A, a display technology firm, manufactures panels."
     },
     {
-      "id": 229,
+      "id": 228,
       "url": "https://xueqiu.com/s/LITE",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -3262,7 +3248,7 @@
       "desc": "Limited info on Lumentum Holdings, lacks specifics."
     },
     {
-      "id": 230,
+      "id": 229,
       "url": "https://xueqiu.com/s/SH600519",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -3273,10 +3259,10 @@
       "score": 3,
       "category": "其他",
       "title": "贵州茅台",
-      "desc": "Kweichow Moutai is a renowned Chinese liquor brand with a long history and premium quality."
+      "desc": "Kweichow Moutai is a renowned Chinese liquor brand focused on premium spirits."
     },
     {
-      "id": 231,
+      "id": 230,
       "url": "https://xueqiu.com/s/SH603629",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -3287,24 +3273,10 @@
       "score": 3,
       "category": "其他",
       "title": "利通电子",
-      "desc": "Limited business info, low value for readers."
+      "desc": "Limited business details for LITONG Electronics."
     },
     {
-      "id": 232,
-      "url": "https://www.zhihu.com/question/2043777043955807460",
-      "platform": "zhihu",
-      "platform_label": "知乎",
-      "platform_color": "#0066FF",
-      "platform_icon": "💡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "释永信一审被判有期徒刑 24 年，涉案金额过亿，哪些信息值得关注？如何从法律角度解读？",
-      "desc": "Yongxin sentenced to 24 years for over-100M case, legal/business implications"
-    },
-    {
-      "id": 233,
+      "id": 231,
       "url": "https://www.zhihu.com/question/2043416917944296940",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -3315,24 +3287,10 @@
       "score": 3,
       "category": "其他",
       "title": "怎么看待美国前 CIA 官员被控在家中藏匿 300 根金条，其辩称系「工作所需」?",
-      "desc": "Ex-CIA official hides gold bars, claims work-related, probes spy/corruption."
+      "desc": "Ex-CIA official hides 300 gold bars, claims work-related necessity"
     },
     {
-      "id": 234,
-      "url": "https://www.zhihu.com/question/2042656230133452844",
-      "platform": "zhihu",
-      "platform_label": "知乎",
-      "platform_color": "#0066FF",
-      "platform_icon": "💡",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 3,
-      "category": "其他",
-      "title": "我最后一次模考作弊考了 700 多，参加联考的学生中 10 万多人中省排第 14，全市第一，下一步怎么办？",
-      "desc": "Cheating in mock exam raises concerns about integrity and true ability."
-    },
-    {
-      "id": 235,
+      "id": 232,
       "url": "https://www.zhihu.com/question/2042623663493616711",
       "platform": "zhihu",
       "platform_label": "知乎",
@@ -3343,10 +3301,10 @@
       "score": 3,
       "category": "其他",
       "title": "为什么现在农田中出现了大量的野鸡？是好事还是坏事？",
-      "desc": "More wild pheasants in farmland: ecological or agricultural impact?"
+      "desc": "More pheasants due to ecology, but may harm farmland"
     },
     {
-      "id": 236,
+      "id": 233,
       "url": "https://www.zaochenbao.com/news/politics/202605/2872837.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -3360,7 +3318,7 @@
       "desc": "Swiss train station stabbing injures three"
     },
     {
-      "id": 237,
+      "id": 234,
       "url": "https://www.zaochenbao.com/news/china/202605/2872827.html",
       "platform": "news_aggregator",
       "platform_label": "新闻聚合",
@@ -3371,10 +3329,24 @@
       "score": 2,
       "category": "其他",
       "title": "王毅：中方将继续为古巴主持公道 仗义执言",
-      "desc": "Wang Yi: China to continue supporting Cuba"
+      "desc": "Wang Yi: China will continue to support Cuba"
     },
     {
-      "id": 238,
+      "id": 235,
+      "url": "https://www.zaochenbao.com/news/china/202605/2872825.html",
+      "platform": "news_aggregator",
+      "platform_label": "新闻聚合",
+      "platform_color": "#94A3B8",
+      "platform_icon": "📡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "其他",
+      "title": "中国最高检：对个人极端等重大恶性犯罪快捕快诉从重从严惩治",
+      "desc": "China's top prosecutor to severely punish extreme crimes with swift trials"
+    },
+    {
+      "id": 236,
       "url": "https://www.chongbuluo.com/thread-24246-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3388,7 +3360,7 @@
       "desc": "Share NetEase Cloud Music for 128-day membership"
     },
     {
-      "id": 239,
+      "id": 237,
       "url": "https://www.chongbuluo.com/thread-24234-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3399,10 +3371,10 @@
       "score": 2,
       "category": "其他",
       "title": "打听！男生都想收到什么礼物啊？",
-      "desc": "Male gift preferences survey, limited insights"
+      "desc": "Asking about gifts for men, lacks specifics."
     },
     {
-      "id": 240,
+      "id": 238,
       "url": "https://www.chongbuluo.com/thread-24474-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3413,10 +3385,10 @@
       "score": 2,
       "category": "其他",
       "title": "21 年在一起，23 年男友出轨我不知道，25 年结婚，26 年才发现他 23 年出轨怎么办",
-      "desc": "Long-term relationship, marriage, then discovered past infidelity"
+      "desc": "Long-term relationship, marriage, then infidelity discovery—no business/tech relevance"
     },
     {
-      "id": 241,
+      "id": 239,
       "url": "https://www.chongbuluo.com/thread-24392-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3430,7 +3402,7 @@
       "desc": "Vague content, no substantial information"
     },
     {
-      "id": 242,
+      "id": 240,
       "url": "https://www.chongbuluo.com/thread-24263-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3441,10 +3413,10 @@
       "score": 2,
       "category": "其他",
       "title": "有什么你很想或者很喜欢的技能",
-      "desc": "Vague, lacks specific skill details"
+      "desc": "Vague content, lacks specific skill details"
     },
     {
-      "id": 243,
+      "id": 241,
       "url": "https://www.chongbuluo.com/thread-24509-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3455,10 +3427,10 @@
       "score": 2,
       "category": "其他",
       "title": "你买了什么东西,增加了家里的幸福感,疯狂求安利!",
-      "desc": "Sharing items that boost home happiness, seeking recommendations"
+      "desc": "Product recommendations for home happiness"
     },
     {
-      "id": 244,
+      "id": 242,
       "url": "https://www.chongbuluo.com/thread-24385-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3469,10 +3441,10 @@
       "score": 2,
       "category": "其他",
       "title": "It's my life",
-      "desc": "Lacks tech/business value"
+      "desc": "Vapid content with no substance"
     },
     {
-      "id": 245,
+      "id": 243,
       "url": "https://www.chongbuluo.com/thread-24349-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3483,10 +3455,10 @@
       "score": 2,
       "category": "其他",
       "title": "有什么有意思的爱好推荐吗",
-      "desc": "Asking for hobby recommendations, lacks specifics."
+      "desc": "Vague, lacks specific recommendations"
     },
     {
-      "id": 246,
+      "id": 244,
       "url": "https://www.chongbuluo.com/thread-24288-1-1.html",
       "platform": "chongbuluo",
       "platform_label": "虫部落",
@@ -3500,7 +3472,7 @@
       "desc": "Zhang Xuefeng died of sudden cardiac death"
     },
     {
-      "id": 247,
+      "id": 245,
       "url": "https://www.coolapk.com/feed/72048026",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -3511,10 +3483,10 @@
       "score": 2,
       "category": "其他",
       "title": "是不是史低价了",
-      "desc": "Too vague, lacks details"
+      "desc": "Brief content, lacks specifics"
     },
     {
-      "id": 248,
+      "id": 246,
       "url": "https://www.coolapk.com/feed/72041377",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -3528,7 +3500,7 @@
       "desc": "Pinduoduo order cancellation is random, good if not canceled"
     },
     {
-      "id": 249,
+      "id": 247,
       "url": "https://www.coolapk.com/feed/72047515",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -3542,7 +3514,7 @@
       "desc": "Asking about 'god car' event time, no useful info"
     },
     {
-      "id": 250,
+      "id": 248,
       "url": "https://www.coolapk.com/feed/30595448",
       "platform": "coolapk",
       "platform_label": "酷安",
@@ -3553,7 +3525,35 @@
       "score": 2,
       "category": "其他",
       "title": "很多时候，我们做的很多事都是身不由己——比如没钱支持正版[受虐滑稽]作为一个资深网上冲浪者兼二次元肥宅，这些年我也积累了很多看番观影渠道。看完这篇图文之后，如果觉得对你有帮助，请务必给我点个赞[牛啤]",
-      "desc": "Sharing anime streaming channels, urging正版 support"
+      "desc": "Sharing anime streaming channels, advocating for正版 support."
+    },
+    {
+      "id": 249,
+      "url": "https://github.com/twentyhq/twenty",
+      "platform": "github",
+      "platform_label": "GitHub",
+      "platform_color": "#6CCB5F",
+      "platform_icon": "🐙",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "其他",
+      "title": "twentyhq /      twenty",
+      "desc": "TwentyHQ is an open-source Twitter clone with limited technical value."
+    },
+    {
+      "id": 250,
+      "url": "https://github.com/anthropics/claude-code",
+      "platform": "github",
+      "platform_label": "GitHub",
+      "platform_color": "#6CCB5F",
+      "platform_icon": "🐙",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "其他",
+      "title": "anthropics /      claude-code",
+      "desc": "Limited info on Anthropic/Claude code project"
     },
     {
       "id": 251,
@@ -3567,10 +3567,24 @@
       "score": 2,
       "category": "其他",
       "title": "cursor /      plugins",
-      "desc": "Cursor plugins info is vague and lacks details."
+      "desc": "Cursor plugins info, limited content."
     },
     {
       "id": 252,
+      "url": "https://github.com/DigitalPlatDev/FreeDomain",
+      "platform": "github",
+      "platform_label": "GitHub",
+      "platform_color": "#6CCB5F",
+      "platform_icon": "🐙",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "AI模型",
+      "title": "DigitalPlatDev /      FreeDomain",
+      "desc": "Vague project name, low informational value"
+    },
+    {
+      "id": 253,
       "url": "https://github.com/affaan-m/ECC",
       "platform": "github",
       "platform_label": "GitHub",
@@ -3584,7 +3598,7 @@
       "desc": "Limited ECC project info, low value"
     },
     {
-      "id": 253,
+      "id": 254,
       "url": "https://github.com/hardikpandya/stop-slop",
       "platform": "github",
       "platform_label": "GitHub",
@@ -3595,10 +3609,10 @@
       "score": 2,
       "category": "其他",
       "title": "hardikpandya /      stop-slop",
-      "desc": "Vague project name, lacks details."
+      "desc": "Vague project name, no content, lacks informational value"
     },
     {
-      "id": 254,
+      "id": 255,
       "url": "https://news.ycombinator.com/item?id=48327367",
       "platform": "hackernews",
       "platform_label": "HackerNews",
@@ -3609,10 +3623,10 @@
       "score": 2,
       "category": "其他",
       "title": "Rothko for your current weather conditions",
-      "desc": "Weather-based Rothko painting recommendation, low value"
+      "desc": "Vague content, lacks practical value"
     },
     {
-      "id": 255,
+      "id": 256,
       "url": "https://bbs.hupu.com/639576926.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3626,7 +3640,7 @@
       "desc": "Vague content, lacks specifics"
     },
     {
-      "id": 256,
+      "id": 257,
       "url": "https://bbs.hupu.com/639582616.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3640,7 +3654,7 @@
       "desc": "Uncle borrowing money, no tech/business value"
     },
     {
-      "id": 257,
+      "id": 258,
       "url": "https://bbs.hupu.com/639594050.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3654,7 +3668,7 @@
       "desc": "Kanye accepts something, showing inclusivity"
     },
     {
-      "id": 258,
+      "id": 259,
       "url": "https://bbs.hupu.com/639578098.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3665,10 +3679,10 @@
       "score": 2,
       "category": "其他",
       "title": "为什么林丹出轨，谢杏芳能很快原谅，现在二人依旧很幸福，而文章出轨，马伊琍也原谅了，可最后还是离婚了？",
-      "desc": "Celebrity marriage differences, non-tech info"
+      "desc": "Celebrity marriage differences, low tech/business value"
     },
     {
-      "id": 259,
+      "id": 260,
       "url": "https://bbs.hupu.com/639575929.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3679,10 +3693,10 @@
       "score": 2,
       "category": "其他",
       "title": "真子:开端就福利局，你们还想怎样？",
-      "desc": "Mako's favorable start sparks debate"
+      "desc": "Mako's match starts with benefits, sparking debate"
     },
     {
-      "id": 260,
+      "id": 261,
       "url": "https://bbs.hupu.com/639580812.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3696,7 +3710,7 @@
       "desc": "Title derogatory, no substantive content"
     },
     {
-      "id": 261,
+      "id": 262,
       "url": "https://bbs.hupu.com/639588232.html",
       "platform": "hupu",
       "platform_label": "虎扑",
@@ -3707,10 +3721,10 @@
       "score": 2,
       "category": "其他",
       "title": "丽丽：酒后不省人事，事发第4天我才知道真相",
-      "desc": "Lili blacked out drunk, learned truth on day 4."
+      "desc": "Lili lost memory after drinking, learned truth after 4 days"
     },
     {
-      "id": 262,
+      "id": 263,
       "url": "https://v.ifeng.com/c/8tWdU5HaWAN",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -3721,10 +3735,10 @@
       "score": 2,
       "category": "其他",
       "title": "万斯在军校毕业典礼上“撒娇”：你们不能嘘我",
-      "desc": "Vance booed at military academy, pleads for silence"
+      "desc": "Vance booed at military academy graduation, protests"
     },
     {
-      "id": 263,
+      "id": 264,
       "url": "https://news.ifeng.com/c/8tWWsQUeIK8",
       "platform": "ifeng",
       "platform_label": "凤凰网",
@@ -3735,10 +3749,10 @@
       "score": 2,
       "category": "其他",
       "title": "香会前“练兵”，美国防长与海军士兵一同进行体能训练(图)",
-      "desc": "US defense minister trains with sailors ahead of Shangri-La Dialogue."
+      "desc": "US defense minister trains with Navy troops before Shangri-La Dialogue"
     },
     {
-      "id": 264,
+      "id": 265,
       "url": "https://juejin.cn/post/7644427751187333154",
       "platform": "juejin",
       "platform_label": "掘金",
@@ -3749,21 +3763,7 @@
       "score": 2,
       "category": "其他",
       "title": "820亿Credits等于多少Tokens?",
-      "desc": "Insufficient context to convert Credits to Tokens"
-    },
-    {
-      "id": 265,
-      "url": "https://sspai.com/post/108334",
-      "platform": "sspai",
-      "platform_label": "少数派",
-      "platform_color": "#D33A2C",
-      "platform_icon": "📱",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 2,
-      "category": "其他",
-      "title": "免费试读 | 零基础美术启蒙，该如何准备适合的美术器材",
-      "desc": "Guide to art supplies for beginners"
+      "desc": "Vague question, lacks context, cannot convert accurately"
     },
     {
       "id": 266,
@@ -3791,7 +3791,7 @@
       "score": 2,
       "category": "其他",
       "title": "学习时报头版：发展党员要防止两种错误倾向",
-      "desc": "Prevent two errors in party member recruitment"
+      "desc": "Prevent two errors in party member development"
     },
     {
       "id": 268,
@@ -3847,7 +3847,7 @@
       "score": 2,
       "category": "其他",
       "title": "风波后首更,Rookie女友晒自拍",
-      "desc": "Rookie's girlfriend posts selfie after drama"
+      "desc": "Rookie's girlfriend posts selfie after controversy"
     },
     {
       "id": 272,
@@ -3875,7 +3875,7 @@
       "score": 2,
       "category": "其他",
       "title": "老人与邻居互殴次日自缢身亡法院判了",
-      "desc": "Elder man hanged himself after fight with neighbor, court ruling announced"
+      "desc": "Elder man hanged himself after fight with neighbor; court ruling released."
     },
     {
       "id": 274,
@@ -3889,7 +3889,7 @@
       "score": 2,
       "category": "其他",
       "title": "爸爸拉窗帘叫女儿起床被一句话劝退",
-      "desc": "Dad tries to wake daughter, but she stops him"
+      "desc": "Father opens curtains to wake daughter, dissuaded by her words"
     },
     {
       "id": 275,
@@ -3903,7 +3903,7 @@
       "score": 2,
       "category": "其他",
       "title": "广州热到非洲狮都顶不住",
-      "desc": "Guangzhou heat affects African lions, impacting animal welfare"
+      "desc": "Guangzhou heat affects African lions, animal welfare concern"
     },
     {
       "id": 276,
@@ -3917,11 +3917,11 @@
       "score": 2,
       "category": "其他",
       "title": "朱珠：40岁+最好的状态是依然性感",
-      "desc": "Zhu Zhu on staying sexy past 40, age and charm coexist."
+      "desc": "Zhu Zhu: 40+ best state is still sexy"
     },
     {
       "id": 277,
-      "url": "https://www.toutiao.com/trending/7645136175778398218/",
+      "url": "https://www.toutiao.com/trending/7644156896194494491/",
       "platform": "toutiao",
       "platform_label": "今日头条",
       "platform_color": "#E63946",
@@ -3930,11 +3930,25 @@
       "date": "2026-05-30",
       "score": 2,
       "category": "其他",
-      "title": "齐豫再拿《歌手》第一",
-      "desc": "Chi Yu won first place again on 'Singer'."
+      "title": "儿子刚去世 母亲在高铁车厢角落痛哭",
+      "desc": "Mother cries on train after son's death"
     },
     {
       "id": 278,
+      "url": "https://s.weibo.com/weibo?q=%23%E6%AD%8C%E6%89%8B%E7%AC%AC%E4%B8%89%E6%9C%9F%E5%B8%AE%E5%94%B1%E5%98%89%E5%AE%BE%E4%BF%A1%E6%81%AF%23&t=31&band_rank=1&Refer=top",
+      "platform": "weibo",
+      "platform_label": "微博热搜",
+      "platform_color": "#FF9500",
+      "platform_icon": "🔥",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "其他",
+      "title": "歌手第三期帮唱嘉宾信息",
+      "desc": "Singer Season 3 guest performers info"
+    },
+    {
+      "id": 279,
       "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E5%AE%B6%E5%9B%9B%E5%8F%A3%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8&t=31&band_rank=2&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
@@ -3945,10 +3959,10 @@
       "score": 2,
       "category": "其他",
       "title": "一家四口有限责任公司",
-      "desc": "Limited info on family business, low tech/business value."
+      "desc": "Limited family business info, low value"
     },
     {
-      "id": 279,
+      "id": 280,
       "url": "https://s.weibo.com/weibo?q=%E8%80%B3%E5%B8%9D%20%E6%AD%8C%E6%89%8B%E7%AC%AC%E4%BA%8C%E6%9C%9F%E9%9D%9E%E5%B8%B8%E7%B3%9F%E7%B3%95&t=31&band_rank=4&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
@@ -3959,21 +3973,7 @@
       "score": 2,
       "category": "其他",
       "title": "耳帝 歌手第二期非常糟糕",
-      "desc": "Erdi criticizes second episode of Singer"
-    },
-    {
-      "id": 280,
-      "url": "https://s.weibo.com/weibo?q=%23%E8%8C%83%E4%B8%9E%E4%B8%9E%E9%97%AE%E7%AC%AC%E4%B8%89%E5%90%8D%E6%80%8E%E4%B9%88%E4%BD%A0%E4%BA%86%23&t=31&band_rank=5&Refer=top",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 2,
-      "category": "其他",
-      "title": "范丞丞问第三名怎么你了",
-      "desc": "Fan Chengcheng asks why third place targeted him"
+      "desc": "Erdi criticizes Singer's second episode"
     },
     {
       "id": 281,
@@ -3987,7 +3987,7 @@
       "score": 2,
       "category": "其他",
       "title": "歌手 倒数第一竞争激烈",
-      "desc": "Singer competition fierce, last place volatile."
+      "desc": "Singer competition is fierce, but lacks tech/business insights."
     },
     {
       "id": 282,
@@ -4001,7 +4001,7 @@
       "score": 2,
       "category": "其他",
       "title": "VOGUE晚宴",
-      "desc": "VOGUE dinner fashion event"
+      "desc": "VOGUE dinner, a fashion event with no business/tech value."
     },
     {
       "id": 283,
@@ -4015,7 +4015,7 @@
       "score": 2,
       "category": "其他",
       "title": "德约科维奇vs丰塞卡",
-      "desc": "Djokovic vs Fonseca match, low value for tech/business readers"
+      "desc": "Djokovic vs Fonseca match, low tech/business value"
     },
     {
       "id": 284,
@@ -4043,7 +4043,7 @@
       "score": 2,
       "category": "其他",
       "title": "单依纯含金量",
-      "desc": "Lacks specific details, unable to assess Shan Yichun's value."
+      "desc": "Lacks specific details; cannot assess Shan Yichun's value."
     },
     {
       "id": 286,
@@ -4061,6 +4061,20 @@
     },
     {
       "id": 287,
+      "url": "https://s.weibo.com/weibo?q=%23%E7%99%BD%E9%B9%BF%E6%9D%8E%E6%99%A8%E9%83%91%E6%81%BA%E5%A4%8D%E5%AE%A3%E8%B7%91%E7%94%B7%23&t=31&band_rank=14&Refer=top",
+      "platform": "weibo",
+      "platform_label": "微博热搜",
+      "platform_color": "#FF9500",
+      "platform_icon": "🔥",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "其他",
+      "title": "白鹿李晨郑恺复宣跑男",
+      "desc": "Bailu, Li Chen, Zheng Kai return to RM"
+    },
+    {
+      "id": 288,
       "url": "https://s.weibo.com/weibo?q=%E6%AD%8C%E6%89%8B%E6%8E%92%E5%90%8D&t=31&band_rank=15&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
@@ -4071,10 +4085,10 @@
       "score": 2,
       "category": "其他",
       "title": "歌手排名",
-      "desc": "Limited singer ranking data, lacks in-depth analysis"
+      "desc": "Limited singer rankings, lacks in-depth analysis"
     },
     {
-      "id": 288,
+      "id": 289,
       "url": "https://xueqiu.com/s/NVDA",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -4085,21 +4099,7 @@
       "score": 2,
       "category": "其他",
       "title": "英伟达",
-      "desc": "Insufficient information about Nvidia, lacks specifics."
-    },
-    {
-      "id": 289,
-      "url": "https://xueqiu.com/s/MSFT",
-      "platform": "xueqiu",
-      "platform_label": "雪球",
-      "platform_color": "#FF6B35",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 2,
-      "category": "其他",
-      "title": "微软",
-      "desc": "Limited info, low value"
+      "desc": "No useful information provided"
     },
     {
       "id": 290,
@@ -4117,20 +4117,6 @@
     },
     {
       "id": 291,
-      "url": "https://xueqiu.com/s/ORCL",
-      "platform": "xueqiu",
-      "platform_label": "雪球",
-      "platform_color": "#FF6B35",
-      "platform_icon": "📊",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 2,
-      "category": "其他",
-      "title": "甲骨文",
-      "desc": "Oracle script is ancient, low relevance to tech/business."
-    },
-    {
-      "id": 292,
       "url": "https://xueqiu.com/s/BABA",
       "platform": "xueqiu",
       "platform_label": "雪球",
@@ -4141,7 +4127,21 @@
       "score": 2,
       "category": "其他",
       "title": "阿里巴巴",
-      "desc": "Alibaba is a Chinese e-commerce giant"
+      "desc": "No content provided, unable to assess"
+    },
+    {
+      "id": 292,
+      "url": "https://www.zhihu.com/question/2042656230133452844",
+      "platform": "zhihu",
+      "platform_label": "知乎",
+      "platform_color": "#0066FF",
+      "platform_icon": "💡",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 2,
+      "category": "其他",
+      "title": "我最后一次模考作弊考了 700 多，参加联考的学生中 10 万多人中省排第 14，全市第一，下一步怎么办？",
+      "desc": "Cheated high score, ranked 14th, city first, need to reflect on integrity."
     },
     {
       "id": 293,
@@ -4155,7 +4155,7 @@
       "score": 1,
       "category": "其他",
       "title": "你对什么气味有着特殊的癖好？",
-      "desc": "No substantive info, just a fun question"
+      "desc": "No substantive content, just a casual question"
     },
     {
       "id": 294,
@@ -4169,11 +4169,25 @@
       "score": 1,
       "category": "其他",
       "title": "洛阳女海王的瓜，大家吃了吗",
-      "desc": "Luoyang 'female sea king' scandal, entertainment gossip, no tech value"
+      "desc": "Luoyang 'female sea king' gossip, no tech relevance"
     },
     {
       "id": 295,
-      "url": "https://www.toutiao.com/trending/7644156896194494491/",
+      "url": "https://bbs.hupu.com/639575718.html",
+      "platform": "hupu",
+      "platform_label": "虎扑",
+      "platform_color": "#D32F2F",
+      "platform_icon": "🏀",
+      "hot": 0,
+      "date": "2026-05-30",
+      "score": 1,
+      "category": "其他",
+      "title": "哈哈哈，笑死我了",
+      "desc": "No substantive information, purely entertainment."
+    },
+    {
+      "id": 296,
+      "url": "https://www.toutiao.com/trending/7645136175778398218/",
       "platform": "toutiao",
       "platform_label": "今日头条",
       "platform_color": "#E63946",
@@ -4182,26 +4196,12 @@
       "date": "2026-05-30",
       "score": 1,
       "category": "其他",
-      "title": "儿子刚去世 母亲在高铁车厢角落痛哭",
-      "desc": "Mother grieves son's death on train"
-    },
-    {
-      "id": 296,
-      "url": "https://s.weibo.com/weibo?q=%23%E6%AD%8C%E6%89%8B%E7%AC%AC%E4%B8%89%E6%9C%9F%E5%B8%AE%E5%94%B1%E5%98%89%E5%AE%BE%E4%BF%A1%E6%81%AF%23&t=31&band_rank=1&Refer=top",
-      "platform": "weibo",
-      "platform_label": "微博热搜",
-      "platform_color": "#FF9500",
-      "platform_icon": "🔥",
-      "hot": 0,
-      "date": "2026-05-30",
-      "score": 1,
-      "category": "其他",
-      "title": "歌手第三期帮唱嘉宾信息",
-      "desc": "Singer season 3 guest performers info"
+      "title": "齐豫再拿《歌手》第一",
+      "desc": "Chi Yu won first place again on 'Singer'."
     },
     {
       "id": 297,
-      "url": "https://s.weibo.com/weibo?q=%23%E7%99%BD%E9%B9%BF%E6%9D%8E%E6%99%A8%E9%83%91%E6%81%BA%E5%A4%8D%E5%AE%A3%E8%B7%91%E7%94%B7%23&t=31&band_rank=14&Refer=top",
+      "url": "https://s.weibo.com/weibo?q=%23%E8%8C%83%E4%B8%9E%E4%B8%9E%E9%97%AE%E7%AC%AC%E4%B8%89%E5%90%8D%E6%80%8E%E4%B9%88%E4%BD%A0%E4%BA%86%23&t=31&band_rank=5&Refer=top",
       "platform": "weibo",
       "platform_label": "微博热搜",
       "platform_color": "#FF9500",
@@ -4210,8 +4210,8 @@
       "date": "2026-05-30",
       "score": 1,
       "category": "其他",
-      "title": "白鹿李晨郑恺复宣跑男",
-      "desc": "Bailu, Li Chen, Zheng Kai return to Running Man"
+      "title": "范丞丞问第三名怎么你了",
+      "desc": "Fan Chengcheng asks about third place"
     }
   ]
 }
