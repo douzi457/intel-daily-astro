@@ -1,6 +1,6 @@
 {
-  "summary": "AI技术爆发与商业价值凸显",
-  "trendAnalysis": "今日资讯中AI相关内容占比最高，戴尔AI收入暴增757%印证产业爆发，Tiny-vLLM和Speculation Rules API则从技术层面展示AI应用创新，显示AI已从概念走向大规模商业落地。",
+  "summary": "AI硬件爆发，隐私搜索受益",
+  "trendAnalysis": "AI硬件需求集中爆发，戴尔AI收入环比暴增757%，印证行业高景气度；同时隐私搜索用户增长，反映用户对AI数据安全的担忧加剧，形成AI发展与隐私保护并行的双轨趋势。",
   "highlights": [
     {
       "rank": 1,
@@ -13,46 +13,46 @@
     },
     {
       "rank": 2,
-      "title": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
-      "reason": "轻量级LLM推理引擎突破",
-      "insight": "AI模型部署效率大幅提升",
-      "summary": "C++/CUDA开发的高性能轻量级LLM推理引擎，显著提升AI模型部署效率。",
-      "source": "hackernews",
-      "url": "https://news.ycombinator.com/item?id=48328184"
-    },
-    {
-      "rank": 3,
-      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "reason": "网页体验革命性突破",
-      "insight": "前端技术向AI体验靠拢",
-      "summary": "Speculation Rules API实现0毫秒无感页面跳转，大幅提升网页用户体验。",
-      "source": "juejin",
-      "url": "https://juejin.cn/post/7643721690566688804"
-    },
-    {
-      "rank": 4,
       "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
-      "reason": "AI搜索引发用户迁移",
-      "insight": "隐私搜索迎来新机遇",
-      "summary": "谷歌转型AI搜索后，DuckDuckGo安装量增长最高达30%，隐私搜索受益。",
+      "reason": "隐私搜索需求激增",
+      "insight": "用户对AI数据安全担忧加剧",
+      "summary": "Google转型AI搜索后，DuckDuckGo安装量增长最高达三成，反映用户对隐私保护需求上升。",
       "source": "solidot",
       "url": "https://www.solidot.org/story?sid=84415"
     },
     {
-      "rank": 5,
+      "rank": 3,
       "title": "轨道上的中国火箭残骸急剧增加",
-      "reason": "太空安全风险加剧",
-      "insight": "航天发展需兼顾可持续性",
-      "summary": "中国火箭残骸激增，轨道安全风险加剧，航天发展需关注可持续性。",
+      "reason": "太空安全风险上升",
+      "insight": "太空垃圾管理亟待解决",
+      "summary": "中国火箭残骸激增引发轨道安全担忧，太空垃圾管理问题日益突出。",
       "source": "solidot",
       "url": "https://www.solidot.org/story?sid=84416"
+    },
+    {
+      "rank": 4,
+      "title": "荷兰阻止美国公司收购其重要数字供应商",
+      "reason": "数字主权争夺加剧",
+      "insight": "科技领域地缘政治风险上升",
+      "summary": "荷兰阻止美企收购其重要数字供应商，反映数字主权争夺加剧。",
+      "source": "solidot",
+      "url": "https://www.solidot.org/story?sid=84412"
+    },
+    {
+      "rank": 5,
+      "title": "Dropbox 创始人卸任 CEO 一职",
+      "reason": "云存储行业进入新阶段",
+      "insight": "创始人退位预示战略转型",
+      "summary": "Dropbox创始人卸任CEO，公司进入新阶段，可能面临战略调整。",
+      "source": "solidot",
+      "url": "https://www.solidot.org/story?sid=84414"
     }
   ],
   "trends": [
-    "AI商业化",
-    "技术突破",
-    "用户体验"
+    "AI硬件",
+    "隐私搜索",
+    "数字主权"
   ],
   "date": "2026-06-01",
-  "generated_at": "2026-05-31T19:10:40.918333"
+  "generated_at": "2026-05-31T22:02:04.598952"
 }
