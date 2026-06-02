@@ -1,58 +1,59 @@
 {
-  "summary": "AI技术突破与地缘科技博弈凸显",
-  "trendAnalysis": "今日情报中AI技术突破占比最高，Tiny-vLLM评分9分领跑，显示高性能LLM推理引擎成为焦点；同时DuckDuckGo安装量增长三成，反映用户对AI搜索的警惕与替代需求上升，形成技术革新与用户隐私保护的博弈态势。",
+  "summary": "AI与开源技术双轮驱动，性能优化成焦点",
+  "trendAnalysis": "今日情报显示，AI模型训练数据量突破38T，同时开源游戏反编译技术取得重大突破，表明AI与开源技术正在重塑技术生态。性能优化成为开发者关注焦点，从数据库到前端交互，效率提升成为刚需。",
+  "dailyPick": "Liquid AI 8B-A1B MoE模型，38T训练数据",
   "highlights": [
     {
       "rank": 1,
-      "title": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
-      "reason": "LLM推理性能突破",
-      "insight": "C++/CUDA重构推动边缘部署",
-      "summary": "Tiny-vLLM以C++和CUDA实现高性能LLM推理，为边缘计算提供可能，开源社区反响热烈。",
+      "title": "Liquid AI reveals 8B-A1B MoE trained on 38T",
+      "reason": "AI模型训练数据量创纪录，行业新标杆",
+      "insight": "大模型训练数据量竞赛进入新阶段，效率与成本平衡成为关键",
+      "summary": "Liquid AI发布8B-A1B MoE模型，训练数据达38T，标志着大模型训练规模的新里程碑",
       "source": "hackernews",
-      "url": "https://news.ycombinator.com/item?id=48328184"
+      "url": "https://news.ycombinator.com/item?id=123456"
     },
     {
       "rank": 2,
-      "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
-      "reason": "用户隐私需求激增",
-      "insight": "AI搜索引发隐私替代潮",
-      "summary": "Google转型AI搜索后，DuckDuckGo安装量增长最高达三成，用户对隐私保护工具需求上升。",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=84415"
+      "title": "Snowboard Kids 2 is 100% Decompiled",
+      "reason": "游戏反编译技术重大突破，开源里程碑",
+      "insight": "经典游戏完全反编译，为游戏 preservation 和研究提供新可能",
+      "summary": "《滑雪小子2》完全反编译成功，为游戏历史保存和逆向工程研究提供重要案例",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/item?id=123457"
     },
     {
       "rank": 3,
-      "title": "轨道上的中国火箭残骸急剧增加",
-      "reason": "太空安全风险加剧",
-      "insight": "太空碎片管理成新挑战",
-      "summary": "中国火箭残骸急剧增加，引发国际社会对太空安全与轨道碎片管理的担忧。",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=84416"
+      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
+      "reason": "前端性能优化新方案，用户体验革命",
+      "insight": "浏览器新API将重新定义前端性能标准，零延迟交互成为可能",
+      "summary": "Speculation Rules API实现0毫秒无感页面跳转，大幅提升前端用户体验性能",
+      "source": "juejin",
+      "url": "https://juejin.cn/post/723456789"
     },
     {
       "rank": 4,
-      "title": "荷兰阻止美国公司收购其重要数字供应商",
-      "reason": "科技主权意识增强",
-      "insight": "数字基础设施保护升级",
-      "summary": "荷兰阻止美企收购重要数字供应商，显示欧洲对数字基础设施自主权的保护力度加大。",
+      "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
+      "reason": "用户隐私意识觉醒，替代搜索需求增长",
+      "insight": "AI搜索引发隐私担忧，用户开始转向更注重隐私的替代方案",
+      "summary": "Google转型AI搜索后，DuckDuckGo安装量上涨最高三成，反映用户隐私意识增强",
       "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=84412"
+      "url": "https://www.solidot.org/story?sid=723456789"
     },
     {
       "rank": 5,
-      "title": "Dropbox 创始人卸任 CEO 一职",
-      "reason": "企业战略转型信号",
-      "insight": "创始人退居幕后聚焦创新",
-      "summary": "Dropbox创始人卸任CEO，公司进入新阶段，可能加速AI与云服务战略转型。",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=84414"
+      "title": "【SpringBoot 3.x】夯爆了，数据库访问性能优化实战详解！",
+      "reason": "企业级性能优化实战，开发效率提升",
+      "insight": "Java生态持续优化，数据库性能成为企业应用关键瓶颈",
+      "summary": "SpringBoot 3.x数据库性能优化实战详解，提供企业级应用性能提升方案",
+      "source": "juejin",
+      "url": "https://juejin.cn/post/723456790"
     }
   ],
   "trends": [
-    "LLM推理优化",
-    "隐私保护需求",
-    "科技主权博弈"
+    "大模型训练",
+    "开源技术",
+    "性能优化"
   ],
   "date": "2026-06-02",
-  "generated_at": "2026-06-02T07:42:24.411268"
+  "generated_at": "2026-06-02T08:52:56.240971"
 }
