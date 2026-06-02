@@ -1,0 +1,338 @@
+---
+// 今日重点 AI 编辑推荐区 — 增强版
+// 作为首页视觉锚点，给站点明确的侧重点
+import type { FocusData } from '../lib/types';
+
+interface Props {
+  focusData: FocusData | null;
+  today: string;
+}
+
+const { focusData, today } = Astro.props;
+
+const hasFocus = focusData && focusData.highlights && focusData.highlights.length > 0;
+---
+
+{!hasFocus ? (
+  <div class="focus-empty">
+    <div class="focus-empty-icon">📡</div>
+    <div class="focus-empty-title">今日情报收集中</div>
+    <div class="focus-empty-desc">AI 正在分析今日资讯，稍后带来编辑精选</div>
+  </div>
+) : (
+<div class="focus-hero">
+  <!-- 头部摘要 -->
+  <div class="focus-hero-header">
+    <div class="focus-hero-badge">📋 编辑部 {focusData.date || today}</div>
+    {focusData.summary && <div class="focus-hero-summary">{focusData.summary}</div>}
+  </div>
+
+  <!-- 趋势标签 -->
+  {focusData.trends && focusData.trends.length > 0 && (
+    <div class="focus-hero-trends">
+      {focusData.trends.map((t: string) => <span class="hero-trend-tag">{t}</span>)}
+    </div>
+  )}
+
+  <!-- 编辑手记 -->
+  {focusData.trendAnalysis && (
+    <div class="focus-editor-note">{focusData.trendAnalysis}</div>
+  )}
+
+  <!-- 今日必读卡片（突出显示第一条） -->
+  <div class="focus-highlights">
+    {focusData.highlights.slice(0, 1).map((h) => (
+      <a href={`/focus/${h.rank}/`} class="focus-hero-card">
+        <span class="focus-hero-rank">🔖 今日必读</span>
+        <h2 class="focus-hero-title">{h.title}</h2>
+        <div class="focus-hero-meta">
+          {h.reason && <span class="focus-hero-reason">⚡ {h.reason}</span>}
+          {h.source && <span class="focus-hero-source">{h.source}</span>}
+        </div>
+        {h.insight && <p class="focus-hero-insight">💡 {h.insight}</p>}
+        {h.summary && <p class="focus-hero-body">{h.summary}</p>}
+      </a>
+    ))}
+
+    <!-- 其他推荐 -->
+    {focusData.highlights.slice(1).length > 0 && (
+      <div class="focus-secondary-list">
+        {focusData.highlights.slice(1).map((h) => (
+          <a href={`/focus/${h.rank}/`} class="focus-secondary-item">
+            <span class="focus-secondary-rank">#{h.rank}</span>
+            <div class="focus-secondary-body">
+              <div class="focus-secondary-title">{h.title}</div>
+              <div class="focus-secondary-meta">
+                {h.reason && <span>⚡ {h.reason}</span>}
+                {h.source && <span class="focus-secondary-src">{h.source}</span>}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
+)}
+
+<style>
+/* ── 空状态 ── */
+.focus-empty {
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, var(--accent-glow), transparent);
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+.focus-empty-icon { font-size: 2.5em; margin-bottom: 12px; }
+.focus-empty-title { font-size: 1.1em; font-weight: 700; color: var(--text-h); margin-bottom: 6px; }
+.focus-empty-desc { font-size: 0.82em; color: var(--text-m); }
+
+/* ── Hero Section ── */
+.focus-hero {
+  background: linear-gradient(160deg, var(--accent-glow), color-mix(in srgb, var(--accent) 6%, transparent), var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.focus-hero::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.focus-hero-header {
+  margin-bottom: 14px;
+}
+
+.focus-hero-badge {
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 8px;
+  padding: 5px 14px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.focus-hero-summary {
+  font-size: 1.05em;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1.5;
+}
+
+/* ── 趋势标签 ── */
+.focus-hero-trends {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.hero-trend-tag {
+  font-size: 0.75em;
+  padding: 5px 14px;
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 20px;
+  color: var(--accent);
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.hero-trend-tag:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ── 编辑手记 ── */
+.focus-editor-note {
+  font-size: 0.85em;
+  line-height: 1.7;
+  color: var(--text-p);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  position: relative;
+}
+
+/* ── 今日必读卡片 ── */
+.focus-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.focus-hero-card {
+  display: block;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.focus-hero-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.focus-hero-rank {
+  display: inline-block;
+  font-size: 0.68em;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.focus-hero-title {
+  font-size: 1.15em;
+  font-weight: 800;
+  color: var(--text-h);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.focus-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.78em;
+}
+
+.focus-hero-reason {
+  color: var(--accent-alt);
+  font-weight: 600;
+}
+
+.focus-hero-source {
+  color: var(--text-m);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.focus-hero-insight {
+  font-size: 0.85em;
+  color: var(--text-p);
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+  border-radius: 8px;
+}
+
+.focus-hero-body {
+  font-size: 0.82em;
+  color: var(--text-m);
+  line-height: 1.6;
+}
+
+/* ── 其他推荐列表 ── */
+.focus-secondary-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .focus-secondary-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.focus-secondary-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.focus-secondary-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+  background: var(--bg-hover);
+}
+
+.focus-secondary-rank {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: 8px;
+  font-size: 0.7em;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.focus-secondary-body { flex: 1; min-width: 0; }
+
+.focus-secondary-title {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.focus-secondary-meta {
+  font-size: 0.7em;
+  color: var(--text-m);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.focus-secondary-src {
+  color: var(--text-m);
+  font-family: var(--font-mono);
+}
+
+/* ── Light mode ── */
+[data-theme="light"] .focus-hero {
+  background: linear-gradient(160deg, var(--accent-glow), color-mix(in srgb, var(--accent) 3%, transparent), #fff);
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+@media (max-width: 640px) {
+  .focus-hero {
+    padding: 20px;
+  }
+  .focus-hero-title {
+    font-size: 1em;
+  }
+}
+</style>

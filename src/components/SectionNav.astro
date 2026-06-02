@@ -1,0 +1,84 @@
+---
+// 分区导航栏组件
+import type { NavTab } from '../lib/types';
+import { getNavTabs, SECTION_ORDER, SECTION_CATEGORIES_ZH, SECTION_CATEGORIES_EN } from '../lib/constants';
+
+interface Props {
+  activeSections: string[];
+  locale?: 'zh' | 'en';
+}
+
+const { activeSections, locale = 'zh' } = Astro.props;
+const navTabs = getNavTabs(activeSections, locale);
+---
+
+<div class="section-nav-wrap">
+  <nav class="section-nav" id="sectionNav">
+    {navTabs.map(tab => (
+      <a href={`#${tab.id}`} data-target={tab.id} class={tab.id === 'featured' ? 'active' : ''}>
+        {tab.icon} {tab.label}
+      </a>
+    ))}
+  </nav>
+</div>
+
+<style>
+.section-nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.section-nav {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 4px;
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+}
+
+.section-nav::-webkit-scrollbar { display: none; }
+
+.section-nav a {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--text-m);
+  border-radius: var(--radius-full);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.section-nav a:hover {
+  color: var(--text-h);
+  background: var(--bg-hover);
+}
+
+.section-nav a.active {
+  color: #fff;
+  background: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .section-nav-wrap { margin-bottom: 24px; }
+  .section-nav a {
+    padding: 8px 10px;
+    font-size: 0.72em;
+  }
+}
+</style>

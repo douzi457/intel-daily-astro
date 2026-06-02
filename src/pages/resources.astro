@@ -1,0 +1,453 @@
+---
+// 资源福利页 — 网盘拉新推广
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../lib/constants';
+
+// ── 资源分类数据 ──
+const sections = [
+  {
+    id: 'education',
+    icon: '🎒',
+    title: '幼小初教辅资料',
+    desc: '精选小学 1-6 年级全学科试卷、晨读资料、手抄报模板等',
+    color: '#4CAF50',
+    items: [
+      { title: '幼小衔接资料合集', url: 'https://pan.quark.cn/s/c109909b8f8e', desc: '幼升小必备衔接资料包' },
+      { title: '小学 1-6 年级全学科试卷', url: 'https://pan.quark.cn/s/9562e1cc5bcf', desc: '各年级期中期末真题卷' },
+      { title: '小学生手抄报', url: 'https://pan.quark.cn/s/13c0a70fcb93', desc: '节日主题手抄报模板大全' },
+      { title: '小学语文晨读辅导资料', url: 'https://pan.quark.cn/s/86f458391917', desc: '每日晨读打卡训练' },
+      { title: '小学生全脑开发系列', url: 'https://pan.quark.cn/s/aac7b89fb477', desc: '思维训练与专注力提升' },
+      { title: '中小学黑板报模板合集', url: 'https://pan.quark.cn/s/9b92f2fc3658', desc: '班级文化墙设计素材' },
+      { title: '2026 小升初冲刺卷（语数英）', url: 'https://pan.quark.cn/s/b1dcb05d59cd', desc: '最新小升初备考真题' },
+    ],
+  },
+  {
+    id: 'wallpaper',
+    icon: '🖼️',
+    title: '精选壁纸合集',
+    desc: '手机电脑高清壁纸、分区壁纸、4K 锁屏壁纸',
+    color: '#9C27B0',
+    items: [
+      { title: '稀缺手机电脑壁纸', url: 'https://pan.quark.cn/s/b460e6f60542', desc: 'ins 风高清壁纸精选' },
+      { title: '电脑分区壁纸合集', url: 'https://pan.quark.cn/s/db7df3b1e78d', desc: '分屏壁纸·多显示器适配' },
+      { title: '电脑及平板壁纸', url: 'https://pan.quark.cn/s/344b74fa1f90', desc: '横竖屏通用高清壁纸' },
+      { title: '手机壁纸合集', url: 'https://pan.quark.cn/s/b2e2d477333d', desc: '全面屏手机高清壁纸' },
+      { title: '手机 4K 锁屏壁纸', url: 'https://pan.quark.cn/s/087ef29c0d1a', desc: '4K 超清锁屏专属壁纸' },
+    ],
+  },
+];
+
+// AI 工具推荐
+const aiTools = [
+  { title: '智谱清言 — 免费 AI 对话', url: 'https://chatglm.cn', desc: 'GLM 大模型免费使用' },
+  { title: '豆包 — 字节跳动 AI 助手', url: 'https://www.doubao.com', desc: '多功能 AI 对话与创作' },
+  { title: '夸克 AI 搜索 — 网盘会员福利', url: 'https://pan.quark.cn', desc: '注册即送容量，资源随心存' },
+];
+
+const pageMeta = `${SITE.name} · 资源福利 — 教辅资料、壁纸合集免费下载`;
+const pageDesc = '精选幼小初教辅资料、高清壁纸合集，夸克网盘一键保存。豆子实验室每日情报站资源专区。';
+---
+
+<BaseLayout
+  title="🎁 资源福利"
+  description={pageDesc}
+>
+<div class="page">
+  <Header mode="archive" />
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1 class="hero-title">🎁 资源福利专区</h1>
+    <p class="hero-desc">精选优质资源，夸克网盘一键保存到你的网盘。定期更新，欢迎收藏。</p>
+    <div class="hero-tags">
+      <span class="tag">📖 教辅资料</span>
+      <span class="tag">🖼️ 高清壁纸</span>
+      <span class="tag">🤖 AI 工具</span>
+      <span class="tag">🆓 完全免费</span>
+    </div>
+  </div>
+
+  <!-- Resource Sections -->
+  {sections.map(section => (
+    <section class="res-section" id={section.id}>
+      <div class="res-header">
+        <span class="res-icon">{section.icon}</span>
+        <div>
+          <h2 class="res-title" style={`color:${section.color}`}>{section.title}</h2>
+          <p class="res-desc">{section.desc}</p>
+        </div>
+        <span class="res-count">{section.items.length} 项</span>
+      </div>
+
+      <div class="res-grid">
+        {section.items.map(item => (
+          <a href={item.url} target="_blank" rel="noopener" class="res-card" style={`--card-accent:${section.color}`}>
+            <div class="res-card-icon">{section.icon}</div>
+            <div class="res-card-body">
+              <div class="res-card-title">{item.title}</div>
+              <div class="res-card-desc">{item.desc}</div>
+            </div>
+            <div class="res-card-action">
+              <span class="action-text">保存到网盘</span>
+              <span class="action-arrow">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <!-- AI Tools Section -->
+  <section class="res-section" id="ai-tools">
+    <div class="res-header">
+      <span class="res-icon">🤖</span>
+      <div>
+        <h2 class="res-title" style="color:#4A90E2">AI 工具推荐</h2>
+        <p class="res-desc">好用的免费 AI 工具，助力学习与创作</p>
+      </div>
+      <span class="res-count">{aiTools.length} 项</span>
+    </div>
+
+    <div class="res-grid">
+      {aiTools.map(item => (
+        <a href={item.url} target="_blank" rel="noopener" class="res-card" style="--card-accent:#4A90E2">
+          <div class="res-card-icon">🤖</div>
+          <div class="res-card-body">
+            <div class="res-card-title">{item.title}</div>
+            <div class="res-card-desc">{item.desc}</div>
+          </div>
+          <div class="res-card-action">
+            <span class="action-text">立即体验</span>
+            <span class="action-arrow">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- How to use guide -->
+  <section class="guide-section">
+    <h3 class="guide-title">📋 使用指南</h3>
+    <div class="guide-steps">
+      <div class="guide-step">
+        <span class="step-num">1</span>
+        <div>
+          <strong>注册夸克网盘</strong>
+          <p>如果还没有夸克账号，点击上方任意链接注册即可获得免费存储空间</p>
+        </div>
+      </div>
+      <div class="guide-step">
+        <span class="step-num">2</span>
+        <div>
+          <strong>一键保存资源</strong>
+          <p>点击资源卡片上的「保存到网盘」按钮，资源会自动保存到你的网盘</p>
+        </div>
+      </div>
+      <div class="guide-step">
+        <span class="step-num">3</span>
+        <div>
+          <strong>随时随地查看</strong>
+          <p>在夸克 App 或网页版中随时查看、下载已保存的资料</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</div>
+</BaseLayout>
+
+<style>
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  padding: 48px 24px 32px;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, var(--accent-glow), transparent);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.hero-title {
+  font-size: 2em;
+  font-weight: 800;
+  color: var(--text-h);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+  font-family: var(--font-brand);
+}
+
+.hero-desc {
+  font-size: 0.95em;
+  color: var(--text-p);
+  max-width: 520px;
+  margin: 0 auto 20px;
+  line-height: 1.7;
+}
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  font-size: 0.82em;
+  font-weight: 600;
+  padding: 6px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-p);
+  transition: all 0.15s;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Resource Section ── */
+.res-section {
+  margin-bottom: 48px;
+}
+
+.res-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.res-icon {
+  font-size: 2em;
+  flex-shrink: 0;
+}
+
+.res-title {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 2px;
+  letter-spacing: -0.3px;
+}
+
+.res-desc {
+  font-size: 0.82em;
+  color: var(--text-m);
+}
+
+.res-count {
+  margin-left: auto;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--text-m);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px 14px;
+  font-family: var(--font-mono);
+}
+
+/* ── Resource Card Grid ── */
+.res-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .res-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .res-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Resource Card ── */
+.res-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.res-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--card-accent, var(--accent));
+  border-radius: 0 3px 3px 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.res-card:hover {
+  border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.res-card:hover::before {
+  opacity: 1;
+}
+
+.res-card-icon {
+  font-size: 1.6em;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--card-accent, var(--accent)) 8%, transparent);
+  border-radius: 10px;
+}
+
+.res-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.res-card-title {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.res-card-desc {
+  font-size: 0.74em;
+  color: var(--text-m);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.res-card-action {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--card-accent, var(--accent));
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s;
+}
+
+.res-card:hover .res-card-action {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.action-arrow {
+  font-size: 1.1em;
+}
+
+/* ── Guide Section ── */
+.guide-section {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.guide-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .guide-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.guide-step {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.85em;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.guide-step strong {
+  display: block;
+  font-size: 0.88em;
+  color: var(--text-h);
+  margin-bottom: 4px;
+}
+
+.guide-step p {
+  font-size: 0.78em;
+  color: var(--text-m);
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero {
+    padding: 32px 16px 24px;
+  }
+  .hero-title {
+    font-size: 1.5em;
+  }
+  .res-header {
+    flex-wrap: wrap;
+  }
+  .res-count {
+    margin-left: auto;
+  }
+  .guide-section {
+    padding: 20px;
+  }
+}
+</style>

@@ -1,10 +1,42 @@
 ---
 import '../styles/global.css';
+import { SITE } from '../lib/constants';
+
 interface Props {
   title: string;
   lang?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  structuredData?: string;
+  prevUrl?: string;
+  nextUrl?: string;
 }
-const { title, lang = 'zh-CN' } = Astro.props;
+
+const {
+  title, lang = 'zh-CN',
+  description = SITE.description,
+  ogImage = '/icon.svg',
+  canonicalUrl,
+  structuredData,
+  prevUrl,
+  nextUrl,
+} = Astro.props;
+
+const isEn = lang.startsWith('en');
+const siteDescription = description || (isEn ? SITE.descriptionEn : SITE.description);
+const fullTitle = title.includes(SITE.name) ? title : `${title} · ${SITE.name}`;
+const pageUrl = canonicalUrl || Astro.url.href;
+
+const defaultSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  alternateName: SITE.nameEn,
+  url: SITE.url,
+  description: SITE.description,
+  inLanguage: isEn ? 'en-US' : 'zh-CN',
+});
 ---
 
 <!DOCTYPE html>
@@ -12,13 +44,39 @@ const { title, lang = 'zh-CN' } = Astro.props;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI-Powered Intelligence Hub. Real-time global insights, trends, and automated reporting." />
-  <title>{title}</title>
+  <title>{fullTitle}</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content={siteDescription} />
+  <link rel="canonical" href={pageUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={siteDescription} />
+  <meta property="og:image" content={new URL(ogImage, SITE.url).href} />
+  <meta property="og:url" content={pageUrl} />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:locale" content={isEn ? 'en_US' : 'zh_CN'} />
+
+  <!-- Prev/Next for paginated content -->
+  {prevUrl && <link rel="prev" href={prevUrl} />}
+  {nextUrl && <link rel="next" href={nextUrl} />}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={siteDescription} />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={structuredData || defaultSchema}></script>
+
+  <!-- Assets -->
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <link rel="preload" href="/Baloo2-Bold.subset.ttf" as="font" type="font/ttf" crossorigin>
+
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ad58971b03c54dab95ef71e841966a34"}'></script>
-  <!-- End Cloudflare Web Analytics -->
 </head>
 <body>
   <slot />
@@ -28,7 +86,6 @@ const { title, lang = 'zh-CN' } = Astro.props;
       const theme = localStorage.getItem('theme') || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
 
-      // Theme toggle
       const themeBtn = document.getElementById('themeToggle');
       if (themeBtn) {
         themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
@@ -39,9 +96,6 @@ const { title, lang = 'zh-CN' } = Astro.props;
           themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
         });
       }
-
-      // Scheme picker (removed — single brand scheme)
-      const scheme = 'ink';
     })();
   </script>
 </body>

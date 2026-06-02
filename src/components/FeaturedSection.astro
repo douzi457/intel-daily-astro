@@ -1,0 +1,197 @@
+---
+// 精选头条区组件
+import type { IntelItem, PlatformMeta } from '../lib/types';
+import { getPlatformMeta } from '../lib/constants';
+
+interface Props {
+  featured: IntelItem[];
+  locale?: 'zh' | 'en';
+}
+
+const { featured, locale = 'zh' } = Astro.props;
+
+if (featured.length === 0) return null;
+---
+
+<section id="featured" class="featured-bento">
+  <div class="featured-hero">
+    {featured.slice(0, 3).map((item, idx) => {
+      const meta = getPlatformMeta(item.platform, locale);
+      return (
+        <div class="hero-entry">
+          <div class="hero-entry-rank">{idx === 0 ? (locale === 'zh' ? '★ 精选头条' : '★ Top Pick') : (locale === 'zh' ? `#${idx + 1} 精选` : `#${idx + 1} Pick`)}</div>
+          <div class="hero-entry-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
+          <div class="hero-entry-meta">
+            <span class="platform-tag" style={`--tag-color:${meta.color}`}>
+              <span class="tag-icon">{meta.icon}</span>
+              {meta.label}
+            </span>
+            {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>{locale === 'zh' ? '信号' : 'Sig'} {item.score}</span>}
+            {(item.cross_sources || 0) >= 3 && <span class="cross-badge-mini">🌐</span>}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  {featured.length > 3 && (
+    <div class="featured-side">
+      {featured.slice(3).map((item, idx) => {
+        const meta = getPlatformMeta(item.platform, locale);
+        return (
+          <div class="featured-mini">
+            <span class="mini-rank">#{idx + 4} {locale === 'zh' ? '推荐' : 'Rec'}</span>
+            <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
+            <span class="platform-tag" style={`--tag-color:${meta.color}`}>
+              <span class="tag-icon">{meta.icon}</span>
+              {meta.label}
+            </span>
+            {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>{locale === 'zh' ? '信号' : 'Sig'} {item.score}</span>}
+            {(item.cross_sources || 0) >= 3 && <span class="cross-badge-mini">🌐</span>}
+          </div>
+        );
+      })}
+    </div>
+  )}
+</section>
+
+<style>
+.featured-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .featured-bento {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.featured-hero {
+  background: linear-gradient(135deg, var(--accent-glow), transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.featured-hero:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.hero-entry {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-entry:last-child {
+  border-bottom: none;
+}
+
+.hero-entry-rank {
+  font-family: var(--font-mono);
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.hero-entry-title {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--text-h);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.hero-entry-title a:hover { color: var(--accent); }
+
+.hero-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.featured-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featured-mini {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  flex: 1;
+}
+
+.featured-mini:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.mini-rank {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  font-weight: 600;
+  color: var(--text-m);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.mini-title {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.12s;
+}
+
+.featured-mini:hover .mini-title { color: var(--accent); }
+
+.featured-mini .platform-tag {
+  margin-top: 6px;
+  display: inline-flex;
+}
+
+.cross-badge-mini {
+  font-size: 0.75em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+@media (max-width: 768px) {
+  .featured-bento {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

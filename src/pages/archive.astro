@@ -1,5 +1,8 @@
 ---
+// 归档页 — 使用共享组件
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { getAllDates } from '../utils/data.ts';
 import CalendarWidget from '../components/CalendarWidget.astro';
 
@@ -8,57 +11,15 @@ const dates = getAllDates('zh');
 
 <BaseLayout title="📁 历史归档 · 豆子实验室">
 <div class="page">
-
-  <header class="header">
-    <div class="header-brand">
-      <img src="/icon.svg" alt="" width="36" height="36">
-      <div class="header-logo-text">
-        <span class="logo-line1">每日<span class="logo-accent">情报</span></span>
-        <span class="logo-line2"><span class="logo-accent">豆子</span><span class="logo-dot">·</span>实验室</span>
-      </div>
-    </div>
-    <div class="header-meta">
-      <span class="count-badge">{dates.length} 天数据</span>
-    </div>
-    <div class="header-actions">
-      <a href="/" class="lang-btn">← 首页</a>
-      <a href="/stats" class="lang-btn">📊 统计</a>
-      <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
-    </div>
-  </header>
+  <Header mode="archive" />
 
   <div style="margin-bottom:40px;">
     <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 历史归档</h1>
+    <p style="font-size:0.82em;color:var(--text-m);margin-top:6px;">共 {dates.length} 天数据</p>
   </div>
 
   <CalendarWidget dates={dates} basePath="/day/" locale="zh" />
 
-  <!-- Footer -->
-  <div class="footer" style="margin-top:40px;">
-    📡 INTEL.SYS · 历史归档
-    <div class="footer-ecosystem">
-      <span class="footer-brand">🌐 知能生态</span>
-      <a href="https://news.zhinengtech.dpdns.org" target="_blank" rel="noopener">知能新闻</a>
-      <a href="https://zhinengtools.pages.dev" target="_blank" rel="noopener">知能工具</a>
-      <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
-      <span>📱 公众号：豆子实验室</span>
-    </div>
-  </div>
-
+  <Footer />
 </div>
-
-<script>
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
-    let theme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    btn.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    });
-  }
-</script>
 </BaseLayout>

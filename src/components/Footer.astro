@@ -1,0 +1,53 @@
+---
+// 共享 Footer 组件
+import { SITE } from '../lib/constants';
+---
+
+<footer class="footer">
+  <p>📡 智谱 GLM-5 驱动 · {SITE.name} 每日情报</p>
+  <p>每日自动采集 · AI 智能评分 · 原生广告展示</p>
+  <div class="footer-ecosystem">
+    <span class="footer-brand">🌐 知能生态</span>
+    <a href="https://news.zhinengtech.dpdns.org" target="_blank" rel="noopener">知能新闻</a>
+    <a href="https://zhinengtools.pages.dev" target="_blank" rel="noopener">知能工具</a>
+    <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
+    <span>📱 公众号：豆子实验室</span>
+  </div>
+</footer>
+
+<style>
+.footer {
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.78em;
+  color: var(--text-m);
+  line-height: 1.8;
+}
+.footer-ecosystem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  margin-bottom: 8px;
+}
+.footer-ecosystem a {
+  color: var(--text-p);
+  text-decoration: none;
+  transition: color 0.12s;
+}
+.footer-ecosystem a:hover {
+  color: var(--accent);
+}
+.footer-brand {
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 40px;
+  }
+}
+</style>

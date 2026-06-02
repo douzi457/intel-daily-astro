@@ -1,0 +1,361 @@
+---
+// 侧边栏组件 — 精简版：数据概览 + 来源分布 + 热度排行
+import type { IntelItem, GzhArticle } from '../lib/types';
+import { getPlatformMeta, SECTION_ORDER } from '../lib/constants';
+
+interface Props {
+  totalItems: number;
+  activeSectionCount: number;
+  coverageDays: number;
+  highScoreCount: number;
+  grouped: Record<string, IntelItem[]>;
+  featured: IntelItem[];
+  trending: IntelItem[];
+  filteredArticles: GzhArticle[];
+  locale?: 'zh' | 'en';
+}
+
+const {
+  totalItems, activeSectionCount, coverageDays, highScoreCount,
+  grouped, featured, trending, filteredArticles, locale = 'zh'
+} = Astro.props;
+
+const isEn = locale === 'en';
+---
+
+<aside class="sidebar">
+  <!-- 数据概览 -->
+  <div class="sidebar-widget">
+    <div class="sidebar-widget-title">{isEn ? '📊 Dashboard' : '📊 数据概览'}</div>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-cell-value">{totalItems}</div>
+        <div class="stat-cell-label">{isEn ? 'Today' : '今日情报'}</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-value">{activeSectionCount}</div>
+        <div class="stat-cell-label">{isEn ? 'Sources' : '信息来源'}</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-value">{highScoreCount}</div>
+        <div class="stat-cell-label">{isEn ? 'High-value' : '高价值信号'}</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-value">{coverageDays}</div>
+        <div class="stat-cell-label">{isEn ? 'Days' : '覆盖天数'}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 来源分布 -->
+  {activeSectionCount > 0 && (
+    <div class="sidebar-widget">
+      <div class="sidebar-widget-title">{isEn ? '🌐 Sources' : '🌐 信息来源'}</div>
+      {SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0).slice(0, 8).map(s => {
+        const cnt = grouped[s].length;
+        const meta = getPlatformMeta(s, locale);
+        return (
+          <div class="dist-item">
+            <div class="dist-header">
+              <span class="dist-label">{meta.icon} {meta.label}</span>
+              <span class="dist-count">{cnt}</span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  )}
+
+  <!-- 热度 / 高分信号 -->
+  <div class="sidebar-widget">
+    {trending.filter((i) => i.hot > 0).length > 0 ? (
+      <>
+        <div class="sidebar-widget-title">{isEn ? '🔥 Trending' : '🔥 实时热度'}</div>
+        {trending.slice(0, 8).map((item, idx) => (
+          <div class="trending-item">
+            <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
+            <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
+          </div>
+        ))}
+      </>
+    ) : (
+      <>
+        <div class="sidebar-widget-title">{isEn ? '📡 Top Signals' : '📡 高分信号'}</div>
+        {featured.slice(0, 8).map((item, idx) => {
+          const meta = getPlatformMeta(item.platform, locale);
+          return (
+            <div class="signal-item">
+              <span class={`signal-badge ${item.score >= 8 ? 'high' : 'med'}`}>{item.score}</span>
+              <div>
+                <span class="signal-source" style={`color:${meta.color}`}>{meta.icon} {meta.label}</span>
+                <a href={item.url} target="_blank" rel="noopener" class="signal-title">{item.title}</a>
+              </div>
+            </div>
+          );
+        })}
+      </>
+    )}
+  </div>
+
+  <!-- 推广 & 引流（底部小卡，不喧宾夺主） -->
+  <div class="sidebar-widget promo-block">
+    <div class="promo-links">
+      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="promo-link cloud">
+        <span>☁️</span>
+        <span>{isEn ? 'Tencent Cloud from $10.9/yr' : '腾讯云轻量服务器 79元/年'}</span>
+      </a>
+      <div class="promo-link wechat-qr">
+        <span>💬</span>
+        <span>{isEn ? 'Follow on WeChat' : '关注公众号：豆子实验室'}</span>
+      </div>
+      <div class="qr-popup">
+        <img src="/assets/brand/wechat/wechat_search_qr.png" alt="微信扫码关注豆子实验室" loading="lazy" />
+        <div class="qr-hint">{isEn ? 'Scan to follow' : '微信扫码关注'}</div>
+      </div>
+      <a href="/resources" class="promo-link resource">
+        <span>🎁</span>
+        <span>{isEn ? 'Free Resources' : '资源福利 · 教辅/壁纸合集'}</span>
+      </a>
+    </div>
+  </div>
+
+</aside>
+
+<style>
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  position: sticky;
+  top: 60px;
+  align-self: start;
+}
+
+@media (max-width: 1023px) {
+  .sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    position: static;
+    align-self: auto;
+  }
+  .promo-block {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar { grid-template-columns: 1fr; }
+}
+
+.sidebar-widget {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+}
+
+.sidebar-widget-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── 推广区块 ── */
+.promo-block {
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--accent) 3%, var(--bg-card));
+  border-color: color-mix(in srgb, var(--accent) 8%, var(--border));
+}
+
+.promo-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s;
+  color: var(--text-m);
+}
+
+.promo-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-h);
+}
+
+.promo-link.cloud:hover { color: var(--accent); }
+.promo-link.wechat-qr { color: var(--text-m); cursor: default; }
+.promo-link.wechat-qr:hover { color: #07C160; }
+.promo-link.resource:hover { color: #4CAF50; }
+
+/* QR 图展示 */
+.qr-popup {
+  text-align: center;
+  padding: 8px 0 4px;
+}
+
+.qr-popup img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: block;
+  margin: 0 auto;
+}
+
+.qr-hint {
+  font-size: 0.62em;
+  color: var(--text-m);
+  margin-top: 4px;
+}
+
+.signal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+}
+.signal-item:last-child { border-bottom: none; }
+
+.signal-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  margin-top: 2px;
+  background: linear-gradient(135deg, var(--accent-glow), color-mix(in srgb, var(--accent) 18%, transparent));
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.signal-badge.high {
+  background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.08));
+  color: #ef4444;
+  border-color: rgba(239,68,68,0.2);
+}
+.signal-badge.med {
+  background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.08));
+  color: #fbbf24;
+  border-color: rgba(251,191,36,0.2);
+}
+
+.signal-source {
+  font-size: 0.62em;
+  font-weight: 600;
+  color: var(--text-m);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.signal-title {
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--text-p);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.signal-title:hover { color: var(--accent); }
+
+.trending-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.trending-item:last-child { border-bottom: none; }
+
+.trending-rank {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  font-weight: 700;
+  color: var(--text-m);
+  min-width: 16px;
+  text-align: right;
+}
+.trending-rank.top-3 { color: #ef4444; }
+
+.trending-title {
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--text-p);
+  line-height: 1.4;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.trending-title:hover { color: var(--accent); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat-cell {
+  text-align: center;
+  padding: 10px 6px;
+  background: var(--bg);
+  border-radius: 10px;
+}
+
+.stat-cell-value {
+  font-family: var(--font-mono);
+  font-size: 1.1em;
+  font-weight: 800;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-cell-label {
+  font-size: 0.65em;
+  color: var(--text-m);
+  margin-top: 3px;
+}
+
+.dist-item { padding: 4px 0; }
+.dist-item + .dist-item {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 3px;
+}
+.dist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.dist-label {
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--text-p);
+}
+.dist-count {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  font-weight: 600;
+  color: var(--text-m);
+}
+</style>

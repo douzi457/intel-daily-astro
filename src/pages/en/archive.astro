@@ -1,65 +1,25 @@
 ---
+// EN Archive — using shared components
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 import { getAllDates } from '../../utils/data.ts';
 import CalendarWidget from '../../components/CalendarWidget.astro';
 
 const dates = getAllDates('en');
 ---
 
-<BaseLayout title="📁 History Archive · DOUZI LABS" lang="en">
+<BaseLayout title="📁 History Archive · Douzi Labs" lang="en">
 <div class="page">
-
-  <header class="header">
-    <div class="header-brand">
-      <img src="/icon.svg" alt="" width="36" height="36">
-      <div class="header-logo-text">
-        <span class="logo-line1">Intel<span class="logo-accent">D</span>aily</span>
-        <span class="logo-line2"><span class="logo-accent">Douzi</span><span class="logo-dot">·</span>Labs</span>
-      </div>
-    </div>
-    <div class="header-meta">
-      <span class="count-badge">{dates.length} days</span>
-    </div>
-    <div class="header-actions">
-      <a href="/en/" class="lang-btn">← Home</a>
-      <a href="/en/stats" class="lang-btn">📊 Stats</a>
-      <a href="/" class="lang-btn">中文</a>
-      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
-    </div>
-  </header>
+  <Header mode="archive" lang="en" />
 
   <div style="margin-bottom:40px;">
     <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 History Archive</h1>
+    <p style="font-size:0.82em;color:var(--text-m);margin-top:6px;">{dates.length} days of data</p>
   </div>
 
   <CalendarWidget dates={dates} basePath="/en/day/" locale="en" />
 
-  <!-- Footer -->
-  <div class="footer" style="margin-top:40px;">
-    📡 INTEL.SYS · Archive
-    <div class="footer-ecosystem">
-      <span class="footer-brand">🌐 Zhineng Ecosystem</span>
-      <a href="https://news.zhinengtech.dpdns.org" target="_blank" rel="noopener">Zhineng News</a>
-      <a href="https://zhinengtools.pages.dev" target="_blank" rel="noopener">Zhineng Tools</a>
-      <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
-      <span>💬 WeChat: 豆子实验室</span>
-    </div>
-  </div>
-
+  <Footer />
 </div>
-
-<script>
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
-    let theme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    btn.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    });
-  }
-</script>
 </BaseLayout>

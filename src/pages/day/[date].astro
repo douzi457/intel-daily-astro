@@ -1,306 +1,107 @@
 ---
+// 日报页 — 使用共享组件
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getDayData, getAllDates } from '../../utils/data.ts';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FocusSection from '../../components/FocusSection.astro';
+import FeaturedSection from '../../components/FeaturedSection.astro';
+import PlatformSection from '../../components/PlatformSection.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import SectionNav from '../../components/SectionNav.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
+import { getDayData, getAllDates } from '../../utils/data.ts';
+import { SITE, SECTION_ORDER, getDow } from '../../lib/constants';
+import type { FocusData, IntelItem, GzhArticle } from '../../lib/types';
 import articles from '../../data/gzh-articles.json';
 
-let focusData: any = null;
-try {
-  const mod = await import('../../data/rewrite/today-focus.json');
-  focusData = mod.default;
-} catch {}
-
-const filteredArticles = articles.filter(a => a.title);
-
+// ── 静态路径生成 ──
 export async function getStaticPaths() {
   const dates = getAllDates('zh');
   return dates.map(d => ({ params: { date: d } }));
 }
 
+// ── 数据加载 ──
+let focusData: FocusData | null = null;
+try {
+  const mod = await import('../../data/rewrite/today-focus.json');
+  focusData = mod.default as FocusData;
+} catch {}
+
+const filteredArticles: GzhArticle[] = articles.filter((a: GzhArticle) => a.title);
+
 const { date } = Astro.params as { date: string };
 const dayData = getDayData(date, 'zh');
-const totalItems = dayData.items.length;
+const items: IntelItem[] = dayData.items;
+const totalItems = items.length;
 
-const PLATFORM_META: Record<string, { label: string; icon: string; color: string }> = {
-  weibo:           { label: '微博',     icon: '🔥', color: '#FF9500' },
-  hackernews:      { label: 'HackerNews', icon: '⚡', color: '#FF6600' },
-  github:          { label: 'GitHub',   icon: '🐙', color: '#6CCB5F' },
-  producthunt:     { label: 'ProductHunt', icon: '🚀', color: '#DA5430' },
-  v2ex:            { label: 'V2EX',     icon: '💬', color: '#4CAF50' },
-  ithome:          { label: 'IT之家',   icon: '💻', color: '#0090D8' },
-  '36kr':          { label: '36氪',     icon: '📊', color: '#4A90E2' },
-  wallstreetcn:    { label: '华尔街见闻', icon: '📈', color: '#3395FF' },
-  toutiao:         { label: '今日头条',  icon: '📰', color: '#E63946' },
-  douyin:          { label: '抖音',     icon: '🎵', color: '#00F2EA' },
-  news_aggregator: { label: '快讯聚合',  icon: '📌', color: '#94A3B8' },
-  bilibili:        { label: 'B站',      icon: '📺', color: '#FB7299' },
-  zhihu:           { label: '知乎',     icon: '💡', color: '#0066FF' },
-  baidu:           { label: '百度热搜', icon: '🔍', color: '#2932E1' },
-  tieba:           { label: '百度贴吧', icon: '📋', color: '#4B90E0' },
-  cailianshe:      { label: '财联社',   icon: '📡', color: '#C71A1A' },
-  pengpai:         { label: '澎湃新闻', icon: '📱', color: '#E60012' },
-  guancha:         { label: '观察者网', icon: '👁️', color: '#2B5797' },
-  '163':           { label: '网易新闻', icon: '📰', color: '#DE1A1A' },
-  chuangye:        { label: '创业邦',   icon: '🚀', color: '#FF6B35' },
-};
-
-const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator', 'bilibili', 'zhihu', 'baidu', 'tieba', 'cailianshe', 'pengpai', 'guancha', '163', 'chuangye'];
-
-const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
-  weibo:           { name: '微博热搜',  icon: '🔥' },
-  hackernews:      { name: '开发者社区', icon: '💻' },
-  github:          { name: '开源项目',  icon: '🐙' },
-  producthunt:     { name: '新品发布',  icon: '🚀' },
-  v2ex:            { name: 'V2EX 热议', icon: '💬' },
-  ithome:          { name: '科技资讯',  icon: '💻' },
-  '36kr':          { name: '商业科技',  icon: '📊' },
-  wallstreetcn:    { name: '华尔街见闻', icon: '📈' },
-  toutiao:         { name: '今日头条',  icon: '📰' },
-  douyin:          { name: '抖音',     icon: '🎵' },
-  news_aggregator: { name: '快讯聚合',  icon: '📌' },
-  bilibili:        { name: 'B站',      icon: '📺' },
-  zhihu:           { name: '知乎',     icon: '💡' },
-  baidu:           { name: '百度热搜', icon: '🔍' },
-  tieba:           { name: '百度贴吧', icon: '📋' },
-  cailianshe:      { name: '财联社',   icon: '📡' },
-  pengpai:         { name: '澎湃新闻', icon: '📱' },
-  guancha:         { name: '观察者网', icon: '👁️' },
-  '163':           { name: '网易新闻', icon: '📰' },
-  chuangye:        { name: '创业邦',   icon: '🚀' },
-};
-
-const grouped: Record<string, any[]> = {};
-for (const item of dayData.items) {
+// ── 分组排序 ──
+const grouped: Record<string, IntelItem[]> = {};
+for (const item of items) {
   const key = item.platform || 'other';
   if (!grouped[key]) grouped[key] = [];
   grouped[key].push(item);
 }
 
-const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
+const sortedAll = [...items].sort((a, b) => (b.score || 0) - (a.score || 0));
 const featured = sortedAll.slice(0, 5);
 
-const trending = [...dayData.items]
-  .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
+const trending = [...items]
+  .sort((a, b) => (b.hot || 0) - (a.hot || 0))
   .slice(0, 10);
 
 const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
+const highScoreCount = items.filter(i => i.score >= 7).length;
 
-const NAV_TABS = [
-  { id: 'featured', label: '精选', icon: '⭐' },
-  ...activeSections.map(s => ({
-    id: `section-${s}`,
-    label: SECTION_CATEGORIES[s]?.name || s,
-    icon: SECTION_CATEGORIES[s]?.icon || '📌',
-  })),
-];
-
+// ── 导航 ──
 const allDates = getAllDates('zh');
 const idx = allDates.indexOf(date);
 const prevDay = idx < allDates.length - 1 ? allDates[idx + 1] : null;
 const nextDay = idx > 0 ? allDates[idx - 1] : null;
-
 const recentDates = allDates.slice(0, 12);
 
-const dowLabels = ['周一','周二','周三','周四','周五','周六','周日'];
-function getDow(d: string) {
-  const ndx = new Date(d + 'T00:00:00').getDay();
-  return dowLabels[ndx === 0 ? 6 : ndx - 1];
-}
+// 动态 meta description（用当天第一精选）
+const metaDesc = featured.length > 0
+  ? `${date} 情报日报 · ${featured[0].title}`
+  : `${date} 情报日报 · ${SITE.name} 每日情报`;
+
+const pageUrl = `${SITE.url}/day/${date}`;
+const prevUrl = prevDay ? `${SITE.url}/day/${prevDay}` : '';
+const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
 ---
 
-<BaseLayout title={`📡 ${date} 情报日报 · 豆子实验室`} lang="zh-CN">
+<BaseLayout
+  title={`📡 ${date} 情报日报 · ${SITE.name}`}
+  lang="zh-CN"
+  description={metaDesc}
+  canonicalUrl={pageUrl}
+  prevUrl={prevUrl}
+  nextUrl={nextUrl}
+>
 <div class="page">
+  <Header mode="day" date={date} totalItems={totalItems} />
 
-  <!-- Header -->
-  <header class="header">
-    <div class="header-brand">
-      <img src="/icon.svg" alt="" width="36" height="36">
-      <div class="header-logo-text">
-        <span class="logo-line1">每日<span class="logo-accent">情报</span></span>
-        <span class="logo-line2"><span class="logo-accent">豆子</span><span class="logo-dot">·</span>实验室</span>
-      </div>
-      <span style="font-size:0.8em;color:var(--text-m);font-weight:500;margin-left:6px;">日报 · {date}</span>
-    </div>
-    <div class="header-meta">
-      <span class="count-badge">{totalItems} 条情报</span>
-      <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="badge-link">☁️ 阿里云 1折起</a>
-      <a id="tencentPromo" href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="badge-link tencent">💙 腾讯云 79元/年</a>
-    </div>
-    <div class="header-actions">
-      <a href="/" class="lang-btn">← 返回首页</a>
-      <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
-    </div>
-  </header>
-
-  <!-- Day Navigation -->
-  <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;">
-    {prevDay ? <a href={`/day/${prevDay}`} style="font-size:0.85em;color:var(--text-m);padding:6px 14px;border:1px solid var(--border);border-radius:8px;font-weight:600;">← {prevDay}</a> : <span style="width:90px"></span>}
-    <span style="font-size:0.9em;font-weight:700;color:var(--text-h);font-family:var(--font-mono);">{date} {getDow(date)}</span>
-    {nextDay ? <a href={`/day/${nextDay}`} style="font-size:0.85em;color:var(--text-m);padding:6px 14px;border:1px solid var(--border);border-radius:8px;font-weight:600;">{nextDay} →</a> : <span style="width:90px"></span>}
+  <!-- 日期导航 -->
+  <div class="day-nav">
+    {prevDay ? <a href={`/day/${prevDay}`} class="day-nav-link">← {prevDay}</a> : <span class="day-nav-spacer"></span>}
+    <span class="day-nav-current">{date} {getDow(date, 'zh')}</span>
+    {nextDay ? <a href={`/day/${nextDay}`} class="day-nav-link">{nextDay} →</a> : <span class="day-nav-spacer"></span>}
   </div>
-
-  <!-- Header thin banner -->
-  {totalItems > 0 && (
-    <div class="header-ad" id="headerAd">
-      <a id="headerAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
-        <img id="headerAdImg" src="/assets/ads/tencent/banner/return_970_90.png" alt="腾讯云推广" loading="lazy">
-      </a>
-    </div>
-  )}
-
 </div>
 
-<!-- Section Nav -->
-<div class="section-nav-wrap">
-  <nav class="section-nav" id="sectionNav">
-    {NAV_TABS.map(tab => (
-      <a href={`#${tab.id}`} data-target={tab.id} class={tab.id === 'featured' ? 'active' : ''}>
-        {tab.icon} {tab.label}
-      </a>
-    ))}
-  </nav>
-</div>
+<SectionNav activeSections={activeSections} locale="zh" />
 
 <div class="page">
-
-  <!-- Today's Focus (only if matches this day) -->
-  {focusData && focusData.date === date && focusData.highlights && focusData.highlights.length > 0 && (
-    <div class="focus-section">
-      <div class="focus-header">
-        <span class="focus-title">📋 今日重点</span>
-        <span class="focus-date">{focusData.date}</span>
-      </div>
-      {focusData.summary && <div class="focus-summary">{focusData.summary}</div>}
-      {focusData.trends && focusData.trends.length > 0 && (
-        <div class="focus-trends">
-          {focusData.trends.map((t: string) => <span class="trend-tag">{t}</span>)}
-        </div>
-      )}
-      {focusData.trendAnalysis && (
-        <div class="focus-analysis">📊 {focusData.trendAnalysis}</div>
-      )}
-      <div class="focus-list">
-        {focusData.highlights.map((h: any) => (
-          <a href={`/focus/${h.rank}/`} class="focus-item">
-            <span class="focus-rank">#{h.rank}</span>
-            <div class="focus-body">
-              <div class="focus-item-title">{h.title}</div>
-              <div class="focus-meta">
-                <span class="focus-reason">⚡ {h.reason}</span>
-                {h.insight && <span class="focus-insight">💡 {h.insight}</span>}
-                {h.source && <span class="focus-source">{h.source}</span>}
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
+  <!-- 今日重点（仅当日匹配时显示） -->
+  {focusData && focusData.date === date && (
+    <FocusSection focusData={focusData} today={date} />
   )}
 
-  <!-- Content Grid -->
   <div class="content-grid">
     <div class="main-content">
+      <PlatformSection grouped={grouped} locale="zh" />
+      <FeaturedSection featured={featured} locale="zh" />
 
-      <!-- Featured Bento -->
-      <section id="featured" class="featured-bento">
-        {featured.length > 0 && (
-          <>
-            <div class="featured-hero">
-              {featured.slice(0, 3).map((item, idx) => {
-                const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-                return (
-                  <div class="hero-entry">
-                    <div class="hero-entry-rank">{idx === 0 ? '★ 精选头条' : `#${idx + 1} 精选`}</div>
-                    <div class="hero-entry-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
-                    <div class="hero-entry-meta">
-                      <span class="platform-tag" style={`--tag-color:${meta.color}`}>
-                        <span class="tag-icon">{meta.icon}</span>
-                        {meta.label}
-                      </span>
-                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>信号 {item.score}</span>}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {featured.length > 3 && (
-              <div class="featured-side">
-                {featured.slice(3).map((item, idx) => {
-                  const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-                  return (
-                    <div class="featured-mini">
-                      <span class="mini-rank">#{idx + 4} 推荐</span>
-                      <a href={item.url} target="_blank" rel="noopener" class="mini-title">{item.title}</a>
-                      <span class="platform-tag" style={`--tag-color:${meta.color}`}>
-                        <span class="tag-icon">{meta.icon}</span>
-                        {meta.label}
-                      </span>
-                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>信号 {item.score}</span>}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </>
-        )}
-      </section>
-
-      <!-- Platform Grid -->
-      <div class="platform-grid">
-        {activeSections.map(sectionKey => {
-          const items = grouped[sectionKey];
-          const sec = SECTION_CATEGORIES[sectionKey] || { name: sectionKey, icon: '📌' };
-          const meta = PLATFORM_META[sectionKey] || { label: sectionKey, color: '#94a3b8', icon: '📌' };
-
-          return (
-            <section class="platform-section" id={`section-${sectionKey}`}>
-              <div class="section-header">
-                <div class="section-title">
-                  <span>{sec.icon}</span>
-                  <span style={`color:${meta.color}`}>{sec.name}</span>
-                  <span class="section-count">{items.length}</span>
-                </div>
-              </div>
-              <div class="news-list">
-                {items.map((item: any, idx: number) => {
-                  const hotValue = item.hot || 0;
-                  const sources = item.merged_sources || [item];
-                  const primarySource = sources[0];
-                  const extraSources = sources.slice(1);
-                  return (
-                    <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
-                      <span class="news-idx">{idx + 1}</span>
-                      <div class="news-body">
-                        <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                        <div class="news-footer">
-                          <div class="source-tags">
-                            <span class="platform-tag" style={`--tag-color:${primarySource.color}`}>
-                              <span class="tag-icon">{primarySource.icon}</span>
-                              {primarySource.label}
-                            </span>
-                            {extraSources.map((s: any) => (
-                              <span class="platform-tag platform-tag-sm" style={`--tag-color:${s.color}`} title={s.label}>
-                                <span class="tag-icon">{s.icon}</span>
-                              </span>
-                            ))}
-                            {item.merged_sources && <span class="merge-count">+{extraSources.length}</span>}
-                          </div>
-                          {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                          {item.score > 0 && <span class="news-score">信号 <strong>{item.score}</strong></span>}
-                        </div>
-                        {item.desc && <div class="news-desc">{item.desc}</div>}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-          );
-        })}
-      </div>
-
-      <!-- Native feed-style ad -->
+      <!-- 原生推广卡片 -->
       {totalItems > 0 && (
         <div class="section" style="margin-bottom:0;">
           <div class="section-header">
@@ -322,16 +123,7 @@ function getDow(d: string) {
         </div>
       )}
 
-      <!-- Native Ad: 腾讯云（自动轮换） -->
-      {totalItems > 0 && (
-        <div id="tencentAd" class="ad-card-img" style="display:block;text-decoration:none;">
-          <a id="tencentAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
-            <img id="tencentAdImg" src="/assets/ads/tencent/banner/ai_banner.png" alt="腾讯云推广" loading="lazy" style="width:100%;height:auto;border-radius:12px;display:block;">
-          </a>
-        </div>
-      )}
-
-      <!-- Calendar -->
+      <!-- 日历 -->
       {allDates.length > 0 && (
         <section class="section section-full">
           <CalendarWidget dates={allDates} basePath="/day/" locale="zh" currentDate={date} />
@@ -339,207 +131,115 @@ function getDow(d: string) {
       )}
     </div>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-
-      <!-- 公众号关注 -->
-      <div class="sidebar-widget">
-        <div class="sidebar-widget-title">📢 豆子实验室</div>
-        <div style="text-align:center;">
-          <div style="font-size:0.82em;font-weight:600;color:var(--text-h);margin-bottom:8px;">每日情报 · 技术干货</div>
-          <a href="https://weixin.qq.com" target="_blank" rel="noopener" style="display:block;margin:0 auto 10px;max-width:260px;border-radius:10px;overflow:hidden;border:1px solid var(--border);transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-            <img src="/assets/brand/wechat/wechat_search_qr.png" alt="微信搜索「豆子实验室」" loading="lazy" style="width:100%;height:auto;display:block;">
-          </a>
-          <div style="font-size:0.72em;color:var(--text-m);line-height:1.6;">
-            📱 微信搜索 <strong style="color:var(--accent);">「豆子实验室」</strong> 或扫码关注
-          </div>
-        </div>
-        {filteredArticles.length > 0 && (
-          <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px;">
-            <div style="font-size:0.75em;font-weight:700;color:var(--text-h);margin-bottom:8px;">📰 最新文章</div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              {filteredArticles.slice(0, 5).map(a => (
-                <a href={a.url} target="_blank" rel="noopener" style="font-size:0.72em;line-height:1.4;color:var(--text-p);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'">
-                  {a.date && <span style="color:var(--text-m);font-size:0.85em;">[{a.date}] </span>}{a.title}
-                </a>
-              ))}
-            </div>
-            <div style="margin-top:8px;font-size:0.72em;color:var(--text-m);text-align:center;">在微信搜索「豆子实验室」查看全部文章</div>
-          </div>
-        )}
-      </div>
-
-      <!-- 资源福利 -->
-      <div class="sidebar-widget">
-        <div class="sidebar-widget-title">🎁 资源福利</div>
-        <div style="font-size:0.72em;font-weight:600;color:var(--text-m);padding:6px 0 3px;letter-spacing:0.3px;">🎒 幼小初教辅资料</div>
-        <div style="display:flex;flex-direction:column;gap:3px;">
-          <a href="https://pan.quark.cn/s/c109909b8f8e" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">幼小衔接资料合集</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/9562e1cc5bcf" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">小学 1-6 年级全学科试卷</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/13c0a70fcb93" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">小学生手抄报</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/86f458391917" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">小学语文晨读辅导资料</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/aac7b89fb477" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">小学生全脑开发系列</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/9b92f2fc3658" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">中小学黑板报模板合集</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/b1dcb05d59cd" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>📖</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">2026 小升初冲刺卷（语数英）</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-        </div>
-        <div style="font-size:0.72em;font-weight:600;color:var(--text-m);padding:8px 0 3px;letter-spacing:0.3px;">🖼️ 精选壁纸合集</div>
-        <div style="display:flex;flex-direction:column;gap:3px;">
-          <a href="https://pan.quark.cn/s/b460e6f60542" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>🖼️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">稀缺手机电脑壁纸</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/db7df3b1e78d" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>🖼️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">电脑分区壁纸合集</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/344b74fa1f90" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>🖼️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">电脑及平板壁纸</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/b2e2d477333d" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>🖼️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">手机壁纸合集</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-          <a href="https://pan.quark.cn/s/087ef29c0d1a" target="_blank" rel="noopener" style="font-size:0.72em;padding:5px 8px;background:var(--bg);border-radius:5px;color:var(--text-p);display:flex;align-items:center;gap:6px;transition:all 0.12s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-p)'"><span>🖼️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">手机 4K 锁屏壁纸</span><span style="font-size:0.7em;opacity:0.5;">↗</span></a>
-        </div>
-      </div>
-
-      <!-- 腾讯云推广（侧边栏） -->
-      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="sidebar-widget" style="padding:0;overflow:hidden;border-radius:14px;display:block;">
-        <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="腾讯云 · 轻量服务器 4核4G3M 仅 79元/年" loading="lazy" style="width:100%;height:auto;display:block;">
-      </a>
-
-      <!-- Mini Stats -->
-      <div class="sidebar-widget">
-        <div class="sidebar-widget-title">📊 数据概览</div>
-        <div class="stats-grid">
-          <div class="stat-cell">
-            <div class="stat-cell-value">{totalItems}</div>
-            <div class="stat-cell-label">当日情报</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{activeSections.length}</div>
-            <div class="stat-cell-label">信息来源</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{recentDates.length}</div>
-            <div class="stat-cell-label">覆盖天数</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
-            <div class="stat-cell-label">高价值信号</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Source Distribution -->
-      {activeSections.length > 0 && (
-        <div class="sidebar-widget">
-          <div class="sidebar-widget-title">🌐 信息来源</div>
-          {activeSections.map(s => {
-            const cnt = grouped[s].length;
-            const meta = PLATFORM_META[s] || { label: s, icon: '📌', color: '#94A3B8' };
-            return (
-              <div class="dist-item">
-                <div class="dist-header">
-                  <span class="dist-label">{meta.icon} {meta.label}</span>
-                  <span class="dist-count">{cnt}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <!-- Trending / Top Signals -->
-      <div class="sidebar-widget">
-        {trending.filter((i: any) => i.hot > 0).length > 0 ? (
-          <>
-            <div class="sidebar-widget-title">🔥 实时热度</div>
-            {trending.map((item, idx) => (
-              <div class="trending-item">
-                <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
-                <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
-              </div>
-            ))}
-          </>
-        ) : (
-          <>
-            <div class="sidebar-widget-title">📡 高分信号</div>
-            {featured.map((item, idx) => {
-              const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-              return (
-                <div class="signal-item">
-                  <span class={`signal-badge ${item.score >= 8 ? 'high' : 'med'}`}>{item.score}</span>
-                  <div>
-                    <span class="signal-source" style={`color:${meta.color}`}>{meta.icon} {meta.label}</span>
-                    <a href={item.url} target="_blank" rel="noopener" class="signal-title">{item.title}</a>
-                  </div>
-                </div>
-              );
-            })}
-          </>
-        )}
-      </div>
-
-    </aside>
+    <!-- 侧边栏 -->
+    <Sidebar
+      totalItems={totalItems}
+      activeSectionCount={activeSections.length}
+      coverageDays={recentDates.length}
+      highScoreCount={highScoreCount}
+      grouped={grouped}
+      featured={featured}
+      trending={trending}
+      filteredArticles={filteredArticles}
+      locale="zh"
+    />
   </div>
 
-  <div class="footer">
-    📡 智谱 GLM-5 驱动 · 豆子实验室 每日情报<br />
-    每日自动采集 · AI 智能评分 · 原生广告展示
-    <div class="footer-ecosystem">
-      <span class="footer-brand">🌐 知能生态</span>
-      <a href="https://news.zhinengtech.dpdns.org" target="_blank" rel="noopener">知能新闻</a>
-      <a href="https://zhinengtools.pages.dev" target="_blank" rel="noopener">知能工具</a>
-      <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
-      <span>📱 公众号：豆子实验室</span>
-    </div>
-  </div>
-
+  <Footer />
 </div>
 
 <button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
-
 </BaseLayout>
 
 <style>
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  .featured-hero {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 20px;
-  }
-  .hero-entry {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-entry:last-child {
-    border-bottom: none;
-  }
-  .hero-entry-rank {
-    font-family: var(--font-mono);
-    font-size: 0.6em;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
-  }
-  .hero-entry-title {
-    font-size: 0.88em;
-    font-weight: 700;
-    color: var(--text-h);
-    line-height: 1.4;
-    margin-bottom: 6px;
-  }
-  .hero-entry-title a:hover {
-    color: var(--accent);
-  }
-  .hero-entry-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 1024px) {
+  .content-grid { grid-template-columns: 1fr 300px; }
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+.day-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.day-nav-link {
+  font-size: 0.85em;
+  color: var(--text-m);
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.day-nav-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.day-nav-current {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--text-h);
+  font-family: var(--font-mono);
+}
+
+.day-nav-spacer { width: 90px; }
+
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-m);
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s;
+  z-index: 200;
+  box-shadow: var(--shadow-md);
+}
+
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+  .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+  .day-nav-spacer { width: 50px; }
+}
 </style>
 
 <script>
   const nav = document.getElementById('sectionNav');
   if (nav) {
-    const links = nav.querySelectorAll('a');
+    const links = nav.querySelectorAll('a[data-target]');
     const sections = Array.from(links).map(link => {
       const id = link.getAttribute('data-target');
       return id ? document.getElementById(id) : null;
-    }).filter(Boolean);
+    }).filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -552,9 +252,7 @@ function getDow(d: string) {
       });
     }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
 
-    sections.forEach(section => {
-      if (section) observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   }
 
   const backBtn = document.getElementById('backToTop');
@@ -562,50 +260,10 @@ function getDow(d: string) {
     window.addEventListener('scroll', () => {
       backBtn.classList.toggle('visible', window.scrollY > 400);
     });
-    backBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
-  // Tencent Cloud banner rotation (main)
-  const adImg = document.getElementById('tencentAdImg');
-  const adLink = document.getElementById('tencentAdLink');
-  if (adImg && adLink) {
-    const promos = [
-      { src: '/assets/ads/tencent/banner/ai_banner.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 AI焕新季 · 2核2G4M 新客 99元/年' },
-      { src: '/assets/ads/tencent/banner/lighthouse_480_300.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 · 轻量服务器 4核4G3M 仅 79元/年' },
-      { src: '/assets/ads/tencent/banner/return_970_250.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 · 推广大使特惠合集' },
-    ];
-    let idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % promos.length;
-      const p = promos[idx];
-      adImg.src = p.src;
-      adImg.alt = p.alt;
-      adLink.href = p.href;
-    }, 25000);
-  }
-
-  // Header thin banner rotation
-  const headerImg = document.getElementById('headerAdImg');
-  const headerLink = document.getElementById('headerAdLink');
-  if (headerImg && headerLink) {
-    const ads = [
-      { src: '/assets/ads/tencent/banner/return_970_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 AI焕新季' },
-      { src: '/assets/ads/tencent/banner/lighthouse_1200_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: '腾讯云 · 轻量服务器 79元/年' },
-    ];
-    let hi = 0;
-    setInterval(() => {
-      hi = (hi + 1) % ads.length;
-      const p = ads[hi];
-      headerImg.src = p.src;
-      headerImg.alt = p.alt;
-      headerLink.href = p.href;
-    }, 20000);
-  }
-
-  // Header rotating Tencent promo badge
-  const promoEl = document.getElementById('tencentPromo');
+  const promoEl = document.getElementById('tencentPromo') as HTMLAnchorElement | null;
   if (promoEl) {
     const promos = [
       { text: '💙 轻量服务器 4核4G3M 79元/年', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
@@ -621,4 +279,3 @@ function getDow(d: string) {
     }, 8000);
   }
 </script>
-</BaseLayout>

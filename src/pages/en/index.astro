@@ -1,127 +1,49 @@
 ---
+// EN Homepage — using shared components
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getDayData, getAllDates } from '../../utils/data.ts';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FeaturedSection from '../../components/FeaturedSection.astro';
+import PlatformSection from '../../components/PlatformSection.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import SectionNav from '../../components/SectionNav.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
+import { getDayData, getAllDates } from '../../utils/data.ts';
+import { SITE, SECTION_ORDER } from '../../lib/constants';
+import type { IntelItem, GzhArticle } from '../../lib/types';
+import articles from '../../data/gzh-articles.json';
+
+// Data loading
+const filteredArticles: GzhArticle[] = articles.filter((a: GzhArticle) => a.title);
 
 const allDates = getAllDates('en');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'en');
-const totalItems = dayData.items.length;
+const items: IntelItem[] = dayData.items;
+const totalItems = items.length;
 const recentDates = allDates.slice(0, 10);
 
-const PLATFORM_META: Record<string, { label: string; icon: string; color: string }> = {
-  weibo:           { label: 'Weibo',       icon: '🔥', color: '#FF9500' },
-  hackernews:      { label: 'HackerNews',  icon: '⚡', color: '#FF6600' },
-  github:          { label: 'GitHub',      icon: '🐙', color: '#6CCB5F' },
-  producthunt:     { label: 'ProductHunt', icon: '🚀', color: '#DA5430' },
-  v2ex:            { label: 'V2EX',        icon: '💬', color: '#4CAF50' },
-  ithome:          { label: 'IT Home',     icon: '💻', color: '#0090D8' },
-  '36kr':          { label: '36Kr',        icon: '📊', color: '#4A90E2' },
-  wallstreetcn:    { label: 'WallStreetCN', icon: '📈', color: '#3395FF' },
-  toutiao:         { label: 'TouTiao',     icon: '📰', color: '#E63946' },
-  douyin:          { label: 'Douyin',      icon: '🎵', color: '#00F2EA' },
-  news_aggregator: { label: 'News Feed',   icon: '📌', color: '#94A3B8' },
-  bilibili:        { label: 'Bilibili',    icon: '📺', color: '#FB7299' },
-  zhihu:           { label: 'Zhihu',       icon: '💡', color: '#0066FF' },
-  baidu:           { label: 'Baidu Hot',   icon: '🔍', color: '#2932E1' },
-  tieba:           { label: 'Baidu Tieba', icon: '📋', color: '#4B90E0' },
-  cailianshe:      { label: 'Cailianshe',  icon: '📡', color: '#C71A1A' },
-  pengpai:         { label: 'The Paper',   icon: '📱', color: '#E60012' },
-  guancha:         { label: 'Guancha',     icon: '👁️', color: '#2B5797' },
-  '163':           { label: 'NetEase News', icon: '📰', color: '#DE1A1A' },
-  chuangye:        { label: 'Cyzone',      icon: '🚀', color: '#FF6B35' },
-};
-
-const SECTION_ORDER = ['weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin', 'news_aggregator', 'bilibili', 'zhihu', 'baidu', 'tieba', 'cailianshe', 'pengpai', 'guancha', '163', 'chuangye'];
-
-const SECTION_CATEGORIES: Record<string, { name: string; icon: string }> = {
-  weibo:           { name: 'Weibo Hot',    icon: '🔥' },
-  hackernews:      { name: 'Dev Community', icon: '💻' },
-  github:          { name: 'Open Source',  icon: '🐙' },
-  producthunt:     { name: 'New Products', icon: '🚀' },
-  v2ex:            { name: 'V2EX',         icon: '💬' },
-  ithome:          { name: 'Tech News',    icon: '💻' },
-  '36kr':          { name: '36Kr',         icon: '📊' },
-  wallstreetcn:    { name: 'WallStreetCN', icon: '📈' },
-  toutiao:         { name: 'TouTiao',      icon: '📰' },
-  douyin:          { name: 'Douyin',       icon: '🎵' },
-  news_aggregator: { name: 'News Feed',    icon: '📌' },
-  bilibili:        { name: 'Bilibili',     icon: '📺' },
-  zhihu:           { name: 'Zhihu',        icon: '💡' },
-  baidu:           { name: 'Baidu Hot',    icon: '🔍' },
-  tieba:           { name: 'Baidu Tieba',  icon: '📋' },
-  cailianshe:      { name: 'Cailianshe',   icon: '📡' },
-  pengpai:         { name: 'The Paper',    icon: '📱' },
-  guancha:         { name: 'Guancha',      icon: '👁️' },
-  '163':           { name: 'NetEase News', icon: '📰' },
-  chuangye:        { name: 'Cyzone',       icon: '🚀' },
-};
-
-const grouped: Record<string, any[]> = {};
-for (const item of dayData.items) {
+// Grouping & sorting
+const grouped: Record<string, IntelItem[]> = {};
+for (const item of items) {
   const key = item.platform || 'other';
   if (!grouped[key]) grouped[key] = [];
   grouped[key].push(item);
 }
 
-const sortedAll = [...dayData.items].sort((a: any, b: any) => (b.score || 0) - (a.score || 0));
+const sortedAll = [...items].sort((a, b) => (b.score || 0) - (a.score || 0));
 const featured = sortedAll.slice(0, 5);
-
-const trending = [...dayData.items]
-  .sort((a: any, b: any) => (b.hot || 0) - (a.hot || 0))
-  .slice(0, 10);
-
+const trending = [...items].sort((a, b) => (b.hot || 0) - (a.hot || 0)).slice(0, 10);
 const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
+const highScoreCount = items.filter(i => i.score >= 7).length;
 
-// Pre-compute featured sidebar items to avoid Astro template parser issues
-const featuredSideItems = featured.slice(3).map((item: any) => {
-  const meta = PLATFORM_META[item.platform] || ({ label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' } as any);
-  return { item, meta };
-});
-
-const NAV_TABS = [
-  { id: 'featured', label: 'Featured', icon: '⭐' },
-  ...activeSections.map(s => ({
-    id: `section-${s}`,
-    label: SECTION_CATEGORIES[s]?.name || s,
-    icon: SECTION_CATEGORIES[s]?.icon || '📌',
-  })),
-];
-
-
-const dowLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-function getDow(d: string) {
-  const idx = new Date(d + 'T00:00:00').getDay();
-  return dowLabels[idx === 0 ? 6 : idx - 1];
-}
+const pageDesc = `Today's tech intelligence briefing from ${SITE.name}. AI-scored news from ${activeSections.length} sources.`;
 ---
 
-<BaseLayout title="DOUZI LABS · Daily Intel" lang="en">
+<BaseLayout title="Douzi Labs · Daily Intel" lang="en" description={pageDesc}>
 <div class="page">
+  <Header mode="en-home" date={today} totalItems={totalItems} lang="en" />
 
-  <header class="header">
-    <div class="header-brand">
-      <img src="/icon.svg" alt="" width="36" height="36">
-      <div class="header-logo-text">
-        <span class="logo-line1">Intel<span class="logo-accent">D</span>aily</span>
-        <span class="logo-line2"><span class="logo-accent">Douzi</span><span class="logo-dot">·</span>Labs</span>
-      </div>
-    </div>
-    <div class="header-meta">
-      <span class="date-badge">{today}</span>
-      <span class="count-badge">{totalItems} briefs</span>
-      <a href="https://www.aliyun.com/minisite/goods?userCode=za8gqbw7" target="_blank" rel="noopener" class="badge-link">☁️ Aliyun 1折起</a>
-      <a id="tencentPromo" href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="badge-link tencent">💙 Tencent Cloud 79/yr</a>
-    </div>
-    <div class="header-actions">
-      <a href="/stats" class="lang-btn">📊 Stats</a>
-      <a href="/archive" class="lang-btn">📁 Archive</a>
-      <a href="/" class="lang-btn">中文</a>
-      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
-    </div>
-  </header>
-
-  <!-- Header thin banner -->
   {totalItems > 0 && (
     <div class="header-ad" id="headerAd">
       <a id="headerAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
@@ -129,69 +51,16 @@ function getDow(d: string) {
       </a>
     </div>
   )}
-
 </div>
 
-<!-- Section Nav (full width) -->
-<div class="section-nav-wrap">
-  <nav class="section-nav" id="sectionNav">
-    {NAV_TABS.map(tab => (
-      <a href={`#${tab.id}`} data-target={tab.id} class={tab.id === 'featured' ? 'active' : ''}>
-        {tab.icon} {tab.label}
-      </a>
-    ))}
-  </nav>
-</div>
+<SectionNav activeSections={activeSections} locale="en" />
 
 <div class="page">
-
-  <!-- Content Grid -->
   <div class="content-grid">
     <div class="main-content">
+      <PlatformSection grouped={grouped} locale="en" />
+      <FeaturedSection featured={featured} locale="en" />
 
-      <!-- Featured Bento -->
-      <section id="featured" class="featured-bento">
-        {featured.length > 0 && (
-          <>
-            <div class="featured-hero">
-              {featured.slice(0, 3).map((item, idx) => {
-                const meta = PLATFORM_META[item.platform] || ({ label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' });
-                return (
-                  <div class="hero-entry">
-                    <div class="hero-entry-rank">{idx === 0 ? '★ Top Pick' : `#${idx + 1} Pick`}</div>
-                    <div class="hero-entry-title"><a href={item.url} target="_blank" rel="noopener">{item.title}</a></div>
-                    <div class="hero-entry-meta">
-                      <span class="platform-tag" style={`--tag-color:${meta.color}`}>
-                        <span class="tag-icon">{meta.icon}</span>
-                        {meta.label}
-                      </span>
-                      {item.score > 0 && <span class={`signal-badge ${item.score >= 8 ? 'high' : item.score >= 6 ? 'med' : ''}`}>SIGNAL {item.score}</span>}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {featuredSideItems.length > 0 && (
-              <div class="featured-side">
-                {featuredSideItems.map((entry, i) => (
-                  <div class="featured-mini">
-                    <span class="mini-rank">#{i + 4} Pick</span>
-                    <a href={entry.item.url} target="_blank" rel="noopener" class="mini-title">{entry.item.title}</a>
-                    <span class="platform-tag" style={`--tag-color:${entry.meta.color}`}>
-                      <span class="tag-icon">{entry.meta.icon}</span>
-                      {entry.meta.label}
-                    </span>
-                    {entry.item.score > 0 && <span class={`signal-badge ${entry.item.score >= 8 ? 'high' : entry.item.score >= 6 ? 'med' : ''}`}>SIGNAL {entry.item.score}</span>}
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </section>
-
-      <!-- Native feed-style ad: Tencent Cloud -->
       {totalItems > 0 && (
         <div class="section" style="margin-bottom:0;">
           <div class="section-header">
@@ -213,70 +82,6 @@ function getDow(d: string) {
         </div>
       )}
 
-      <!-- Platform Grid -->
-      <div class="platform-grid">
-        {activeSections.map(sectionKey => {
-          const items = grouped[sectionKey];
-          const sec = SECTION_CATEGORIES[sectionKey] || { name: sectionKey, icon: '📌' };
-          const meta = PLATFORM_META[sectionKey] || { label: sectionKey, color: '#94a3b8', icon: '📌' };
-
-          return (
-            <section class="platform-section" id={`section-${sectionKey}`} style={`--pf-color:${meta.color}`}>
-              <div class="section-header">
-                <div class="section-title">
-                  <span>{sec.icon}</span>
-                  <span style={`color:${meta.color}`}>{sec.name}</span>
-                  <span class="section-count">{items.length}</span>
-                </div>
-              </div>
-              <div class="news-list">
-                {items.map((item: any, idx: number) => {
-                  const hotValue = item.hot || 0;
-                  const sources = item.merged_sources || [item];
-                  const primarySource = sources[0];
-                  const extraSources = sources.slice(1);
-                  return (
-                    <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
-                      <span class="news-idx">{idx + 1}</span>
-                      <div class="news-body">
-                        <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
-                        <div class="news-footer">
-                          <div class="source-tags">
-                            <span class="platform-tag" style={`--tag-color:${primarySource.color}`}>
-                              <span class="tag-icon">{primarySource.icon}</span>
-                              {primarySource.label}
-                            </span>
-                            {extraSources.map((s: any) => (
-                              <span class="platform-tag platform-tag-sm" style={`--tag-color:${s.color}`} title={s.label}>
-                                <span class="tag-icon">{s.icon}</span>
-                              </span>
-                            ))}
-                            {item.merged_sources && <span class="merge-count">+{extraSources.length}</span>}
-                          </div>
-                          {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                          {item.score > 0 && <span class="news-score">Signal <strong>{item.score}</strong></span>}
-                        </div>
-                        {item.desc && <div class="news-desc">{item.desc}</div>}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-          );
-        })}
-      </div>
-
-      <!-- Main Tencent Cloud banner (auto-rotation) -->
-      {totalItems > 0 && (
-        <div id="tencentAd" class="ad-card-img" style="display:block;text-decoration:none;">
-          <a id="tencentAdLink" href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener">
-            <img id="tencentAdImg" src="/assets/ads/tencent/banner/ai_banner.png" alt="Tencent Cloud" loading="lazy" style="width:100%;height:auto;border-radius:12px;display:block;">
-          </a>
-        </div>
-      )}
-
-      <!-- Calendar -->
       {allDates.length > 0 && (
         <section class="section section-full">
           <CalendarWidget dates={allDates} basePath="/en/day/" locale="en" />
@@ -284,223 +89,122 @@ function getDow(d: string) {
       )}
     </div>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-
-      <!-- Overview -->
-      <div class="sidebar-widget">
-        <div class="sidebar-widget-title">📊 Overview</div>
-        <div class="stats-grid">
-          <div class="stat-cell">
-            <div class="stat-cell-value">{totalItems}</div>
-            <div class="stat-cell-label">Today</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{activeSections.length}</div>
-            <div class="stat-cell-label">Sources</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{recentDates.length}</div>
-            <div class="stat-cell-label">Days</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-cell-value">{dayData.items.filter((i: any) => i.score >= 7).length}</div>
-            <div class="stat-cell-label">High Signals</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tencent Cloud sidebar ad -->
-      <a href="https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="sidebar-widget" style="padding:0;overflow:hidden;border-radius:14px;display:block;">
-        <img src="/assets/ads/tencent/sidebar/return_300_250.png" alt="Tencent Cloud · 4C4G3M from $10.9/yr" loading="lazy" style="width:100%;height:auto;display:block;">
-      </a>
-
-      <!-- Source Distribution -->
-      {activeSections.length > 0 && (
-        <div class="sidebar-widget">
-          <div class="sidebar-widget-title">🌐 Sources</div>
-          {activeSections.map(s => {
-            const cnt = grouped[s].length;
-            const meta = PLATFORM_META[s] || { label: s, icon: '📌', color: '#94A3B8' };
-            return (
-              <div class="dist-item">
-                <div class="dist-header">
-                  <span class="dist-label">{meta.icon} {meta.label}</span>
-                  <span class="dist-count">{cnt}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <!-- Trending / Top Signals -->
-      <div class="sidebar-widget">
-        {trending.filter((i: any) => i.hot > 0).length > 0 ? (
-          <>
-            <div class="sidebar-widget-title">🔥 Trending Now</div>
-            {trending.map((item, idx) => (
-              <div class="trending-item">
-                <span class={`trending-rank ${idx < 3 ? 'top-3' : ''}`}>{idx + 1}</span>
-                <a href={item.url} target="_blank" rel="noopener" class="trending-title">{item.title}</a>
-              </div>
-            ))}
-          </>
-        ) : (
-          <>
-            <div class="sidebar-widget-title">📡 Top Signals</div>
-            {featured.map((item, idx) => {
-              const meta = PLATFORM_META[item.platform] || { label: item.platform_label || item.platform, icon: '📌', color: '#94A3B8' };
-              return (
-                <div class="signal-item">
-                  <span class={`signal-badge ${item.score >= 8 ? 'high' : 'med'}`}>{item.score}</span>
-                  <div>
-                    <span class="signal-source" style={`color:${meta.color}`}>{meta.icon} {meta.label}</span>
-                    <a href={item.url} target="_blank" rel="noopener" class="signal-title">{item.title}</a>
-                  </div>
-                </div>
-              );
-            })}
-          </>
-        )}
-      </div>
-
-    </aside>
+    <Sidebar
+      totalItems={totalItems}
+      activeSectionCount={activeSections.length}
+      coverageDays={recentDates.length}
+      highScoreCount={highScoreCount}
+      grouped={grouped}
+      featured={featured}
+      trending={trending}
+      filteredArticles={filteredArticles}
+      locale="en"
+    />
   </div>
 
-  <div class="footer">
-    📡 Powered by Zhipu GLM-5 · DOUZI LABS Daily Intel<br />
-    Daily auto-collection · AI-scored · Native ads
-    <div class="footer-ecosystem">
-      <span class="footer-brand">🌐 Zhineng Ecosystem</span>
-      <a href="https://news.zhinengtech.dpdns.org" target="_blank" rel="noopener">Zhineng News</a>
-      <a href="https://zhinengtools.pages.dev" target="_blank" rel="noopener">Zhineng Tools</a>
-      <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
-      <span>💬 WeChat: 豆子实验室</span>
-    </div>
-  </div>
-
+  <Footer />
 </div>
 
 <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
-
 </BaseLayout>
 
 <style>
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  .featured-hero {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 20px;
-  }
-  .hero-entry {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-entry:last-child {
-    border-bottom: none;
-  }
-  .hero-entry-rank {
-    font-family: var(--font-mono);
-    font-size: 0.6em;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
-  }
-  .hero-entry-title {
-    font-size: 0.88em;
-    font-weight: 700;
-    color: var(--text-h);
-    line-height: 1.4;
-    margin-bottom: 6px;
-  }
-  .hero-entry-title a:hover {
-    color: var(--accent);
-  }
-  .hero-entry-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+@media (min-width: 1024px) {
+  .content-grid { grid-template-columns: 1fr 300px; }
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+.header-ad {
+  margin-top: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+  height: 90px;
+}
+.header-ad:hover { border-color: var(--accent); }
+.header-ad a { display: block; text-decoration: none; height: 100%; }
+.header-ad img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.header-ad:hover img { transform: scale(1.01); }
+
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-m);
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s;
+  z-index: 200;
+  box-shadow: var(--shadow-md);
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+@media (max-width: 768px) {
+  .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+}
 </style>
 
 <script>
   const nav = document.getElementById('sectionNav');
   if (nav) {
-    const links = nav.querySelectorAll('a');
+    const links = nav.querySelectorAll('a[data-target]');
     const sections = Array.from(links).map(link => {
       const id = link.getAttribute('data-target');
       return id ? document.getElementById(id) : null;
-    }).filter(Boolean);
-
+    }).filter(Boolean) as HTMLElement[];
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
-          links.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('data-target') === id);
-          });
+          links.forEach(link => link.classList.toggle('active', link.getAttribute('data-target') === id));
         }
       });
     }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(section => {
-      if (section) observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   }
 
   const backBtn = document.getElementById('backToTop');
   if (backBtn) {
-    window.addEventListener('scroll', () => {
-      backBtn.classList.toggle('visible', window.scrollY > 400);
-    });
-    backBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400));
+    backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
-  // Tencent Cloud banner rotation (main)
-  const adImg = document.getElementById('tencentAdImg');
-  const adLink = document.getElementById('tencentAdLink');
-  if (adImg && adLink) {
-    const promos = [
-      { src: '/assets/ads/tencent/banner/ai_banner.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud AI Season · 2C2G4M New Users $13.6/yr' },
-      { src: '/assets/ads/tencent/banner/lighthouse_480_300.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · Lightweight Server 4C4G3M from $10.9/yr' },
-      { src: '/assets/ads/tencent/banner/return_970_250.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · Ambassador Collection' },
-    ];
-    let idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % promos.length;
-      const p = promos[idx];
-      adImg.src = p.src;
-      adImg.alt = p.alt;
-      adLink.href = p.href;
-    }, 25000);
-  }
-
-  // Header thin banner rotation
-  const headerImg = document.getElementById('headerAdImg');
-  const headerLink = document.getElementById('headerAdLink');
+  // Header banner rotation
+  const headerImg = document.getElementById('headerAdImg') as HTMLImageElement | null;
+  const headerLink = document.getElementById('headerAdLink') as HTMLAnchorElement | null;
   if (headerImg && headerLink) {
     const ads = [
       { src: '/assets/ads/tencent/banner/return_970_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud AI Season' },
-      { src: '/assets/ads/tencent/banner/lighthouse_1200_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · Lightweight Server $10.9/yr' },
+      { src: '/assets/ads/tencent/banner/lighthouse_1200_90.png', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console', alt: 'Tencent Cloud · $10.9/yr' },
     ];
     let hi = 0;
-    setInterval(() => {
-      hi = (hi + 1) % ads.length;
-      const p = ads[hi];
-      headerImg.src = p.src;
-      headerImg.alt = p.alt;
-      headerLink.href = p.href;
-    }, 20000);
+    setInterval(() => { hi = (hi + 1) % ads.length; const p = ads[hi]; headerImg.src = p.src; headerImg.alt = p.alt; headerLink.href = p.href; }, 20000);
   }
 
-  // Header rotating Tencent promo badge
-  const promoEl = document.getElementById('tencentPromo');
+  const promoEl = document.getElementById('tencentPromo') as HTMLAnchorElement | null;
   if (promoEl) {
     const promos = [
       { text: '💙 Lightweight Server 4C4G3M $10.9/yr', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=1079&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
@@ -508,12 +212,6 @@ function getDow(d: string) {
       { text: '🎁 Ambassador Deals', href: 'https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console' },
     ];
     let pi = 0;
-    setInterval(() => {
-      pi = (pi + 1) % promos.length;
-      const p = promos[pi];
-      promoEl.textContent = p.text;
-      promoEl.href = p.href;
-    }, 8000);
+    setInterval(() => { pi = (pi + 1) % promos.length; const p = promos[pi]; promoEl.textContent = p.text; promoEl.href = p.href; }, 8000);
   }
-
 </script>
