@@ -1,59 +1,59 @@
 {
-  "summary": "AI与开源技术双轮驱动，性能优化成焦点",
-  "trendAnalysis": "今日情报显示，AI模型训练数据量突破38T，同时开源游戏反编译技术取得重大突破，表明AI与开源技术正在重塑技术生态。性能优化成为开发者关注焦点，从数据库到前端交互，效率提升成为刚需。",
-  "dailyPick": "Liquid AI 8B-A1B MoE模型，38T训练数据",
+  "summary": "开源鸿蒙与AI搜索引领技术变革",
+  "trendAnalysis": "今日技术圈呈现双线突破：国产操作系统生态建设加速，AI搜索替代效应显现。龙鸿生态启动标志国产技术栈成熟，而DuckDuckGo增长反映用户对AI搜索的信任转移。",
+  "dailyPick": "开源鸿蒙×龙架构：国产系统生态破局",
   "highlights": [
     {
       "rank": 1,
-      "title": "Liquid AI reveals 8B-A1B MoE trained on 38T",
-      "reason": "AI模型训练数据量创纪录，行业新标杆",
-      "insight": "大模型训练数据量竞赛进入新阶段，效率与成本平衡成为关键",
-      "summary": "Liquid AI发布8B-A1B MoE模型，训练数据达38T，标志着大模型训练规模的新里程碑",
-      "source": "hackernews",
-      "url": "https://news.ycombinator.com/item?id=123456"
+      "title": "开源鸿蒙生态 × 龙架构：王成录宣布“深开鸿 + 龙芯”龙鸿生态建设正式启动",
+      "reason": "国产系统生态建设里程碑",
+      "insight": "技术自主可控进入生态化阶段",
+      "summary": "深开鸿与龙芯合作启动龙鸿生态，推动开源鸿蒙与龙架构融合发展，标志着国产操作系统从单点突破迈向生态构建。",
+      "source": "ithome",
+      "url": "https://ithome.com/"
     },
     {
       "rank": 2,
-      "title": "Snowboard Kids 2 is 100% Decompiled",
-      "reason": "游戏反编译技术重大突破，开源里程碑",
-      "insight": "经典游戏完全反编译，为游戏 preservation 和研究提供新可能",
-      "summary": "《滑雪小子2》完全反编译成功，为游戏历史保存和逆向工程研究提供重要案例",
-      "source": "hackernews",
-      "url": "https://news.ycombinator.com/item?id=123457"
+      "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
+      "reason": "AI搜索替代效应实证",
+      "insight": "用户隐私与AI体验的平衡需求",
+      "summary": "Google转型AI搜索后，DuckDuckGo安装量显著增长，反映用户对隐私保护与AI功能的双重需求正在重塑搜索市场格局。",
+      "source": "solidot",
+      "url": "https://solidot.org/"
     },
     {
       "rank": 3,
       "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "reason": "前端性能优化新方案，用户体验革命",
-      "insight": "浏览器新API将重新定义前端性能标准，零延迟交互成为可能",
-      "summary": "Speculation Rules API实现0毫秒无感页面跳转，大幅提升前端用户体验性能",
+      "reason": "Web性能优化新范式",
+      "insight": "前端体验进入毫秒竞争时代",
+      "summary": "Speculation Rules API可实现预加载预测，将页面跳转延迟降至零，重新定义Web性能优化的技术标准。",
       "source": "juejin",
-      "url": "https://juejin.cn/post/723456789"
+      "url": "https://juejin.cn/"
     },
     {
       "rank": 4,
-      "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
-      "reason": "用户隐私意识觉醒，替代搜索需求增长",
-      "insight": "AI搜索引发隐私担忧，用户开始转向更注重隐私的替代方案",
-      "summary": "Google转型AI搜索后，DuckDuckGo安装量上涨最高三成，反映用户隐私意识增强",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=723456789"
+      "title": "呆老师亲授前端转全栈+AI 开发的学习图谱",
+      "reason": "AI时代开发者转型指南",
+      "insight": "全栈能力与AI融合成新刚需",
+      "summary": "前端开发者向全栈+AI转型的实用学习路径，涵盖技术栈选择与实战项目，帮助开发者抓住AI浪潮机遇。",
+      "source": "juejin",
+      "url": "https://juejin.cn/"
     },
     {
       "rank": 5,
-      "title": "【SpringBoot 3.x】夯爆了，数据库访问性能优化实战详解！",
-      "reason": "企业级性能优化实战，开发效率提升",
-      "insight": "Java生态持续优化，数据库性能成为企业应用关键瓶颈",
-      "summary": "SpringBoot 3.x数据库性能优化实战详解，提供企业级应用性能提升方案",
-      "source": "juejin",
-      "url": "https://juejin.cn/post/723456790"
+      "title": "本周重磅日程：美非农、ComputeX大会、宇树IPO上会、美团博通财报",
+      "reason": "科技产业风向标事件",
+      "insight": "AI与机器人商业化关键节点",
+      "summary": "本周非农数据、ComputeX大会、宇树IPO和美团博通财报将集中释放AI商业化与机器人产业重要信号。",
+      "source": "wallstreetcn",
+      "url": "https://wallstreetcn.com/"
     }
   ],
   "trends": [
-    "大模型训练",
-    "开源技术",
-    "性能优化"
+    "国产操作系统生态",
+    "AI搜索替代",
+    "全栈AI开发"
   ],
   "date": "2026-06-02",
-  "generated_at": "2026-06-02T08:52:56.240971"
+  "generated_at": "2026-06-02T12:53:41.379900"
 }
