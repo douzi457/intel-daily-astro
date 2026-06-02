@@ -1,0 +1,226 @@
+---
+// 共享 Header 组件
+// 支持三种模式：首页(home)、日报(day)、归档(archive)
+import { SITE } from '../lib/constants';
+import type { IntelItem } from '../lib/types';
+
+interface Props {
+  mode?: 'home' | 'day' | 'archive' | 'stats' | 'en-home' | 'en-day';
+  date?: string;
+  totalItems?: number;
+  lang?: string;
+  today?: string;
+}
+
+const { mode = 'home', date, totalItems = 0, lang = 'zh-CN', today = '' } = Astro.props;
+const isEn = mode.startsWith('en-') || lang.startsWith('en');
+
+// 根据模式生成返回链接
+const backLink = (() => {
+  switch (mode) {
+    case 'day': return '/';
+    case 'archive': return '/';
+    case 'stats': return '/';
+    case 'en-day': return '/en/';
+    default: return '/';
+  }
+})();
+
+const backLabel = (() => {
+  switch (mode) {
+    case 'day': return '← 返回首页';
+    case 'archive': return '← 首页';
+    case 'stats': return '← 首页';
+    case 'en-day': return '← Home';
+    default: return '';
+  }
+})();
+---
+
+<header class="header">
+  <div class="header-brand">
+    <img src="/icon.svg" alt="" width="36" height="36">
+    <div class="header-logo-text">
+      <span class="logo-line1">{isEn ? 'INTEL' : '每日'}<span class="logo-accent">{isEn ? 'DAILY' : '情报'}</span></span>
+      <span class="logo-line2"><span class="logo-accent">豆子</span><span class="logo-dot">·</span>实验室</span>
+    </div>
+    {date && <span class="header-date">{isEn ? 'Report · ' : '日报 · '}{date}</span>}
+  </div>
+
+  <div class="header-meta">
+    {totalItems > 0 && <span class="count-badge">{totalItems} {isEn ? 'items' : '条情报'}</span>}
+  </div>
+
+  <div class="header-actions">
+    {mode === 'home' && (
+      <>
+        <a href="/daily/{today || date || ''}" class="lang-btn">📰 {isEn ? 'Daily' : '日报'}</a>
+        <a href="/stats" class="lang-btn">📊 {isEn ? 'Stats' : '统计'}</a>
+        <a href="/archive" class="lang-btn">📁 {isEn ? 'Archive' : '归档'}</a>
+        <a href="/en/" class="lang-btn">English</a>
+      </>
+    )}
+    {mode === 'en-home' && (
+      <>
+        <a href="/en/stats" class="lang-btn">📊 Stats</a>
+        <a href="/en/archive" class="lang-btn">📁 Archive</a>
+        <a href="/" class="lang-btn">中文</a>
+      </>
+    )}
+    {(mode === 'day' || mode === 'archive' || mode === 'stats' || mode === 'en-day') && (
+      <a href={backLink} class="lang-btn">{backLabel}</a>
+    )}
+    <button id="themeToggle" class="theme-btn" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<style>
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-brand img {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.header-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-line1 {
+  font-family: var(--font-brand);
+  font-size: 1.25em;
+  line-height: 1.15;
+  color: var(--text-h);
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.logo-line2 {
+  font-size: 0.68em;
+  font-weight: 700;
+  color: var(--text-m);
+  letter-spacing: 0.4px;
+  font-family: var(--font-sans);
+  line-height: 1.3;
+  margin-top: 1px;
+}
+
+.logo-accent { color: var(--accent); }
+.logo-dot { color: var(--text-m); opacity: 0.35; }
+
+.header-date {
+  font-size: 0.8em;
+  color: var(--text-m);
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.count-badge {
+  font-size: 0.75em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-weight: 600;
+  color: var(--text-p);
+}
+
+.badge-link {
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 20px;
+  padding: 4px 12px;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.badge-link:hover {
+  border-color: var(--accent);
+}
+
+.badge-link.tencent {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-btn {
+  font-size: 0.78em;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-p);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.lang-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-size: 1.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.theme-btn:hover { border-color: var(--accent); }
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+</style>
