@@ -13,7 +13,8 @@
     "deploy-local": "astro build && git add dist/ -f && git commit -m \"build: local deploy $(date +%Y-%m-%d)\" && git push"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.5.4",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.3.7"
   }
 }
