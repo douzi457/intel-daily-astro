@@ -1,59 +1,59 @@
 {
-  "summary": "AI硬件与安全漏洞成焦点",
-  "trendAnalysis": "今日科技圈呈现两极分化：微软与英伟达联手推动AI硬件性能革命，同时VS Code漏洞暴露云服务安全风险。深海探索与国产航天突破则彰显人类技术边界持续拓展。",
-  "dailyPick": "微软重写Win11底层优化AI性能",
+  "summary": "AI与安全双线并行，国产芯片突破在即",
+  "trendAnalysis": "今日科技圈呈现AI底层优化与安全漏洞交织的态势，微软对Win11的重写显示AI硬件适配加速，而VS Code漏洞则警示开发者生态安全风险。同时，深海探索与航天领域的突破预示硬科技投资热潮延续。",
+  "dailyPick": "微软为英伟达RTX Spark重塑Win11底层",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "AI硬件与操作系统深度协同",
-      "insight": "预示AI专用硬件将成主流，软件底层重构加速",
-      "summary": "微软重写Win11底层架构，专为英伟达RTX Spark优化CPU调度与AI内存负载，大幅提升AI计算效率。",
+      "reason": "AI硬件与操作系统深度协同的里程碑",
+      "insight": "标志着AI计算从应用层向系统层渗透，未来OS或将专为AI芯片重构",
+      "summary": "微软重写Win11底层优化CPU调度与AI内存负载，推动AI硬件与操作系统深度融合，预示PC架构向AI原生演进。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 2,
       "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
-      "reason": "云开发工具安全风险激增",
-      "insight": "远程代码执行漏洞威胁全球开发者",
-      "summary": "VS Code网页版存在严重安全漏洞，攻击者可通过恶意链接一键窃取GitHub私有仓库访问令牌。",
+      "reason": "开发者生态面临重大安全威胁",
+      "insight": "云原生工具链安全风险凸显，需建立更严格的权限验证机制",
+      "summary": "微软VS Code网页版存在严重安全漏洞，攻击者可通过恶意链接一键窃取GitHub私有仓库令牌，影响范围极广。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 3,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "科技巨头跨界科研探索",
-      "insight": "商业资本推动前沿科技突破",
-      "summary": "Valve创始人投资7亿欧元建造11000米级深海科考船，将极大推动海洋科研进程。",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产芯片航天应用重大突破",
+      "insight": "自主可控技术从民用向高可靠性领域延伸，打破国外垄断",
+      "summary": "龙芯处理器首次应用于长征火箭核心控制系统，标志着国产芯片在高可靠性航天领域实现零的突破。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 4,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片航天应用里程碑",
-      "insight": "自主可控技术获关键突破",
-      "summary": "龙芯处理器首次应用于长征火箭核心控制系统，标志着国产芯片在航天领域实现重大突破。",
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
+      "reason": "科技巨头跨界硬核科研投资",
+      "insight": "商业资本正加速向深海探索等前沿科技领域倾斜",
+      "summary": "Valve创始人纽维尔斥资7亿欧元打造万米级深海科考船，设计任务深度达11000米，彰显科技巨头对深海的野心。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 5,
-      "title": "【SpringBoot 3.x】夯爆了，数据库访问性能优化实战详解！",
-      "reason": "企业级开发性能优化指南",
-      "insight": "AI时代数据库性能成瓶颈",
-      "summary": "SpringBoot 3.x数据库性能优化实战，详解AI时代企业级应用性能提升方案。",
-      "source": "juejin",
-      "url": "https://juejin.com/post/xxxxx"
+      "title": "1-Click GitHub Token Stealing via a VSCode Bug",
+      "reason": "开源社区安全危机警示",
+      "insight": "云原生开发工具的权限管理亟待重构",
+      "summary": "HackerNews披露VSCode漏洞可一键窃取GitHub令牌，风险等级极高，开发者需立即采取防护措施。",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/xxxxx"
     }
   ],
   "trends": [
-    "AI硬件优化",
-    "云安全威胁",
-    "国产技术突破"
+    "AI系统重构",
+    "开发安全危机",
+    "国产芯片突破"
   ],
   "date": "2026-06-04",
-  "generated_at": "2026-06-03T16:27:23.738770"
+  "generated_at": "2026-06-03T18:51:27.213889"
 }
