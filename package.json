@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy-local": "astro build && git add dist/ -f && git commit -m \"build: local deploy $(date +%Y-%m-%d)\" && git push"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.4",
