@@ -10,11 +10,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
-    # 仅 workflow_run 成功时执行；手动触发永远执行
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
@@ -32,14 +31,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to Cloudflare Pages (via dist push)
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dist/ -f
-          if git diff --staged --quiet; then
-            echo "No build changes, skipping deploy"
-          else
-            git commit -m "build: deploy $(date +%Y-%m-%d)"
-            git push
-          fi
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: npx wrangler pages deploy dist/ --project-name=intel-daily-astro --branch=main
