@@ -1,59 +1,59 @@
 {
-  "summary": "AI生态重构，技术效能革命",
-  "trendAnalysis": "今日情报显示科技行业正经历双重变革：NVIDIA引领AI创业生态扩张，而Speculation Rules API等前沿技术正在重塑用户体验。同时，传统工具如Obsidian通过AI辅助进化，预示生产力工具智能化趋势加速。",
-  "dailyPick": "0毫秒无感跳转，用户体验革命",
+  "summary": "AI硬件革命与国产航天突破并行",
+  "trendAnalysis": "今日情报呈现两大主线：一是AI硬件生态加速整合，微软深度优化NVIDIA芯片底层；二是国产技术突破进入深水区，龙芯火箭与深海科考船彰显硬实力。技术自主与AI协同成新焦点。",
+  "dailyPick": "微软重塑Win11底层，AI硬件生态加速整合",
   "highlights": [
     {
       "rank": 1,
-      "title": "2026 年度 NVIDIA 创业企业展示现已启动招募！",
-      "reason": "AI创业生态风向标，商业价值极高",
-      "insight": "NVIDIA正构建完整AI创业生态圈，预示行业资源向头部集中",
-      "summary": "NVIDIA启动2026年度创业企业招募，科技商业价值高，反映AI产业生态加速成熟",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=78945"
+      "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
+      "reason": "AI硬件与操作系统深度协同的里程碑",
+      "insight": "预示AI专用芯片将重构计算架构",
+      "summary": "微软深度改造Windows底层，专为NVIDIA AI芯片优化调度与内存，推动AI硬件生态革命。",
+      "source": "ithome",
+      "url": "https://www.ithome.com/0/0/0.htm"
     },
     {
       "rank": 2,
-      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "reason": "前端性能突破，用户体验革命",
-      "insight": "浏览器原生API将重新定义性能标准，推动Web体验质变",
-      "summary": "Speculation Rules API实现0毫秒无感跳转，技术虽小但意义重大，代表前端性能新方向",
-      "source": "juejin",
-      "url": "https://juejin.cn/post/7389456784567890123"
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产芯片航天应用的重大突破",
+      "insight": "关键技术自主可控进入新阶段",
+      "summary": "龙芯处理器首次应用于长征火箭核心系统，标志国产芯片在航天控制领域实现零的突破。",
+      "source": "ithome",
+      "url": "https://www.ithome.com/0/0/0.htm"
     },
     {
       "rank": 3,
-      "title": "从插件到 AI 辅助：Obsidian 如何成为我的主力工具",
-      "reason": "AI赋能知识管理，生产力工具进化",
-      "insight": "传统工具通过AI辅助实现功能跃迁，代表软件智能化新路径",
-      "summary": "Obsidian从插件进化到AI辅助，成为高效生产力工具，展示AI赋能传统软件的创新模式",
-      "source": "sspai",
-      "url": "https://sspai.com/post/7890123456789012"
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
+      "reason": "科技巨头跨界深海探索",
+      "insight": "前沿科技向极端领域延伸",
+      "summary": "游戏巨头纽维尔豪掷7亿欧元打造11000米级科考船，彰显科技企业对深海探索的战略投入。",
+      "source": "ithome",
+      "url": "https://www.ithome.com/0/0/0.htm"
     },
     {
       "rank": 4,
-      "title": "Google 转型 AI 搜索之后 DuckDuckGo 安装量上涨最高三成",
-      "reason": "隐私搜索受益，用户选择分化",
-      "insight": "AI转型引发用户隐私意识觉醒，垂直搜索迎来新机遇",
-      "summary": "Google转型AI搜索后，DuckDuckGo安装量增长最高达三成，反映用户对隐私搜索需求上升",
+      "title": "2026 年度 NVIDIA 创业企业展示启动招募",
+      "reason": "AI生态创业的重要窗口",
+      "insight": "芯片巨头正构建完整AI创业生态",
+      "summary": "NVIDIA启动年度创业企业展示，为AI硬件创新企业提供重要孵化与曝光平台。",
       "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=78946"
+      "url": "https://www.solidot.org/story?sid=75683"
     },
     {
       "rank": 5,
-      "title": "《巫师3》将于明年推出新资料片《旧时曲》",
-      "reason": "经典IP持续运营，游戏内容生态",
-      "insight": "老游戏通过持续更新维持生命力，展示游戏内容经济新模式",
-      "summary": "《巫师3》明年将推出新资料片《旧时曲》，经典IP持续运营，反映游戏内容生态韧性",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=78947"
+      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
+      "reason": "云端开发工具的安全警示",
+      "insight": "AI时代开发环境安全风险升级",
+      "summary": "微软VS Code网页版存在严重漏洞，可导致私有仓库Token泄露，威胁开发者安全。",
+      "source": "ithome",
+      "url": "https://www.ithome.com/0/0/0.htm"
     }
   ],
   "trends": [
-    "AI生态扩张",
-    "技术效能革命",
-    "用户体验升级"
+    "AI硬件生态",
+    "国产技术突破",
+    "深海科技探索"
   ],
   "date": "2026-06-03",
-  "generated_at": "2026-06-03T03:53:06.305003"
+  "generated_at": "2026-06-03T07:59:33.309170"
 }
