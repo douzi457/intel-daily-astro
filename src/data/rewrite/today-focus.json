@@ -1,59 +1,59 @@
 {
-  "summary": "AI与硬件革新引领科技新浪潮",
-  "trendAnalysis": "今日科技圈呈现三重突破：AI算力与操作系统深度整合（微软/英伟达）、国产芯片航天应用（龙芯）、深海探测技术升级（纽维尔）。显示科技巨头正重构底层架构，中国硬科技突破加速。",
-  "dailyPick": "微软重塑Win11底层，AI计算革命开启",
+  "summary": "AI硬件底层革命与国产航天突破",
+  "trendAnalysis": "今日情报呈现两大主线：一是AI硬件底层优化加速，微软为英伟达重写Win11底层、GPU内存交换技术突破；二是国产航天技术里程碑，龙芯处理器首次用于长征火箭核心控制，显示中国硬科技崛起。",
+  "dailyPick": "微软为英伟达重塑Win11底层",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "操作系统级AI优化，预示PC算力新范式",
-      "insight": "微软与英伟达联手重构计算底层，AI负载分配革命性突破",
-      "summary": "微软深度改造Win11内核，优化CPU调度与AI内存管理，为RTX Spark提供底层支持，开启AI计算新时代。",
+      "reason": "AI硬件底层革命加速",
+      "insight": "操作系统与AI硬件深度协同，预示AI计算范式变革",
+      "summary": "微软重写Win11底层优化CPU调度与AI内存负载，推动AI计算性能跃升",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 2,
-      "title": "外媒上手微软 Surface Laptop Ultra：可能是有史以来最好笔记本",
-      "reason": "AI笔记本标杆产品，重新定义移动生产力",
-      "insight": "硬件与AI深度融合的旗舰产品，预示PC行业新标准",
-      "summary": "外媒评测称Surface Laptop Ultra为史上最佳笔记本，其AI性能与设计创新树立行业新标杆。",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产航天芯片突破",
+      "insight": "中国自主芯片技术进入航天核心领域，打破国外垄断",
+      "summary": "龙芯处理器首次应用于长征火箭核心控制，长十二乙首飞成功，标志国产航天芯片重大突破",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 3,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片航天应用里程碑，自主可控突破",
-      "insight": "中国航天核心系统首次采用国产处理器，技术自主重大进展",
-      "summary": "龙芯处理器首次应用于长征火箭核心控制，长十二乙首飞成功，标志中国航天关键芯片自主化。",
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
+      "reason": "科技巨头跨界海洋探索",
+      "insight": "科技巨头布局深海资源开发，开启蓝色经济新纪元",
+      "summary": "纽维尔投资7亿欧元打造万米级深海科考船，推动海洋科技与资源开发",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 4,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "科技巨头跨界海洋探索，推动前沿科研",
-      "insight": "游戏大亨投资深海科技，显示科技边界持续拓展",
-      "summary": "纽维尔投资7亿欧元打造万米级深海科考船，设计任务深度达11000米，推动海洋科技发展。",
+      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
+      "reason": "云端开发工具安全警钟",
+      "insight": "AI时代开发工具安全风险升级，需重新审视云原生安全",
+      "summary": "微软网页版VS Code漏洞可致私有仓库令牌泄露，暴露云端开发工具安全隐患",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 5,
-      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "reason": "前端性能革命性突破，用户体验飞跃",
-      "insight": "浏览器API重构网页交互模式，接近原生应用体验",
-      "summary": "Speculation Rules API实现0毫秒无感跳转，大幅提升网页性能，被低估的前端技术突破。",
-      "source": "juejin",
-      "url": "https://juejin.com/article/xxxxx"
+      "title": "利用Nvidia GPU's VRAM作为Linux交换空间，提升性能",
+      "reason": "GPU内存实用化创新",
+      "insight": "AI硬件资源利用新思路，推动计算性能边界拓展",
+      "summary": "利用Nvidia GPU的VRAM作为Linux交换空间，显著提升系统性能",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/xxxxx"
     }
   ],
   "trends": [
-    "AI计算革命",
-    "国产硬科技突破",
-    "前沿科技跨界"
+    "AI硬件底层优化",
+    "国产航天芯片突破",
+    "科技巨头跨界探索"
   ],
   "date": "2026-06-05",
-  "generated_at": "2026-06-04T21:35:26.094586"
+  "generated_at": "2026-06-04T22:29:25.759570"
 }
