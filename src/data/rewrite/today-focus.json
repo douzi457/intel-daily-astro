@@ -1,59 +1,59 @@
 {
-  "summary": "AI硬件革命与国产航天突破双线并进",
-  "trendAnalysis": "今日情报显示AI硬件生态正经历深度重构，微软与NVIDIA的底层合作预示计算范式变革；同时国产航天与深海探索展现硬科技突破，科技竞争已从云端延伸至深海与太空。",
-  "dailyPick": "微软重写Win11底层，AI计算革命启动",
+  "summary": "AI硬件革命与安全危机并存",
+  "trendAnalysis": "今日科技圈呈现两极分化：微软深度优化AI硬件生态，而VS Code漏洞暴露数字基建脆弱性。龙芯上天标志着国产技术突破，深海探索与全栈开发则预示着技术疆域的持续扩张。",
+  "dailyPick": "微软重塑Win11底层，AI硬件加速落地",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "操作系统级AI优化，计算架构革命信号",
-      "insight": "微软与NVIDIA深度合作预示AI计算将重构操作系统底层逻辑",
-      "summary": "微软为NVIDIA RTX Spark重写Win11底层，优化CPU调度与AI内存负载，推动AI计算原生集成。",
+      "reason": "AI硬件与操作系统深度整合",
+      "insight": "科技巨头正从软件层面向硬件层面渗透AI生态",
+      "summary": "微软重写Win11底层，优化CPU调度与AI内存负载，推动AI硬件生态加速落地。",
       "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "url": "https://ithome.com/"
     },
     {
       "rank": 2,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片航天首秀，自主可控里程碑",
-      "insight": "龙芯进入航天核心系统标志国产芯片突破关键领域",
-      "summary": "龙芯处理器首次应用于长征火箭核心控制系统，长十二乙首飞成功，实现航天领域芯片自主可控。",
-      "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "title": "1-Click GitHub Token Stealing via a VSCode Bug",
+      "reason": "开发者安全警报",
+      "insight": "开源工具安全漏洞威胁数字基础设施",
+      "summary": "VS Code漏洞可一键窃取GitHub令牌，风险极高，开发者需紧急修复。",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/"
     },
     {
       "rank": 3,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "游戏大亨跨界深海科技，硬科技投资新风向",
-      "insight": "科技巨头向深海探索延伸，前沿科技竞争维度拓展",
-      "summary": "Valve创始人投资7亿欧元打造11000米级深海科考船，展现科技企业向深海探索的战略布局。",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产技术突破",
+      "insight": "自主芯片技术进入国家战略核心领域",
+      "summary": "龙芯处理器首次用于长征火箭核心控制系统，长十二乙首飞成功。",
       "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "url": "https://ithome.com/"
     },
     {
       "rank": 4,
-      "title": "2026 年度 NVIDIA 创业企业展示现已启动招募",
-      "reason": "AI生态圈扩张，创业新机遇窗口",
-      "insight": "NVIDIA持续构建AI创业生态，加速技术商业化",
-      "summary": "NVIDIA启动2026年度创业企业展示招募，为AI创业企业提供重要平台和资源支持。",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=77895"
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
+      "reason": "科技跨界探索",
+      "insight": "科技巨头向深海等未知领域扩张",
+      "summary": "纽维尔投资7亿欧元打造11000米深海科考船，设计任务深度可达11000米。",
+      "source": "ithome",
+      "url": "https://ithome.com/"
     },
     {
       "rank": 5,
-      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
-      "reason": "云端开发工具安全警示，开发环境风险升级",
-      "insight": "AI工具普及带来新的安全挑战，开发环境安全需重新审视",
-      "summary": "微软网页版VS Code存在安全漏洞，可致私有仓库令牌泄露，提醒开发者注意云端工具安全风险。",
-      "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
+      "reason": "前端性能革命",
+      "insight": "浏览器API革新将重塑用户体验标准",
+      "summary": "Speculation Rules API实现无感页面跳转，大幅提升前端用户体验。",
+      "source": "juejin",
+      "url": "https://juejin.cn/"
     }
   ],
   "trends": [
-    "AI硬件革命",
-    "国产科技突破",
-    "深海太空探索"
+    "AI硬件生态",
+    "数字安全危机",
+    "国产技术突破"
   ],
   "date": "2026-06-04",
-  "generated_at": "2026-06-03T23:10:26.869100"
+  "generated_at": "2026-06-04T02:42:40.273545"
 }
