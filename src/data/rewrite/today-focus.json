@@ -1,59 +1,59 @@
 {
-  "summary": "AI硬件与国产芯片双突破，科技巨头竞速深海与太空",
-  "trendAnalysis": "今日情报呈现AI硬件优化、国产芯片上天、深海探索三大主线。微软重写Win11底层为AI硬件铺路，龙芯火箭应用标志国产芯片突破，纽维尔深海船则显示科技巨头跨界探索，三者共同指向科技前沿的深度竞争。",
-  "dailyPick": "微软重塑Win11底层，AI硬件革命加速",
+  "summary": "AI硬件革命与国产航天突破",
+  "trendAnalysis": "今日科技圈呈现双轨并行：微软深度优化AI硬件生态，展现算力竞争新维度；同时国产龙芯航天应用标志自主可控里程碑。深海探索与开发工具升级则指向技术下沉趋势。",
+  "dailyPick": "龙芯上天：国产芯破壁航天",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "AI硬件与操作系统深度协同，开发者必看",
-      "insight": "操作系统底层重构是AI硬件普及的关键信号",
-      "summary": "微软重写Win11底层优化AI负载，预示AI硬件与系统深度融合的新时代，开发者需关注底层技术变革。",
+      "reason": "AI硬件生态重构信号",
+      "insight": "操作系统深度适配AI芯片，预示算力竞争进入软硬件协同新阶段",
+      "summary": "微软底层重构Win11系统，专为英伟达AI芯片优化调度与内存，推动AI硬件生态深度融合",
       "source": "ithome",
-      "url": "https://ithome.com/"
+      "url": "https://ithome.com/..."
     },
     {
       "rank": 2,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片里程碑，航天自主可控突破",
-      "insight": "航天级芯片应用验证国产技术成熟度",
-      "summary": "龙芯处理器首次用于长征火箭核心系统，标志国产芯片在航天领域实现重大突破，技术自主可控迈出关键一步。",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统，长十二乙首飞新突破",
+      "reason": "国产芯航天里程碑",
+      "insight": "自主可控芯片突破航天应用，标志国产技术从跟跑到并跑的关键跨越",
+      "summary": "龙芯处理器首次应用于长征火箭核心控制，实现航天领域国产化重大突破，长十二乙首飞成功",
       "source": "ithome",
-      "url": "https://ithome.com/"
+      "url": "https://ithome.com/..."
     },
     {
       "rank": 3,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "科技巨头跨界深海探索，新蓝海市场显现",
-      "insight": "科技资源正从数字世界向物理世界延伸",
-      "summary": "纽豪斯豪掷7亿欧元打造万米级科考船，显示科技巨头正将创新资源投向深海探索，开辟科技新边疆。",
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船，设计任务深度可达 11000 米",
+      "reason": "科技巨头跨界深海",
+      "insight": "游戏大厂布局深海资源开发，反映科技竞争向未知领域延伸的战略转向",
+      "summary": "Valve创始人投资7亿欧元打造11000米级深海科考船，开启科技企业深海探索新纪元",
       "source": "ithome",
-      "url": "https://ithome.com/"
+      "url": "https://ithome.com/..."
     },
     {
       "rank": 4,
       "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "reason": "前端性能革命，用户体验跃升",
-      "insight": "浏览器API创新将重塑Web交互标准",
-      "summary": "Speculation Rules API实现0毫秒无感跳转，预示Web交互性能即将迎来革命性突破，开发者需提前布局。",
+      "reason": "Web体验革命性突破",
+      "insight": "浏览器原生预加载技术重构用户体验，预示Web性能进入毫秒级竞争时代",
+      "summary": "Speculation Rules API实现0毫秒无感跳转，通过浏览器原生预加载技术彻底改变Web交互体验",
       "source": "juejin",
-      "url": "https://juejin.com/"
+      "url": "https://juejin.com/..."
     },
     {
       "rank": 5,
-      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
-      "reason": "云端开发安全警钟，开发者需警惕",
-      "insight": "云原生工具安全风险日益凸显",
-      "summary": "微软VS Code网页版漏洞可致令牌泄露，警示云端开发工具安全风险升级，开发者需加强安全防护意识。",
-      "source": "ithome",
-      "url": "https://ithome.com/"
+      "title": "Capstone – multi-platform, multi-architecture disassembly framework",
+      "reason": "逆向工程工具升级",
+      "insight": "跨架构反汇编框架突破，为安全研究和开发提供强大底层支持",
+      "summary": "Capstone多平台多架构反汇编框架发布，显著提升逆向工程效率和兼容性",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/..."
     }
   ],
   "trends": [
-    "AI硬件优化",
-    "国产芯片突破",
-    "深海与太空探索"
+    "AI硬件生态",
+    "国产技术突破",
+    "深海科技"
   ],
   "date": "2026-06-06",
-  "generated_at": "2026-06-05T21:28:16.631887"
+  "generated_at": "2026-06-05T22:20:27.929065"
 }
