@@ -1,59 +1,59 @@
 {
-  "summary": "AI硬件革命与国产航天突破",
-  "trendAnalysis": "今日情报显示AI硬件优化与国产航天技术成为双主线。微软深度优化Win11底层支持AI负载，龙芯处理器首次用于长征火箭核心系统，标志着国产芯片在航天领域的关键突破。",
-  "dailyPick": "微软重塑Win11底层，AI硬件革命加速",
+  "summary": "AI硬件革命与安全危机并行爆发",
+  "trendAnalysis": "今日情报呈现两大主线：一是AI硬件底层优化加速，微软与英伟达重塑Win11调度机制，龙芯处理器突破航天应用；二是开源工具安全漏洞集中爆发，VS Code漏洞威胁开发者生态。技术巨头与开源社区正面临安全与性能的双重挑战。",
+  "dailyPick": "微软为英伟达RTX Spark重塑Win11底层",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "AI硬件底层优化将改变开发体验",
-      "insight": "操作系统深度适配AI芯片，预示软硬件协同新方向",
-      "summary": "微软重写Win11底层优化CPU调度和AI内存负载，大幅提升AI应用性能，推动AI硬件生态发展。",
+      "reason": "AI硬件与操作系统深度协同的里程碑",
+      "insight": "标志着AI专用硬件正式进入操作系统核心层，开启AI计算新范式",
+      "summary": "微软深度改造Win11底层，优化CPU调度与AI内存负载，为RTX Spark提供专用加速通道，提升AI计算效率。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 2,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片航天应用里程碑",
-      "insight": "自主可控技术突破，航天领域国产化进程加速",
-      "summary": "龙芯处理器首次应用于长征火箭核心控制系统，长十二乙首飞成功，标志国产芯片在航天关键领域实现突破。",
+      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
+      "reason": "开源开发工具面临严重安全威胁",
+      "insight": "开发者生态安全体系亟待重构，开源工具安全成行业焦点",
+      "summary": "微软网页版VS Code存在严重漏洞，攻击者可通过恶意链接一键窃取GitHub私有仓库访问令牌，影响范围广泛。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 3,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "科技巨头跨界深海探索",
-      "insight": "商业资本推动前沿科研，深海技术迎来新机遇",
-      "summary": "纽维尔投资7亿欧元打造深海科考船，任务深度达11000米，将大幅提升深海科研能力。",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产芯片突破航天核心应用",
+      "insight": "自主可控技术进入国家战略领域，航天芯片国产化加速",
+      "summary": "龙芯处理器首次应用于长征系列运载火箭核心控制系统，长十二乙首飞成功，标志国产芯片航天应用突破。",
       "source": "ithome",
       "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 4,
-      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
-      "reason": "前端性能优化新突破",
-      "insight": "浏览器API革新，用户体验进入毫秒级时代",
-      "summary": "Speculation Rules API可实现0毫秒无感页面跳转，大幅提升Web应用用户体验，前端技术迎来新突破。",
-      "source": "juejin",
-      "url": "https://juejin.com/article/xxxxx"
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
+      "reason": "科技巨头跨界深海探索",
+      "insight": "商业资本加速深海科技布局，前沿科研进入新阶段",
+      "summary": "Valve联合创始人纽维尔投资7亿欧元打造11000米级深海科考船，设计任务深度可达马里亚纳海沟。",
+      "source": "ithome",
+      "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 5,
-      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
-      "reason": "开发者工具安全警示",
-      "insight": "AI工具普及带来的安全风险不容忽视",
-      "summary": "微软网页版VS Code存在严重安全漏洞，点击链接即可窃取私有仓库Tokens，开发者需立即修复。",
-      "source": "ithome",
-      "url": "https://ithome.com/article/xxxxx"
+      "title": "利用Nvidia GPU的VRAM作为Linux交换空间",
+      "reason": "硬件资源利用效率革命性提升",
+      "insight": "GPU内存扩展技术将重塑计算资源分配模式",
+      "summary": "Linux系统可利用Nvidia GPU的VRAM作为交换空间，显著提升大内存应用性能，优化计算资源利用。",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/xxxxx"
     }
   ],
   "trends": [
-    "AI硬件优化",
-    "国产芯片突破",
-    "前端性能革新"
+    "AI硬件底层优化",
+    "开源工具安全危机",
+    "国产芯片突破应用"
   ],
   "date": "2026-06-05",
-  "generated_at": "2026-06-05T08:22:46.229051"
+  "generated_at": "2026-06-05T11:38:21.776973"
 }
