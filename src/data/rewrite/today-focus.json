@@ -1,59 +1,59 @@
 {
-  "summary": "AI与硬件革命开启新纪元",
-  "trendAnalysis": "今日情报显示，AI与硬件正迎来爆发式突破：微软重构操作系统底层、龙芯火箭应用、AI超越法律专家，预示着技术融合将重塑产业格局。深海探索与开源工具同步发力，科技巨头与开源社区正共同推动技术边界。",
+  "summary": "AI硬件与国产芯片双突破，科技巨头竞速深海与太空",
+  "trendAnalysis": "今日情报呈现AI硬件优化、国产芯片上天、深海探索三大主线。微软重写Win11底层为AI硬件铺路，龙芯火箭应用标志国产芯片突破，纽维尔深海船则显示科技巨头跨界探索，三者共同指向科技前沿的深度竞争。",
   "dailyPick": "微软重塑Win11底层，AI硬件革命加速",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "操作系统底层重构，AI性能革命",
-      "insight": "微软与英伟达深度合作，预示AI硬件与系统将深度融合",
-      "summary": "微软重写Win11底层优化AI负载，CPU调度革新，推动AI硬件生态发展",
+      "reason": "AI硬件与操作系统深度协同，开发者必看",
+      "insight": "操作系统底层重构是AI硬件普及的关键信号",
+      "summary": "微软重写Win11底层优化AI负载，预示AI硬件与系统深度融合的新时代，开发者需关注底层技术变革。",
       "source": "ithome",
-      "url": "https://ithome.com/..."
+      "url": "https://ithome.com/"
     },
     {
       "rank": 2,
-      "title": "AI outperforms law professors in Stanford Law study",
-      "reason": "AI专业能力首次超越人类专家",
-      "insight": "AI在专业领域突破性进展，重塑知识工作者价值",
-      "summary": "斯坦福研究证实AI法律表现超越教授，AI专业能力里程碑式突破",
-      "source": "hackernews",
-      "url": "https://news.ycombinator.com/..."
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产芯片里程碑，航天自主可控突破",
+      "insight": "航天级芯片应用验证国产技术成熟度",
+      "summary": "龙芯处理器首次用于长征火箭核心系统，标志国产芯片在航天领域实现重大突破，技术自主可控迈出关键一步。",
+      "source": "ithome",
+      "url": "https://ithome.com/"
     },
     {
       "rank": 3,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片航天首秀，技术自主突破",
-      "insight": "中国芯片技术突破关键领域，航天自主可控加速",
-      "summary": "龙芯处理器首次用于长征火箭核心系统，国产芯片航天应用里程碑",
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
+      "reason": "科技巨头跨界深海探索，新蓝海市场显现",
+      "insight": "科技资源正从数字世界向物理世界延伸",
+      "summary": "纽豪斯豪掷7亿欧元打造万米级科考船，显示科技巨头正将创新资源投向深海探索，开辟科技新边疆。",
       "source": "ithome",
-      "url": "https://ithome.com/..."
+      "url": "https://ithome.com/"
     },
     {
       "rank": 4,
-      "title": "1-Click GitHub Token Stealing via a VSCode Bug",
-      "reason": "开发工具高危漏洞，安全风险剧增",
-      "insight": "AI时代开发工具安全成为新战场，开发者需警惕",
-      "summary": "VSCode漏洞可一键窃取GitHub令牌，开发者安全面临严峻挑战",
-      "source": "hackernews",
-      "url": "https://news.ycombinator.com/..."
+      "title": "如何实现 0 毫秒无感页面跳转？聊聊被低估的 Speculation Rules API",
+      "reason": "前端性能革命，用户体验跃升",
+      "insight": "浏览器API创新将重塑Web交互标准",
+      "summary": "Speculation Rules API实现0毫秒无感跳转，预示Web交互性能即将迎来革命性突破，开发者需提前布局。",
+      "source": "juejin",
+      "url": "https://juejin.com/"
     },
     {
       "rank": 5,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "科技巨头跨界深海探索，技术边界拓展",
-      "insight": "科技巨头布局前沿科研，探索经济与技术新边疆",
-      "summary": "纽维尔7亿欧元打造万米级科考船，推动深海探索技术革命",
+      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
+      "reason": "云端开发安全警钟，开发者需警惕",
+      "insight": "云原生工具安全风险日益凸显",
+      "summary": "微软VS Code网页版漏洞可致令牌泄露，警示云端开发工具安全风险升级，开发者需加强安全防护意识。",
       "source": "ithome",
-      "url": "https://ithome.com/..."
+      "url": "https://ithome.com/"
     }
   ],
   "trends": [
-    "AI硬件革命",
-    "国产技术突破",
-    "科技前沿探索"
+    "AI硬件优化",
+    "国产芯片突破",
+    "深海与太空探索"
   ],
   "date": "2026-06-06",
-  "generated_at": "2026-06-05T19:42:57.505525"
+  "generated_at": "2026-06-05T21:28:16.631887"
 }
