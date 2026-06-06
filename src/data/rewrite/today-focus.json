@@ -1,59 +1,59 @@
 {
-  "summary": "AI硬件革命与太空竞赛开启",
-  "trendAnalysis": "今日情报揭示两大核心趋势：AI硬件生态加速整合（微软深度适配NVIDIA），同时中国航天与深海探索技术突破显现。科技巨头与国家战略正在重塑产业格局。",
-  "dailyPick": "微软为英伟达RTX Spark重写Win11底层",
+  "summary": "AI硬件革命与安全危机并存",
+  "trendAnalysis": "今日科技圈呈现双面性：一方面AI硬件底层优化与国产航天突破推动技术边界，另一方面VS Code漏洞暴露云开发生态的脆弱性，凸显安全与创新的博弈。",
+  "dailyPick": "VS Code漏洞：一键窃取令牌",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "操作系统底层重构预示AI硬件新生态",
-      "insight": "软硬协同加速AI普及，微软与NVIDIA深度绑定",
-      "summary": "微软为支持NVIDIA AI芯片重写Windows内核，优化CPU调度与内存管理，推动AI应用性能革命",
+      "reason": "AI操作系统底层重构，性能革命性突破",
+      "insight": "微软与英伟达深度绑定，预示AI硬件与系统生态的融合加速",
+      "summary": "微软重写Win11底层，优化CPU调度与AI内存负载，推动AI硬件性能新高度",
       "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 2,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
-      "reason": "国产芯片突破航天核心领域",
-      "insight": "自主可控战略在关键领域取得里程碑式进展",
-      "summary": "龙芯处理器首次应用于长征火箭核心控制系统，标志国产芯片在航天关键领域实现突破",
+      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船，设计任务深度可达 11000 米",
+      "reason": "游戏大亨跨界深海探索，科技边界再扩展",
+      "insight": "科技巨头向极端领域投资，反映对未知资源与技术的战略布局",
+      "summary": "纽维尔斥资7亿欧元打造11000米级深海科考船，开启人类探索深海新纪元",
       "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 3,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船",
-      "reason": "游戏巨头跨界深海探索",
-      "insight": "科技巨头布局前沿科研，商业与科学边界模糊",
-      "summary": "Valve创始人投资7亿欧元打造11000米级深海科考船，显示科技企业对前沿科研的深度参与",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统，长十二乙首飞新突破",
+      "reason": "国产芯片航天首秀，自主可控里程碑",
+      "insight": "关键领域国产化进程加速，打破技术垄断的战略突破",
+      "summary": "龙芯处理器首次应用于长征火箭核心系统，标志国产芯片进入航天关键领域",
       "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 4,
       "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
-      "reason": "开发工具安全风险激增",
-      "insight": "AI时代开发工具安全面临新挑战",
-      "summary": "微软VS Code网页版存在严重漏洞，可被恶意链接一键窃取GitHub令牌，影响大量开发者",
+      "reason": "云开发生态重大安全风险，开发者需紧急防护",
+      "insight": "云端开发工具集中化带来的安全隐患，暴露供应链脆弱性",
+      "summary": "VS Code网页版漏洞可致私有令牌泄露，影响全球开发者代码安全",
       "source": "ithome",
-      "url": "https://www.ithome.com/0/0/0.htm"
+      "url": "https://ithome.com/article/xxxxx"
     },
     {
       "rank": 5,
-      "title": "2026 年度 NVIDIA 创业企业展示现已启动招募",
-      "reason": "AI硬件生态加速扩张",
-      "insight": "NVIDIA通过扶持初创企业巩固AI生态主导地位",
-      "summary": "NVIDIA启动2026年度创业企业展示招募，进一步扩大AI硬件生态系统影响力",
-      "source": "solidot",
-      "url": "https://www.solidot.org/story?sid=75682"
+      "title": "Capstone – multi-platform, multi-architecture disassembly framework",
+      "reason": "逆向工程核心工具，跨平台架构支持",
+      "insight": "底层安全研究工具升级，助力跨平台威胁分析",
+      "summary": "Capstone框架支持多平台多架构反汇编，提升安全研究效率",
+      "source": "hackernews",
+      "url": "https://hackernews.com/article/xxxxx"
     }
   ],
   "trends": [
     "AI硬件生态",
-    "国产芯片突破",
-    "科技跨界科研"
+    "国产化突破",
+    "云安全风险"
   ],
   "date": "2026-06-06",
-  "generated_at": "2026-06-06T02:06:41.918912"
+  "generated_at": "2026-06-06T06:35:18.395105"
 }
