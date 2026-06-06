@@ -1,59 +1,59 @@
 {
-  "summary": "AI硬件革命与安全危机并存",
-  "trendAnalysis": "今日科技圈呈现双面性：一方面AI硬件底层优化与国产航天突破推动技术边界，另一方面VS Code漏洞暴露云开发生态的脆弱性，凸显安全与创新的博弈。",
-  "dailyPick": "VS Code漏洞：一键窃取令牌",
+  "summary": "AI硬件革命与国产航天突破",
+  "trendAnalysis": "今日科技圈呈现双线并行：NVIDIA生态扩张与微软深度优化AI底层，同时龙芯处理器航天应用标志国产芯片里程碑。AI硬件与自主可控成为核心叙事。",
+  "dailyPick": "微软重写Win11底层，AI性能革命",
   "highlights": [
     {
       "rank": 1,
       "title": "微软为英伟达 RTX Spark 重塑 Win11 底层：改写 CPU 调度、优化 AI 内存负载",
-      "reason": "AI操作系统底层重构，性能革命性突破",
-      "insight": "微软与英伟达深度绑定，预示AI硬件与系统生态的融合加速",
-      "summary": "微软重写Win11底层，优化CPU调度与AI内存负载，推动AI硬件性能新高度",
+      "reason": "AI计算范式重构，系统级优化突破",
+      "insight": "操作系统与AI硬件深度绑定，预示未来计算架构变革",
+      "summary": "微软重写Win11底层优化AI负载，RTX Spark将重塑AI计算生态，推动软硬件协同进化。",
       "source": "ithome",
-      "url": "https://ithome.com/article/xxxxx"
+      "url": "https://www.ithome.com/0/0/0.htm"
     },
     {
       "rank": 2,
-      "title": "Valve 联合创始人纽维尔投资约 7 亿欧元打造最强深海科考船，设计任务深度可达 11000 米",
-      "reason": "游戏大亨跨界深海探索，科技边界再扩展",
-      "insight": "科技巨头向极端领域投资，反映对未知资源与技术的战略布局",
-      "summary": "纽维尔斥资7亿欧元打造11000米级深海科考船，开启人类探索深海新纪元",
+      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统",
+      "reason": "国产芯片航天首秀，自主可控里程碑",
+      "insight": "航天级芯片验证完成，国产化进程加速",
+      "summary": "龙芯处理器首次用于长征火箭核心系统，长十二乙首飞成功，标志国产芯片进入航天关键领域。",
       "source": "ithome",
-      "url": "https://ithome.com/article/xxxxx"
+      "url": "https://www.ithome.com/0/0/0.htm"
     },
     {
       "rank": 3,
-      "title": "龙芯处理器上天：首次用于长征系列运载火箭核心控制系统，长十二乙首飞新突破",
-      "reason": "国产芯片航天首秀，自主可控里程碑",
-      "insight": "关键领域国产化进程加速，打破技术垄断的战略突破",
-      "summary": "龙芯处理器首次应用于长征火箭核心系统，标志国产芯片进入航天关键领域",
-      "source": "ithome",
-      "url": "https://ithome.com/article/xxxxx"
+      "title": "2026 年度 NVIDIA 创业企业展示现已启动招募",
+      "reason": "AI创业黄金窗口，生态布局关键信号",
+      "insight": "NVIDIA持续构建AI护城河，创业生态成竞争核心",
+      "summary": "NVIDIA启动年度创业企业招募，AI硬件生态扩张加速，创业公司迎来技术红利期。",
+      "source": "solidot",
+      "url": "https://www.solidot.org/story?sid=75678"
     },
     {
       "rank": 4,
-      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
-      "reason": "云开发生态重大安全风险，开发者需紧急防护",
-      "insight": "云端开发工具集中化带来的安全隐患，暴露供应链脆弱性",
-      "summary": "VS Code网页版漏洞可致私有令牌泄露，影响全球开发者代码安全",
-      "source": "ithome",
-      "url": "https://ithome.com/article/xxxxx"
+      "title": "利用Nvidia GPU的VRAM作为Linux交换空间",
+      "reason": "开源性能优化，开发者实用技巧",
+      "insight": "硬件资源利用新范式，AI计算效率提升",
+      "summary": "开发者可利用GPU VRAM作为Linux交换空间，显著提升AI工作负载性能，开源社区创新突破。",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/item?id=123456"
     },
     {
       "rank": 5,
-      "title": "Capstone – multi-platform, multi-architecture disassembly framework",
-      "reason": "逆向工程核心工具，跨平台架构支持",
-      "insight": "底层安全研究工具升级，助力跨平台威胁分析",
-      "summary": "Capstone框架支持多平台多架构反汇编，提升安全研究效率",
-      "source": "hackernews",
-      "url": "https://hackernews.com/article/xxxxx"
+      "title": "微软网页版 VS Code 曝安全漏洞：点击链接就能窃取私有仓库 Tokens",
+      "reason": "云端开发安全警示，企业级风险提示",
+      "insight": "AI工具普及带来新型安全挑战，需警惕供应链风险",
+      "summary": "微软VS Code网页版高危漏洞可致私有仓库Token泄露，提醒开发者加强云端开发安全防护。",
+      "source": "ithome",
+      "url": "https://www.ithome.com/0/0/0.htm"
     }
   ],
   "trends": [
     "AI硬件生态",
-    "国产化突破",
-    "云安全风险"
+    "国产芯片突破",
+    "系统级优化"
   ],
   "date": "2026-06-06",
-  "generated_at": "2026-06-06T06:35:18.395105"
+  "generated_at": "2026-06-06T07:02:00.067169"
 }
