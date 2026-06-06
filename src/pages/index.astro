@@ -4,14 +4,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FocusSection from '../components/FocusSection.astro';
-import FeaturedSection from '../components/FeaturedSection.astro';
 import PlatformSection from '../components/PlatformSection.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SectionNav from '../components/SectionNav.astro';
+import PickSection from '../components/PickSection.astro';
 import CalendarWidget from '../components/CalendarWidget.astro';
 import { getDayData, getAllDates } from '../utils/data.ts';
 import { SITE, SECTION_ORDER, getPlatformMeta } from '../lib/constants';
-import type { FocusData, IntelItem, GzhArticle } from '../lib/types';
+import type { FocusData, IntelItem, GzhArticle, V4DailyData } from '../lib/types';
 import articles from '../data/gzh-articles.json';
 
 // ── 数据加载 ──
@@ -19,6 +19,17 @@ let focusData: FocusData | null = null;
 try {
   const mod = await import('../data/rewrite/today-focus.json');
   focusData = mod.default as FocusData;
+} catch {}
+
+// ── V4 精选数据加载 ──
+let v4Data: V4DailyData | null = null;
+try {
+  const v4Index = await import('../data/v4/index.json');
+  const latestDate = v4Index.default.latest_date;
+  if (latestDate) {
+    const mod = await import(`../data/v4/daily-${latestDate}.json`);
+    v4Data = mod.default as V4DailyData;
+  }
 } catch {}
 
 const filteredArticles: GzhArticle[] = articles.filter((a: GzhArticle) => a.title);
@@ -60,6 +71,9 @@ const highScoreCount = items.filter(i => i.score >= 7).length;
 <div class="page">
   <!-- 今日重点 AI 编辑推荐（唯一 Hero） -->
   <FocusSection focusData={focusData} today={today} />
+
+  <!-- 每日精选（来自 dashboard_v4） -->
+  <PickSection data={v4Data} />
 
   <!-- 今日数据摘要横条 -->
   <div class="stats-bar">

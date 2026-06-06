@@ -1,20 +1,14 @@
 name: Deploy
 
 on:
-  workflow_run:
-    workflows:
-      - "Data Pipeline"
-      - "Collect RSS"
-    types:
-      - completed
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout

@@ -82,6 +82,36 @@ export interface GzhArticle {
   date?: string;
 }
 
+/** V4 推荐条目（来自 dashboard_v4 的每日精选） */
+export interface V4RecommendItem {
+  title: string;
+  title_original: string;
+  url: string;
+  source: string;
+  score: number;
+  summary: string;
+  heat: string;
+}
+
+/** V4 每日数据（来自 dashboard_v4 的 JSON 输出） */
+export interface V4DailyData {
+  date: string;
+  generated_at: string;
+  summary: string;
+  total_items: number;
+  total_sources: number;
+  total_translated: number;
+  recommendations: Record<string, V4RecommendItem[]>;
+  by_category: Record<string, {
+    title: string;
+    url: string;
+    source: string;
+    score: number;
+    heat: string;
+  }[]>;
+  sources: { name: string; category: string; count: number }[];
+}
+
 /** 广告轮播项 */
 export interface AdPromo {
   src?: string;
