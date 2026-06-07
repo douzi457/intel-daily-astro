@@ -58,11 +58,28 @@ const trending = [...items]
 
 const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
 const highScoreCount = items.filter(i => i.score >= 7).length;
+
+// ── 页面标题与SEO ──
+const v4Date = v4Data?.date || today;
+const y = v4Date.slice(0,4);
+const m = parseInt(v4Date.slice(5,7)).toString();
+const d = parseInt(v4Date.slice(8,10)).toString();
+const displayDate = `${y}年${m}月${d}日`;
+const topHeadlines = v4Data?.recommendations
+  ? Object.values(v4Data.recommendations).flat().slice(0, 3).map(i => i.title).join(' · ')
+  : '';
+const metaDesc = topHeadlines
+  ? `${displayDate} AI/科技资讯聚合：${topHeadlines.slice(0, 100)}`
+  : `${displayDate} 全球科技资讯聚合，AI智能评分精选`;
+const pageTitle = `${displayDate} AI/科技情报`;
 ---
 
-<BaseLayout title={`${SITE.name} · 每日情报`} lang="zh-CN">
+<BaseLayout title={pageTitle} description={metaDesc} lang="zh-CN">
 <div class="page">
   <Header mode="home" date={today} totalItems={totalItems} today={today} />
+
+  <!-- H1 页面标题（SEO） -->
+  <h1 class="page-h1">{displayDate} AI/科技情报</h1>
 
 </div>
 
@@ -130,6 +147,20 @@ const highScoreCount = items.filter(i => i.score >= 7).length;
 
 <style>
 html { scroll-behavior: smooth; }
+
+/* 页面H1标题 */
+.page-h1 {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .page-h1 { font-size: 0.95em; }
+}
 
 /* 内容区布局 */
 .content-grid {

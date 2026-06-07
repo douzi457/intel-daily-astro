@@ -662,11 +662,46 @@ def extract_text_from_html(html_content: str) -> str:
     return text.strip()
 
 
-def generate_summary(url: str, title: str) -> Optional[str]:
-    """Fetch page, extract text, translate if needed (httpx, no curl.exe)"""
+def _zhipu_summary(title: str, text: str, api_key: str) -> Optional[str]:
+    """Use ZHIPU GLM-4-Flash to generate a concise Chinese summary (1-2 sentences)"""
+    prompt = f"""你是一个科技资讯编辑。请用1-2句中文简洁概括以下科技资讯的核心看点。
+不要评价"值得关注"这类废话，直接说这条资讯讲了什么。
+
+标题：{title}
+内容摘要：{text[:800]}
+
+中文概括（1-2句）："""
+    try:
+        resp = httpx.post(
+            "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "GLM-4-Flash",
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.3,
+                "max_tokens": 150,
+            },
+            timeout=30,
+        )
+        if resp.status_code == 200:
+            summary = resp.json()["choices"][0]["message"]["content"].strip()
+            summary = summary.strip('\"').strip("'")
+            if summary and len(summary) > 10:
+                zh = sum(1 for c in summary if '\u4e00' <= c <= '\u9fff')
+                if zh >= len(summary) * 0.3:
+                    return summary[:200]
+    except:
+        pass
+    return None
+
+
+def _fallback_summary_from_page(url: str, title: str) -> Optional[str]:
+    """Fallback: fetch page, extract first sentences, translate if needed"""
     if not url:
         return None
-
     body = None
     try:
         with httpx.Client(timeout=25, follow_redirects=True) as client:
@@ -726,24 +761,104 @@ def generate_summary(url: str, title: str) -> Optional[str]:
     return summary[:200]
 
 
+def generate_summary(url: str, title: str, api_key: str = "") -> Optional[str]:
+    """Generate a concise Chinese summary. Prefers ZHIPU AI, falls back to page extraction + translation."""
+    if not url:
+        return None
+    body = None
+    try:
+        with httpx.Client(timeout=25, follow_redirects=True) as client:
+            resp = client.get(url, headers={
+                "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+            })
+            if resp.status_code == 200:
+                body = resp.text
+    except:
+        pass
+    if not body:
+        return None
+
+    text = extract_text_from_html(body)
+    if len(text) < 100:
+        return None
+
+    # Method 1: ZHIPU API (if key available)
+    if api_key:
+        result = _zhipu_summary(title, text[:800], api_key)
+        if result:
+            return result
+
+    # Method 2: Fallback to page extraction + translation
+    text_full = text[:3000]
+    sentences = re.split(r'[。！？.!?]', text_full)
+    sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
+
+    if len(sentences) >= 3:
+        summary = "。".join(sentences[:3]) + "。"
+    elif len(sentences) >= 2:
+        summary = "。".join(sentences[:2]) + "。"
+    elif len(sentences) == 1:
+        summary = sentences[0]
+    else:
+        summary = text_full[:150]
+
+    zh = sum(1 for c in summary if '\u4e00' <= c <= '\u9fff')
+    if zh < len(summary) * 0.7 and len(summary) > 20:
+        try:
+            with httpx.Client(timeout=15) as c2:
+                encoded = urllib.parse.quote(summary[:300])
+                resp2 = c2.get(
+                    f"https://translate.googleapis.com/translate_a/single?"
+                    f"client=gtx&sl=auto&tl=zh-CN&dt=t&q={encoded}",
+                    headers={"User-Agent": "Mozilla/5.0"}
+                )
+                if resp2.status_code == 200:
+                    body_tr = resp2.text
+                    j = json.loads(body_tr)
+                    translated = "".join([s[0] for s in j[0] if s[0]]) if j and j[0] else summary
+                    if translated.strip():
+                        summary = translated.strip()
+                        zh2 = sum(1 for c in summary if '\u4e00' <= c <= '\u9fff')
+                        if zh2 < len(summary) * 0.5:
+                            return None
+        except:
+            return None
+
+    final_zh = sum(1 for c in summary if '\u4e00' <= c <= '\u9fff')
+    if final_zh < len(summary) * 0.5:
+        return None
+    return summary[:200]
+
+
 def generate_summaries(candidates: dict):
     """Phase 6: Generate summaries for recommendation candidates"""
     print("\n=== PHASE 6: Summary Generation ===")
 
+    api_key = os.environ.get("ZHIPU_API_KEY", "").strip()
+    if api_key:
+        print(f"  Using ZHIPU API (GLM-4-Flash) for AI-powered summaries")
+    else:
+        print(f"  No ZHIPU_API_KEY found, using fallback (page extraction + translate)")
+
     count = 0
+    total = sum(len(items) for items in candidates.values())
+    done = 0
     for cat, items in candidates.items():
         for item in items:
             url = item.get("url", "")
             title = item.get("title_cn", item["title"])
-            summary = generate_summary(url, title)
+            summary = generate_summary(url, title, api_key)
             if summary:
                 item["summary"] = summary
                 count += 1
             else:
                 item["summary"] = None
-            time.sleep(0.3)
+            done += 1
+            if done % 5 == 0:
+                print(f"    Summaries: {done}/{total} (valid: {count})", flush=True)
 
-    print(f"  Summaries generated: {count}")
+    print(f"  Summaries generated: {count}/{total}")
     return count
 
 

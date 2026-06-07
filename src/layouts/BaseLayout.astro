@@ -36,6 +36,8 @@ const defaultSchema = JSON.stringify({
   url: SITE.url,
   description: SITE.description,
   inLanguage: isEn ? 'en-US' : 'zh-CN',
+  dateModified: new Date().toISOString().split('T')[0],
+  datePublished: '2026-01-01',
 });
 ---
 

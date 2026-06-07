@@ -211,11 +211,13 @@ const isEn = locale === 'en';
 
 .qr-popup img {
   width: 120px;
-  height: 120px;
+  aspect-ratio: 1;
+  height: auto;
   border-radius: 10px;
   border: 1px solid var(--border);
   display: block;
   margin: 0 auto;
+  object-fit: contain;
 }
 
 .qr-hint {
