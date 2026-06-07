@@ -1161,6 +1161,90 @@ def generate_v4_json(final: list, recommendations: dict, cache: dict):
         print(f"  (Astro v4 data dir not found: {astro_dir})")
 
 
+def generate_rewrite_json(final: list, recommendations: dict):
+    """Export rewrite-format JSON for Astro site's PlatformSection"""
+    import json, os
+    from datetime import datetime, timezone, timedelta
+    CST = timezone(timedelta(hours=8))
+    date_str = datetime.now(CST).strftime("%Y-%m-%d")
+    
+    # Source name → old platform key mapping
+    SOURCE_PLATFORM = {
+        "Hacker News": "hackernews", "Techmeme": "techmeme",
+        "Slashdot": "slashdot", "Engadget": "engadget",
+        "HackerNoon": "hackernoon", "TechCrunch": "techcrunch",
+        "The Verge": "theverge", "Ars Technica": "arstechnica",
+        "Wired": "wired", "Dev.to": "devto", "Lobsters": "lobsters",
+        "Nature": "nature", "Science Daily": "sciencedaily",
+        "MIT Tech Review": "mitteltechreview", "BBC Tech": "bbc",
+        "GitHub Trending": "github", "BBC World": "bbc",
+        "BBC News": "bbc", "The Guardian": "guardian",
+        "NYTimes Tech": "nytimes", "NYTimes World": "nytimes",
+        "CBC World": "cbc", "Euronews": "euronews", "NPR": "npr",
+        "Baidu": "baidu", "Douyin": "douyin", "Bilibili": "bilibili",
+        "Zhihu": "zhihu", "Toutiao": "toutiao", "Pengpai": "pengpai",
+        "Sputnik CN": "sputnik", "Juejin": "juejin",
+        "ifanr": "ifanr", "InfoQ CN": "infoq", "QbitAI": "qbitai",
+        "AI Hot": "aihot", "WallstreetCN Hot": "wallstreetcn",
+        "WallstreetCN Live": "wallstreetcn", "Tieba": "tieba",
+        "Nowcoder": "nowcoder",
+    }
+    
+    items = []
+    seen_urls = set()
+    
+    for item in final:
+        url = item.get("url", "")
+        if not url or url in seen_urls:
+            continue
+        seen_urls.add(url)
+        
+        source_name = item.get("source", "")
+        platform_key = SOURCE_PLATFORM.get(source_name, source_name.lower().replace(" ", ""))
+        
+        title = item.get("title_cn", item.get("title", ""))
+        desc = item.get("summary", "")[:200] if item.get("summary") else title[:200]
+        if desc == title:
+            desc = ""
+        
+        items.append({
+            "id": len(items) + 1,
+            "url": url,
+            "platform": platform_key,
+            "platform_label": source_name,
+            "platform_color": "#94A3B8",
+            "platform_icon": "\U0001f4cc",
+            "hot": int(item.get("heat", 0) or 0),
+            "date": date_str,
+            "score": int(item.get("score", 0)),
+            "category": item.get("category", "其他"),
+            "title": title,
+            "desc": desc,
+            "cross_sources": 0,
+        })
+    
+    data = {"date": date_str, "items": items}
+    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    rewrite_dir = os.path.normpath(os.path.join(script_dir, "..", "src", "data", "rewrite", "zh"))
+    if os.path.isdir(os.path.normpath(os.path.join(script_dir, "..", "src", "data", "rewrite"))):
+        os.makedirs(rewrite_dir, exist_ok=True)
+        json_path = os.path.join(rewrite_dir, f"{date_str}.json")
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"  -> Rewrite (zh): {json_path} ({len(items)} items)")
+    
+        # Also generate en version (same data, different label mapping)
+        en_dir = os.path.normpath(os.path.join(script_dir, "..", "src", "data", "rewrite", "en"))
+        os.makedirs(en_dir, exist_ok=True)
+        en_path = os.path.join(en_dir, f"{date_str}.json")
+        with open(en_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"  -> Rewrite (en): {en_path}")
+    else:
+        print(f"  (Rewrite dir not found: {rewrite_dir})")
+
+
 # ====================================================================
 # MAIN
 # ====================================================================
@@ -1191,6 +1275,7 @@ async def main():
     generate_markdown(recommendations, final)
     generate_html(recommendations, final)
     generate_v4_json(final, recommendations, cache)
+    generate_rewrite_json(final, recommendations)
 
     elapsed = time.time() - t0
     active = [s for s in OUT if s["count"] > 0]
