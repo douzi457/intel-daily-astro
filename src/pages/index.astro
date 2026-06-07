@@ -100,8 +100,8 @@ const pageTitle = `${displayDate} AI/科技情报`;
     </div>
     <div class="stats-bar-divider"></div>
     <div class="stats-bar-item">
-      <span class="stats-bar-value">{activeSections.length}</span>
-      <span class="stats-bar-label">信息来源</span>
+      <span class="stats-bar-value">{v4Data?.total_sources || activeSections.length}</span>
+      <span class="stats-bar-label">采集源</span>
     </div>
     <div class="stats-bar-divider"></div>
     <div class="stats-bar-item highlight">
