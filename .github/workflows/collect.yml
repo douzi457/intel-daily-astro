@@ -1,0 +1,46 @@
+name: Daily Collect & Deploy
+
+on:
+  schedule:
+    - cron: '0 22 * * *'      # UTC 22:00 = CST 06:00
+  workflow_dispatch:           # 也可手动触发
+
+# 禁止并发：如果上次还没跑完就不开新的
+concurrency:
+  group: collect-deploy
+  cancel-in-progress: false
+
+jobs:
+  collect-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 1. 采集数据 ──
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run data collection
+        run: python scripts/dashboard_v4.py
+
+      # ── 2. 构建并部署 ──
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies & build
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          npm ci --include=optional || npm install
+          npm run build
+          npx wrangler pages deploy dist/ --project-name=intel-daily-astro --branch=main
