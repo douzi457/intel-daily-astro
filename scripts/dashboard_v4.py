@@ -1214,7 +1214,7 @@ def generate_rewrite_json(final: list, recommendations: dict):
             "platform_label": source_name,
             "platform_color": "#94A3B8",
             "platform_icon": "\U0001f4cc",
-            "hot": int(item.get("heat", 0) or 0),
+            "hot": int(''.join(c for c in str(item.get("heat", 0)) if c.isdigit()) or 0),
             "date": date_str,
             "score": int(item.get("score", 0)),
             "category": item.get("category", "其他"),
