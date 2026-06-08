@@ -8,6 +8,7 @@ interface Props {
   activeSectionCount: number;
   coverageDays: number;
   highScoreCount: number;
+  v4SourceCount?: number;
   grouped: Record<string, IntelItem[]>;
   featured: IntelItem[];
   trending: IntelItem[];
@@ -17,8 +18,12 @@ interface Props {
 
 const {
   totalItems, activeSectionCount, coverageDays, highScoreCount,
+  v4SourceCount,
   grouped, featured, trending, filteredArticles, locale = 'zh'
 } = Astro.props;
+
+// 信息来源数：优先用 V4 实际采集源数，回退到平台分区数
+const displaySourceCount = v4SourceCount || activeSectionCount;
 
 const isEn = locale === 'en';
 ---
@@ -33,8 +38,8 @@ const isEn = locale === 'en';
         <div class="stat-cell-label">{isEn ? 'Today' : '今日情报'}</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-cell-value">{activeSectionCount}</div>
-        <div class="stat-cell-label">{isEn ? 'Sources' : '信息来源'}</div>
+        <div class="stat-cell-value">{displaySourceCount}</div>
+        <div class="stat-cell-label">{isEn ? '采集源' : '采集源'}</div>
       </div>
       <div class="stat-cell">
         <div class="stat-cell-value">{highScoreCount}</div>
@@ -210,12 +215,13 @@ const isEn = locale === 'en';
 }
 
 .qr-popup img {
-  max-width: 160px;
+  max-width: 220px;
   height: auto;
   border-radius: 10px;
   border: 1px solid var(--border);
   display: block;
   margin: 0 auto;
+  width: 100%;
 }
 
 .qr-hint {
