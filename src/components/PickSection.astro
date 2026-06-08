@@ -42,6 +42,9 @@ const topItems = sortedTop.slice(0, 5);
 const heroItem = topItems[0];
 const sideItems = topItems.slice(1);
 
+// ── Hero URL 集合，用于分类去重 ──
+const heroUrls = new Set(topItems.map(i => i.url));
+
 // ── 评分色阶 ──
 function scoreColor(s: number): string {
   if (s >= 8.5) return '#ef4444';
@@ -158,7 +161,8 @@ const catStats = activeCats
 
   <div class="pick-grid">
     {activeCats.map((cat) => {
-      const items = data.recommendations[cat] as V4RecommendItem[];
+      const items = (data.recommendations[cat] as V4RecommendItem[]).filter(item => !heroUrls.has(item.url));
+      if (items.length === 0) return null;
       const meta = CATEGORY_META[cat] || { icon: '📌', desc: '' };
       return (
         <div class="pick-category">
