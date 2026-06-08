@@ -1,5 +1,5 @@
 ---
-// 每日精选 — 来自 dashboard_v4 的 5 方向 × 5 条推荐
+// 每日精选 — 来自 dashboard_v4 的推荐 + 热搜 Hero
 import type { V4DailyData, V4RecommendItem } from '../lib/types';
 
 interface Props {
@@ -8,7 +8,6 @@ interface Props {
 
 const { data } = Astro.props;
 
-// 定义方向的显示顺序和图标
 const CATEGORY_META: Record<string, { icon: string; desc: string }> = {
   'AI/大模型': { icon: '🤖', desc: 'AI 前沿、大模型、智能体' },
   '数码/硬件': { icon: '📱', desc: '手机、芯片、数码产品' },
@@ -22,17 +21,110 @@ const CATEGORY_ORDER = ['AI/大模型', '数码/硬件', '开源/工具', '科�
 
 if (!data || !data.recommendations) return null;
 
-// 统计有数据的分类
 const activeCats = CATEGORY_ORDER.filter(cat => (data.recommendations[cat]?.length || 0) > 0);
 if (activeCats.length === 0) return null;
+
+// ── 热搜 Top 5（跨分类按 score 排序） ──
+interface HeroItem extends V4RecommendItem {
+  category: string;
+  catIcon: string;
+}
+
+const allItems: HeroItem[] = [];
+for (const cat of activeCats) {
+  const meta = CATEGORY_META[cat] || { icon: '📌', desc: '' };
+  for (const item of data.recommendations[cat] || []) {
+    allItems.push({ ...item, category: cat, catIcon: meta.icon });
+  }
+}
+const sortedTop = allItems.sort((a, b) => b.score - a.score);
+const topItems = sortedTop.slice(0, 5);
+const heroItem = topItems[0];
+const sideItems = topItems.slice(1);
+
+// ── 评分色阶 ──
+function scoreColor(s: number): string {
+  if (s >= 8.5) return '#ef4444';
+  if (s >= 7) return '#f59e0b';
+  if (s >= 6) return '#10b981';
+  return '#6b7280';
+}
+function scoreBg(s: number): string {
+  if (s >= 8.5) return 'rgba(239,68,68,0.15)';
+  if (s >= 7) return 'rgba(245,158,11,0.15)';
+  if (s >= 6) return 'rgba(16,185,129,0.15)';
+  return 'rgba(107,114,128,0.10)';
+}
+function truncate(text: string, max: number): string {
+  if (!text || text.length <= max) return text || '';
+  return text.slice(0, max) + '…';
+}
+// ── 计算最热的5个分类 ──
+const catStats = activeCats
+  .map(cat => ({
+    name: cat,
+    meta: CATEGORY_META[cat] || { icon: '📌', desc: '' },
+    count: (data.recommendations[cat] || []).length,
+    avgScore: (data.recommendations[cat] || []).reduce((a, i) => a + i.score, 0) / Math.max((data.recommendations[cat] || []).length, 1),
+  }))
+  .sort((a, b) => b.avgScore - a.avgScore);
 ---
 
 <section class="pick-section">
-  <div class="pick-header">
+  <!-- ═══════════════════ 热搜 Hero ═══════════════════ -->
+  {topItems.length > 0 && (
+    <div class="hero-bento">
+      <div class="hero-bento-header">
+        <h2 class="hero-bento-title">🔥 今日热搜</h2>
+        <span class="hero-bento-sub">{data.total_sources} 个信息源 · {Math.round(sortedTop.reduce((a,i) => a + i.score, 0) / sortedTop.length * 10) / 10} 平均分</span>
+      </div>
+
+      <div class="hero-bento-grid">
+        <!-- ═══ 主卡 ═══ -->
+        <a href={heroItem.url || '#'} target="_blank" rel="noopener" class="hero-main-card">
+          <div class="hero-main-score" style={`background:${scoreColor(heroItem.score)}`}>{heroItem.score}</div>
+          <div class="hero-main-body">
+            <div class="hero-main-rank">🏆 今日最佳</div>
+            <h3 class="hero-main-title">{heroItem.title}</h3>
+            <div class="hero-main-meta">
+              <span class="hero-main-source">{heroItem.source}</span>
+              {heroItem.heat && <span class="hero-main-heat">🔥 {heroItem.heat}</span>}
+            </div>
+            {heroItem.summary && <p class="hero-main-summary">{truncate(heroItem.summary, 120)}</p>}
+          </div>
+        </a>
+
+        <!-- ═══ 边卡 2×2 ═══ -->
+        {sideItems.length > 0 && (
+          <div class="hero-side-grid">
+            {sideItems.map((item) => (
+              <a href={item.url || '#'} target="_blank" rel="noopener" class="hero-side-card">
+                <div class="hero-side-score" style={`background:${scoreColor(item.score)}`}>{item.score}</div>
+                <div class="hero-side-body">
+                  <div class="hero-side-title">{item.title}</div>
+                  <div class="hero-side-meta">
+                    <span>{item.source}</span>
+                    {item.heat && <span class="hero-side-heat">🔥 {item.heat}</span>}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+
+  <!-- ═══════════════════ 分类精选 ═══════════════════ -->
+  <div class="pick-masthead">
     <h2 class="pick-title">📊 今日精选推荐</h2>
-    <p class="pick-meta">
-      来自 {data.total_sources} 个信息源 · 共 {data.total_items} 条
-    </p>
+    <div class="pick-cat-stats">
+      {catStats.slice(0, 5).map(cs => (
+        <span class="pick-cat-stat" style={`--stat-color:${scoreColor(cs.avgScore)}`}>
+          {cs.meta.icon} {cs.name} <em>{Math.round(cs.avgScore * 10) / 10}</em>
+        </span>
+      ))}
+    </div>
   </div>
 
   <div class="pick-grid">
@@ -47,20 +139,22 @@ if (activeCats.length === 0) return null;
               <h3 class="pick-cat-name">{cat}</h3>
               {meta.desc && <span class="pick-cat-desc">{meta.desc}</span>}
             </div>
-            <span class="pick-cat-count">{items.length}条</span>
+            <span class="pick-cat-count">{items.length} 条</span>
           </div>
 
           <div class="pick-items">
             {items.map((item) => (
-              <a href={item.url || '#'} target="_blank" rel="noopener" class="pick-item">
-                <div class="pick-item-score">{item.score}</div>
+              <a href={item.url || '#'} target="_blank" rel="noopener" class={`pick-item ${item.score >= 8.5 ? 'score-elite' : item.score >= 7 ? 'score-great' : ''}`}>
+                <div class="pick-item-score" style={`background:${scoreColor(item.score)}; box-shadow: 0 0 6px ${scoreColor(item.score)}40`}>
+                  {item.score}
+                </div>
                 <div class="pick-item-body">
                   <div class="pick-item-title">{item.title}</div>
                   <div class="pick-item-meta">
                     <span class="pick-item-source">{item.source}</span>
                     {item.heat && <span class="pick-item-heat">🔥 {item.heat}</span>}
                   </div>
-                  {item.summary && <div class="pick-item-summary">{item.summary}</div>}
+                  {item.summary && <div class="pick-item-summary">{truncate(item.summary, 180)}</div>}
                 </div>
               </a>
             ))}
@@ -72,30 +166,291 @@ if (activeCats.length === 0) return null;
 </section>
 
 <style>
+/* ──────────────────────────────────────────────
+   每日精选 + 热搜 Hero 组件样式
+   ────────────────────────────────────────────── */
+
 .pick-section {
+  margin-bottom: 32px;
+}
+
+/* ════════════════════════ 热搜 Hero ════════════════════════ */
+
+.hero-bento {
+  background: linear-gradient(160deg, var(--accent-glow), color-mix(in srgb, var(--accent) 5%, transparent), var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: 20px;
+  padding: 24px 28px;
   margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
 }
 
-.pick-header {
-  margin-bottom: 20px;
+.hero-bento::after {
+  content: '';
+  position: absolute;
+  top: -25%;
+  right: -8%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.pick-title {
-  font-size: 1.2em;
+.hero-bento-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.hero-bento-title {
+  font-size: 1.15em;
   font-weight: 800;
   color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.hero-bento-sub {
+  font-size: 0.72em;
+  color: var(--text-m);
+  font-weight: 500;
+}
+
+/* ── Bento Grid ── */
+.hero-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .hero-bento-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* ── 主卡 ── */
+.hero-main-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-main-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.hero-main-score {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1em;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #fff;
+  margin-top: 2px;
+}
+
+.hero-main-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-main-rank {
+  font-size: 0.65em;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.hero-main-title {
+  font-size: 1.05em;
+  font-weight: 800;
+  color: var(--text-h);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.hero-main-card:hover .hero-main-title {
+  color: var(--accent);
+}
+
+.hero-main-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.hero-main-source {
+  font-size: 0.72em;
+  color: var(--text-m);
+  font-family: var(--font-mono);
+}
+
+.hero-main-heat {
+  font-size: 0.72em;
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.hero-main-summary {
+  font-size: 0.82em;
+  color: var(--text-p);
+  line-height: 1.6;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── 边卡 2×2 ── */
+.hero-side-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .hero-side-grid {
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+.hero-side-card {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-side-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-side-score {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 0.68em;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: #fff;
+  margin-top: 1px;
+}
+
+.hero-side-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-side-title {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   margin-bottom: 4px;
 }
 
-.pick-meta {
-  font-size: 0.75em;
-  color: var(--text-m);
+.hero-side-card:hover .hero-side-title {
+  color: var(--accent);
 }
 
+.hero-side-meta {
+  font-size: 0.65em;
+  color: var(--text-m);
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.hero-side-heat {
+  color: #ef4444;
+}
+
+/* ════════════════════════ 分类精选 ════════════════════════ */
+
+.pick-masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.pick-title {
+  font-size: 1.15em;
+  font-weight: 800;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.pick-cat-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pick-cat-stat {
+  font-size: 0.68em;
+  font-weight: 600;
+  color: var(--text-m);
+  padding: 3px 10px;
+  background: var(--bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.pick-cat-stat em {
+  font-style: normal;
+  color: var(--stat-color, var(--accent));
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* ── 分类卡片网格 ── */
 .pick-grid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .pick-category {
@@ -103,18 +458,19 @@ if (activeCats.length === 0) return null;
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .pick-category:hover {
   border-color: var(--border-hover);
+  box-shadow: var(--shadow-sm);
 }
 
 .pick-cat-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 18px;
+  padding: 16px 20px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
@@ -130,7 +486,7 @@ if (activeCats.length === 0) return null;
 }
 
 .pick-cat-name {
-  font-size: 0.9em;
+  font-size: 0.95em;
   font-weight: 700;
   color: var(--text-h);
   margin: 0;
@@ -147,11 +503,12 @@ if (activeCats.length === 0) return null;
   font-weight: 600;
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
-  padding: 3px 10px;
-  border-radius: 6px;
+  padding: 4px 12px;
+  border-radius: 8px;
   flex-shrink: 0;
 }
 
+/* ── 条目列表 ── */
 .pick-items {
   display: flex;
   flex-direction: column;
@@ -160,10 +517,11 @@ if (activeCats.length === 0) return null;
 .pick-item {
   display: flex;
   gap: 12px;
-  padding: 12px 18px;
+  padding: 14px 20px;
   text-decoration: none;
   border-bottom: 1px solid var(--border);
-  transition: background 0.12s;
+  transition: background 0.12s, padding-left 0.15s;
+  position: relative;
 }
 
 .pick-item:last-child {
@@ -172,21 +530,37 @@ if (activeCats.length === 0) return null;
 
 .pick-item:hover {
   background: var(--bg-hover);
+  padding-left: 24px;
+}
+
+/* 高分条目左侧高亮色条 */
+.pick-item.score-elite {
+  border-left: 3px solid #ef4444;
+  background: linear-gradient(90deg, rgba(239,68,68,0.03), transparent);
+}
+.pick-item.score-elite:hover {
+  background: linear-gradient(90deg, rgba(239,68,68,0.06), transparent);
+}
+.pick-item.score-great {
+  border-left: 3px solid #f59e0b;
+  background: linear-gradient(90deg, rgba(245,158,11,0.03), transparent);
+}
+.pick-item.score-great:hover {
+  background: linear-gradient(90deg, rgba(245,158,11,0.06), transparent);
 }
 
 .pick-item-score {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-alt));
-  color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 0.7em;
   font-weight: 700;
   font-family: var(--font-mono);
+  color: #fff;
   margin-top: 2px;
 }
 
@@ -196,11 +570,11 @@ if (activeCats.length === 0) return null;
 }
 
 .pick-item-title {
-  font-size: 0.85em;
+  font-size: 0.88em;
   font-weight: 600;
   color: var(--text-h);
   line-height: 1.45;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -218,7 +592,7 @@ if (activeCats.length === 0) return null;
   gap: 8px;
   font-size: 0.72em;
   color: var(--text-m);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .pick-item-source {
@@ -235,15 +609,50 @@ if (activeCats.length === 0) return null;
 .pick-item-summary {
   font-size: 0.78em;
   color: var(--text-p);
-  line-height: 1.5;
-  padding: 6px 10px;
+  line-height: 1.55;
+  padding: 8px 12px;
   background: var(--bg);
   border-left: 2px solid var(--accent);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
-/* Light mode */
-[data-theme="light"] .pick-category {
-  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+/* ════════════════════════ 响应式 ════════════════════════ */
+@media (max-width: 640px) {
+  .hero-bento {
+    padding: 16px 18px;
+  }
+  .hero-bento-title {
+    font-size: 1em;
+  }
+  .hero-main-card {
+    flex-direction: column;
+    padding: 16px 18px;
+  }
+  .hero-main-score {
+    width: 40px;
+    height: 40px;
+    font-size: 0.85em;
+  }
+  .hero-main-title {
+    font-size: 0.92em;
+  }
+  .pick-cat-header {
+    padding: 12px 14px;
+  }
+  .pick-item {
+    padding: 10px 14px;
+  }
+  .pick-item:hover {
+    padding-left: 14px;
+  }
+  .pick-item-score {
+    width: 30px;
+    height: 30px;
+    font-size: 0.65em;
+  }
+  .pick-masthead {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 </style>

@@ -3,7 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FocusSection from '../components/FocusSection.astro';
+
 import PlatformSection from '../components/PlatformSection.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SectionNav from '../components/SectionNav.astro';
@@ -11,15 +11,10 @@ import PickSection from '../components/PickSection.astro';
 import CalendarWidget from '../components/CalendarWidget.astro';
 import { getDayData, getAllDates } from '../utils/data.ts';
 import { SITE, SECTION_ORDER, getPlatformMeta } from '../lib/constants';
-import type { FocusData, IntelItem, GzhArticle, V4DailyData } from '../lib/types';
+import type { IntelItem, GzhArticle, V4DailyData } from '../lib/types';
 import articles from '../data/gzh-articles.json';
 
-// ── 数据加载 ──
-let focusData: FocusData | null = null;
-try {
-  const mod = await import('../data/rewrite/today-focus.json');
-  focusData = mod.default as FocusData;
-} catch {}
+// ── 数据加载 — V4 推荐数据由 PickSection 自行处理 ──
 
 // ── V4 精选数据加载 ──
 let v4Data: V4DailyData | null = null;
@@ -86,10 +81,7 @@ const pageTitle = `${displayDate} AI/科技情报`;
 <SectionNav activeSections={activeSections} locale="zh" />
 
 <div class="page">
-  <!-- 今日重点 AI 编辑推荐（唯一 Hero） -->
-  <FocusSection focusData={focusData} today={today} />
-
-  <!-- 每日精选（来自 dashboard_v4） -->
+  <!-- 每日精选 + 热搜 Hero（来自 dashboard_v4） -->
   <PickSection data={v4Data} />
 
   <!-- 今日数据摘要横条 -->
