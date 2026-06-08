@@ -656,9 +656,23 @@ def extract_text_from_html(html_content: str) -> str:
     text = re.sub(r'<[^>]+>', " ", html_content)
     text = html_mod.unescape(text)
     text = re.sub(r'\s+', " ", text)
-    text = re.sub(r'(Skip to content|Skip to main content|Navigation Menu|'
-                  r'Toggle navigation|Sign in|Log in)', "", text,
-                  flags=re.IGNORECASE)
+    # ── 砍掉常见 UI 垃圾文本 ──
+    text = re.sub(
+        r'(?:'
+        r'关闭[。，]?\s*此主题[^。]*帖子[^。]*添加到[^。]*邮件[^。]*摘要[^。]*提要|'
+        r'添加到你的每日|添加到您的每日|'
+        r'此主题的[^。]*帖子将[^。]*添加到|'
+        r'查看所有[^。]*|查看全部[^。]*|'
+        r'关闭[。，]?[^。]*此主题[^。]*|'
+        r'此主题的[^。]*(?:游戏|娱乐|新闻|科技)[^。]*|'
+        r'关注[。，]?\s*关注|Follow\s+关注|'
+        r'Skip to content|Skip to main content|'
+        r'Navigation Menu|Toggle navigation|'
+        r'Sign in|Log in|Subscribe Now|Read more stories|'
+        r'Theme[^。]*Light|Theme[^。]*Dark|'
+        r'Privacy[^。]*Cookies|Cookie[^。]*Settings|'
+        r')', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
 
@@ -755,6 +769,17 @@ def _fallback_summary_from_page(url: str, title: str) -> Optional[str]:
         except:
             return None
 
+    # ── 再次清洗垃圾 UI 文本 ──
+    GARBAGE_UI = [
+        '关闭', '此主题', '添加到', '电子邮件', '摘要', '提要',
+        '查看所有', '查看全部', 'Skip to', 'Navigation', 'Toggle',
+        'Sign in', 'Log in', 'Subscribe', 'Cookie', 'Privacy',
+        'Follow', '关注', '关注关注',
+    ]
+    garbage_count = sum(1 for g in GARBAGE_UI if g.lower() in summary.lower())
+    if garbage_count >= 3:
+        return None
+
     final_zh = sum(1 for c in summary if '\u4e00' <= c <= '\u9fff')
     if final_zh < len(summary) * 0.5:
         return None
@@ -824,6 +849,17 @@ def generate_summary(url: str, title: str, api_key: str = "") -> Optional[str]:
                             return None
         except:
             return None
+
+    # ── 再次清洗垃圾 UI 文本 ──
+    GARBAGE_UI = [
+        '关闭', '此主题', '添加到', '电子邮件', '摘要', '提要',
+        '查看所有', '查看全部', 'Skip to', 'Navigation', 'Toggle',
+        'Sign in', 'Log in', 'Subscribe', 'Cookie', 'Privacy',
+        'Follow', '关注', '关注关注',
+    ]
+    garbage_count = sum(1 for g in GARBAGE_UI if g.lower() in summary.lower())
+    if garbage_count >= 3:
+        return None
 
     final_zh = sum(1 for c in summary if '\u4e00' <= c <= '\u9fff')
     if final_zh < len(summary) * 0.5:
