@@ -70,10 +70,8 @@ SOURCES = [
     ("International Tech", "Science Daily",   "rss",  "https://www.sciencedaily.com/rss/top/science.xml"),
     ("International Tech", "MIT Tech Review", "rss",  "https://www.technologyreview.com/feed/"),
     ("International Tech", "BBC Tech",        "rss",  "https://feeds.bbci.co.uk/news/technology/rss.xml"),
-    ("International Tech", "GitHub Trending", "json", "https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc&per_page=15",
-     lambda d: [{'title': f'{i.get("full_name","")} - {(i.get("description") or "")[:60]}',
-                 'url': i.get("html_url",""), 'heat': i.get("stargazers_count",0)}
-                for i in d.get("items",[])]),
+    ("International Tech", "GitHub Trending", "github_trending",
+     "https://github.com/trending?since=daily"),
 
     # ── International News (8) ──
     ("International News", "BBC World",       "rss", "https://feeds.bbci.co.uk/news/world/rss.xml"),
@@ -330,8 +328,51 @@ async def fetch_baidu(client: httpx.AsyncClient, cat: str, name: str, url: str, 
     return 0
 
 
+async def fetch_github_trending(client: httpx.AsyncClient, cat: str, name: str, url: str, limit: int = 15):
+    """Scrape GitHub Trending page for repos with daily star gain"""
+    body = await fetch_async(client, url, extra_headers={
+        "Accept": "text/html,application/xhtml+xml",
+    })
+    if not body:
+        return 0
+
+    items = []
+    # Split by article tags (GitHub Trending uses Box-row class)
+    articles = re.findall(
+        r'<article[^>]*class="Box-row[^"]*"[^>]*>(.*?)</article>',
+        body, re.DOTALL | re.IGNORECASE
+    )
+
+    for art in articles[:limit]:
+        # Extract repo owner/name
+        m = re.search(r'href="/([^"/]+/[^"/]+?)"', art)
+        if not m:
+            continue
+        full_name = m.group(1)
+
+        # Extract description
+        desc_m = re.search(r'<p[^>]*>(.*?)</p>', art, re.DOTALL)
+        desc = re.sub(r'<[^>]+>', '', desc_m.group(1)).strip() if desc_m else ""
+        desc = html_mod.unescape(desc)
+
+        # Extract stars today
+        stars_m = re.search(r'(\d[\d,]*)\s*stars?\s*today', art, re.IGNORECASE)
+        stars_today = int(stars_m.group(1).replace(',', '')) if stars_m else 0
+
+        title = f'{full_name} - {desc[:80]}' if desc else full_name
+
+        items.append({
+            'title': title.strip(),
+            'url': f'https://github.com/{full_name}',
+            'heat': stars_today,
+        })
+
+    add(cat, name, "trending", items)
+    return len(items)
+
+
 async def collect_all():
-    """Phase 1: Fetch all 38 sources concurrently"""
+    """Phase 1: Fetch all sources concurrently"""
     print("=== PHASE 1: Concurrent Collection ===", flush=True)
     print("  Creating async HTTP client...", flush=True)
 
@@ -359,6 +400,9 @@ async def collect_all():
 
             elif stype == "raw_html" and name == "Baidu":
                 tasks.append(fetch_baidu(client, cat, name, url))
+
+            elif stype == "github_trending":
+                tasks.append(fetch_github_trending(client, cat, name, url))
 
             print(f"  Queued: [{cat}] {name}", flush=True)
 

@@ -27,6 +27,8 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
 <div class="platform-grid">
   {visibleSections.map(sectionKey => {
     const items = grouped[sectionKey];
+    // GitHub projects: sort by stars today (hot) descending (trending)
+    const displayItems = sectionKey === 'github' ? [...items].sort((a, b) => (b.hot || 0) - (a.hot || 0)) : items;
     const sec = categories[sectionKey] || { name: sectionKey, icon: '📌' };
     const meta = getPlatformMeta(sectionKey, locale);
 
@@ -40,7 +42,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
           </div>
         </div>
         <div class="news-list">
-          {items.map((item, idx) => {
+          {displayItems.map((item, idx) => {
             const hotValue = item.hot || 0;
             const sources = item.merged_sources || [];
             const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
@@ -88,6 +90,8 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
     <div class="platform-grid hidden-sources" id="hiddenSources">
       {hiddenSections.map(sectionKey => {
         const items = grouped[sectionKey];
+        // GitHub projects: sort by stars today (hot) descending (trending)
+        const displayItems = sectionKey === 'github' ? [...items].sort((a, b) => (b.hot || 0) - (a.hot || 0)) : items;
         const sec = categories[sectionKey] || { name: sectionKey, icon: '📌' };
         const meta = getPlatformMeta(sectionKey, locale);
 
@@ -101,7 +105,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
               </div>
             </div>
             <div class="news-list">
-              {items.map((item, idx) => {
+              {displayItems.map((item, idx) => {
                 const hotValue = item.hot || 0;
                 const sources = item.merged_sources || [];
                 const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
