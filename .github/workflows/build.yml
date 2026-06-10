@@ -59,7 +59,7 @@ jobs:
           git config user.email "bot@dianda.dpdns.org"
 
           # 删除 7 天前的数据文件（按文件名中的日期判断）
-          python3 -c "
+          python3 << 'PYEOF'
 import os, glob
 from datetime import datetime, timezone, timedelta
 cutoff = datetime.now(timezone.utc) - timedelta(days=7)
@@ -73,7 +73,7 @@ for pattern in ['src/data/v4/daily-*.json', 'src/data/rewrite/zh/*.json', 'src/d
                 print(f'  Removed old: {f}')
         except:
             pass
-"
+PYEOF
 
           git add -A src/data/ public/data/
           git diff --cached --quiet || git commit -m "auto: daily data $(date +%Y-%m-%d)"
