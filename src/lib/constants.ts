@@ -10,6 +10,8 @@ export const PLATFORM_META_ZH: Record<string, PlatformMeta> = {
   github:          { label: 'GitHub',     icon: '🐙', color: '#6CCB5F' },
   producthunt:     { label: 'ProductHunt',icon: '🚀', color: '#DA5430' },
   v2ex:            { label: 'V2EX',       icon: '💬', color: '#4CAF50' },
+  twitter:         { label: 'X/Twitter',   icon: '🐦', color: '#1DA1F2' },
+  reddit:          { label: 'Reddit',     icon: '🤖', color: '#FF4500' },
   ithome:          { label: 'IT之家',     icon: '💻', color: '#0090D8' },
   '36kr':          { label: '36氪',       icon: '📊', color: '#4A90E2' },
   wallstreetcn:    { label: '华尔街见闻', icon: '📈', color: '#3395FF' },
@@ -34,6 +36,8 @@ export const PLATFORM_META_EN: Record<string, PlatformMeta> = {
   github:          { label: 'GitHub',       icon: '🐙', color: '#6CCB5F' },
   producthunt:     { label: 'ProductHunt',  icon: '🚀', color: '#DA5430' },
   v2ex:            { label: 'V2EX',         icon: '💬', color: '#4CAF50' },
+  twitter:         { label: 'X/Twitter',     icon: '🐦', color: '#1DA1F2' },
+  reddit:          { label: 'Reddit',       icon: '🤖', color: '#FF4500' },
   ithome:          { label: 'IT Home',      icon: '💻', color: '#0090D8' },
   '36kr':          { label: '36Kr',         icon: '📊', color: '#4A90E2' },
   wallstreetcn:    { label: 'WallStreetCN', icon: '📈', color: '#3395FF' },
@@ -53,7 +57,7 @@ export const PLATFORM_META_EN: Record<string, PlatformMeta> = {
 
 /** 分区展示顺序（中英文共用） */
 export const SECTION_ORDER = [
-  'weibo', 'hackernews', 'github', 'producthunt', 'v2ex',
+  'weibo', 'hackernews', 'github', 'producthunt', 'v2ex', 'twitter', 'reddit',
   'ithome', '36kr', 'wallstreetcn', 'toutiao', 'douyin',
   'news_aggregator', 'bilibili', 'zhihu', 'baidu', 'tieba',
   'cailianshe', 'pengpai', 'guancha', '163', 'chuangye',
@@ -62,6 +66,8 @@ export const SECTION_ORDER = [
 /** 分区中文名 */
 export const SECTION_CATEGORIES_ZH: Record<string, SectionCategory> = {
   weibo:           { name: '微博热搜',   icon: '🔥' },
+  twitter:         { name: 'X/Twitter',   icon: '🐦' },
+  reddit:          { name: 'Reddit',      icon: '🤖' },
   hackernews:      { name: '开发者社区', icon: '💻' },
   github:          { name: '开源项目',   icon: '🐙' },
   producthunt:     { name: '新品发布',   icon: '🚀' },
@@ -86,6 +92,8 @@ export const SECTION_CATEGORIES_ZH: Record<string, SectionCategory> = {
 /** 分区英文名 */
 export const SECTION_CATEGORIES_EN: Record<string, SectionCategory> = {
   weibo:           { name: 'Weibo Hot',     icon: '🔥' },
+  twitter:         { name: 'X/Twitter',      icon: '🐦' },
+  reddit:          { name: 'Reddit',         icon: '🤖' },
   hackernews:      { name: 'Dev Community', icon: '💻' },
   github:          { name: 'Open Source',   icon: '🐙' },
   producthunt:     { name: 'New Products',  icon: '🚀' },

@@ -154,6 +154,40 @@ SOURCES = [
      lambda d: [{'title': i.get("title",""),
                  'url': i.get("router",{}).get("url","") if isinstance(i.get("router"),dict) else ''}
                 for i in d.get("data",{}).get("result",[])[:20]]),
+
+    # ── New Sources: V2EX, Reddit, Twitter, etc. ──
+    ("Community", "V2EX Hot", "json",
+     "https://www.v2ex.com/api/topics/hot.json",
+     lambda d: [{'title': i.get("title",""),
+                 'url': f'https://www.v2ex.com/t/{i.get("id","")}',
+                 'heat': i.get("replies",0)}
+                for i in (d if isinstance(d,list) else [])[:30]]),
+
+    ("Community", "Reddit Hot", "json",
+     "https://www.reddit.com/r/all/hot/.json?limit=25",
+     lambda d: [{'title': i.get("data",{}).get("title",""),
+                 'url': f'https://www.reddit.com{i.get("data",{}).get("permalink","")}',
+                 'heat': i.get("data",{}).get("score",0)}
+                for i in d.get("data",{}).get("children",[])[:25]],
+     {'User-Agent': 'intel-daily-astro/1.0'}),
+
+    ("Community", "Twitter Hot (Sopilot)", "rss",
+     "https://sopilot.net/rss/hottweets"),
+
+    ("Chinese Hot Search", "Weibo", "json",
+     "https://weibo.com/ajax/side/hotSearch",
+     lambda d: [{'title': i.get("word",""),
+                 'url': f'https://s.weibo.com/weibo?q={i.get("word","")}',
+                 'heat': i.get("raw_hot",0)}
+                for i in d.get("data",{}).get("realtime",[])[:30]],
+     {'Referer': 'https://weibo.com/', 
+      'Cookie': 'SUB=_2AkMSEic0f8NxqwJRmPoRyGjmaoV-zg7EieKiRMrFJRMxHRl-yT9kqmMtRBGFaUsfX6dYIx7b3vjyFGT6FAUquV8gJCiq'}),
+
+    ("Chinese Tech", "IT之家", "rss",
+     "https://api.ithome.com/rss/news"),
+
+    ("Chinese Tech", "36氪", "rss",
+     "https://36kr.com/feed"),
 ]
 
 
@@ -1268,6 +1302,12 @@ def generate_rewrite_json(final: list, recommendations: dict):
         "AI Hot": "aihot", "WallstreetCN Hot": "wallstreetcn",
         "WallstreetCN Live": "wallstreetcn", "Tieba": "tieba",
         "Nowcoder": "nowcoder",
+        "V2EX Hot": "v2ex",
+        "Reddit Hot": "reddit",
+        "Twitter Hot (Sopilot)": "twitter",
+        "Weibo": "weibo",
+        "IT之家": "ithome",
+        "36氪": "36kr",
     }
     
     items = []

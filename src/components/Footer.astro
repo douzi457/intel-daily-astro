@@ -13,7 +13,20 @@ import { SITE } from '../lib/constants';
     <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
     <span>📱 公众号：豆子实验室</span>
   </div>
+
+  <!-- 不蒜子统计 -->
+  <div class="footer-stats">
+    <span class="stat-item">
+      <span id="busuanzi_container_site_pv" style="display:inline">👁️ 浏览 <span id="busuanzi_value_site_pv"></span></span>
+    </span>
+    <span class="stat-divider">·</span>
+    <span class="stat-item">
+      <span id="busuanzi_container_site_uv" style="display:inline">👤 访客 <span id="busuanzi_value_site_uv"></span></span>
+    </span>
+  </div>
 </footer>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <style>
 .footer {
@@ -24,6 +37,23 @@ import { SITE } from '../lib/constants';
   font-size: 0.78em;
   color: var(--text-m);
   line-height: 1.8;
+}
+
+.footer-stats {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.95em;
+  color: var(--text-p);
+}
+.stat-item {
+  display: inline-flex;
+  align-items: center;
+}
+.stat-divider {
+  color: var(--text-m);
+  opacity: 0.4;
 }
 .footer-ecosystem {
   display: flex;
