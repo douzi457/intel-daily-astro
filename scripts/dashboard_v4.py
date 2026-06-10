@@ -513,7 +513,8 @@ def deduplicate():
 def should_skip_translation(text: str) -> bool:
     """
     Check if a title should NOT be translated.
-    Preserves proper nouns: GitHub repos, Twitter handles, code names, etc.
+    Preserves proper nouns: GitHub repos, Twitter handles, code names, package names.
+    Uses stop words to distinguish full sentences from proper noun phrases.
     """
     # Too short to translate meaningfully
     if len(text) < 10:
@@ -530,20 +531,59 @@ def should_skip_translation(text: str) -> bool:
     # Code patterns: brackets, braces
     if re.search(r'[{}()\[\]]', text):
         return True
-    # More than 30% acronyms (all-caps words >= 2 chars) — indicates proper names
-    words = text.split()
-    if words:
-        cap_count = sum(1 for w in words if w.isupper() and len(w) >= 2)
-        if cap_count / len(words) > 0.3:
-            return True
     # Already has Chinese characters (partially localized, skip)
     zh = sum(1 for c in text if '\u4e00' <= c <= '\u9fff' or '\u3400' <= c <= '\u4dbf')
     if zh > 0:
         return True
-    # Multiple consecutive capital words (proper names like "Orange AI", "Claude Fable")
-    cap_seq = sum(1 for w in words if w[0].isupper() and len(w) >= 2)
-    if len(words) >= 3 and cap_seq >= min(2, len(words) - 1):
+
+    words = text.split()
+    
+    # Common English stop words — if present, this is a sentence, NOT a proper name
+    # Includes question words, auxiliaries, contractions
+    stop_words = {
+        'the', 'a', 'an', 'of', 'in', 'for', 'to', 'and', 'or', 'but', 'nor',
+        'is', 'are', 'was', 'were', 'be', 'been', 'being',
+        'this', 'that', 'these', 'those',
+        'with', 'from', 'by', 'on', 'at', 'into', 'through', 'during',
+        'will', 'can', 'may', 'might', 'must', 'shall',
+        'has', 'have', 'had', 'do', 'does', 'did',
+        'would', 'could', 'should', 'need', 'dare',
+        'their', 'your', 'our', 'its', 'my', 'his', 'her', 'its',
+        'not', 'no', 'nor', 'never',
+        'after', 'before', 'about', 'until', 'since',
+        'why', 'what', 'how', 'when', 'where', 'who', 'which', 'whom',
+        'get', 'got', 'make', 'made', 'use', 'used', 'using',
+        'say', 'says', 'said', 'see', 'seen',
+        'know', 'new', 'like', 'just', 'also', 'very', 'even', 'still',
+        'than', 'then', 'now', 'here', 'there', 'all', 'any', 'some',
+    }
+    # Strip punctuation, handle contractions like "won't" → "wont", "can't" → "cant"
+    lower_words = set()
+    for w in words:
+        clean = w.lower().rstrip(',.!?:;"\'').replace("'", '')
+        if clean:
+            lower_words.add(clean)
+    has_stop_words = bool(lower_words & stop_words)
+    
+    # If it has stop words AND at least 4 words, it's a sentence — translate
+    if has_stop_words and len(words) >= 4:
+        return False
+    
+    # Check for short proper noun phrases (2-4 words, all title case, no stop words)
+    # Exclude numbers in the count (like "Claude Fable 5" → count "Claude", "Fable" only)
+    cap_words = sum(1 for w in words if len(w) >= 2 and w[0].isupper())
+    meaningful_words = sum(1 for w in words if any(c.isalpha() for c in w))
+    
+    if meaningful_words >= 2 and cap_words == meaningful_words:
+        # All words are capitalized (no lowercase words) → likely proper noun phrase
         return True
+    
+    # More than 40% ALL-CAPS words indicates heavy acronyms/proper names
+    if words:
+        all_caps = sum(1 for w in words if w.isupper() and len(w) >= 2)
+        if all_caps / len(words) > 0.4:
+            return True
+    
     return False
 
 
