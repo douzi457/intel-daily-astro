@@ -1271,6 +1271,19 @@ def generate_v4_json(final: list, recommendations: dict, cache: dict):
         with open(index_path, "w", encoding="utf-8") as f:
             json.dump({"latest_date": date_str}, f, ensure_ascii=False)
         print(f"  -> Updated index.json: latest_date={date_str}")
+
+        # Also copy to public/data/ for direct HTTP access (deployed as static file)
+        public_dir = os.path.normpath(os.path.join(script_dir, "..", "public", "data"))
+        os.makedirs(public_dir, exist_ok=True)
+        public_path = os.path.join(public_dir, f"daily-{date_str}.json")
+        with open(public_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"  -> Public: {public_path}")
+        # Always update latest.json
+        latest_path = os.path.join(public_dir, "latest.json")
+        with open(latest_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"  -> Public latest: {latest_path}")
     else:
         print(f"  (Astro v4 data dir not found: {astro_dir})")
 
