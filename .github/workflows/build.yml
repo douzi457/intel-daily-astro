@@ -53,28 +53,13 @@ jobs:
           npx wrangler pages deploy dist/ --project-name=intel-daily-astro --branch=main
 
       # ── 3. 回写数据到仓库（保留最近7天） ──
-      - name: Commit daily data (rolling 7-day window)
+      - name: Clean up old data (>7 days)
+        run: python scripts/cleanup_data.py
+
+      - name: Commit daily data
         run: |
           git config user.name "intel-daily-bot"
           git config user.email "bot@dianda.dpdns.org"
-
-          # 删除 7 天前的数据文件（按文件名中的日期判断）
-          python3 << 'PYEOF'
-import os, glob
-from datetime import datetime, timezone, timedelta
-cutoff = datetime.now(timezone.utc) - timedelta(days=7)
-for pattern in ['src/data/v4/daily-*.json', 'src/data/rewrite/zh/*.json', 'src/data/rewrite/en/*.json', 'public/data/daily-*.json']:
-    for f in glob.glob(pattern):
-        base = os.path.basename(f).replace('daily-', '').replace('.json', '')
-        try:
-            fd = datetime.strptime(base[:10], '%Y-%m-%d').replace(tzinfo=timezone.utc)
-            if fd < cutoff:
-                os.remove(f)
-                print(f'  Removed old: {f}')
-        except:
-            pass
-PYEOF
-
           git add -A src/data/ public/data/
           git diff --cached --quiet || git commit -m "auto: daily data $(date +%Y-%m-%d)"
           git push
