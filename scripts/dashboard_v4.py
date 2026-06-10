@@ -510,6 +510,43 @@ def deduplicate():
 # ====================================================================
 # PHASE 3: TRANSLATION
 # ====================================================================
+def should_skip_translation(text: str) -> bool:
+    """
+    Check if a title should NOT be translated.
+    Preserves proper nouns: GitHub repos, Twitter handles, code names, etc.
+    """
+    # Too short to translate meaningfully
+    if len(text) < 10:
+        return True
+    # GitHub-style paths: user/repo, user/repo-name
+    if '/' in text:
+        return True
+    # Twitter/X handles or @mentions
+    if '@' in text:
+        return True
+    # Package/library names like xxx-yyy-zzz or xxx_yyy
+    if re.match(r'^[a-z][a-z0-9]*(?:[-_][a-z0-9]+)+$', text.split(' - ')[0].split(':')[0]):
+        return True
+    # Code patterns: brackets, braces
+    if re.search(r'[{}()\[\]]', text):
+        return True
+    # More than 30% acronyms (all-caps words >= 2 chars) — indicates proper names
+    words = text.split()
+    if words:
+        cap_count = sum(1 for w in words if w.isupper() and len(w) >= 2)
+        if cap_count / len(words) > 0.3:
+            return True
+    # Already has Chinese characters (partially localized, skip)
+    zh = sum(1 for c in text if '\u4e00' <= c <= '\u9fff' or '\u3400' <= c <= '\u4dbf')
+    if zh > 0:
+        return True
+    # Multiple consecutive capital words (proper names like "Orange AI", "Claude Fable")
+    cap_seq = sum(1 for w in words if w[0].isupper() and len(w) >= 2)
+    if len(words) >= 3 and cap_seq >= min(2, len(words) - 1):
+        return True
+    return False
+
+
 def translate_one(text: str) -> str:
     """Google Translate via URL API (httpx, no curl.exe)"""
     try:
@@ -537,6 +574,9 @@ def translate_titles(final: list):
     seen_t = set()
     for item in final:
         t = item["title"]
+        # Skip if translation would mangle proper nouns
+        if should_skip_translation(t):
+            continue
         zh = sum(1 for c in t if '\u4e00' <= c <= '\u9fff' or '\u3400' <= c <= '\u4dbf')
         if zh <= len(t) * 0.3 and len(t) >= 3 and t not in seen_t:
             seen_t.add(t)
