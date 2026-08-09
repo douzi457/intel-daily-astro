@@ -1,10 +1,10 @@
 {
   "date": "2026-08-09",
-  "generated_at": "2026-08-09 06:21:23",
-  "summary": "今日采集 40 个源，共 682 条去重数据",
-  "total_items": 682,
-  "total_sources": 40,
-  "total_translated": 269,
+  "generated_at": "2026-08-09 11:41:29",
+  "summary": "今日采集 41 个源，共 689 条去重数据",
+  "total_items": 689,
+  "total_sources": 41,
+  "total_translated": 276,
   "recommendations": {
     "AI/大模型": [
       {
@@ -35,6 +35,26 @@
         "heat": ""
       },
       {
+        "title": "Fastmail 提供欧盟数据区域",
+        "title_original": "Fastmail offers EU data region",
+        "url": "https://www.fastmail.com/blog/fastmail-offers-eu-data-region/",
+        "source": "Hacker News",
+        "score": 10.0,
+        "summary": "您的选择 许多人都告诉我们，您的电子邮件存储在哪里对您很重要。这样做的原因有多种，例如当地法律、将您的数据保存在离家较近的地方或合规性。您现在可以将欧盟作为 Fastmail 数据的主要所在地，位于我们位于 Ams 的安全服务器上",
+        "heat": ""
+      },
+      {
+        "title": "OpenAI 对 Hugging Face 的意外攻击的时间线",
+        "title_original": "Timeline of the OpenAI accidental attack against Hugging Face",
+        "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/",
+        "source": "Hacker News",
+        "score": 10.0,
+        "summary": "现在我们有了 OpenAI 对 Hugging Face 意外攻击的时间表 2026 年 8 月 7 日 OpenAI 在周三的黑帽安全会议上做了最后一刻关于“Hugging Face 事件”的演示（之前在本博客中）。该视频于昨天发布。它很短，信息密集，",
+        "heat": ""
+      }
+    ],
+    "数码/硬件": [
+      {
         "title": "下载：审查制度阴谋论和人工智能创造的第一个病毒",
         "title_original": "The Download: a censorship conspiracy theory and the first virus created by AI",
         "url": "https://www.technologyreview.com/2026/08/07/1141389/the-download-censorship-conspiracy-theory-first-ai-virus/",
@@ -50,17 +70,6 @@
         "source": "MIT Tech Review",
         "score": 10.0,
         "summary": "这是今天版本的《下载》，我们的平日时事通讯，每天提供技术世界中正在发生的事情。谷歌的人工智能帝国正在重塑。以下是变化。",
-        "heat": ""
-      }
-    ],
-    "数码/硬件": [
-      {
-        "title": "数码相机和有线耳机又回来了，而且“更真实”",
-        "title_original": "Digital cameras and wired earphones are back and 'a bit more real'",
-        "url": "https://www.bbc.co.uk/news/articles/cly599xlllyo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 6.5,
-        "summary": "图片来源，Annabel Rackham 作者：Annabel Rackham 文化记者 发表于 2026 年 8 月 8 日，英国夏令时 02:40 这是周六下午，我在第一个障碍时就差点摔倒了——我把数码相机的电池留在家里了。请原谅我，我最后一次带这台相机出去还是在 15 年前的一次家庭度假中。",
         "heat": ""
       },
       {
@@ -82,34 +91,16 @@
         "heat": ""
       },
       {
-        "title": "Fastmail 提供欧盟数据区域",
-        "title_original": "Fastmail offers EU data region",
-        "url": "https://www.fastmail.com/blog/fastmail-offers-eu-data-region/",
-        "source": "Hacker News",
-        "score": 10.0,
-        "summary": "您的选择 许多人都告诉我们，您的电子邮件存储在哪里对您很重要。这样做的原因有多种，例如当地法律、将您的数据保存在离家较近的地方或合规性。您现在可以将欧盟作为 Fastmail 数据的主要所在地，位于我们位于 Ams 的安全服务器上",
-        "heat": ""
-      },
-      {
-        "title": "OpenAI 对 Hugging Face 的意外攻击的时间线",
-        "title_original": "Timeline of the OpenAI accidental attack against Hugging Face",
-        "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/",
-        "source": "Hacker News",
-        "score": 10.0,
+        "title": "OpenAI 意外攻击 Hugging Face 事件时间线现已整理出炉",
+        "title_original": "OpenAI 意外攻击 Hugging Face 事件时间线现已整理出炉",
+        "url": "https://simonwillison.net/2026/Aug/7/openai-timeline",
+        "source": "AI Hot",
+        "score": 10,
         "summary": "现在我们有了 OpenAI 对 Hugging Face 意外攻击的时间表 2026 年 8 月 7 日 OpenAI 在周三的黑帽安全会议上做了最后一刻关于“Hugging Face 事件”的演示（之前在本博客中）。该视频于昨天发布。它很短，信息密集，",
         "heat": ""
       }
     ],
     "开源/工具": [
-      {
-        "title": "HPC-Ops × SGLang：腾讯混元开源高性能 Attention、Router GEMM 与 MoE 算子",
-        "title_original": "HPC-Ops × SGLang：腾讯混元开源高性能 Attention、Router GEMM 与 MoE 算子",
-        "url": "https://www.lmsys.org/blog/2026-08-07-hpc-ops-sglang",
-        "source": "AI Hot",
-        "score": 9.5,
-        "summary": "← 返回博客 ← 返回博客内容 重点介绍注意力、路由和专家：MoE 模型服务中的三个热路径 注意力：混合长度解码的负载平衡 围绕实时 KV 工作进行调度 融合注意力序言 路由器 GEMM：平衡路由精度和吞吐量 精度感知",
-        "heat": ""
-      },
       {
         "title": "TapXWorld/ChinaTextbook - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        TapXWorld /\n\n      ChinaTextbook",
         "title_original": "TapXWorld/ChinaTextbook - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        TapXWorld /\n\n      ChinaTextbook",
@@ -117,7 +108,7 @@
         "source": "GitHub Trending",
         "score": 8.5,
         "summary": "项目的由来 虽然国内教育网站已提供免费资源，但大多数普通人获取信息的途径依然受限。有些人利用这一点，在某站上销售这些带有私人水印的资源。为了应对这种情况，我计划将这些资源集中并开源，以促进义务教育的普及和消除地区间的教育贫困。",
-        "heat": "591"
+        "heat": "118"
       },
       {
         "title": "LadybirdBrowser/ladybird - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        LadybirdBrowser /\n\n      ladybird",
@@ -126,7 +117,7 @@
         "source": "GitHub Trending",
         "score": 8.5,
         "summary": "Ladybird Ladybird 是一款真正独立的 Web 浏览器，使用基于 Web 标准的新颖引擎。重要的是 Ladybird 处于 pre-alpha 状态，仅适合开发人员使用 功能 我们的目标是为现代 Web 构建一个完整的、可用的浏览器。Ladybird 使用多进程架构",
-        "heat": "79"
+        "heat": "48"
       },
       {
         "title": "denoland/celld - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        denoland /\n\n      celld  \n\n    \n      s",
@@ -144,7 +135,16 @@
         "source": "GitHub Trending",
         "score": 8.5,
         "summary": "DevOps 和 SRE 面试问题从 2025 年和 2026 年实际参加过 DevOps、SRE 和云工程面试的人那里收集的真实面试问题。没有释义，没有“前 50 个问题”填充物 - 这些是候选人被问到的确切问题，经过组织，以便您可以查找",
-        "heat": "59"
+        "heat": "68"
+      },
+      {
+        "title": "蚂蚁开源Avernet，为多智能体协作搭建“操作系统”！内部跑通12大业务、任务完成率超90%",
+        "title_original": "蚂蚁开源Avernet，为多智能体协作搭建“操作系统”！内部跑通12大业务、任务完成率超90%",
+        "url": "https://www.infoq.cn/article/iNvHOsahsYFYaE9ImZBV?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
+        "score": 7.5,
+        "summary": "近日，蚂蚁集团正式开源多智能体协作基础设施 Avernet，社区版本已上线。首个版本重点开放智能体协作网络能力，支持不同智能体之间的发现、共识、跨团队协作与治理。AI Coding 和智能体技术极大提升了内容、代码和方案的生成速度，但系统整合与组织协同却严重滞后。",
+        "heat": ""
       }
     ],
     "科技热点": [
@@ -167,43 +167,34 @@
         "heat": ""
       },
       {
-        "title": "“代码从来都不是困难的部分”是对所有程序员的侮辱",
-        "title_original": "\"Code was never the hard part\" is an insult to all programmers",
-        "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
-        "source": "Hacker News",
+        "title": "美国前网络总监表示，关于机器人规则的“阿西莫夫是对的”",
+        "title_original": "'Asimov Was Right' About Rules For Robots, Says Ex-US Cyber Director",
+        "url": "https://it.slashdot.org/story/26/08/07/1829239/asimov-was-right-about-rules-for-robots-says-ex-us-cyber-director?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
         "score": 8.0,
-        "summary": "“代码从来都不是最难的部分”是对所有程序员的侮辱 2026 年 8 月 8 日 软件开发行业正处于剧变之中。没有人知道人工智能革命最终会如何发展，但很明显工作和生活的许多方面都将发生转变——包括编程。其中之一",
+        "summary": "184892858 故事 前美国国家网络主管 Chris Inglis 表示，最大的人工智能风险不是感知力，而是自主性。“我担心的是，他们可以选择做什么、在哪里做某事，以及在什么规则下做这件事，”他引用了 OpenAI、Anthropic 近期的人工智能代理案例说道。",
         "heat": ""
       },
       {
-        "title": "在游戏中制作难度曲线",
-        "title_original": "Making difficulty curves in games",
-        "url": "http://www.davetech.co.uk/difficultycurves",
-        "source": "Hacker News",
+        "title": "黎曼动力携手光轮智能与诺亦腾机器人，推进2026年百万小时具身智能数据建设",
+        "title_original": "黎曼动力携手光轮智能与诺亦腾机器人，推进2026年百万小时具身智能数据建设",
+        "url": "https://www.infoq.cn/article/hI2W3XTUo2GNylxSXDC8?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
         "score": 8.0,
-        "summary": "游戏行业很奇怪，因为我们总是试图创建一个系统，让游戏保持足够的难度，以阻止人们看到产品的其余部分。我的思考过程都是从这条推文开始的：当我们制作旅鼠时，我们对此感到痛苦，我们花了很长时间来解决这个困难",
+        "summary": "8 月 6 日，黎曼动力宣布与光轮智能、诺亦腾机器人（Noitom Robotics）达成战略合作。0 具身世界动作模型与 Matrix-Game 3。5 交互式世界模型，黎曼动力将与两家公司在高质量具身数据采集、模型训练、规模化评测、真实机器人部署与反馈优化等方向展开深度协同，推进面向 2026 年的百万小时具身智能数据建设。",
         "heat": ""
       },
       {
-        "title": "TinySol，一款 DOS 小型纸牌游戏",
-        "title_original": "TinySol, a tiny solitaire game for DOS",
-        "url": "https://classicbits.net/coding-and-software/my-software/monosol/",
-        "source": "Hacker News",
+        "title": "在 ChinaJoy ，我看到了第一台「科技潮玩」机器人",
+        "title_original": "在 ChinaJoy ，我看到了第一台「科技潮玩」机器人",
+        "url": "https://www.ifanr.com/1674308?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
         "score": 8.0,
-        "summary": "TinySol（以前称为 MonoSol）是一款免费的小型克朗代克纸牌游戏，专为在老式计算机（尤其是单色屏幕的计算机）上提供良好的可玩性而设计。TinySol 在 GRiDCase 气体等离子显示器上以 640×400 模式显示。3 (5/25/2026) 下载 640 个可赢的保存游戏文件 (5/25/2026) 启动游戏后",
+        "summary": "逛了几年 ChinaJoy ，我发现最有意思的东西未必在展台上。安检队伍里，顶着二次元发色的、背着比自己还高的武器的，游戏里的职业、皮肤和阵营，在这几天暂时取代了现实世界的工牌，当然还有这两年大展会都少不了的机器人。说实话，一年到头看下来，我对后空翻和跳舞已经脱敏了，不过爱范儿在现场还是发现了一些特别的 Coser，上纬新材旗下的 启元 Q1 探索版换上星际战士、铠甲斗士、超能机甲和宇航员的外壳，",
         "heat": ""
       }
     ],
     "财经/商业": [
-      {
-        "title": "OpenAI 意外攻击 Hugging Face 事件时间线现已整理出炉",
-        "title_original": "OpenAI 意外攻击 Hugging Face 事件时间线现已整理出炉",
-        "url": "https://simonwillison.net/2026/Aug/7/openai-timeline",
-        "source": "AI Hot",
-        "score": 10,
-        "summary": "现在我们有了 OpenAI 对 Hugging Face 意外攻击的时间表 2026 年 8 月 7 日 OpenAI 在周三的黑帽安全会议上做了最后一刻关于“Hugging Face 事件”的演示（之前在本博客中）。该视频于昨天发布。它很短，信息密集，",
-        "heat": ""
-      },
       {
         "title": "Claude Code 会话间可互发消息",
         "title_original": "Claude Code 会话间可互发消息",
@@ -223,21 +214,30 @@
         "heat": ""
       },
       {
-        "title": "美国前网络总监表示，关于机器人规则的“阿西莫夫是对的”",
-        "title_original": "'Asimov Was Right' About Rules For Robots, Says Ex-US Cyber Director",
-        "url": "https://it.slashdot.org/story/26/08/07/1829239/asimov-was-right-about-rules-for-robots-says-ex-us-cyber-director?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 8.0,
-        "summary": "184892858 故事 前美国国家网络主管 Chris Inglis 表示，最大的人工智能风险不是感知力，而是自主性。“我担心的是，他们可以选择做什么、在哪里做某事，以及在什么规则下做这件事，”他引用了 OpenAI、Anthropic 近期的人工智能代理案例说道。",
+        "title": "蚂蚁集团开源Avernet：破解多智能体“找不到、对不齐”协作难题",
+        "title_original": "蚂蚁集团开源Avernet：破解多智能体“找不到、对不齐”协作难题",
+        "url": "https://www.infoq.cn/article/B6WtPNGNH0d5LolB1ED2?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
+        "score": 7.5,
+        "summary": "近日，蚂蚁集团正式开源多智能体协作基础设施 Avernet，社区版本已上线。首个版本重点开放智能体协作网络能力，支持不同智能体之间的发现、共识、跨团队协作与治理。AI Coding 和智能体技术极大提升了内容、代码和方案的生成速度，但系统整合与组织协同却严重滞后。",
         "heat": ""
       },
       {
-        "title": "黎曼动力携手光轮智能与诺亦腾机器人，推进2026年百万小时具身智能数据建设",
-        "title_original": "黎曼动力携手光轮智能与诺亦腾机器人，推进2026年百万小时具身智能数据建设",
-        "url": "https://www.infoq.cn/article/hI2W3XTUo2GNylxSXDC8?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
-        "score": 8.0,
-        "summary": "8 月 6 日，黎曼动力宣布与光轮智能、诺亦腾机器人（Noitom Robotics）达成战略合作。0 具身世界动作模型与 Matrix-Game 3。5 交互式世界模型，黎曼动力将与两家公司在高质量具身数据采集、模型训练、规模化评测、真实机器人部署与反馈优化等方向展开深度协同，推进面向 2026 年的百万小时具身智能数据建设。",
+        "title": "Kalshi 和 Polymarket 对临床试验的押注被批评为“可怕”",
+        "title_original": "Kalshi and Polymarket Bets On Clinical Trials Criticized As 'Ghastly'",
+        "url": "https://news.slashdot.org/story/26/08/07/1843210/kalshi-and-polymarket-bets-on-clinical-trials-criticized-as-ghastly?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 7.5,
+        "summary": "184892978 故事 一位匿名读者引用了 NPR 的一篇报道：在监管宽松的预测市场网站上，每周有数十亿美元的交易，用户在这些网站上押注从电影评论到选举再到中东冲突的一切。临床试验只是预测市场的最新领域。",
+        "heat": ""
+      },
+      {
+        "title": "Shopify 用 MySQL 取代了 Redis 来进行库存预订，并且可以扩展",
+        "title_original": "Shopify replaced Redis with MySQL for inventory reservations–and it scaled",
+        "url": "https://shopify.engineering/scaling-inventory-reservations",
+        "source": "Hacker News",
+        "score": 7.0,
+        "summary": "博客 |基础设施 我们用 MySQL 取代了 Redis 来进行库存预订，并且进行了扩展 我们如何使用 SKIP LOCKED、复合主键和连接可见性来达到我们的规模目标。发布于 2026 年 5 月 12 日 在结帐期间，当买家单击“完成购买”时，我们需要保证",
         "heat": ""
       }
     ]
@@ -294,6 +294,20 @@
         "heat": ""
       },
       {
+        "title": "Fastmail 提供欧盟数据区域",
+        "url": "https://www.fastmail.com/blog/fastmail-offers-eu-data-region/",
+        "source": "Hacker News",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "OpenAI 对 Hugging Face 的意外攻击的时间线",
+        "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/",
+        "source": "Hacker News",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
         "title": "下载：审查制度阴谋论和人工智能创造的第一个病毒",
         "url": "https://www.technologyreview.com/2026/08/07/1141389/the-download-censorship-conspiracy-theory-first-ai-virus/",
         "source": "MIT Tech Review",
@@ -322,39 +336,11 @@
         "heat": ""
       },
       {
-        "title": "丹麦要求学生进行书面作业答辩以打击人工智能作弊",
-        "url": "https://mezha.net/eng/bukvy/ca117584_denmark_requires_oral/",
-        "source": "Hacker News",
-        "score": 10.0,
-        "heat": ""
-      },
-      {
-        "title": "Fastmail 提供欧盟数据区域",
-        "url": "https://www.fastmail.com/blog/fastmail-offers-eu-data-region/",
-        "source": "Hacker News",
-        "score": 10.0,
-        "heat": ""
-      },
-      {
-        "title": "OpenAI 对 Hugging Face 的意外攻击的时间线",
-        "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/",
-        "source": "Hacker News",
-        "score": 10.0,
-        "heat": ""
-      },
-      {
         "title": "PrimeIntellect-ai/prime-agent - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        PrimeIntellect-ai /\n\n      prime-agent",
         "url": "https://github.com/PrimeIntellect-ai/prime-agent",
         "source": "GitHub Trending",
         "score": 10.0,
         "heat": "2483"
-      },
-      {
-        "title": "When Lighthouse CI maintenance in CI/CD pipelines becomes a second job",
-        "url": "https://dev.to/apogeewatcher/when-lighthouse-ci-maintenance-in-cicd-pipelines-becomes-a-second-job-347c",
-        "source": "Dev.to",
-        "score": 9.0,
-        "heat": ""
       },
       {
         "title": "OpenAI 昂贵的智能扬声器将使用活动部件来显得“更有活力”",
@@ -378,9 +364,30 @@
         "heat": ""
       },
       {
-        "title": "下载：美国机器人限制和 ICE 的 DNA 抓取",
-        "url": "https://www.technologyreview.com/2026/08/04/1141098/the-download-robot-restrictions-ice-dna/",
-        "source": "MIT Tech Review",
+        "title": "发布 AI 构建的 Next.js + Supabase 应用程序之前的 7 项安全检查",
+        "url": "https://dev.to/peterbuildssecure/7-security-checks-before-shipping-an-ai-built-nextjs-supabase-app-1bnk",
+        "source": "Dev.to",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "人工智能可以构建您的网站。完成仍然是一个声明。",
+        "url": "https://dev.to/studiomeyer_io/ai-can-build-your-website-done-is-still-a-claim-4a0p",
+        "source": "Dev.to",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "人工智能代理到底是什么，以及这个词的结尾",
+        "url": "https://dev.to/studiomeyer_io/what-ai-agents-actually-are-and-where-the-word-ends-3olh",
+        "source": "Dev.to",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "跨 OpenAI、Claude 和 Gemini 的 SaaS 聊天机器人 API 容量规划",
+        "url": "https://dev.to/carterhughes6853/capacity-planning-a-saas-chatbot-api-across-openai-claude-and-gemini-58ni",
+        "source": "Dev.to",
         "score": 9.0,
         "heat": ""
       },
@@ -395,6 +402,20 @@
         "title": "Hairmax LaserBand 82 ComfortFlex 评测：扎下新根",
         "url": "https://www.wired.com/review/hairmax-laserband-82-comfortflex/",
         "source": "Wired",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "Anthropic says auto mode will be the default in Claude Code for Pro, Max, Team plans, starting on Aug. 14, claiming it's good enough at catching harmful actions (Simon Willison/Simon Willison's Weblog)",
+        "url": "https://www.techmeme.com/260808/p10#a260808p10",
+        "source": "Techmeme",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "A look at \"Spiralism\", a quasi-spiritual movement that grew in 2025 from human-AI conversations after sycophantic GPT-4o updates and expanded ChatGPT memory (Hayden Field/The Verge)",
+        "url": "https://www.techmeme.com/260808/p9#a260808p9",
+        "source": "Techmeme",
         "score": 9.0,
         "heat": ""
       },
@@ -448,16 +469,9 @@
         "heat": ""
       },
       {
-        "title": "Sources: Situational Awareness invested $500M, including $400M this week, into Source Foundry, a startup that plans to develop new AI chip manufacturing tools (Wall Street Journal)",
-        "url": "https://www.techmeme.com/260807/p31#a260807p31",
-        "source": "Techmeme",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "The Clarity Act faces uncertainty after Senate Republicans delayed a vote until after their August recess, pushing it to September, just weeks before midterms (Jasper Goodman/Politico)",
-        "url": "https://www.techmeme.com/260807/p30#a260807p30",
-        "source": "Techmeme",
+        "title": "下载：美国机器人限制和 ICE 的 DNA 抓取",
+        "url": "https://www.technologyreview.com/2026/08/04/1141098/the-download-robot-restrictions-ice-dna/",
+        "source": "MIT Tech Review",
         "score": 9.0,
         "heat": ""
       },
@@ -532,6 +546,20 @@
         "heat": ""
       },
       {
+        "title": "addyosmani/agent-skills - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        addyosmani /\n\n      agent-skills",
+        "url": "https://github.com/addyosmani/agent-skills",
+        "source": "GitHub Trending",
+        "score": 9.0,
+        "heat": "779"
+      },
+      {
+        "title": "TauricResearch/TradingAgents - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        TauricResearch /\n\n      TradingAgents",
+        "url": "https://github.com/TauricResearch/TradingAgents",
+        "source": "GitHub Trending",
+        "score": 9.0,
+        "heat": "153"
+      },
+      {
         "title": "利用人工智能进行热带气旋业务预报",
         "url": "https://www.nature.com/articles/s41586-026-10953-2",
         "source": "Nature",
@@ -544,20 +572,6 @@
         "source": "Nature",
         "score": 9.0,
         "heat": ""
-      },
-      {
-        "title": "addyosmani/agent-skills - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        addyosmani /\n\n      agent-skills",
-        "url": "https://github.com/addyosmani/agent-skills",
-        "source": "GitHub Trending",
-        "score": 9.0,
-        "heat": "778"
-      },
-      {
-        "title": "TauricResearch/TradingAgents - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        TauricResearch /\n\n      TradingAgents",
-        "url": "https://github.com/TauricResearch/TradingAgents",
-        "source": "GitHub Trending",
-        "score": 9.0,
-        "heat": "126"
       },
       {
         "title": "这台售价 450 美元的未知品牌笔记本电脑是否好得令人难以置信？",
@@ -574,18 +588,11 @@
         "heat": ""
       },
       {
-        "title": "英特尔最终能否在每瓦性能上击败 ARM？",
-        "url": "https://hackaday.com/2026/08/08/want-energy-efficiency-dude-youre-getting-a-dell/",
-        "source": "Hacker News",
-        "score": 8.5,
-        "heat": ""
-      },
-      {
         "title": "TapXWorld/ChinaTextbook - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        TapXWorld /\n\n      ChinaTextbook",
         "url": "https://github.com/TapXWorld/ChinaTextbook",
         "source": "GitHub Trending",
         "score": 8.5,
-        "heat": "591"
+        "heat": "118"
       },
       {
         "title": "google/skills - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        google /\n\n      skills  \n\n    \n      Ag",
@@ -599,7 +606,7 @@
         "url": "https://github.com/sponsors/mattpocock",
         "source": "GitHub Trending",
         "score": 8.5,
-        "heat": "1354"
+        "heat": "1359"
       },
       {
         "title": "sponsors/goauthentik - Sponsor\n    \n  \n\n\n\n      \n            \n    \n\n    \n\n        \n          Star",
@@ -620,7 +627,7 @@
         "url": "https://github.com/LadybirdBrowser/ladybird",
         "source": "GitHub Trending",
         "score": 8.5,
-        "heat": "79"
+        "heat": "48"
       },
       {
         "title": "denoland/celld - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        denoland /\n\n      celld  \n\n    \n      s",
@@ -634,21 +641,14 @@
         "url": "https://github.com/litu54/DevOps-Interview-Guide",
         "source": "GitHub Trending",
         "score": 8.5,
-        "heat": "59"
+        "heat": "68"
       },
       {
         "title": "bannedbook/fanqiang - Star\n\n\n  \n\n  \n    \n    \n\n\n      \n        bannedbook /\n\n      fanqiang",
         "url": "https://github.com/bannedbook/fanqiang",
         "source": "GitHub Trending",
         "score": 8.5,
-        "heat": "161"
-      },
-      {
-        "title": "沃尔玛赞助的游戏网站解雇了编辑人员",
-        "url": "https://www.theverge.com/games/977056/restart-gaming-site-walmart-moonrock-layoffs",
-        "source": "The Verge",
-        "score": 8.0,
-        "heat": ""
+        "heat": "101"
       },
       {
         "title": "事实证明，火星上第一辆自动驾驶汽车取得了巨大成功",
@@ -658,22 +658,15 @@
         "heat": ""
       },
       {
-        "title": "“代码从来都不是困难的部分”是对所有程序员的侮辱",
-        "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
-        "source": "Hacker News",
+        "title": "沃尔玛赞助的游戏网站解雇了编辑人员",
+        "url": "https://www.theverge.com/games/977056/restart-gaming-site-walmart-moonrock-layoffs",
+        "source": "The Verge",
         "score": 8.0,
         "heat": ""
       },
       {
         "title": "在游戏中制作难度曲线",
         "url": "http://www.davetech.co.uk/difficultycurves",
-        "source": "Hacker News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "TinySol，一款 DOS 小型纸牌游戏",
-        "url": "https://classicbits.net/coding-and-software/my-software/monosol/",
         "source": "Hacker News",
         "score": 8.0,
         "heat": ""
@@ -693,8 +686,8 @@
         "heat": ""
       },
       {
-        "title": "为什么我不再猜测 Spark 和 dbt 配置值",
-        "url": "https://dev.to/dorfarber/why-i-stopped-guessing-at-spark-and-dbt-config-values-1i2n",
+        "title": "在用 Python 从头开始​​构建编程语言后我学到了什么",
+        "url": "https://dev.to/probal_dhali_f7d15eac866a/what-i-learned-after-building-a-programming-language-from-scratch-in-python-bof",
         "source": "Dev.to",
         "score": 7.5,
         "heat": ""
@@ -738,13 +731,6 @@
         "title": "Sims 和 EA FC 制造商艺电 (Electronic Arts) 以 550 亿美元的价格出售给沙特领导的集团",
         "url": "https://www.bbc.co.uk/news/articles/cjejyl34345o?at_medium=RSS&at_campaign=rss",
         "source": "BBC Tech",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "PS3 仿真现在在 ARM 上速度很快",
-        "url": "https://www.youtube.com/watch?v=-aI_XEwmKFk",
-        "source": "Lobsters",
         "score": 7.5,
         "heat": ""
       },
@@ -854,6 +840,90 @@
         "heat": ""
       },
       {
+        "title": "我用克劳德代码自动化求职的两项技能",
+        "url": "https://dev.to/smabernat/two-skills-i-built-to-automate-my-job-search-with-claude-code-1pcn",
+        "source": "Dev.to",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "我的服务器现在是电话",
+        "url": "https://seg6.space/posts/phone-server/",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "Os8088：适用于 IBM XT、286、386 的强大的类 Mac 操作系统",
+        "url": "https://os8088.com/",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "改进 A* 寻路的启发式方法",
+        "url": "https://www.redblobgames.com/pathfinding/heuristics/differential.html",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "电话簿让我们找到了隐藏的阿萨德间谍头子",
+        "url": "https://www.bbc.com/news/articles/c4gyrzn8p94o",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "Shopify 用 MySQL 取代了 Redis 来进行库存预订，并且可以扩展",
+        "url": "https://shopify.engineering/scaling-inventory-reservations",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "Dithered QR Codes",
+        "url": "https://www.andrewt.net/dithered-qr-codes/wtf/",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "_待售 DNS 记录",
+        "url": "https://specification.website/spec/foundations/for-sale-dns/",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "意外事件和亲社会行为：蝙蝠侠效应",
+        "url": "https://www.nature.com/articles/s44184-025-00171-5",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "The Sound and Music of 'Hyper Light Drifter' [video]",
+        "url": "https://gdcvault.com/play/1024135/The-Sound-and-Music-of",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "Triton：适用于 QEMU 的 DirectX 11 驱动程序",
+        "url": "https://blog.getutm.app/2026/introducing-triton-directx-11-driver-for-qemu/",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "TheoremDB · 机器数学的公共工作区",
+        "url": "https://theoremdb.org/",
+        "source": "Hacker News",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
         "title": "庞大审查网络的想法如何从网络边缘转向特朗普政策",
         "url": "https://www.technologyreview.com/2026/08/07/1141105/how-ideas-of-a-vast-censorship-network-moved-from-the-online-fringe-to-trump-policy/",
         "source": "MIT Tech Review",
@@ -889,129 +959,10 @@
         "heat": ""
       },
       {
-        "title": "第二次海狸袭击后，马里兰州关闭了更多坎宁安瀑布州立公园",
-        "url": "https://news.maryland.gov/dnr/2026/08/05/dnr-closes-additional-areas-of-cunningham-falls-state-park-following-second-beaver-attack/",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "LinkedIn Feed Blocker",
-        "url": "https://github.com/andrewpollack/linkedin-feed-blocker",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "域名现在可以在 DNS 中说它正在出售",
-        "url": "https://specification.website/spec/foundations/for-sale-dns/",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "DeepMind 的 WeatherNext 模型在预测气旋方面取得突破",
-        "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "通过防止折叠来防止错误折叠",
-        "url": "https://www.science.org/content/blog-post/preventing-misfolding-preventing-folding",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "使用超宽带构建本地定位系统来跟踪跑步者",
-        "url": "https://zeus.ugent.be/blog/25-26/12urenloop-uwb/",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "Triton：适用于 QEMU 的 DirectX 11 驱动程序",
-        "url": "https://blog.getutm.app/2026/introducing-triton-directx-11-driver-for-qemu/",
-        "source": "Hacker News",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
         "title": "“代码从来都不是困难的部分”是对所有程序员的侮辱",
         "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
         "source": "Lobsters",
         "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "缓存：后端系统如何使用 Redis 提高速度",
-        "url": "https://dev.to/juma_evans_34e389ef539266/caching-how-backend-systems-get-faster-with-redis-387c",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "我如何简化业务应用程序的后端架构",
-        "url": "https://dev.to/akintunde_morakinyo_db6b2/how-i-simplified-my-backend-architecture-for-business-applications-161l",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Kubernetes 底层的内核：nftables、netfilter 以及为什么 svclb-traefik 不断出现崩溃循环",
-        "url": "https://dev.to/audu97/the-kernel-underneath-kubernetes-nftables-netfilter-and-why-svclb-traefik-kept-crash-looping-5cgi",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "我如何构建具有实时视频背景去除功能的 60 FPS 404 页面",
-        "url": "https://dev.to/amirhosseindehghanazar/how-i-built-a-60-fps-404-page-with-live-video-background-removal-25bb",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "您的浏览器测试失败。浏览器测试可能是无辜的。",
-        "url": "https://dev.to/sleepyfalcon247/your-browser-test-failed-the-browser-test-might-be-innocent-23l4",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "最困难的端到端测试在边界进行",
-        "url": "https://dev.to/orbitpickle307/the-hardest-e2e-tests-live-at-the-boundaries-2ghc",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "您的客服人员的收件箱检查正在测量已读状态，而不是已应答状态",
-        "url": "https://dev.to/jacksonxly/your-agents-inbox-check-is-measuring-read-state-not-answered-state-fkk",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "大多数“不稳定的测试”实际上是架构测试",
-        "url": "https://dev.to/randomsquirrel802/most-flaky-tests-are-really-architecture-tests-34na",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Debugging SAML SSO: How to Decode a SAMLResponse (and Why It's Sometimes Not XML)",
-        "url": "https://dev.to/pjanderson/debugging-saml-sso-how-to-decode-a-samlresponse-and-why-its-sometimes-not-xml-pn3",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Decoding a PowerShell -EncodedCommand During Incident Response (the UTF-16 gotcha)",
-        "url": "https://dev.to/pjanderson/decoding-a-powershell-encodedcommand-during-incident-response-the-utf-16-gotcha-5a6i",
-        "source": "Dev.to",
-        "score": 6.0,
         "heat": ""
       },
       {
@@ -1088,6 +1039,48 @@
         "title": "世界上最大的太阳望远镜捕捉到太阳表面的漩涡",
         "url": "https://arstechnica.com/science/2026/08/the-worlds-biggest-solar-telescope-caught-vortexes-on-the-suns-surface/",
         "source": "Ars Technica",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "如何在浏览器中转换文件而不上传它们",
+        "url": "https://dev.to/harshapalegar/how-to-convert-files-in-the-browser-without-uploading-them-3hid",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "为什么大多数软件市场列表对开发人员来说毫无用处",
+        "url": "https://dev.to/esde_site/why-most-software-marketplace-listings-are-useless-to-developers-eb9",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "如何将时间转换为十进制小时：时间表计算背后的简单公式",
+        "url": "https://dev.to/joy_zhang_416a71128c140c9/how-to-convert-time-to-decimal-hours-the-simple-formula-behind-timesheet-calculations-47f1",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "自动重构：让维护成为一种习惯",
+        "url": "https://dev.to/robust_true_try/automated-refactoring-making-maintenance-a-habit-3dd3",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "十二个特工，一个记忆 - 自主特工舰队的持久召回",
+        "url": "https://dev.to/narko4u/twelve-agents-one-memory-persistent-recall-for-an-autonomous-agent-fleet-57j6",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "开发日志：2026-08-08 — 礼貌回答的存根，以及不存在的 CSS 属性",
+        "url": "https://dev.to/nasrulhazim/dev-log-2026-08-08-stubs-that-answer-politely-and-a-css-property-that-doesnt-exist-4ig2",
+        "source": "Dev.to",
         "score": 6.0,
         "heat": ""
       },
@@ -1204,160 +1197,6 @@
         "heat": ""
       },
       {
-        "title": "更多警察因滥用群体摄像系统而被解雇、调查或逮捕",
-        "url": "https://yro.slashdot.org/story/26/08/08/0453229/more-police-officers-fired-investigated-or-arrested-for-misusing-flock-camera-systems?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "美国首座电网规模钠离子电池厂首次接受大测试",
-        "url": "https://hardware.slashdot.org/story/26/08/08/1940232/americas-first-grid-scale-sodium-ion-battery-plant-gets-its-first-big-test?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "纸制品公司正在研究树木的替代品",
-        "url": "https://news.slashdot.org/story/26/08/08/065247/paper-goods-company-is-investigating-an-alternative-to-trees?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "微软、谷歌、亚马逊、Meta 和甲骨文预计明年负现金流将达 1250 亿美元",
-        "url": "https://developers.slashdot.org/story/26/08/08/1727226/microsoft-google-amazon-meta-and-oracle-expect-a-negative-cash-flow-of-125-billion-next-year?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "日本首相为审查日本无核武器政策敞开大门",
-        "url": "https://tech.slashdot.org/story/26/08/08/0217224/prime-minister-leaves-door-open-for-reviewing-policy-of-no-nuclear-weapons-in-japan?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "SpaceX 火箭月球坠毁前后的对比",
-        "url": "https://science.slashdot.org/story/26/08/08/0410218/before-and-after-views-of-spacex-rockets-moon-crash?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "NASA 找到了如何让已有 48 年历史的航海者 2 号探测器再运行一年",
-        "url": "https://science.slashdot.org/story/26/08/08/0415215/nasa-figured-out-how-to-keep-its-48-year-old-voyager-2-probe-running-for-yet-another-year?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "女子两次被误认为群体警报后，被警察用枪指着从车里拉出来",
-        "url": "https://yro.slashdot.org/story/26/08/08/042259/woman-pulled-from-car-at-gunpoint-by-police-after-mistaken-flock-alert---twice?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "特朗普政府将向德国公司支付 12 亿美元以停止美国风电项目",
-        "url": "https://hardware.slashdot.org/story/26/08/07/2157219/trump-administration-to-pay-german-firm-12-billion-to-halt-us-wind-projects?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "弗吉尼亚州州长将干预Dominion-NextEra合并",
-        "url": "https://news.slashdot.org/story/26/08/07/2142258/virginia-governor-to-intervene-in-dominion-nextera-merger?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "水务集团与 DEF CON 分支机构合作建设水观察中心",
-        "url": "https://it.slashdot.org/story/26/08/07/2137206/water-utilities-group-partners-with-def-con-offshoot-for-water-watch-center?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "框架通过受损的元数据库 BI 服务通知“所有客户”数据泄露",
-        "url": "https://yro.slashdot.org/story/26/08/07/1757230/framework-notifies-all-customers-of-a-data-breach-via-compromised-metabase-bi-service?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "61 篇博客文章来了解 Http",
-        "url": "https://hackernoon.com/61-blog-posts-to-learn-about-http?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "加密货币最终能像普通货币一样运作吗？",
-        "url": "https://hackernoon.com/can-crypto-finally-work-like-regular-money?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "The HackerNoon Newsletter: Can a VPN Replace a Browser Ad Blocker? (8/8/2026)",
-        "url": "https://hackernoon.com/8-8-2026-newsletter?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "122 篇博客文章来了解 Html5",
-        "url": "https://hackernoon.com/122-blog-posts-to-learn-about-html5?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "监控与......我的意思是和可观察性",
-        "url": "https://hackernoon.com/monitoring-versu-i-mean-and-observability?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "《蜘蛛侠：全新一天》值得去电影院观看吗？这是评论家和观众的想法",
-        "url": "https://hackernoon.com/is-spider-man-brand-new-day-worth-watching-in-theatres-heres-what-the-critics-and-audience-think?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "我反对七次接触销售顺序的理由",
-        "url": "https://hackernoon.com/my-case-against-the-seven-touch-sales-sequence?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "186 篇博客文章了解 Hackernoon 社区",
-        "url": "https://hackernoon.com/186-blog-posts-to-learn-about-hackernoon-community?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Gate DexBuilder Launches First Event Contracts Builder, Unveils $3 Million Grant Program",
-        "url": "https://hackernoon.com/gate-dexbuilder-launches-first-event-contracts-builder-unveils-$3-million-grant-program?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "The HackerNoon Newsletter: Designing an XP System for Real-Life Skills (8/7/2026)",
-        "url": "https://hackernoon.com/8-7-2026-newsletter?source=rss",
-        "source": "HackerNoon",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
         "title": "粉碎新泽西屋顶的陨石揭示了生命起源的线索",
         "url": "https://www.sciencedaily.com/releases/2026/08/260807035145.htm",
         "source": "Science Daily",
@@ -1463,6 +1302,258 @@
         "heat": ""
       },
       {
+        "title": "Slashdot Reader 为 iPhone 构建照片验证应用程序",
+        "url": "https://apple.slashdot.org/story/26/08/08/2328239/slashdot-reader-builds-a-photo-verification-app-for-iphones?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "更多警察因滥用群体摄像系统而被解雇、调查或逮捕",
+        "url": "https://yro.slashdot.org/story/26/08/08/0453229/more-police-officers-fired-investigated-or-arrested-for-misusing-flock-camera-systems?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "美国首座电网规模钠离子电池厂首次接受大测试",
+        "url": "https://hardware.slashdot.org/story/26/08/08/1940232/americas-first-grid-scale-sodium-ion-battery-plant-gets-its-first-big-test?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "纸制品公司正在研究树木的替代品",
+        "url": "https://news.slashdot.org/story/26/08/08/065247/paper-goods-company-is-investigating-an-alternative-to-trees?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "微软、谷歌、亚马逊、Meta 和甲骨文预计明年负现金流将达 1250 亿美元",
+        "url": "https://developers.slashdot.org/story/26/08/08/1727226/microsoft-google-amazon-meta-and-oracle-expect-a-negative-cash-flow-of-125-billion-next-year?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "日本首相为审查日本无核武器政策敞开大门",
+        "url": "https://tech.slashdot.org/story/26/08/08/0217224/prime-minister-leaves-door-open-for-reviewing-policy-of-no-nuclear-weapons-in-japan?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "SpaceX 火箭月球坠毁前后的对比",
+        "url": "https://science.slashdot.org/story/26/08/08/0410218/before-and-after-views-of-spacex-rockets-moon-crash?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "NASA 找到了如何让已有 48 年历史的航海者 2 号探测器再运行一年",
+        "url": "https://science.slashdot.org/story/26/08/08/0415215/nasa-figured-out-how-to-keep-its-48-year-old-voyager-2-probe-running-for-yet-another-year?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "女子两次被误认为群体警报后，被警察用枪指着从车里拉出来",
+        "url": "https://yro.slashdot.org/story/26/08/08/042259/woman-pulled-from-car-at-gunpoint-by-police-after-mistaken-flock-alert---twice?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "特朗普政府将向德国公司支付 12 亿美元以停止美国风电项目",
+        "url": "https://hardware.slashdot.org/story/26/08/07/2157219/trump-administration-to-pay-german-firm-12-billion-to-halt-us-wind-projects?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "弗吉尼亚州州长将干预Dominion-NextEra合并",
+        "url": "https://news.slashdot.org/story/26/08/07/2142258/virginia-governor-to-intervene-in-dominion-nextera-merger?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "水务集团与 DEF CON 分支机构合作建设水观察中心",
+        "url": "https://it.slashdot.org/story/26/08/07/2137206/water-utilities-group-partners-with-def-con-offshoot-for-water-watch-center?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "一些我喜欢的软件讲座",
+        "url": "https://char.lt/blog/2026/08/talks-i-like/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Nixpkgs核心团队已解散",
+        "url": "https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "robots.villas – RSS 到 Mastodon 的桥梁",
+        "url": "https://robot.villas",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "他们不再像 Sublime Text 那样了",
+        "url": "https://dbushell.com/2026/08/07/sublime-text/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "我是问题所在吗？采访另一个团队来找出答案",
+        "url": "https://www.macchaffee.com/blog/2026/am-i-the-problem/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "抖动的 QR 码",
+        "url": "https://www.andrewt.net/dithered-qr-codes/wtf/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Systemd Dynamic Users (2020)",
+        "url": "https://ethulhu.co.uk/systemd-dynamicuser",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "数着日子，重温",
+        "url": "https://dotat.at/@/2026-08-09-rata-die.html",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "OpenSSH Key Structure Guide",
+        "url": "https://sshref.dev/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "翱翔包管理器",
+        "url": "https://soar.qaidvoid.dev/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Livelymerge 中的对象模型",
+        "url": "https://www.inkandswitch.com/livelymerge/notebook/lm-03/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Fastlanes统一运输布局",
+        "url": "https://blog.dave.tf/post/fastlanes-utl/",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Multistack Concatenative Programming Languages",
+        "url": "https://www.sheeeeeeeep.art/multistack-catlangs.html",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Amiga August 2026 Update",
+        "url": "https://amiga.com/news/20260804-amiga-update",
+        "source": "Lobsters",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "61 篇博客文章来了解 Http",
+        "url": "https://hackernoon.com/61-blog-posts-to-learn-about-http?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "加密货币最终能像普通货币一样运作吗？",
+        "url": "https://hackernoon.com/can-crypto-finally-work-like-regular-money?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "The HackerNoon Newsletter: Can a VPN Replace a Browser Ad Blocker? (8/8/2026)",
+        "url": "https://hackernoon.com/8-8-2026-newsletter?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "122 篇博客文章来了解 Html5",
+        "url": "https://hackernoon.com/122-blog-posts-to-learn-about-html5?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "监控与......我的意思是和可观察性",
+        "url": "https://hackernoon.com/monitoring-versu-i-mean-and-observability?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "《蜘蛛侠：全新一天》值得去电影院观看吗？这是评论家和观众的想法",
+        "url": "https://hackernoon.com/is-spider-man-brand-new-day-worth-watching-in-theatres-heres-what-the-critics-and-audience-think?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "我反对七次接触销售顺序的理由",
+        "url": "https://hackernoon.com/my-case-against-the-seven-touch-sales-sequence?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "186 篇博客文章了解 Hackernoon 社区",
+        "url": "https://hackernoon.com/186-blog-posts-to-learn-about-hackernoon-community?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Gate DexBuilder Launches First Event Contracts Builder, Unveils $3 Million Grant Program",
+        "url": "https://hackernoon.com/gate-dexbuilder-launches-first-event-contracts-builder-unveils-$3-million-grant-program?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "The HackerNoon Newsletter: Designing an XP System for Real-Life Skills (8/7/2026)",
+        "url": "https://hackernoon.com/8-7-2026-newsletter?source=rss",
+        "source": "HackerNoon",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
         "title": "Meta 在针对社交媒体巨头的最大儿童安全裁决中被罚款 5.67 亿美元",
         "url": "https://www.bbc.co.uk/news/articles/cd7lz3wr2rlo?at_medium=RSS&at_campaign=rss",
         "source": "BBC Tech",
@@ -1501,97 +1592,6 @@
         "title": "Tech Life",
         "url": "https://www.bbc.co.uk/sounds/play/w3ct8jy7?at_medium=RSS&at_campaign=rss",
         "source": "BBC Tech",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "一些我喜欢的软件讲座",
-        "url": "https://char.lt/blog/2026/08/talks-i-like/",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Nixpkgs核心团队已解散",
-        "url": "https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "他们不再像 Sublime Text 那样了",
-        "url": "https://dbushell.com/2026/08/07/sublime-text/",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "我是问题所在吗？采访另一个团队来找出答案",
-        "url": "https://www.macchaffee.com/blog/2026/am-i-the-problem/",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "robots.villas – RSS 到 Mastodon 的桥梁",
-        "url": "https://robot.villas",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Amiga August 2026 Update",
-        "url": "https://amiga.com/news/20260804-amiga-update",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "翱翔包管理器",
-        "url": "https://soar.qaidvoid.dev/",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "用于 Jolt 的程序映像和可移植方案后端",
-        "url": "https://yogthos.net/posts/2026-08-07-portable-jolt.html",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Livelymerge 中的对象模型",
-        "url": "https://www.inkandswitch.com/livelymerge/notebook/lm-03/",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "“永别了，埃陶因·什鲁德鲁”",
-        "url": "https://archive.org/details/FarewellEtaoinShrdlu",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "耻辱大会堂：CPU 性能竞相触底",
-        "url": "https://github.com/xoreaxeaxeax/asm-hall-of-shame",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Systemd Dynamic Users (2020)",
-        "url": "https://ethulhu.co.uk/systemd-dynamicuser",
-        "source": "Lobsters",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "修订提示改进了工业法学硕士流程",
-        "url": "https://revisionprompting.info/",
-        "source": "Lobsters",
         "score": 6.0,
         "heat": ""
       },
@@ -1688,6 +1688,13 @@
       }
     ],
     "AI/Frontier": [
+      {
+        "title": "OpenAI 桌面端 ChatGPT 上线语音交互功能，可语音操控电脑执行多步骤任务",
+        "url": "https://www.ithome.com/0/987/452.htm",
+        "source": "AI Hot",
+        "score": 10,
+        "heat": ""
+      },
       {
         "title": "OpenAI 意外攻击 Hugging Face 事件时间线现已整理出炉",
         "url": "https://simonwillison.net/2026/Aug/7/openai-timeline",
@@ -1822,13 +1829,6 @@
         "heat": ""
       },
       {
-        "title": "HPC-Ops × SGLang：腾讯混元开源高性能 Attention、Router GEMM 与 MoE 算子",
-        "url": "https://www.lmsys.org/blog/2026-08-07-hpc-ops-sglang",
-        "source": "AI Hot",
-        "score": 9.5,
-        "heat": ""
-      },
-      {
         "title": "Grok Imagine 图像编辑迎来重大升级",
         "url": "https://x.com/elonmusk/status/2086127247077843282",
         "source": "AI Hot",
@@ -1901,30 +1901,16 @@
     ],
     "Chinese Tech": [
       {
-        "title": "DeepSeek 预计要涨价，而且涨幅较大，你怎么看？",
-        "url": "https://juejin.cn/post/7670739142733381672",
-        "source": "Juejin",
+        "title": "OpenAI给10亿用户免费换上GPT-5.6",
+        "url": "https://www.infoq.cn/article/RXRuR3TN9msNMAUWRtCl?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "速度太快了！本地可以跑 DeepSeek-V4-Flash 了",
-        "url": "https://juejin.cn/post/7670558003235717135",
-        "source": "Juejin",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "从“白菜价”到大幅涨价，DeepSeek正在经历什么？",
-        "url": "https://juejin.cn/post/7670757585832820776",
-        "source": "Juejin",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "AI 时代，你的编程能力在第几层？我敢说，大多数人卡在第一层",
-        "url": "https://juejin.cn/post/7670475896516952115",
-        "source": "Juejin",
+        "title": "从失控到可控：基于系统控制论的 Agent 安全防御体系设计与实践｜AICon深圳",
+        "url": "https://www.infoq.cn/article/MMh1pkuNSPDlUAtuRelk?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
         "score": 9.0,
         "heat": ""
       },
@@ -1971,9 +1957,23 @@
         "heat": ""
       },
       {
-        "title": "HarmonyOS 7（API 26）Beta 2 新特性解读：AI 赋能应用故障分析，助力应用稳定性问题发现、定位与修复",
-        "url": "https://www.infoq.cn/article/FGMkg9BOrQ7vg5ubBp4U?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
+        "title": "DeepSeek 预计要涨价，而且涨幅较大，你怎么看？",
+        "url": "https://juejin.cn/post/7670739142733381672",
+        "source": "Juejin",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "速度太快了！本地可以跑 DeepSeek-V4-Flash 了",
+        "url": "https://juejin.cn/post/7670558003235717135",
+        "source": "Juejin",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "从“白菜价”到大幅涨价，DeepSeek正在经历什么？",
+        "url": "https://juejin.cn/post/7670757585832820776",
+        "source": "Juejin",
         "score": 9.0,
         "heat": ""
       },
@@ -2048,16 +2048,16 @@
         "heat": ""
       },
       {
-        "title": "堆了 20 套主题、10+ 组件，用户还是用不出来？我给设计 Skill 加了「自动驾驶」",
-        "url": "https://juejin.cn/post/7670092136000716843",
-        "source": "Juejin",
+        "title": "黎曼动力携手光轮智能与诺亦腾机器人，推进2026年百万小时具身智能数据建设",
+        "url": "https://www.infoq.cn/article/hI2W3XTUo2GNylxSXDC8?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
         "score": 8.0,
         "heat": ""
       },
       {
-        "title": "黎曼动力携手光轮智能与诺亦腾机器人，推进2026年百万小时具身智能数据建设",
-        "url": "https://www.infoq.cn/article/hI2W3XTUo2GNylxSXDC8?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
+        "title": "堆了 20 套主题、10+ 组件，用户还是用不出来？我给设计 Skill 加了「自动驾驶」",
+        "url": "https://juejin.cn/post/7670092136000716843",
+        "source": "Juejin",
         "score": 8.0,
         "heat": ""
       },
@@ -2073,13 +2073,6 @@
         "url": "https://www.ifanr.com/1674265?utm_source=rss&utm_medium=rss&utm_campaign=",
         "source": "ifanr",
         "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "连接池参数治理-HikariCP怎么配才稳",
-        "url": "https://juejin.cn/post/7670453050885472266",
-        "source": "Juejin",
-        "score": 7.5,
         "heat": ""
       },
       {
@@ -2104,13 +2097,6 @@
         "heat": ""
       },
       {
-        "title": "HarmonyOS 7（API 26）Beta 2 新能力解读：平行视界开启大屏多任务新体验",
-        "url": "https://www.infoq.cn/article/d6ypyGIvilRgHz1MJaTR?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
         "title": "AWS Lambda 取消代码存储配额，别误会：函数大小限制没变",
         "url": "https://www.infoq.cn/article/OG03ezJaBkdOd1G3rc1b?utm_source=rss&utm_medium=article",
         "source": "InfoQ CN",
@@ -2118,16 +2104,23 @@
         "heat": ""
       },
       {
-        "title": "FFmpeg 9.0正式发布：代号“Lei”，以纪念中国开发者雷霄骅",
-        "url": "https://juejin.cn/post/7670447828808007718",
+        "title": "前端路由（一）：二十行代码实现 Hash 路由",
+        "url": "https://juejin.cn/post/7670739142733168680",
         "source": "Juejin",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "告别旧 Renderer！.NET MAUI 正式迈向 Handler 架构时代",
+        "url": "https://www.infoq.cn/article/sbMEk7BQoWXRcl5ZFvkD?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "竹知了很火？于是我用Cocos做了一个",
-        "url": "https://juejin.cn/post/7670488556980469786",
-        "source": "Juejin",
+        "title": "Demo 能跑，项目却落不了地：企业真正缺的是 FDE 能力",
+        "url": "https://www.infoq.cn/article/ZvwSZ2U61Q8uBMerbYD9?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
         "score": 6.0,
         "heat": ""
       },
@@ -2146,15 +2139,15 @@
         "heat": ""
       },
       {
-        "title": "为什么在 Flowable 时代还要写一个轻量工作流引擎",
-        "url": "https://juejin.cn/post/7670053235008258099",
+        "title": "launch 不是用来切线程的：为什么我越来越少在它后面写 Dispatchers.IO",
+        "url": "https://juejin.cn/post/7670383736383832110",
         "source": "Juejin",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "launch 不是用来切线程的：为什么我越来越少在它后面写 Dispatchers.IO",
-        "url": "https://juejin.cn/post/7670383736383832110",
+        "title": "为什么在 Flowable 时代还要写一个轻量工作流引擎",
+        "url": "https://juejin.cn/post/7670053235008258099",
         "source": "Juejin",
         "score": 6.0,
         "heat": ""
@@ -2174,13 +2167,6 @@
         "heat": ""
       },
       {
-        "title": "Android 图形系统全景",
-        "url": "https://juejin.cn/post/7670404221932306474",
-        "source": "Juejin",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
         "title": "接手新项目不用硬啃源码，我的 TRAE Work 快速上手实战工作流",
         "url": "https://juejin.cn/post/7671107889683087366",
         "source": "Juejin",
@@ -2188,15 +2174,15 @@
         "heat": ""
       },
       {
-        "title": "useRef + Web Worker：React 中的耗时计算不卡页面",
-        "url": "https://juejin.cn/post/7671152660225622026",
+        "title": "我用 Codex 自动剪视频，全靠这 9 个 视频 skills",
+        "url": "https://juejin.cn/post/7670567758656962595",
         "source": "Juejin",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "我用 Codex 自动剪视频，全靠这 9 个 视频 skills",
-        "url": "https://juejin.cn/post/7670567758656962595",
+        "title": "useRef + Web Worker：React 中的耗时计算不卡页面",
+        "url": "https://juejin.cn/post/7671152660225622026",
         "source": "Juejin",
         "score": 6.0,
         "heat": ""
@@ -2216,16 +2202,30 @@
         "heat": ""
       },
       {
-        "title": "告别旧 Renderer！.NET MAUI 正式迈向 Handler 架构时代",
-        "url": "https://www.infoq.cn/article/sbMEk7BQoWXRcl5ZFvkD?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
+        "title": "Vue3+Cesium实现阴天乌云+下雨天气特效",
+        "url": "https://juejin.cn/post/7670747041917337600",
+        "source": "Juejin",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "Demo 能跑，项目却落不了地：企业真正缺的是 FDE 能力",
-        "url": "https://www.infoq.cn/article/ZvwSZ2U61Q8uBMerbYD9?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
+        "title": "我重写了自己用了两年的防抖节流Hook——发现里面藏着3个隐藏bug",
+        "url": "https://juejin.cn/post/7670703945447505983",
+        "source": "Juejin",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Boolean 变量到底该怎么命名？",
+        "url": "https://juejin.cn/post/7670447828809302054",
+        "source": "Juejin",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "2.0  React Router 前端路由深度解析：从传统后端路由到现代 SPA 的完整演进",
+        "url": "https://juejin.cn/post/7670920981116239891",
+        "source": "Juejin",
         "score": 6.0,
         "heat": ""
       },
@@ -2372,6 +2372,13 @@
         "heat": ""
       },
       {
+        "title": "德国政界人士赞扬公交车司机在机场使用爆炸性无人机的冒险行为",
+        "url": "https://www.cbc.ca/news/world/german-leipzig-halle-airport-drone-incident-9.7299265?cmp=rss",
+        "source": "CBC World",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
         "title": "德国武装部队称，两架无人机被发现飞越该国西部的军事基地",
         "url": "http://www.euronews.com/my-europe/2026/08/08/two-drones-spottled-flying-over-military-base-in-the-western-part-of-the-country-german-ar",
         "source": "Euronews",
@@ -2382,20 +2389,6 @@
         "title": "乌克兰无人机在罗马尼亚和保加利亚边境附近爆炸，基辅承诺进行调查",
         "url": "http://www.euronews.com/my-europe/2026/08/08/unidentified-drone-explodes-in-bulgarian-airspace-close-to-romanian-border",
         "source": "Euronews",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "数码相机和有线耳机又回来了，而且“更真实”",
-        "url": "https://www.bbc.co.uk/news/articles/cly599xlllyo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "德国政界人士赞扬公交车司机在机场使用爆炸性无人机的冒险行为",
-        "url": "https://www.cbc.ca/news/world/german-leipzig-halle-airport-drone-incident-9.7299265?cmp=rss",
-        "source": "CBC World",
         "score": 6.5,
         "heat": ""
       },
@@ -2505,93 +2498,163 @@
         "heat": ""
       },
       {
-        "title": "婚礼在丰沙尔大教堂举行，但不是克里斯蒂亚诺和乔治娜的婚礼，令数百人失望",
-        "url": "http://www.euronews.com/2026/08/08/wedding-at-funchal-cathedral-but-not-cristiano-and-georginas-to-the-disappointment-of-hund",
-        "source": "Euronews",
+        "title": "安迪·伯纳姆 (Andy Burnham) 将踏上英国生活成本之旅",
+        "url": "https://www.bbc.co.uk/news/articles/c0l5j8y388lo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "加尔达湖上方山上发生重大野火：至少200名居民和游客疏散",
-        "url": "http://www.euronews.com/my-europe/2026/08/08/major-wildfire-in-hills-above-lake-garda-at-least-200-residents-and-tourists-evacuated",
-        "source": "Euronews",
+        "title": "国际足联批评驱逐主席因凡蒂诺的活动",
+        "url": "https://www.bbc.co.uk/sport/football/articles/cj03drn965do?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "最新消息公告 | 2026 年 8 月 8 日 – 晚上",
-        "url": "http://www.euronews.com/video/2026/08/08/latest-news-bulletin-august-8th-2026-evening",
-        "source": "Euronews",
+        "title": "结婚一个月后被杀——为什么安德鲁·哈珀警官的死令这么多人感动",
+        "url": "https://www.bbc.co.uk/news/articles/c4gvrnyrjn0o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "塞尔维亚总统武契奇以盛大场面接待泽伦斯基，向布鲁塞尔和莫斯科发出信号",
-        "url": "http://www.euronews.com/my-europe/2026/08/08/serbias-vucic-sends-signal-to-brussels-and-moscow-by-hosting-zelenskyy-with-pomp-and-circu",
-        "source": "Euronews",
+        "title": "以色列被指控将约旦河西岸古代遗址的考古武器化",
+        "url": "https://www.bbc.co.uk/news/articles/c20d8qre98do?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "26 岁男子在鹿特丹因“随意”刺伤两人受伤而被捕",
-        "url": "http://www.euronews.com/my-europe/2026/08/08/man-26-arrested-in-rotterdam-after-two-injured-in-random-stabbing-spree",
-        "source": "Euronews",
+        "title": "澳大利亚是地球上的灭绝热点，但一种动物带来了一线希望",
+        "url": "https://www.bbc.co.uk/news/articles/c9q94lxqrzzo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "白俄罗斯加入俄罗斯的信息自由战争",
-        "url": "http://www.euronews.com/my-europe/2026/08/08/belarus-joins-russias-war-on-freedom-of-information",
-        "source": "Euronews",
+        "title": "随着第五次热浪的形成，英国更多地区可能会陷入干旱",
+        "url": "https://www.bbc.co.uk/weather/articles/c9d8vwg0197o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "蒂萨党团提名安德拉斯·巴卡为匈牙利新总统",
-        "url": "http://www.euronews.com/my-europe/2026/08/08/tisza-party-group-nominates-andras-baka-for-new-hungarian-president",
-        "source": "Euronews",
+        "title": "凯莉·布莱特 (Kellie Bright) 离开东区 13 年后",
+        "url": "https://www.bbc.co.uk/news/articles/cre40875r9vo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "约 34,000 名歌迷参加 Kanye West 在阿尔加维体育场举行的演唱会",
-        "url": "http://www.euronews.com/culture/2026/08/08/around-34000-fans-attend-kanye-west-concert-at-algarve-stadium",
-        "source": "Euronews",
+        "title": "赞达亚在红地毯上看到我，她的下巴都惊掉了——我仍然感到震惊",
+        "url": "https://www.bbc.co.uk/news/articles/cq56j53g9yeo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "最新消息公告 | 2026 年 8 月 8 日 – 中午",
-        "url": "http://www.euronews.com/video/2026/08/08/latest-news-bulletin-august-8th-2026-midday",
-        "source": "Euronews",
+        "title": "减肥药物如何改变与酒精的关系",
+        "url": "https://www.bbc.co.uk/news/articles/cr7kmlg0lxpo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "德拉埃斯普里埃拉就职后，美国拟向哥伦比亚提供10亿美元援助",
-        "url": "http://www.euronews.com/2026/08/08/us-intends-to-send-1-billion-in-aid-to-colombia-following-de-la-espriellas-inauguration",
-        "source": "Euronews",
+        "title": "在世界各地追逐日食是什么感觉",
+        "url": "https://www.bbc.co.uk/news/articles/cd69wn5ny3eo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "罗马-马德里行：西班牙如何检查来自意大利的旅客",
-        "url": "http://www.euronews.com/travel/2026/08/08/rome-madrid-row-how-spain-checks-travellers-arriving-from-italy",
-        "source": "Euronews",
+        "title": "成绩公布日之前你的大学清算生存指南",
+        "url": "https://www.bbc.co.uk/news/articles/c20dpj3peglo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "美国研究发现，随着气候变化恶化，野火烟雾对孕妇构成的风险越来越大",
-        "url": "http://www.euronews.com/health/2026/08/08/wildfire-smoke-poses-growing-risk-to-pregnant-women-as-climate-change-worsens-us-study-fin",
-        "source": "Euronews",
+        "title": "原始图像，无滤镜：为什么 MySpace 粉丝希望重新推出它",
+        "url": "https://www.bbc.co.uk/news/articles/c4g64152v71o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "低多瑙河水揭示了河床上的国防军摩托车",
-        "url": "http://www.euronews.com/culture/2026/08/08/low-danube-water-reveals-wehrmacht-motorbike-on-riverbed",
-        "source": "Euronews",
+        "title": "报纸：“顶尖大学降低入学成绩”和“欧足联准备对因凡蒂诺进行调查”",
+        "url": "https://www.bbc.co.uk/news/articles/czek0nw2g1xo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "班克斯作品的公众花费近 15 万英镑",
+        "url": "https://www.bbc.co.uk/news/articles/cx2vnny7j5zo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "洛杉矶仓库大火中大量腐烂的食物散发出难以忍受的恶臭",
+        "url": "https://www.bbc.co.uk/news/articles/c2elpz33zp2o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "新墨西哥州法官责令 Meta 支付 5.67 亿美元罚款",
+        "url": "https://www.nytimes.com/2026/08/06/technology/meta-new-mexico-child-safety.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "亚马逊新数据中心引发人们担心它将成为美国污染最严重的发电厂",
+        "url": "https://www.nytimes.com/2026/08/08/climate/amazon-data-center-texas-pollution.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "F.C.C.取消广播电视所有权限制",
+        "url": "https://www.nytimes.com/2026/08/06/technology/fcc-broadcast-tv-ownership.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "法国主播因踢直播死亡相关案件被定罪",
+        "url": "https://www.nytimes.com/2026/08/06/world/europe/french-streamers-kick-death-convicted.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "使用这些免费应用程序关注市场并跟踪股票",
+        "url": "https://www.nytimes.com/2026/08/06/technology/personaltech/finance-stocks-apps.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "TikTok 解雇 250 名办公室员工，其中包括内容审核",
+        "url": "https://www.nytimes.com/2026/08/05/technology/tiktok-layoffs-nashville.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "新泽西州在诉讼中指控亚马逊克扣送货司机的工资",
+        "url": "https://www.nytimes.com/2026/08/04/technology/amazon-nj-lawsuit.html",
+        "source": "NYTimes Tech",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "法院裁定，男子声称捷豹刹车失灵是为了避免汽车付款的诈骗",
+        "url": "https://www.nytimes.com/2026/08/04/world/europe/runaway-car-jaguar-uk.html",
+        "source": "NYTimes Tech",
         "score": 5.0,
         "heat": ""
       },
@@ -2701,265 +2764,6 @@
         "heat": ""
       },
       {
-        "title": "新墨西哥州法官责令 Meta 支付 5.67 亿美元罚款",
-        "url": "https://www.nytimes.com/2026/08/06/technology/meta-new-mexico-child-safety.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "亚马逊新数据中心引发人们担心它将成为美国污染最严重的发电厂",
-        "url": "https://www.nytimes.com/2026/08/08/climate/amazon-data-center-texas-pollution.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "F.C.C.取消广播电视所有权限制",
-        "url": "https://www.nytimes.com/2026/08/06/technology/fcc-broadcast-tv-ownership.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "法国主播因踢直播死亡相关案件被定罪",
-        "url": "https://www.nytimes.com/2026/08/06/world/europe/french-streamers-kick-death-convicted.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "使用这些免费应用程序关注市场并跟踪股票",
-        "url": "https://www.nytimes.com/2026/08/06/technology/personaltech/finance-stocks-apps.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "TikTok 解雇 250 名办公室员工，其中包括内容审核",
-        "url": "https://www.nytimes.com/2026/08/05/technology/tiktok-layoffs-nashville.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "新泽西州在诉讼中指控亚马逊克扣送货司机的工资",
-        "url": "https://www.nytimes.com/2026/08/04/technology/amazon-nj-lawsuit.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "法院裁定，男子声称捷豹刹车失灵是为了避免汽车付款的诈骗",
-        "url": "https://www.nytimes.com/2026/08/04/world/europe/runaway-car-jaguar-uk.html",
-        "source": "NYTimes Tech",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "西班牙将对来自意大利的游客实行临时边境检查",
-        "url": "https://www.theguardian.com/world/2026/aug/07/spain-to-introduce-temporary-border-checks-on-visitors-from-italy",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "法官批准特朗普终止南苏丹 TPS 保护的努力",
-        "url": "https://www.theguardian.com/us-news/2026/aug/07/judge-trump-south-sudan-tps",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "官员称刚果民主共和国大规模爆发的埃博拉病毒可能正在变异",
-        "url": "https://www.theguardian.com/world/2026/aug/06/ebola-virus-drc-mutating",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "美国将关闭五个领事馆，因批评人士担心中国可能填补外交真空",
-        "url": "https://www.theguardian.com/us-news/2026/aug/05/us-state-department-consulate-closures",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "乌干达顶级足球运动员被持铺路石的劫匪杀害",
-        "url": "https://www.theguardian.com/football/2026/aug/06/top-uganda-footballer-killed-robbery-kampala",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "“我无法呼吸”：野火烟雾造成的致命健康负担",
-        "url": "https://www.theguardian.com/news/ng-interactive/2026/aug/08/wildfire-smoke-unknown-health-impacts",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "新右翼总统承诺打击毒品 美国承诺向哥伦比亚提供 10 亿美元安全援助",
-        "url": "https://www.theguardian.com/world/2026/aug/08/us-promises-1bn-in-security-aid-to-colombia-as-new-rightwing-president-pledges-drugs-crackdown",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "被控在墨西哥杀害三人的美国警察在边境被捕",
-        "url": "https://www.theguardian.com/us-news/2026/aug/07/chad-eberle-arrested-police-killings",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "哥伦比亚濒临崩溃：ELN游击队准备重返战争",
-        "url": "https://www.theguardian.com/world/ng-interactive/2026/aug/07/colombia-on-the-brink-eln-guerrilla-group-prepares-for-return-to-war",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "美国取消 TPS 保护后，海地人面临逮捕和驱逐出境",
-        "url": "https://www.theguardian.com/us-news/2026/aug/07/haitians-us-deportation-tps-immigration",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "泰国校园枪击案：警方称，包括疑似袭击者在内的八人死亡",
-        "url": "https://www.theguardian.com/world/2026/aug/07/thailand-school-shooting-debsirin-nonthaburi-bangkok",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "“妈妈咪呀！”：特朗普关税退款导致任天堂利润飙升 53%",
-        "url": "https://www.theguardian.com/games/2026/aug/06/trump-tariffs-refund-fuels-profit-spike-nintendo",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "“坦克日”活动引发公愤后，韩国星巴克遭警方突击搜查",
-        "url": "https://www.theguardian.com/world/2026/aug/06/starbucks-korea-raided-police-tank-day-campaign-gwangju-massacre",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "新西兰首都迎来罕见降雪，南部城市居民在世界上最陡的街道上滑雪",
-        "url": "https://www.theguardian.com/world/2026/aug/05/new-zealand-capital-rare-snow-wellington-dunedin-ski-down-worlds-steepest-street",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "“我们的新冠军”：亚历克斯·埃拉历史性胜利后，菲律宾掀起网球热潮",
-        "url": "https://www.theguardian.com/world/2026/aug/05/alex-eala-philippines-tennis-fever",
-        "source": "The Guardian",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "警方被指控在凶手和强奸犯身上“一连串失败”，敦促受害者挺身而出",
-        "url": "https://www.bbc.co.uk/news/articles/cewr8egkelwo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "据英国广播公司了解，威德科姆警方重新启动对法拉奇家中事件的调查",
-        "url": "https://www.bbc.co.uk/news/articles/c62qrvd9303o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "追捕幽灵：BBC 如何在长达数月的追捕后追踪一名在逃的间谍头子",
-        "url": "https://www.bbc.co.uk/news/articles/c4gyrzn8p94o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "阿曼表示霍尔木兹会谈积极，伊朗警告协议不会打开海峡",
-        "url": "https://www.bbc.co.uk/news/articles/c934j5y2lq9o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "自从穆雷尔因挪用苏格兰民族党资金入狱后，斯特金就没有和他说过话",
-        "url": "https://www.bbc.co.uk/news/articles/cdx8jxqxyw0o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "观看：反对派议员向科索沃代理总理扔鸡蛋的时刻",
-        "url": "https://www.bbc.co.uk/news/videos/cvg8je12xxeo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "麦当娜向“天才、超凡脱俗”的制作人威廉·奥尔比特致敬",
-        "url": "https://www.bbc.co.uk/news/articles/cewr8wel4z8o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "我进行了全身 MOT，结果令人震惊",
-        "url": "https://www.bbc.co.uk/news/articles/cx2dj82v1rko?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "他在珠穆朗玛峰被冻了30年，现在“绿靴子”可能终于回家了",
-        "url": "https://www.bbc.co.uk/news/articles/cz05xn35xj7o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "前英国奥运选手如何遏制他的色情问题 - 以及恢复的迹象和步骤",
-        "url": "https://www.bbc.co.uk/news/articles/c89n8j5e32do?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "随着休达移民涌入的争端加剧，西班牙对意大利实施边境管制",
-        "url": "https://www.bbc.co.uk/news/articles/c5yv5l6yr5ko?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "特朗普前律师托德·布兰奇以微弱优势当选美国司法部长",
-        "url": "https://www.bbc.co.uk/news/articles/cewr898jy8go?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "梅西父亲豪尔赫因病去世，享年68岁",
-        "url": "https://www.bbc.co.uk/sport/football/articles/c70gn3w5ek5o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "严格舞者 Ola 和 James Jordan 在结婚 23 年后分居",
-        "url": "https://www.bbc.co.uk/news/articles/cy9wyzrn57wo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
         "title": "在美国北部边境，威胁不是单向的",
         "url": "https://www.cbc.ca/news/world/canada-u-s-border-tour-detroit-windsor-9.7300262?cmp=rss",
         "source": "CBC World",
@@ -3058,6 +2862,20 @@
         "heat": ""
       },
       {
+        "title": "日食将于下周发生。这是你需要知道的",
+        "url": "https://www.npr.org/2026/08/08/nx-s1-5925939/solar-eclipse-august-2026",
+        "source": "NPR",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "霍尔木兹海峡油轮水手仍面临危险",
+        "url": "https://www.npr.org/2026/08/08/nx-s1-5923592/tanker-sailors-still-face-danger-in-the-strait-of-hormuz",
+        "source": "NPR",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
         "title": "乌克兰哀悼“灵魂收藏家”奥莱克西·尤可夫在战争死难者中丧生",
         "url": "https://www.npr.org/2026/08/08/nx-s1-5925887/ukraine-mourns-oleksiy-yukov",
         "source": "NPR",
@@ -3114,28 +2932,203 @@
         "heat": ""
       },
       {
-        "title": "参议院投票确认托德·布兰奇担任司法部长",
-        "url": "https://www.npr.org/2026/08/08/g-s1-137631/senate-confirms-todd-blanche-attorney-general",
-        "source": "NPR",
+        "title": "婚礼在丰沙尔大教堂举行，但不是克里斯蒂亚诺和乔治娜的婚礼，令数百人失望",
+        "url": "http://www.euronews.com/2026/08/08/wedding-at-funchal-cathedral-but-not-cristiano-and-georginas-to-the-disappointment-of-hund",
+        "source": "Euronews",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "亚特兰大疾病预防控制中心的工作人员还记得一年前的枪击案受害者小罗伯特·肯尼迪。参加",
-        "url": "https://www.npr.org/2026/08/07/nx-s1-5924799/staff-at-the-cdc-in-atlanta-remember-victim-of-shooting-a-year-ago-as-rfk-jr-attends",
-        "source": "NPR",
+        "title": "加尔达湖上方山上发生重大野火：至少200名居民和游客疏散",
+        "url": "http://www.euronews.com/my-europe/2026/08/08/major-wildfire-in-hills-above-lake-garda-at-least-200-residents-and-tourists-evacuated",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "最新消息公告 | 2026 年 8 月 8 日 – 晚上",
+        "url": "http://www.euronews.com/video/2026/08/08/latest-news-bulletin-august-8th-2026-evening",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "塞尔维亚总统武契奇以盛大场面接待泽伦斯基，向布鲁塞尔和莫斯科发出信号",
+        "url": "http://www.euronews.com/my-europe/2026/08/08/serbias-vucic-sends-signal-to-brussels-and-moscow-by-hosting-zelenskyy-with-pomp-and-circu",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "26 岁男子在鹿特丹因“随意”刺伤两人受伤而被捕",
+        "url": "http://www.euronews.com/my-europe/2026/08/08/man-26-arrested-in-rotterdam-after-two-injured-in-random-stabbing-spree",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "白俄罗斯加入俄罗斯的信息自由战争",
+        "url": "http://www.euronews.com/my-europe/2026/08/08/belarus-joins-russias-war-on-freedom-of-information",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "蒂萨党团提名安德拉斯·巴卡为匈牙利新总统",
+        "url": "http://www.euronews.com/my-europe/2026/08/08/tisza-party-group-nominates-andras-baka-for-new-hungarian-president",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "约 34,000 名歌迷参加 Kanye West 在阿尔加维体育场举行的演唱会",
+        "url": "http://www.euronews.com/culture/2026/08/08/around-34000-fans-attend-kanye-west-concert-at-algarve-stadium",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "最新消息公告 | 2026 年 8 月 8 日 – 中午",
+        "url": "http://www.euronews.com/video/2026/08/08/latest-news-bulletin-august-8th-2026-midday",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "德拉埃斯普里埃拉就职后，美国拟向哥伦比亚提供10亿美元援助",
+        "url": "http://www.euronews.com/2026/08/08/us-intends-to-send-1-billion-in-aid-to-colombia-following-de-la-espriellas-inauguration",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "罗马-马德里行：西班牙如何检查来自意大利的旅客",
+        "url": "http://www.euronews.com/travel/2026/08/08/rome-madrid-row-how-spain-checks-travellers-arriving-from-italy",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "美国研究发现，随着气候变化恶化，野火烟雾对孕妇构成的风险越来越大",
+        "url": "http://www.euronews.com/health/2026/08/08/wildfire-smoke-poses-growing-risk-to-pregnant-women-as-climate-change-worsens-us-study-fin",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "低多瑙河水揭示了河床上的国防军摩托车",
+        "url": "http://www.euronews.com/culture/2026/08/08/low-danube-water-reveals-wehrmacht-motorbike-on-riverbed",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "西班牙将对来自意大利的游客实行临时边境检查",
+        "url": "https://www.theguardian.com/world/2026/aug/07/spain-to-introduce-temporary-border-checks-on-visitors-from-italy",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "法官批准特朗普终止南苏丹 TPS 保护的努力",
+        "url": "https://www.theguardian.com/us-news/2026/aug/07/judge-trump-south-sudan-tps",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "官员称刚果民主共和国大规模爆发的埃博拉病毒可能正在变异",
+        "url": "https://www.theguardian.com/world/2026/aug/06/ebola-virus-drc-mutating",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "美国将关闭五个领事馆，因批评人士担心中国可能填补外交真空",
+        "url": "https://www.theguardian.com/us-news/2026/aug/05/us-state-department-consulate-closures",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "乌干达顶级足球运动员被持铺路石的劫匪杀害",
+        "url": "https://www.theguardian.com/football/2026/aug/06/top-uganda-footballer-killed-robbery-kampala",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "“我无法呼吸”：野火烟雾造成的致命健康负担",
+        "url": "https://www.theguardian.com/news/ng-interactive/2026/aug/08/wildfire-smoke-unknown-health-impacts",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "新右翼总统承诺打击毒品 美国承诺向哥伦比亚提供 10 亿美元安全援助",
+        "url": "https://www.theguardian.com/world/2026/aug/08/us-promises-1bn-in-security-aid-to-colombia-as-new-rightwing-president-pledges-drugs-crackdown",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "被控在墨西哥杀害三人的美国警察在边境被捕",
+        "url": "https://www.theguardian.com/us-news/2026/aug/07/chad-eberle-arrested-police-killings",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "哥伦比亚濒临崩溃：ELN游击队准备重返战争",
+        "url": "https://www.theguardian.com/world/ng-interactive/2026/aug/07/colombia-on-the-brink-eln-guerrilla-group-prepares-for-return-to-war",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "美国取消 TPS 保护后，海地人面临逮捕和驱逐出境",
+        "url": "https://www.theguardian.com/us-news/2026/aug/07/haitians-us-deportation-tps-immigration",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "泰国校园枪击案造成12岁儿童死亡 警方称死亡人数上升至9人",
+        "url": "https://www.theguardian.com/world/2026/aug/09/thailand-school-shooting-toll-rises-to-nine-after-12-year-old-dies-police-say",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "泰国校园枪击案：警方称，包括疑似袭击者在内的八人死亡",
+        "url": "https://www.theguardian.com/world/2026/aug/07/thailand-school-shooting-debsirin-nonthaburi-bangkok",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "“妈妈咪呀！”：特朗普关税退款导致任天堂利润飙升 53%",
+        "url": "https://www.theguardian.com/games/2026/aug/06/trump-tariffs-refund-fuels-profit-spike-nintendo",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "“坦克日”活动引发公愤后，韩国星巴克遭警方突击搜查",
+        "url": "https://www.theguardian.com/world/2026/aug/06/starbucks-korea-raided-police-tank-day-campaign-gwangju-massacre",
+        "source": "The Guardian",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "新西兰首都迎来罕见降雪，南部城市居民在世界上最陡的街道上滑雪",
+        "url": "https://www.theguardian.com/world/2026/aug/05/new-zealand-capital-rare-snow-wellington-dunedin-ski-down-worlds-steepest-street",
+        "source": "The Guardian",
         "score": 5.0,
         "heat": ""
       }
     ],
     "Finance": [
-      {
-        "title": "爆仓之后，资本反而扑向\"AI股神\"",
-        "url": "https://wallstreetcn.com/articles/3778984",
-        "source": "WallstreetCN Hot",
-        "score": 8.0,
-        "heat": ""
-      },
       {
         "title": "英伟达盯上OpenAI“星际之门”背后的电力商，30亿美元直接入股",
         "url": "https://wallstreetcn.com/articles/3778988",
@@ -3144,8 +3137,22 @@
         "heat": ""
       },
       {
-        "title": "Apollo首席经济学家：AI烧钱速度创历史之最，警惕“次贷危机式”逆转冲击",
-        "url": "https://wallstreetcn.com/articles/3778982",
+        "title": "中国7月CPI同比涨幅收窄至0.5%，PPI同比上涨3.5%，AI驱动平板电脑价格环比上涨11.3%",
+        "url": "https://wallstreetcn.com/articles/3778996",
+        "source": "WallstreetCN Hot",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "AI应用公司毛利故事遭遇首次\"体检\"：Canva主动降速、Figma自吞推理成本 ",
+        "url": "https://wallstreetcn.com/articles/3778990",
+        "source": "WallstreetCN Hot",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Agentic AI新趋势：亚马逊AWS出现“CPU短缺” ",
+        "url": "https://wallstreetcn.com/articles/3778989",
         "source": "WallstreetCN Hot",
         "score": 8.0,
         "heat": ""
@@ -3179,27 +3186,6 @@
         "heat": ""
       },
       {
-        "title": "非农爆冷打击加息预期，标普道指收创新高，本周美油跌近8%、期金反弹超7%",
-        "url": "https://wallstreetcn.com/articles/3778924",
-        "source": "WallstreetCN Hot",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "AAOI业绩爆了，带飞整个光通信",
-        "url": "https://wallstreetcn.com/articles/3778985",
-        "source": "WallstreetCN Hot",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "油价刺激通胀、就业削弱加息--黄金“双面得利”",
-        "url": "https://wallstreetcn.com/articles/3778987",
-        "source": "WallstreetCN Hot",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
         "title": "伯克希尔Q2净利润翻倍，单季回购规模创5年来最大，谷歌进入前五大持仓 | 财报见闻",
         "url": "https://wallstreetcn.com/articles/3778993",
         "source": "WallstreetCN Hot",
@@ -3207,15 +3193,29 @@
         "heat": ""
       },
       {
-        "title": "华尔街见闻早餐FM-Radio | 2026年8月8日",
-        "url": "https://wallstreetcn.com/articles/3778980",
+        "title": "“新王”登基“三把火”：伯克希尔开始“花钱”了，净买入200亿美元股票 ",
+        "url": "https://wallstreetcn.com/articles/3778995",
         "source": "WallstreetCN Hot",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "SpaceX解禁后两日暴涨23%，期权成交创纪录，空头回补或进一步推升股价",
-        "url": "https://wallstreetcn.com/articles/3778979",
+        "title": "磷化铟是下一个“稀土”？关键产业如何成为反制核心，卡住美国光通信的脖子？",
+        "url": "https://wallstreetcn.com/premium/articles/3778945?layout=wscn-layout",
+        "source": "WallstreetCN Hot",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "万斯称美伊冲突仍处于“博弈中段”，美军“寻找出口”，伊朗开出“重开海峡6大条件”",
+        "url": "https://wallstreetcn.com/articles/3778994",
+        "source": "WallstreetCN Hot",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "韩媒：SK海力士拟推710亿美元股东回报方案，40%用于回购股票，相当于美股发行规模",
+        "url": "https://wallstreetcn.com/articles/3778998",
         "source": "WallstreetCN Hot",
         "score": 5.0,
         "heat": ""
@@ -3303,467 +3303,467 @@
         "source": "WallstreetCN Live",
         "score": 5.0,
         "heat": ""
-      },
-      {
-        "title": "国泰海通：董事会审议通过《关于国泰君安国际相关资本运作方案的议案》，以实现国君国际私有化退市",
-        "url": "",
-        "source": "WallstreetCN Live",
-        "score": 5.0,
-        "heat": ""
       }
     ],
     "Chinese Hot Search": [
       {
-        "title": "当AI反过来问你问题",
-        "url": "",
-        "source": "Douyin",
-        "score": 8.0,
-        "heat": "7746689"
-      },
-      {
-        "title": "几元成本的AI广告导致千万市值蒸发",
-        "url": "https://www.baidu.com/s?wd=%E5%87%A0%E5%85%83%E6%88%90%E6%9C%AC%E7%9A%84AI%E5%B9%BF%E5%91%8A%E5%AF%BC%E8%87%B4%E5%8D%83%E4%B8%87%E5%B8%82%E5%80%BC%E8%92%B8%E5%8F%91&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "大爷听AI洒农药 150亩苗一夜枯萎",
+        "url": "https://www.baidu.com/s?wd=%E5%A4%A7%E7%88%B7%E5%90%ACAI%E6%B4%92%E5%86%9C%E8%8D%AF+150%E4%BA%A9%E8%8B%97%E4%B8%80%E5%A4%9C%E6%9E%AF%E8%90%8E&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 8.0,
-        "heat": "7712355"
+        "heat": "6952205"
       },
       {
-        "title": "为什么体制内至今仍不鼓励用人工智能？",
-        "url": "https://www.zhihu.com/question/2042649810709239000",
-        "source": "Zhihu",
-        "score": 6.0,
-        "heat": "68 万热度"
+        "title": "上半年国内手机销量榜",
+        "url": "https://www.baidu.com/s?wd=%E4%B8%8A%E5%8D%8A%E5%B9%B4%E5%9B%BD%E5%86%85%E6%89%8B%E6%9C%BA%E9%94%80%E9%87%8F%E6%A6%9C&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 6.5,
+        "heat": "7713429"
       },
       {
-        "title": "网传 DeepSeek V4 Flash 完成任务后写了个游戏玩一上午，是真的吗？为什么会出现这样的现象？",
-        "url": "https://www.zhihu.com/question/2068108635620774765",
-        "source": "Zhihu",
-        "score": 6.0,
-        "heat": "68 万热度"
+        "title": "这种手机壳可能是医疗垃圾做的",
+        "url": "https://www.baidu.com/s?wd=%E8%BF%99%E7%A7%8D%E6%89%8B%E6%9C%BA%E5%A3%B3%E5%8F%AF%E8%83%BD%E6%98%AF%E5%8C%BB%E7%96%97%E5%9E%83%E5%9C%BE%E5%81%9A%E7%9A%84&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 6.5,
+        "heat": "7046291"
       },
       {
-        "title": "如何看待 OpenCode Go 订阅中 DeepSeek v4 Flash 开启限时双倍活动？",
-        "url": "https://www.zhihu.com/question/2069133357099832441",
-        "source": "Zhihu",
+        "title": "AI是否能帮助数学实现大突破",
+        "url": "https://search.bilibili.com/all?keyword=AI是否能帮助数学实现大突破",
+        "source": "Bilibili",
         "score": 6.0,
-        "heat": "59 万热度"
+        "heat": ""
+      },
+      {
+        "title": "苹果AI国行版上线官网",
+        "url": "https://s.weibo.com/weibo?q=苹果AI国行版上线官网",
+        "source": "Weibo",
+        "score": 6.0,
+        "heat": "0"
+      },
+      {
+        "title": "AI短剧和真人剧观众两极分化",
+        "url": "https://s.weibo.com/weibo?q=AI短剧和真人剧观众两极分化",
+        "source": "Weibo",
+        "score": 6.0,
+        "heat": "0"
       },
       {
         "title": "台风白海豚实时路径",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "12033971"
+        "heat": "11905129"
       },
       {
-        "title": "台风白海豚已闭眼",
+        "title": "台风白海豚靠近杭州",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "11869680"
+        "heat": "11329231"
       },
       {
-        "title": "数说城市地下管网",
+        "title": "全民健身计划带来哪些实惠",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "11707628"
-      },
-      {
-        "title": "用慢充旅行治愈自己",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "11216942"
-      },
-      {
-        "title": "早秋韩系奶油风穿搭",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "10576611"
+        "heat": "11089069"
       },
       {
         "title": "大连英博1:0辽宁铁人",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "10560940"
+        "heat": "10845903"
+      },
+      {
+        "title": "用慢充旅行治愈自己",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "10290746"
+      },
+      {
+        "title": "早秋韩系奶油风穿搭",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "10160760"
       },
       {
         "title": "人总在夏天回忆冬天",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9443573"
+        "heat": "9003630"
       },
       {
-        "title": "我只是来地球散步的",
+        "title": "全明星刺激之夜吃鸡行为大赏",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9432328"
+        "heat": "8605632"
       },
       {
         "title": "火把节的抹黑祝福",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9406350"
+        "heat": "8485887"
       },
       {
-        "title": "提前预习秋天穿搭",
+        "title": "穿搭没有公式",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9158728"
+        "heat": "8252627"
       },
       {
         "title": "谢霆锋沈阳演唱会",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9141984"
-      },
-      {
-        "title": "苏超无锡1:1盐城",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "9119723"
-      },
-      {
-        "title": "“地球将失重7秒”不实",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "9043345"
-      },
-      {
-        "title": "河南重大刑案嫌犯夏某钢落网",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "8924567"
-      },
-      {
-        "title": "刺激之夜抖音直播",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "8609270"
-      },
-      {
-        "title": "三角洲藏宝图",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "8182631"
-      },
-      {
-        "title": "台军“汉光演习”漏洞百出",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7855739"
-      },
-      {
-        "title": "A股多家上市公司收到美政府退税",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7843774"
-      },
-      {
-        "title": "以媒：穆杰塔巴被紧急送医情况危急",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7802817"
-      },
-      {
-        "title": "蜘蛛侠崭新之日的梗各火各的",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7798387"
-      },
-      {
-        "title": "台风白海豚对比巴威有何不同",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7786478"
-      },
-      {
-        "title": "叫号取餐选秀大会",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7780831"
-      },
-      {
-        "title": "国内金饰克价重回1300元",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7767351"
-      },
-      {
-        "title": "苏超泰州1:0连云港",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7760089"
-      },
-      {
-        "title": "2.5天休假推行难点在哪",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7748821"
-      },
-      {
-        "title": "下辈子不一定还能遇见你手势舞",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7737467"
-      },
-      {
-        "title": "全民健身日科普来了",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "7735163"
+        "heat": "8060629"
       },
       {
         "title": "成都汽水音乐节",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7731077"
+        "heat": "7793553"
       },
       {
-        "title": "王者无尽之局皮肤实战测评",
+        "title": "“到此一拿”都藏着哪些风险",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7726418"
+        "heat": "7779261"
       },
       {
-        "title": "全民健身事业高质量发展",
-        "url": "https://www.baidu.com/s?wd=%E5%85%A8%E6%B0%91%E5%81%A5%E8%BA%AB%E4%BA%8B%E4%B8%9A%E9%AB%98%E8%B4%A8%E9%87%8F%E5%8F%91%E5%B1%95&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
+        "title": "河南重大刑案嫌犯夏某钢落网",
+        "url": "",
+        "source": "Douyin",
         "score": 5.0,
-        "heat": "7904681"
+        "heat": "7779075"
       },
       {
-        "title": "2026年“未录满”本科专业排行榜出炉",
-        "url": "https://www.baidu.com/s?wd=2026%E5%B9%B4%E2%80%9C%E6%9C%AA%E5%BD%95%E6%BB%A1%E2%80%9D%E6%9C%AC%E7%A7%91%E4%B8%93%E4%B8%9A%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%87%BA%E7%82%89&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
+        "title": "我只是来地球散步的",
+        "url": "",
+        "source": "Douyin",
         "score": 5.0,
-        "heat": "7808214"
+        "heat": "7775629"
       },
       {
-        "title": "生产也能“拼单”了",
-        "url": "https://www.baidu.com/s?wd=%E7%94%9F%E4%BA%A7%E4%B9%9F%E8%83%BD%E2%80%9C%E6%8B%BC%E5%8D%95%E2%80%9D%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
+        "title": "李荣浩大连演唱会",
+        "url": "",
+        "source": "Douyin",
         "score": 5.0,
-        "heat": "7616854"
+        "heat": "7765985"
       },
       {
-        "title": "央视新主播李秋莹孙亚鹏亮相",
-        "url": "https://www.baidu.com/s?wd=%E5%A4%AE%E8%A7%86%E6%96%B0%E4%B8%BB%E6%92%AD%E6%9D%8E%E7%A7%8B%E8%8E%B9%E5%AD%99%E4%BA%9A%E9%B9%8F%E4%BA%AE%E7%9B%B8&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "开学三件套全线暴涨",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7758907"
+      },
+      {
+        "title": "BLG战胜EDG",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7757893"
+      },
+      {
+        "title": "蜘蛛侠崭新之日的梗各火各的",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7754085"
+      },
+      {
+        "title": "台风白海豚10日夜间或将进入安徽",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7753222"
+      },
+      {
+        "title": "解析台风白海豚的反常特征",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7752294"
+      },
+      {
+        "title": "田曦薇COS和平精英甜包",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7750130"
+      },
+      {
+        "title": "下辈子不一定还能遇见你手势舞",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7739052"
+      },
+      {
+        "title": "叫号取餐选秀大会",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7738664"
+      },
+      {
+        "title": "台军“汉光演习”漏洞百出",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7734050"
+      },
+      {
+        "title": "台风白海豚对比巴威有何不同",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7727337"
+      },
+      {
+        "title": "家门口徒步燃起来了",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7721892"
+      },
+      {
+        "title": "刺激之夜抖音直播",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7720793"
+      },
+      {
+        "title": "A股多家上市公司收到美政府退税",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7715122"
+      },
+      {
+        "title": "内蒙古第十六届运动会启幕",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "7703747"
+      },
+      {
+        "title": "各美其美 美美与共",
+        "url": "https://www.baidu.com/s?wd=%E5%90%84%E7%BE%8E%E5%85%B6%E7%BE%8E+%E7%BE%8E%E7%BE%8E%E4%B8%8E%E5%85%B1&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7520070"
+        "heat": "7904131"
+      },
+      {
+        "title": "最高级别！台风红色预警",
+        "url": "https://www.baidu.com/s?wd=%E6%9C%80%E9%AB%98%E7%BA%A7%E5%88%AB%EF%BC%81%E5%8F%B0%E9%A3%8E%E7%BA%A2%E8%89%B2%E9%A2%84%E8%AD%A6&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7809764"
+      },
+      {
+        "title": "白海豚逼近浙闽沿海",
+        "url": "https://www.baidu.com/s?wd=%E7%99%BD%E6%B5%B7%E8%B1%9A%E9%80%BC%E8%BF%91%E6%B5%99%E9%97%BD%E6%B2%BF%E6%B5%B7&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7617242"
+      },
+      {
+        "title": "白海豚台风眼一闭一睁",
+        "url": "https://www.baidu.com/s?wd=%E7%99%BD%E6%B5%B7%E8%B1%9A%E5%8F%B0%E9%A3%8E%E7%9C%BC%E4%B8%80%E9%97%AD%E4%B8%80%E7%9D%81&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7521157"
+      },
+      {
+        "title": "方桃子代言广告视频已下架",
+        "url": "https://www.baidu.com/s?wd=%E6%96%B9%E6%A1%83%E5%AD%90%E4%BB%A3%E8%A8%80%E5%B9%BF%E5%91%8A%E8%A7%86%E9%A2%91%E5%B7%B2%E4%B8%8B%E6%9E%B6&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7424484"
+      },
+      {
+        "title": "以军士兵把枪口对准中国记者",
+        "url": "https://www.baidu.com/s?wd=%E4%BB%A5%E5%86%9B%E5%A3%AB%E5%85%B5%E6%8A%8A%E6%9E%AA%E5%8F%A3%E5%AF%B9%E5%87%86%E4%B8%AD%E5%9B%BD%E8%AE%B0%E8%80%85&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7329879"
+      },
+      {
+        "title": "台风白海豚到哪了",
+        "url": "https://www.baidu.com/s?wd=%E5%8F%B0%E9%A3%8E%E7%99%BD%E6%B5%B7%E8%B1%9A%E5%88%B0%E5%93%AA%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7232317"
+      },
+      {
+        "title": "斯诺克中国公开赛刘宏宇击败霍金斯",
+        "url": "https://www.baidu.com/s?wd=%E6%96%AF%E8%AF%BA%E5%85%8B%E4%B8%AD%E5%9B%BD%E5%85%AC%E5%BC%80%E8%B5%9B%E5%88%98%E5%AE%8F%E5%AE%87%E5%87%BB%E8%B4%A5%E9%9C%8D%E9%87%91%E6%96%AF&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7138078"
+      },
+      {
+        "title": "跟风评论随意脑补？杜绝二次造谣",
+        "url": "https://www.baidu.com/s?wd=%E8%B7%9F%E9%A3%8E%E8%AF%84%E8%AE%BA%E9%9A%8F%E6%84%8F%E8%84%91%E8%A1%A5%EF%BC%9F%E6%9D%9C%E7%BB%9D%E4%BA%8C%E6%AC%A1%E9%80%A0%E8%B0%A3&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6849309"
+      },
+      {
+        "title": "谢霆锋演唱会隔空祝王菲生日快乐",
+        "url": "https://www.baidu.com/s?wd=%E8%B0%A2%E9%9C%86%E9%94%8B%E6%BC%94%E5%94%B1%E4%BC%9A%E9%9A%94%E7%A9%BA%E7%A5%9D%E7%8E%8B%E8%8F%B2%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6751720"
+      },
+      {
+        "title": "白海豚在海上打了个结",
+        "url": "https://www.baidu.com/s?wd=%E7%99%BD%E6%B5%B7%E8%B1%9A%E5%9C%A8%E6%B5%B7%E4%B8%8A%E6%89%93%E4%BA%86%E4%B8%AA%E7%BB%93&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6659801"
+      },
+      {
+        "title": "经常半夜醒要排查6种疾病",
+        "url": "https://www.baidu.com/s?wd=%E7%BB%8F%E5%B8%B8%E5%8D%8A%E5%A4%9C%E9%86%92%E8%A6%81%E6%8E%92%E6%9F%A56%E7%A7%8D%E7%96%BE%E7%97%85&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6569581"
+      },
+      {
+        "title": "“玉兔精”李玲玉回应网友模仿",
+        "url": "https://www.baidu.com/s?wd=%E2%80%9C%E7%8E%89%E5%85%94%E7%B2%BE%E2%80%9D%E6%9D%8E%E7%8E%B2%E7%8E%89%E5%9B%9E%E5%BA%94%E7%BD%91%E5%8F%8B%E6%A8%A1%E4%BB%BF&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6471206"
       },
       {
         "title": "150元车上过夜费到底谁被做局了",
         "url": "https://www.baidu.com/s?wd=150%E5%85%83%E8%BD%A6%E4%B8%8A%E8%BF%87%E5%A4%9C%E8%B4%B9%E5%88%B0%E5%BA%95%E8%B0%81%E8%A2%AB%E5%81%9A%E5%B1%80%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7424902"
+        "heat": "6367959"
       },
       {
-        "title": "沈腾演技",
-        "url": "https://www.baidu.com/s?wd=%E6%B2%88%E8%85%BE%E6%BC%94%E6%8A%80&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "上海大部迎大暴雨",
+        "url": "https://www.baidu.com/s?wd=%E4%B8%8A%E6%B5%B7%E5%A4%A7%E9%83%A8%E8%BF%8E%E5%A4%A7%E6%9A%B4%E9%9B%A8&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7238662"
+        "heat": "6281223"
       },
       {
-        "title": "河南刑案嫌犯被抓 逃窜时伤害多人",
-        "url": "https://www.baidu.com/s?wd=%E6%B2%B3%E5%8D%97%E5%88%91%E6%A1%88%E5%AB%8C%E7%8A%AF%E8%A2%AB%E6%8A%93+%E9%80%83%E7%AA%9C%E6%97%B6%E4%BC%A4%E5%AE%B3%E5%A4%9A%E4%BA%BA&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "白海豚10级风圈已触及浙江",
+        "url": "https://www.baidu.com/s?wd=%E7%99%BD%E6%B5%B7%E8%B1%9A10%E7%BA%A7%E9%A3%8E%E5%9C%88%E5%B7%B2%E8%A7%A6%E5%8F%8A%E6%B5%99%E6%B1%9F&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7137815"
+        "heat": "6181153"
       },
       {
-        "title": "潜逃10天被抓嫌犯疑靠吃玉米维生",
-        "url": "https://www.baidu.com/s?wd=%E6%BD%9C%E9%80%8310%E5%A4%A9%E8%A2%AB%E6%8A%93%E5%AB%8C%E7%8A%AF%E7%96%91%E9%9D%A0%E5%90%83%E7%8E%89%E7%B1%B3%E7%BB%B4%E7%94%9F&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "上交绝杀清华 姚明笑出表情包",
+        "url": "https://www.baidu.com/s?wd=%E4%B8%8A%E4%BA%A4%E7%BB%9D%E6%9D%80%E6%B8%85%E5%8D%8E+%E5%A7%9A%E6%98%8E%E7%AC%91%E5%87%BA%E8%A1%A8%E6%83%85%E5%8C%85&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7047237"
+        "heat": "6090064"
       },
       {
-        "title": "王菲看了窦靖童歌手总决赛",
-        "url": "https://www.baidu.com/s?wd=%E7%8E%8B%E8%8F%B2%E7%9C%8B%E4%BA%86%E7%AA%A6%E9%9D%96%E7%AB%A5%E6%AD%8C%E6%89%8B%E6%80%BB%E5%86%B3%E8%B5%9B&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "景区透露36岁男演员待遇：不存在高薪",
+        "url": "https://www.baidu.com/s?wd=%E6%99%AF%E5%8C%BA%E9%80%8F%E9%9C%B236%E5%B2%81%E7%94%B7%E6%BC%94%E5%91%98%E5%BE%85%E9%81%87%EF%BC%9A%E4%B8%8D%E5%AD%98%E5%9C%A8%E9%AB%98%E8%96%AA&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6946802"
+        "heat": "5989377"
       },
       {
-        "title": "这些燃气使用“偏方”千万别信",
-        "url": "https://www.baidu.com/s?wd=%E8%BF%99%E4%BA%9B%E7%87%83%E6%B0%94%E4%BD%BF%E7%94%A8%E2%80%9C%E5%81%8F%E6%96%B9%E2%80%9D%E5%8D%83%E4%B8%87%E5%88%AB%E4%BF%A1&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "拜登前列腺癌恶化",
+        "url": "https://www.baidu.com/s?wd=%E6%8B%9C%E7%99%BB%E5%89%8D%E5%88%97%E8%85%BA%E7%99%8C%E6%81%B6%E5%8C%96&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6850435"
+        "heat": "5889501"
       },
       {
-        "title": "情侣在平潭拍日出时坠崖致一死一伤",
-        "url": "https://www.baidu.com/s?wd=%E6%83%85%E4%BE%A3%E5%9C%A8%E5%B9%B3%E6%BD%AD%E6%8B%8D%E6%97%A5%E5%87%BA%E6%97%B6%E5%9D%A0%E5%B4%96%E8%87%B4%E4%B8%80%E6%AD%BB%E4%B8%80%E4%BC%A4&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "台风白海豚将横穿安徽",
+        "url": "https://www.baidu.com/s?wd=%E5%8F%B0%E9%A3%8E%E7%99%BD%E6%B5%B7%E8%B1%9A%E5%B0%86%E6%A8%AA%E7%A9%BF%E5%AE%89%E5%BE%BD&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6763724"
+        "heat": "5803178"
       },
       {
-        "title": "男子不顾劝导花15万请大师迁坟改运",
-        "url": "https://www.baidu.com/s?wd=%E7%94%B7%E5%AD%90%E4%B8%8D%E9%A1%BE%E5%8A%9D%E5%AF%BC%E8%8A%B115%E4%B8%87%E8%AF%B7%E5%A4%A7%E5%B8%88%E8%BF%81%E5%9D%9F%E6%94%B9%E8%BF%90&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "孙子考取上海交大 爷爷感谢亲家母",
+        "url": "https://www.baidu.com/s?wd=%E5%AD%99%E5%AD%90%E8%80%83%E5%8F%96%E4%B8%8A%E6%B5%B7%E4%BA%A4%E5%A4%A7+%E7%88%B7%E7%88%B7%E6%84%9F%E8%B0%A2%E4%BA%B2%E5%AE%B6%E6%AF%8D&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6667191"
+        "heat": "5699654"
       },
       {
-        "title": "浙江舟山发布实施“五停”命令",
-        "url": "https://www.baidu.com/s?wd=%E6%B5%99%E6%B1%9F%E8%88%9F%E5%B1%B1%E5%8F%91%E5%B8%83%E5%AE%9E%E6%96%BD%E2%80%9C%E4%BA%94%E5%81%9C%E2%80%9D%E5%91%BD%E4%BB%A4&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "原北京军区副司令员李永金逝世",
+        "url": "https://www.baidu.com/s?wd=%E5%8E%9F%E5%8C%97%E4%BA%AC%E5%86%9B%E5%8C%BA%E5%89%AF%E5%8F%B8%E4%BB%A4%E5%91%98%E6%9D%8E%E6%B0%B8%E9%87%91%E9%80%9D%E4%B8%96&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6561975"
+        "heat": "5600088"
       },
       {
-        "title": "孙子考取上海交大 爷爷高情商答谢",
-        "url": "https://www.baidu.com/s?wd=%E5%AD%99%E5%AD%90%E8%80%83%E5%8F%96%E4%B8%8A%E6%B5%B7%E4%BA%A4%E5%A4%A7+%E7%88%B7%E7%88%B7%E9%AB%98%E6%83%85%E5%95%86%E7%AD%94%E8%B0%A2&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "越禁越买！美国人热衷来中国扫货",
+        "url": "https://www.baidu.com/s?wd=%E8%B6%8A%E7%A6%81%E8%B6%8A%E4%B9%B0%EF%BC%81%E7%BE%8E%E5%9B%BD%E4%BA%BA%E7%83%AD%E8%A1%B7%E6%9D%A5%E4%B8%AD%E5%9B%BD%E6%89%AB%E8%B4%A7&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6462800"
+        "heat": "5525720"
       },
       {
-        "title": "车企回归实体按键",
-        "url": "https://www.baidu.com/s?wd=%E8%BD%A6%E4%BC%81%E5%9B%9E%E5%BD%92%E5%AE%9E%E4%BD%93%E6%8C%89%E9%94%AE&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "数千粉丝围堵教堂结果新人不是C罗",
+        "url": "https://www.baidu.com/s?wd=%E6%95%B0%E5%8D%83%E7%B2%89%E4%B8%9D%E5%9B%B4%E5%A0%B5%E6%95%99%E5%A0%82%E7%BB%93%E6%9E%9C%E6%96%B0%E4%BA%BA%E4%B8%8D%E6%98%AFC%E7%BD%97&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6367528"
+        "heat": "5412899"
       },
       {
-        "title": "台风前上海天空出现绝美晚霞",
-        "url": "https://www.baidu.com/s?wd=%E5%8F%B0%E9%A3%8E%E5%89%8D%E4%B8%8A%E6%B5%B7%E5%A4%A9%E7%A9%BA%E5%87%BA%E7%8E%B0%E7%BB%9D%E7%BE%8E%E6%99%9A%E9%9C%9E&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "苏醒喊话《歌手》：我档期很空费用极低",
+        "url": "https://www.baidu.com/s?wd=%E8%8B%8F%E9%86%92%E5%96%8A%E8%AF%9D%E3%80%8A%E6%AD%8C%E6%89%8B%E3%80%8B%EF%BC%9A%E6%88%91%E6%A1%A3%E6%9C%9F%E5%BE%88%E7%A9%BA%E8%B4%B9%E7%94%A8%E6%9E%81%E4%BD%8E&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6287693"
+        "heat": "5318919"
       },
       {
-        "title": "购飞机票7分钟后退票被扣2022元",
-        "url": "https://www.baidu.com/s?wd=%E8%B4%AD%E9%A3%9E%E6%9C%BA%E7%A5%A87%E5%88%86%E9%92%9F%E5%90%8E%E9%80%80%E7%A5%A8%E8%A2%AB%E6%89%A32022%E5%85%83&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "老外直呼没见过 三蹦子成时尚新品",
+        "url": "https://www.baidu.com/s?wd=%E8%80%81%E5%A4%96%E7%9B%B4%E5%91%BC%E6%B2%A1%E8%A7%81%E8%BF%87+%E4%B8%89%E8%B9%A6%E5%AD%90%E6%88%90%E6%97%B6%E5%B0%9A%E6%96%B0%E5%93%81&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6191898"
+        "heat": "5217620"
       },
       {
-        "title": "商场现钱学森巨幅海报 负责人回应",
-        "url": "https://www.baidu.com/s?wd=%E5%95%86%E5%9C%BA%E7%8E%B0%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%B7%A8%E5%B9%85%E6%B5%B7%E6%8A%A5+%E8%B4%9F%E8%B4%A3%E4%BA%BA%E5%9B%9E%E5%BA%94&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "“黄银勋”和“烤斯克”联动了",
+        "url": "https://www.baidu.com/s?wd=%E2%80%9C%E9%BB%84%E9%93%B6%E5%8B%8B%E2%80%9D%E5%92%8C%E2%80%9C%E7%83%A4%E6%96%AF%E5%85%8B%E2%80%9D%E8%81%94%E5%8A%A8%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "6091951"
-      },
-      {
-        "title": "《龙餐馆》 战争版《药神》",
-        "url": "https://www.baidu.com/s?wd=%E3%80%8A%E9%BE%99%E9%A4%90%E9%A6%86%E3%80%8B+%E6%88%98%E4%BA%89%E7%89%88%E3%80%8A%E8%8D%AF%E7%A5%9E%E3%80%8B&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5996631"
-      },
-      {
-        "title": "外国游客的“中国游三件套”火了",
-        "url": "https://www.baidu.com/s?wd=%E5%A4%96%E5%9B%BD%E6%B8%B8%E5%AE%A2%E7%9A%84%E2%80%9C%E4%B8%AD%E5%9B%BD%E6%B8%B8%E4%B8%89%E4%BB%B6%E5%A5%97%E2%80%9D%E7%81%AB%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5903625"
-      },
-      {
-        "title": "酒店花洒现排泄物住客索赔遭拒",
-        "url": "https://www.baidu.com/s?wd=%E9%85%92%E5%BA%97%E8%8A%B1%E6%B4%92%E7%8E%B0%E6%8E%92%E6%B3%84%E7%89%A9%E4%BD%8F%E5%AE%A2%E7%B4%A2%E8%B5%94%E9%81%AD%E6%8B%92&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5802011"
-      },
-      {
-        "title": "国乒女单三将晋级四强",
-        "url": "https://www.baidu.com/s?wd=%E5%9B%BD%E4%B9%92%E5%A5%B3%E5%8D%95%E4%B8%89%E5%B0%86%E6%99%8B%E7%BA%A7%E5%9B%9B%E5%BC%BA&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5710834"
-      },
-      {
-        "title": "李玲玉回应网友模仿",
-        "url": "https://www.baidu.com/s?wd=%E6%9D%8E%E7%8E%B2%E7%8E%89%E5%9B%9E%E5%BA%94%E7%BD%91%E5%8F%8B%E6%A8%A1%E4%BB%BF&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5614073"
-      },
-      {
-        "title": "吉马良斯正式加盟阿森纳",
-        "url": "https://www.baidu.com/s?wd=%E5%90%89%E9%A9%AC%E8%89%AF%E6%96%AF%E6%AD%A3%E5%BC%8F%E5%8A%A0%E7%9B%9F%E9%98%BF%E6%A3%AE%E7%BA%B3&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5523276"
-      },
-      {
-        "title": "检测列车撞人致11死2伤 涉事单位被罚",
-        "url": "https://www.baidu.com/s?wd=%E6%A3%80%E6%B5%8B%E5%88%97%E8%BD%A6%E6%92%9E%E4%BA%BA%E8%87%B411%E6%AD%BB2%E4%BC%A4+%E6%B6%89%E4%BA%8B%E5%8D%95%E4%BD%8D%E8%A2%AB%E7%BD%9A&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5409631"
-      },
-      {
-        "title": "89岁钟南山高能量日常：每周健身3次",
-        "url": "https://www.baidu.com/s?wd=89%E5%B2%81%E9%92%9F%E5%8D%97%E5%B1%B1%E9%AB%98%E8%83%BD%E9%87%8F%E6%97%A5%E5%B8%B8%EF%BC%9A%E6%AF%8F%E5%91%A8%E5%81%A5%E8%BA%AB3%E6%AC%A1&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5324815"
-      },
-      {
-        "title": "迪丽热巴听不懂粤语努力憋笑",
-        "url": "https://www.baidu.com/s?wd=%E8%BF%AA%E4%B8%BD%E7%83%AD%E5%B7%B4%E5%90%AC%E4%B8%8D%E6%87%82%E7%B2%A4%E8%AF%AD%E5%8A%AA%E5%8A%9B%E6%86%8B%E7%AC%91&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5216043"
-      },
-      {
-        "title": "0糖饮料不是完全不含糖",
-        "url": "https://www.baidu.com/s?wd=0%E7%B3%96%E9%A5%AE%E6%96%99%E4%B8%8D%E6%98%AF%E5%AE%8C%E5%85%A8%E4%B8%8D%E5%90%AB%E7%B3%96&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5133041"
+        "heat": "5118084"
       },
       {
         "title": "比亚迪纯电 K-car「海獭」Racco 在日本获超 700 辆订单，这对其出海战略意味着什么？",
         "url": "https://www.zhihu.com/question/2068423027138859669",
         "source": "Zhihu",
         "score": 4.5,
-        "heat": "161 万热度"
+        "heat": "87 万热度"
       },
       {
         "title": "跑了几天外卖发现，很多人原来是修手机的、修汽车的、修家电的技术人员，有手艺为什么要来跑外卖呢？",
         "url": "https://www.zhihu.com/question/2068266947939153909",
         "source": "Zhihu",
         "score": 4.5,
-        "heat": "72 万热度"
+        "heat": "71 万热度"
       },
       {
-        "title": "这种手机壳可能是医疗垃圾做的",
-        "url": "https://s.weibo.com/weibo?q=这种手机壳可能是医疗垃圾做的",
+        "title": "上半年国内手机销量TOP30出炉",
+        "url": "https://s.weibo.com/weibo?q=上半年国内手机销量TOP30出炉",
         "source": "Weibo",
         "score": 4.5,
         "heat": "0"
@@ -3773,713 +3773,1023 @@
         "url": "https://www.zhihu.com/question/479719590",
         "source": "Zhihu",
         "score": 4.0,
-        "heat": "65 万热度"
+        "heat": "128 万热度"
       },
       {
-        "title": "游戏中有哪些让你意难平？",
-        "url": "https://www.zhihu.com/question/2069302358006305599",
-        "source": "Zhihu",
-        "score": 4.0,
-        "heat": "60 万热度"
-      },
-      {
-        "title": "完蛋男同学主创回应",
-        "url": "https://search.bilibili.com/all?keyword=完蛋男同学主创回应",
+        "title": "台风红色预警发布",
+        "url": "https://search.bilibili.com/all?keyword=台风红色预警发布",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "欣小萌俄罗斯坐坦克打枪",
-        "url": "https://search.bilibili.com/all?keyword=欣小萌俄罗斯坐坦克打枪",
+        "title": "时光代理人",
+        "url": "https://search.bilibili.com/all?keyword=时光代理人",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "警惕台风白海豚带来暴雨",
-        "url": "https://search.bilibili.com/all?keyword=警惕台风白海豚带来暴雨",
+        "title": "关于知了猴的硬核知识",
+        "url": "https://search.bilibili.com/all?keyword=关于知了猴的硬核知识",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "AG.AL KSG",
-        "url": "https://search.bilibili.com/all?keyword=AG.AL KSG",
+        "title": "牧神记",
+        "url": "https://search.bilibili.com/all?keyword=牧神记",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "万妮达再见让我哭",
-        "url": "https://search.bilibili.com/all?keyword=万妮达再见让我哭",
+        "title": "台风白海豚",
+        "url": "https://search.bilibili.com/all?keyword=台风白海豚",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "逐帧解析凡人修仙传186集",
-        "url": "https://search.bilibili.com/all?keyword=逐帧解析凡人修仙传186集",
+        "title": "堂主年马计划一周年",
+        "url": "https://search.bilibili.com/all?keyword=堂主年马计划一周年",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "美国为何要拯救日元",
-        "url": "https://search.bilibili.com/all?keyword=美国为何要拯救日元",
+        "title": "福建将防台风应急响应提升至二级",
+        "url": "https://search.bilibili.com/all?keyword=福建将防台风应急响应提升至二级",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "歌剧老师锐评歌王之战",
-        "url": "https://search.bilibili.com/all?keyword=歌剧老师锐评歌王之战",
+        "title": "KSG战胜AG.AL赛后数据",
+        "url": "https://search.bilibili.com/all?keyword=KSG战胜AG.AL赛后数据",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "从游客视角探秘陶瓷文化",
-        "url": "https://search.bilibili.com/all?keyword=从游客视角探秘陶瓷文化",
+        "title": "欢迎来龙餐馆是反战片吗",
+        "url": "https://search.bilibili.com/all?keyword=欢迎来龙餐馆是反战片吗",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
       },
       {
-        "title": "威少新赛季将何去何从",
-        "url": "https://search.bilibili.com/all?keyword=威少新赛季将何去何从",
-        "source": "Bilibili",
-        "score": 3.0,
-        "heat": ""
-      },
-      {
-        "title": "如何评价超前点映中，由文牧野执导、沈腾领衔主演的电影《欢迎来龙餐馆》？",
-        "url": "https://www.zhihu.com/question/2068425373046544035",
+        "title": "台风「白海豚」逼近，9 岁男孩在浙江温岭海边被浪卷走，带来哪些警示？目前救援难点有哪些？",
+        "url": "https://www.zhihu.com/question/2069556360698488227",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "230 万热度"
+        "heat": "620 万热度"
       },
       {
-        "title": "游客称睡私家车被酒店收 150 元过夜费，酒店回应费用涉及停车、使用厨具及衣物清洗等，如何看待此事？",
-        "url": "https://www.zhihu.com/question/2068356033634898265",
+        "title": "如何看待贵州网红金蝉子账号发布讣告，称外号「老表」的打工网红彭仕运在老家游泳时不幸溺水身亡？",
+        "url": "https://www.zhihu.com/question/2068817961792623517",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "167 万热度"
+        "heat": "459 万热度"
       },
       {
-        "title": "于东来 8 月 5 日官宣：2030 年后停止所有经营项目发展，转型「学校式企业」，这种打法在商业上站得住吗？",
-        "url": "https://www.zhihu.com/question/2068353941474121293",
+        "title": "如何看待日本一医院错把患者脑部当肿瘤切除？",
+        "url": "https://www.zhihu.com/question/2069354305589620880",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "150 万热度"
+        "heat": "417 万热度"
       },
       {
-        "title": "《工人日报》撰文批评郑钦文「盲目自信是自大…要听团队的劝」，对此你怎么看，《工人日报》说的对吗？",
+        "title": "媒体评郑钦文「她需调整自我认知，要听团队的劝」，对此你怎么看，这篇文章说的对吗？",
         "url": "https://www.zhihu.com/question/2069125628117214469",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "113 万热度"
+        "heat": "283 万热度"
+      },
+      {
+        "title": "台风白海豚 10 级风圈触及浙江台州部分地区，中央气象台三预警齐发，你那边天气如何？",
+        "url": "https://www.zhihu.com/question/2068622608979813741",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "263 万热度"
       },
       {
         "title": "于东来称要关闭营业 24 年的生活广场店，每一个项目都是国际一流的品质，达不到的都关了，如何看待此事？",
         "url": "https://www.zhihu.com/question/2069099745738593864",
         "source": "Zhihu",
         "score": 3.0,
+        "heat": "243 万热度"
+      },
+      {
+        "title": "雪佛兰正式停售中国市场，如何评价这个汽车品牌在华的 21 年？",
+        "url": "https://www.zhihu.com/question/2069357693840667744",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "158 万热度"
+      },
+      {
+        "title": "如何看待华硕将海外用户已付 4607 美元的 5090 订单强行砍单，并随后提价至 5090 美元？",
+        "url": "https://www.zhihu.com/question/2069330740664439572",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "146 万热度"
+      },
+      {
+        "title": "人脑是不是也会过拟合？",
+        "url": "https://www.zhihu.com/question/2018494114556040490",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "144 万热度"
+      },
+      {
+        "title": "录取到浙大农学，我应该选择复读还是进大学转专业？",
+        "url": "https://www.zhihu.com/question/2062672836922184193",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "123 万热度"
+      },
+      {
+        "title": "梁朝伟、梁家辉、周星驰，演技排名到底该怎么排？",
+        "url": "https://www.zhihu.com/question/2063285568411379508",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "110 万热度"
+      },
+      {
+        "title": "网球影响力为何远远大于羽毛球乒乓球?",
+        "url": "https://www.zhihu.com/question/30020661",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "108 万热度"
+      },
+      {
+        "title": "作为《鸣潮》的看板娘，秧秧这个角色未来的剧情会怎样发展？",
+        "url": "https://www.zhihu.com/question/3268268562",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "107 万热度"
+      },
+      {
+        "title": "你会去电影院看沈腾的主旋律喜剧大片《欢迎来龙餐馆》吗? 票房能破 50 亿吗?",
+        "url": "https://www.zhihu.com/question/2068398077522793536",
+        "source": "Zhihu",
+        "score": 3.0,
         "heat": "106 万热度"
-      },
-      {
-        "title": "今年前 7 月我国货物贸易进出口总值 30.13 万亿元，同比增长  17.3% ，如何看待这一数据？",
-        "url": "https://www.zhihu.com/question/2069008146291496844",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "93 万热度"
-      },
-      {
-        "title": "以媒称伊朗最高领袖被紧急送医，真实性如何？会怎样影响当前局势？",
-        "url": "https://www.zhihu.com/question/2069421184177763676",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "91 万热度"
-      },
-      {
-        "title": "年轻人不喜欢白酒，为什么白酒却是消费主流？",
-        "url": "https://www.zhihu.com/question/664667368",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "89 万热度"
-      },
-      {
-        "title": "《年会不能停！2》票房预测跌至 2.48 亿，甚至不到第一部票房的零头，问题出在哪里？",
-        "url": "https://www.zhihu.com/question/2068466998103822555",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "75 万热度"
-      },
-      {
-        "title": "太原一乘客质疑出租车绕路准备投诉，被司机持铁棍打伤缝 13 针，如何看待此事？",
-        "url": "https://www.zhihu.com/question/2068620061821212203",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "74 万热度"
       },
       {
         "title": "知名博主峰哥实名举报编剧汪海林偷税漏税，汪海林回应系网红为流量炒作话题，此事真实性如何？两人有何恩怨？",
         "url": "https://www.zhihu.com/question/2069443167678632232",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "73 万热度"
+        "heat": "104 万热度"
       },
       {
-        "title": "企鹅的脚为什么不怕冷?",
-        "url": "https://www.zhihu.com/question/27543215",
+        "title": "如何评价超前点映中，由文牧野执导、沈腾领衔主演的电影《欢迎来龙餐馆》？",
+        "url": "https://www.zhihu.com/question/2068425373046544035",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "67 万热度"
+        "heat": "101 万热度"
       },
       {
-        "title": "P-51 战斗机是不是史上被吹得最狠的飞机？",
-        "url": "https://www.zhihu.com/question/12265059538",
+        "title": "年轻人不喜欢白酒，为什么白酒却是消费主流？",
+        "url": "https://www.zhihu.com/question/664667368",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "67 万热度"
+        "heat": "99 万热度"
       },
       {
-        "title": "《楚门的世界》中，妻子既然不爱楚门为什么反复提及要与楚门生一个孩子？",
-        "url": "https://www.zhihu.com/question/305864895",
+        "title": "如何评价《海贼王》第 1190 话？",
+        "url": "https://www.zhihu.com/question/2068125846083262145",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "66 万热度"
+        "heat": "97 万热度"
       },
       {
-        "title": "我发现玄幻小说中各种势力的设定不合理，好像这些势力不应该存在。不知道应该怎么解决势力不该存在的问题？",
-        "url": "https://www.zhihu.com/question/1912930247021658114",
+        "title": "2026 暑期档国产片频繁提档、撤档，进口片档期却基本不变，可能有哪些原因？频繁调整档期的影响有多大？",
+        "url": "https://www.zhihu.com/question/2067995468202599329",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "65 万热度"
+        "heat": "96 万热度"
+      },
+      {
+        "title": "多地停车场计费试行取消「向上取整」，「按分钟计费」试点加速落地，如何看待这一调整？值得推广吗？",
+        "url": "https://www.zhihu.com/question/2068298447619364747",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "95 万热度"
+      },
+      {
+        "title": "游客称睡私家车被酒店收 150 元过夜费，酒店回应费用涉及停车、使用厨具及衣物清洗等，如何看待此事？",
+        "url": "https://www.zhihu.com/question/2068356033634898265",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "94 万热度"
+      },
+      {
+        "title": "婚外胚胎案男方再发声，在三方律师见证下已销毁胚胎，正遭受严重网暴准备报警，哪些信息值得关注？",
+        "url": "https://www.zhihu.com/question/2068384820644800140",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "91 万热度"
       },
       {
         "title": "2026 年 8 月，黄金一天涨了 40 块，还会继续涨下去吗？有可能回到 880 那个区间吗？",
         "url": "https://www.zhihu.com/question/2068520976749531189",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "64 万热度"
+        "heat": "78 万热度"
       },
       {
-        "title": "你认为世界是连续的，还是离散的？",
-        "url": "https://www.zhihu.com/question/1908928077351875015",
+        "title": "您对当下大学生有什么忠告吗？",
+        "url": "https://www.zhihu.com/question/1981882434594309976",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "63 万热度"
+        "heat": "68 万热度"
       },
       {
-        "title": "如何评价凡人修仙传 186 集，是否达到预期？",
-        "url": "https://www.zhihu.com/question/2064502213205141253",
+        "title": "强者是怎么熬过最痛苦的阶段的？有什么方法吗？",
+        "url": "https://www.zhihu.com/question/795966921",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "62 万热度"
+        "heat": "68 万热度"
       },
       {
-        "title": "大家现在都在用什么软件看小说啊？",
-        "url": "https://www.zhihu.com/question/12402966092",
+        "title": "为什么明明背了很多遍的知识但是第二天还是会忘？",
+        "url": "https://www.zhihu.com/question/5938681428",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "60 万热度"
+        "heat": "65 万热度"
       },
       {
-        "title": "电影《功夫女足》映期延长至 9 月 10 日，目前票房破 22 亿，你认为最终票房有望冲击多少？",
-        "url": "https://www.zhihu.com/question/2069082068911502422",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "59 万热度"
-      },
-      {
-        "title": "《八仙！》中的东华帝君是好人吗？",
-        "url": "https://www.zhihu.com/question/2064500634976510238",
+        "title": "《年会不能停！2》票房预测跌至 2.48 亿，甚至不到第一部票房的零头，问题出在哪里？",
+        "url": "https://www.zhihu.com/question/2068466998103822555",
         "source": "Zhihu",
         "score": 3.0,
         "heat": "59 万热度"
       },
       {
-        "title": "最近翻《云别传》越看越不明白，赵云一生都没进过蜀汉核心决策圈，他到底是被刘备当铁卫还是刻意边缘化？",
-        "url": "https://www.zhihu.com/question/2037239345288045936",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "59 万热度"
-      },
-      {
-        "title": "韩剧《黑暗荣耀 2》里为什么坏人都不销毁证据？",
-        "url": "https://www.zhihu.com/question/588793391",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "59 万热度"
-      },
-      {
-        "title": "只有小时候发烧才有这种感觉",
-        "url": "https://s.weibo.com/weibo?q=只有小时候发烧才有这种感觉",
+        "title": "天才女友总制片人怎么了",
+        "url": "https://s.weibo.com/weibo?q=天才女友总制片人怎么了",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "台风白海豚",
-        "url": "https://s.weibo.com/weibo?q=台风白海豚",
+        "title": "我国日均词元调用量超千倍增长",
+        "url": "https://s.weibo.com/weibo?q=我国日均词元调用量超千倍增长",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "本周这些数据最值得关注",
-        "url": "https://s.weibo.com/weibo?q=本周这些数据最值得关注",
+        "title": "保护脊柱腰椎 幻想自己有一条尾巴",
+        "url": "https://s.weibo.com/weibo?q=保护脊柱腰椎 幻想自己有一条尾巴",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "张凌赫座驾阿维塔07L上市",
-        "url": "https://s.weibo.com/weibo?q=张凌赫座驾阿维塔07L上市",
+        "title": "上海台风",
+        "url": "https://s.weibo.com/weibo?q=上海台风",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "长期穿碳板鞋的受害者出现了",
-        "url": "https://s.weibo.com/weibo?q=长期穿碳板鞋的受害者出现了",
+        "title": "J人是这样备注的",
+        "url": "https://s.weibo.com/weibo?q=J人是这样备注的",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "发现父母开始看自己脸色了",
-        "url": "https://s.weibo.com/weibo?q=发现父母开始看自己脸色了",
+        "title": "张雅琪中餐厅干活被指推诿",
+        "url": "https://s.weibo.com/weibo?q=张雅琪中餐厅干活被指推诿",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "好像给麻辣烫店的脸太多了",
-        "url": "https://s.weibo.com/weibo?q=好像给麻辣烫店的脸太多了",
+        "title": "白海豚最大可能登陆地点",
+        "url": "https://s.weibo.com/weibo?q=白海豚最大可能登陆地点",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "伯爵熠眼心动",
-        "url": "https://s.weibo.com/weibo?q=伯爵熠眼心动",
+        "title": "白海豚台风红色预警",
+        "url": "https://s.weibo.com/weibo?q=白海豚台风红色预警",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "情侣平潭翻墙拍日出坠崖",
-        "url": "https://s.weibo.com/weibo?q=情侣平潭翻墙拍日出坠崖",
+        "title": "齐豫独唱时加的小男孩家长态度",
+        "url": "https://s.weibo.com/weibo?q=齐豫独唱时加的小男孩家长态度",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "微博文化之夜之这是谁",
-        "url": "https://s.weibo.com/weibo?q=微博文化之夜之这是谁",
+        "title": "孕妇生病 硬抗",
+        "url": "https://s.weibo.com/weibo?q=孕妇生病 硬抗",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "国乒围剿张本美和",
-        "url": "https://s.weibo.com/weibo?q=国乒围剿张本美和",
+        "title": "全上海都在偶遇赵丽颖",
+        "url": "https://s.weibo.com/weibo?q=全上海都在偶遇赵丽颖",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "沈腾感谢惠英红",
-        "url": "https://s.weibo.com/weibo?q=沈腾感谢惠英红",
+        "title": "中国富二代在泰国遭遇情杀",
+        "url": "https://s.weibo.com/weibo?q=中国富二代在泰国遭遇情杀",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "金价猛涨踏空的人哭麻了",
-        "url": "https://s.weibo.com/weibo?q=金价猛涨踏空的人哭麻了",
+        "title": "刘亦菲下沉市场路人缘",
+        "url": "https://s.weibo.com/weibo?q=刘亦菲下沉市场路人缘",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "殡仪馆回应情侣平潭拍日出坠崖",
-        "url": "https://s.weibo.com/weibo?q=殡仪馆回应情侣平潭拍日出坠崖",
+        "title": "披荆斩棘",
+        "url": "https://s.weibo.com/weibo?q=披荆斩棘",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "白海豚开始发力了",
-        "url": "https://s.weibo.com/weibo?q=白海豚开始发力了",
+        "title": "杭州地铁",
+        "url": "https://s.weibo.com/weibo?q=杭州地铁",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "陈伟霆说我还以为去了成毅的演唱会",
-        "url": "https://s.weibo.com/weibo?q=陈伟霆说我还以为去了成毅的演唱会",
+        "title": "邹市明说和冉莹颖度蜜月惨不忍睹",
+        "url": "https://s.weibo.com/weibo?q=邹市明说和冉莹颖度蜜月惨不忍睹",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "卫生巾应该分坐用跟躺用",
-        "url": "https://s.weibo.com/weibo?q=卫生巾应该分坐用跟躺用",
+        "title": "齐司礼业火鉴心",
+        "url": "https://s.weibo.com/weibo?q=齐司礼业火鉴心",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "奥德赛",
-        "url": "https://s.weibo.com/weibo?q=奥德赛",
+        "title": "酥就是油多 脆就是糖多",
+        "url": "https://s.weibo.com/weibo?q=酥就是油多 脆就是糖多",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "钟意状态",
-        "url": "https://s.weibo.com/weibo?q=钟意状态",
+        "title": "iPhone18Pro 涨价",
+        "url": "https://s.weibo.com/weibo?q=iPhone18Pro 涨价",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "西村力演唱会的发言",
-        "url": "https://s.weibo.com/weibo?q=西村力演唱会的发言",
+        "title": "金智秀也开始闯美了",
+        "url": "https://s.weibo.com/weibo?q=金智秀也开始闯美了",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "小伙睡梦翻身把隐翅虫碾进内裤",
-        "url": "https://s.weibo.com/weibo?q=小伙睡梦翻身把隐翅虫碾进内裤",
+        "title": "成毅 演唱会",
+        "url": "https://s.weibo.com/weibo?q=成毅 演唱会",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "小夜灯 性早熟",
-        "url": "https://s.weibo.com/weibo?q=小夜灯 性早熟",
+        "title": "迈阿密国际球员进球后悼念豪尔赫",
+        "url": "https://s.weibo.com/weibo?q=迈阿密国际球员进球后悼念豪尔赫",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "常吃4种食物不易得胃癌",
-        "url": "https://s.weibo.com/weibo?q=常吃4种食物不易得胃癌",
+        "title": "孟子义到达泰国",
+        "url": "https://s.weibo.com/weibo?q=孟子义到达泰国",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "很瘦但是个胖子",
-        "url": "https://s.weibo.com/weibo?q=很瘦但是个胖子",
+        "title": "孙颖莎入选中国品牌青年榜",
+        "url": "https://s.weibo.com/weibo?q=孙颖莎入选中国品牌青年榜",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "粉丝说西村力今天演唱会状态特别好",
-        "url": "https://s.weibo.com/weibo?q=粉丝说西村力今天演唱会状态特别好",
+        "title": "长崎将把南京大屠杀改为南京事件",
+        "url": "https://s.weibo.com/weibo?q=长崎将把南京大屠杀改为南京事件",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "向下对齐是亲密关系最大的诅咒",
-        "url": "https://s.weibo.com/weibo?q=向下对齐是亲密关系最大的诅咒",
-        "source": "Weibo",
-        "score": 3.0,
-        "heat": "0"
-      },
-      {
-        "title": "迪丽热巴香港造型",
-        "url": "https://s.weibo.com/weibo?q=迪丽热巴香港造型",
-        "source": "Weibo",
-        "score": 3.0,
-        "heat": "0"
-      },
-      {
-        "title": "成绩好就随便吃14岁男孩吃出糖尿病",
-        "url": "https://s.weibo.com/weibo?q=成绩好就随便吃14岁男孩吃出糖尿病",
-        "source": "Weibo",
-        "score": 3.0,
-        "heat": "0"
-      },
-      {
-        "title": "陈小春帮宋亚轩整理胸花",
-        "url": "https://s.weibo.com/weibo?q=陈小春帮宋亚轩整理胸花",
+        "title": "上海地铁",
+        "url": "https://s.weibo.com/weibo?q=上海地铁",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       }
     ],
+    "Community": [
+      {
+        "title": "AI快问快答,D老师语出惊人",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356965",
+        "source": "Tieba",
+        "score": 7.0,
+        "heat": "610680"
+      },
+      {
+        "title": "[薅羊毛] mirasim（注册账号赠送额度：等于 Codex Pro 5× + Claude Code Max 5×）",
+        "url": "https://www.v2ex.com/t/1232965",
+        "source": "V2EX Hot",
+        "score": 6.0,
+        "heat": "50"
+      },
+      {
+        "title": "如何看待 DeepSeek 在 X 上要求大家把自己的项目放上去以换取内测资格？以及后续的签约需要身份征等其他个人信息？",
+        "url": "https://www.v2ex.com/t/1232938",
+        "source": "V2EX Hot",
+        "score": 6.0,
+        "heat": "22"
+      },
+      {
+        "title": "AYi (@AYi_AInotes)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086236960310407590",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "勇哥遭快招公司死亡威胁",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356973",
+        "source": "Tieba",
+        "score": 4.5,
+        "heat": "1877700"
+      },
+      {
+        "title": "网文痴二游痴对轰,乐子人看爽",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356977",
+        "source": "Tieba",
+        "score": 4.5,
+        "heat": "1741798"
+      },
+      {
+        "title": "60场吻戏白拍,富婆拒付尾款",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356974",
+        "source": "Tieba",
+        "score": 4.5,
+        "heat": "1475348"
+      },
+      {
+        "title": "白宫蹭蜘蛛侠热度,漫威粉怒了",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356978",
+        "source": "Tieba",
+        "score": 4.5,
+        "heat": "1367982"
+      },
+      {
+        "title": "尘白已死?制作人疑似离职",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356975",
+        "source": "Tieba",
+        "score": 4.5,
+        "heat": "1010750"
+      },
+      {
+        "title": "作者来整活,豆包成主角DS器灵",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356971",
+        "source": "Tieba",
+        "score": 4.0,
+        "heat": "887075"
+      },
+      {
+        "title": "王朝崩塌,AG勇夺底座冠军",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356976",
+        "source": "Tieba",
+        "score": 4.0,
+        "heat": "881280"
+      },
+      {
+        "title": "BLG平推EDG,文波团战游龙",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356970",
+        "source": "Tieba",
+        "score": 4.0,
+        "heat": "818294"
+      },
+      {
+        "title": "胚胎案原配申请终止离婚",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356961",
+        "source": "Tieba",
+        "score": 4.0,
+        "heat": "676808"
+      },
+      {
+        "title": "诺兰凭奥德赛冲进导演榜前三",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356972",
+        "source": "Tieba",
+        "score": 4.0,
+        "heat": "555200"
+      },
+      {
+        "title": "T1临阵换人,HLE止连败",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356967",
+        "source": "Tieba",
+        "score": 3.5,
+        "heat": "410495"
+      },
+      {
+        "title": "神人连线勇哥,1.9套餐全是坑",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356962",
+        "source": "Tieba",
+        "score": 3.5,
+        "heat": "388098"
+      },
+      {
+        "title": "台风白海豚压境,华东严阵以待",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356969",
+        "source": "Tieba",
+        "score": 3.5,
+        "heat": "286807"
+      },
+      {
+        "title": "波兰运动员黑宁波是贫民窟",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356966",
+        "source": "Tieba",
+        "score": 3.5,
+        "heat": "259936"
+      },
+      {
+        "title": "接线员失职被炒,控诉遭恶意辞退",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356960",
+        "source": "Tieba",
+        "score": 3.5,
+        "heat": "187905"
+      },
+      {
+        "title": "Oner替补,T1上调二队打野",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356963",
+        "source": "Tieba",
+        "score": 3.5,
+        "heat": "132384"
+      },
+      {
+        "title": "终于看到 V2 有人发 mac 不好用了....我一直以为只有我觉得难用",
+        "url": "https://www.v2ex.com/t/1232881",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "133"
+      },
+      {
+        "title": "说说为什么明明只用一把键盘,家里还有七把",
+        "url": "https://www.v2ex.com/t/1232899",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "74"
+      },
+      {
+        "title": "关于我转行矿工的两年后，谢谢大家的关心",
+        "url": "https://www.v2ex.com/t/1232933",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "60"
+      },
+      {
+        "title": "厄运专找苦命人，看中山大学 23 岁博士确诊胃癌晚期有感",
+        "url": "https://www.v2ex.com/t/1232900",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "32"
+      },
+      {
+        "title": "iphone18 来了，大家倾向于怎样换机",
+        "url": "https://www.v2ex.com/t/1232921",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "30"
+      },
+      {
+        "title": "分享一个 ublock origin 规则，屏蔽 x 上的黄色评论",
+        "url": "https://www.v2ex.com/t/1232883",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "28"
+      },
+      {
+        "title": "真的不建议任何人用中转 2",
+        "url": "https://www.v2ex.com/t/1232923",
+        "source": "V2EX Hot",
+        "score": 3.0,
+        "heat": "26"
+      },
+      {
+        "title": "Michael Guo (@Michaelzsguo)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086189108804854080",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
+        "title": "摆烂程序媛 (@wanerfu)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086244321465074025",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
+        "title": "图拉鼎 (@tualatrix)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086271721754280220",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
+        "title": "seekinganythingbutalpha (@ivanalog_com)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086240987513327929",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
+        "title": "刘小排 (@bourneliu66)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086189381078139350",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
+        "title": "宝玉 (@dotey)",
+        "url": "https://sopilot.net/hot-tweets?tweetId=2086144247388905833",
+        "source": "Twitter Hot (Sopilot)",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
+        "title": "日本医院把患者大脑当肿瘤切了",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356955",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "94263"
+      },
+      {
+        "title": "装备硬核!钓鱼佬自备空调",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356957",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "83928"
+      },
+      {
+        "title": "六连胜被断,Bin超话开香槟",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356958",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "71896"
+      },
+      {
+        "title": "运动员穿三角裤比赛被骂擦边",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356956",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "59380"
+      },
+      {
+        "title": "女员工0元购狂薅3千台电器",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356959",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "44307"
+      },
+      {
+        "title": "解说内涵Shy哥恐遭官方重拳",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356947",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "37424"
+      },
+      {
+        "title": "值得反思!日本运动员偷鸡蛋被捕",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356951",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "36659"
+      },
+      {
+        "title": "韩企捐水日本被骂只配冲马桶",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356935",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "29292"
+      },
+      {
+        "title": "男子撤销捐献仍被摘器官",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356944",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "27245"
+      },
+      {
+        "title": "大反转!桃酥吃出牙冠系造谣",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356863",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "25124"
+      },
+      {
+        "title": "无视说教,农村小孩哥耿直回复",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356850",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "18177"
+      },
+      {
+        "title": "北大又上分!苏炜杰获统计诺奖",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356945",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "14448"
+      },
+      {
+        "title": "BLG惨败TES,Bin哥回归预热?",
+        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356952",
+        "source": "Tieba",
+        "score": 3.0,
+        "heat": "14341"
+      }
+    ],
     "Chinese News": [
       {
-        "title": "上半年国内手机销量TOP30出炉",
-        "url": "https://www.toutiao.com/trending/7670854651357904947",
-        "source": "Toutiao",
-        "score": 7.5,
-        "heat": "16043947"
-      },
-      {
-        "title": "李开复：AI时代，人的优势在“右脑”，做出数据不能预测的事情",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33740664",
-        "source": "Pengpai",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "马上评｜AI演员带货，真人演员授权：AI时代如何重构信任关系",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33744426",
-        "source": "Pengpai",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "伊媒发布伊朗最高领袖视频",
-        "url": "https://www.toutiao.com/trending/7671613890689502783",
+        "title": "白海豚10级风圈",
+        "url": "https://www.toutiao.com/trending/7671841305773002291",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "39461742"
+        "heat": "50680534"
       },
       {
-        "title": "白海豚将正面袭击贯穿浙江",
-        "url": "https://www.toutiao.com/trending/7671556283757022747",
+        "title": "以军士兵把枪口对准中国记者",
+        "url": "https://www.toutiao.com/trending/7670816047708667940",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "35706461"
+        "heat": "45857643"
       },
       {
         "title": "一周“靓”数",
         "url": "https://www.toutiao.com/trending/7671626556606795290",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "32308542"
+        "heat": "41493711"
       },
       {
-        "title": "伊总统：伊朗要学中国做好自己的事",
-        "url": "https://www.toutiao.com/trending/7670977056377618495",
+        "title": "滚筒洗衣机自爆 满筒碎玻璃渣",
+        "url": "https://www.toutiao.com/trending/7671828905889710099",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "29233977"
+        "heat": "37545063"
       },
       {
-        "title": "如何看待印度打听雅下水电项目细节",
-        "url": "https://www.toutiao.com/trending/7671067894347956275",
+        "title": "白海豚预计将在浙江苍南到三门一带登陆",
+        "url": "https://www.toutiao.com/trending/7671850049743097398",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "26451997"
+        "heat": "33972177"
       },
       {
-        "title": "情侣平潭拍日出坠崖1死1伤",
-        "url": "https://www.toutiao.com/trending/7671606512804806697",
+        "title": "男孩被妈妈强拉拍照比“995”",
+        "url": "https://www.toutiao.com/trending/7671666402750824491",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "23934756"
+        "heat": "30739297"
       },
       {
-        "title": "台风白海豚实时路径",
-        "url": "https://www.toutiao.com/trending/7670858062097481770",
+        "title": "浙江沿海狂风暴雨摄像头剧烈震颤",
+        "url": "https://www.toutiao.com/trending/7671579166454546495",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "21657063"
+        "heat": "25167208"
       },
       {
-        "title": "身体出现这几个信号可能是肝在求救",
-        "url": "https://www.toutiao.com/trending/7671344614855163950",
+        "title": "89岁钟南山每周健身3次",
+        "url": "https://www.toutiao.com/trending/7671804196668100146",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "19596121"
+        "heat": "22772231"
       },
       {
-        "title": "孙子考取上海交大 爷爷高情商答谢",
-        "url": "https://www.toutiao.com/trending/7670818620276228134",
+        "title": "89岁婆婆34年坚持锻炼",
+        "url": "https://www.toutiao.com/trending/7671623822897987627",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "17731303"
+        "heat": "20605167"
       },
       {
-        "title": "网络谣言的3种典型“伪装套路”",
-        "url": "https://www.toutiao.com/trending/7670853259876515866",
+        "title": "跟风评论随意脑补 杜绝二次造谣",
+        "url": "https://www.toutiao.com/trending/7671848830887280676",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "14517163"
+        "heat": "18644326"
       },
       {
-        "title": "王菲生日戴了老王帽",
-        "url": "https://www.toutiao.com/trending/7671594374523076659",
+        "title": "中央气象台升级发布台风红色预警",
+        "url": "https://www.toutiao.com/trending/7671856440352443945",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "13135673"
+        "heat": "16870084"
       },
       {
-        "title": "医生提醒别忽略肠癌的身体预警",
-        "url": "https://www.toutiao.com/trending/7671480831927599131",
+        "title": "博主：俄罗斯主战派声音越来越大",
+        "url": "https://www.toutiao.com/trending/7671826635414310442",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "11885648"
+        "heat": "15264683"
       },
       {
-        "title": "36岁男演员成景区NPC后人气爆棚",
-        "url": "https://www.toutiao.com/trending/7671250660881662002",
+        "title": "原北京军区副司令员李永金逝世",
+        "url": "https://www.toutiao.com/trending/7671641140575715379",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "10754579"
+        "heat": "13812056"
       },
       {
-        "title": "银龙鱼离世大哥正伤心妻子问能吃不",
-        "url": "https://www.toutiao.com/trending/7671152814982201395",
+        "title": "上海中心城区暴雨预警由橙变红",
+        "url": "https://www.toutiao.com/trending/7671847912715849258",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "9731145"
+        "heat": "12497665"
       },
       {
-        "title": "中国人正在抛弃旅行社吗",
-        "url": "https://www.toutiao.com/trending/7671522197021675049",
+        "title": "网传猎鹰9号火箭残骸撞月视频系伪造",
+        "url": "https://www.toutiao.com/trending/7671052831155699718",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "8805104"
+        "heat": "11308355"
       },
       {
-        "title": "儿子称父亲意外离世被按病故理赔",
-        "url": "https://www.toutiao.com/trending/7671118447329738758",
+        "title": "王楠出任内蒙古十六运开幕式火炬手",
+        "url": "https://www.toutiao.com/trending/7671595976822489114",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "7967188"
+        "heat": "10232223"
       },
       {
-        "title": "河南重大刑案嫌犯夏某钢落网",
-        "url": "https://www.toutiao.com/trending/7670835580204518953",
+        "title": "白海豚生命史是普通台风3倍以上",
+        "url": "https://www.toutiao.com/trending/7671499726491058230",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "7209010"
+        "heat": "9258498"
       },
       {
-        "title": "20岁中国男子在泰国身亡",
-        "url": "https://www.toutiao.com/trending/7671449697697103899",
+        "title": "“伊斯兰版北约”出现",
+        "url": "https://www.toutiao.com/trending/7671490081631633444",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "6522982"
+        "heat": "8377435"
       },
       {
-        "title": "安徽阜阳市委书记：坚决打赢防台风硬仗",
-        "url": "https://www.toutiao.com/trending/7671632959987781163",
+        "title": "四川宜宾5.5级地震后余震为何不断",
+        "url": "https://www.toutiao.com/trending/7671845989270965769",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "5902238"
+        "heat": "7580217"
       },
       {
-        "title": "金饰克价一夜涨回1300元",
-        "url": "https://www.toutiao.com/trending/7670685913919471626",
+        "title": "游客西湖边突遭暴雨蹲地列阵",
+        "url": "https://www.toutiao.com/trending/7670831404032347691",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "5340566"
+        "heat": "6858864"
       },
       {
-        "title": "云南发现眼镜王蛇一家38口",
-        "url": "https://www.toutiao.com/trending/7670698699731337270",
+        "title": "俄乌分别通报最新战况",
+        "url": "https://www.toutiao.com/trending/7671208118822617142",
         "source": "Toutiao",
-        "score": 5.5,
-        "heat": "4832344"
-      },
-      {
-        "title": "中医建议秋天多吃柔润食物",
-        "url": "https://www.toutiao.com/trending/7671210035176112174",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "4372485"
-      },
-      {
-        "title": "波兰总统：不容忍波兰出现班德拉旗帜",
-        "url": "https://www.toutiao.com/trending/7671268240555081771",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "3956388"
-      },
-      {
-        "title": "宇树王兴兴被问了360多个问题",
-        "url": "https://www.toutiao.com/trending/7670607945574694962",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "3579888"
-      },
-      {
-        "title": "永和豆浆创始人林炳生逝世",
-        "url": "https://www.toutiao.com/trending/7671601007847489555",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "3239217"
-      },
-      {
-        "title": "舒默怒斥特朗普：你在哪个星球",
-        "url": "https://www.toutiao.com/trending/7671480510048452651",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "2930964"
-      },
-      {
-        "title": "新疆女孩在天津偶遇支教老师哭红眼",
-        "url": "https://www.toutiao.com/trending/7671460092932636678",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "2652046"
-      },
-      {
-        "title": "央行购金突然加速释放什么信号",
-        "url": "https://www.toutiao.com/trending/7671595405942984242",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "2399671"
+        "score": 6.0,
+        "heat": "6206157"
       },
       {
         "title": "央媒：用Token还是词元事关科技话语权",
         "url": "https://www.toutiao.com/trending/7671123642835566598",
         "source": "Toutiao",
-        "score": 5.5,
-        "heat": "2171312"
+        "score": 6.0,
+        "heat": "5615563"
       },
       {
-        "title": "媒体：因无人机袭击频发，土耳其限制船舶进入黑海",
-        "url": "https://sputniknews.cn/20260808/1072692610.html",
+        "title": "永和豆浆创始人林炳生曾说爱拼才会赢",
+        "url": "https://www.toutiao.com/trending/7671829288753086514",
+        "source": "Toutiao",
+        "score": 6.0,
+        "heat": "5081171"
+      },
+      {
+        "title": "上半年中国人形机器人领域新设企业11.6万户，同比增长9.5%",
+        "url": "https://sputniknews.cn/20260809/1072695202.html",
+        "source": "Sputnik CN",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "白海豚5次眼壁置换",
+        "url": "https://www.toutiao.com/trending/7671860344410787338",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "4597634"
+      },
+      {
+        "title": "周一A股真正要看什么",
+        "url": "https://www.toutiao.com/trending/7671849065465777683",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "4160111"
+      },
+      {
+        "title": "徐志任安徽芜湖市委书记",
+        "url": "https://www.toutiao.com/trending/7671851707797622326",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "3764224"
+      },
+      {
+        "title": "新疆优化调整景区内自驾服务费",
+        "url": "https://www.toutiao.com/trending/7671581385966764073",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "3406011"
+      },
+      {
+        "title": "日本樱岛南岳火山口喷发",
+        "url": "https://www.toutiao.com/trending/7670746442847649828",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "3081886"
+      },
+      {
+        "title": "身体出现这几个信号可能是肝在求救",
+        "url": "https://www.toutiao.com/trending/7671344614855163950",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "2788606"
+      },
+      {
+        "title": "乌军无人机袭击造成别尔哥罗德13人受伤，其中包括两名儿童",
+        "url": "https://sputniknews.cn/20260809/1072696087.html",
         "source": "Sputnik CN",
         "score": 5.5,
         "heat": ""
       },
       {
-        "title": "封面｜08奥运年出生的孩子成人了",
+        "title": "封面｜“白海豚”逼近浙闽",
         "url": "https://www.thepaper.cn/newsDetail_forward_",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
       },
       {
-        "title": "上海、浙江局地明将有特大暴雨",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33744453",
+        "title": "今日上海两机场六成航班调减取消",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33746909",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
       },
       {
-        "title": "新疆部分景区自驾服务费改成按车收",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33744766",
+        "title": "西湖大学开学，施一公提及王虹邓昱",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33746651",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
       },
       {
-        "title": "以媒：美军中央司令部司令访以讨论“多战线局势”",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33747509",
+        "title": "消费者称被“弹窗投保”续费超千元：元保保险称过程合规，已退款",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33747930",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
       },
       {
-        "title": "万斯称美伊冲突仍处于“博弈中段”",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33747478",
+        "title": "火灾来了消防栓竟是摆设！腾冲一物业不愿检修擅自关停消防供水阀门",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33747908",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "永和豆浆创始人林炳生逝世，享年70岁",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33745335",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
@@ -4499,13 +4809,6 @@
         "heat": ""
       },
       {
-        "title": "苏州平江历史街区老树疑遭“钻孔灌药”，姑苏区住建委：将持续跟进救助事宜",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33743298",
-        "source": "Pengpai",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
         "title": "蔡皋领取国际安徒生奖，“在孩子们心底种下真善美的种子”",
         "url": "https://www.thepaper.cn/newsDetail_forward_33743181",
         "source": "Pengpai",
@@ -4513,8 +4816,29 @@
         "heat": ""
       },
       {
-        "title": "从“福利枪”利益链到深层枪支崇拜，泰国为何反复上演枪击悲剧？",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33739635",
+        "title": "苏州平江历史街区老树疑遭“钻孔灌药”，姑苏区住建委：将持续跟进救助事宜",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33743298",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "美上诉法院叫停白宫宴会厅施工，特朗普怒了：国家耻辱！",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33744455",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "男子在微信家长群里煽动孤立孩子同学被法院判赔",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33744280",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "核观察｜美欲用战术核武器对抗中俄，弹药不足核武来凑？",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33745016",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
@@ -4527,8 +4851,15 @@
         "heat": ""
       },
       {
-        "title": "台风“白海豚”未来三天强降雨影响7省市，浙江上海等地位于台风危险半圆",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33742880",
+        "title": "原北京军区副司令员兼北京军区空军司令员李永金逝世，享年84岁",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33745911",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "网上卖黄金卷入电诈8万元被划扣，驻马店市公安局称新蔡警方程序违法",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33747571",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
@@ -4541,6 +4872,13 @@
         "heat": ""
       },
       {
+        "title": "台风、暴雨、强对流等五预警齐发！沿海部分地区将有特大暴雨",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33745275",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
         "title": "伊朗媒体发布伊朗最高领袖视频",
         "url": "https://www.thepaper.cn/newsDetail_forward_33745289",
         "source": "Pengpai",
@@ -4548,8 +4886,8 @@
         "heat": ""
       },
       {
-        "title": "台风、暴雨、强对流等五预警齐发！沿海部分地区将有特大暴雨",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33745275",
+        "title": "蓝厅观察丨被中方反制的7家美国实体有何来头？",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33746518",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
@@ -4564,20 +4902,6 @@
       {
         "title": "8月9日运营开始起，上海轨交全网络地面高架区段限速运行",
         "url": "https://www.thepaper.cn/newsDetail_forward_33745913",
-        "source": "Pengpai",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "蓝厅观察丨被中方反制的7家美国实体有何来头？",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33746518",
-        "source": "Pengpai",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "兵韬志略｜日本发布2026防卫白皮书，“总体战”动员值得警惕",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33736615",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
@@ -4604,16 +4928,79 @@
         "heat": ""
       },
       {
-        "title": "受台风“白海豚”影响，8月9日上海两大机场近六成航班调减取消",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33746909",
+        "title": "现货黄金周涨超7%站上4300美元，为何突然大涨？",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33744664",
         "source": "Pengpai",
         "score": 4.0,
         "heat": ""
       },
       {
-        "title": "不足半月茅台自营店再调价！飞天零售价涨至1753元，较i茅台售价高出114元",
-        "url": "https://www.thepaper.cn/newsDetail_forward_33745878",
+        "title": "中央气象台升级发布台风红警：六省份有大暴雨，浙江局地特大暴雨",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33747722",
         "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "《湖南日报》头版头条聚焦安徒生奖得主蔡皋：“皋”在低处",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33747650",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "上海中心城区暴雨预警由黄变橙，全市防汛防台应急响应行动更新为Ⅱ级",
+        "url": "https://www.thepaper.cn/newsDetail_forward_33747661",
+        "source": "Pengpai",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄罗斯失业率为G20国家中最低",
+        "url": "https://sputniknews.cn/20260809/1072695958.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "美国国务院已通知国会：拟从土耳其调拨美制武器移交乌克兰",
+        "url": "https://sputniknews.cn/20260809/1072695852.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "莫迪与万斯讨论印美扩大合作事宜",
+        "url": "https://sputniknews.cn/20260809/1072695744.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "台风“白海豚”登陆前，一男孩被海浪卷走",
+        "url": "https://sputniknews.cn/20260809/1072695633.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄驻日大使：东京放弃无核地位将招致邻国反制",
+        "url": "https://sputniknews.cn/20260809/1072695338.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "媒体：美国不满足德黑兰条件，伊朗就不会开放霍尔木兹海峡",
+        "url": "https://sputniknews.cn/20260809/1072695076.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "媒体：美国核武库中剩余的爱国者导弹不足1700枚",
+        "url": "https://sputniknews.cn/20260809/1072694948.html",
+        "source": "Sputnik CN",
         "score": 4.0,
         "heat": ""
       },
@@ -4693,350 +5080,17 @@
         "source": "Sputnik CN",
         "score": 4.0,
         "heat": ""
-      },
-      {
-        "title": "“俄气”：欧洲地下储气库注气形势恶化",
-        "url": "https://sputniknews.cn/20260808/1072693516.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "伊朗外长：恢复霍尔木兹海峡通航取决于美方补偿",
-        "url": "https://sputniknews.cn/20260808/1072693400.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄安全会议副主席：倘若乌克兰民众无法选出理智的新一届领导人，该国必将走向不可避免的覆灭",
-        "url": "https://sputniknews.cn/20260808/1072693295.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄安全会议副主席：西方外交已彻底丧失公信力",
-        "url": "https://sputniknews.cn/20260808/1072693180.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "印度内政部：在与中国接壤的边境邦正式标注27处地名",
-        "url": "https://sputniknews.cn/20260808/1072693065.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "超17.5万日本民众收到台风疏散指令",
-        "url": "https://sputniknews.cn/20260808/1072692962.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄常驻维也纳国际组织代表：美伊冲突只能通过外交途径解决",
-        "url": "https://sputniknews.cn/20260808/1072692846.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "美媒：严重的腐败问题将阻碍乌克兰加入北约",
-        "url": "https://sputniknews.cn/20260808/1072692728.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      }
-    ],
-    "Community": [
-      {
-        "title": "AI快问快答,D老师语出惊人",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356965",
-        "source": "Tieba",
-        "score": 7.5,
-        "heat": "1249300"
-      },
-      {
-        "title": "codex 接 deepseek 的 api 能用么？",
-        "url": "https://www.v2ex.com/t/1232858",
-        "source": "V2EX Hot",
-        "score": 6.0,
-        "heat": "22"
-      },
-      {
-        "title": "BLG平推EDG,文波团战游龙",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356970",
-        "source": "Tieba",
-        "score": 4.5,
-        "heat": "2257770"
-      },
-      {
-        "title": "胚胎案原配申请终止离婚",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356961",
-        "source": "Tieba",
-        "score": 4.5,
-        "heat": "1593347"
-      },
-      {
-        "title": "诺兰凭奥德赛冲进导演榜前三",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356972",
-        "source": "Tieba",
-        "score": 4.5,
-        "heat": "1294608"
-      },
-      {
-        "title": "T1临阵换人,HLE止连败",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356967",
-        "source": "Tieba",
-        "score": 4.5,
-        "heat": "1293597"
-      },
-      {
-        "title": "Grok 4.5 做的江湖武侠游戏",
-        "url": "https://www.v2ex.com/t/1232867",
-        "source": "V2EX Hot",
-        "score": 4.0,
-        "heat": "31"
-      },
-      {
-        "title": "作者来整活,豆包成主角DS器灵",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356971",
-        "source": "Tieba",
-        "score": 4.0,
-        "heat": "979000"
-      },
-      {
-        "title": "神人连线勇哥,1.9套餐全是坑",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356962",
-        "source": "Tieba",
-        "score": 4.0,
-        "heat": "872232"
-      },
-      {
-        "title": "台风白海豚压境,华东严阵以待",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356969",
-        "source": "Tieba",
-        "score": 4.0,
-        "heat": "626888"
-      },
-      {
-        "title": "波兰运动员黑宁波是贫民窟",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356966",
-        "source": "Tieba",
-        "score": 4.0,
-        "heat": "617342"
-      },
-      {
-        "title": "接线员失职被炒,控诉遭恶意辞退",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356960",
-        "source": "Tieba",
-        "score": 4.0,
-        "heat": "613494"
-      },
-      {
-        "title": "Oner替补,T1上调二队打野",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356963",
-        "source": "Tieba",
-        "score": 4.0,
-        "heat": "597520"
-      },
-      {
-        "title": "日本医院把患者大脑当肿瘤切了",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356955",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "427101"
-      },
-      {
-        "title": "装备硬核!钓鱼佬自备空调",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356957",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "367848"
-      },
-      {
-        "title": "六连胜被断,Bin超话开香槟",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356958",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "328882"
-      },
-      {
-        "title": "运动员穿三角裤比赛被骂擦边",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356956",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "254400"
-      },
-      {
-        "title": "女员工0元购狂薅3千台电器",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356959",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "221340"
-      },
-      {
-        "title": "解说内涵Shy哥恐遭官方重拳",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356947",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "220248"
-      },
-      {
-        "title": "BLG惨败TES,Bin哥回归预热?",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356952",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "191698"
-      },
-      {
-        "title": "值得反思!日本运动员偷鸡蛋被捕",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356951",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "180780"
-      },
-      {
-        "title": "韩企捐水日本被骂只配冲马桶",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356935",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "168894"
-      },
-      {
-        "title": "男子撤销捐献仍被摘器官",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356944",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "153410"
-      },
-      {
-        "title": "歌手收官,胡彦斌夺歌王",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356953",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "127800"
-      },
-      {
-        "title": "大反转!桃酥吃出牙冠系造谣",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356863",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "123928"
-      },
-      {
-        "title": "无视说教,农村小孩哥耿直回复",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356850",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "117278"
-      },
-      {
-        "title": "北大又上分!苏炜杰获统计诺奖",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356945",
-        "source": "Tieba",
-        "score": 3.5,
-        "heat": "106404"
-      },
-      {
-        "title": "终于看到 V2 有人发 mac 不好用了....我一直以为只有我觉得难用",
-        "url": "https://www.v2ex.com/t/1232881",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "124"
-      },
-      {
-        "title": "说说为什么明明只用一把键盘,家里还有七把",
-        "url": "https://www.v2ex.com/t/1232899",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "68"
-      },
-      {
-        "title": "关于我转行矿工的两年后，谢谢大家的关心",
-        "url": "https://www.v2ex.com/t/1232933",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "51"
-      },
-      {
-        "title": "codex 似乎要重置啦",
-        "url": "https://www.v2ex.com/t/1232843",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "38"
-      },
-      {
-        "title": "厄运专找苦命人，看中山大学 23 岁博士确诊胃癌晚期有感",
-        "url": "https://www.v2ex.com/t/1232900",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "31"
-      },
-      {
-        "title": "分享一个 ublock origin 规则，屏蔽 x 上的黄色评论",
-        "url": "https://www.v2ex.com/t/1232883",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "27"
-      },
-      {
-        "title": "iphone18 来了，大家倾向于怎样换机",
-        "url": "https://www.v2ex.com/t/1232921",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "26"
-      },
-      {
-        "title": "真的不建议任何人用中转 2",
-        "url": "https://www.v2ex.com/t/1232923",
-        "source": "V2EX Hot",
-        "score": 3.0,
-        "heat": "24"
-      },
-      {
-        "title": "韩足协性贿赂20名外籍裁判",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356933",
-        "source": "Tieba",
-        "score": 3.0,
-        "heat": "77530"
-      },
-      {
-        "title": "猫娘抽烟番被日本家长投诉",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356861",
-        "source": "Tieba",
-        "score": 3.0,
-        "heat": "60700"
-      },
-      {
-        "title": "外设想赚钱,键盘鼠标排队涨价",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356950",
-        "source": "Tieba",
-        "score": 3.0,
-        "heat": "58179"
-      },
-      {
-        "title": "Coser兔娘互动太顶,网友酸了",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356858",
-        "source": "Tieba",
-        "score": 3.0,
-        "heat": "57822"
-      },
-      {
-        "title": "越南新娘买车房遭网友举报",
-        "url": "https://tieba.baidu.com/hottopic/browse?topic_id=28356859",
-        "source": "Tieba",
-        "score": 3.0,
-        "heat": "44355"
       }
     ]
   },
   "sources": [
     {
       "name": "TechCrunch",
+      "category": "International Tech",
+      "count": 15
+    },
+    {
+      "name": "Ars Technica",
       "category": "International Tech",
       "count": 15
     },
@@ -5051,22 +5105,12 @@
       "count": 12
     },
     {
-      "name": "Ars Technica",
+      "name": "Hacker News",
       "category": "International Tech",
       "count": 15
-    },
-    {
-      "name": "MIT Tech Review",
-      "category": "International Tech",
-      "count": 10
     },
     {
       "name": "Wired",
-      "category": "International Tech",
-      "count": 15
-    },
-    {
-      "name": "Hacker News",
       "category": "International Tech",
       "count": 15
     },
@@ -5081,32 +5125,17 @@
       "count": 15
     },
     {
-      "name": "Euronews",
-      "category": "International News",
-      "count": 15
+      "name": "MIT Tech Review",
+      "category": "International Tech",
+      "count": 10
     },
     {
-      "name": "NYTimes World",
-      "category": "International News",
-      "count": 15
-    },
-    {
-      "name": "NYTimes Tech",
-      "category": "International News",
-      "count": 15
-    },
-    {
-      "name": "Slashdot",
+      "name": "Science Daily",
       "category": "International Tech",
       "count": 15
     },
     {
-      "name": "The Guardian",
-      "category": "International News",
-      "count": 15
-    },
-    {
-      "name": "HackerNoon",
+      "name": "Slashdot",
       "category": "International Tech",
       "count": 15
     },
@@ -5116,7 +5145,27 @@
       "count": 15
     },
     {
-      "name": "Science Daily",
+      "name": "NYTimes Tech",
+      "category": "International News",
+      "count": 15
+    },
+    {
+      "name": "NYTimes World",
+      "category": "International News",
+      "count": 15
+    },
+    {
+      "name": "CBC World",
+      "category": "International News",
+      "count": 15
+    },
+    {
+      "name": "Lobsters",
+      "category": "International Tech",
+      "count": 15
+    },
+    {
+      "name": "HackerNoon",
       "category": "International Tech",
       "count": 15
     },
@@ -5126,24 +5175,19 @@
       "count": 14
     },
     {
-      "name": "CBC World",
-      "category": "International News",
-      "count": 15
-    },
-    {
       "name": "NPR",
       "category": "International News",
       "count": 10
     },
     {
-      "name": "Lobsters",
-      "category": "International Tech",
+      "name": "Euronews",
+      "category": "International News",
       "count": 15
     },
     {
-      "name": "V2EX Hot",
-      "category": "Community",
-      "count": 10
+      "name": "The Guardian",
+      "category": "International News",
+      "count": 15
     },
     {
       "name": "Bilibili",
@@ -5151,12 +5195,17 @@
       "count": 10
     },
     {
-      "name": "Nature",
-      "category": "International Tech",
-      "count": 15
+      "name": "V2EX Hot",
+      "category": "Community",
+      "count": 9
     },
     {
       "name": "Toutiao",
+      "category": "Chinese News",
+      "count": 30
+    },
+    {
+      "name": "Pengpai",
       "category": "Chinese News",
       "count": 30
     },
@@ -5166,19 +5215,9 @@
       "count": 10
     },
     {
-      "name": "Pengpai",
-      "category": "Chinese News",
-      "count": 27
-    },
-    {
-      "name": "Douyin",
-      "category": "Chinese Hot Search",
-      "count": 30
-    },
-    {
-      "name": "Juejin",
-      "category": "Chinese Tech",
-      "count": 20
+      "name": "Twitter Hot (Sopilot)",
+      "category": "Community",
+      "count": 7
     },
     {
       "name": "GitHub Trending",
@@ -5186,9 +5225,9 @@
       "count": 12
     },
     {
-      "name": "WallstreetCN Live",
-      "category": "Finance",
-      "count": 16
+      "name": "Douyin",
+      "category": "Chinese Hot Search",
+      "count": 30
     },
     {
       "name": "Zhihu",
@@ -5196,8 +5235,8 @@
       "count": 30
     },
     {
-      "name": "InfoQ CN",
-      "category": "Chinese Tech",
+      "name": "WallstreetCN Live",
+      "category": "Finance",
       "count": 15
     },
     {
@@ -5206,14 +5245,19 @@
       "count": 20
     },
     {
-      "name": "ifanr",
+      "name": "InfoQ CN",
       "category": "Chinese Tech",
       "count": 15
     },
     {
-      "name": "Weibo",
-      "category": "Chinese Hot Search",
-      "count": 30
+      "name": "Juejin",
+      "category": "Chinese Tech",
+      "count": 20
+    },
+    {
+      "name": "ifanr",
+      "category": "Chinese Tech",
+      "count": 15
     },
     {
       "name": "QbitAI",
@@ -5221,13 +5265,23 @@
       "count": 10
     },
     {
-      "name": "Baidu",
+      "name": "Weibo",
       "category": "Chinese Hot Search",
       "count": 30
     },
     {
       "name": "Tieba",
       "category": "Community",
+      "count": 30
+    },
+    {
+      "name": "Nature",
+      "category": "International Tech",
+      "count": 15
+    },
+    {
+      "name": "Baidu",
+      "category": "Chinese Hot Search",
       "count": 30
     },
     {
