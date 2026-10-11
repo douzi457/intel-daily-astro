@@ -161,9 +161,29 @@ class IntelligenceProcessor:
         cluster_result = self.cluster.cluster(normalized_items)
         events = self._build_events(normalized_items, cluster_result)
         core_signals, watchlist, ignored = self._categorize(events)
-        actions = self._generate_actions(core_signals)
+
+        # 调用大模型生成个性化评价（如果配置了Key）
+        llm_importance, llm_actions, llm_usage = self._call_llm_for_judgment(core_signals)
+
+        # 更新core_signals的why_it_matters和suggested_action
+        if llm_importance:
+            for i, event in enumerate(core_signals, 1):
+                if i in llm_importance:
+                    event['why_it_matters'] = llm_importance[i]
+                if llm_actions and i in llm_actions:
+                    event['suggested_action'] = {'type': 'try', 'text': llm_actions[i]}
+
+        actions = self._generate_actions(core_signals, llm_importance, llm_actions)
         executive_summary = self._generate_summary(core_signals, actions)
         quality = self._calculate_quality(normalized_items, events, core_signals, len(watchlist), len(actions))
+
+        # 添加LLM用量信息
+        if llm_usage:
+            quality['llm_usage'] = llm_usage
+            quality['warnings'].append(f"LLM调用成功: {llm_usage['total_tokens']} tokens")
+        else:
+            quality['warnings'].append("LLM未调用：AGNES_API_KEY/ZHIPU_API_KEY 未配置，使用模板输出")
+
         source_health = self._build_source_health(raw_data.get('sources', []))
         
         result = {
@@ -395,6 +415,8 @@ class IntelligenceProcessor:
                     '深入研究该领域进展，等待关键细节后决策',
                     '加入监控列表，定期回顾变化趋势',
                     '建立事件追踪，关注后续发展动向',
+                    '持续跟踪该话题，等待更多信息再评估',
+                    '加入观察清单，等待关键节点触发决策',
                 ],
                 '关注AI安全实践': [
                     '跟踪Anthropic对齐研究方向，评估技术路线',
@@ -452,7 +474,145 @@ class IntelligenceProcessor:
 
         seen_actions.add(result['text'])
         return result
-    
+
+    def _call_llm_for_judgment(self, core_signals: List[Dict]) -> Tuple[Optional[Dict], Optional[Dict], Optional[Dict]]:
+        """调用大模型为5条核心信号生成个性化评价和动作建议"""
+        import os
+        import urllib.request
+        import urllib.error
+
+        api_key = os.environ.get("AGNES_API_KEY") or os.environ.get("ZHIPU_API_KEY")
+        model = os.environ.get("AGNES_MODEL") or "agnes-3.0"
+
+        if not api_key:
+            print("警告: AGNES_API_KEY 或 ZHIPU_API_KEY 未配置，使用模板输出", file=sys.stderr)
+            return None, None, None
+
+        # 构建批量请求
+        events_data = []
+        for i, event in enumerate(core_signals[:5], 1):
+            events_data.append({
+                'index': i,
+                'event_id': event.get('event_id', ''),
+                'headline': event.get('headline', '')[:80],
+                'clean_summary': event.get('clean_summary', '')[:200],
+                'source_count': event.get('source_count', 1),
+                'tags': event.get('tags', [])[:3],
+            })
+
+        # 构建prompt
+        system_prompt = """你是一个专业的AI技术内容创作者顾问。你的读者是关注AI开源项目与Agent技术的创作者（做公众号/视频/开源项目推荐）。
+
+请为每条AI新闻事件提供：
+1. why_it_matters: 该事件对"AI开源与Agent创作者"的具体价值（80-150字）
+   - 必须说明：选题价值、工具链影响、内容角度
+   - 禁止泛泛而谈"可能影响行业格局"
+   - 不同事件的评价角度必须实质不同
+
+2. suggested_action: 该创作者今天/本周可执行的具体动作（30-80字）
+   - 必须包含动词开头（如"克隆仓库"、"编写代码"、"录制视频"）
+   - 禁止空话如"标记为观察项"、"持续关注"、"定期回顾"
+   - 动作必须是具体的、可执行的
+
+输出格式为JSON数组，每个元素包含：
+{
+  "index": 事件序号(1-5),
+  "why_it_matters": "...",
+  "suggested_action": "..."
+}"""
+
+        user_message = f"""请为以下5条AI新闻事件提供评价和动作建议：
+
+{json.dumps(events_data, ensure_ascii=False, indent=2)}"""
+
+        try:
+            # 构建请求
+            payload = {
+                "model": model,
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_message},
+                ],
+                "temperature": 0.3,
+                "max_tokens": 2000,
+            }
+
+            req = urllib.request.Request(
+                "http://localhost:11434/v1/chat/completions",
+                data=json.dumps(payload).encode('utf-8'),
+                headers={
+                    'Content-Type': 'application/json',
+                    'Authorization': f'Bearer {api_key}'
+                },
+                method='POST'
+            )
+
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                result = json.loads(resp.read().decode('utf-8'))
+
+            # 解析返回
+            content = result['choices'][0]['message']['content']
+            response_data = json.loads(content)
+
+            # 构建映射
+            importance_map = {}
+            action_map = {}
+            for item in response_data:
+                idx = item['index']
+                importance_map[idx] = item['why_it_matters']
+                action_map[idx] = item['suggested_action']
+
+            # 记录token用量
+            usage = result.get('usage', {})
+            llm_usage = {
+                'model': model,
+                'input_tokens': usage.get('prompt_tokens', 0),
+                'output_tokens': usage.get('completion_tokens', 0),
+                'total_tokens': usage.get('total_tokens', 0),
+            }
+
+            return importance_map, action_map, llm_usage
+
+        except Exception as e:
+            print(f"LLM调用失败: {e}", file=sys.stderr)
+            return None, None, None
+
+    def _generate_actions(self, core_signals: List[Dict], llm_importance: Dict = None, llm_actions: Dict = None) -> List[Dict]:
+        """生成动作列表，带跨日去重"""
+        action_limit = self.profile.get('action_limit', 3)
+        actions = []
+        seen_actions = set()
+        today = datetime.now(CST).strftime('%Y-%m-%d')
+
+        # 加载昨日核心动作用于去重
+        yesterday = (datetime.now(CST) - timedelta(days=1)).strftime('%Y-%m-%d')
+        yesterday_file = Path('public/data/v2/daily-' + yesterday + '-v2.json')
+        if yesterday_file.exists():
+            try:
+                with open(yesterday_file) as f:
+                    yesterday_data = json.load(f)
+                for action in yesterday_data.get('actions', []):
+                    seen_actions.add(action.get('text', ''))
+            except:
+                pass
+
+        for i, event in enumerate(core_signals[:action_limit], 1):
+            # 优先使用LLM生成的动作
+            if llm_actions and i in llm_actions:
+                action_text = llm_actions[i]
+            else:
+                action_text = self._suggest_action(event, seen_actions)['text']
+
+            if action_text not in seen_actions:
+                actions.append({
+                    'type': 'try' if '克隆' in action_text or '搭建' in action_text or '编写' in action_text else 'watch',
+                    'text': action_text,
+                    'evidence_event_id': event['event_id'],
+                    'date': today,
+                })
+                seen_actions.add(action_text)
+        return actions[:action_limit]
+
     def _calculate_score(self, original_score: float, entities: List[Dict], source_name: str) -> Dict:
         relevance = min(30, int(original_score * 3))
         impact = min(20, int(original_score * 2))
@@ -560,38 +720,7 @@ class IntelligenceProcessor:
                 })
 
         return core_signals, watchlist, ignored
-    
-    def _generate_actions(self, core_signals: List[Dict]) -> List[Dict]:
-        """生成动作列表，带跨日去重"""
-        action_limit = self.profile.get('action_limit', 3)
-        actions = []
-        seen_actions = set()
-        today = datetime.now(CST).strftime('%Y-%m-%d')
 
-        # 加载昨日核心动作用于去重
-        yesterday = (datetime.now(CST) - timedelta(days=1)).strftime('%Y-%m-%d')
-        yesterday_file = Path('public/data/v2/daily-' + yesterday + '-v2.json')
-        if yesterday_file.exists():
-            try:
-                with open(yesterday_file) as f:
-                    yesterday_data = json.load(f)
-                for action in yesterday_data.get('actions', []):
-                    seen_actions.add(action.get('text', ''))
-            except:
-                pass
-
-        for event in core_signals[:action_limit]:
-            action = self._suggest_action(event, seen_actions)
-            if action and action.get('type') != 'ignore':
-                actions.append({
-                    'type': action.get('type', 'watch'),
-                    'text': action.get('text', '持续关注'),
-                    'evidence_event_id': event['event_id'],
-                    'date': today,
-                })
-                seen_actions.add(action['text'])
-        return actions[:action_limit]
-    
     def _generate_summary(self, core_signals: List[Dict], actions: List[Dict]) -> List[str]:
         summary = []
         if core_signals:
