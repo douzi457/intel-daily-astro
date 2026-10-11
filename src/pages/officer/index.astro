@@ -294,6 +294,131 @@ function normalize(text: string): string {
                     {event.clean_summary && event.clean_summary !== event.headline && (
                       <p class="signal-summary">{normalize(event.clean_summary)}</p>
                     )}
+
+                    {/* 事件简报（新） */}
+                    {event.event_brief && (
+                      <div class="signal-section">
+                        <div class="signal-label">事件简报</div>
+                        <div class="signal-value">{normalize(event.event_brief)}</div>
+                      </div>
+                    )}
+
+                    {/* 卡片类型徽章（新） */}
+                    {event.card_type && (
+                      <div class="signal-card-type">
+                        <span class={`badge ${event.card_type === '观点型' ? 'viewpoint' : event.card_type === '教程型' ? 'tutorial' : event.card_type === '资讯型' ? 'news' : 'preview'}`}>
+                          {event.card_type}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* 深度分析（新，移动端默认折叠） */}
+                    {event.deep_analysis && (Object.keys(event.deep_analysis).length > 0) && (
+                      <details class="signal-deep-analysis">
+                        <summary>深度分析</summary>
+                        {event.deep_analysis.background && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">背景</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.background)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.divergence && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">分歧</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.divergence)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.comparison && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">对照</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.comparison)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.principle && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">原理</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.principle)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.impact && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">影响</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.impact)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.solution && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">解法</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.solution)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.highlights && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">看点</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.highlights)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.treasures && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">宝藏</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.treasures)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.method && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">挖法</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.method)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.current_state && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">现状</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.current_state)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.variable && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">变量</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.variable)}</div>
+                          </div>
+                        )}
+                        {event.deep_analysis.speculation && (
+                          <div class="analysis-block">
+                            <div class="analysis-label">推演</div>
+                            <div class="analysis-text">{normalize(event.deep_analysis.speculation)}</div>
+                          </div>
+                        )}
+                      </details>
+                    )}
+
+                    {/* 关键引文（新，移动端默认折叠） */}
+                    {event.key_quotes && event.key_quotes.length > 0 && (
+                      <details class="signal-quotes">
+                        <summary>关键引文</summary>
+                        <div class="quotes-list">
+                          {event.key_quotes.map((q: any, qi: number) => (
+                            <blockquote class="quote-item">
+                              <p class="quote-text">"{normalize(q.text)}"</p>
+                              {q.source && <cite class="quote-source">{normalize(q.source)}</cite>}
+                            </blockquote>
+                          ))}
+                        </div>
+                      </details>
+                    )}
+
+                    {/* 执行脚本（新） */}
+                    {event.action_script && event.action_script.length > 0 && (
+                      <div class="signal-section">
+                        <div class="signal-label">执行脚本</div>
+                        <ol class="action-script-list">
+                          {event.action_script.map((step: any) => (
+                            <li key={step.step}>{normalize(step.text)}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    )}
+
+                    {/* 原有字段（保留精简版） */}
                     {event.why_it_matters && (
                       <div class="signal-section">
                         <div class="signal-label">为什么对你重要</div>

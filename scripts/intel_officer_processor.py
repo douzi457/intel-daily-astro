@@ -168,7 +168,16 @@ class IntelligenceProcessor:
         core_signals, watchlist, ignored = self._categorize(events)
 
         # 调用大模型生成个性化评价（如果配置了Key）
-        llm_importance, llm_actions, llm_usage, llm_error = self._call_llm_for_judgment(core_signals)
+        llm_result = self._call_llm_for_judgment(core_signals)
+        llm_importance = llm_result[0]
+        llm_actions = llm_result[1]
+        llm_usage = llm_result[2]
+        llm_error = llm_result[3]
+        card_type_map = llm_result[4] if len(llm_result) > 4 else None
+        event_brief_map = llm_result[5] if len(llm_result) > 5 else None
+        deep_analysis_map = llm_result[6] if len(llm_result) > 6 else None
+        action_script_map = llm_result[7] if len(llm_result) > 7 else None
+        key_quotes_map = llm_result[8] if len(llm_result) > 8 else None
 
         # 更新core_signals的why_it_matters和suggested_action
         if llm_importance:
@@ -177,6 +186,17 @@ class IntelligenceProcessor:
                     event['why_it_matters'] = llm_importance[i]
                 if llm_actions and i in llm_actions:
                     event['suggested_action'] = {'type': 'try', 'text': llm_actions[i]}
+                # 新增深度字段
+                if card_type_map and i in card_type_map:
+                    event['card_type'] = card_type_map[i]
+                if event_brief_map and i in event_brief_map:
+                    event['event_brief'] = event_brief_map[i]
+                if deep_analysis_map and i in deep_analysis_map:
+                    event['deep_analysis'] = deep_analysis_map[i]
+                if action_script_map and i in action_script_map:
+                    event['action_script'] = action_script_map[i]
+                if key_quotes_map and i in key_quotes_map:
+                    event['key_quotes'] = key_quotes_map[i]
 
         actions = self._generate_actions(core_signals, llm_importance, llm_actions)
         executive_summary = self._generate_summary(core_signals, actions)
@@ -525,29 +545,54 @@ class IntelligenceProcessor:
                 'event_id': event.get('event_id', ''),
                 'headline': event.get('headline', '')[:80],
                 'clean_summary': event.get('clean_summary', '')[:200],
+                'url': event.get('url', '')[:100],
                 'source_count': event.get('source_count', 1),
                 'tags': event.get('tags', [])[:3],
             })
 
         system_prompt = """你是一个专业的AI技术内容创作者顾问。你的读者是关注AI开源项目与Agent技术的创作者（做公众号/视频/开源项目推荐）。
 
-请为每条AI新闻事件提供：
-1. why_it_matters: 该事件对"AI开源与Agent创作者"的具体价值（80-150字）
-   - 必须说明：选题价值、工具链影响、内容角度
-   - 禁止泛泛而谈"可能影响行业格局"
-   - 不同事件的评价角度必须实质不同
+请为每条AI新闻事件提供深度分析：
 
-2. suggested_action: 该创作者今天/本周可执行的具体动作（30-80字）
-   - 必须包含动词开头（如"克隆仓库"、"编写代码"、"录制视频"）
-   - 禁止空话如"标记为观察项"、"持续关注"、"定期回顾"
-   - 动作必须是具体的、可执行的
+## 1. card_type (必填，从四选一):
+- "观点型": 大厂言论、争议话题、立场声明
+- "教程型": 技术故障、评测缺陷、工具使用
+- "资讯型": 榜单发布、融资消息、产品上线
+- "前瞻型": 新架构、新范式、未来趋势
 
-输出格式为JSON数组，每个元素包含：
-{
+## 2. event_brief (必填): 5W1H一句话说全，≤80字
+格式: "谁+在哪+说了/做了什么+为什么是今天"
+
+## 3. deep_analysis (必填): 根据card_type选择对应框架
+- 观点型: {背景, 分歧, 对照}
+- 教程型: {原理, 影响, 解法}
+- 资讯型: {看点, 宝藏, 挖法}
+- 前瞻型: {现状, 变量, 推演}
+每块1-2句，不许泛泛而谈。
+
+## 4. action_script (必填): 执行脚本，数组，3-5步
+每步格式: {step: 序号, text: "动词开头+具体对象+素材说明"}
+
+## 5. key_quotes (必填): 关键引文，数组，1-2条
+每条约: {text: "原话或硬数字", source: "来源链接或出处"}
+⚠️ 严禁编造引文！不确定就写{"text": "暂无可引用的公开原话", "source": ""}
+
+## 6. why_it_matters (精简版): 80-150字，保留RSS兼容性
+## 7. suggested_action (精简版): 30-80字，保留RSS兼容性
+
+禁止空话词汇: "值得关注"、"具有重要意义"、"不容错过"
+
+输出格式为JSON数组:
+[{
   "index": 事件序号(1-5),
+  "card_type": "观点型"|"教程型"|"资讯型"|"前瞻型",
+  "event_brief": "...",
+  "deep_analysis": {"背景": "...", "分歧": "...", ...},
+  "action_script": [{"step": 1, "text": "..."}, ...],
+  "key_quotes": [{"text": "...", "source": "..."}, ...],
   "why_it_matters": "...",
   "suggested_action": "..."
-}"""
+}]"""
 
         user_message = f"""请为以下5条AI新闻事件提供评价和动作建议：
 
@@ -591,12 +636,24 @@ class IntelligenceProcessor:
                     content = result['choices'][0]['message']['content']
                     response_data = json.loads(content)
 
+                    # Parse new deep analysis fields
+                    card_type_map = {}
+                    event_brief_map = {}
+                    deep_analysis_map = {}
+                    action_script_map = {}
+                    key_quotes_map = {}
                     importance_map = {}
                     action_map = {}
+                    
                     for item in response_data:
                         idx = item['index']
-                        importance_map[idx] = item['why_it_matters']
-                        action_map[idx] = item['suggested_action']
+                        card_type_map[idx] = item.get('card_type', '观点型')
+                        event_brief_map[idx] = item.get('event_brief', '')
+                        deep_analysis_map[idx] = item.get('deep_analysis', {})
+                        action_script_map[idx] = item.get('action_script', [])
+                        key_quotes_map[idx] = item.get('key_quotes', [])
+                        importance_map[idx] = item.get('why_it_matters', '')
+                        action_map[idx] = item.get('suggested_action', '')
 
                     usage = result.get('usage', {})
                     llm_usage = {
@@ -605,7 +662,7 @@ class IntelligenceProcessor:
                         'output_tokens': usage.get('completion_tokens', 0),
                         'total_tokens': usage.get('total_tokens', 0),
                     }
-                    return importance_map, action_map, llm_usage, None
+                    return importance_map, action_map, llm_usage, None,                            card_type_map, event_brief_map, deep_analysis_map, action_script_map, key_quotes_map
 
                 except urllib.error.HTTPError as e:
                     last_error = f"HTTP {e.code}: {e.reason}"
