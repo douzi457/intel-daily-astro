@@ -7,6 +7,7 @@ import json
 import re
 import hashlib
 import sys
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
@@ -579,8 +580,11 @@ class IntelligenceProcessor:
 
                     with urllib.request.urlopen(req, timeout=60) as resp:
                         if resp.status != 200:
-                            last_error = f"HTTP {resp.status} (model={try_model}, attempt={attempt+1})"
-                            print(f"[LLM] 模型 {try_model} 第{attempt+1}次尝试失败: {last_error}", file=sys.stderr)
+                            # 指数退避 + 尊重 Retry-After 头
+                            retry_after = resp.headers.get('Retry-After')
+                            wait = (2 ** attempt) if retry_after is None else int(retry_after)
+                            print(f"[LLM] HTTP {resp.status} (model={try_model}, attempt={attempt+1})，等待 {wait}s 后重试", file=sys.stderr)
+                            time.sleep(wait)
                             continue
                         result = json.loads(resp.read().decode('utf-8'))
 
@@ -1159,12 +1163,30 @@ def main():
     
     processor = IntelligenceProcessor(profile_config)
     result = processor.process(raw_data)
-    
+
+    # ── LLM 失败保护：如果本次 LLM 调用失败，但上次 V2 数据有效，保留旧数据不覆盖 ──
+    llm_ok = bool(result.get('quality', {}).get('llm_usage'))
+    v2_path = Path('public/data/v2') / f'daily-{args.date}-v2.json'
+
+    if not llm_ok and v2_path.exists():
+        try:
+            with open(v2_path, encoding='utf-8') as f:
+                old = json.load(f)
+            if old.get('quality', {}).get('llm_usage'):
+                print(f"LLM_FAILED_KEEP_PREVIOUS_V2: 保留上一版好数据，不覆盖 V2/brief", file=sys.stderr)
+                sys.exit(0)
+        except Exception as e:
+            print(f"LLM_FAILED_KEEP_PREVIOUS_V2: 读取旧文件失败 {e}，允许写入模板降级版", file=sys.stderr)
+
     output_dir = Path(args.output) if args.output else Path(args.input).parent
     output_dir.mkdir(parents=True, exist_ok=True)
-    
-    with open(output_dir / f'daily-{args.date}-v2.json', 'w', encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
+
+    # 仅在 LLM 成功时才写 V2（首次运行或 LLM 成功都允许写入）
+    if llm_ok or not v2_path.exists():
+        with open(output_dir / f'daily-{args.date}-v2.json', 'w', encoding='utf-8') as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+    else:
+        print(f"LLM_FAILED_SKIP_WRITE: V2 文件未更新（LLM 失败，保留旧数据）", file=sys.stderr)
     
     export = processor.export_markdown(result)
     exports_dir = output_dir / 'exports' / 'intel-officer'
