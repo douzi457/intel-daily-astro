@@ -160,10 +160,14 @@ class IntelligenceProcessor:
         normalized_items = self._normalize_items(all_items)
         cluster_result = self.cluster.cluster(normalized_items)
         events = self._build_events(normalized_items, cluster_result)
+
+        # 跨日去重
+        events = self._check_cross_day_dedup(events, date)
+
         core_signals, watchlist, ignored = self._categorize(events)
 
         # 调用大模型生成个性化评价（如果配置了Key）
-        llm_importance, llm_actions, llm_usage = self._call_llm_for_judgment(core_signals)
+        llm_importance, llm_actions, llm_usage, llm_error = self._call_llm_for_judgment(core_signals)
 
         # 更新core_signals的why_it_matters和suggested_action
         if llm_importance:
@@ -180,7 +184,12 @@ class IntelligenceProcessor:
         # 添加LLM用量信息
         if llm_usage:
             quality['llm_usage'] = llm_usage
-            quality['warnings'].append(f"LLM调用成功: {llm_usage['total_tokens']} tokens")
+        if llm_error:
+            quality['warnings'].append(llm_error)
+
+        # freshness固定值标注
+        if freshness_score == 70.0:
+            quality['warnings'].append("freshness: 暂用固定值70（published_at全部unknown，无法判断真实新鲜度）")
         else:
             quality['warnings'].append("LLM未调用：AGNES_API_KEY/ZHIPU_API_KEY 未配置，使用模板输出")
 
@@ -481,12 +490,110 @@ class IntelligenceProcessor:
         import urllib.request
         import urllib.error
 
-        api_key = os.environ.get("AGNES_API_KEY") or os.environ.get("ZHIPU_API_KEY")
+        api_key = os.environ.get("AGNES_API_KEY")
+        base_url = os.environ.get("AGNES_BASE_URL") or "https://api.agnes-ai.cn/v1"
         model = os.environ.get("AGNES_MODEL") or "agnes-3.0"
 
         if not api_key:
-            print("警告: AGNES_API_KEY 或 ZHIPU_API_KEY 未配置，使用模板输出", file=sys.stderr)
-            return None, None, None
+            return None, None, None, "llm_judgment_skipped_no_key"
+
+        # 尝试主模型，如失败则降级到flash
+        models_to_try = [model]
+        if model != "agnes-3.0-flash":
+            models_to_try.append("agnes-3.0-flash")
+
+        events_data = []
+        for i, event in enumerate(core_signals[:5], 1):
+            events_data.append({
+                'index': i,
+                'event_id': event.get('event_id', ''),
+                'headline': event.get('headline', '')[:80],
+                'clean_summary': event.get('clean_summary', '')[:200],
+                'source_count': event.get('source_count', 1),
+                'tags': event.get('tags', [])[:3],
+            })
+
+        system_prompt = """你是一个专业的AI技术内容创作者顾问。你的读者是关注AI开源项目与Agent技术的创作者（做公众号/视频/开源项目推荐）。
+
+请为每条AI新闻事件提供：
+1. why_it_matters: 该事件对"AI开源与Agent创作者"的具体价值（80-150字）
+   - 必须说明：选题价值、工具链影响、内容角度
+   - 禁止泛泛而谈"可能影响行业格局"
+   - 不同事件的评价角度必须实质不同
+
+2. suggested_action: 该创作者今天/本周可执行的具体动作（30-80字）
+   - 必须包含动词开头（如"克隆仓库"、"编写代码"、"录制视频"）
+   - 禁止空话如"标记为观察项"、"持续关注"、"定期回顾"
+   - 动作必须是具体的、可执行的
+
+输出格式为JSON数组，每个元素包含：
+{
+  "index": 事件序号(1-5),
+  "why_it_matters": "...",
+  "suggested_action": "..."
+}"""
+
+        user_message = f"""请为以下5条AI新闻事件提供评价和动作建议：
+
+{json.dumps(events_data, ensure_ascii=False, indent=2)}"""
+
+        last_error = None
+        for try_model in models_to_try:
+            try:
+                payload = {
+                    "model": try_model,
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message},
+                    ],
+                    "temperature": 0.3,
+                    "max_tokens": 2000,
+                }
+
+                url = f"{base_url}/chat/completions"
+                req = urllib.request.Request(
+                    url,
+                    data=json.dumps(payload).encode('utf-8'),
+                    headers={
+                        'Content-Type': 'application/json',
+                        'Authorization': f'Bearer {api_key}'
+                    },
+                    method='POST'
+                )
+
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    if resp.status != 200:
+                        last_error = f"HTTP {resp.status}"
+                        continue
+                    result = json.loads(resp.read().decode('utf-8'))
+
+                content = result['choices'][0]['message']['content']
+                response_data = json.loads(content)
+
+                importance_map = {}
+                action_map = {}
+                for item in response_data:
+                    idx = item['index']
+                    importance_map[idx] = item['why_it_matters']
+                    action_map[idx] = item['suggested_action']
+
+                usage = result.get('usage', {})
+                llm_usage = {
+                    'model': try_model,
+                    'input_tokens': usage.get('prompt_tokens', 0),
+                    'output_tokens': usage.get('completion_tokens', 0),
+                    'total_tokens': usage.get('total_tokens', 0),
+                }
+                return importance_map, action_map, llm_usage, None
+
+            except urllib.error.HTTPError as e:
+                last_error = f"HTTP {e.code}: {e.reason}"
+                continue
+            except Exception as e:
+                last_error = str(e)
+                continue
+
+        return None, None, None, f"llm_call_failed: {last_error}"
 
         # 构建批量请求
         events_data = []
@@ -882,14 +989,37 @@ class IntelligenceProcessor:
         h2 = e2.get('headline', '').lower()
         if h1 == h2:
             return True
-        # 共享关键词超过50%
+        # 共享关键词超过60%（提高阈值减少误合并）
         words1 = set(h1.split())
         words2 = set(h2.split())
         if words1 and words2:
             intersection = words1 & words2
             union = words1 | words2
-            return len(intersection) / len(union) > 0.5
+            return len(intersection) / len(union) > 0.6
         return False
+
+    def _check_cross_day_dedup(self, core_signals: List[Dict], date: str) -> List[Dict]:
+        """跨日去重：昨日核心故事今日降权或移入观察名单"""
+        yesterday = (datetime.strptime(date, '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
+        yesterday_file = Path('public/data/v2/daily-' + yesterday + '-v2.json')
+
+        if not yesterday_file.exists():
+            return core_signals
+
+        try:
+            with open(yesterday_file) as f:
+                yesterday_data = json.load(f)
+            yesterday_core = {e['headline'].lower()[:30] for e in yesterday_data.get('core_signals', [])}
+
+            # 对今日核心降权（分数降低10分）
+            for event in core_signals:
+                if event['headline'].lower()[:30] in yesterday_core:
+                    event['score']['total'] = max(0, event['score']['total'] - 10)
+                    event['_cross_day_duplicate'] = True
+        except Exception as e:
+            print(f"跨日去重失败: {e}", file=sys.stderr)
+
+        return core_signals
 
     def _has_noise_summary(self, text: str) -> bool:
         """检查摘要是否包含噪声"""
@@ -967,9 +1097,10 @@ class IntelligenceProcessor:
         return (healthy / max(1, sample_size)) * 100
 
     def _calc_freshness_score(self, items: List[Dict]) -> float:
-        """计算新鲜度分数（基于first_seen_at）"""
-        # 由于published_at都unknown，用first_seen_at估算
-        # 返回固定值，因为无法判断真实新鲜度
+        """计算新鲜度分数（暂用固定值）
+        原因: published_at全部为unknown，无法判断真实新鲜度
+        TODO: 待采集器支持时间提取后改为真实计算
+        """
         return 70.0
     
     def _build_source_health(self, sources: List[Dict]) -> List[Dict]:
