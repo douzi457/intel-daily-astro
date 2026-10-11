@@ -44,9 +44,9 @@ export async function GET({ request }: { request: Request }) {
 
     return intelItems.slice(0, 10).map((item: IntelItem) => {
       const meta = getPlatformMeta(item.platform, 'zh');
-      // 匹配 V2 评价
+      // 匹配 V2 评价（按 primary_item_id 精确匹配）
       const matched = v2Info.signals.find(
-        s => s.primary_item_id === item.id || s.why_it_matters.length > 20
+        s => s.primary_item_id === item.id
       );
       const description = matched?.why_it_matters
         ? `[${meta.label}] ${matched.why_it_matters}`
