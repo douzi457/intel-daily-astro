@@ -116,16 +116,24 @@ export const SECTION_CATEGORIES_EN: Record<string, SectionCategory> = {
 };
 
 /** 获取指定语言的导航标签 */
-export function getNavTabs(activeSections: string[], locale: 'zh' | 'en' = 'zh'): NavTab[] {
+export function getNavTabs(activeSections: string[], locale: 'zh' | 'en' = 'zh', includeFeatured: boolean = true): NavTab[] {
   const cats = locale === 'zh' ? SECTION_CATEGORIES_ZH : SECTION_CATEGORIES_EN;
-  return [
-    { id: 'featured', label: locale === 'zh' ? '精选' : 'Featured', icon: '⭐' },
-    ...activeSections.map(s => ({
+  const tabs: NavTab[] = [];
+
+  // 精选tab（可选）
+  if (includeFeatured) {
+    tabs.push({ id: 'featured', label: locale === 'zh' ? '精选' : 'Featured', icon: '⭐' });
+  }
+
+  // 实际有数据的分类
+  for (const s of activeSections) {
+    tabs.push({
       id: `section-${s}`,
       label: cats[s]?.name || s,
       icon: cats[s]?.icon || '📌',
-    })),
-  ];
+    });
+  }
+  return tabs;
 }
 
 /** 获取平台元数据（带默认值） */

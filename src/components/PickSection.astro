@@ -148,16 +148,18 @@ const catStats = activeCats
   )}
 
   <!-- ═══════════════════ 分类精选 ═══════════════════ -->
-  <div class="pick-masthead">
-    <h2 class="pick-title">📊 今日精选推荐</h2>
-    <div class="pick-cat-stats">
-      {catStats.slice(0, 5).map(cs => (
-        <span class="pick-cat-stat" style={`--stat-color:${scoreColor(cs.avgScore)}`}>
-          {cs.meta.icon} {cs.name} <em>{Math.round(cs.avgScore * 10) / 10}</em>
-        </span>
-      ))}
+  {activeCats.length > 0 && (
+    <div class="pick-masthead">
+      <h2 class="pick-title">📊 今日精选推荐</h2>
+      <div class="pick-cat-stats">
+        {catStats.slice(0, 5).map(cs => (
+          <span class="pick-cat-stat" style={`--stat-color:${scoreColor(cs.avgScore)}`}>
+            {cs.meta.icon} {cs.name} <em>{Math.round(cs.avgScore * 10) / 10}</em>
+          </span>
+        ))}
+      </div>
     </div>
-  </div>
+  )}
 
   <div class="pick-grid">
     {activeCats.map((cat) => {

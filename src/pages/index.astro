@@ -54,6 +54,9 @@ const trending = [...items]
 const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
 const highScoreCount = items.filter(i => i.score >= 7).length;
 
+// 计算精选是否有数据（用于条件渲染）
+const hasFeatured = v4Data && Object.values(v4Data.recommendations || {}).some(cat => (cat?.length || 0) > 0);
+
 // ── 页面标题与SEO ──
 const v4Date = v4Data?.date || today;
 const y = v4Date.slice(0,4);
@@ -78,7 +81,7 @@ const pageTitle = `${displayDate} AI/科技情报`;
 
 </div>
 
-<SectionNav activeSections={activeSections} locale="zh" />
+<SectionNav activeSections={activeSections} locale="zh" data={v4Data} />
 
 <div class="page">
   <!-- 每日精选 + 热搜 Hero（来自 dashboard_v4） -->

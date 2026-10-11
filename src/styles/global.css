@@ -95,6 +95,7 @@ a { color: inherit; text-decoration: none; }
   max-width: 1320px;
   margin: 0 auto;
   padding: 32px 24px 60px;
+  overflow-x: hidden;
 }
 
 @media (max-width: 640px) {
@@ -612,6 +613,9 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
   cursor: pointer;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .section-nav a:hover {
   color: var(--text-h);
@@ -627,6 +631,7 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
+  overflow-x: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -640,6 +645,12 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   gap: 28px;
   min-width: 0;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* ── Featured Bento ── */
@@ -647,6 +658,7 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+  overflow-x: hidden;
 }
 
 @media (min-width: 768px) {

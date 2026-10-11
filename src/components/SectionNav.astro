@@ -6,10 +6,14 @@ import { getNavTabs, SECTION_ORDER, SECTION_CATEGORIES_ZH, SECTION_CATEGORIES_EN
 interface Props {
   activeSections: string[];
   locale?: 'zh' | 'en';
+  data?: V4DailyData | null;
 }
 
-const { activeSections, locale = 'zh' } = Astro.props;
-const navTabs = getNavTabs(activeSections, locale);
+const { activeSections, locale = 'zh', data } = Astro.props;
+
+// 仅在有精选数据时包含精选tab
+const includeFeatured = data && data.recommendations && Object.values(data.recommendations).some(cat => (cat?.length || 0) > 0);
+const navTabs = getNavTabs(activeSections, locale, includeFeatured);
 ---
 
 <div class="section-nav-wrap">
