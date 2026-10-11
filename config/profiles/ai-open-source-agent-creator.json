@@ -1,0 +1,61 @@
+{
+  "id": "ai-open-source-agent-creator",
+  "name": "AI 开源与 Agent 创作者",
+  "description": "面向公众号创作者的 AI 开源、Agent 与开发者工具画像",
+  "include_keywords": [
+    "开源模型", "Agent", "OpenClaw", "编程助手", "开发者工具",
+    "大模型", "LLM", "AI coding", "agent framework", "open source",
+    "coding agent", "AI security", "model evaluation", "benchmark",
+    "GPT", "Claude", "Gemini", "Llama", "OpenAI", "Anthropic",
+    "DeepSeek", "Qwen", "Grok", "xAI", "Mistral",
+    "AutogPT", "BabyAGI", "LangChain", "LlamaIndex", "RAG",
+    "machine learning", "deep learning", "neural network",
+    "transformer", "fine-tuning", "prompt engineering",
+    "AI tool", "AI product", "AI startup", "AI news",
+    "coding assistant", "IDE plugin", "developer workflow",
+    "GitHub", "VSCode", "cursor", "copilot", "windsurf"
+  ],
+  "exclude_keywords": [
+    "娱乐", "明星", "消费电子促销", "体育", "游戏发布",
+    "手机评测", "汽车新闻", "财经市场", "股票", "加密货币",
+    "社交网络八卦", "网红", "追星", "电视剧", "电影票房",
+    "减肥", "健身", "美食", "旅游", "天气", "星座"
+  ],
+  "entities_watch": [
+    {"name": "OpenAI", "type": "company"},
+    {"name": "Anthropic", "type": "company"},
+    {"name": "Google DeepMind", "type": "company"},
+    {"name": "Meta AI", "type": "company"},
+    {"name": "Microsoft", "type": "company"},
+    {"name": "Amazon", "type": "company"},
+    {"name": "阿里巴巴", "type": "company"},
+    {"name": "腾讯", "type": "company"},
+    {"name": "字节跳动", "type": "company"},
+    {"name": "Baidu", "type": "company"},
+    {"name": "智谱AI", "type": "company"},
+    {"name": "月之暗面", "type": "company"},
+    {"name": "MiniMax", "type": "company"}
+  ],
+  "category_weights": {
+    "AI/大模型": 1.5,
+    "数码/硬件": 0.8,
+    "开源/工具": 1.3,
+    "科技热点": 0.6,
+    "International Tech": 1.4,
+    "Chinese Tech": 1.2
+  },
+  "source_boost": [
+    "Hacker News", "TechCrunch", "The Verge", "Ars Technica",
+    "Wired", "GitHub Trending", "MIT Tech Review",
+    "InfoQ", "36氪", "量子位", "机器之心"
+  ],
+  "source_block": [
+    "Baidu", "Douyin", "Weibo", "Toutiao"
+  ],
+  "languages": ["zh", "en"],
+  "core_limit": 5,
+  "watch_limit": 12,
+  "action_limit": 3,
+  "reading_minutes": 10,
+  "confidence_threshold": 0.65
+}

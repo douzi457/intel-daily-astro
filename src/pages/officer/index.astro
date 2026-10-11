@@ -1,0 +1,212 @@
+---
+// Intel Officer Dashboard — AI 情报官驾驶舱
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { V2DailyData } from '../../lib/types-v2.ts';
+
+let v2Data: V2DailyData | null = null;
+try {
+  const v2Index = await import('../../../public/data/v2/index.json').catch(() => null);
+  if (v2Index?.default?.latest_date) {
+    const mod = await import(`../../../public/data/v2/daily-${v2Index.default.latest_date}-v2.json`).catch(() => null);
+    v2Data = mod?.default as V2DailyData | null;
+  }
+} catch {}
+
+const date = v2Data?.date || new Date().toISOString().slice(0, 10);
+const qualityGrade = v2Data?.quality?.grade || 'pilot';
+const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pilot' ? '#f59e0b' : '#ef4444';
+---
+
+<BaseLayout title="AI 情报官 | 豆子实验室">
+  <style>
+    :root {
+      --color-bg: #0f172a;
+      --color-surface: #1e293b;
+      --color-border: #334155;
+      --color-text: #f8fafc;
+      --color-text-muted: #94a3b8;
+      --color-accent: #3b82f6;
+      --color-core: #10b981;
+      --color-watch: #f59e0b;
+      --color-action: #8b5cf6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--color-bg); color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    
+    .topbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 18px; font-weight: 600; }
+    .brand span { color: var(--color-accent); }
+    .profile-badge { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--color-accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+    .meta-info { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--color-text-muted); }
+    .quality-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.1); }
+    .quality-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-quality, var(--color-watch)); }
+    
+    main { padding: 32px 0; }
+    .executive-summary { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+    .section-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 16px; }
+    .summary-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .summary-item { display: flex; gap: 12px; }
+    .summary-number { background: var(--color-accent); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+    .summary-text { font-size: 16px; }
+    
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 380px; gap: 24px; margin-bottom: 32px; }
+    @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
+    
+    .core-signals { display: flex; flex-direction: column; gap: 16px; }
+    .signal-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; }
+    .signal-card:hover { border-color: var(--color-core); }
+    .signal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .signal-rank { background: var(--color-core); color: white; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+    .signal-title { font-size: 16px; font-weight: 600; flex: 1; }
+    .signal-title a { color: var(--color-text); text-decoration: none; }
+    .signal-title a:hover { color: var(--color-core); }
+    .signal-score { font-size: 14px; color: var(--color-text-muted); }
+    .score-value { font-size: 20px; font-weight: 700; color: var(--color-core); }
+    .signal-summary { font-size: 14px; color: var(--color-text-muted); margin-bottom: 12px; }
+    .signal-section { margin-bottom: 12px; }
+    .signal-label { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 4px; }
+    .signal-value { font-size: 14px; }
+    .signal-value.important { color: var(--color-core); }
+    .signal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+    .tag.highlight { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--color-core); }
+    
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .actions-section, .quality-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; }
+    .action-card { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+    .action-type { display: inline-block; background: var(--color-action); color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
+    .action-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .action-meta { font-size: 12px; color: var(--color-text-muted); }
+    
+    .watchlist-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; margin-bottom: 32px; }
+    .watchlist-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .watchlist-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+    .watchlist-rank { font-size: 12px; color: var(--color-text-muted); width: 24px; }
+    .watchlist-title { font-size: 14px; flex: 1; }
+    .watchlist-title a { color: var(--color-text); text-decoration: none; }
+    .watchlist-title a:hover { color: var(--color-watch); }
+    .watchlist-score { font-size: 14px; font-weight: 600; color: var(--color-watch); width: 40px; text-align: right; }
+    
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--color-text-muted); }
+    .funnel { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-muted); margin-bottom: 24px; }
+    .funnel-number { font-weight: 600; color: var(--color-text); }
+  </style>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">豆子实验室 · <span>AI 情报官</span></div>
+      <div class="profile-badge">AI 开源与 Agent 创作者</div>
+      <div class="meta-info">
+        <span>{date}</span>
+        <span class="quality-badge" style="--color-quality: {qualityColor}">
+          <span class="quality-dot"></span>
+          {v2Data?.quality?.total || 0}/100 {qualityGrade.toUpperCase()}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      {!v2Data ? (
+        <div class="empty-state">
+          <h2>暂无情报数据</h2>
+          <p>请稍后再试，或检查数据采集状态</p>
+        </div>
+      ) : (
+        <>
+          <div class="funnel">
+            <div class="funnel-item"><span class="funnel-number">{v2Data.stats.raw_items}</span> 条原料</div>
+            <span>→</span>
+            <div class="funnel-item"><span class="funnel-number">{v2Data.stats.unique_events}</span> 个事件</div>
+            <span>→</span>
+            <div class="funnel-item"><span class="funnel-number">{v2Data.stats.core_signals}</span> 条核心</div>
+          </div>
+
+          <section class="executive-summary">
+            <div class="section-title">今日结论</div>
+            <ol class="summary-list">
+              {v2Data.executive_summary.map((text: string, i: number) => (
+                <li class="summary-item">
+                  <span class="summary-number">{i + 1}</span>
+                  <span class="summary-text">{text}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <div class="dashboard-grid">
+            <section class="core-signals">
+              <div class="section-title">核心信号</div>
+              {v2Data.core_signals.map((event, i: number) => (
+                <article class="signal-card">
+                  <div class="signal-header">
+                    <div class="signal-rank">{i + 1}</div>
+                    <h3 class="signal-title">{event.headline}</h3>
+                    <div class="signal-score"><span class="score-value">{event.score.total}</span><span>分</span></div>
+                  </div>
+                  {event.clean_summary && <p class="signal-summary">{event.clean_summary}</p>}
+                  {event.why_it_matters && (
+                    <div class="signal-section">
+                      <div class="signal-label">为什么对你重要</div>
+                      <div class="signal-value important">{event.why_it_matters}</div>
+                    </div>
+                  )}
+                  {event.suggested_action?.text && (
+                    <div class="signal-section">
+                      <div class="signal-label">建议动作</div>
+                      <div class="signal-value">{event.suggested_action.text}</div>
+                    </div>
+                  )}
+                  <div class="signal-tags">
+                    {event.tags.map((tag: string) => (<span class={`tag ${i < 3 ? 'highlight' : ''}`}>{tag}</span>))}
+                  </div>
+                </article>
+              ))}
+            </section>
+
+            <aside class="sidebar">
+              <section class="actions-section">
+                <div class="section-title">今日动作</div>
+                {v2Data.actions.map((action: any, i: number) => (
+                  <div class="action-card">
+                    <span class="action-type">{action.type || 'watch'}</span>
+                    <div class="action-title">{action.text}</div>
+                    {action.evidence_event_id && <div class="action-meta">证据: 信号 #{i + 1}</div>}
+                  </div>
+                ))}
+              </section>
+
+              <section class="quality-section">
+                <div class="section-title">质量报告</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px;">
+                  <div><div style="color: var(--color-text-muted)">原料数</div><div style="font-weight: 600">{v2Data.stats.raw_items}</div></div>
+                  <div><div style="color: var(--color-text-muted)">唯一事件</div><div style="font-weight: 600">{v2Data.stats.unique_events}</div></div>
+                  <div><div style="color: var(--color-text-muted)">空摘要率</div><div style="font-weight: 600">{(v2Data.quality.metrics.empty_summary_rate * 100).toFixed(1)}%</div></div>
+                  <div><div style="color: var(--color-text-muted)">重复率</div><div style="font-weight: 600">{(v2Data.quality.metrics.exact_duplicate_rate * 100).toFixed(1)}%</div></div>
+                </div>
+              </section>
+            </aside>
+          </div>
+
+          {v2Data.watchlist.length > 0 && (
+            <section class="watchlist-section">
+              <div class="section-title">观察名单 ({v2Data.watchlist.length})</div>
+              <ul class="watchlist-list">
+                {v2Data.watchlist.map((event, i: number) => (
+                  <li class="watchlist-item">
+                    <span class="watchlist-rank">{i + 1}</span>
+                    <span class="watchlist-title">{event.headline}</span>
+                    <span class="watchlist-score">{event.score.total}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </>
+      )}
+    </div>
+  </main>
+</BaseLayout>
