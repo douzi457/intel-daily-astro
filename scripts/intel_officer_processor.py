@@ -221,6 +221,20 @@ class IntelligenceProcessor:
     
     def _normalize_items(self, items: List[Dict]) -> List[Dict]:
         return [self._normalize_item(item, item.get('category', 'Unknown')) for item in items if self._normalize_item(item, item.get('category', 'Unknown'))]
+
+    def _normalize_punctuation(self, text: str) -> str:
+        """规范化英文标点，修复渲染bug"""
+        if not text:
+            return text
+        # 修复智能引号 → 普通引号
+        text = text.replace('’', "'").replace('‘', "'")
+        text = text.replace('–', '-').replace('—', '-')
+        # 清除多余空格（特别是标点后的空格）
+        text = text.replace("' s", "'s").replace("'t ", "'t ").replace("'re ", "'re ")
+        text = text.replace("'m ", "'m ").replace("'ll ", "'ll ").replace("'d ", "'d ")
+        # 清除其他多余空格
+        text = ' '.join(text.split())
+        return text
     
     def _normalize_item(self, item: Dict, category: str) -> Optional[Dict]:
         url = item.get('url', '')
@@ -228,9 +242,12 @@ class IntelligenceProcessor:
         item_id = URLNormalizer.generate_id(canonical_url, item.get('source', ''))
         
         title = item.get('title', '')
+        # 规范化标点
+        title = self._normalize_punctuation(title)
         raw_summary = item.get('summary') or ''
         if not raw_summary or len(raw_summary) < 10:
             raw_summary = title
+        raw_summary = self._normalize_punctuation(raw_summary)
         
         clean_summary = SummaryCleaner.clean(raw_summary)
         has_noise = SummaryCleaner.has_noise(clean_summary)
@@ -682,7 +699,7 @@ class IntelligenceProcessor:
             return None, None, None
 
     def _generate_actions(self, core_signals: List[Dict], llm_importance: Dict = None, llm_actions: Dict = None) -> List[Dict]:
-        """生成动作列表，带跨日去重"""
+        """生成动作列表，带跨日去重和有效性过滤"""
         action_limit = self.profile.get('action_limit', 3)
         actions = []
         seen_actions = set()
@@ -700,21 +717,28 @@ class IntelligenceProcessor:
             except:
                 pass
 
+        # 过滤无效动作：必须是具体动作，不能是空话
+        invalid_keywords = ['标记为观察项', '持续关注', '定期回顾', '等待更多', '建议关注']
+
         for i, event in enumerate(core_signals[:action_limit], 1):
-            # 优先使用LLM生成的动作
             if llm_actions and i in llm_actions:
                 action_text = llm_actions[i]
             else:
                 action_text = self._suggest_action(event, seen_actions)['text']
 
-            if action_text not in seen_actions:
+            # 过滤空话
+            if any(kw in action_text for kw in invalid_keywords):
+                continue
+
+            if action_text not in seen_actions and len(action_text) > 15:
                 actions.append({
-                    'type': 'try' if '克隆' in action_text or '搭建' in action_text or '编写' in action_text else 'watch',
+                    'type': 'try' if any(kw in action_text for kw in ['克隆', '搭建', '编写', '测试', '录制', '部署']) else 'watch',
                     'text': action_text,
                     'evidence_event_id': event['event_id'],
                     'date': today,
                 })
                 seen_actions.add(action_text)
+
         return actions[:action_limit]
 
     def _calculate_score(self, original_score: float, entities: List[Dict], source_name: str) -> Dict:
@@ -755,7 +779,7 @@ class IntelligenceProcessor:
 
             event = {
                 'event_id': event_id,
-                'headline': main_item['title'],
+                'headline': self._normalize_punctuation(main_item['title']),
                 'clean_summary': main_item['clean_summary'] or main_item['raw_summary'][:100],
                 'primary_item_id': main_item['id'],
                 'url': main_item['url'],
@@ -826,17 +850,34 @@ class IntelligenceProcessor:
         return core_signals, watchlist, ignored
 
     def _generate_summary(self, core_signals: List[Dict], actions: List[Dict]) -> List[str]:
+        """生成今日结论 - 必须是判断句，不是标题截断"""
         summary = []
-        if core_signals:
-            top = core_signals[0]
-            summary.append(f"{top['headline']}：{top['clean_summary'][:50]}...")
-        if len(core_signals) > 1:
-            second = core_signals[1]
-            summary.append(f"{second['headline']}显示{second['why_it_matters'][:30]}...")
-        if actions:
-            summary.append(f"建议优先关注：{actions[0]['text'][:30]}...")
+        if not core_signals:
+            return ["暂无情报，建议关注历史趋势"]
+
+        # 生成3条结论性语句
+        for i, event in enumerate(core_signals[:3], 1):
+            # 使用LLM生成的why_it_matters作为结论基础
+            why = event.get('why_it_matters', '')
+            action = event.get('suggested_action', {}).get('text', '')
+
+            if i == 1:
+                # 第一条：核心判断
+                summary.append(f"{event['headline'][:50]}... — {why[:80]}...")
+            elif i == 2:
+                # 第二条：关联事件
+                summary.append(f"结合{event['headline'][:30]}...，建议关注该方向进展")
+            else:
+                # 第三条：行动导向
+                if action and action != '标记为观察项':
+                    summary.append(f"优先执行：{action[:60]}...")
+                else:
+                    summary.append(f"持续关注：{event['headline'][:40]}...")
+
+        # 补齐到3条
         while len(summary) < 3:
-            summary.append("暂无更多可执行情报，建议关注历史趋势变化。")
+            summary.append("暂无更多可执行情报，建议关注历史趋势变化")
+
         return summary[:3]
     
     def _calculate_quality(self, items: List[Dict], events: List[Dict], core_signals: List[Dict], watch_count: int = 0, action_count: int = 0) -> Dict:
