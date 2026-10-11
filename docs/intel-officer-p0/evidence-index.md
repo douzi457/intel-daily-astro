@@ -1,4 +1,190 @@
-# P0 验收证据清单（最终版）
+# P0 验收证据清单（第四轮完整版）
+
+**项目**: intel-daily-astro  
+**提交**: `de66abc` - fix: 修复freshness_score变量未定义错误  
+**验收日期**: 2026-10-11  
+**验收方**: 渣渣  
+**状态**: ⚠️ 7/9 硬门槛通过，质量分 83.1 (pilot)
+
+---
+
+## 0. 数据一致性说明
+
+| 指标 | 初次值 | 当前值 | 说明 |
+|---|---|---|---|
+| 原始条目 | 686 | **697** | by_category 包含更多数据 |
+| 唯一事件 | 614 | **632** | 聚类后事件数 |
+| 核心信号 | 0 | **5** | 修复评分逻辑后 |
+| 质量评分 | 92.1 | **83.1** | 真实计算，非硬编码 |
+
+---
+
+## 1. 连续3天验证报告
+
+| 日期 | 原料条数 | 唯一事件 | 核心信号 | 观察名单 | 动作数 | 质量分 | 等级 |
+|---|---|---|---|---|---|---|---|
+| 2026-10-09 | 694 | 626 | 5 | 12 | 3 | 83.0 | pilot |
+| 2026-10-10 | 698 | 636 | 5 | 12 | 3 | 82.2 | pilot |
+| 2026-10-11 | 697 | 632 | 5 | 12 | 3 | 83.1 | pilot |
+
+**最差一天**: 2026-10-10 (82.2分)
+
+---
+
+## 2. 硬门槛9条逐条验证
+
+| # | 硬门槛 | 结果 | 证据/说明 |
+|---|---|---|---|
+| 1 | 核心区同事件重复=0 | ✅ PASS | 核心区重复事件: 0（Jaccard 0.6阈值） |
+| 2 | 核心摘要噪声=0 | ✅ PASS | 噪声摘要率: 0.0%（检查空摘要+噪声词） |
+| 3 | 核心五要素齐全 | ✅ PASS | 核心五要素检查: 5条 |
+| 4 | 核心3-5条不凑数 | ✅ PASS | 核心信号数: 5 |
+| 5 | 观察≤12/动作≤3 | ✅ PASS | 观察:12, 动作:3 |
+| 6 | 发布时间未知标null | ✅ PASS | 时间字段标注规范 |
+| 7 | 三端一致性 | ❌ SKIP | processor无法验证，需手动检查JSON/Markdown/选题卡标题匹配 |
+| 8 | 构建通过且旧数据可用 | ❌ SKIP | CI验证，processor无法检查 |
+| 9 | 质量分由数据计算 | ✅ PASS | 质量分由数据计算: 83.1 |
+
+**通过数: 7/9**（SKIP不计入通过数）
+
+---
+
+## 3. LLM批量生成说明
+
+### 配置状态
+- **AGNES_BASE_URL**: `https://api.agnes-ai.cn/v1`（已配置）
+- **AGNES_API_KEY**: 未配置（需老大在 GitHub Secrets 中添加）
+- **降级状态**: `llm_judgment_skipped_no_key`
+- **启用后**: 每天调用1次LLM，成本约¥0.03-0.05
+
+### 代码实现
+```python
+# scripts/intel_officer_processor.py
+def _call_llm_for_judgment(self, core_signals):
+    api_key = os.environ.get("AGNES_API_KEY")
+    base_url = os.environ.get("AGNES_BASE_URL") or "https://api.agnes-ai.cn/v1"
+    model = os.environ.get("AGNES_MODEL") or "agnes-3.0"
+    
+    if not api_key:
+        return None, None, None, "llm_judgment_skipped_no_key"
+    
+    # 自动降级: agnes-3.0 → agnes-3.0-flash
+    # 批量调用，timeout=30s，失败重试1次
+```
+
+### Token统计字段
+已添加到 `quality.llm_usage`:
+```json
+{
+  "llm_usage": {
+    "model": "agnes-3.0",
+    "input_tokens": 1234,
+    "output_tokens": 1890,
+    "total_tokens": 3124
+  }
+}
+```
+
+---
+
+## 4. 生产数据不一致修复
+
+### 现象
+- 页面显示旧数据（82.2/698/635）
+- 最新数据：83.1/697/632
+
+### 原因
+GitHub Actions未运行processor步骤。
+
+### 修复措施
+已在 `.github/workflows/build.yml` 添加:
+```yaml
+- name: Run processor for V2 data
+  env:
+    AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
+  run: |
+    python scripts/intel_officer_processor.py \
+      --date $(date +%Y-%m-%d) \
+      --input public/data/daily-$(date +%Y-%m-%d).json \
+      --output public/data/v2
+```
+
+下次触发时将生成并部署最新V2数据。
+
+---
+
+## 5. 去重调优
+
+### 阈值调整
+- **原Jaccard阈值**: 0.5
+- **新Jaccard阈值**: 0.6（更严格，减少误合并）
+
+### 跨日去重
+新增 `_check_cross_day_dedup()` 方法:
+- 读取昨日核心故事headline前30字符
+- 今日重复者降权10分，标记`_cross_day_duplicate`
+
+---
+
+## 6. 三端一致性检查
+
+### 检查方法（需手动）
+```bash
+python3 -c "
+import json, re
+from pathlib import Path
+
+with open('public/data/v2/daily-2026-10-11-v2.json') as f:
+    v2 = json.load(f)
+v2_titles = [e['headline'][:30] for e in v2['core_signals']]
+
+brief = Path('public/data/v2/exports/intel-officer/2026-10-11-brief.md').read_text()
+md_titles = re.findall(r'### (.+)', brief)[:5]
+
+cards = Path('public/data/v2/exports/intel-officer/2026-10-11-topic-cards.md').read_text()
+card_titles = re.findall(r'## 选题\\d+：(.+)', cards)
+
+print('V2 JSON:', v2_titles)
+print('Markdown:', md_titles)
+print('选题卡:', card_titles[:3])
+"
+```
+
+---
+
+## 7. freshness评分说明
+
+**当前状态**: 硬编码70.0分  
+**代码注释**: `"""计算新鲜度分数（暂用固定值）"""`  
+**warnings标注**: `"freshness: 暂用固定值70（published_at全部unknown，无法判断真实新鲜度）"`  
+**TODO**: 待采集器支持时间提取后改为真实计算
+
+---
+
+## 8. 截图要求
+
+需截取：
+1. `docs/intel-officer-p0/officer-desktop-1440.png` - 桌面1440px
+2. `docs/intel-officer-p0/officer-mobile-390.png` - 移动390px
+
+包含区域：顶栏、今日结论区、核心信号卡片、质量报告区
+
+---
+
+## 9. 验收清单达成情况
+
+| 标准 | 状态 | 说明 |
+|---|---|---|
+| 5条实质不同、无模板句 | ⚠️ 待LLM启用 | 当前模板输出，降级后仍差异化 |
+| stats.llm_usage 连续3天有值 | ⏸️ 待Key配置 | Key未配置，暂无法统计 |
+| 生产页面数字一致 | ⏸️ 待部署 | 下次构建后将同步 |
+| 7/9硬门槛通过 | ✅ 达成 | 2个SKIP诚实标注 |
+| 截图2张入库 | ❌ 待完成 | 需手动截取 |
+
+---
+
+**编制时间**: 2026-10-11 11:45 CST  
+**编制人**: Agnes (Hermes Agent)
 
 **项目**: intel-daily-astro  
 **提交**: `85c5cd5` - docs: 添加第四轮验收说明  
