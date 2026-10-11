@@ -38,27 +38,34 @@ export async function GET({ request }: { request: Request }) {
   }
 
   const items = recentDates.flatMap(d => {
-    const dayData = getDayData(d, 'zh');
-    const intelItems: IntelItem[] = dayData.items || [];
-    const v2Info = v2Map[d] || { signals: [] };
+  const dayData = getDayData(d, 'zh');
+  const intelItems: IntelItem[] = dayData.items || [];
+  const v2Info = v2Map[d] || { signals: [] };
 
-    return intelItems.slice(0, 10).map((item: IntelItem) => {
-      const meta = getPlatformMeta(item.platform, 'zh');
-      // 匹配 V2 评价（按 primary_item_id 精确匹配）
-      const matched = v2Info.signals.find(
-        s => s.primary_item_id === item.id
-      );
-      const description = matched?.why_it_matters
-        ? `[${meta.label}] ${matched.why_it_matters}`
-        : `${item.desc || ''}`.slice(0, 200);
-      return {
-        title: item.title,
-        link: item.url,
-        pubDate: new Date(item.date + 'T08:00:00+08:00'),
-        description,
-        categories: [item.platform, item.category],
-      };
-    });
+  // 构建 URL → signal 的查找表（去除尾部斜杠，统一小写）
+  const signalByUrl = new Map<string, { why_it_matters: string; headline: string }>();
+  for (const s of v2Info.signals) {
+    const url = (s.url || '').replace(/\/$/, '').toLowerCase();
+    if (url) signalByUrl.set(url, { why_it_matters: s.why_it_matters || '', headline: s.headline || '' });
+  }
+
+  return intelItems.slice(0, 10).map((item: IntelItem) => {
+    const meta = getPlatformMeta(item.platform, 'zh');
+    // 按 URL 精确匹配 V2 评价
+    const itemUrl = (item.url || '').replace(/\/$/, '').toLowerCase();
+    const matched = signalByUrl.get(itemUrl);
+    // sanity check：匹配到的 signal 标题须与 item 标题相关（URL 已保证同一事件）
+    const description = matched?.why_it_matters && matched.headline?.trim()
+      ? `[${meta.label}] ${matched.why_it_matters}`
+      : `${item.desc || ''}`.slice(0, 200);
+    return {
+      title: item.title,
+      link: item.url,
+      pubDate: new Date(item.date + 'T08:00:00+08:00'),
+      description,
+      categories: [item.platform, item.category],
+    };
+  });
   });
 
   return rss({
