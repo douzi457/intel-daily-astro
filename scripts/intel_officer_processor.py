@@ -506,12 +506,13 @@ class IntelligenceProcessor:
 
         api_key = os.environ.get("AGNES_API_KEY")
         base_url = os.environ.get("AGNES_BASE_URL") or "https://api.agnes-ai.cn/v1"
-        model = os.environ.get("AGNES_MODEL") or "agnes-3.0"
+        # 默认模型改为flash版本，官方文档仅列出此模型
+        model = os.environ.get("AGNES_MODEL") or "agnes-3.0-flash"
 
         if not api_key:
             return None, None, None, "llm_judgment_skipped_no_key"
 
-        # 尝试主模型，如失败则降级到flash
+        # 尝试主模型，如失败则降级到另一版本
         models_to_try = [model]
         if model != "agnes-3.0-flash":
             models_to_try.append("agnes-3.0-flash")
@@ -601,10 +602,29 @@ class IntelligenceProcessor:
                 return importance_map, action_map, llm_usage, None
 
             except urllib.error.HTTPError as e:
+                # 记录HTTP错误但不中断，尝试下一个模型
                 last_error = f"HTTP {e.code}: {e.reason}"
+                # 解析错误类型（如model_not_found, unauthorized等）
+                try:
+                    error_body = json.loads(e.read().decode('utf-8'))
+                    if isinstance(error_body, dict):
+                        err_type = error_body.get('error', {}).get('type', e.reason)
+                        last_error = f"HTTP {e.code}: {err_type}"
+                except:
+                    pass
+                print(f"[LLM] 模型 {try_model} 调用失败: {last_error}", file=sys.stderr)
+                continue
+            except urllib.error.URLError as e:
+                last_error = f"网络错误: {e.reason}"
+                print(f"[LLM] 网络异常: {last_error}", file=sys.stderr)
+                continue
+            except json.JSONDecodeError as e:
+                last_error = f"JSON解析错误: {str(e)}"
+                print(f"[LLM] 响应解析失败: {last_error}", file=sys.stderr)
                 continue
             except Exception as e:
-                last_error = str(e)
+                last_error = f"{type(e).__name__}: {str(e)[:100]}"  # 截断过长消息
+                print(f"[LLM] 未预期异常: {last_error}", file=sys.stderr)
                 continue
 
         return None, None, None, f"llm_call_failed: {last_error}"
@@ -761,33 +781,45 @@ class IntelligenceProcessor:
         return core_signals, watchlist, ignored
 
     def _generate_summary(self, core_signals: List[Dict], actions: List[Dict]) -> List[str]:
-        """生成今日结论 - 必须是判断句，不是标题截断"""
+        """生成今日结论 - 必须是完整判断句，不许截断标题"""
         summary = []
         if not core_signals:
             return ["暂无情报，建议关注历史趋势"]
 
-        # 生成3条结论性语句
-        for i, event in enumerate(core_signals[:3], 1):
-            # 使用LLM生成的why_it_matters作为结论基础
+        # 收集LLM生成的完整内容
+        llm_whys = []
+        llm_actions = []
+        for event in core_signals[:3]:
             why = event.get('why_it_matters', '')
-            action = event.get('suggested_action', {}).get('text', '')
+            action = event.get('suggested_action', {})
+            if isinstance(action, dict):
+                action = action.get('text', '')
+            llm_whys.append(why)
+            llm_actions.append(action)
 
-            if i == 1:
-                # 第一条：核心判断
-                summary.append(f"{event['headline'][:50]}... — {why[:80]}...")
-            elif i == 2:
-                # 第二条：关联事件
-                summary.append(f"结合{event['headline'][:30]}...，建议关注该方向进展")
-            else:
-                # 第三条：行动导向
-                if action and action != '标记为观察项':
-                    summary.append(f"优先执行：{action[:60]}...")
-                else:
-                    summary.append(f"持续关注：{event['headline'][:40]}...")
+        # 第1条：核心事件判断
+        if llm_whys[0]:
+            summary.append(llm_whys[0])
+        else:
+            summary.append(f"{core_signals[0].get('headline', 'AI领域')}今日出现重要动态，建议持续关注。")
 
-        # 补齐到3条
-        while len(summary) < 3:
-            summary.append("暂无更多可执行情报，建议关注历史趋势变化")
+        # 第2条：关联事件或趋势判断
+        if len(core_signals) > 1 and llm_whys[1]:
+            summary.append(llm_whys[1])
+        elif len(core_signals) > 1:
+            summary.append(f"同日{core_signals[1].get('headline', '相关事件')}亦反映同类趋势，可纳入选题储备。")
+        else:
+            summary.append("当前情报集中在单一方向，建议拓宽信息源以获取多元视角。")
+
+        # 第3条：行动导向
+        if llm_actions[2] and len(llm_actions[2]) > 15 and '观察' not in llm_actions[2]:
+            summary.append(llm_actions[2])
+        elif llm_actions[1] and len(llm_actions[1]) > 15 and '观察' not in llm_actions[1]:
+            summary.append(llm_actions[1])
+        elif llm_actions[0] and len(llm_actions[0]) > 15 and '观察' not in llm_actions[0]:
+            summary.append(llm_actions[0])
+        else:
+            summary.append("当前无明确可执行动作，建议持续观察后续进展。")
 
         return summary[:3]
     

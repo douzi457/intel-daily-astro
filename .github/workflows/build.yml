@@ -42,13 +42,25 @@ jobs:
       - name: Run processor for V2 data
         env:
           AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
+          AGNES_BASE_URL: ${{ secrets.AGNES_BASE_URL || 'https://api.agnes-ai.cn/v1' }}
+          AGNES_MODEL: ${{ secrets.AGNES_MODEL || 'agnes-3.0-flash' }}
         run: |
           python scripts/intel_officer_processor.py \
             --date $(date +%Y-%m-%d) \
             --input public/data/daily-$(date +%Y-%m-%d).json \
             --output public/data/v2
 
-      # ── 2. 构建并部署 ──
+      # ── 先提交数据，确保构建使用最新数据 ──
+      # 注意：push会触发新workflow，但由于concurrency取消机制，只保留最新一次
+      - name: Commit daily data
+        run: |
+          git config user.name "intel-daily-bot"
+          git config user.email "bot@dianda.dpdns.org"
+          git add -A src/data/ public/data/
+          git diff --cached --quiet || git commit -m "auto: daily data $(date +%Y-%m-%d)"
+          git push || echo "Push skipped (likely recursion prevention)"
+
+      # ── 构建并部署 ──
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -62,14 +74,6 @@ jobs:
           npm run build
           npx wrangler pages deploy dist/ --project-name=intel-daily-astro --branch=main
 
-      # ── 3. 回写数据到仓库（保留最近7天） ──
+      # ── 清理旧数据（保留最近7天） ──
       - name: Clean up old data (>7 days)
         run: python scripts/cleanup_data.py
-
-      - name: Commit daily data
-        run: |
-          git config user.name "intel-daily-bot"
-          git config user.email "bot@dianda.dpdns.org"
-          git add -A src/data/ public/data/
-          git diff --cached --quiet || git commit -m "auto: daily data $(date +%Y-%m-%d)"
-          git push
