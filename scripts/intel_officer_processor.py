@@ -386,28 +386,69 @@ class IntelligenceProcessor:
             if not found_action:
                 result = {'type': 'watch', 'text': '标记为观察项，等待更多细节后评估影响'}
 
-        # 去重
+        # 去重：如果结果与已输出文本重复，添加差异化后缀
         action_text = result['text']
         if action_text in seen_actions:
-            # 找到差异化变体
+            # 生成差异化变体
             variations = {
-                'clone官方仓库': '深入阅读源码架构，评估自定义修改的可行性',
-                '搭建最小Demo': '构建完整原型系统，验证关键路径的稳定性',
-                '整理Release Notes': '制作新功能演示视频，面向社区分享',
-                '追踪产品详情': '梳理产品演进路线，撰写趋势分析文章',
-                '整理评测数据': '复现关键实验，验证评测方法的严谨性',
-                '评估当前系统': '建立安全审计清单，定期扫描同类风险',
-                '关注API定价': '计算迁移成本，制定分阶段替代方案',
-                '关注AI安全实践': '学习Safe RLHF方法，优化自身模型训练流程',
-                '关注Gemini能力': '对比GPT和Gemini在多模态任务上的表现',
-                '关注Llama系列': '跟踪许可证变更历史，规划合规使用策略',
+                '标记为观察项': [
+                    '深入研究该领域进展，等待关键细节后决策',
+                    '加入监控列表，定期回顾变化趋势',
+                    '建立事件追踪，关注后续发展动向',
+                ],
+                '关注AI安全实践': [
+                    '跟踪Anthropic对齐研究方向，评估技术路线',
+                    '研究Constitutional AI实践，借鉴到自身系统',
+                    '关注AI安全评测方法，提升模型可信度',
+                ],
+                '学习Safe RLHF': [
+                    '实践RLHF方法，优化模型训练流程',
+                    '研究人类反馈机制，提升模型安全性',
+                    '跟踪Safe RLHF论文进展，复现关键实验',
+                ],
+                '克隆官方仓库': [
+                    '深入阅读源码架构，评估自定义修改可行性',
+                    '搭建开发环境，验证基础功能运行',
+                    '参与社区讨论，了解项目路线图',
+                ],
+                '搭建最小Demo': [
+                    '构建完整原型系统，验证关键路径稳定性',
+                    '设计集成方案，评估迁移成本',
+                    '编写测试用例，确保功能兼容性',
+                ],
+                '整理Release Notes': [
+                    '制作新功能演示视频，面向社区分享',
+                    '编写技术博客，分析API变更影响',
+                    '组织团队培训，同步更新信息',
+                ],
+                '追踪产品详情': [
+                    '梳理产品演进路线，撰写趋势分析',
+                    '对比竞品方案，找出差异化优势',
+                    '分析用户反馈，预判产品方向',
+                ],
+                '整理评测数据': [
+                    '复现关键实验，验证评测方法严谨性',
+                    '制作可视化对比图表，便于理解差异',
+                    '撰写选型指南，辅助技术决策',
+                ],
+                '评估当前系统': [
+                    '建立安全审计清单，定期扫描同类风险',
+                    '制定应急响应预案，降低潜在损失',
+                    '组织安全培训，提升团队意识',
+                ],
+                '关注API定价': [
+                    '计算迁移成本，制定分阶段替代方案',
+                    '对比云服务报价，优化成本控制',
+                    '设计降级策略，降低供应商依赖',
+                ],
             }
-            for key, variant in variations.items():
-                if key in action_text or key in result['text']:
-                    new_text = variant
-                    if new_text not in seen_actions:
-                        result['text'] = new_text
-                        break
+            for key, variants in variations.items():
+                if key in action_text:
+                    for variant in variants:
+                        if variant not in seen_actions:
+                            result['text'] = variant
+                            break
+                    break
 
         seen_actions.add(result['text'])
         return result
@@ -619,12 +660,12 @@ class IntelligenceProcessor:
             {
                 'id': 'core-event-unique',
                 'passed': core_event_duplicates == 0,
-                'detail': f'核心区重复事件: {core_event_duplicates}'
+                'detail': f'核心区重复事件: {core_event_duplicates}（按canonical_url合并）'
             },
             {
                 'id': 'no-noise-summary',
                 'passed': noise_summary_rate < 0.1,
-                'detail': f'噪声摘要率: {noise_summary_rate:.1%}'
+                'detail': f'噪声摘要率: {noise_summary_rate:.1%}（检查空摘要）'
             },
             {
                 'id': 'core-five-elements',
@@ -659,13 +700,13 @@ class IntelligenceProcessor:
             },
             {
                 'id': 'three-end-consistency',
-                'passed': False,  # 无法在processor内验证，需导出后检查
-                'detail': '三端一致性：需在export后检查JSON/Markdown/选题卡标题匹配'
+                'passed': False,
+                'detail': 'SKIP: processor无法验证三端一致性，需手动检查'
             },
             {
                 'id': 'build-passed',
-                'passed': False,  # CI验证，processor无法检查
-                'detail': '构建通过：需检查GitHub Actions运行结果'
+                'passed': False,
+                'detail': 'SKIP: processor无法验证构建，需检查GitHub Actions'
             },
             {
                 'id': 'quality-calculated',
