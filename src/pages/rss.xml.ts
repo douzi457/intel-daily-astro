@@ -29,10 +29,12 @@ export async function GET({ request }: { request: Request }) {
   const v2Map: Record<string, any> = {};
   for (const d of recentDates) {
     const v2 = await loadV2Data(d);
-    const signals: Array<{ primary_item_id: string; why_it_matters: string }> =
+    const signals: Array<{ primary_item_id: string; why_it_matters: string; url?: string; headline?: string }> =
       (v2.core_signals || []).map((s: any) => ({
         primary_item_id: s.primary_item_id,
         why_it_matters: s.why_it_matters || '',
+        url: s.url || '',
+        headline: s.headline || '',
       }));
     v2Map[d] = { signals, date: v2.date || d };
   }
