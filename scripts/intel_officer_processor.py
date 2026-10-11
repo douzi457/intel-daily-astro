@@ -506,16 +506,16 @@ class IntelligenceProcessor:
 
         api_key = os.environ.get("AGNES_API_KEY")
         base_url = os.environ.get("AGNES_BASE_URL") or "https://api.agnes-ai.cn/v1"
-        # 默认模型改为flash版本，官方文档仅列出此模型
+        # 默认模型改为3.0-flash（中国站可用）；用户也可用AGNES_MODEL环境变量覆盖
         model = os.environ.get("AGNES_MODEL") or "agnes-3.0-flash"
 
         if not api_key:
             return None, None, None, "llm_judgment_skipped_no_key"
 
-        # 尝试主模型，如失败则降级到另一版本
+        # 尝试主模型，如失败则降级到2.5-flash
         models_to_try = [model]
-        if model != "agnes-3.0-flash":
-            models_to_try.append("agnes-3.0-flash")
+        if model != "agnes-2.5-flash":
+            models_to_try.append("agnes-2.5-flash")
 
         events_data = []
         for i, event in enumerate(core_signals[:5], 1):
