@@ -36,7 +36,17 @@ jobs:
       - name: Run data collection
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
         run: python scripts/dashboard_v4.py
+
+      - name: Run processor for V2 data
+        env:
+          AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
+        run: |
+          python scripts/intel_officer_processor.py \
+            --date $(date +%Y-%m-%d) \
+            --input public/data/daily-$(date +%Y-%m-%d).json \
+            --output public/data/v2
 
       # ── 2. 构建并部署 ──
       - name: Setup Node.js
