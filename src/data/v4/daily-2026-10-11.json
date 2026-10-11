@@ -1,13 +1,32 @@
 {
   "date": "2026-10-11",
-  "generated_at": "2026-10-11 20:46:18",
-  "summary": "今日采集 42 个源，共 701 条去重数据",
-  "total_items": 701,
+  "generated_at": "2026-10-11 20:51:02",
+  "summary": "今日采集 42 个源，共 702 条去重数据",
+  "total_items": 702,
   "total_sources": 42,
   "total_translated": 274,
   "recommendations": {
-    "AI/大模型": [],
+    "AI/大模型": [
+      {
+        "title": "AMD YES！老哥给老车插上显卡，手搓「真智驾」",
+        "title_original": "AMD YES！老哥给老车插上显卡，手搓「真智驾」",
+        "url": "https://www.ifanr.com/1683790?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 7.5,
+        "summary": "最近 Reddit 上的一条帖子火出圈了，有位老哥给他的老款丰田插上了一张 AMD 显卡，实现了可以脱手的辅助驾驶。画面里是一辆在高速公路上自主行驶的 2021 款丰田埃尔法，仪表台的正中间，插着一张 AMD Radeon RX 9060，配套的线束交织在一起，顺着中控台向下延伸。插上了显卡，这辆埃尔法就像是打了超级战士血清的美国队长，被蜘蛛咬了的彼得·帕克，暴露在伽马射线里的绿巨人，突然就拥有了",
+        "heat": ""
+      }
+    ],
     "数码/硬件": [
+      {
+        "title": "苹果商店详情顶部头图已面向所有开发者开放！",
+        "title_original": "苹果商店详情顶部头图已面向所有开发者开放！",
+        "url": "https://juejin.cn/post/7694106627768401939",
+        "source": "Juejin",
+        "score": 8.0,
+        "summary": "CocoaKier 2026-10-08 1 阅读5分钟 一、国庆假期期间，苹果有哪些新动静 2026年国庆假期期间，苹果悄咪咪地更新了苹果后台，新上了几个东西： 1、商店详情页顶部头图已面向所有开发者开放（以前只有精选应用、大厂开发者才有权设置）。2、搜索结果可以自定义展示素材，而不是固定展示5图中的第一张了。3、苹果后台新增了入口“素材库”，集中管理和提审所有素材，5图、视频、App活动、头图",
+        "heat": ""
+      },
       {
         "title": "早报｜曝苹果iPhone Duo加单30%/四部门拟禁全隐藏式车门把手/长鑫首款服务器产品或年底推出",
         "title_original": "早报｜曝苹果iPhone Duo加单30%/四部门拟禁全隐藏式车门把手/长鑫首款服务器产品或年底推出",
@@ -43,23 +62,75 @@
         "score": 8.0,
         "summary": "今天，苹果负责全球营销的高管 Greg Joswiak 在社交平台上发了一段 17 秒的短视频。视频中，一根针用彩线在粗布上慢慢缝出经典的六色彩虹苹果标志，最后浮现出「Welcome home。图｜Apple 随后媒体收到的邀请函补齐了更多细节：活动地点定在纽约，形式标注为「Apple Experience」，主要面向受邀媒体开放线下的真机上手体验。",
         "heat": ""
+      }
+    ],
+    "开源/工具": [
+      {
+        "title": "腾讯又来一王炸，开源版 WorkBuddy 太夯了！",
+        "title_original": "腾讯又来一王炸，开源版 WorkBuddy 太夯了！",
+        "url": "https://juejin.cn/post/7694844501786050596",
+        "source": "Juejin",
+        "score": 7.5,
+        "summary": "腾讯又来一王炸，开源版 WorkBuddy 太夯了。cxuanAI 2026-10-10 166 阅读9分钟 WorkBuddy 太火了，我就这么说吧，如果说最近这段时间国外 Coding Agent 讨论最多的是 Claude 的话，那么国内讨论度最高的，那就得是 WorkBuddy 了。火到什么程度，我看了一下我自己的公众号后台关注的人群，有当老师的、当医生的、做律师的、干塔吊的、干电焊的、做",
+        "heat": ""
       },
       {
-        "title": "AMD YES！老哥给老车插上显卡，手搓「真智驾」",
-        "title_original": "AMD YES！老哥给老车插上显卡，手搓「真智驾」",
-        "url": "https://www.ifanr.com/1683790?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
+        "title": "我免费开源的 Archify 约 8 万 Star，别人先做出了 $19/月的在线版",
+        "title_original": "我免费开源的 Archify 约 8 万 Star，别人先做出了 $19/月的在线版",
+        "url": "https://juejin.cn/post/7694182755944923199",
+        "source": "Juejin",
         "score": 7.5,
-        "summary": "最近 Reddit 上的一条帖子火出圈了，有位老哥给他的老款丰田插上了一张 AMD 显卡，实现了可以脱手的辅助驾驶。画面里是一辆在高速公路上自主行驶的 2021 款丰田埃尔法，仪表台的正中间，插着一张 AMD Radeon RX 9060，配套的线束交织在一起，顺着中控台向下延伸。插上了显卡，这辆埃尔法就像是打了超级战士血清的美国队长，被蜘蛛咬了的彼得·帕克，暴露在伽马射线里的绿巨人，突然就拥有了",
+        "summary": "我免费开源的 Archify 约 8 万 Star，别人先做出了 $19/月的在线版 也无风雨也雾晴 2026-10-09 0 阅读2分钟 我还在免费维护开源项目，别人已经把在线版和价目表安排上了，看到的时候确实有点懵 😂 我是 Archify 的作者。最近项目到了约 8 万 Star，原本想继续分享新功能，结果先遇到了一件有点意外的事。com 的网站，名字只比 Archify 多一个 i。",
         "heat": ""
       }
     ],
-    "开源/工具": [],
     "科技热点": [],
     "财经/商业": []
   },
   "by_category": {
     "International Tech": [
+      {
+        "title": "Microsoft’s Satya Nadella says AI models need an ‘emergency brake’",
+        "url": "https://techcrunch.com/2026/10/10/microsofts-satya-nadella-says-ai-models-need-an-emergency-brake/",
+        "source": "TechCrunch",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "3 days to TechCrunch Disrupt 2026: Meet the startups before they hit mainstream",
+        "url": "https://techcrunch.com/2026/10/10/3-days-to-disrupt-2026-meet-the-startups-before-they-hit-mainstream/",
+        "source": "TechCrunch",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "Here are the top AI agents that can live in your text messages",
+        "url": "https://techcrunch.com/2026/10/10/all-the-ai-agents-that-can-live-in-your-text-messages/",
+        "source": "TechCrunch",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "Anthropic can’t reliably control its AI agents. It’s cutting off its internal evals from the live internet instead",
+        "url": "https://techcrunch.com/2026/10/09/anthropic-cant-reliably-control-its-ai-agents-its-cutting-off-its-internal-evals-from-the-live-internet-instead/",
+        "source": "TechCrunch",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "The maker of non-text AI model Jev valued at $7.5B just weeks after launch",
+        "url": "https://techcrunch.com/2026/10/09/the-maker-of-non-text-ai-model-jev-valued-at-7-5b-just-weeks-after-launch/",
+        "source": "TechCrunch",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "An Anthropic AI model sent a false homicide tip to Philadelphia police",
+        "url": "https://techcrunch.com/2026/10/09/an-anthropic-ai-model-sent-a-false-homicide-tip-to-philadelphia-police/",
+        "source": "TechCrunch",
+        "score": 10.0,
+        "heat": ""
+      },
       {
         "title": "Learning to use local AI is exciting, overwhelming, and frustrating",
         "url": "https://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress",
@@ -78,6 +149,27 @@
         "title": "LG’s RGB LED TV is good for certain situations, but an OLED is better",
         "url": "https://www.theverge.com/tech/1008957/lg-mrgb95b-rgb-led-tv-review",
         "source": "The Verge",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "I paid people to try and follow my README",
+        "url": "https://shkspr.mobi/blog/2026/10/i-paid-people-to-try-and-follow-my-readme/",
+        "source": "Hacker News",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "Weave (YC W25) is hiring ML, AI, product, & design engineers",
+        "url": "https://jobs.ashbyhq.com/weave-os",
+        "source": "Hacker News",
+        "score": 10.0,
+        "heat": ""
+      },
+      {
+        "title": "AI is creating a 'human premium' for art created by people",
+        "url": "https://www.bbc.com/news/articles/c5vgjm3gk7rzo",
+        "source": "Hacker News",
         "score": 10.0,
         "heat": ""
       },
@@ -131,66 +223,59 @@
         "heat": ""
       },
       {
-        "title": "Microsoft’s Satya Nadella says AI models need an ‘emergency brake’",
-        "url": "https://techcrunch.com/2026/10/10/microsofts-satya-nadella-says-ai-models-need-an-emergency-brake/",
+        "title": "Apple discloses deal to hire team and license tech from personalized podcast startup Huxe",
+        "url": "https://techcrunch.com/2026/10/10/apple-discloses-deal-to-hire-team-and-license-tech-from-personalized-podcast-startup-huxe/",
         "source": "TechCrunch",
-        "score": 10.0,
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "3 days to TechCrunch Disrupt 2026: Meet the startups before they hit mainstream",
-        "url": "https://techcrunch.com/2026/10/10/3-days-to-disrupt-2026-meet-the-startups-before-they-hit-mainstream/",
-        "source": "TechCrunch",
-        "score": 10.0,
+        "title": "FBI Arrests Cybersecurity Executive Over Data Breach After Contractor Fails to Update Oracle HR Platform",
+        "url": "https://it.slashdot.org/story/26/10/11/0157259/fbi-arrests-cybersecurity-executive-over-data-breach-after-contractor-fails-to-update-oracle-hr-platform?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Here are the top AI agents that can live in your text messages",
-        "url": "https://techcrunch.com/2026/10/10/all-the-ai-agents-that-can-live-in-your-text-messages/",
-        "source": "TechCrunch",
-        "score": 10.0,
+        "title": "Ubuntu Confirms Thursday's Distributed Denial of Service Attack Against Its Web Infrastructure",
+        "url": "https://news.slashdot.org/story/26/10/11/0142235/ubuntu-confirms-thursdays-distributed-denial-of-service-attack-against-its-web-infrastructure?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Anthropic can’t reliably control its AI agents. It’s cutting off its internal evals from the live internet instead",
-        "url": "https://techcrunch.com/2026/10/09/anthropic-cant-reliably-control-its-ai-agents-its-cutting-off-its-internal-evals-from-the-live-internet-instead/",
-        "source": "TechCrunch",
-        "score": 10.0,
+        "title": "AI Execs Game Out 'Political Revolt' after a Catastrophic AI Event",
+        "url": "https://yro.slashdot.org/story/26/10/10/2253228/ai-execs-game-out-political-revolt-after-a-catastrophic-ai-event?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "The maker of non-text AI model Jev valued at $7.5B just weeks after launch",
-        "url": "https://techcrunch.com/2026/10/09/the-maker-of-non-text-ai-model-jev-valued-at-7-5b-just-weeks-after-launch/",
-        "source": "TechCrunch",
-        "score": 10.0,
+        "title": "Nicolas Cage Didn't Sign Amazon's AI Waiver For 'Spider-Noir'. Series Cancelled.",
+        "url": "https://entertainment.slashdot.org/story/26/10/10/2221212/nicolas-cage-didnt-sign-amazons-ai-waiver-for-spider-noir-series-cancelled?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "An Anthropic AI model sent a false homicide tip to Philadelphia police",
-        "url": "https://techcrunch.com/2026/10/09/an-anthropic-ai-model-sent-a-false-homicide-tip-to-philadelphia-police/",
-        "source": "TechCrunch",
-        "score": 10.0,
+        "title": "Claude Sent Police a Fake Murder Tip. White House Mandates AI Companies Report Security Incidents",
+        "url": "https://slashdot.org/story/26/10/10/1951219/claude-sent-police-a-fake-murder-tip-white-house-mandates-ai-companies-report-security-incidents?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "I paid people to try and follow my README",
-        "url": "https://shkspr.mobi/blog/2026/10/i-paid-people-to-try-and-follow-my-readme/",
-        "source": "Hacker News",
-        "score": 10.0,
+        "title": "OpenAI Disrupts Two AI-Enabled 'False Front' Influence Operations That Included Seven Fake Journalists",
+        "url": "https://politics.slashdot.org/story/26/10/10/0537232/openai-disrupts-two-ai-enabled-false-front-influence-operations-that-included-seven-fake-journalists?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Weave (YC W25) is hiring ML, AI, product, & design engineers",
-        "url": "https://jobs.ashbyhq.com/weave-os",
-        "source": "Hacker News",
-        "score": 10.0,
-        "heat": ""
-      },
-      {
-        "title": "AI is creating a 'human premium' for art created by people",
-        "url": "https://www.bbc.com/news/articles/c5vgjm3gk7rzo",
-        "source": "Hacker News",
-        "score": 10.0,
+        "title": "AI Surveillance Startup Flock To Cut Several Hundred Jobs Amid Backlash, Sources Say",
+        "url": "https://yro.slashdot.org/story/26/10/09/2026244/ai-surveillance-startup-flock-to-cut-several-hundred-jobs-amid-backlash-sources-say?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 9.0,
         "heat": ""
       },
       {
@@ -243,135 +328,30 @@
         "heat": ""
       },
       {
-        "title": "AI Agent Evaluation Is the Foundation of Reliable Autonomy",
-        "url": "https://hackernoon.com/ai-agent-evaluation-is-the-foundation-of-reliable-autonomy?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "The TechBeat: The Billing Ladder: Five Ways to Price an AI Agent (10/10/2026)",
-        "url": "https://hackernoon.com/10-10-2026-techbeat?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "The Ostrich Effect: How Optimism Bias Contributes to Project Failure",
-        "url": "https://hackernoon.com/the-ostrich-effect-how-optimism-bias-contributes-to-project-failure?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "AI Isn’t Escaping. We Built an Agent and Expected a Human.",
-        "url": "https://hackernoon.com/ai-isnt-escaping-we-built-an-agent-and-expected-a-human?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Build Your Own AI Agent Execution Trace in Python.",
-        "url": "https://hackernoon.com/build-your-own-ai-agent-execution-trace-in-python?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "This AI Model Has Native Text, Image, and Video Capabilities: Here's What You Should Know",
-        "url": "https://hackernoon.com/this-ai-model-has-native-text-image-and-video-capabilities-heres-what-you-should-know?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "How to Run vLLM Natively on Windows",
-        "url": "https://hackernoon.com/how-to-run-vllm-natively-on-windows?source=rss",
-        "source": "HackerNoon",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "A guardrail you cannot test is a hope",
-        "url": "https://dev.to/usehive/a-guardrail-you-cannot-test-is-a-hope-4lma",
+        "title": "AWS Launches AI-Driven Autoscaling for Cloud Computing",
+        "url": "https://dev.to/techpulse01239/aws-launches-ai-driven-autoscaling-for-cloud-computing-52nn",
         "source": "Dev.to",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "We Wanted a Fast Offline AI. First, We Had to Fix Our Benchmark.",
-        "url": "https://dev.to/lastbrowser/we-wanted-a-fast-offline-ai-first-we-had-to-fix-our-benchmark-2n9k",
+        "title": "In four countries, Google requires a restart and a 24-hour wait for non-store Android app installations",
+        "url": "https://dev.to/hacksgr/in-four-countries-google-requires-a-restart-and-a-24-hour-wait-for-non-store-android-app-gdj",
         "source": "Dev.to",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "TrailRelay: Offline-First Trail Hazard Reporting with Gemma and Temporal",
-        "url": "https://dev.to/akshaj_shetty/trailrelay-offline-first-trail-hazard-reporting-with-gemma-and-temporal-3h59",
+        "title": "AI writes code faster than anyone can review it. What do you actually check?",
+        "url": "https://dev.to/mattbusel/ai-writes-code-faster-than-anyone-can-review-it-what-do-you-actually-check-4n02",
         "source": "Dev.to",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Evidence Levels: What a Single JSON Can and Cannot Claim",
-        "url": "https://dev.to/aabhinavg/evidence-levels-what-a-single-json-can-and-cannot-claim-13jm",
+        "title": "Domain, Assertions, Fixture Hash: Gate Agent Patches on Strength",
+        "url": "https://dev.to/datacpp_8185/domain-assertions-fixture-hash-gate-agent-patches-on-strength-38o9",
         "source": "Dev.to",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "n8n: Talk to your Google Sheets with an AI Agent (and why it sometimes gets the math wrong)",
-        "url": "https://dev.to/robert_breen_d96e41ecd765/n8n-talk-to-your-google-sheets-with-an-ai-agent-and-why-it-sometimes-gets-the-math-wrong-k2a",
-        "source": "Dev.to",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Insurance Claims Retrieval Architecture: Staged Collections for Bounded Latency",
-        "url": "https://dev.to/syltharwave2946/insurance-claims-retrieval-architecture-staged-collections-for-bounded-latency-1l2o",
-        "source": "Dev.to",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Breaking down nerve-cell scaffold relieves chronic pain in mice",
-        "url": "https://www.nature.com/articles/d41586-026-03159-z",
-        "source": "Nature",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Chimp and gorilla brains resist weight loss with age — unlike human brains",
-        "url": "https://www.nature.com/articles/d41586-026-03158-0",
-        "source": "Nature",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Author Correction: Histone readers MLLT1 and MLLT3 concentrate AID to confer locus specificity",
-        "url": "https://www.nature.com/articles/s41586-026-11266-0",
-        "source": "Nature",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "How to build a mouse: embryo development captured in stunning detail",
-        "url": "https://www.nature.com/articles/d41586-026-03193-x",
-        "source": "Nature",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Will AI scoop your science? Some researchers see a gloomy future",
-        "url": "https://www.nature.com/articles/d41586-026-03128-6",
-        "source": "Nature",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "Scientists created a tiny device that can control your nerves to treat chronic pain",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008005253.htm",
-        "source": "Science Daily",
         "score": 9.0,
         "heat": ""
       },
@@ -432,23 +412,51 @@
         "heat": ""
       },
       {
-        "title": "Apple discloses deal to hire team and license tech from personalized podcast startup Huxe",
-        "url": "https://techcrunch.com/2026/10/10/apple-discloses-deal-to-hire-team-and-license-tech-from-personalized-podcast-startup-huxe/",
-        "source": "TechCrunch",
+        "title": "AI Agent Evaluation Is the Foundation of Reliable Autonomy",
+        "url": "https://hackernoon.com/ai-agent-evaluation-is-the-foundation-of-reliable-autonomy?source=rss",
+        "source": "HackerNoon",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "I Made Terrible Games With Google’s AI Playground",
-        "url": "https://www.wired.com/story/i-made-terrible-games-with-googles-ai-playground/",
-        "source": "Wired",
+        "title": "The TechBeat: The Billing Ladder: Five Ways to Price an AI Agent (10/10/2026)",
+        "url": "https://hackernoon.com/10-10-2026-techbeat?source=rss",
+        "source": "HackerNoon",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "AI Is Getting Really Good at Messing With Cybercriminals",
-        "url": "https://www.wired.com/story/ai-is-getting-really-good-at-messing-with-cybercriminals/",
-        "source": "Wired",
+        "title": "The Ostrich Effect: How Optimism Bias Contributes to Project Failure",
+        "url": "https://hackernoon.com/the-ostrich-effect-how-optimism-bias-contributes-to-project-failure?source=rss",
+        "source": "HackerNoon",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "AI Isn’t Escaping. We Built an Agent and Expected a Human.",
+        "url": "https://hackernoon.com/ai-isnt-escaping-we-built-an-agent-and-expected-a-human?source=rss",
+        "source": "HackerNoon",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "Build Your Own AI Agent Execution Trace in Python.",
+        "url": "https://hackernoon.com/build-your-own-ai-agent-execution-trace-in-python?source=rss",
+        "source": "HackerNoon",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "This AI Model Has Native Text, Image, and Video Capabilities: Here's What You Should Know",
+        "url": "https://hackernoon.com/this-ai-model-has-native-text-image-and-video-capabilities-heres-what-you-should-know?source=rss",
+        "source": "HackerNoon",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "How to Run vLLM Natively on Windows",
+        "url": "https://hackernoon.com/how-to-run-vllm-natively-on-windows?source=rss",
+        "source": "HackerNoon",
         "score": 9.0,
         "heat": ""
       },
@@ -509,73 +517,59 @@
         "heat": ""
       },
       {
-        "title": "FBI Arrests Cybersecurity Executive Over Data Breach After Contractor Fails to Update Oracle HR Platform",
-        "url": "https://it.slashdot.org/story/26/10/11/0157259/fbi-arrests-cybersecurity-executive-over-data-breach-after-contractor-fails-to-update-oracle-hr-platform?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "I Made Terrible Games With Google’s AI Playground",
+        "url": "https://www.wired.com/story/i-made-terrible-games-with-googles-ai-playground/",
+        "source": "Wired",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Ubuntu Confirms Thursday's Distributed Denial of Service Attack Against Its Web Infrastructure",
-        "url": "https://news.slashdot.org/story/26/10/11/0142235/ubuntu-confirms-thursdays-distributed-denial-of-service-attack-against-its-web-infrastructure?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "AI Is Getting Really Good at Messing With Cybercriminals",
+        "url": "https://www.wired.com/story/ai-is-getting-really-good-at-messing-with-cybercriminals/",
+        "source": "Wired",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "AI Execs Game Out 'Political Revolt' after a Catastrophic AI Event",
-        "url": "https://yro.slashdot.org/story/26/10/10/2253228/ai-execs-game-out-political-revolt-after-a-catastrophic-ai-event?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "Scientists created a tiny device that can control your nerves to treat chronic pain",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008005253.htm",
+        "source": "Science Daily",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Nicolas Cage Didn't Sign Amazon's AI Waiver For 'Spider-Noir'. Series Cancelled.",
-        "url": "https://entertainment.slashdot.org/story/26/10/10/2221212/nicolas-cage-didnt-sign-amazons-ai-waiver-for-spider-noir-series-cancelled?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "Breaking down nerve-cell scaffold relieves chronic pain in mice",
+        "url": "https://www.nature.com/articles/d41586-026-03159-z",
+        "source": "Nature",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "Claude Sent Police a Fake Murder Tip. White House Mandates AI Companies Report Security Incidents",
-        "url": "https://slashdot.org/story/26/10/10/1951219/claude-sent-police-a-fake-murder-tip-white-house-mandates-ai-companies-report-security-incidents?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "Chimp and gorilla brains resist weight loss with age — unlike human brains",
+        "url": "https://www.nature.com/articles/d41586-026-03158-0",
+        "source": "Nature",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "OpenAI Disrupts Two AI-Enabled 'False Front' Influence Operations That Included Seven Fake Journalists",
-        "url": "https://politics.slashdot.org/story/26/10/10/0537232/openai-disrupts-two-ai-enabled-false-front-influence-operations-that-included-seven-fake-journalists?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "Author Correction: Histone readers MLLT1 and MLLT3 concentrate AID to confer locus specificity",
+        "url": "https://www.nature.com/articles/s41586-026-11266-0",
+        "source": "Nature",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "AI Surveillance Startup Flock To Cut Several Hundred Jobs Amid Backlash, Sources Say",
-        "url": "https://yro.slashdot.org/story/26/10/09/2026244/ai-surveillance-startup-flock-to-cut-several-hundred-jobs-amid-backlash-sources-say?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "How to build a mouse: embryo development captured in stunning detail",
+        "url": "https://www.nature.com/articles/d41586-026-03193-x",
+        "source": "Nature",
         "score": 9.0,
         "heat": ""
       },
       {
-        "title": "K-pop star Sunmi loves Notion and ear cleaning videos",
-        "url": "https://www.theverge.com/entertainment/1008654/k-pop-sunmi-wonder-girls-interview",
-        "source": "The Verge",
-        "score": 8.5,
-        "heat": ""
-      },
-      {
-        "title": "Will Warner Bros. kill Skydance — or will David Ellison kill Warner Bros?",
-        "url": "https://www.theverge.com/podcast/1008733/warner-skydance-paramount-ellison-debt-failure",
-        "source": "The Verge",
-        "score": 8.5,
-        "heat": ""
-      },
-      {
-        "title": "The Download: weight-loss drugs slowing aging and carbon dioxide batteries",
-        "url": "https://www.technologyreview.com/2026/10/07/1145895/the-download-weight-loss-drugs-slow-aging-carbon-dioxide-batteries/",
-        "source": "MIT Tech Review",
-        "score": 8.5,
+        "title": "Will AI scoop your science? Some researchers see a gloomy future",
+        "url": "https://www.nature.com/articles/d41586-026-03128-6",
+        "source": "Nature",
+        "score": 9.0,
         "heat": ""
       },
       {
@@ -614,9 +608,30 @@
         "heat": ""
       },
       {
+        "title": "K-pop star Sunmi loves Notion and ear cleaning videos",
+        "url": "https://www.theverge.com/entertainment/1008654/k-pop-sunmi-wonder-girls-interview",
+        "source": "The Verge",
+        "score": 8.5,
+        "heat": ""
+      },
+      {
+        "title": "Will Warner Bros. kill Skydance — or will David Ellison kill Warner Bros?",
+        "url": "https://www.theverge.com/podcast/1008733/warner-skydance-paramount-ellison-debt-failure",
+        "source": "The Verge",
+        "score": 8.5,
+        "heat": ""
+      },
+      {
         "title": "Sudden drop in Cloudflare bot traffic after strike on Yandex datacenter",
         "url": "https://radar.cloudflare.com/bots/as13238?dateRange=7d",
         "source": "Hacker News",
+        "score": 8.5,
+        "heat": ""
+      },
+      {
+        "title": "The Download: weight-loss drugs slowing aging and carbon dioxide batteries",
+        "url": "https://www.technologyreview.com/2026/10/07/1145895/the-download-weight-loss-drugs-slow-aging-carbon-dioxide-batteries/",
+        "source": "MIT Tech Review",
         "score": 8.5,
         "heat": ""
       },
@@ -677,17 +692,31 @@
         "heat": "496"
       },
       {
-        "title": "I gave my blog an agent: auto topic ideas every week",
-        "url": "https://dev.to/zishuowang696/i-gave-my-blog-an-agent-auto-topic-ideas-every-week-540o",
-        "source": "Dev.to",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
         "title": "What's Wrong with GitHub",
         "url": "https://www.gnu.org/philosophy/whats-wrong-with-github.html",
         "source": "Lobsters",
         "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "NASA Releases Data from Artemis II Moon Mission, Calls It 'Sights and Sounds of Science'",
+        "url": "https://science.slashdot.org/story/26/10/11/0221200/nasa-releases-data-from-artemis-ii-moon-mission-calls-it-sights-and-sounds-of-science?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "First Thorium Nuclear Clocks Begin to Tick",
+        "url": "https://science.slashdot.org/story/26/10/08/1913209/first-thorium-nuclear-clocks-begin-to-tick?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Cloudflare Keeps 1.1.1.1 Out of Piracy Blocking, Escapes Penalties In France",
+        "url": "https://yro.slashdot.org/story/26/10/08/1948246/cloudflare-keeps-1111-out-of-piracy-blocking-escapes-penalties-in-france?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 7.5,
         "heat": ""
       },
       {
@@ -722,6 +751,62 @@
         "title": "Rocket Report: A rare Falcon 9 scrub; is it just about Vulcan's time to shine?",
         "url": "https://arstechnica.com/space/2026/10/rocket-report-a-rare-falcon-9-scrub-is-it-just-about-vulcans-time-to-shine/",
         "source": "Ars Technica",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Your Architecture Isn't Fast Until It Has a Number Attached",
+        "url": "https://dev.to/nurrehman/your-architecture-isnt-fast-until-it-has-a-number-attached-4a5h",
+        "source": "Dev.to",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "1 Parking Lot System",
+        "url": "https://dev.to/_noob/1-parking-lot-system-1n15",
+        "source": "Dev.to",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Kookaburra: Query Java Objects with Streams, Accelerated by RoaringBitmap",
+        "url": "https://dev.to/paganini2008/kookaburra-query-java-objects-with-streams-accelerated-by-roaringbitmap-3nkb",
+        "source": "Dev.to",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "A look at Beijing-based Neolix, which operates the world's largest robovan fleet at 27K, as Shenzhen tests nighttime parcel deliveries by driverless vehicles (Bloomberg)",
+        "url": "https://www.techmeme.com/261011/p5#a261011p5",
+        "source": "Techmeme",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "\"Super Intelligence systems\" are black boxes that shouldn't be trusted by companies, and strong deterministic systems are needed around their deployment (Satya Nadella/@satyanadella)",
+        "url": "https://www.techmeme.com/261010/p18#a261010p18",
+        "source": "Techmeme",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "IDC: Shenzhen-based DJI and Insta360, accounting for 73% and 20% of global smart camera market in Q2, are vying for the top spot as GoPro's share drops to 3% (William Langley/Financial Times)",
+        "url": "https://www.techmeme.com/261010/p15#a261010p15",
+        "source": "Techmeme",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "A profile of Zach Frankel, a secretive and unusually hands-on solo investor who wrote the first checks to startups like Ramp, Cognition, and Applied Compute (Jemima McEvoy/The Information)",
+        "url": "https://www.techmeme.com/261010/p13#a261010p13",
+        "source": "Techmeme",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "A look at Walmart's troubled push to automate its ~200 US warehouses, as it and partners like Symbotic face technical setbacks; Walmart owns 12.6% of Symbotic (Sarah Nassauer/Wall Street Journal)",
+        "url": "https://www.techmeme.com/261010/p10#a261010p10",
+        "source": "Techmeme",
         "score": 7.5,
         "heat": ""
       },
@@ -761,23 +846,128 @@
         "heat": ""
       },
       {
-        "title": "New Platform Needed to Address Shortcomings in Hardware Coding Practice Tools",
-        "url": "https://dev.to/viklogix/new-platform-needed-to-address-shortcomings-in-hardware-coding-practice-tools-2a50",
-        "source": "Dev.to",
+        "title": "King warns malicious online actors are evolving tactics",
+        "url": "https://www.bbc.co.uk/news/articles/cme3xl7d18z2o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC Tech",
         "score": 7.5,
         "heat": ""
       },
       {
-        "title": "Score Any Public Repository Reproducibly with harness-maturity-analysis",
-        "url": "https://dev.to/paladini/score-any-public-repository-reproducibly-with-harness-maturity-analysis-493g",
-        "source": "Dev.to",
+        "title": "Why are more roofs not made of solar tiles?",
+        "url": "https://www.bbc.co.uk/news/articles/cdr7n610rmzo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC Tech",
         "score": 7.5,
         "heat": ""
       },
       {
-        "title": "Reading or Guessing? An Urdu Font-Twin Benchmark",
-        "url": "https://dev.to/faris-khan/reading-or-guessing-an-urdu-font-twin-benchmark-1lek",
-        "source": "Dev.to",
+        "title": "Fuel prices added to Google Maps as petrol and diesel costs soar",
+        "url": "https://www.bbc.co.uk/news/articles/ckx2d4ddjn2eo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC Tech",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "How the 2026 Super El Niño and Climate Change Are Related",
+        "url": "https://www.wired.com/story/super-el-nino-climate-change-connections/",
+        "source": "Wired",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "California’s Tallest and Most Iconic Trees Are Getting Heatstroke",
+        "url": "https://www.wired.com/story/californias-tallest-and-most-iconic-trees-are-getting-heat-stroke/",
+        "source": "Wired",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Best Lego Gifts for Brick Builders (2026): Smart Bricks, Video Games, and More",
+        "url": "https://www.wired.com/gallery/gifts-for-lego-lovers/",
+        "source": "Wired",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "The Best Smart Scales for Tracking Weight and Body Composition (2026)",
+        "url": "https://www.wired.com/gallery/best-smart-scales/",
+        "source": "Wired",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Humans Watched This Supernova Explode Nearly a Millennium Ago. Now You Can See It in High Definition",
+        "url": "https://www.wired.com/story/humans-watched-this-supernova-explode-nearly-a-millennium-ago-now-you-can-see-it-in-high-definition/",
+        "source": "Wired",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "How This Tiny Startup Built the World’s Safest Bike Helmet",
+        "url": "https://www.wired.com/story/how-this-tiny-startup-pikio-built-the-worlds-safest-bike-helmet/",
+        "source": "Wired",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Scientists build a nuclear clock that could make atomic clocks obsolete",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008102701.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "NASA is searching for hidden caves to build its first Moon base",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008005247.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "MIT astronomers catch a star in a feast that could last billions of years",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008005240.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Scientists find hidden materials that could improve batteries and solar fuels",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261007042118.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Scientists found Homo erectus 200,000 years earlier than expected",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261007042113.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "NASA’s Webb finds signs of Mars-sized worlds smashing together",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261007042108.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Hubble Space Telescope may have found a planet born after its star died",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261007042106.htm",
+        "source": "Science Daily",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "oh, apparently it's not possible to portably check for string-to-float conversion errors in standard c",
+        "url": "https://sebsite.pw/w/20261009-strtod.html",
+        "source": "Lobsters",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "Making np.searchsorted up to 25× Faster in NumPy 2.5",
+        "url": "https://blog.scientific-python.org/numpy/searchsorted/",
+        "source": "Lobsters",
         "score": 7.5,
         "heat": ""
       },
@@ -838,185 +1028,24 @@
         "heat": ""
       },
       {
-        "title": "Scientists build a nuclear clock that could make atomic clocks obsolete",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008102701.htm",
-        "source": "Science Daily",
-        "score": 7.5,
+        "title": "Petra Power looks to modernize energy for data centers and defense vehicles",
+        "url": "https://techcrunch.com/2026/10/10/petra-power-looks-to-modernize-energy-for-data-centers-and-defense-vehicles/",
+        "source": "TechCrunch",
+        "score": 7.0,
         "heat": ""
       },
       {
-        "title": "NASA is searching for hidden caves to build its first Moon base",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008005247.htm",
-        "source": "Science Daily",
-        "score": 7.5,
+        "title": "TechCrunch Disrupt 2026: Gamma’s Grant Lee, Engine’s Elia Wallen, and GV’s Crystal Huang on landing your first 1,000 customers",
+        "url": "https://techcrunch.com/2026/10/09/techcrunch-disrupt-2026-gammas-grant-lee-engines-elia-wallen-and-gvs-crystal-huang-on-landing-your-first-1000-customers/",
+        "source": "TechCrunch",
+        "score": 7.0,
         "heat": ""
       },
       {
-        "title": "MIT astronomers catch a star in a feast that could last billions of years",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008005240.htm",
-        "source": "Science Daily",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Scientists find hidden materials that could improve batteries and solar fuels",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261007042118.htm",
-        "source": "Science Daily",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Scientists found Homo erectus 200,000 years earlier than expected",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261007042113.htm",
-        "source": "Science Daily",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "NASA’s Webb finds signs of Mars-sized worlds smashing together",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261007042108.htm",
-        "source": "Science Daily",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Hubble Space Telescope may have found a planet born after its star died",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261007042106.htm",
-        "source": "Science Daily",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "A look at Beijing-based Neolix, which operates the world's largest robovan fleet at 27K, as Shenzhen tests nighttime parcel deliveries by driverless vehicles (Bloomberg)",
-        "url": "https://www.techmeme.com/261011/p5#a261011p5",
-        "source": "Techmeme",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "\"Super Intelligence systems\" are black boxes that shouldn't be trusted by companies, and strong deterministic systems are needed around their deployment (Satya Nadella/@satyanadella)",
-        "url": "https://www.techmeme.com/261010/p18#a261010p18",
-        "source": "Techmeme",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "IDC: Shenzhen-based DJI and Insta360, accounting for 73% and 20% of global smart camera market in Q2, are vying for the top spot as GoPro's share drops to 3% (William Langley/Financial Times)",
-        "url": "https://www.techmeme.com/261010/p15#a261010p15",
-        "source": "Techmeme",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "A profile of Zach Frankel, a secretive and unusually hands-on solo investor who wrote the first checks to startups like Ramp, Cognition, and Applied Compute (Jemima McEvoy/The Information)",
-        "url": "https://www.techmeme.com/261010/p13#a261010p13",
-        "source": "Techmeme",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "A look at Walmart's troubled push to automate its ~200 US warehouses, as it and partners like Symbotic face technical setbacks; Walmart owns 12.6% of Symbotic (Sarah Nassauer/Wall Street Journal)",
-        "url": "https://www.techmeme.com/261010/p10#a261010p10",
-        "source": "Techmeme",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "How the 2026 Super El Niño and Climate Change Are Related",
-        "url": "https://www.wired.com/story/super-el-nino-climate-change-connections/",
-        "source": "Wired",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "California’s Tallest and Most Iconic Trees Are Getting Heatstroke",
-        "url": "https://www.wired.com/story/californias-tallest-and-most-iconic-trees-are-getting-heat-stroke/",
-        "source": "Wired",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Best Lego Gifts for Brick Builders (2026): Smart Bricks, Video Games, and More",
-        "url": "https://www.wired.com/gallery/gifts-for-lego-lovers/",
-        "source": "Wired",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "The Best Smart Scales for Tracking Weight and Body Composition (2026)",
-        "url": "https://www.wired.com/gallery/best-smart-scales/",
-        "source": "Wired",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Humans Watched This Supernova Explode Nearly a Millennium Ago. Now You Can See It in High Definition",
-        "url": "https://www.wired.com/story/humans-watched-this-supernova-explode-nearly-a-millennium-ago-now-you-can-see-it-in-high-definition/",
-        "source": "Wired",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "How This Tiny Startup Built the World’s Safest Bike Helmet",
-        "url": "https://www.wired.com/story/how-this-tiny-startup-pikio-built-the-worlds-safest-bike-helmet/",
-        "source": "Wired",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "King warns malicious online actors are evolving tactics",
-        "url": "https://www.bbc.co.uk/news/articles/cme3xl7d18z2o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC Tech",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Why are more roofs not made of solar tiles?",
-        "url": "https://www.bbc.co.uk/news/articles/cdr7n610rmzo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC Tech",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Fuel prices added to Google Maps as petrol and diesel costs soar",
-        "url": "https://www.bbc.co.uk/news/articles/ckx2d4ddjn2eo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC Tech",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "oh, apparently it's not possible to portably check for string-to-float conversion errors in standard c",
-        "url": "https://sebsite.pw/w/20261009-strtod.html",
-        "source": "Lobsters",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Making np.searchsorted up to 25× Faster in NumPy 2.5",
-        "url": "https://blog.scientific-python.org/numpy/searchsorted/",
-        "source": "Lobsters",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "NASA Releases Data from Artemis II Moon Mission, Calls It 'Sights and Sounds of Science'",
-        "url": "https://science.slashdot.org/story/26/10/11/0221200/nasa-releases-data-from-artemis-ii-moon-mission-calls-it-sights-and-sounds-of-science?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "First Thorium Nuclear Clocks Begin to Tick",
-        "url": "https://science.slashdot.org/story/26/10/08/1913209/first-thorium-nuclear-clocks-begin-to-tick?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
-        "title": "Cloudflare Keeps 1.1.1.1 Out of Piracy Blocking, Escapes Penalties In France",
-        "url": "https://yro.slashdot.org/story/26/10/08/1948246/cloudflare-keeps-1111-out-of-piracy-blocking-escapes-penalties-in-france?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 7.5,
+        "title": "LumenUs helps automate tedious paperwork in times of grief",
+        "url": "https://techcrunch.com/2026/10/09/lumenus-helps-automate-tedious-paperwork-in-times-of-grief/",
+        "source": "TechCrunch",
+        "score": 7.0,
         "heat": ""
       },
       {
@@ -1055,41 +1084,6 @@
         "heat": ""
       },
       {
-        "title": "We’re still figuring out the side effects of GLP-1 weight-loss drugs",
-        "url": "https://www.technologyreview.com/2026/10/09/1146094/were-still-figuring-out-the-side-effects-of-glp-1-weight-loss-drugs/",
-        "source": "MIT Tech Review",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "Why we’re watching these climate tech companies",
-        "url": "https://www.technologyreview.com/2026/10/08/1145920/climate-tech-companies-list/",
-        "source": "MIT Tech Review",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "Petra Power looks to modernize energy for data centers and defense vehicles",
-        "url": "https://techcrunch.com/2026/10/10/petra-power-looks-to-modernize-energy-for-data-centers-and-defense-vehicles/",
-        "source": "TechCrunch",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "TechCrunch Disrupt 2026: Gamma’s Grant Lee, Engine’s Elia Wallen, and GV’s Crystal Huang on landing your first 1,000 customers",
-        "url": "https://techcrunch.com/2026/10/09/techcrunch-disrupt-2026-gammas-grant-lee-engines-elia-wallen-and-gvs-crystal-huang-on-landing-your-first-1000-customers/",
-        "source": "TechCrunch",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
-        "title": "LumenUs helps automate tedious paperwork in times of grief",
-        "url": "https://techcrunch.com/2026/10/09/lumenus-helps-automate-tedious-paperwork-in-times-of-grief/",
-        "source": "TechCrunch",
-        "score": 7.0,
-        "heat": ""
-      },
-      {
         "title": "LineageOS 24.0",
         "url": "https://lineageos.org/Changelog-32/",
         "source": "Hacker News",
@@ -1111,15 +1105,15 @@
         "heat": ""
       },
       {
-        "title": "Don't Put Tilde In Your Path",
-        "url": "https://disconnect3d.pl//2026/10/02/dont-put-tilde-in-your-path/",
+        "title": "What driving across Europe costs in tolls, vignettes, bridges and fuel",
+        "url": "https://copilot.travel/tolls/europe-2026",
         "source": "Hacker News",
         "score": 7.0,
         "heat": ""
       },
       {
-        "title": "What driving across Europe costs in tolls, vignettes, bridges and fuel",
-        "url": "https://copilot.travel/tolls/europe-2026",
+        "title": "Don't Put Tilde In Your Path",
+        "url": "https://disconnect3d.pl//2026/10/02/dont-put-tilde-in-your-path/",
         "source": "Hacker News",
         "score": 7.0,
         "heat": ""
@@ -1167,6 +1161,55 @@
         "heat": ""
       },
       {
+        "title": "We’re still figuring out the side effects of GLP-1 weight-loss drugs",
+        "url": "https://www.technologyreview.com/2026/10/09/1146094/were-still-figuring-out-the-side-effects-of-glp-1-weight-loss-drugs/",
+        "source": "MIT Tech Review",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "Why we’re watching these climate tech companies",
+        "url": "https://www.technologyreview.com/2026/10/08/1145920/climate-tech-companies-list/",
+        "source": "MIT Tech Review",
+        "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "UK Vegetables 20-50% Less Nutritious Than In the 1960s",
+        "url": "https://science.slashdot.org/story/26/10/11/0124231/uk-vegetables-20-50-less-nutritious-than-in-the-1960s?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Ubuntu 26.10 Will Offer a Rust-based GnuPG Replacement Option",
+        "url": "https://linux.slashdot.org/story/26/10/10/2155227/ubuntu-2610-will-offer-a-rust-based-gnupg-replacement-option?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Another Woman Sues Flock For Mistaken Crime Accusation By Police - and for Surveillance",
+        "url": "https://yro.slashdot.org/story/26/10/09/2251259/another-woman-sues-flock-for-mistaken-crime-accusation-by-police---and-for-surveillance?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Meta Developing Compressed RAM 'CRAM' For Linux: Better Than ZRAM and Zswap?",
+        "url": "https://hardware.slashdot.org/story/26/10/10/0631257/meta-developing-compressed-ram-cram-for-linux-better-than-zram-and-zswap?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "A 1960 Paper Published In Science Predicts World Will End Next Month",
+        "url": "https://science.slashdot.org/story/26/10/08/1937203/a-1960-paper-published-in-science-predicts-world-will-end-next-month?utm_source=rss1.0mainlinkanon&utm_medium=feed",
+        "source": "Slashdot",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
         "title": "A Cray-1 supercomputer replica from 30 \"obsolete\" Mac Minis",
         "url": "https://arstechnica.com/gadgets/2026/10/a-cray-1-supercomputer-replica-from-30-obsolete-mac-minis/",
         "source": "Ars Technica",
@@ -1184,6 +1227,55 @@
         "title": "Volkswagen's replacement for the ID.4 crossover is here",
         "url": "https://arstechnica.com/cars/2026/10/volkswagens-replacement-for-the-id-4-crossover-is-here/",
         "source": "Ars Technica",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "How I read an Etsy order export in the browser without uploading it",
+        "url": "https://dev.to/devansh_choudhary_797aa6c/how-i-read-an-etsy-order-export-in-the-browser-without-uploading-it-221o",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Why Cursor Fixes Supabase RLS Errors by Opening the Table",
+        "url": "https://dev.to/c_k_fb750e731394/why-cursor-fixes-supabase-rls-errors-by-opening-the-table-oed",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Read Foreign Websites: Put Translations Under the Original",
+        "url": "https://dev.to/equalangai/read-foreign-websites-put-translations-under-the-original-3mp4",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Dawn-Chorus",
+        "url": "https://dev.to/bhaianu264/dawn-chorus-4ifl",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "How to Ship an Official MCP Server for Your SaaS in 2 Weeks",
+        "url": "https://dev.to/fadymondy/how-to-ship-an-official-mcp-server-for-your-saas-in-2-weeks-47mi",
+        "source": "Dev.to",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "After 20+ major Japanese companies reported cyber attacks in recent weeks, Japan's NCSH chief says the country is in \"a state of emergency in cyber space\" (Financial Times)",
+        "url": "https://www.techmeme.com/261010/p19#a261010p19",
+        "source": "Techmeme",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "How Anthropic co-founder Tom Brown used GOP ties to end a June standoff over model safety and win over Musk, brokering a $1.25B/month SpaceX compute deal (Wall Street Journal)",
+        "url": "https://www.techmeme.com/261010/p12#a261010p12",
+        "source": "Techmeme",
         "score": 6.0,
         "heat": ""
       },
@@ -1209,93 +1301,16 @@
         "heat": ""
       },
       {
-        "title": "Wanderlore: What if your next walk had a plot?",
-        "url": "https://dev.to/reet_singh_ee97da2986538e/wanderlore-what-if-your-next-walk-had-a-plot-a3g",
-        "source": "Dev.to",
+        "title": "White House blocks Microsoft from foreign worker hiring programme",
+        "url": "https://www.bbc.co.uk/news/articles/ck5yngl2y4gpo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC Tech",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "Show HN launches now run on repos created days before posting. It used to be months.",
-        "url": "https://dev.to/pennyforgehq/show-hn-launches-now-run-on-repos-created-days-before-posting-it-used-to-be-months-3i90",
-        "source": "Dev.to",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "An experiment to glimpse the future Amazon — in pictures",
-        "url": "https://www.nature.com/articles/d41586-026-02909-3",
-        "source": "Nature",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Editorial Expression of Concern: Maternal gut bacteria promote neurodevelopmental abnormalities in mouse offspring",
-        "url": "https://www.nature.com/articles/s41586-026-11070-w",
-        "source": "Nature",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "NASA astronauts splash down after 100 million miles in space",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008232629.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "October’s night sky is full of cosmic tricks and treats",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008102704.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Neanderthals may have used prehistoric glue as an ancient antibiotic",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008005256.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "The eye has a hidden cleanup system scientists never knew existed",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008005254.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Scientists may have found a shortcut to fusion energy",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261008005242.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Scientists accidentally discover a genetic code that breaks the rules of life",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261007233136.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "This “golden tree” coral was too strange for any known family",
-        "url": "https://www.sciencedaily.com/releases/2026/10/261007042116.htm",
-        "source": "Science Daily",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "After 20+ major Japanese companies reported cyber attacks in recent weeks, Japan's NCSH chief says the country is in \"a state of emergency in cyber space\" (Financial Times)",
-        "url": "https://www.techmeme.com/261010/p19#a261010p19",
-        "source": "Techmeme",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "How Anthropic co-founder Tom Brown used GOP ties to end a June standoff over model safety and win over Musk, brokering a $1.25B/month SpaceX compute deal (Wall Street Journal)",
-        "url": "https://www.techmeme.com/261010/p12#a261010p12",
-        "source": "Techmeme",
+        "title": "Tech Life",
+        "url": "https://www.bbc.co.uk/sounds/play/w3ct8jyj?at_medium=RSS&at_campaign=rss",
+        "source": "BBC Tech",
         "score": 6.0,
         "heat": ""
       },
@@ -1349,16 +1364,51 @@
         "heat": ""
       },
       {
-        "title": "White House blocks Microsoft from foreign worker hiring programme",
-        "url": "https://www.bbc.co.uk/news/articles/ck5yngl2y4gpo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC Tech",
+        "title": "NASA astronauts splash down after 100 million miles in space",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008232629.htm",
+        "source": "Science Daily",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "Tech Life",
-        "url": "https://www.bbc.co.uk/sounds/play/w3ct8jyj?at_medium=RSS&at_campaign=rss",
-        "source": "BBC Tech",
+        "title": "October’s night sky is full of cosmic tricks and treats",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008102704.htm",
+        "source": "Science Daily",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Neanderthals may have used prehistoric glue as an ancient antibiotic",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008005256.htm",
+        "source": "Science Daily",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "The eye has a hidden cleanup system scientists never knew existed",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008005254.htm",
+        "source": "Science Daily",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Scientists may have found a shortcut to fusion energy",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261008005242.htm",
+        "source": "Science Daily",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "Scientists accidentally discover a genetic code that breaks the rules of life",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261007233136.htm",
+        "source": "Science Daily",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "This “golden tree” coral was too strange for any known family",
+        "url": "https://www.sciencedaily.com/releases/2026/10/261007042116.htm",
+        "source": "Science Daily",
         "score": 6.0,
         "heat": ""
       },
@@ -1447,37 +1497,16 @@
         "heat": ""
       },
       {
-        "title": "UK Vegetables 20-50% Less Nutritious Than In the 1960s",
-        "url": "https://science.slashdot.org/story/26/10/11/0124231/uk-vegetables-20-50-less-nutritious-than-in-the-1960s?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "An experiment to glimpse the future Amazon — in pictures",
+        "url": "https://www.nature.com/articles/d41586-026-02909-3",
+        "source": "Nature",
         "score": 6.0,
         "heat": ""
       },
       {
-        "title": "Ubuntu 26.10 Will Offer a Rust-based GnuPG Replacement Option",
-        "url": "https://linux.slashdot.org/story/26/10/10/2155227/ubuntu-2610-will-offer-a-rust-based-gnupg-replacement-option?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Another Woman Sues Flock For Mistaken Crime Accusation By Police - and for Surveillance",
-        "url": "https://yro.slashdot.org/story/26/10/09/2251259/another-woman-sues-flock-for-mistaken-crime-accusation-by-police---and-for-surveillance?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "Meta Developing Compressed RAM 'CRAM' For Linux: Better Than ZRAM and Zswap?",
-        "url": "https://hardware.slashdot.org/story/26/10/10/0631257/meta-developing-compressed-ram-cram-for-linux-better-than-zram-and-zswap?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "A 1960 Paper Published In Science Predicts World Will End Next Month",
-        "url": "https://science.slashdot.org/story/26/10/08/1937203/a-1960-paper-published-in-science-predicts-world-will-end-next-month?utm_source=rss1.0mainlinkanon&utm_medium=feed",
-        "source": "Slashdot",
+        "title": "Editorial Expression of Concern: Maternal gut bacteria promote neurodevelopmental abnormalities in mouse offspring",
+        "url": "https://www.nature.com/articles/s41586-026-11070-w",
+        "source": "Nature",
         "score": 6.0,
         "heat": ""
       }
@@ -1717,34 +1746,6 @@
         "heat": ""
       },
       {
-        "title": "24 天估值暴涨 37 倍，这就是 AI 圈年度爽文",
-        "url": "https://www.ifanr.com/1683674?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "这届 AI PC，太烧心了",
-        "url": "https://www.ifanr.com/1683688?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "为什么 ChatGPT 总爱在标题里塞色情赌博小广告？",
-        "url": "https://www.ifanr.com/1683545?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
-        "title": "陶哲轩转发抵制声明，数学界和OpenAI彻底撕破脸",
-        "url": "https://www.ifanr.com/1683401?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 9.0,
-        "heat": ""
-      },
-      {
         "title": "利用 AI 代码智能体优化软件架构的五种方法",
         "url": "https://www.infoq.cn/article/soRObi5sjdTTUM95zLJK?utm_source=rss&utm_medium=article",
         "source": "InfoQ CN",
@@ -1822,6 +1823,34 @@
         "heat": ""
       },
       {
+        "title": "24 天估值暴涨 37 倍，这就是 AI 圈年度爽文",
+        "url": "https://www.ifanr.com/1683674?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "这届 AI PC，太烧心了",
+        "url": "https://www.ifanr.com/1683688?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "为什么 ChatGPT 总爱在标题里塞色情赌博小广告？",
+        "url": "https://www.ifanr.com/1683545?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
+        "title": "陶哲轩转发抵制声明，数学界和OpenAI彻底撕破脸",
+        "url": "https://www.ifanr.com/1683401?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 9.0,
+        "heat": ""
+      },
+      {
         "title": "GitHub 热榜项目：日榜（2026-10-09）",
         "url": "https://juejin.cn/post/7694469284471390242",
         "source": "Juejin",
@@ -1832,6 +1861,27 @@
         "title": "苹果商店详情顶部头图已面向所有开发者开放！",
         "url": "https://juejin.cn/post/7694106627768401939",
         "source": "Juejin",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "单次RL后训练烧掉260万美元、每步37亿Token，小米披露MiMo-V2.6“规模化强化学习”路线",
+        "url": "https://www.infoq.cn/article/gNdWoDM8ygkAjXfsLaBK?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "金融监管领域的 Harness 实践：让知识与数据驱动 Agent 稳定运行",
+        "url": "https://www.infoq.cn/article/SuqGY4FQ95AVzs1S0KSV?utm_source=rss&utm_medium=article",
+        "source": "InfoQ CN",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "特斯拉FSD，在欧洲被打回原形",
+        "url": "https://www.qbitai.com/2026/10/502467.html",
+        "source": "QbitAI",
         "score": 8.0,
         "heat": ""
       },
@@ -1864,27 +1914,6 @@
         "heat": ""
       },
       {
-        "title": "单次RL后训练烧掉260万美元、每步37亿Token，小米披露MiMo-V2.6“规模化强化学习”路线",
-        "url": "https://www.infoq.cn/article/gNdWoDM8ygkAjXfsLaBK?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "金融监管领域的 Harness 实践：让知识与数据驱动 Agent 稳定运行",
-        "url": "https://www.infoq.cn/article/SuqGY4FQ95AVzs1S0KSV?utm_source=rss&utm_medium=article",
-        "source": "InfoQ CN",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "特斯拉FSD，在欧洲被打回原形",
-        "url": "https://www.qbitai.com/2026/10/502467.html",
-        "source": "QbitAI",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
         "title": "腾讯又来一王炸，开源版 WorkBuddy 太夯了！",
         "url": "https://juejin.cn/post/7694844501786050596",
         "source": "Juejin",
@@ -1899,13 +1928,6 @@
         "heat": ""
       },
       {
-        "title": "AMD YES！老哥给老车插上显卡，手搓「真智驾」",
-        "url": "https://www.ifanr.com/1683790?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 7.5,
-        "heat": ""
-      },
-      {
         "title": "Linear 通过 1000 多次 PR 从 styled-components 迁移到 Meta 的 StyleX",
         "url": "https://www.infoq.cn/article/YLOUT8CrDm0NPWgHL8LG?utm_source=rss&utm_medium=article",
         "source": "InfoQ CN",
@@ -1916,6 +1938,13 @@
         "title": "Java 近期新闻：TornadoVM 7.0、Groovy 6.0、GraalVM、Hibernate、Quarkus、Gradle、Maven",
         "url": "https://www.infoq.cn/article/8s5fm3AAfw7ya1qdWl5Q?utm_source=rss&utm_medium=article",
         "source": "InfoQ CN",
+        "score": 7.5,
+        "heat": ""
+      },
+      {
+        "title": "AMD YES！老哥给老车插上显卡，手搓「真智驾」",
+        "url": "https://www.ifanr.com/1683790?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
         "score": 7.5,
         "heat": ""
       },
@@ -2011,48 +2040,6 @@
         "heat": ""
       },
       {
-        "title": "DDR4 内存重出江湖，PC 终于癫成我不认识的样子",
-        "url": "https://www.ifanr.com/1683529?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "17.98 万元起，银河战舰 700 上市，三电机千匹马力，装进家用方盒子",
-        "url": "https://www.ifanr.com/1683809?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "森海 Momentum 5 真无线降噪耳机体验：升级无线传输与空间音频，它依然是那个正统 「森海味」",
-        "url": "https://www.ifanr.com/1683383?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "这三个摄影 App， 配得上你全新的 iPhone 18 Pro",
-        "url": "https://www.ifanr.com/1683596?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "停产一年，宝马带着 iX4 重回溜背市场，海外售价 53 万元起",
-        "url": "https://www.ifanr.com/1683421?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
-        "title": "新款理想 i6 六项升级公布，旗舰配置下放，要做「全球爆款」！",
-        "url": "https://www.ifanr.com/1683385?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "source": "ifanr",
-        "score": 6.0,
-        "heat": ""
-      },
-      {
         "title": "Uber 在 Kubernetes 平台上将扩容意图与执行操作解耦",
         "url": "https://www.infoq.cn/article/2SNgaiHoK808v22dl5SJ?utm_source=rss&utm_medium=article",
         "source": "InfoQ CN",
@@ -2114,9 +2101,121 @@
         "source": "QbitAI",
         "score": 6.0,
         "heat": ""
+      },
+      {
+        "title": "DDR4 内存重出江湖，PC 终于癫成我不认识的样子",
+        "url": "https://www.ifanr.com/1683529?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "17.98 万元起，银河战舰 700 上市，三电机千匹马力，装进家用方盒子",
+        "url": "https://www.ifanr.com/1683809?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "森海 Momentum 5 真无线降噪耳机体验：升级无线传输与空间音频，它依然是那个正统 「森海味」",
+        "url": "https://www.ifanr.com/1683383?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "这三个摄影 App， 配得上你全新的 iPhone 18 Pro",
+        "url": "https://www.ifanr.com/1683596?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "停产一年，宝马带着 iX4 重回溜背市场，海外售价 53 万元起",
+        "url": "https://www.ifanr.com/1683421?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 6.0,
+        "heat": ""
+      },
+      {
+        "title": "新款理想 i6 六项升级公布，旗舰配置下放，要做「全球爆款」！",
+        "url": "https://www.ifanr.com/1683385?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "source": "ifanr",
+        "score": 6.0,
+        "heat": ""
       }
     ],
     "International News": [
+      {
+        "title": "'Time for Ukraine to get new president,' says Trump after Zelensky condemns diesel deal",
+        "url": "https://www.bbc.co.uk/news/articles/cqe8r5l7n92jo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "US murderer Christa Pike discharged from hospital 10 days after failed execution",
+        "url": "https://www.bbc.co.uk/news/articles/cmlyle97pqd7o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Headmaster detained after BBC investigation into alleged sexual abuse of students",
+        "url": "https://www.bbc.co.uk/news/articles/cwy8lx1r2vrro?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Rogue Anthropic AI agent gave police fake tip in unsolved murder case",
+        "url": "https://www.bbc.co.uk/news/articles/cqkg50j1yd5lo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Riyadh airport attack another dangerous moment in already tense conflict",
+        "url": "https://www.bbc.co.uk/news/articles/cr4g1pwxxlq1o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Wildlife park remains closed after fatal tiger attack",
+        "url": "https://www.bbc.co.uk/news/articles/cmgr8221v4x1o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Three friends on their student debt: One paid off, one chipping away and one creeping up",
+        "url": "https://www.bbc.co.uk/news/articles/c9rk3k25vmxko?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "AI is creating a 'human premium' for art made by people, but will it hold?",
+        "url": "https://www.bbc.co.uk/news/articles/c5vgjm3gk7rzo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Toxicity and uncertainty await Man City as they prepare to take on Liverpool",
+        "url": "https://www.bbc.co.uk/sport/football/articles/cvy0rp14xz7lo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Why are so many four-year-olds not potty-trained before school?",
+        "url": "https://www.bbc.co.uk/news/articles/c5x2vnp4jrkdo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 8.0,
+        "heat": ""
+      },
       {
         "title": "Why My Conversations with OpenAI’s ‘ChatGPT for Teens’ Made Me Very Worried",
         "url": "https://www.nytimes.com/2026/10/07/technology/personaltech/chatgpt-teens-openai.html",
@@ -2202,6 +2301,34 @@
         "heat": ""
       },
       {
+        "title": "Isaias strengthens to become first Atlantic hurricane of 2026 season",
+        "url": "https://www.theguardian.com/environment/2026/oct/09/isaias-strengthens-first-atlantic-hurricane-2026",
+        "source": "The Guardian",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Missing Australian hiker Jordan Yap last seen on remote trail found dead in Peru",
+        "url": "https://www.theguardian.com/australia-news/2026/oct/11/missing-australian-hiker-jordan-yap-last-seen-on-remote-trail-found-dead-in-peru",
+        "source": "The Guardian",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Sydney trader sacked for working from Singapore without permission wins unfair dismissal case",
+        "url": "https://www.theguardian.com/australia-news/2026/oct/09/sydney-currency-trader-sacked-for-working-from-singapore-without-permission-wins-unfair-dismissal-case",
+        "source": "The Guardian",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
+        "title": "Japan beer giants raided over suspicions they colluded to set the price of beverages",
+        "url": "https://www.theguardian.com/world/2026/oct/08/japan-beer-giants-raided-over-suspicions-they-colluded-to-set-the-price-of-beverages",
+        "source": "The Guardian",
+        "score": 8.0,
+        "heat": ""
+      },
+      {
         "title": "Zaporizhzhia airstrikes kill 17 as Russia intensifies attacks across Ukraine",
         "url": "https://www.euronews.com/video/2026/10/11/zaporizhzhia-airstrikes-kill-17-as-russia-intensifies-attacks-across-ukraine",
         "source": "Euronews",
@@ -2233,104 +2360,6 @@
         "title": "Trump says Ukraine needs new president after Zelenskyy condemns Russia fuel deal",
         "url": "https://www.euronews.com/2026/10/10/trump-says-ukraine-needs-new-president-after-zelenskyy-condemns-russia-fuel-deal",
         "source": "Euronews",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Riyadh airport attack another dangerous moment in already tense conflict",
-        "url": "https://www.bbc.co.uk/news/articles/cr4g1pwxxlq1o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Wildlife park remains closed after fatal tiger attack",
-        "url": "https://www.bbc.co.uk/news/articles/cmgr8221v4x1o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Three friends on their student debt: One paid off, one chipping away and one creeping up",
-        "url": "https://www.bbc.co.uk/news/articles/c9rk3k25vmxko?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "AI is creating a 'human premium' for art made by people, but will it hold?",
-        "url": "https://www.bbc.co.uk/news/articles/c5vgjm3gk7rzo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Toxicity and uncertainty await Man City as they prepare to take on Liverpool",
-        "url": "https://www.bbc.co.uk/sport/football/articles/cvy0rp14xz7lo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Why are so many four-year-olds not potty-trained before school?",
-        "url": "https://www.bbc.co.uk/news/articles/c5x2vnp4jrkdo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Isaias strengthens to become first Atlantic hurricane of 2026 season",
-        "url": "https://www.theguardian.com/environment/2026/oct/09/isaias-strengthens-first-atlantic-hurricane-2026",
-        "source": "The Guardian",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Missing Australian hiker Jordan Yap last seen on remote trail found dead in Peru",
-        "url": "https://www.theguardian.com/australia-news/2026/oct/11/missing-australian-hiker-jordan-yap-last-seen-on-remote-trail-found-dead-in-peru",
-        "source": "The Guardian",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Sydney trader sacked for working from Singapore without permission wins unfair dismissal case",
-        "url": "https://www.theguardian.com/australia-news/2026/oct/09/sydney-currency-trader-sacked-for-working-from-singapore-without-permission-wins-unfair-dismissal-case",
-        "source": "The Guardian",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Japan beer giants raided over suspicions they colluded to set the price of beverages",
-        "url": "https://www.theguardian.com/world/2026/oct/08/japan-beer-giants-raided-over-suspicions-they-colluded-to-set-the-price-of-beverages",
-        "source": "The Guardian",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "'Time for Ukraine to get new president,' says Trump after Zelensky condemns diesel deal",
-        "url": "https://www.bbc.co.uk/news/articles/cqe8r5l7n92jo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "US murderer Christa Pike discharged from hospital 10 days after failed execution",
-        "url": "https://www.bbc.co.uk/news/articles/cmlyle97pqd7o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Headmaster detained after BBC investigation into alleged sexual abuse of students",
-        "url": "https://www.bbc.co.uk/news/articles/cwy8lx1r2vrro?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
-        "score": 8.0,
-        "heat": ""
-      },
-      {
-        "title": "Rogue Anthropic AI agent gave police fake tip in unsolved murder case",
-        "url": "https://www.bbc.co.uk/news/articles/cqkg50j1yd5lo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
         "score": 8.0,
         "heat": ""
       },
@@ -2374,6 +2403,48 @@
         "url": "https://www.nytimes.com/video/technology/100000011159494/why-ai-agents-are-going-rogue.html",
         "source": "NYTimes Tech",
         "score": 7.0,
+        "heat": ""
+      },
+      {
+        "title": "US justice department investigates TV networks over Trump pool coverage",
+        "url": "https://www.bbc.co.uk/news/articles/c9vgregzk6gro?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
+        "title": "Expedition hopes to find aviator Amelia Earhart's plane on remote island",
+        "url": "https://www.bbc.co.uk/news/articles/c3y0e871rk4vo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
+        "title": "Drone strike by Sudan paramilitary kills 41 near Ethiopian border, rights group says",
+        "url": "https://www.bbc.co.uk/news/articles/c8vgx9ew571wo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
+        "title": "US country music star Ella Langley cancels show due to 'security threat'",
+        "url": "https://www.bbc.co.uk/news/articles/cm79pdlywqd4o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
+        "title": "Young men live in fear of being snatched off the streets and sold to Myanmar's army",
+        "url": "https://www.bbc.co.uk/news/articles/c680zlny0gk4o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
+        "title": "I was told I had depression for 14 years until I got sectioned - it was bipolar",
+        "url": "https://www.bbc.co.uk/news/articles/ck3rer7e4rngo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 6.5,
         "heat": ""
       },
       {
@@ -2482,6 +2553,13 @@
         "heat": ""
       },
       {
+        "title": "‘It was a terrible thing’: Panama declares state of emergency as quake aftershocks rattle communities",
+        "url": "https://www.theguardian.com/world/2026/oct/11/panama-eathquake-state-of-emergency",
+        "source": "The Guardian",
+        "score": 6.5,
+        "heat": ""
+      },
+      {
         "title": "Denmark tests humanoid robots in supermarkets to help to ease staff workload at night",
         "url": "https://www.euronews.com/video/2026/10/11/denmark-tests-humanoid-robots-in-supermarkets-to-help-to-ease-staff-workload-at-night",
         "source": "Euronews",
@@ -2492,55 +2570,6 @@
         "title": "Europe's best Christmas markets to visit in 2026, according to travellers",
         "url": "https://www.euronews.com/2026/10/11/europes-best-christmas-markets-to-visit-in-2026-according-to-travellers",
         "source": "Euronews",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "Young men live in fear of being snatched off the streets and sold to Myanmar's army",
-        "url": "https://www.bbc.co.uk/news/articles/c680zlny0gk4o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "I was told I had depression for 14 years until I got sectioned - it was bipolar",
-        "url": "https://www.bbc.co.uk/news/articles/ck3rer7e4rngo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "US justice department investigates TV networks over Trump pool coverage",
-        "url": "https://www.bbc.co.uk/news/articles/c9vgregzk6gro?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "‘It was a terrible thing’: Panama declares state of emergency as quake aftershocks rattle communities",
-        "url": "https://www.theguardian.com/world/2026/oct/11/panama-eathquake-state-of-emergency",
-        "source": "The Guardian",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "Expedition hopes to find aviator Amelia Earhart's plane on remote island",
-        "url": "https://www.bbc.co.uk/news/articles/c3y0e871rk4vo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "Drone strike by Sudan paramilitary kills 41 near Ethiopian border, rights group says",
-        "url": "https://www.bbc.co.uk/news/articles/c8vgx9ew571wo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
-        "score": 6.5,
-        "heat": ""
-      },
-      {
-        "title": "US country music star Ella Langley cancels show due to 'security threat'",
-        "url": "https://www.bbc.co.uk/news/articles/cm79pdlywqd4o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
         "score": 6.5,
         "heat": ""
       },
@@ -2570,6 +2599,83 @@
         "url": "https://www.npr.org/2026/10/10/nx-s1-5997504/christa-pike-hospital-prison-after-botched-execution",
         "source": "NPR",
         "score": 6.5,
+        "heat": ""
+      },
+      {
+        "title": "Pope Leo to have surgery after lump found on lung",
+        "url": "https://www.bbc.co.uk/news/articles/c6m2dnngvw8xo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Homes and bridges swept away as fresh floods hit Nepal",
+        "url": "https://www.bbc.co.uk/news/articles/ck86zppejjw3o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Delhi sees more protests as freed 'cockroach' group's leaders vow to fight on",
+        "url": "https://www.bbc.co.uk/news/articles/c84g179n2393o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Children among 109 dead after boat capsizes off Djibouti, UN says",
+        "url": "https://www.bbc.co.uk/news/articles/cwy7lxx60dg5o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Russian glide bomb attack on Zaporizhzhia kills at least 20 people",
+        "url": "https://www.bbc.co.uk/news/articles/cwvgdpv642g5o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Woman injures three people in third Poland school knife attack in a week",
+        "url": "https://www.bbc.co.uk/news/articles/cv8ezd246z1wo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Nobel peace laureate says US sanctions on ICC 'unacceptable'",
+        "url": "https://www.bbc.co.uk/news/articles/cqkgjrpmr47vo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC World",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Buildings swept away as flash floods hit central Nepal",
+        "url": "https://www.bbc.co.uk/news/videos/cwzrdnljedx0o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "UK does not support Trump's Russia diesel deal, says Streeting",
+        "url": "https://www.bbc.co.uk/news/articles/c65yn92nj423o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Northern Lights dazzles skies across the UK",
+        "url": "https://www.bbc.co.uk/news/articles/c9rkyey458xdo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Inside the room: What it was like to be with Blackpink's Lisa as race scandal erupted",
+        "url": "https://www.bbc.co.uk/news/articles/cjzxl56q30k7o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "score": 5.0,
         "heat": ""
       },
       {
@@ -2678,97 +2784,6 @@
         "heat": ""
       },
       {
-        "title": "Pope Leo XIV to have surgery in 'coming days' to remove nodule in lung",
-        "url": "https://www.euronews.com/2026/10/11/pope-leo-xiv-to-have-surgery-in-coming-days-to-remove-nodule-in-lung",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Polish police alerted over possible attack on PM Donald Tusk",
-        "url": "https://www.euronews.com/2026/10/11/polish-police-alerted-over-possible-attack-on-pm-donald-tusk",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Czech PM Babiš's ANO faces strong challenge in first round of Senate election",
-        "url": "https://www.euronews.com/2026/10/11/czech-pm-babiss-ano-faces-strong-challenge-in-first-round-of-senate-election",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Latest news bulletin | October 11th, 2026 – Midday",
-        "url": "https://www.euronews.com/video/2026/10/11/latest-news-bulletin-october-11th-2026-midday",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Protesters take to the streets in Portugal over rising living costs and housing prices",
-        "url": "https://www.euronews.com/2026/10/11/protesters-take-to-the-streets-in-portugal-over-rising-living-costs-and-housing-prices",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Teen revolt or revolution? The student protests threatening France's presidential race",
-        "url": "https://www.euronews.com/2026/10/11/teen-revolt-or-revolution-the-student-protests-threatening-frances-presidential-race",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "ESA director general reveals €10bn plan to get to space without NASA",
-        "url": "https://www.euronews.com/2026/10/11/esa-director-general-reveals-10bn-plan-to-get-to-space-without-nasa",
-        "source": "Euronews",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Buildings swept away as flash floods hit central Nepal",
-        "url": "https://www.bbc.co.uk/news/videos/cwzrdnljedx0o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "UK does not support Trump's Russia diesel deal, says Streeting",
-        "url": "https://www.bbc.co.uk/news/articles/c65yn92nj423o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Pope Leo to have surgery after lump found on lung",
-        "url": "https://www.bbc.co.uk/news/articles/c6m2dnngvw8xo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Northern Lights dazzles skies across the UK",
-        "url": "https://www.bbc.co.uk/news/articles/c9rkyey458xdo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Inside the room: What it was like to be with Blackpink's Lisa as race scandal erupted",
-        "url": "https://www.bbc.co.uk/news/articles/cjzxl56q30k7o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
-        "title": "Children among 109 dead after boat capsizes off Djibouti, UN says",
-        "url": "https://www.bbc.co.uk/news/articles/cwy7lxx60dg5o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC News",
-        "score": 5.0,
-        "heat": ""
-      },
-      {
         "title": "Controversial vaccine trial touted by RFK Jr gets go-ahead in Guinea-Bissau",
         "url": "https://www.theguardian.com/society/2026/oct/09/vaccine-trial-guinea-bissau-rfk-jr",
         "source": "The Guardian",
@@ -2839,37 +2854,51 @@
         "heat": ""
       },
       {
-        "title": "Homes and bridges swept away as fresh floods hit Nepal",
-        "url": "https://www.bbc.co.uk/news/articles/ck86zppejjw3o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
+        "title": "Pope Leo XIV to have surgery in 'coming days' to remove nodule in lung",
+        "url": "https://www.euronews.com/2026/10/11/pope-leo-xiv-to-have-surgery-in-coming-days-to-remove-nodule-in-lung",
+        "source": "Euronews",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "Delhi sees more protests as freed 'cockroach' group's leaders vow to fight on",
-        "url": "https://www.bbc.co.uk/news/articles/c84g179n2393o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
+        "title": "Polish police alerted over possible attack on PM Donald Tusk",
+        "url": "https://www.euronews.com/2026/10/11/polish-police-alerted-over-possible-attack-on-pm-donald-tusk",
+        "source": "Euronews",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "Russian glide bomb attack on Zaporizhzhia kills at least 20 people",
-        "url": "https://www.bbc.co.uk/news/articles/cwvgdpv642g5o?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
+        "title": "Czech PM Babiš's ANO faces strong challenge in first round of Senate election",
+        "url": "https://www.euronews.com/2026/10/11/czech-pm-babiss-ano-faces-strong-challenge-in-first-round-of-senate-election",
+        "source": "Euronews",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "Woman injures three people in third Poland school knife attack in a week",
-        "url": "https://www.bbc.co.uk/news/articles/cv8ezd246z1wo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
+        "title": "Latest news bulletin | October 11th, 2026 – Midday",
+        "url": "https://www.euronews.com/video/2026/10/11/latest-news-bulletin-october-11th-2026-midday",
+        "source": "Euronews",
         "score": 5.0,
         "heat": ""
       },
       {
-        "title": "Nobel peace laureate says US sanctions on ICC 'unacceptable'",
-        "url": "https://www.bbc.co.uk/news/articles/cqkgjrpmr47vo?at_medium=RSS&at_campaign=rss",
-        "source": "BBC World",
+        "title": "Protesters take to the streets in Portugal over rising living costs and housing prices",
+        "url": "https://www.euronews.com/2026/10/11/protesters-take-to-the-streets-in-portugal-over-rising-living-costs-and-housing-prices",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "Teen revolt or revolution? The student protests threatening France's presidential race",
+        "url": "https://www.euronews.com/2026/10/11/teen-revolt-or-revolution-the-student-protests-threatening-frances-presidential-race",
+        "source": "Euronews",
+        "score": 5.0,
+        "heat": ""
+      },
+      {
+        "title": "ESA director general reveals €10bn plan to get to space without NASA",
+        "url": "https://www.euronews.com/2026/10/11/esa-director-general-reveals-10bn-plan-to-get-to-space-without-nasa",
+        "source": "Euronews",
         "score": 5.0,
         "heat": ""
       },
@@ -3078,209 +3107,349 @@
         "url": "https://www.toutiao.com/trending/7694547961828851748",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "18840629"
+        "heat": "18855208"
+      },
+      {
+        "title": "王曼昱横扫佐藤瞳夺冠",
+        "url": "https://www.toutiao.com/trending/7695000467810746422",
+        "source": "Toutiao",
+        "score": 6.0,
+        "heat": "17060898"
       },
       {
         "title": "节后错峰出游持续升温",
         "url": "https://www.toutiao.com/trending/7694292556233916457",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "15425402"
+        "heat": "15437339"
       },
       {
         "title": "沙特首都机场遇袭意味着什么",
         "url": "https://www.toutiao.com/trending/7695367654676106778",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "13957481"
+        "heat": "13968282"
       },
       {
         "title": "王曼昱两天两卫冕",
         "url": "https://www.toutiao.com/trending/7695346454692433434",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "12629251"
+        "heat": "12639024"
       },
       {
         "title": "大闸蟹价格大跌",
         "url": "https://www.toutiao.com/trending/7695266917119954483",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "11427419"
+        "heat": "11436262"
       },
       {
         "title": "胡塞武装警告卡塔尔勿协助沙特作战",
         "url": "https://www.toutiao.com/trending/7695364327334743603",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "10339956"
+        "heat": "10347957"
       },
       {
         "title": "加油新规11月1日起全面实施",
         "url": "https://www.toutiao.com/trending/7694896490082304026",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "9355979"
+        "heat": "9363219"
       },
       {
         "title": "哈药股份总裁被立案",
         "url": "https://www.toutiao.com/trending/7695318757652987946",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "8465640"
+        "heat": "8472191"
       },
       {
         "title": "人民日报评刹车踏板风波",
         "url": "https://www.toutiao.com/trending/7693822162725228073",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "7660028"
+        "heat": "7665955"
       },
       {
         "title": "亲子鉴定32份报告21个非亲生？假的",
         "url": "https://www.toutiao.com/trending/7695209111373299754",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "6931080"
+        "heat": "6936443"
       },
       {
         "title": "胡塞武装与沙特交战面扩大",
         "url": "https://www.toutiao.com/trending/7695336442913885747",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "6271500"
+        "heat": "6276353"
       },
       {
         "title": "2026美好奇妙夜",
         "url": "https://www.toutiao.com/trending/7695024319021432886",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "5674688"
+        "heat": "5679079"
       },
       {
         "title": "郑丽文喊话沈伯洋：不要躲闪",
         "url": "https://www.toutiao.com/trending/7694149865362325558",
         "source": "Toutiao",
         "score": 6.0,
-        "heat": "5134670"
-      },
-      {
-        "title": "张帅组合获中网女双亚军",
-        "url": "https://www.toutiao.com/trending/7695343361095421466",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "4646042"
-      },
-      {
-        "title": "黄坤明一个月内两次调研深圳",
-        "url": "https://www.toutiao.com/trending/7694221173953445942",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "4203912"
-      },
-      {
-        "title": "中国人亲历机场遇袭：多人被巨响吓哭",
-        "url": "https://www.toutiao.com/trending/7695196471968353830",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "3803857"
-      },
-      {
-        "title": "帅化民：美日嘴巴不讲暗中做很多",
-        "url": "https://www.toutiao.com/trending/7694143342892367891",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "3441872"
+        "heat": "5138643"
       },
       {
         "title": "常州第一人民医院原院长何小舟被查",
         "url": "https://www.toutiao.com/trending/7695330482975690283",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "3114335"
+        "heat": "4649637"
+      },
+      {
+        "title": "张帅组合获中网女双亚军",
+        "url": "https://www.toutiao.com/trending/7695343361095421466",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "4207165"
+      },
+      {
+        "title": "中国人亲历机场遇袭：多人被巨响吓哭",
+        "url": "https://www.toutiao.com/trending/7695196471968353830",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "3806800"
+      },
+      {
+        "title": "帅化民：美日嘴巴不讲暗中做很多",
+        "url": "https://www.toutiao.com/trending/7694143342892367891",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "3444535"
       },
       {
         "title": "美要从俄进口柴油对俄乌影响有多大",
         "url": "https://www.toutiao.com/trending/7695358308189736511",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "2817966"
+        "heat": "3116745"
       },
       {
         "title": "美专家疾呼美军撤至第二岛链有何考量",
         "url": "https://www.toutiao.com/trending/7694749329109729323",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "2549801"
+        "heat": "2820147"
       },
       {
-        "title": "如何缓解“青菜焦虑症”",
-        "url": "https://www.toutiao.com/trending/7695281817427247146",
+        "title": "黄坤明一个月内两次调研深圳",
+        "url": "https://www.toutiao.com/trending/7694221173953445942",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "2307156"
+        "heat": "2551775"
       },
       {
         "title": "牛弹琴：泽连斯基最凶险的时刻来了",
         "url": "https://www.toutiao.com/trending/7694523630415380521",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "2087601"
+        "heat": "2308941"
       },
       {
         "title": "中网多项数据创新高",
         "url": "https://www.toutiao.com/trending/7695261984230998057",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "1888939"
+        "heat": "2089216"
+      },
+      {
+        "title": "如何缓解“青菜焦虑症”",
+        "url": "https://www.toutiao.com/trending/7695281817427247146",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "1890401"
       },
       {
         "title": "欧文时隔19个月复出",
         "url": "https://www.toutiao.com/trending/7695346727246630443",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "1709183"
-      },
-      {
-        "title": "沙溢胡可现场观看WTT中国大满贯",
-        "url": "https://www.toutiao.com/trending/7694484039500234771",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "1546533"
-      },
-      {
-        "title": "国防部批赖清德是“台湾之祸”",
-        "url": "https://www.toutiao.com/trending/7694983541897203242",
-        "source": "Toutiao",
-        "score": 5.5,
-        "heat": "1399360"
+        "heat": "1710505"
       },
       {
         "title": "梅启明悬赏5万港币欲寻回梅艳芳骨灰",
         "url": "https://www.toutiao.com/trending/7694426936835702827",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "1266194"
+        "heat": "1547729"
       },
       {
-        "title": "媒体：津门虎正远离降级区",
-        "url": "https://www.toutiao.com/trending/7695161351869743625",
+        "title": "国防部批赖清德是“台湾之祸”",
+        "url": "https://www.toutiao.com/trending/7694983541897203242",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "1145699"
+        "heat": "1400443"
+      },
+      {
+        "title": "机场爆炸声背后沙土巴防务联盟迎大考",
+        "url": "https://www.toutiao.com/trending/7694785227461345306",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "1267173"
+      },
+      {
+        "title": "沙溢胡可现场观看WTT中国大满贯",
+        "url": "https://www.toutiao.com/trending/7694484039500234771",
+        "source": "Toutiao",
+        "score": 5.5,
+        "heat": "1146586"
       },
       {
         "title": "李连杰澄清抛妻弃子传闻",
         "url": "https://www.toutiao.com/trending/7695236775379894326",
         "source": "Toutiao",
         "score": 5.5,
-        "heat": "1036672"
+        "heat": "1037474"
       },
       {
         "title": "俄国防部：防空系统一夜间在多地上空共摧毁479架乌克兰无人机",
         "url": "https://sputniknews.cn/20261011/1073572474.html",
         "source": "Sputnik CN",
         "score": 5.5,
+        "heat": ""
+      },
+      {
+        "title": "梅德韦杰夫：特朗普谈及泽连斯基后，\"班德拉政权\"陷入茫然",
+        "url": "https://sputniknews.cn/20261011/1073574239.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄总统新闻秘书：陪伴普京庆祝生日的人非常少",
+        "url": "https://sputniknews.cn/20261011/1073574108.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄驻华大使提议将上合组织足球杯办成定期举办的赛事",
+        "url": "https://sputniknews.cn/20261011/1073573820.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄总统新闻秘书：泽连斯基歇斯底里 无法采取深思熟虑的行动",
+        "url": "https://sputniknews.cn/20261011/1073573713.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄驻华大使：上合组织成员国体育合作稳步发展",
+        "url": "https://sputniknews.cn/20261011/1073573570.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "媒体：泽连斯基的圈子对特朗普关于乌克兰需要新领导人的言论感到震惊",
+        "url": "https://sputniknews.cn/20261011/1073573006.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄国防部：俄军控制哈尔科夫州的里兹尼科韦村和库皮内村",
+        "url": "https://sputniknews.cn/20261011/1073573112.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "马斯克赞同特朗普的观点并表示乌克兰已经是时候寻找新领导",
+        "url": "https://sputniknews.cn/20261011/1073572710.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "专家认为，特朗普可能\"寻求让乌克兰改变方向的办法\"",
+        "url": "https://sputniknews.cn/20261011/1073572596.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄驻华大使：上海合作组织成员国在体育领域的合作稳步发展",
+        "url": "https://sputniknews.cn/20261011/1073572338.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄国防部：俄军打击乌军相关数据中心及港口设施",
+        "url": "https://sputniknews.cn/20261011/1073572208.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄总统特别代表呼吁马斯克旗下“无聊公司”着手建设俄美隧道",
+        "url": "https://sputniknews.cn/20261011/1073572097.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "芬兰政界人士：欧洲的虚假团结正在延长乌克兰冲突",
+        "url": "https://sputniknews.cn/20261011/1073571974.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄罗斯与中国计划为阿穆尔虎建立生态廊道",
+        "url": "https://sputniknews.cn/20261011/1073571833.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "中国国防部谈赖清德发表所谓“双十”讲话：再次暴露其“台湾之祸”、“和平之灾”的本质",
+        "url": "https://sputniknews.cn/20261011/1073571703.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "联合国秘书长坚决谴责利雅得机场遭袭事件",
+        "url": "https://sputniknews.cn/20261011/1073571579.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "朝鲜庆祝建党81周年，金正恩携妻女观演",
+        "url": "https://sputniknews.cn/20261011/1073571285.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "俄总统特别代表：特朗普的努力正推动乌克兰冲突走向解决",
+        "url": "https://sputniknews.cn/20261011/1073570968.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
+        "heat": ""
+      },
+      {
+        "title": "韩情报机构：与美在诸多领域共享涉朝情报",
+        "url": "https://sputniknews.cn/20261011/1073570850.html",
+        "source": "Sputnik CN",
+        "score": 4.0,
         "heat": ""
       },
       {
@@ -3476,139 +3645,6 @@
         "title": "第38次上海市咨会顺利完成各项议程，取得三方面成果",
         "url": "https://www.thepaper.cn/newsDetail_forward_34232062",
         "source": "Pengpai",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "梅德韦杰夫：特朗普谈及泽连斯基后，\"班德拉政权\"陷入茫然",
-        "url": "https://sputniknews.cn/20261011/1073574239.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄总统新闻秘书：陪伴普京庆祝生日的人非常少",
-        "url": "https://sputniknews.cn/20261011/1073574108.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄驻华大使提议将上合组织足球杯办成定期举办的赛事",
-        "url": "https://sputniknews.cn/20261011/1073573820.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄总统新闻秘书：泽连斯基歇斯底里 无法采取深思熟虑的行动",
-        "url": "https://sputniknews.cn/20261011/1073573713.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄驻华大使：上合组织成员国体育合作稳步发展",
-        "url": "https://sputniknews.cn/20261011/1073573570.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "媒体：泽连斯基的圈子对特朗普关于乌克兰需要新领导人的言论感到震惊",
-        "url": "https://sputniknews.cn/20261011/1073573006.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄国防部：俄军控制哈尔科夫州的里兹尼科韦村和库皮内村",
-        "url": "https://sputniknews.cn/20261011/1073573112.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "马斯克赞同特朗普的观点并表示乌克兰已经是时候寻找新领导",
-        "url": "https://sputniknews.cn/20261011/1073572710.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "专家认为，特朗普可能\"寻求让乌克兰改变方向的办法\"",
-        "url": "https://sputniknews.cn/20261011/1073572596.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄驻华大使：上海合作组织成员国在体育领域的合作稳步发展",
-        "url": "https://sputniknews.cn/20261011/1073572338.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄国防部：俄军打击乌军相关数据中心及港口设施",
-        "url": "https://sputniknews.cn/20261011/1073572208.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄总统特别代表呼吁马斯克旗下“无聊公司”着手建设俄美隧道",
-        "url": "https://sputniknews.cn/20261011/1073572097.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "芬兰政界人士：欧洲的虚假团结正在延长乌克兰冲突",
-        "url": "https://sputniknews.cn/20261011/1073571974.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄罗斯与中国计划为阿穆尔虎建立生态廊道",
-        "url": "https://sputniknews.cn/20261011/1073571833.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "中国国防部谈赖清德发表所谓“双十”讲话：再次暴露其“台湾之祸”、“和平之灾”的本质",
-        "url": "https://sputniknews.cn/20261011/1073571703.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "联合国秘书长坚决谴责利雅得机场遭袭事件",
-        "url": "https://sputniknews.cn/20261011/1073571579.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "朝鲜庆祝建党81周年，金正恩携妻女观演",
-        "url": "https://sputniknews.cn/20261011/1073571285.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "俄总统特别代表：特朗普的努力正推动乌克兰冲突走向解决",
-        "url": "https://sputniknews.cn/20261011/1073570968.html",
-        "source": "Sputnik CN",
-        "score": 4.0,
-        "heat": ""
-      },
-      {
-        "title": "韩情报机构：与美在诸多领域共享涉朝情报",
-        "url": "https://sputniknews.cn/20261011/1073570850.html",
-        "source": "Sputnik CN",
         "score": 4.0,
         "heat": ""
       }
@@ -4083,224 +4119,224 @@
         "url": "https://www.zhihu.com/question/2079863733422142709",
         "source": "Zhihu",
         "score": 6.0,
-        "heat": "72 万热度"
+        "heat": "73 万热度"
       },
       {
         "title": "网上很多人鼓吹 agent 有前途，但 agent 开发会不会被 agent 本身取代？",
         "url": "https://www.zhihu.com/question/2091291972199883979",
         "source": "Zhihu",
         "score": 5.0,
-        "heat": "83 万热度"
+        "heat": "85 万热度"
       },
       {
         "title": "当北方人第一次闻桂花香",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "12042044"
+        "heat": "12096506"
       },
       {
         "title": "郑钦文中网冲冠",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "12022287"
+        "heat": "12050295"
       },
       {
         "title": "2026世界市长对话洛阳",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "12004990"
+        "heat": "12038539"
       },
       {
         "title": "纯过日子就是好好生活",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "12004913"
+        "heat": "12026797"
       },
       {
         "title": "2026美好奇妙夜",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "11372777"
+        "heat": "11423038"
       },
       {
         "title": "秋天的桂花香太治愈了",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "11245221"
+        "heat": "11249351"
       },
       {
         "title": "大自然的秋天进度更新了",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9820043"
+        "heat": "9842898"
       },
       {
         "title": "王曼昱横扫佐藤瞳夺冠",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9795266"
+        "heat": "9842592"
       },
       {
         "title": "在芒市玩的每一天都很明媚",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9711272"
-      },
-      {
-        "title": "国庆后错峰出游太爽了",
-        "url": "",
-        "source": "Douyin",
-        "score": 5.0,
-        "heat": "9533029"
+        "heat": "9579604"
       },
       {
         "title": "张雪机车冲刺冠军",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9449586"
+        "heat": "9545476"
+      },
+      {
+        "title": "国庆后错峰出游太爽了",
+        "url": "",
+        "source": "Douyin",
+        "score": 5.0,
+        "heat": "9464416"
       },
       {
         "title": "苏超无锡vs徐州",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9404221"
+        "heat": "9305090"
       },
       {
         "title": "“喝醋能刮油”不实",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "9301496"
+        "heat": "8679163"
       },
       {
         "title": "松岛辉空WTT中国大满贯男单夺冠",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "8759006"
+        "heat": "8106568"
       },
       {
         "title": "苏超宿迁vs盐城",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "8231889"
+        "heat": "7837743"
       },
       {
         "title": "周末在海边漫步的快乐谁懂",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7837775"
+        "heat": "7823298"
       },
       {
         "title": "新疆旅游的后劲也太大了",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7824960"
+        "heat": "7799372"
       },
       {
         "title": "青甘大环线后劲太大了",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7801637"
+        "heat": "7778894"
       },
       {
         "title": "欧文复出后首秀",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7774277"
+        "heat": "7767298"
       },
       {
         "title": "我的假日慢充宝藏城市",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7767079"
+        "heat": "7755979"
       },
       {
         "title": "香港警方回应梅艳芳骨灰被盗",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7759038"
+        "heat": "7754639"
       },
       {
         "title": "秋日第一锅香辣蟹",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7756869"
+        "heat": "7751036"
       },
       {
         "title": "晒出我的民族风假期",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7752391"
+        "heat": "7749516"
       },
       {
         "title": "我不要上班 我要去爬山",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7749178"
+        "heat": "7741161"
       },
       {
         "title": "生化危机爆发夜细节越扒越有",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7743552"
+        "heat": "7741110"
       },
       {
         "title": "这临沂炒鸡吃了不烧心",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7741845"
+        "heat": "7732751"
       },
       {
         "title": "终于刷出了孙燕姿的开始懂了",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7739569"
+        "heat": "7720510"
       },
       {
         "title": "别想太多别睡太晚别爱太满",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7734367"
+        "heat": "7719369"
       },
       {
         "title": "你在这碗汤里放了什么啊",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7727728"
+        "heat": "7718167"
       },
       {
         "title": "2026手搓本命娃挑战赛",
         "url": "",
         "source": "Douyin",
         "score": 5.0,
-        "heat": "7721251"
+        "heat": "7705205"
       },
       {
         "title": "华为被曝将推子品牌星芒",
@@ -4314,210 +4350,210 @@
         "url": "https://www.baidu.com/s?wd=%E6%AF%8F%E4%B8%80%E4%BB%A3%E4%BA%BA%E9%83%BD%E8%A6%81%E8%B5%B0%E5%A5%BD%E8%87%AA%E5%B7%B1%E7%9A%84%E9%95%BF%E5%BE%81%E8%B7%AF&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7904637"
+        "heat": "7903979"
       },
       {
         "title": "陪看：郑钦文冲击中网首冠",
         "url": "https://www.baidu.com/s?wd=%E9%99%AA%E7%9C%8B%EF%BC%9A%E9%83%91%E9%92%A6%E6%96%87%E5%86%B2%E5%87%BB%E4%B8%AD%E7%BD%91%E9%A6%96%E5%86%A0&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7808763"
+        "heat": "7809228"
       },
       {
         "title": "王曼昱卫冕中国大满贯女单冠军",
         "url": "https://www.baidu.com/s?wd=%E7%8E%8B%E6%9B%BC%E6%98%B1%E5%8D%AB%E5%86%95%E4%B8%AD%E5%9B%BD%E5%A4%A7%E6%BB%A1%E8%B4%AF%E5%A5%B3%E5%8D%95%E5%86%A0%E5%86%9B&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7714281"
+        "heat": "7712502"
       },
       {
         "title": "这些文物见证伟大远征",
         "url": "https://www.baidu.com/s?wd=%E8%BF%99%E4%BA%9B%E6%96%87%E7%89%A9%E8%A7%81%E8%AF%81%E4%BC%9F%E5%A4%A7%E8%BF%9C%E5%BE%81&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "7616369"
-      },
-      {
-        "title": "地磁暴",
-        "url": "https://www.baidu.com/s?wd=%E5%9C%B0%E7%A3%81%E6%9A%B4&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "7522775"
-      },
-      {
-        "title": "周星驰1港元交易 看似亏本实则精明",
-        "url": "https://www.baidu.com/s?wd=%E5%91%A8%E6%98%9F%E9%A9%B01%E6%B8%AF%E5%85%83%E4%BA%A4%E6%98%93+%E7%9C%8B%E4%BC%BC%E4%BA%8F%E6%9C%AC%E5%AE%9E%E5%88%99%E7%B2%BE%E6%98%8E&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "7424656"
-      },
-      {
-        "title": "郑钦文出场全场沸腾 靳东担任嘉宾",
-        "url": "https://www.baidu.com/s?wd=%E9%83%91%E9%92%A6%E6%96%87%E5%87%BA%E5%9C%BA%E5%85%A8%E5%9C%BA%E6%B2%B8%E8%85%BE+%E9%9D%B3%E4%B8%9C%E6%8B%85%E4%BB%BB%E5%98%89%E5%AE%BE&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "7329767"
-      },
-      {
-        "title": "松岛辉空中国大满贯男单夺冠",
-        "url": "https://www.baidu.com/s?wd=%E6%9D%BE%E5%B2%9B%E8%BE%89%E7%A9%BA%E4%B8%AD%E5%9B%BD%E5%A4%A7%E6%BB%A1%E8%B4%AF%E7%94%B7%E5%8D%95%E5%A4%BA%E5%86%A0&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "7238303"
-      },
-      {
-        "title": "中网决赛上座率",
-        "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E7%BD%91%E5%86%B3%E8%B5%9B%E4%B8%8A%E5%BA%A7%E7%8E%87&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "7138050"
-      },
-      {
-        "title": "外地务工人员2元彩票中500万",
-        "url": "https://www.baidu.com/s?wd=%E5%A4%96%E5%9C%B0%E5%8A%A1%E5%B7%A5%E4%BA%BA%E5%91%982%E5%85%83%E5%BD%A9%E7%A5%A8%E4%B8%AD500%E4%B8%87&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "7047044"
-      },
-      {
-        "title": "81岁马德华再现猪八戒名场面",
-        "url": "https://www.baidu.com/s?wd=81%E5%B2%81%E9%A9%AC%E5%BE%B7%E5%8D%8E%E5%86%8D%E7%8E%B0%E7%8C%AA%E5%85%AB%E6%88%92%E5%90%8D%E5%9C%BA%E9%9D%A2&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6947295"
-      },
-      {
-        "title": "亲子鉴定32份报告21个非亲生？假的",
-        "url": "https://www.baidu.com/s?wd=%E4%BA%B2%E5%AD%90%E9%89%B4%E5%AE%9A32%E4%BB%BD%E6%8A%A5%E5%91%8A21%E4%B8%AA%E9%9D%9E%E4%BA%B2%E7%94%9F%EF%BC%9F%E5%81%87%E7%9A%84&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6854290"
-      },
-      {
-        "title": "王婆说媒现场29岁女舞蹈老师火了",
-        "url": "https://www.baidu.com/s?wd=%E7%8E%8B%E5%A9%86%E8%AF%B4%E5%AA%92%E7%8E%B0%E5%9C%BA29%E5%B2%81%E5%A5%B3%E8%88%9E%E8%B9%88%E8%80%81%E5%B8%88%E7%81%AB%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6758834"
-      },
-      {
-        "title": "唐国强曝《雍正王朝》最初角色是老八",
-        "url": "https://www.baidu.com/s?wd=%E5%94%90%E5%9B%BD%E5%BC%BA%E6%9B%9D%E3%80%8A%E9%9B%8D%E6%AD%A3%E7%8E%8B%E6%9C%9D%E3%80%8B%E6%9C%80%E5%88%9D%E8%A7%92%E8%89%B2%E6%98%AF%E8%80%81%E5%85%AB&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6660181"
-      },
-      {
-        "title": "古偶终于开始过日子了",
-        "url": "https://www.baidu.com/s?wd=%E5%8F%A4%E5%81%B6%E7%BB%88%E4%BA%8E%E5%BC%80%E5%A7%8B%E8%BF%87%E6%97%A5%E5%AD%90%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6568472"
-      },
-      {
-        "title": "TTG对战EDGM",
-        "url": "https://www.baidu.com/s?wd=TTG%E5%AF%B9%E6%88%98EDGM&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6471207"
-      },
-      {
-        "title": "二十年夫妻因1万元打斗致丈夫死亡",
-        "url": "https://www.baidu.com/s?wd=%E4%BA%8C%E5%8D%81%E5%B9%B4%E5%A4%AB%E5%A6%BB%E5%9B%A01%E4%B8%87%E5%85%83%E6%89%93%E6%96%97%E8%87%B4%E4%B8%88%E5%A4%AB%E6%AD%BB%E4%BA%A1&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6380548"
-      },
-      {
-        "title": "张帅：亚军也不错",
-        "url": "https://www.baidu.com/s?wd=%E5%BC%A0%E5%B8%85%EF%BC%9A%E4%BA%9A%E5%86%9B%E4%B9%9F%E4%B8%8D%E9%94%99&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6287687"
-      },
-      {
-        "title": "银行业“反内卷”再升级",
-        "url": "https://www.baidu.com/s?wd=%E9%93%B6%E8%A1%8C%E4%B8%9A%E2%80%9C%E5%8F%8D%E5%86%85%E5%8D%B7%E2%80%9D%E5%86%8D%E5%8D%87%E7%BA%A7&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6184949"
-      },
-      {
-        "title": "清渣工触电身亡 国企追责表述消失",
-        "url": "https://www.baidu.com/s?wd=%E6%B8%85%E6%B8%A3%E5%B7%A5%E8%A7%A6%E7%94%B5%E8%BA%AB%E4%BA%A1+%E5%9B%BD%E4%BC%81%E8%BF%BD%E8%B4%A3%E8%A1%A8%E8%BF%B0%E6%B6%88%E5%A4%B1&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "6080611"
-      },
-      {
-        "title": "胖东来连水果糖分都给你标明白了",
-        "url": "https://www.baidu.com/s?wd=%E8%83%96%E4%B8%9C%E6%9D%A5%E8%BF%9E%E6%B0%B4%E6%9E%9C%E7%B3%96%E5%88%86%E9%83%BD%E7%BB%99%E4%BD%A0%E6%A0%87%E6%98%8E%E7%99%BD%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5984648"
-      },
-      {
-        "title": "村民自建房用的砖可以徒手掰断",
-        "url": "https://www.baidu.com/s?wd=%E6%9D%91%E6%B0%91%E8%87%AA%E5%BB%BA%E6%88%BF%E7%94%A8%E7%9A%84%E7%A0%96%E5%8F%AF%E4%BB%A5%E5%BE%92%E6%89%8B%E6%8E%B0%E6%96%AD&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5899887"
-      },
-      {
-        "title": "《美人余》 闻不了老人味",
-        "url": "https://www.baidu.com/s?wd=%E3%80%8A%E7%BE%8E%E4%BA%BA%E4%BD%99%E3%80%8B+%E9%97%BB%E4%B8%8D%E4%BA%86%E8%80%81%E4%BA%BA%E5%91%B3&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5801475"
+        "heat": "7618391"
       },
       {
         "title": "央视曝光个别地区蔬菜大棚撂荒",
         "url": "https://www.baidu.com/s?wd=%E5%A4%AE%E8%A7%86%E6%9B%9D%E5%85%89%E4%B8%AA%E5%88%AB%E5%9C%B0%E5%8C%BA%E8%94%AC%E8%8F%9C%E5%A4%A7%E6%A3%9A%E6%92%82%E8%8D%92&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "5715390"
+        "heat": "7520179"
       },
       {
-        "title": "花钱进天眼核心区 谁开的违规口子",
-        "url": "https://www.baidu.com/s?wd=%E8%8A%B1%E9%92%B1%E8%BF%9B%E5%A4%A9%E7%9C%BC%E6%A0%B8%E5%BF%83%E5%8C%BA+%E8%B0%81%E5%BC%80%E7%9A%84%E8%BF%9D%E8%A7%84%E5%8F%A3%E5%AD%90&sa=fyb_news&rsv_dl=fyb_news",
+        "title": "清渣工触电身亡 国企追责表述消失",
+        "url": "https://www.baidu.com/s?wd=%E6%B8%85%E6%B8%A3%E5%B7%A5%E8%A7%A6%E7%94%B5%E8%BA%AB%E4%BA%A1+%E5%9B%BD%E4%BC%81%E8%BF%BD%E8%B4%A3%E8%A1%A8%E8%BF%B0%E6%B6%88%E5%A4%B1&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "5605251"
+        "heat": "7426595"
+      },
+      {
+        "title": "张帅：亚军也不错",
+        "url": "https://www.baidu.com/s?wd=%E5%BC%A0%E5%B8%85%EF%BC%9A%E4%BA%9A%E5%86%9B%E4%B9%9F%E4%B8%8D%E9%94%99&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7329153"
+      },
+      {
+        "title": "松岛辉空中国大满贯男单夺冠",
+        "url": "https://www.baidu.com/s?wd=%E6%9D%BE%E5%B2%9B%E8%BE%89%E7%A9%BA%E4%B8%AD%E5%9B%BD%E5%A4%A7%E6%BB%A1%E8%B4%AF%E7%94%B7%E5%8D%95%E5%A4%BA%E5%86%A0&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7237213"
+      },
+      {
+        "title": "中网决赛上座率",
+        "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E7%BD%91%E5%86%B3%E8%B5%9B%E4%B8%8A%E5%BA%A7%E7%8E%87&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7141337"
+      },
+      {
+        "title": "郑钦文出场全场沸腾 靳东担任嘉宾",
+        "url": "https://www.baidu.com/s?wd=%E9%83%91%E9%92%A6%E6%96%87%E5%87%BA%E5%9C%BA%E5%85%A8%E5%9C%BA%E6%B2%B8%E8%85%BE+%E9%9D%B3%E4%B8%9C%E6%8B%85%E4%BB%BB%E5%98%89%E5%AE%BE&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "7040386"
+      },
+      {
+        "title": "外地务工人员2元彩票中500万",
+        "url": "https://www.baidu.com/s?wd=%E5%A4%96%E5%9C%B0%E5%8A%A1%E5%B7%A5%E4%BA%BA%E5%91%982%E5%85%83%E5%BD%A9%E7%A5%A8%E4%B8%AD500%E4%B8%87&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6943792"
+      },
+      {
+        "title": "亲子鉴定32份报告21个非亲生？假的",
+        "url": "https://www.baidu.com/s?wd=%E4%BA%B2%E5%AD%90%E9%89%B4%E5%AE%9A32%E4%BB%BD%E6%8A%A5%E5%91%8A21%E4%B8%AA%E9%9D%9E%E4%BA%B2%E7%94%9F%EF%BC%9F%E5%81%87%E7%9A%84&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6847263"
+      },
+      {
+        "title": "王婆说媒现场29岁女舞蹈老师火了",
+        "url": "https://www.baidu.com/s?wd=%E7%8E%8B%E5%A9%86%E8%AF%B4%E5%AA%92%E7%8E%B0%E5%9C%BA29%E5%B2%81%E5%A5%B3%E8%88%9E%E8%B9%88%E8%80%81%E5%B8%88%E7%81%AB%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6755823"
       },
       {
         "title": "郑钦文连救3个盘点",
         "url": "https://www.baidu.com/s?wd=%E9%83%91%E9%92%A6%E6%96%87%E8%BF%9E%E6%95%913%E4%B8%AA%E7%9B%98%E7%82%B9&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "5520955"
+        "heat": "6667574"
+      },
+      {
+        "title": "81岁马德华再现猪八戒名场面",
+        "url": "https://www.baidu.com/s?wd=81%E5%B2%81%E9%A9%AC%E5%BE%B7%E5%8D%8E%E5%86%8D%E7%8E%B0%E7%8C%AA%E5%85%AB%E6%88%92%E5%90%8D%E5%9C%BA%E9%9D%A2&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6567911"
+      },
+      {
+        "title": "村民自建房用的砖可以徒手掰断",
+        "url": "https://www.baidu.com/s?wd=%E6%9D%91%E6%B0%91%E8%87%AA%E5%BB%BA%E6%88%BF%E7%94%A8%E7%9A%84%E7%A0%96%E5%8F%AF%E4%BB%A5%E5%BE%92%E6%89%8B%E6%8E%B0%E6%96%AD&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6469863"
+      },
+      {
+        "title": "TTG对战EDGM",
+        "url": "https://www.baidu.com/s?wd=TTG%E5%AF%B9%E6%88%98EDGM&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6372841"
+      },
+      {
+        "title": "二十年夫妻因1万元打斗致丈夫死亡",
+        "url": "https://www.baidu.com/s?wd=%E4%BA%8C%E5%8D%81%E5%B9%B4%E5%A4%AB%E5%A6%BB%E5%9B%A01%E4%B8%87%E5%85%83%E6%89%93%E6%96%97%E8%87%B4%E4%B8%88%E5%A4%AB%E6%AD%BB%E4%BA%A1&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6281006"
+      },
+      {
+        "title": "地磁暴",
+        "url": "https://www.baidu.com/s?wd=%E5%9C%B0%E7%A3%81%E6%9A%B4&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6186968"
+      },
+      {
+        "title": "古偶终于开始过日子了",
+        "url": "https://www.baidu.com/s?wd=%E5%8F%A4%E5%81%B6%E7%BB%88%E4%BA%8E%E5%BC%80%E5%A7%8B%E8%BF%87%E6%97%A5%E5%AD%90%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "6089048"
+      },
+      {
+        "title": "《美人余》 闻不了老人味",
+        "url": "https://www.baidu.com/s?wd=%E3%80%8A%E7%BE%8E%E4%BA%BA%E4%BD%99%E3%80%8B+%E9%97%BB%E4%B8%8D%E4%BA%86%E8%80%81%E4%BA%BA%E5%91%B3&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5993208"
+      },
+      {
+        "title": "花钱进天眼核心区 谁开的违规口子",
+        "url": "https://www.baidu.com/s?wd=%E8%8A%B1%E9%92%B1%E8%BF%9B%E5%A4%A9%E7%9C%BC%E6%A0%B8%E5%BF%83%E5%8C%BA+%E8%B0%81%E5%BC%80%E7%9A%84%E8%BF%9D%E8%A7%84%E5%8F%A3%E5%AD%90&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5901163"
+      },
+      {
+        "title": "唐国强曝《雍正王朝》最初角色是老八",
+        "url": "https://www.baidu.com/s?wd=%E5%94%90%E5%9B%BD%E5%BC%BA%E6%9B%9D%E3%80%8A%E9%9B%8D%E6%AD%A3%E7%8E%8B%E6%9C%9D%E3%80%8B%E6%9C%80%E5%88%9D%E8%A7%92%E8%89%B2%E6%98%AF%E8%80%81%E5%85%AB&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5794573"
+      },
+      {
+        "title": "胖东来连水果糖分都给你标明白了",
+        "url": "https://www.baidu.com/s?wd=%E8%83%96%E4%B8%9C%E6%9D%A5%E8%BF%9E%E6%B0%B4%E6%9E%9C%E7%B3%96%E5%88%86%E9%83%BD%E7%BB%99%E4%BD%A0%E6%A0%87%E6%98%8E%E7%99%BD%E4%BA%86&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5699657"
       },
       {
         "title": "河南高速一路段夜间有人躺路中",
         "url": "https://www.baidu.com/s?wd=%E6%B2%B3%E5%8D%97%E9%AB%98%E9%80%9F%E4%B8%80%E8%B7%AF%E6%AE%B5%E5%A4%9C%E9%97%B4%E6%9C%89%E4%BA%BA%E8%BA%BA%E8%B7%AF%E4%B8%AD&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "5418526"
+        "heat": "5617665"
+      },
+      {
+        "title": "银行业“反内卷”再升级",
+        "url": "https://www.baidu.com/s?wd=%E9%93%B6%E8%A1%8C%E4%B8%9A%E2%80%9C%E5%8F%8D%E5%86%85%E5%8D%B7%E2%80%9D%E5%86%8D%E5%8D%87%E7%BA%A7&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5508058"
       },
       {
         "title": "邻里闹纠纷一方拿出乾隆年间地契",
         "url": "https://www.baidu.com/s?wd=%E9%82%BB%E9%87%8C%E9%97%B9%E7%BA%A0%E7%BA%B7%E4%B8%80%E6%96%B9%E6%8B%BF%E5%87%BA%E4%B9%BE%E9%9A%86%E5%B9%B4%E9%97%B4%E5%9C%B0%E5%A5%91&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "5329938"
+        "heat": "5419304"
+      },
+      {
+        "title": "付费可进天眼 大国重器不容商业蚕食",
+        "url": "https://www.baidu.com/s?wd=%E4%BB%98%E8%B4%B9%E5%8F%AF%E8%BF%9B%E5%A4%A9%E7%9C%BC+%E5%A4%A7%E5%9B%BD%E9%87%8D%E5%99%A8%E4%B8%8D%E5%AE%B9%E5%95%86%E4%B8%9A%E8%9A%95%E9%A3%9F&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5318565"
+      },
+      {
+        "title": "珠海回应学校家委让家长轮流看午休",
+        "url": "https://www.baidu.com/s?wd=%E7%8F%A0%E6%B5%B7%E5%9B%9E%E5%BA%94%E5%AD%A6%E6%A0%A1%E5%AE%B6%E5%A7%94%E8%AE%A9%E5%AE%B6%E9%95%BF%E8%BD%AE%E6%B5%81%E7%9C%8B%E5%8D%88%E4%BC%91&sa=fyb_news&rsv_dl=fyb_news",
+        "source": "Baidu",
+        "score": 5.0,
+        "heat": "5238843"
       },
       {
         "title": "马化腾带28岁青年与省委书记座谈",
         "url": "https://www.baidu.com/s?wd=%E9%A9%AC%E5%8C%96%E8%85%BE%E5%B8%A628%E5%B2%81%E9%9D%92%E5%B9%B4%E4%B8%8E%E7%9C%81%E5%A7%94%E4%B9%A6%E8%AE%B0%E5%BA%A7%E8%B0%88&sa=fyb_news&rsv_dl=fyb_news",
         "source": "Baidu",
         "score": 5.0,
-        "heat": "5230439"
-      },
-      {
-        "title": "王曼昱夺冠后比出两个1",
-        "url": "https://www.baidu.com/s?wd=%E7%8E%8B%E6%9B%BC%E6%98%B1%E5%A4%BA%E5%86%A0%E5%90%8E%E6%AF%94%E5%87%BA%E4%B8%A4%E4%B8%AA1&sa=fyb_news&rsv_dl=fyb_news",
-        "source": "Baidu",
-        "score": 5.0,
-        "heat": "5141409"
+        "heat": "5122521"
       },
       {
         "title": "大学生如何应对父母催谈恋爱",
@@ -4562,6 +4598,13 @@
         "heat": ""
       },
       {
+        "title": "BB大王体验桂林落地签",
+        "url": "https://search.bilibili.com/all?keyword=BB大王体验桂林落地签",
+        "source": "Bilibili",
+        "score": 3.0,
+        "heat": ""
+      },
+      {
         "title": "起底成功学导师周文强套路",
         "url": "https://search.bilibili.com/all?keyword=起底成功学导师周文强套路",
         "source": "Bilibili",
@@ -4576,15 +4619,8 @@
         "heat": ""
       },
       {
-        "title": "当奢侈品去掉logo你还会买吗",
-        "url": "https://search.bilibili.com/all?keyword=当奢侈品去掉logo你还会买吗",
-        "source": "Bilibili",
-        "score": 3.0,
-        "heat": ""
-      },
-      {
-        "title": "Niko喊话V社",
-        "url": "https://search.bilibili.com/all?keyword=Niko喊话V社",
+        "title": "Jackeylove世界赛单曲",
+        "url": "https://search.bilibili.com/all?keyword=Jackeylove世界赛单曲",
         "source": "Bilibili",
         "score": 3.0,
         "heat": ""
@@ -4594,32 +4630,32 @@
         "url": "https://www.zhihu.com/question/2092513467722719411",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "1960 万热度"
+        "heat": "1921 万热度"
       },
       {
         "title": "大二专科生自述靠切片三年赚七百万，直播切片究竟是怎么赚钱的？这种赚钱模式能复制吗？",
         "url": "https://www.zhihu.com/question/2092562681433514181",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "901 万热度"
+        "heat": "910 万热度"
       },
       {
         "title": "为什么五子棋始终没有发展起来？",
         "url": "https://www.zhihu.com/question/284634562",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "469 万热度"
-      },
-      {
-        "title": "WTT 中国大满贯女单决赛，王曼昱 4-0 佐藤瞳成功卫冕，如何评价本场比赛？",
-        "url": "https://www.zhihu.com/question/2092634676540039677",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "313 万热度"
+        "heat": "472 万热度"
       },
       {
         "title": "岸本齐史的全新漫画《火影忍者：暗影崛起》正式公布，对此你有哪些期待？",
         "url": "https://www.zhihu.com/question/2092554410895171870",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "310 万热度"
+      },
+      {
+        "title": "WTT 中国大满贯女单决赛，王曼昱 4-0 佐藤瞳成功卫冕，如何评价本场比赛？",
+        "url": "https://www.zhihu.com/question/2092634676540039677",
         "source": "Zhihu",
         "score": 3.0,
         "heat": "309 万热度"
@@ -4629,49 +4665,49 @@
         "url": "https://www.zhihu.com/question/2092203524230754555",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "228 万热度"
+        "heat": "230 万热度"
       },
       {
         "title": "深圳中小学将迎春秋假且不调休，会对双职工家庭带来哪些影响？",
         "url": "https://www.zhihu.com/question/2092006267560649453",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "214 万热度"
+        "heat": "216 万热度"
       },
       {
         "title": "中超第 27 轮，成都蓉城 0-1 天津津门虎，如何评价本场比赛？",
         "url": "https://www.zhihu.com/question/2092337410356896927",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "115 万热度"
+        "heat": "116 万热度"
       },
       {
         "title": "《血观音》棠夫人如果放弃对权力的钻营，守着棠将军的遗产和棠宁棠真过日子，能过得下去吗？",
         "url": "https://www.zhihu.com/question/2087917395851723033",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "107 万热度"
+        "heat": "108 万热度"
       },
       {
         "title": "杨过童年在桃花岛受尽折磨，为什么还是喜欢回忆那个时候的事物，而且心情还不错？",
         "url": "https://www.zhihu.com/question/2091863659819620081",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "101 万热度"
+        "heat": "102 万热度"
       },
       {
         "title": "如何看待四川巴中 12345 被指拖欠员工工资，工作人员称欠薪问题已在解决，常拖欠不属实，暴露了哪些问题？",
         "url": "https://www.zhihu.com/question/2091593011432010382",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "101 万热度"
+        "heat": "102 万热度"
       },
       {
         "title": "广东 5 人吃野生红尾鲤确诊哈夫病，这种病是如何引发的？日常吃鱼该怎样防范？",
         "url": "https://www.zhihu.com/question/2091593487581975365",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "100 万热度"
+        "heat": "101 万热度"
       },
       {
         "title": "因长期辱骂江秋莲被判道歉 + 赔付，网红黄建生公开发文向江秋莲道歉，哪些信息值得关注？",
@@ -4727,28 +4763,21 @@
         "url": "https://www.zhihu.com/question/2092302606202946517",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "86 万热度"
+        "heat": "87 万热度"
       },
       {
         "title": "为什么苏轼说平生功业在黄州、惠州、儋州？",
         "url": "https://www.zhihu.com/question/8594675598",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "80 万热度"
+        "heat": "81 万热度"
       },
       {
         "title": "职场中，「情绪稳定」 应不应该被当作核心能力？",
         "url": "https://www.zhihu.com/question/2023663009201923518",
         "source": "Zhihu",
         "score": 3.0,
-        "heat": "73 万热度"
-      },
-      {
-        "title": "马斯克以反讽口吻向印度首富道歉，指其垄断市场阻挠星链入印，星链进入印度市场为何一波三折？还有哪些阻力？",
-        "url": "https://www.zhihu.com/question/2092516375331693538",
-        "source": "Zhihu",
-        "score": 3.0,
-        "heat": "72 万热度"
+        "heat": "74 万热度"
       },
       {
         "title": "国足新生代有复苏迹象，中国足球能焕发第二春吗？闯进 2030 世界杯舞台？",
@@ -4765,8 +4794,8 @@
         "heat": "58 万热度"
       },
       {
-        "title": "《斗罗大陆》只看第一部就行吗？是不是斗 2 、斗 3 、斗 4 是在重复？",
-        "url": "https://www.zhihu.com/question/9041823315",
+        "title": "有人说「很多过来人觉得一些事无足轻重，不是因为更成熟而是因为脱离那个环境了」，你怎么看这种说法？",
+        "url": "https://www.zhihu.com/question/2086847201523627947",
         "source": "Zhihu",
         "score": 3.0,
         "heat": "57 万热度"
@@ -4774,6 +4803,13 @@
       {
         "title": "《空之轨迹 2nd》里艾丝蒂尔这种天然呆放现实职场，你会觉得她是真性情还是情商低？",
         "url": "https://www.zhihu.com/question/2083962505064355419",
+        "source": "Zhihu",
+        "score": 3.0,
+        "heat": "57 万热度"
+      },
+      {
+        "title": "为什么不把香港元朗、屯门、北区划到深圳，既能帮助香港开发荒地，又能解决深圳的用地不足问题？",
+        "url": "https://www.zhihu.com/question/2049776403307029645",
         "source": "Zhihu",
         "score": 3.0,
         "heat": "57 万热度"
@@ -4863,6 +4899,13 @@
         "heat": "0"
       },
       {
+        "title": "撒贝宁龙凤胎长这么大了",
+        "url": "https://s.weibo.com/weibo?q=撒贝宁龙凤胎长这么大了",
+        "source": "Weibo",
+        "score": 3.0,
+        "heat": "0"
+      },
+      {
         "title": "郭碧婷只在乎向佐和小孩有没有联系",
         "url": "https://s.weibo.com/weibo?q=郭碧婷只在乎向佐和小孩有没有联系",
         "source": "Weibo",
@@ -4877,13 +4920,6 @@
         "heat": "0"
       },
       {
-        "title": "撒贝宁龙凤胎长这么大了",
-        "url": "https://s.weibo.com/weibo?q=撒贝宁龙凤胎长这么大了",
-        "source": "Weibo",
-        "score": 3.0,
-        "heat": "0"
-      },
-      {
         "title": "2026美好奇妙夜节目单",
         "url": "https://s.weibo.com/weibo?q=2026美好奇妙夜节目单",
         "source": "Weibo",
@@ -4891,15 +4927,15 @@
         "heat": "0"
       },
       {
-        "title": "丁宁陈梦惊喜现身观战王曼昱决赛",
-        "url": "https://s.weibo.com/weibo?q=丁宁陈梦惊喜现身观战王曼昱决赛",
+        "title": "郑钦文安德列娃决赛战术博弈",
+        "url": "https://s.weibo.com/weibo?q=郑钦文安德列娃决赛战术博弈",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
       },
       {
-        "title": "林昀儒vs松岛辉空",
-        "url": "https://s.weibo.com/weibo?q=林昀儒vs松岛辉空",
+        "title": "松岛辉空中国大满贯夺冠",
+        "url": "https://s.weibo.com/weibo?q=松岛辉空中国大满贯夺冠",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
@@ -4919,8 +4955,8 @@
         "heat": "0"
       },
       {
-        "title": "松岛辉空中国大满贯夺冠",
-        "url": "https://s.weibo.com/weibo?q=松岛辉空中国大满贯夺冠",
+        "title": "郑钦文挽救三盘点拿下首盘",
+        "url": "https://s.weibo.com/weibo?q=郑钦文挽救三盘点拿下首盘",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
@@ -4933,22 +4969,22 @@
         "heat": "0"
       },
       {
+        "title": "林昀儒vs松岛辉空",
+        "url": "https://s.weibo.com/weibo?q=林昀儒vs松岛辉空",
+        "source": "Weibo",
+        "score": 3.0,
+        "heat": "0"
+      },
+      {
+        "title": "丁宁陈梦惊喜现身观战王曼昱决赛",
+        "url": "https://s.weibo.com/weibo?q=丁宁陈梦惊喜现身观战王曼昱决赛",
+        "source": "Weibo",
+        "score": 3.0,
+        "heat": "0"
+      },
+      {
         "title": "人民日报评刹车踏板风波",
         "url": "https://s.weibo.com/weibo?q=人民日报评刹车踏板风波",
-        "source": "Weibo",
-        "score": 3.0,
-        "heat": "0"
-      },
-      {
-        "title": "欧文压哨三分",
-        "url": "https://s.weibo.com/weibo?q=欧文压哨三分",
-        "source": "Weibo",
-        "score": 3.0,
-        "heat": "0"
-      },
-      {
-        "title": "国乒以2冠结束中国大满贯",
-        "url": "https://s.weibo.com/weibo?q=国乒以2冠结束中国大满贯",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
@@ -4961,8 +4997,8 @@
         "heat": "0"
       },
       {
-        "title": "客服把爱猫的阿贝贝寄给客户",
-        "url": "https://s.weibo.com/weibo?q=客服把爱猫的阿贝贝寄给客户",
+        "title": "欧文压哨三分",
+        "url": "https://s.weibo.com/weibo?q=欧文压哨三分",
         "source": "Weibo",
         "score": 3.0,
         "heat": "0"
@@ -4985,9 +5021,14 @@
   },
   "sources": [
     {
-      "name": "The Verge",
+      "name": "TechCrunch",
       "category": "International Tech",
-      "count": 10
+      "count": 15
+    },
+    {
+      "name": "Slashdot",
+      "category": "International Tech",
+      "count": 15
     },
     {
       "name": "Ars Technica",
@@ -4995,9 +5036,9 @@
       "count": 15
     },
     {
-      "name": "HackerNoon",
+      "name": "The Verge",
       "category": "International Tech",
-      "count": 15
+      "count": 10
     },
     {
       "name": "Dev.to",
@@ -5005,17 +5046,7 @@
       "count": 12
     },
     {
-      "name": "MIT Tech Review",
-      "category": "International Tech",
-      "count": 10
-    },
-    {
-      "name": "Nature",
-      "category": "International Tech",
-      "count": 15
-    },
-    {
-      "name": "Science Daily",
+      "name": "Hacker News",
       "category": "International Tech",
       "count": 15
     },
@@ -5025,32 +5056,17 @@
       "count": 15
     },
     {
-      "name": "TechCrunch",
+      "name": "HackerNoon",
       "category": "International Tech",
       "count": 15
     },
     {
-      "name": "Hacker News",
+      "name": "MIT Tech Review",
       "category": "International Tech",
-      "count": 15
+      "count": 10
     },
     {
-      "name": "NYTimes Tech",
-      "category": "International News",
-      "count": 15
-    },
-    {
-      "name": "NYTimes World",
-      "category": "International News",
-      "count": 15
-    },
-    {
-      "name": "CBC World",
-      "category": "International News",
-      "count": 15
-    },
-    {
-      "name": "Euronews",
+      "name": "BBC World",
       "category": "International News",
       "count": 15
     },
@@ -5060,8 +5076,43 @@
       "count": 15
     },
     {
+      "name": "BBC Tech",
+      "category": "International Tech",
+      "count": 14
+    },
+    {
       "name": "Wired",
       "category": "International Tech",
+      "count": 15
+    },
+    {
+      "name": "NYTimes Tech",
+      "category": "International News",
+      "count": 15
+    },
+    {
+      "name": "Science Daily",
+      "category": "International Tech",
+      "count": 15
+    },
+    {
+      "name": "Lobsters",
+      "category": "International Tech",
+      "count": 15
+    },
+    {
+      "name": "NYTimes World",
+      "category": "International News",
+      "count": 15
+    },
+    {
+      "name": "Bilibili",
+      "category": "Chinese Hot Search",
+      "count": 10
+    },
+    {
+      "name": "CBC World",
+      "category": "International News",
       "count": 15
     },
     {
@@ -5070,24 +5121,44 @@
       "count": 15
     },
     {
-      "name": "BBC World",
+      "name": "Euronews",
       "category": "International News",
       "count": 15
     },
     {
-      "name": "BBC Tech",
-      "category": "International Tech",
-      "count": 14
-    },
-    {
-      "name": "Bilibili",
-      "category": "Chinese Hot Search",
+      "name": "NPR",
+      "category": "International News",
       "count": 10
     },
     {
-      "name": "Lobsters",
+      "name": "Nature",
       "category": "International Tech",
       "count": 15
+    },
+    {
+      "name": "V2EX Hot",
+      "category": "Community",
+      "count": 10
+    },
+    {
+      "name": "Toutiao",
+      "category": "Chinese News",
+      "count": 30
+    },
+    {
+      "name": "Juejin",
+      "category": "Chinese Tech",
+      "count": 20
+    },
+    {
+      "name": "WallstreetCN Hot",
+      "category": "Finance",
+      "count": 10
+    },
+    {
+      "name": "Twitter Hot (Sopilot)",
+      "category": "Community",
+      "count": 7
     },
     {
       "name": "Zhihu",
@@ -5100,29 +5171,9 @@
       "count": 30
     },
     {
-      "name": "Juejin",
-      "category": "Chinese Tech",
-      "count": 20
-    },
-    {
-      "name": "Toutiao",
-      "category": "Chinese News",
-      "count": 30
-    },
-    {
       "name": "GitHub Trending",
       "category": "International Tech",
       "count": 8
-    },
-    {
-      "name": "WallstreetCN Hot",
-      "category": "Finance",
-      "count": 10
-    },
-    {
-      "name": "Pengpai",
-      "category": "Chinese News",
-      "count": 29
     },
     {
       "name": "Sputnik CN",
@@ -5130,24 +5181,9 @@
       "count": 20
     },
     {
-      "name": "V2EX Hot",
-      "category": "Community",
-      "count": 10
-    },
-    {
-      "name": "Twitter Hot (Sopilot)",
-      "category": "Community",
-      "count": 7
-    },
-    {
       "name": "WallstreetCN Live",
       "category": "Finance",
       "count": 14
-    },
-    {
-      "name": "ifanr",
-      "category": "Chinese Tech",
-      "count": 15
     },
     {
       "name": "InfoQ CN",
@@ -5155,14 +5191,14 @@
       "count": 15
     },
     {
-      "name": "Nowcoder",
-      "category": "Community",
-      "count": 19
-    },
-    {
       "name": "Weibo",
       "category": "Chinese Hot Search",
       "count": 30
+    },
+    {
+      "name": "Nowcoder",
+      "category": "Community",
+      "count": 19
     },
     {
       "name": "QbitAI",
@@ -5170,28 +5206,28 @@
       "count": 10
     },
     {
+      "name": "ifanr",
+      "category": "Chinese Tech",
+      "count": 15
+    },
+    {
+      "name": "Pengpai",
+      "category": "Chinese News",
+      "count": 29
+    },
+    {
       "name": "Baidu",
       "category": "Chinese Hot Search",
       "count": 30
     },
     {
-      "name": "NPR",
-      "category": "International News",
-      "count": 10
+      "name": "AI Hot",
+      "category": "AI/Frontier",
+      "count": 30
     },
     {
       "name": "Tieba",
       "category": "Community",
-      "count": 30
-    },
-    {
-      "name": "Slashdot",
-      "category": "International Tech",
-      "count": 15
-    },
-    {
-      "name": "AI Hot",
-      "category": "AI/Frontier",
       "count": 30
     }
   ]
