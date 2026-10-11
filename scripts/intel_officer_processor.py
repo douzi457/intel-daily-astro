@@ -498,7 +498,7 @@ class IntelligenceProcessor:
         seen_actions.add(result['text'])
         return result
 
-    def _call_llm_for_judgment(self, core_signals: List[Dict]) -> Tuple[Optional[Dict], Optional[Dict], Optional[Dict]]:
+    def _call_llm_for_judgment(self, core_signals: List[Dict]) -> Tuple[Optional[Dict], Optional[Dict], Optional[Dict], Optional[str]]:
         """调用大模型为5条核心信号生成个性化评价和动作建议"""
         import os
         import urllib.request
@@ -608,95 +608,6 @@ class IntelligenceProcessor:
                 continue
 
         return None, None, None, f"llm_call_failed: {last_error}"
-
-        # 构建批量请求
-        events_data = []
-        for i, event in enumerate(core_signals[:5], 1):
-            events_data.append({
-                'index': i,
-                'event_id': event.get('event_id', ''),
-                'headline': event.get('headline', '')[:80],
-                'clean_summary': event.get('clean_summary', '')[:200],
-                'source_count': event.get('source_count', 1),
-                'tags': event.get('tags', [])[:3],
-            })
-
-        # 构建prompt
-        system_prompt = """你是一个专业的AI技术内容创作者顾问。你的读者是关注AI开源项目与Agent技术的创作者（做公众号/视频/开源项目推荐）。
-
-请为每条AI新闻事件提供：
-1. why_it_matters: 该事件对"AI开源与Agent创作者"的具体价值（80-150字）
-   - 必须说明：选题价值、工具链影响、内容角度
-   - 禁止泛泛而谈"可能影响行业格局"
-   - 不同事件的评价角度必须实质不同
-
-2. suggested_action: 该创作者今天/本周可执行的具体动作（30-80字）
-   - 必须包含动词开头（如"克隆仓库"、"编写代码"、"录制视频"）
-   - 禁止空话如"标记为观察项"、"持续关注"、"定期回顾"
-   - 动作必须是具体的、可执行的
-
-输出格式为JSON数组，每个元素包含：
-{
-  "index": 事件序号(1-5),
-  "why_it_matters": "...",
-  "suggested_action": "..."
-}"""
-
-        user_message = f"""请为以下5条AI新闻事件提供评价和动作建议：
-
-{json.dumps(events_data, ensure_ascii=False, indent=2)}"""
-
-        try:
-            # 构建请求
-            payload = {
-                "model": model,
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_message},
-                ],
-                "temperature": 0.3,
-                "max_tokens": 2000,
-            }
-
-            req = urllib.request.Request(
-                "http://localhost:11434/v1/chat/completions",
-                data=json.dumps(payload).encode('utf-8'),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': f'Bearer {api_key}'
-                },
-                method='POST'
-            )
-
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                result = json.loads(resp.read().decode('utf-8'))
-
-            # 解析返回
-            content = result['choices'][0]['message']['content']
-            response_data = json.loads(content)
-
-            # 构建映射
-            importance_map = {}
-            action_map = {}
-            for item in response_data:
-                idx = item['index']
-                importance_map[idx] = item['why_it_matters']
-                action_map[idx] = item['suggested_action']
-
-            # 记录token用量
-            usage = result.get('usage', {})
-            llm_usage = {
-                'model': model,
-                'input_tokens': usage.get('prompt_tokens', 0),
-                'output_tokens': usage.get('completion_tokens', 0),
-                'total_tokens': usage.get('total_tokens', 0),
-            }
-
-            return importance_map, action_map, llm_usage
-
-        except Exception as e:
-            print(f"LLM调用失败: {e}", file=sys.stderr)
-            return None, None, None
 
     def _generate_actions(self, core_signals: List[Dict], llm_importance: Dict = None, llm_actions: Dict = None) -> List[Dict]:
         """生成动作列表，带跨日去重和有效性过滤"""
