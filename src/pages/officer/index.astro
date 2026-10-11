@@ -15,6 +15,52 @@ try {
 const date = v2Data?.date || new Date().toISOString().slice(0, 10);
 const qualityGrade = v2Data?.quality?.grade || 'pilot';
 const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pilot' ? '#f59e0b' : '#ef4444';
+
+// 生成前一日/后一日日期（用于导航）
+const cur = new Date(date + 'T00:00:00+08:00');
+const prevDate = new Date(cur.getTime() - 86400000).toISOString().slice(0, 10);
+const nextDate = new Date(cur.getTime() + 86400000).toISOString().slice(0, 10);
+
+// 获取近7天日期列表（用于归档入口）
+const datesList: string[] = [];
+for (let i = 0; i < 7; i++) {
+  datesList.push(new Date(cur.getTime() - i * 86400000).toISOString().slice(0, 10));
+}
+
+// 数据来源统计
+const sourceStats = (v2Data?.source_health || [])
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 5)
+  .map(s => `${s.name}(${s.count})`)
+  .join('、') || '暂无';
+
+const categoryCounts = new Map<string, number>();
+(v2Data?.events || []).forEach(e => {
+  (e.tags || []).forEach(t => categoryCounts.set(t, (categoryCounts.get(t) || 0) + 1));
+});
+const topCategories = [...categoryCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 5)
+  .map(([k, v]) => `${k}:${v}`)
+  .join('、') || '暂无';
+
+// 格式化时间
+function fmtTime(iso?: string) {
+  if (!iso) return '未知';
+  try {
+    return new Date(iso).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+  } catch { return '未知'; }
+}
+
+// 归一化英文标点（修复弯引号渲染问题）
+function normalize(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/'/g, "'")
+    .replace(/'/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 ---
 
 <BaseLayout title="AI 情报官 | 豆子实验室">
@@ -33,65 +79,127 @@ const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pil
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--color-bg); color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
     .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-    
+
+    /* ── Topbar ── */
     .topbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
-    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .brand { font-size: 18px; font-weight: 600; }
     .brand span { color: var(--color-accent); }
-    .profile-badge { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--color-accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
-    .meta-info { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--color-text-muted); }
-    .quality-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.1); }
-    .quality-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-quality, var(--color-watch)); }
-    
-    main { padding: 32px 0; }
-    .executive-summary { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
-    .section-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 16px; }
-    .summary-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .profile-badge { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); color: var(--color-accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+    .meta-info { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--color-text-muted); flex-wrap: wrap; }
+    .quality-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.08); }
+    .quality-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ── 日期导航 ── */
+    .date-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .date-nav-btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); text-decoration: none; cursor: pointer; transition: all 0.15s; }
+    .date-nav-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .date-nav-btn.current { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+    .date-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .date-nav-btn:disabled:hover { border-color: var(--color-border); color: var(--color-text-muted); }
+    .date-nav-sep { color: var(--color-text-muted); font-size: 12px; }
+    .archive-dropdown { position: relative; }
+    .archive-menu { display: none; position: absolute; top: 100%; left: 0; margin-top: 4px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 4px; min-width: 160px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .archive-dropdown:hover .archive-menu, .archive-menu:hover { display: block; }
+    .archive-menu a { display: block; padding: 6px 12px; font-size: 13px; color: var(--color-text-muted); text-decoration: none; border-radius: 4px; }
+    .archive-menu a:hover { background: rgba(59,130,246,0.1); color: var(--color-accent); }
+
+    main { padding: 24px 0 48px; }
+    .executive-summary { background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.1) 100%); border: 1px solid rgba(59,130,246,0.3); border-radius: 16px; padding: 24px; margin-bottom: 28px; }
+    .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 14px; }
+    .summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .summary-item { display: flex; gap: 12px; }
-    .summary-number { background: var(--color-accent); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
-    .summary-text { font-size: 16px; }
-    
-    .dashboard-grid { display: grid; grid-template-columns: 1fr 380px; gap: 24px; margin-bottom: 32px; }
+    .summary-number { background: var(--color-accent); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .summary-text { font-size: 15px; line-height: 1.65; }
+
+    /* ── 复制按钮 ── */
+    .copy-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); cursor: pointer; transition: all 0.15s; margin-left: auto; }
+    .copy-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .copy-btn.copied { border-color: var(--color-core); color: var(--color-core); }
+
+    /* ── Dashboard Grid ── */
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 360px; gap: 24px; margin-bottom: 28px; }
     @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
-    
-    .core-signals { display: flex; flex-direction: column; gap: 16px; }
-    .signal-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; }
+
+    /* ── Core Signal Cards ── */
+    .core-signals { display: flex; flex-direction: column; gap: 14px; }
+    .signal-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; transition: border-color 0.15s; }
     .signal-card:hover { border-color: var(--color-core); }
-    .signal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    .signal-rank { background: var(--color-core); color: white; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
-    .signal-title { font-size: 16px; font-weight: 600; flex: 1; }
-    .signal-title a { color: var(--color-text); text-decoration: none; }
-    .signal-title a:hover { color: var(--color-core); }
-    .signal-score { font-size: 14px; color: var(--color-text-muted); }
-    .score-value { font-size: 20px; font-weight: 700; color: var(--color-core); }
-    .signal-summary { font-size: 14px; color: var(--color-text-muted); margin-bottom: 12px; }
-    .signal-section { margin-bottom: 12px; }
-    .signal-label { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 4px; }
-    .signal-value { font-size: 14px; }
+    .signal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .signal-rank { background: var(--color-core); color: white; width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .signal-title-wrap { flex: 1; min-width: 0; }
+    .signal-title { font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--color-text); text-decoration: none; display: block; word-break: break-word; }
+    .signal-title:hover { color: var(--color-core); }
+    .signal-grade { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 8px; vertical-align: middle; }
+    .grade-high { background: rgba(16,185,129,0.15); color: var(--color-core); }
+    .grade-mid { background: rgba(245,158,11,0.15); color: var(--color-watch); }
+    .grade-low { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .signal-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--color-text-muted); margin-bottom: 10px; }
+    .signal-meta a { color: var(--color-accent); text-decoration: none; }
+    .signal-meta a:hover { text-decoration: underline; }
+    .signal-summary { font-size: 13px; color: var(--color-text-muted); margin-bottom: 10px; line-height: 1.55; }
+    .signal-section { margin-bottom: 10px; }
+    .signal-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 4px; }
+    .signal-value { font-size: 13px; line-height: 1.55; }
     .signal-value.important { color: var(--color-core); }
-    .signal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 2px 8px; border-radius: 4px; font-size: 12px; }
-    .tag.highlight { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--color-core); }
-    
-    .sidebar { display: flex; flex-direction: column; gap: 24px; }
-    .actions-section, .quality-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; }
-    .action-card { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
-    .action-type { display: inline-block; background: var(--color-action); color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
-    .action-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .action-meta { font-size: 12px; color: var(--color-text-muted); }
-    
-    .watchlist-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; margin-bottom: 32px; }
-    .watchlist-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .watchlist-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; }
-    .watchlist-rank { font-size: 12px; color: var(--color-text-muted); width: 24px; }
-    .watchlist-title { font-size: 14px; flex: 1; }
+    .signal-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+    .tag.highlight { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: var(--color-core); }
+
+    /* ── Sidebar ── */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .actions-section, .data-source-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; }
+    .action-card { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+    .action-type { display: inline-block; background: var(--color-action); color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+    .action-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .action-meta { font-size: 11px; color: var(--color-text-muted); }
+
+    /* 数据来源样式 */
+    .data-source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; }
+    .data-source-item { display: flex; flex-direction: column; gap: 2px; }
+    .data-source-item span:first-child { color: var(--color-text-muted); }
+    .data-source-item span:last-child { font-weight: 600; }
+    .data-source-full { grid-column: 1 / -1; }
+    .data-source-full span:first-child { color: var(--color-text-muted); margin-bottom: 2px; display: block; }
+    .data-source-full span:last-child { font-weight: 500; font-size: 12px; line-height: 1.5; }
+
+    details.tech-details { margin-top: 12px; }
+    details.tech-details summary { font-size: 12px; color: var(--color-text-muted); cursor: pointer; user-select: none; }
+    details.tech-details summary:hover { color: var(--color-accent); }
+    .tech-details-content { margin-top: 8px; font-size: 11px; color: var(--color-text-muted); line-height: 1.6; }
+    .tech-details-content dt { font-weight: 600; color: var(--color-text-muted); margin-top: 4px; }
+    .tech-details-content dd { margin-left: 12px; margin-bottom: 4px; }
+
+    /* ── Watchlist ── */
+    .watchlist-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; margin-bottom: 28px; }
+    .watchlist-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .watchlist-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+    .watchlist-rank { font-size: 11px; color: var(--color-text-muted); width: 22px; text-align: center; }
+    .watchlist-title { font-size: 13px; flex: 1; line-height: 1.4; }
     .watchlist-title a { color: var(--color-text); text-decoration: none; }
     .watchlist-title a:hover { color: var(--color-watch); }
-    .watchlist-score { font-size: 14px; font-weight: 600; color: var(--color-watch); width: 40px; text-align: right; }
-    
+    .watchlist-score { font-size: 13px; font-weight: 600; color: var(--color-watch); width: 36px; text-align: right; }
+
+    /* ── Empty State ── */
     .empty-state { text-align: center; padding: 48px 24px; color: var(--color-text-muted); }
-    .funnel { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-muted); margin-bottom: 24px; }
+    .funnel { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-muted); margin-bottom: 20px; flex-wrap: wrap; }
     .funnel-number { font-weight: 600; color: var(--color-text); }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      .topbar-inner { gap: 10px; }
+      .brand { font-size: 16px; }
+      .meta-info { font-size: 12px; gap: 8px; }
+      main { padding: 16px 0 32px; }
+      .executive-summary { padding: 16px; }
+      .summary-text { font-size: 15px; }
+      .dashboard-grid { gap: 16px; }
+      .signal-card { padding: 14px; }
+      .signal-title { font-size: 14px; }
+      .data-source-grid { grid-template-columns: 1fr; }
+      .copy-btn { width: 100%; justify-content: center; }
+    }
   </style>
 
   <div class="topbar">
@@ -100,10 +208,11 @@ const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pil
       <div class="profile-badge">AI 开源与 Agent 创作者</div>
       <div class="meta-info">
         <span>{date}</span>
-        <span class="quality-badge" style="--color-quality: {qualityColor}">
-          <span class="quality-dot"></span>
+        <span class="quality-badge" style={{ '--color-quality': qualityColor }}>
+          <span class="quality-dot" style={{ 'background': qualityColor }}></span>
           {v2Data?.quality?.total || 0}/100 {qualityGrade.toUpperCase()}
         </span>
+        <button class="copy-btn" id="copyBtn" title="复制日报 Markdown 到剪贴板">📋 复制日报</button>
       </div>
     </div>
   </div>
@@ -117,6 +226,27 @@ const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pil
         </div>
       ) : (
         <>
+          {/* 日期导航 */}
+          <div class="date-nav">
+            <a href={`/officer/?date=${prevDate}`} class={`date-nav-btn ${date === prevDate ? 'current' : ''}`} title="前一天">
+              ← 前一天
+            </a>
+            <span class="date-nav-sep">|</span>
+            <span class="date-nav-btn current" style={{cursor:'default'}}>{date}</span>
+            <span class="date-nav-sep">|</span>
+            <a href={`/officer/?date=${nextDate}`} class="date-nav-btn" title="下一天">
+              下一天 →
+            </a>
+            <div class="archive-dropdown">
+              <button class="date-nav-btn">📅 近7天归档</button>
+              <div class="archive-menu">
+                {datesList.map(d => (
+                  <a href={`/officer/?date=${d}`} class={d === date ? 'current' : ''}>{d}</a>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div class="funnel">
             <div class="funnel-item"><span class="funnel-number">{v2Data.stats.raw_items}</span> 条原料</div>
             <span>→</span>
@@ -125,80 +255,126 @@ const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pil
             <div class="funnel-item"><span class="funnel-number">{v2Data.stats.core_signals}</span> 条核心</div>
           </div>
 
+          {/* 今日结论 */}
           <section class="executive-summary">
             <div class="section-title">今日结论</div>
             <ol class="summary-list">
               {v2Data.executive_summary.map((text: string, i: number) => (
                 <li class="summary-item">
                   <span class="summary-number">{i + 1}</span>
-                  <span class="summary-text">{text}</span>
+                  <span class="summary-text">{normalize(text)}</span>
                 </li>
               ))}
             </ol>
           </section>
 
           <div class="dashboard-grid">
+            {/* 核心信号 */}
             <section class="core-signals">
               <div class="section-title">核心信号</div>
-              {v2Data.core_signals.map((event, i: number) => (
-                <article class="signal-card">
-                  <div class="signal-header">
-                    <div class="signal-rank">{i + 1}</div>
-                    <h3 class="signal-title">{event.headline}</h3>
-                    <div class="signal-score"><span class="score-value">{event.score.total}</span><span>分</span></div>
-                  </div>
-                  {event.clean_summary && <p class="signal-summary">{event.clean_summary}</p>}
-                  {event.why_it_matters && (
-                    <div class="signal-section">
-                      <div class="signal-label">为什么对你重要</div>
-                      <div class="signal-value important">{event.why_it_matters}</div>
+              {v2Data.core_signals.map((event, i: number) => {
+                const gradeClass = event.score.total >= 90 ? 'grade-high' : event.score.total >= 80 ? 'grade-mid' : 'grade-low';
+                const gradeLabel = event.score.total >= 90 ? '高价值' : event.score.total >= 80 ? '中价值' : '低价值';
+                return (
+                  <article class="signal-card">
+                    <div class="signal-header">
+                      <div class="signal-rank">{i + 1}</div>
+                      <div class="signal-title-wrap">
+                        <a class="signal-title" href={event.url || '#'} target="_blank" rel="noopener">
+                          {normalize(event.headline)}
+                          <span class={`signal-grade ${gradeClass}`}>{gradeLabel}</span>
+                        </a>
+                      </div>
                     </div>
-                  )}
-                  {event.suggested_action?.text && (
-                    <div class="signal-section">
-                      <div class="signal-label">建议动作</div>
-                      <div class="signal-value">{event.suggested_action.text}</div>
+                    <div class="signal-meta">
+                      {event.url && <span>🔗 <a href={event.url} target="_blank" rel="noopener">查看原文</a></span>}
+                      <span>🕐 {fmtTime(event.first_seen_at)}</span>
+                      {event.source_count > 1 && <span>📰 另有 {event.source_count - 1} 家报道</span>}
                     </div>
-                  )}
-                  <div class="signal-tags">
-                    {event.tags.map((tag: string) => (<span class={`tag ${i < 3 ? 'highlight' : ''}`}>{tag}</span>))}
-                  </div>
-                </article>
-              ))}
+                    {event.clean_summary && event.clean_summary !== event.headline && (
+                      <p class="signal-summary">{normalize(event.clean_summary)}</p>
+                    )}
+                    {event.why_it_matters && (
+                      <div class="signal-section">
+                        <div class="signal-label">为什么对你重要</div>
+                        <div class="signal-value important">{normalize(event.why_it_matters)}</div>
+                      </div>
+                    )}
+                    {event.suggested_action?.text && (
+                      <div class="signal-section">
+                        <div class="signal-label">建议动作</div>
+                        <div class="signal-value">{normalize(event.suggested_action.text)}</div>
+                      </div>
+                    )}
+                    <div class="signal-tags">
+                      {event.tags.map((tag: string) => (<span class={`tag ${i < 3 ? 'highlight' : ''}`}>{tag}</span>))}
+                    </div>
+                  </article>
+                );
+              })}
             </section>
 
             <aside class="sidebar">
+              {/* 今日动作 */}
               <section class="actions-section">
                 <div class="section-title">今日动作</div>
                 {v2Data.actions.map((action: any, i: number) => (
                   <div class="action-card">
                     <span class="action-type">{action.type || 'watch'}</span>
-                    <div class="action-title">{action.text}</div>
+                    <div class="action-title">{normalize(action.text)}</div>
                     {action.evidence_event_id && <div class="action-meta">证据: 信号 #{i + 1}</div>}
                   </div>
                 ))}
               </section>
 
-              <section class="quality-section">
-                <div class="section-title">质量报告</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px;">
-                  <div><div style="color: var(--color-text-muted)">原料数</div><div style="font-weight: 600">{v2Data.stats.raw_items}</div></div>
-                  <div><div style="color: var(--color-text-muted)">唯一事件</div><div style="font-weight: 600">{v2Data.stats.unique_events}</div></div>
-                  <div><div style="color: var(--color-text-muted)">空摘要率</div><div style="font-weight: 600">{(v2Data.quality.metrics.empty_summary_rate * 100).toFixed(1)}%</div></div>
-                  <div><div style="color: var(--color-text-muted)">重复率</div><div style="font-weight: 600">{(v2Data.quality.metrics.exact_duplicate_rate * 100).toFixed(1)}%</div></div>
+              {/* 数据来源（原质量报告） */}
+              <section class="data-source-section">
+                <div class="section-title">数据来源</div>
+                <div class="data-source-grid">
+                  <div class="data-source-item">
+                    <span>采集源数</span>
+                    <span>{v2Data.source_health?.length || 0}</span>
+                  </div>
+                  <div class="data-source-item">
+                    <span>当日原料</span>
+                    <span>{v2Data.stats.raw_items}</span>
+                  </div>
+                  <div class="data-source-full">
+                    <span>Top 5 来源</span>
+                    <span>{sourceStats}</span>
+                  </div>
+                  <div class="data-source-full">
+                    <span>分类分布</span>
+                    <span>{topCategories}</span>
+                  </div>
                 </div>
+                <details class="tech-details">
+                  <summary>📊 技术指标</summary>
+                  <div class="tech-details-content">
+                    <dl>
+                      <dt>空摘要率</dt><dd>{(v2Data.quality.metrics.empty_summary_rate * 100).toFixed(1)}%</dd>
+                      <dt>重复率</dt><dd>{(v2Data.quality.metrics.exact_duplicate_rate * 100).toFixed(1)}%</dd>
+                      <dt>LLM 模型</dt><dd>{v2Data.quality.llm_usage?.model || '降级模板'}</dd>
+                      <dt>Token 消耗</dt><dd>{v2Data.quality.llm_usage?.total_tokens || 0}</dd>
+                      <dt>质量等级</dt><dd>{v2Data.quality.grade}</dd>
+                    </dl>
+                  </div>
+                </details>
               </section>
             </aside>
           </div>
 
+          {/* 观察名单 */}
           {v2Data.watchlist.length > 0 && (
             <section class="watchlist-section">
               <div class="section-title">观察名单 ({v2Data.watchlist.length})</div>
               <ul class="watchlist-list">
-                {v2Data.watchlist.map((event, i: number) => (
+                {v2Data.watchlist.slice(0, 10).map((event, i: number) => (
                   <li class="watchlist-item">
                     <span class="watchlist-rank">{i + 1}</span>
-                    <span class="watchlist-title">{event.headline}</span>
+                    <span class="watchlist-title">
+                      {event.url ? <a href={event.url} target="_blank" rel="noopener">{normalize(event.headline)}</a> : normalize(event.headline)}
+                    </span>
                     <span class="watchlist-score">{event.score.total}</span>
                   </li>
                 ))}
@@ -210,3 +386,26 @@ const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pil
     </div>
   </main>
 </BaseLayout>
+
+<script>
+  // 复制日报按钮
+  const copyBtn = document.getElementById('copyBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        const resp = await fetch('/data/v2/exports/intel-officer/${date}-brief.md');
+        const text = await resp.text();
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = '✅ 已复制';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.textContent = '📋 复制日报';
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      } catch {
+        copyBtn.textContent = '❌ 复制失败';
+        setTimeout(() => { copyBtn.textContent = '📋 复制日报'; }, 2000);
+      }
+    });
+  }
+</script>

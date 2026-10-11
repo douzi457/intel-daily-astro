@@ -1128,7 +1128,7 @@ class IntelligenceProcessor:
             ])
         
         brief_lines.extend(["## 观察名单"])
-        for event in data.get('watchlist', [])[:5]:
+        for event in data.get('watchlist', [])[:10]:
             brief_lines.append(f"- [{event['score']['total']}] {event['headline']}")
         
         brief_lines.extend(["", "## 今日动作"])
