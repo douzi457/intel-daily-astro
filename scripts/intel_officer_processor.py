@@ -554,78 +554,78 @@ class IntelligenceProcessor:
 
         last_error = None
         for try_model in models_to_try:
-            try:
-                payload = {
-                    "model": try_model,
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_message},
-                    ],
-                    "temperature": 0.3,
-                    "max_tokens": 2000,
-                }
-
-                url = f"{base_url}/chat/completions"
-                req = urllib.request.Request(
-                    url,
-                    data=json.dumps(payload).encode('utf-8'),
-                    headers={
-                        'Content-Type': 'application/json',
-                        'Authorization': f'Bearer {api_key}'
-                    },
-                    method='POST'
-                )
-
-                with urllib.request.urlopen(req, timeout=30) as resp:
-                    if resp.status != 200:
-                        last_error = f"HTTP {resp.status}"
-                        continue
-                    result = json.loads(resp.read().decode('utf-8'))
-
-                content = result['choices'][0]['message']['content']
-                response_data = json.loads(content)
-
-                importance_map = {}
-                action_map = {}
-                for item in response_data:
-                    idx = item['index']
-                    importance_map[idx] = item['why_it_matters']
-                    action_map[idx] = item['suggested_action']
-
-                usage = result.get('usage', {})
-                llm_usage = {
-                    'model': try_model,
-                    'input_tokens': usage.get('prompt_tokens', 0),
-                    'output_tokens': usage.get('completion_tokens', 0),
-                    'total_tokens': usage.get('total_tokens', 0),
-                }
-                return importance_map, action_map, llm_usage, None
-
-            except urllib.error.HTTPError as e:
-                # 记录HTTP错误但不中断，尝试下一个模型
-                last_error = f"HTTP {e.code}: {e.reason}"
-                # 解析错误类型（如model_not_found, unauthorized等）
+            for attempt in range(3):  # 最多重试3次
                 try:
-                    error_body = json.loads(e.read().decode('utf-8'))
-                    if isinstance(error_body, dict):
-                        err_type = error_body.get('error', {}).get('type', e.reason)
-                        last_error = f"HTTP {e.code}: {err_type}"
-                except:
-                    pass
-                print(f"[LLM] 模型 {try_model} 调用失败: {last_error}", file=sys.stderr)
-                continue
-            except urllib.error.URLError as e:
-                last_error = f"网络错误: {e.reason}"
-                print(f"[LLM] 网络异常: {last_error}", file=sys.stderr)
-                continue
-            except json.JSONDecodeError as e:
-                last_error = f"JSON解析错误: {str(e)}"
-                print(f"[LLM] 响应解析失败: {last_error}", file=sys.stderr)
-                continue
-            except Exception as e:
-                last_error = f"{type(e).__name__}: {str(e)[:100]}"  # 截断过长消息
-                print(f"[LLM] 未预期异常: {last_error}", file=sys.stderr)
-                continue
+                    payload = {
+                        "model": try_model,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_message},
+                        ],
+                        "temperature": 0.3,
+                        "max_tokens": 2000,
+                    }
+
+                    url = f"{base_url}/chat/completions"
+                    req = urllib.request.Request(
+                        url,
+                        data=json.dumps(payload).encode('utf-8'),
+                        headers={
+                            'Content-Type': 'application/json',
+                            'Authorization': f'Bearer {api_key}'
+                        },
+                        method='POST'
+                    )
+
+                    with urllib.request.urlopen(req, timeout=60) as resp:
+                        if resp.status != 200:
+                            last_error = f"HTTP {resp.status} (model={try_model}, attempt={attempt+1})"
+                            print(f"[LLM] 模型 {try_model} 第{attempt+1}次尝试失败: {last_error}", file=sys.stderr)
+                            continue
+                        result = json.loads(resp.read().decode('utf-8'))
+
+                    content = result['choices'][0]['message']['content']
+                    response_data = json.loads(content)
+
+                    importance_map = {}
+                    action_map = {}
+                    for item in response_data:
+                        idx = item['index']
+                        importance_map[idx] = item['why_it_matters']
+                        action_map[idx] = item['suggested_action']
+
+                    usage = result.get('usage', {})
+                    llm_usage = {
+                        'model': try_model,
+                        'input_tokens': usage.get('prompt_tokens', 0),
+                        'output_tokens': usage.get('completion_tokens', 0),
+                        'total_tokens': usage.get('total_tokens', 0),
+                    }
+                    return importance_map, action_map, llm_usage, None
+
+                except urllib.error.HTTPError as e:
+                    last_error = f"HTTP {e.code}: {e.reason}"
+                    try:
+                        error_body = json.loads(e.read().decode('utf-8'))
+                        if isinstance(error_body, dict):
+                            err_type = error_body.get('error', {}).get('type', e.reason)
+                            last_error = f"HTTP {e.code}: {err_type}"
+                    except:
+                        pass
+                    print(f"[LLM] 模型 {try_model} 第{attempt+1}次尝试失败: {last_error}", file=sys.stderr)
+                    continue
+                except urllib.error.URLError as e:
+                    last_error = f"网络错误: {e.reason} (attempt={attempt+1})"
+                    print(f"[LLM] 网络异常: {last_error}", file=sys.stderr)
+                    continue
+                except json.JSONDecodeError as e:
+                    last_error = f"JSON解析错误: {str(e)}"
+                    print(f"[LLM] 响应解析失败: {last_error}", file=sys.stderr)
+                    continue
+                except Exception as e:
+                    last_error = f"{type(e).__name__}: {str(e)[:100]}"
+                    print(f"[LLM] 未预期异常: {last_error}", file=sys.stderr)
+                    continue
 
         return None, None, None, f"llm_call_failed: {last_error}"
 
