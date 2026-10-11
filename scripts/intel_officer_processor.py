@@ -659,13 +659,13 @@ class IntelligenceProcessor:
             },
             {
                 'id': 'three-end-consistency',
-                'passed': True,  # 由export_markdown保证，需在导出后验证
-                'detail': '三端一致性由导出函数保证（需手动验证标题匹配）'
+                'passed': False,  # 无法在processor内验证，需导出后检查
+                'detail': '三端一致性：需在export后检查JSON/Markdown/选题卡标题匹配'
             },
             {
                 'id': 'build-passed',
-                'passed': True,  # 由CI保证，processor无法验证
-                'detail': '构建通过（由GitHub Actions保证）'
+                'passed': False,  # CI验证，processor无法检查
+                'detail': '构建通过：需检查GitHub Actions运行结果'
             },
             {
                 'id': 'quality-calculated',
