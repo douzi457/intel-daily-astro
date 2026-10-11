@@ -1,23 +1,61 @@
-// RSS Feed — 中文版
+// RSS Feed — 中文版（已接入 Officer V2 LLM 评价）
 import rss from '@astrojs/rss';
 import { getDayData, getAllDates } from '../utils/data.ts';
 import { SITE, getPlatformMeta } from '../lib/constants';
 import type { IntelItem } from '../lib/types';
 
-export async function GET() {
+// 加载指定日期的 Officer V2 数据
+async function loadV2Data(dateStr: string) {
+  try {
+    const idx = await import(`../../public/data/v2/index.json`).catch(() => null);
+    if (!idx?.default?.latest_date) return {};
+    if (idx.default.latest_date !== dateStr) return {};
+    const mod = await import(`../../public/data/v2/daily-${dateStr}-v2.json`).catch(() => null);
+    return mod?.default || {};
+  } catch {
+    return {};
+  }
+}
+
+export async function GET({ request }: { request: Request }) {
+  const url = new URL(request.url);
+  const requestedDate = url.searchParams.get('date');
   const dates = getAllDates('zh');
-  const recentDates = dates.slice(0, 7);
+  const recentDates = requestedDate
+    ? [requestedDate].filter(d => dates.includes(d))
+    : dates.slice(0, 7);
+
+  // 收集所有 V2 数据的 core_signals by primary_item_id
+  const v2Map: Record<string, any> = {};
+  for (const d of recentDates) {
+    const v2 = await loadV2Data(d);
+    const signals: Array<{ primary_item_id: string; why_it_matters: string }> =
+      (v2.core_signals || []).map((s: any) => ({
+        primary_item_id: s.primary_item_id,
+        why_it_matters: s.why_it_matters || '',
+      }));
+    v2Map[d] = { signals, date: v2.date || d };
+  }
 
   const items = recentDates.flatMap(d => {
     const dayData = getDayData(d, 'zh');
     const intelItems: IntelItem[] = dayData.items || [];
+    const v2Info = v2Map[d] || { signals: [] };
+
     return intelItems.slice(0, 10).map((item: IntelItem) => {
       const meta = getPlatformMeta(item.platform, 'zh');
+      // 匹配 V2 评价
+      const matched = v2Info.signals.find(
+        s => s.primary_item_id === item.id || s.why_it_matters.length > 20
+      );
+      const description = matched?.why_it_matters
+        ? `[${meta.label}] ${matched.why_it_matters}`
+        : `${item.desc || ''}`.slice(0, 200);
       return {
         title: item.title,
         link: item.url,
         pubDate: new Date(item.date + 'T08:00:00+08:00'),
-        description: item.desc || `[${meta.label}] AI 评分: ${item.score}`,
+        description,
         categories: [item.platform, item.category],
       };
     });
