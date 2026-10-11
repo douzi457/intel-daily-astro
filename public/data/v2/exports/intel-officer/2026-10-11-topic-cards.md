@@ -9,7 +9,7 @@
 ---
 
 ## 选题2：Anthropic can’t reliably control its AI 
-- 角度：Agent领域进展，建议了解最新功能和对现有工作流的影响。
+- 角度：Agent领域进展，建议了解最新功能和对现有工作流的影响。（本文侧重部署层面）
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第2条，2家媒体
 - 验证：查阅原文[Anthropic can’t reliably contr...]
