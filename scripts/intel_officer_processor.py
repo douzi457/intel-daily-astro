@@ -333,6 +333,7 @@ class IntelligenceProcessor:
                 'headline': main_item['title'],
                 'clean_summary': main_item['clean_summary'] or main_item['raw_summary'][:100],
                 'primary_item_id': main_item['id'],
+                'url': main_item['url'],  # 添加主条目URL
                 'supporting_item_ids': [i['id'] for i in supporting_items],
                 'source_count': len(indices),
                 'mention_count': len(indices),
