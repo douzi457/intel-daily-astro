@@ -188,10 +188,7 @@ class IntelligenceProcessor:
             quality['warnings'].append(llm_error)
 
         # freshness固定值标注
-        if freshness_score == 70.0:
-            quality['warnings'].append("freshness: 暂用固定值70（published_at全部unknown，无法判断真实新鲜度）")
-        else:
-            quality['warnings'].append("LLM未调用：AGNES_API_KEY/ZHIPU_API_KEY 未配置，使用模板输出")
+        quality['warnings'].append("freshness: 暂用固定值70（published_at全部unknown，无法判断真实新鲜度）")
 
         source_health = self._build_source_health(raw_data.get('sources', []))
         
