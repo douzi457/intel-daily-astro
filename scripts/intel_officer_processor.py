@@ -634,7 +634,11 @@ class IntelligenceProcessor:
                         result = json.loads(resp.read().decode('utf-8'))
 
                     content = result['choices'][0]['message']['content']
-                    response_data = json.loads(content)
+                    # 去除可能的 markdown 代码块包裹（如 ```json ... ```）
+                    stripped = content.strip()
+                    if stripped.startswith('```'):
+                        stripped = stripped.split('\n', 1)[1].rsplit('```', 1)[0].strip()
+                    response_data = json.loads(stripped)
 
                     # Parse new deep analysis fields
                     card_type_map = {}
