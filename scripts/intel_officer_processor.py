@@ -1249,6 +1249,21 @@ def main():
     else:
         print(f"LLM_FAILED_SKIP_WRITE: V2 文件未更新（LLM 失败，保留旧数据）", file=sys.stderr)
     
+    # 同步更新 index.json 的 latest_date（防止页面读不到最新数据）
+    index_path = output_dir / 'index.json'
+    try:
+        if index_path.exists():
+            with open(index_path, 'r', encoding='utf-8') as f:
+                idx = json.load(f)
+        else:
+            idx = {}
+        idx['latest_date'] = args.date
+        with open(index_path, 'w', encoding='utf-8') as f:
+            json.dump(idx, f, ensure_ascii=False)
+        print(f"  -> Updated index.json: latest_date={args.date}")
+    except Exception as e:
+        print(f"  -> Failed to update index.json: {e}", file=sys.stderr)
+    
     export = processor.export_markdown(result)
     exports_dir = output_dir / 'exports' / 'intel-officer'
     exports_dir.mkdir(parents=True, exist_ok=True)
