@@ -16,6 +16,45 @@ from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 CST = timezone(timedelta(hours=8))
 CST_STR = "Asia/Shanghai"
 
+# deep_analysis 键归一化映射：LLM 可能输出中文或英文键，落盘统一为英文
+DEEP_ANALYSIS_KEY_MAP = {
+    '背景': 'background',
+    '分歧': 'divergence',
+    '对照': 'comparison',
+    '现状': 'current_state',
+    '变量': 'variable',
+    '推演': 'projection',
+    '原理': 'principle',
+    '影响': 'impact',
+    '解法': 'solution',
+    '看点': 'highlight',
+    '宝藏': 'treasure',
+    '挖法': 'method',
+    'background': 'background',
+    'divergence': 'divergence',
+    'comparison': 'comparison',
+    'current_state': 'current_state',
+    'variable': 'variable',
+    'projection': 'projection',
+    'principle': 'principle',
+    'impact': 'impact',
+    'solution': 'solution',
+    'highlight': 'highlight',
+    'treasure': 'treasure',
+    'method': 'method',
+}
+
+def normalize_deep_analysis(da: dict) -> dict:
+    """将 deep_analysis 的键归一化为英文，中英混排时保留首次出现的键"""
+    if not da or not isinstance(da, dict):
+        return da
+    result = {}
+    for k, v in da.items():
+        norm = DEEP_ANALYSIS_KEY_MAP.get(k, k)
+        if norm not in result:  # 先到先得
+            result[norm] = v
+    return result
+
 
 class URLNormalizer:
     """URL 标准化与去重"""
@@ -109,33 +148,93 @@ class SummaryCleaner:
 
 
 class EventCluster:
-    """事件聚类"""
-    
-    def __init__(self, threshold: float = 0.7):
+    """事件聚类 — bigram TF-IDF 余弦相似度 + 并查集"""
+
+    def __init__(self, threshold: float = 0.45):
         self.threshold = threshold
-        self.events: Dict[str, List[int]] = {}
-        self.event_counter = 0
-    
+        self._parent: dict = {}
+
+    def _find(self, x: str) -> str:
+        while self._parent[x] != x:
+            self._parent[x] = self._parent[self._parent[x]]
+            x = self._parent[x]
+        return x
+
+    def _union(self, a: str, b: str):
+        ra, rb = self._find(a), self._find(b)
+        if ra != rb:
+            self._parent[ra] = rb
+
+    @staticmethod
+    def _bigrams(text: str) -> list:
+        t = re.sub(r'\s+', '', text.lower())
+        return [t[i:i+2] for i in range(len(t) - 1)]
+
+    @staticmethod
+    def _tf(bigrams: list) -> dict:
+        from collections import Counter
+        c = Counter(bigrams)
+        total = len(bigrams) or 1
+        return {b: v / total for b, v in c.items()}
+
+    @staticmethod
+    def _cosine(tf1: dict, tf2: dict) -> float:
+        common = set(tf1) & set(tf2)
+        if not common:
+            return 0.0
+        dot = sum(tf1[b] * tf2[b] for b in common)
+        norm1 = (sum(v*v for v in tf1.values())) ** 0.5
+        norm2 = (sum(v*v for v in tf2.values())) ** 0.5
+        return dot / (norm1 * norm2 + 1e-9)
+
     def cluster(self, items: List[Dict]) -> Dict[str, List[int]]:
+        self._parent = {str(i): str(i) for i in range(len(items))}
+
+        # 1. URL 完全相同 → 强信号直接合并
+        url_groups: dict = {}
         for i, item in enumerate(items):
-            matched = False
-            canonical = item.get('canonical_url', '')
-            
-            for event_id, indices in self.events.items():
-                for idx in indices:
-                    if items[idx].get('canonical_url') == canonical:
-                        self.events[event_id].append(i)
-                        matched = True
-                        break
-                if matched:
-                    break
-            
-            if not matched:
-                event_id = f"evt_{self.event_counter:04d}"
-                self.events[event_id] = [i]
-                self.event_counter += 1
-        
-        return self.events
+            url = item.get('canonical_url') or item.get('url', '')
+            if url:
+                url_groups.setdefault(url, []).append(i)
+        for group in url_groups.values():
+            if len(group) > 1:
+                root = group[0]
+                for idx in group[1:]:
+                    self._union(root, idx)
+
+        # 2. 内容相似度聚类
+        texts = []
+        for item in items:
+            combined = ' '.join([
+                item.get('headline', ''),
+                item.get('summary', ''),
+                item.get('content', '')[:500],
+            ])
+            texts.append(combined)
+
+        # 按阈值两两 union
+        for i in range(len(items)):
+            for j in range(i + 1, len(items)):
+                if self._find(str(i)) == self._find(str(j)):
+                    continue
+                sim = self._cosine(self._tf(self._bigrams(texts[i])),
+                                   self._tf(self._bigrams(texts[j])))
+                if sim >= self.threshold:
+                    self._union(str(i), str(j))
+
+        # 3. 收集簇
+        from collections import defaultdict
+        groups: dict = defaultdict(list)
+        for i in range(len(items)):
+            groups[self._find(str(i))].append(i)
+
+        # 4. 编号（大簇优先）
+        sorted_groups = sorted(groups.values(), key=lambda g: -len(g))
+        result = {}
+        for idx, group in enumerate(sorted_groups):
+            evt_id = f"evt_{idx:04d}"
+            result[evt_id] = group
+        return result
 
 
 class IntelligenceProcessor:
@@ -653,7 +752,8 @@ class IntelligenceProcessor:
                         idx = item['index']
                         card_type_map[idx] = item.get('card_type', '观点型')
                         event_brief_map[idx] = item.get('event_brief', '')
-                        deep_analysis_map[idx] = item.get('deep_analysis', {})
+                        raw_da = item.get('deep_analysis', {})
+                        deep_analysis_map[idx] = normalize_deep_analysis(raw_da)
                         action_script_map[idx] = item.get('action_script', [])
                         key_quotes_map[idx] = item.get('key_quotes', [])
                         importance_map[idx] = item.get('why_it_matters', '')
