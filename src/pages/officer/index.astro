@@ -52,6 +52,17 @@ function fmtTime(iso?: string) {
   } catch { return '未知'; }
 }
 
+const DEEP_LABELS: Record<string, string> = {
+  background: '背景', divergence: '分歧', comparison: '对照',
+  principle: '原理', impact: '影响', solution: '解法',
+  highlight: '看点', treasure: '宝藏', method: '挖法',
+  current_state: '现状', variable: '变量', projection: '推演',
+};
+
+function cardTypeColor(t: string): string {
+  return t === '观点型' ? '#c0392b' : t === '教程型' ? '#2980b9' : t === '资讯型' ? '#27ae60' : '#8e44ad';
+}
+
 // 归一化英文标点（修复弯引号渲染问题）
 function normalize(text: string): string {
   if (!text) return '';
@@ -66,51 +77,59 @@ function normalize(text: string): string {
 <BaseLayout title="AI 情报官 | 豆子实验室">
   <style>
     :root {
-      --color-bg: #0f172a;
-      --color-surface: #1e293b;
-      --color-border: #334155;
-      --color-text: #f8fafc;
-      --color-text-muted: #94a3b8;
-      --color-accent: #3b82f6;
-      --color-core: #10b981;
-      --color-watch: #f59e0b;
-      --color-action: #8b5cf6;
+      --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
+      --accent: #176b75; --surface: #fff; --border: #d4d0c8; --muted: #8a8578;
+      --paper: #f5f3ee; --line: #e0dcd4;
+      --color-bg: #faf9f6; --color-surface: #fff; --color-border: #d4d0c8;
+      --color-text: #202a30; --color-text-muted: #59656b; --color-accent: #176b75;
+      --color-core: #10b981; --color-watch: #f59e0b; --color-action: #8b5cf6;
+    }
+    [data-theme="dark"] {
+      --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
+      --accent: #12ccd8; --surface: #1a2227; --border: #2a3539; --muted: #5a6a6a;
+      --paper: #171e22; --line: #252e33;
+      --color-bg: #13191c; --color-surface: #1a2227; --color-border: #2a3539;
+      --color-text: #e7eceb; --color-text-muted: #8a9a9a; --color-accent: #12ccd8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--color-bg); color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    body { background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
     /* ── Topbar ── */
-    .topbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+    .topbar { background: var(--surface); border-bottom: 2px solid var(--accent); padding: 12px 0; position: sticky; top: 0; z-index: 100; }
     .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .brand { font-size: 18px; font-weight: 600; }
-    .brand span { color: var(--color-accent); }
-    .profile-badge { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); color: var(--color-accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
-    .meta-info { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--color-text-muted); flex-wrap: wrap; }
-    .quality-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.08); }
-    .quality-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .brand { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+    .brand span { color: var(--accent); }
+    .meta-info { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
+    .q-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; background: var(--paper); border: 1px solid var(--border); }
+    .q-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); background: var(--paper); color: var(--ink-2); cursor: pointer; transition: all .15s; margin-left: auto; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: var(--accent); color: var(--accent); background: rgba(23,107,117,.08); }
+    .theme-btn { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; cursor: pointer; font-size: 14px; color: var(--ink-3); line-height: 1; }
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── 日期导航 ── */
-    .date-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-    .date-nav-btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); text-decoration: none; cursor: pointer; transition: all 0.15s; }
-    .date-nav-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
-    .date-nav-btn.current { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+    .date-nav { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+    .date-nav-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 5px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); background: var(--surface); color: var(--ink-3); text-decoration: none; cursor: pointer; transition: all 0.15s; }
+    .date-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .date-nav-btn.current { background: var(--accent); color: white; border-color: var(--accent); }
     .date-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .date-nav-btn:disabled:hover { border-color: var(--color-border); color: var(--color-text-muted); }
-    .date-nav-sep { color: var(--color-text-muted); font-size: 12px; }
+    .date-nav-btn:disabled:hover { border-color: var(--border); color: var(--ink-4); }
+    .date-nav-sep { color: var(--muted); font-size: 11px; }
     .archive-dropdown { position: relative; }
-    .archive-menu { display: none; position: absolute; top: 100%; left: 0; margin-top: 4px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 4px; min-width: 160px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .archive-menu { display: none; position: absolute; top: 100%; left: 0; margin-top: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 4px; min-width: 140px; z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,.1); }
     .archive-dropdown:hover .archive-menu, .archive-menu:hover { display: block; }
-    .archive-menu a { display: block; padding: 6px 12px; font-size: 13px; color: var(--color-text-muted); text-decoration: none; border-radius: 4px; }
-    .archive-menu a:hover { background: rgba(59,130,246,0.1); color: var(--color-accent); }
+    .archive-menu a { display: block; padding: 5px 10px; font-size: 12px; color: var(--ink-3); text-decoration: none; border-radius: 4px; }
+    .archive-menu a:hover { background: var(--paper); color: var(--accent); }
 
-    main { padding: 24px 0 48px; }
-    .executive-summary { background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.1) 100%); border: 1px solid rgba(59,130,246,0.3); border-radius: 16px; padding: 24px; margin-bottom: 28px; }
-    .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 14px; }
-    .summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .summary-item { display: flex; gap: 12px; }
-    .summary-number { background: var(--color-accent); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-    .summary-text { font-size: 15px; line-height: 1.65; }
+    main { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
+    .executive-summary { background: var(--paper); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 24px; }
+    .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-4); margin-bottom: 10px; }
+    .summary-list { list-style: none; counter-reset: exec; display: flex; flex-direction: column; gap: 7px; }
+    .summary-item { counter-increment: exec; display: flex; gap: 10px; font-size: 14px; line-height: 1.6; }
+    .summary-item::before { content: counter(exec); background: var(--accent); color: #fff; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .summary-text { font-size: 14px; line-height: 1.6; }
 
     /* ── 复制按钮 ── */
     .copy-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); cursor: pointer; transition: all 0.15s; margin-left: auto; }
@@ -118,33 +137,41 @@ function normalize(text: string): string {
     .copy-btn.copied { border-color: var(--color-core); color: var(--color-core); }
 
     /* ── Dashboard Grid ── */
-    .dashboard-grid { display: grid; grid-template-columns: 1fr 360px; gap: 24px; margin-bottom: 28px; }
-    @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 300px; gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 860px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
-    /* ── Core Signal Cards ── */
-    .core-signals { display: flex; flex-direction: column; gap: 14px; }
-    .signal-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; transition: border-color 0.15s; }
-    .signal-card:hover { border-color: var(--color-core); }
-    .signal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
-    .signal-rank { background: var(--color-core); color: white; width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    /* ── Core Signal Cards (Timeline) ── */
+    .core-signals { display: flex; flex-direction: column; gap: 16px; }
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+    .tl-item { position: relative; margin-bottom: 16px; }
+    .tl-item::before { content: ''; position: absolute; left: -24px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+    .tl-time { font-size: 11px; color: var(--ink-4); margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+    .signal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; transition: border-color 0.15s; }
+    .signal-card:hover { border-color: var(--accent); }
+    .signal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+    .signal-rank { background: var(--accent); color: white; width: 22px; height: 22px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
     .signal-title-wrap { flex: 1; min-width: 0; }
-    .signal-title { font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--color-text); text-decoration: none; display: block; word-break: break-word; }
-    .signal-title:hover { color: var(--color-core); }
-    .signal-grade { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 8px; vertical-align: middle; }
-    .grade-high { background: rgba(16,185,129,0.15); color: var(--color-core); }
-    .grade-mid { background: rgba(245,158,11,0.15); color: var(--color-watch); }
-    .grade-low { background: rgba(239,68,68,0.15); color: #ef4444; }
-    .signal-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--color-text-muted); margin-bottom: 10px; }
-    .signal-meta a { color: var(--color-accent); text-decoration: none; }
+    .signal-title { font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--ink); text-decoration: none; display: block; word-break: break-word; }
+    .signal-title:hover { color: var(--accent); }
+    .signal-grade { display: inline-flex; align-items: center; gap: 3px; padding: 1px 7px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+    .grade-high { background: rgba(16,185,129,.12); color: #059669; }
+    .grade-mid { background: rgba(245,158,11,.12); color: #d97706; }
+    .grade-low { background: rgba(239,68,68,.12); color: #dc2626; }
+    .signal-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; color: var(--ink-4); margin-bottom: 8px; }
+    .signal-meta a { color: var(--accent); text-decoration: none; }
     .signal-meta a:hover { text-decoration: underline; }
-    .signal-summary { font-size: 13px; color: var(--color-text-muted); margin-bottom: 10px; line-height: 1.55; }
-    .signal-section { margin-bottom: 10px; }
-    .signal-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 4px; }
+    .report-count { background: var(--paper); border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px; font-size: 10px; }
+    .signal-summary { font-size: 13px; color: var(--ink-3); margin-bottom: 8px; line-height: 1.55; }
+    .signal-section { margin-bottom: 8px; }
+    .signal-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-4); margin-bottom: 3px; }
     .signal-value { font-size: 13px; line-height: 1.55; }
-    .signal-value.important { color: var(--color-core); }
-    .signal-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 2px 8px; border-radius: 4px; font-size: 11px; }
-    .tag.highlight { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: var(--color-core); }
+    .signal-value.important { color: var(--accent); }
+    .signal-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10px; border: 1px solid var(--border); color: var(--ink-4); background: var(--paper); margin-right: 4px; }
+    .tag.highlight { background: rgba(23,107,117,.08); border-color: var(--accent); color: var(--accent); }
+    .card-type-badge { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-bottom: 8px; }
+    .why-box { background: var(--paper); border-left: 3px solid var(--accent); padding: 8px 12px; margin-bottom: 8px; font-size: 13px; color: var(--ink-2); line-height: 1.55; }
 
     /* ── Sidebar ── */
     .sidebar { display: flex; flex-direction: column; gap: 20px; }
@@ -163,56 +190,78 @@ function normalize(text: string): string {
     .data-source-full span:first-child { color: var(--color-text-muted); margin-bottom: 2px; display: block; }
     .data-source-full span:last-child { font-weight: 500; font-size: 12px; line-height: 1.5; }
 
-    details.tech-details { margin-top: 12px; }
-    details.tech-details summary { font-size: 12px; color: var(--color-text-muted); cursor: pointer; user-select: none; }
-    details.tech-details summary:hover { color: var(--color-accent); }
-    .tech-details-content { margin-top: 8px; font-size: 11px; color: var(--color-text-muted); line-height: 1.6; }
-    .tech-details-content dt { font-weight: 600; color: var(--color-text-muted); margin-top: 4px; }
-    .tech-details-content dd { margin-left: 12px; margin-bottom: 4px; }
+    /* ── Fold blocks ── */
+    details.analysis-block { margin: 6px 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    details.analysis-block summary { padding: 8px 12px; font-size: 12px; font-weight: 600; color: var(--ink-3); cursor: pointer; background: var(--paper); list-style: none; display: flex; align-items: center; gap: 6px; }
+    details.analysis-block summary::before { content: '\25B8'; font-size: 10px; transition: transform .15s; }
+    details.analysis-block[open] summary::before { transform: rotate(90deg); }
+    details.analysis-block summary:hover { color: var(--accent); }
+    .analysis-content { padding: 10px 12px; font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+    .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .analysis-item-label { font-size: 11px; font-weight: 700; color: var(--ink-4); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+    .analysis-item-text { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+
+    details.quotes-block { margin: 6px 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    details.quotes-block summary { padding: 8px 12px; font-size: 12px; font-weight: 600; color: var(--ink-3); cursor: pointer; background: var(--paper); list-style: none; }
+    details.quotes-block summary::before { content: '\25B8'; font-size: 10px; }
+    details.quotes-block[open] summary::before { transform: rotate(90deg); }
+    .quotes-list { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+    .quote-item { border-left: 2px solid var(--accent); padding-left: 10px; }
+    .quote-text { font-size: 13px; font-style: italic; color: var(--ink-2); margin-bottom: 2px; }
+    .quote-source { font-size: 11px; color: var(--ink-4); }
+
+    .action-script-list { padding-left: 18px; font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+    .action-script-list li { margin-bottom: 4px; }
 
     /* ── Watchlist ── */
-    .watchlist-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px; margin-bottom: 28px; }
-    .watchlist-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .watchlist-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; }
-    .watchlist-rank { font-size: 11px; color: var(--color-text-muted); width: 22px; text-align: center; }
+    .watchlist-section { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 24px; }
+    .watchlist-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .watchlist-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--paper); border-radius: 6px; }
+    .watchlist-rank { font-size: 10px; color: var(--ink-4); width: 18px; text-align: center; }
     .watchlist-title { font-size: 13px; flex: 1; line-height: 1.4; }
-    .watchlist-title a { color: var(--color-text); text-decoration: none; }
-    .watchlist-title a:hover { color: var(--color-watch); }
-    .watchlist-score { font-size: 13px; font-weight: 600; color: var(--color-watch); width: 36px; text-align: right; }
+    .watchlist-title a { color: var(--ink); text-decoration: none; }
+    .watchlist-title a:hover { color: var(--accent); }
+    .watch-dots { display: flex; gap: 3px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-h { background: #059669; }
+    .dot-m { background: #d97706; }
+    .dot-l { background: #dc2626; }
 
     /* ── Empty State ── */
-    .empty-state { text-align: center; padding: 48px 24px; color: var(--color-text-muted); }
-    .funnel { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-muted); margin-bottom: 20px; flex-wrap: wrap; }
-    .funnel-number { font-weight: 600; color: var(--color-text); }
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--ink-4); }
+    .empty-state h2 { font-size: 18px; margin-bottom: 8px; color: var(--ink-2); }
+    .funnel { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); margin-bottom: 20px; flex-wrap: wrap; }
+    .funnel-number { font-weight: 700; color: var(--ink); }
 
     /* ── Mobile ── */
-    @media (max-width: 768px) {
-      .container { padding: 0 16px; }
+    @media (max-width: 640px) {
+      .container { padding: 0 14px; }
       .topbar-inner { gap: 10px; }
-      .brand { font-size: 16px; }
+      .brand { font-size: 15px; }
       .meta-info { font-size: 12px; gap: 8px; }
-      main { padding: 16px 0 32px; }
+      main { padding: 16px 14px 40px; }
       .executive-summary { padding: 16px; }
-      .summary-text { font-size: 15px; }
+      .summary-text { font-size: 14px; }
       .dashboard-grid { gap: 16px; }
-      .signal-card { padding: 14px; }
+      .signal-card { padding: 12px; }
       .signal-title { font-size: 14px; }
       .data-source-grid { grid-template-columns: 1fr; }
       .copy-btn { width: 100%; justify-content: center; }
+      .analysis-grid { grid-template-columns: 1fr; }
     }
   </style>
 
   <div class="topbar">
-    <div class="container topbar-inner">
+    <div class="container topbar-inner" style={{'--quality-color': qualityColor}}>
       <div class="brand">豆子实验室 · <span>AI 情报官</span></div>
-      <div class="profile-badge">AI 开源与 Agent 创作者</div>
       <div class="meta-info">
         <span>{date}</span>
-        <span class="quality-badge" style={{ '--color-quality': qualityColor }}>
-          <span class="quality-dot" style={{ 'background': qualityColor }}></span>
+        <span class="q-badge" style={{ '--color-quality': qualityColor }}>
+          <span class="q-dot" style={{ 'background': qualityColor }}></span>
           {v2Data?.quality?.total || 0}/100 {qualityGrade.toUpperCase()}
         </span>
-        <button class="copy-btn" id="copyBtn" title="复制日报 Markdown 到剪贴板">📋 复制日报</button>
+        <button class="copy-btn" id="copyBtn" data-date={date} title="复制日报 Markdown">📋 复制日报</button>
+        <button class="theme-btn" id="themeBtn" title="切换主题">🌓</button>
       </div>
     </div>
   </div>
@@ -238,7 +287,7 @@ function normalize(text: string): string {
               下一天 →
             </a>
             <div class="archive-dropdown">
-              <button class="date-nav-btn">📅 近7天归档</button>
+              <button class="date-nav-btn">📅 近7天</button>
               <div class="archive-menu">
                 {datesList.map(d => (
                   <a href={`/officer/?date=${d}`} class={d === date ? 'current' : ''}>{d}</a>
@@ -261,7 +310,6 @@ function normalize(text: string): string {
             <ol class="summary-list">
               {v2Data.executive_summary.map((text: string, i: number) => (
                 <li class="summary-item">
-                  <span class="summary-number">{i + 1}</span>
                   <span class="summary-text">{normalize(text)}</span>
                 </li>
               ))}
@@ -269,174 +317,106 @@ function normalize(text: string): string {
           </section>
 
           <div class="dashboard-grid">
-            {/* 核心信号 */}
+            {/* 核心信号时间线 */}
             <section class="core-signals">
-              <div class="section-title">核心信号</div>
-              {v2Data.core_signals.map((event, i: number) => {
-                const gradeClass = event.score.total >= 90 ? 'grade-high' : event.score.total >= 80 ? 'grade-mid' : 'grade-low';
-                const gradeLabel = event.score.total >= 90 ? '高价值' : event.score.total >= 80 ? '中价值' : '低价值';
-                return (
-                  <article class="signal-card">
-                    <div class="signal-header">
-                      <div class="signal-rank">{i + 1}</div>
-                      <div class="signal-title-wrap">
-                        <a class="signal-title" href={event.url || '#'} target="_blank" rel="noopener">
-                          {normalize(event.headline)}
-                          <span class={`signal-grade ${gradeClass}`}>{gradeLabel}</span>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="signal-meta">
-                      {event.url && <span>🔗 <a href={event.url} target="_blank" rel="noopener">查看原文</a></span>}
-                      <span>🕐 {fmtTime(event.first_seen_at)}</span>
-                      {event.source_count > 1 && <span>📰 另有 {event.source_count - 1} 家报道</span>}
-                    </div>
-                    {event.clean_summary && event.clean_summary !== event.headline && (
-                      <p class="signal-summary">{normalize(event.clean_summary)}</p>
-                    )}
-
-                    {/* 事件简报（新） */}
-                    {event.event_brief && (
-                      <div class="signal-section">
-                        <div class="signal-label">事件简报</div>
-                        <div class="signal-value">{normalize(event.event_brief)}</div>
-                      </div>
-                    )}
-
-                    {/* 卡片类型徽章（新） */}
-                    {event.card_type && (
-                      <div class="signal-card-type">
-                        <span class={`badge ${event.card_type === '观点型' ? 'viewpoint' : event.card_type === '教程型' ? 'tutorial' : event.card_type === '资讯型' ? 'news' : 'preview'}`}>
-                          {event.card_type}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* 深度分析（新，移动端默认折叠） */}
-                    {event.deep_analysis && (Object.keys(event.deep_analysis).length > 0) && (
-                      <details class="signal-deep-analysis">
-                        <summary>深度分析</summary>
-                        {event.deep_analysis.background && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">背景</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.background)}</div>
+              <div class="timeline">
+                {v2Data.core_signals.map((event, i: number) => {
+                  const gradeClass = event.score.total >= 90 ? 'grade-high' : event.score.total >= 80 ? 'grade-mid' : 'grade-low';
+                  const gradeLabel = event.score.total >= 90 ? '高价值' : event.score.total >= 80 ? '中价值' : '低价值';
+                  const reportCount = event.source_count > 1 ? `📰 ${event.source_count}家报道` : null;
+                  return (
+                    <div class="tl-item" key={i}>
+                      <div class="tl-time">{fmtTime(event.first_seen_at)}</div>
+                      <article class="signal-card">
+                        <div class="signal-header">
+                          <div class="signal-rank">{i + 1}</div>
+                          <div class="signal-title-wrap">
+                            <a class="signal-title" href={event.url || '#'} target="_blank" rel="noopener">
+                              {normalize(event.headline)}
+                              <span class={`signal-grade ${gradeClass}`}>{gradeLabel}</span>
+                            </a>
                           </div>
-                        )}
-                        {event.deep_analysis.divergence && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">分歧</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.divergence)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.comparison && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">对照</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.comparison)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.principle && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">原理</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.principle)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.impact && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">影响</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.impact)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.solution && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">解法</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.solution)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.highlights && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">看点</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.highlights)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.treasures && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">宝藏</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.treasures)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.method && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">挖法</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.method)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.current_state && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">现状</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.current_state)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.variable && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">变量</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.variable)}</div>
-                          </div>
-                        )}
-                        {event.deep_analysis.speculation && (
-                          <div class="analysis-block">
-                            <div class="analysis-label">推演</div>
-                            <div class="analysis-text">{normalize(event.deep_analysis.speculation)}</div>
-                          </div>
-                        )}
-                      </details>
-                    )}
-
-                    {/* 关键引文（新，移动端默认折叠） */}
-                    {event.key_quotes && event.key_quotes.length > 0 && (
-                      <details class="signal-quotes">
-                        <summary>关键引文</summary>
-                        <div class="quotes-list">
-                          {event.key_quotes.map((q: any, qi: number) => (
-                            <blockquote class="quote-item">
-                              <p class="quote-text">"{normalize(q.text)}"</p>
-                              {q.source && <cite class="quote-source">{normalize(q.source)}</cite>}
-                            </blockquote>
-                          ))}
                         </div>
-                      </details>
-                    )}
-
-                    {/* 执行脚本（新） */}
-                    {event.action_script && event.action_script.length > 0 && (
-                      <div class="signal-section">
-                        <div class="signal-label">执行脚本</div>
-                        <ol class="action-script-list">
-                          {event.action_script.map((step: any) => (
-                            <li key={step.step}>{normalize(step.text)}</li>
-                          ))}
-                        </ol>
-                      </div>
-                    )}
-
-                    {/* 原有字段（保留精简版） */}
-                    {event.why_it_matters && (
-                      <div class="signal-section">
-                        <div class="signal-label">为什么对你重要</div>
-                        <div class="signal-value important">{normalize(event.why_it_matters)}</div>
-                      </div>
-                    )}
-                    {event.suggested_action?.text && (
-                      <div class="signal-section">
-                        <div class="signal-label">建议动作</div>
-                        <div class="signal-value">{normalize(event.suggested_action.text)}</div>
-                      </div>
-                    )}
-                    <div class="signal-tags">
-                      {event.tags.map((tag: string) => (<span class={`tag ${i < 3 ? 'highlight' : ''}`}>{tag}</span>))}
+                        <div class="signal-meta">
+                          {event.url && <span>🔗 <a href={event.url} target="_blank" rel="noopener">查看原文</a></span>}
+                          {reportCount && <span class="report-count">{reportCount}</span>}
+                          <span>🕐 {fmtTime(event.last_seen_at)}</span>
+                        </div>
+                        {event.card_type && (
+                          <span class="card-type-badge" style={{background: `${cardTypeColor(event.card_type)}18`, color: cardTypeColor(event.card_type), border: `1px solid ${cardTypeColor(event.card_type)}40`}}>
+                            {event.card_type}
+                          </span>
+                        )}
+                        {event.event_brief && (
+                          <div class="signal-section">
+                            <div class="signal-value">{normalize(event.event_brief)}</div>
+                          </div>
+                        )}
+                        {event.clean_summary && event.clean_summary !== event.headline && (
+                          <p class="signal-summary">{normalize(event.clean_summary)}</p>
+                        )}
+                        {event.why_it_matters && (
+                          <div class="why-box">{normalize(event.why_it_matters)}</div>
+                        )}
+                        {/* 深度分析 — 兼容中英双键 */}
+                        {event.deep_analysis && (Object.keys(event.deep_analysis).length > 0) && (
+                          <details class="analysis-block">
+                            <summary>深度分析</summary>
+                            <div class="analysis-content">
+                              <div class="analysis-grid">
+                                {Object.entries(event.deep_analysis).map(([k, v]: [string, any]) => {
+                                  const label = DEEP_LABELS[k] || k;
+                                  return (
+                                    <div class="analysis-item" key={k}>
+                                      <div class="analysis-item-label">{label}</div>
+                                      <div class="analysis-item-text">{normalize(v)}</div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </details>
+                        )}
+                        {/* 关键引文 */}
+                        {event.key_quotes && event.key_quotes.length > 0 && (
+                          <details class="quotes-block">
+                            <summary>关键引文</summary>
+                            <div class="quotes-list">
+                              {event.key_quotes.map((q: any, qi: number) => (
+                                <div class="quote-item" key={qi}>
+                                  <p class="quote-text">"{normalize(q.text)}"</p>
+                                  {q.source && <cite class="quote-source">{normalize(q.source)}</cite>}
+                                </div>
+                              ))}
+                            </div>
+                          </details>
+                        )}
+                        {/* 执行脚本 */}
+                        {event.action_script && event.action_script.length > 0 && (
+                          <div class="signal-section">
+                            <div class="signal-label">执行脚本</div>
+                            <ol class="action-script-list">
+                              {event.action_script.map((step: any) => (
+                                <li key={step.step}>{normalize(step.text)}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+                        {/* 建议动作 */}
+                        {event.suggested_action?.text && (
+                          <div class="signal-section">
+                            <div class="signal-label">建议动作</div>
+                            <div class="signal-value">{normalize(event.suggested_action.text)}</div>
+                          </div>
+                        )}
+                        <div class="signal-tags">
+                          {event.tags.map((tag: string) => (<span class={`tag ${i < 3 ? 'highlight' : ''}`}>{tag}</span>))}
+                        </div>
+                      </article>
                     </div>
-                  </article>
-                );
-              })}
+                  );
+                })}
+              </div>
             </section>
 
             <aside class="sidebar">
@@ -452,7 +432,7 @@ function normalize(text: string): string {
                 ))}
               </section>
 
-              {/* 数据来源（原质量报告） */}
+              {/* 数据来源 */}
               <section class="data-source-section">
                 <div class="section-title">数据来源</div>
                 <div class="data-source-grid">
@@ -473,9 +453,9 @@ function normalize(text: string): string {
                     <span>{topCategories}</span>
                   </div>
                 </div>
-                <details class="tech-details">
+                <details class="tech-d">
                   <summary>📊 技术指标</summary>
-                  <div class="tech-details-content">
+                  <div class="tech-d-content">
                     <dl>
                       <dt>空摘要率</dt><dd>{(v2Data.quality.metrics.empty_summary_rate * 100).toFixed(1)}%</dd>
                       <dt>重复率</dt><dd>{(v2Data.quality.metrics.exact_duplicate_rate * 100).toFixed(1)}%</dd>
@@ -494,15 +474,22 @@ function normalize(text: string): string {
             <section class="watchlist-section">
               <div class="section-title">观察名单 ({v2Data.watchlist.length})</div>
               <ul class="watchlist-list">
-                {v2Data.watchlist.slice(0, 10).map((event, i: number) => (
-                  <li class="watchlist-item">
-                    <span class="watchlist-rank">{i + 1}</span>
-                    <span class="watchlist-title">
-                      {event.url ? <a href={event.url} target="_blank" rel="noopener">{normalize(event.headline)}</a> : normalize(event.headline)}
-                    </span>
-                    <span class="watchlist-score">{event.score.total}</span>
-                  </li>
-                ))}
+                {v2Data.watchlist.slice(0, 10).map((event, i: number) => {
+                  const score = event.score.total;
+                  let dots: any[] = [];
+                  if (score >= 90) dots = [<span class="dot dot-h" key="h"/>,<span class="dot dot-h" key="h2"/>,<span class="dot dot-h" key="h3"/>];
+                  else if (score >= 80) dots = [<span class="dot dot-m" key="m"/>,<span class="dot dot-m" key="m2"/>,<span class="dot dot-l" key="l"/>];
+                  else dots = [<span class="dot dot-l" key="l"/>,<span class="dot dot-l" key="l2"/>,<span class="dot dot-l" key="l3"/>];
+                  return (
+                    <li class="watchlist-item" key={i}>
+                      <span class="watchlist-rank">{i + 1}</span>
+                      <span class="watchlist-title">
+                        {event.url ? <a href={event.url} target="_blank" rel="noopener">{normalize(event.headline)}</a> : normalize(event.headline)}
+                      </span>
+                      <div class="watch-dots">{dots}</div>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
           )}
@@ -512,25 +499,40 @@ function normalize(text: string): string {
   </main>
 </BaseLayout>
 
+<script is:inline>
+  // Theme: prevent FOUC
+  (function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}else if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+</script>
+
 <script>
-  // 复制日报按钮
+  // 复制日报按钮 — 用 data-date 属性取值（修复 ${date} 不插值 bug）
   const copyBtn = document.getElementById('copyBtn');
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
+      const date = copyBtn.getAttribute('data-date');
       try {
-        const resp = await fetch('/data/v2/exports/intel-officer/${date}-brief.md');
+        const resp = await fetch(`/data/v2/exports/intel-officer/${date}-brief.md`);
         const text = await resp.text();
         await navigator.clipboard.writeText(text);
         copyBtn.textContent = '✅ 已复制';
         copyBtn.classList.add('copied');
-        setTimeout(() => {
-          copyBtn.textContent = '📋 复制日报';
-          copyBtn.classList.remove('copied');
-        }, 2000);
+        setTimeout(() => { copyBtn.textContent = '📋 复制日报'; copyBtn.classList.remove('copied'); }, 2000);
       } catch {
         copyBtn.textContent = '❌ 复制失败';
         setTimeout(() => { copyBtn.textContent = '📋 复制日报'; }, 2000);
       }
     });
   }
+
+  // 主题切换 — localStorage 记忆
+  const themeBtn = document.getElementById('themeBtn');
+  function setTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+    themeBtn.textContent = dark ? '☀️' : '🌓';
+  }
+  themeBtn?.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    setTheme(!isDark);
+  });
 </script>
