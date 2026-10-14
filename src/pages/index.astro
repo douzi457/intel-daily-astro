@@ -1,22 +1,13 @@
 ---
-// 首页 — 使用共享组件，消除 DRY 违反
+// 首页 — AIHOT 暖纸风深度复刻
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-import PlatformSection from '../components/PlatformSection.astro';
-import Sidebar from '../components/Sidebar.astro';
-import SectionNav from '../components/SectionNav.astro';
-import PickSection from '../components/PickSection.astro';
 import CalendarWidget from '../components/CalendarWidget.astro';
 import { getDayData, getAllDates } from '../utils/data.ts';
-import { SITE, SECTION_ORDER, getPlatformMeta } from '../lib/constants';
-import type { IntelItem, GzhArticle, V4DailyData } from '../lib/types';
-import articles from '../data/gzh-articles.json';
+import { SITE } from '../lib/constants';
+import type { IntelItem, V4DailyData } from '../lib/types';
 
-// ── 数据加载 — V4 推荐数据由 PickSection 自行处理 ──
-
-// ── V4 精选数据加载 ──
 let v4Data: V4DailyData | null = null;
 try {
   const v4Index = await import('../data/v4/index.json');
@@ -27,8 +18,6 @@ try {
   }
 } catch {}
 
-const filteredArticles: GzhArticle[] = articles.filter((a: GzhArticle) => a.title);
-
 const allDates = getAllDates('zh');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
@@ -36,271 +25,153 @@ const items: IntelItem[] = dayData.items;
 const totalItems = items.length;
 const recentDates = allDates.slice(0, 10);
 
-// ── 数据分组与排序 ──
-const grouped: Record<string, IntelItem[]> = {};
+const groupedByDate = new Map<string, IntelItem[]>();
 for (const item of items) {
-  const key = item.platform || 'other';
-  if (!grouped[key]) grouped[key] = [];
-  grouped[key].push(item);
+  const d = item.date || today;
+  if (!groupedByDate.has(d)) groupedByDate.set(d, []);
+  groupedByDate.get(d)!.push(item);
 }
+const sortedDates = [...groupedByDate.keys()].sort().reverse();
 
-const sortedAll = [...items].sort((a, b) => (b.score || 0) - (a.score || 0));
-const featured = sortedAll.slice(0, 5);
-
-const trending = [...items]
-  .sort((a, b) => (b.hot || 0) - (a.hot || 0))
-  .slice(0, 10);
-
-const activeSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
 const highScoreCount = items.filter(i => i.score >= 7).length;
 
-// 计算精选是否有数据（用于条件渲染）
-const hasFeatured = v4Data && Object.values(v4Data.recommendations || {}).some(cat => (cat?.length || 0) > 0);
-
-// ── 页面标题与SEO ──
 const v4Date = v4Data?.date || today;
 const y = v4Date.slice(0,4);
 const m = parseInt(v4Date.slice(5,7)).toString();
 const d = parseInt(v4Date.slice(8,10)).toString();
 const displayDate = `${y}年${m}月${d}日`;
-const topHeadlines = v4Data?.recommendations
-  ? Object.values(v4Data.recommendations).flat().slice(0, 3).map(i => i.title).join(' · ')
-  : '';
-const metaDesc = topHeadlines
-  ? `${displayDate} AI/科技资讯聚合：${topHeadlines.slice(0, 100)}`
-  : `${displayDate} 全球科技资讯聚合，AI智能评分精选`;
-const pageTitle = `${displayDate} AI/科技情报`;
+
+function gradeBadge(score: number): string {
+  if (score >= 8) return 'elite';
+  if (score >= 6) return 'high';
+  return 'normal';
+}
+function gradeLabel(score: number): string {
+  if (score >= 8) return '高价值';
+  if (score >= 6) return '中价值';
+  return '普通';
+}
+function reasonText(score: number): string {
+  if (score >= 8) return '多源交叉验证，事件重要性与时效性兼备';
+  if (score >= 6) return '单一信源但内容有价值，建议持续关注';
+  return '信息量有限，仅做背景参考';
+}
 ---
 
-<BaseLayout title={pageTitle} description={metaDesc} lang="zh-CN">
-<div class="page">
-  <Header mode="home" date={v4Date} totalItems={totalItems} today={today} />
-
-  <!-- H1 页面标题（SEO） -->
-  <h1 class="page-h1">{displayDate} AI/科技情报</h1>
-
-</div>
-
-<SectionNav activeSections={activeSections} locale="zh" data={v4Data} />
-
-<div class="page">
-  <!-- 每日精选 + 热搜 Hero（来自 dashboard_v4） -->
-  <PickSection data={v4Data} />
-
-  <!-- 今日数据摘要横条 -->
-  <div class="stats-bar">
-    <div class="stats-bar-item">
-      <span class="stats-bar-value">{totalItems}</span>
-      <span class="stats-bar-label">今日情报</span>
-    </div>
-    <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item">
-      <span class="stats-bar-value">{v4Data?.total_sources || activeSections.length}</span>
-      <span class="stats-bar-label">采集源</span>
-    </div>
-    <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item highlight">
-      <span class="stats-bar-value">{highScoreCount}</span>
-      <span class="stats-bar-label">高价值信号</span>
-    </div>
-  </div>
-
-  <!-- 主内容区 -->
-  <div class="content-grid">
-    <div class="main-content">
-      <!-- 平台分区列表（主要内容） -->
-      <PlatformSection grouped={grouped} locale="zh" />
-
-      <!-- 日历 -->
-      {allDates.length > 0 && (
-        <section class="section section-full">
-          <CalendarWidget dates={allDates} basePath="/day/" locale="zh" />
-        </section>
-      )}
-
-    </div>
-
-    <!-- 侧边栏 -->
-    <Sidebar
-      totalItems={totalItems}
-      activeSectionCount={activeSections.length}
-      coverageDays={recentDates.length}
-      highScoreCount={highScoreCount}
-      v4SourceCount={v4Data?.total_sources}
-      grouped={grouped}
-      featured={featured}
-      trending={trending}
-      filteredArticles={filteredArticles}
-      locale="zh"
-    />
-  </div>
-
-  <Footer />
-</div>
-
-<button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
-</BaseLayout>
-
+<BaseLayout title={`${displayDate} AI/科技情报`} description={`${displayDate} 全球科技资讯聚合，AI智能评分精选`} lang="zh-CN">
 <style>
-html { scroll-behavior: smooth; }
-
-/* 页面H1标题 */
-.page-h1 {
-  font-size: 1.05em;
-  font-weight: 700;
-  color: var(--text-h);
-  margin: 0 0 4px;
-  letter-spacing: -0.3px;
-  line-height: 1.4;
-}
-
-@media (max-width: 640px) {
-  .page-h1 { font-size: 0.95em; }
-}
-
-/* 内容区布局 */
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-}
-
-@media (min-width: 1024px) {
-  .content-grid {
-    grid-template-columns: 1fr 300px;
-    gap: 36px;
+  :root {
+    --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
+    --accent: #176b75; --surface: #fff; --border: #d4d0c8; --paper: #f5f3ee; --line: #e0dcd4;
+    --accent-soft: rgba(23,107,117,.08);
   }
-}
-
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  min-width: 0;
-}
-
-/* ── Stats Summary Bar ── */
-.stats-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 16px 24px;
-  margin-bottom: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-}
-
-.stats-bar-item {
-  text-align: center;
-  padding: 0 28px;
-}
-
-.stats-bar-item.highlight .stats-bar-value {
-  color: var(--accent);
-}
-
-.stats-bar-value {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 1.4em;
-  font-weight: 800;
-  color: var(--text-h);
-  font-variant-numeric: tabular-nums;
-}
-
-.stats-bar-label {
-  display: block;
-  font-size: 0.7em;
-  color: var(--text-m);
-  margin-top: 2px;
-  font-weight: 500;
-}
-
-.stats-bar-divider {
-  width: 1px;
-  height: 32px;
-  background: var(--border);
-}
-
-@media (max-width: 640px) {
-  .stats-bar {
-    padding: 14px 12px;
+  [data-theme="dark"] {
+    --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
+    --accent: #12ccd8; --surface: #1a2227; --border: #2a3539; --paper: #171e22; --line: #252e33;
+    --accent-soft: rgba(18,204,216,.08);
   }
-  .stats-bar-item {
-    padding: 0 16px;
+  body { background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 60px; }
+  .stats-bar { display: flex; align-items: center; justify-content: center; gap: 0; padding: 14px 20px; margin: 20px 0 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; }
+  .stats-bar-item { text-align: center; padding: 0 24px; }
+  .stats-bar-value { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.3em; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .stats-bar-label { display: block; font-size: 0.85em; color: var(--ink-3); margin-top: 2px; }
+  .stats-bar-item.highlight .stats-bar-value { color: var(--accent); }
+  .stats-bar-divider { width: 1px; height: 28px; background: var(--border); }
+  .timeline-wrap { display: flex; flex-direction: column; gap: 32px; }
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .day-label { font-size: 11px; font-weight: 700; color: var(--ink-4); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+  .day-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; }
+  .day-count { margin-left: auto; font-size: 11px; color: var(--ink-4); background: var(--paper); border: 1px solid var(--border); border-radius: 10px; padding: 1px 8px; }
+  .entry { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .entry:last-child { border-bottom: none; }
+  .entry:hover { background: var(--paper); margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 6px; }
+  .entry-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 5px; }
+  .entry-time { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--ink-4); font-variant-numeric: tabular-nums; }
+  .entry-sep { color: var(--ink-4); font-size: 11px; }
+  .entry-source { font-size: 11px; color: var(--ink-3); font-weight: 500; }
+  .grade-pill { display: inline-flex; align-items: center; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; border: 1px solid transparent; }
+  .grade-elite { background: rgba(239,68,68,.08); color: #dc2626; border-color: rgba(239,68,68,.2); }
+  .grade-high { background: rgba(245,158,11,.08); color: #d97706; border-color: rgba(245,158,11,.2); }
+  .grade-normal { background: var(--accent-soft); color: var(--accent); }
+  .entry-title { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 7px; display: block; text-decoration: none; }
+  .entry-title:hover { color: var(--accent); }
+  .entry-summary { font-size: 13px; color: var(--ink-3); line-height: 1.75; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .entry-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; padding-left: 10px; border-left: 2px solid var(--border); }
+  .entry-reason-label { font-weight: 700; color: var(--ink-4); margin-right: 4px; }
+  .back-to-top { position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-3); font-size: 1.2em; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.2s; z-index: 200; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); }
+  .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 640px) {
+    .page-wrap { padding: 0 14px 40px; }
+    .stats-bar { padding: 10px 12px; }
+    .stats-bar-item { padding: 0 12px; }
+    .stats-bar-value { font-size: 1.1em; }
+    .entry-title { font-size: 15px; }
+    .entry-summary { font-size: 12px; -webkit-line-clamp: 2; }
+    .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
   }
-  .stats-bar-value {
-    font-size: 1.1em;
-  }
-  .main-content {
-    gap: 28px;
-  }
-}
-
-/* 返回顶部 */
-.back-to-top {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text-m);
-  font-size: 1.2em;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.2s;
-  z-index: 200;
-  box-shadow: var(--shadow-md);
-}
-.back-to-top.visible { opacity: 1; transform: translateY(0); }
-.back-to-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-@media (max-width: 768px) {
-  .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
-}
 </style>
 
+<div class="page-wrap">
+  <Header mode="home" date={v4Date} totalItems={totalItems} today={today} />
+  <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 情报日报</h1>
+  <div class="stats-bar">
+    <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
+    <div class="stats-bar-divider"></div>
+    <div class="stats-bar-item"><span class="stats-bar-value">{v4Data?.total_sources || recentDates.length}</span><span class="stats-bar-label">采集源</span></div>
+    <div class="stats-bar-divider"></div>
+    <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
+  </div>
+  <div class="timeline-wrap">
+    {sortedDates.map(dateStr => {
+      const dayItems = groupedByDate.get(dateStr) || [];
+      const sorted = [...dayItems].sort((a, b) => (b.score || 0) - (a.score || 0));
+      const dy = dateStr.slice(0,4), dm = dateStr.slice(5,7), dd = dateStr.slice(8,10);
+      const dayLabel = dateStr === today ? '今天' : `${dm}月${dd}日`;
+      return (
+        <section>
+          <div class="day-header">
+            <span class="day-label">{dayLabel}</span>
+            <span class="day-date">{dy}-{dm}-{dd}</span>
+            <span class="day-count">{sorted.length} 条</span>
+          </div>
+          {sorted.map(item => {
+            const g = gradeBadge(item.score || 0), gLabel = gradeLabel(item.score || 0);
+            const timeStr = (item.date || '').slice(11, 16);
+            const platform = item.platform_label || item.source || '';
+            const summary = item.desc || item.title;
+            const reason = reasonText(item.score || 0);
+            return (
+              <article class="entry" data-category={item.category || '其他'}>
+                <div class="entry-meta">
+                  {timeStr && <span class="entry-time">{timeStr}</span>}
+                  {timeStr && platform && <span class="entry-sep">·</span>}
+                  {platform && <span class="entry-source">{platform}</span>}
+                  <span class={`grade-pill grade-${g}`}>{gLabel}</span>
+                </div>
+                <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{item.title}</a>
+                {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
+                <div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>
+              </article>
+            );
+          })}
+        </section>
+      );
+    })}
+  </div>
+  {allDates.length > 0 && <section style={{marginTop:'32px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+  <Footer />
+</div>
+<button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
 <script>
-  // 分区导航 IntersectionObserver
-  const nav = document.getElementById('sectionNav');
-  if (nav) {
-    const links = nav.querySelectorAll('a[data-target]');
-    const sections = Array.from(links).map(link => {
-      const id = link.getAttribute('data-target');
-      return id ? document.getElementById(id) : null;
-    }).filter(Boolean) as HTMLElement[];
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          links.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('data-target') === id);
-          });
-        }
-      });
-    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(section => observer.observe(section));
-  }
-
-  // 返回顶部
   const backBtn = document.getElementById('backToTop');
   if (backBtn) {
-    window.addEventListener('scroll', () => {
-      backBtn.classList.toggle('visible', window.scrollY > 400);
-    });
+    window.addEventListener('scroll', () => { backBtn.classList.toggle('visible', window.scrollY > 300); });
     backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
-
 </script>
+</BaseLayout>
+
 
