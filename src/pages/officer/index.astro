@@ -16,6 +16,21 @@ const date = v2Data?.date || new Date().toISOString().slice(0, 10);
 const qualityGrade = v2Data?.quality?.grade || 'pilot';
 const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pilot' ? '#f59e0b' : '#ef4444';
 
+// 分类数据
+const CATEGORIES = ['AI模型', '开源项目', '大厂动态', '创业融资', '工具应用', '其他'];
+const categories = v2Data?.categories || {};
+const activeCategory = Astro.url.searchParams.get('category') || '全部';
+
+// 构建分类事件映射（event_id -> event）
+const eventsMap = new Map<string, any>();
+(v2Data?.core_signals || []).forEach((e: any) => eventsMap.set(e.event_id, e));
+(v2Data?.watchlist || []).forEach((e: any) => eventsMap.set(e.event_id, e));
+
+// 按分类过滤核心信号
+const filteredSignals = activeCategory === '全部'
+  ? (v2Data?.core_signals || [])
+  : (v2Data?.core_signals || []).filter((e: any) => e.category === activeCategory);
+
 // 生成前一日/后一日日期（用于导航）
 const cur = new Date(date + 'T00:00:00+08:00');
 const prevDate = new Date(cur.getTime() - 86400000).toISOString().slice(0, 10);
@@ -233,6 +248,38 @@ function normalize(text: string): string {
     .funnel { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); margin-bottom: 20px; flex-wrap: wrap; }
     .funnel-number { font-weight: 700; color: var(--ink); }
 
+    /* ── Category Tabs ── */
+    .category-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .cat-tab {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--ink-3);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cat-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .cat-tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .cat-count {
+      margin-left: 4px;
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
     /* ── Mobile ── */
     @media (max-width: 640px) {
       .container { padding: 0 14px; }
@@ -304,6 +351,23 @@ function normalize(text: string): string {
             <div class="funnel-item"><span class="funnel-number">{v2Data.stats.core_signals}</span> 条核心</div>
           </div>
 
+          {/* 分类Tab */}
+          {Object.keys(categories).length > 0 && (
+            <div class="category-tabs">
+              <button class={`cat-tab ${activeCategory === '全部' ? 'active' : ''}`}
+                onclick={() => Astro.navigate(`/officer/?date=${date}`)}>
+                全部
+              </button>
+              {CATEGORIES.filter(c => categories[c] && categories[c].length > 0).map(cat => (
+                <button class={`cat-tab ${activeCategory === cat ? 'active' : ''}`}
+                  onclick={() => Astro.navigate(`/officer/?date=${date}&category=${cat}`)}>
+                  {cat}
+                  <span class="cat-count">{categories[cat]?.length || 0}</span>
+                </button>
+              ))}
+            </div>
+          )}
+
           {/* 今日结论 */}
           <section class="executive-summary">
             <div class="section-title">今日结论</div>
@@ -320,7 +384,7 @@ function normalize(text: string): string {
             {/* 核心信号时间线 */}
             <section class="core-signals">
               <div class="timeline">
-                {v2Data.core_signals.map((event, i: number) => {
+                {filteredSignals.map((event: any, i: number) => {
                   const gradeClass = event.score.total >= 90 ? 'grade-high' : event.score.total >= 80 ? 'grade-mid' : 'grade-low';
                   const gradeLabel = event.score.total >= 90 ? '高价值' : event.score.total >= 80 ? '中价值' : '低价值';
                   const reportCount = event.source_count > 1 ? `📰 ${event.source_count}家报道` : null;

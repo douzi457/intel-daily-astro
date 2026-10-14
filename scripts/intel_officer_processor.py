@@ -56,6 +56,47 @@ def normalize_deep_analysis(da: dict) -> dict:
     return result
 
 
+# 分类规则：根据标题、来源、标签推断事件类别
+CATEGORY_RULES = {
+    'AI模型': [
+        'gpt', 'claude', 'gemini', 'ollama', 'llama', 'qwen', 'deepseek',
+        '模型', '大模型', 'llm', 'ai model', 'language model',
+        'gpt-4', 'gpt-5', 'claude-3', 'claude-4', 'gemini-1.5',
+        'openai', 'anthropic', 'google deepmind', 'meta ai',
+        'chatgpt', 'sora', 'dall-e', 'dalle',
+    ],
+    '开源项目': [
+        'github', 'open source', '开源', 'star', 'repo',
+        'hugging face', 'hf', 'model card', 'dataset',
+        'llm', 'transformers', 'langchain', 'crewai',
+        'agent', '框架', 'sdk', 'api', 'tool',
+        'clone', 'fork', 'release', 'repository',
+    ],
+    '大厂动态': [
+        'microsoft', 'google', 'apple', 'amazon', 'meta',
+        'alphabet', 'nvidia', 'intel', 'amd', 'arm',
+        '字节', '腾讯', '阿里', '百度', '华为',
+        'acquisition', 'merger', 'layoff', 'ipo',
+        '财报', '营收', '季度', 'earnings', 'revenue',
+        '财报', '季度', '业绩',
+    ],
+    '创业融资': [
+        'raises', 'funding', '融资', '投资', 'seed',
+        'series a', 'series b', 'series c', 'venture',
+        'startup', 'unicorn', 'valuation', 'billion',
+        '种子轮', 'a轮', 'b轮', 'c轮', 'pre-seed',
+        '天使轮', '领投', '跟投',
+    ],
+    '工具应用': [
+        '工具', 'app', 'application', 'saas',
+        '插件', 'extension', 'chrome', 'browser',
+        '自动化', 'workflow', 'productivity',
+        '效率', '助手', 'copilot', 'bot',
+        'software', 'platform', 'service', 'app',
+    ],
+}
+
+
 class URLNormalizer:
     """URL 标准化与去重"""
     
@@ -314,6 +355,9 @@ class IntelligenceProcessor:
         executive_summary = self._generate_summary(core_signals, actions)
         quality = self._calculate_quality(normalized_items, events, core_signals, len(watchlist), len(actions))
 
+        # 构建分类精选
+        categories = self._build_categories(core_signals, watchlist)
+
         # 添加LLM用量信息
         if llm_usage:
             quality['llm_usage'] = llm_usage
@@ -346,6 +390,7 @@ class IntelligenceProcessor:
             'ignored_summary': self._build_ignored_summary(ignored),
             'source_health': source_health,
             'quality': quality,
+            'categories': categories,  # 分类精选
             'items': normalized_items,
             'events': events,
         }
@@ -886,6 +931,9 @@ class IntelligenceProcessor:
             main_item = items[main_idx]
             supporting_items = [items[i] for i in indices if i != main_idx]
 
+            # 推断事件分类
+            category = self._classify_event(main_item, supporting_items)
+
             event = {
                 'event_id': event_id,
                 'headline': self._normalize_punctuation(main_item['title']),
@@ -900,6 +948,7 @@ class IntelligenceProcessor:
                 'status': 'new' if len(indices) == 1 else 'developing',
                 'tags': main_item['tags'],
                 'entities': main_item['entities'],
+                'category': category,
                 'why_it_matters': self._analyze_importance_event(main_item, items, indices, seen_texts),
                 'suggested_action': self._suggest_action(main_item, seen_actions),
                 'confidence': main_item['confidence'],
@@ -912,12 +961,41 @@ class IntelligenceProcessor:
             seen_actions.add(event['suggested_action']['text'])
 
         return events
-    
+
+    def _classify_event(self, main_item: Dict, supporting_items: List[Dict]) -> str:
+        """根据标题、来源、标签推断事件类别"""
+        text = (main_item.get('title', '') + ' ' +
+                ' '.join(i.get('title', '') for i in supporting_items)).lower()
+        # source可能是dict或string
+        source = main_item.get('source', {})
+        if isinstance(source, dict):
+            source = source.get('name', '')
+        source = str(source).lower()
+        tags = ' '.join(main_item.get('tags', [])).lower()
+        combined = f"{text} {source} {tags}"
+
+        # 按优先级匹配分类
+        for category, keywords in CATEGORY_RULES.items():
+            for kw in keywords:
+                if kw.lower() in combined:
+                    return category
+
+        return '其他'
+
     def _categorize(self, events: List[Dict]) -> Tuple[List[Dict], List[Dict], List[Dict]]:
-        """分层：核心/观察/忽略"""
+        """分层：核心/观察/忽略，并为AI模型/开源项目+10 relevance"""
         core_limit = self.profile.get('core_limit', 5)
         watch_limit = self.profile.get('watch_limit', 12)
         confidence_threshold = self.profile.get('confidence_threshold', 0.65)
+
+        # 为AI模型和开源项目增加relevance权重（老大画像）
+        for event in events:
+            cat = event.get('category', '')
+            if cat in ('AI模型', '开源项目'):
+                event['score']['relevance'] = min(40, event['score'].get('relevance', 0) + 10)
+                # 重新计算总分
+                s = event['score']
+                event['score']['total'] = min(100, s['relevance'] + s.get('impact', 0) + s.get('novelty', 0) + s.get('source_authority', 0) + s.get('actionability', 0) - s.get('penalties', 0))
 
         # 按总分排序
         sorted_events = sorted(events, key=lambda e: e['score']['total'], reverse=True)
@@ -957,6 +1035,26 @@ class IntelligenceProcessor:
                 })
 
         return core_signals, watchlist, ignored
+
+    def _build_categories(self, core_signals: List[Dict], watchlist: List[Dict]) -> Dict[str, List[str]]:
+        """构建分类精选：每类取Top3，存储event_id引用"""
+        all_events = core_signals + watchlist
+        categories = {}
+
+        # 按分类分组
+        for event in all_events:
+            cat = event.get('category', '其他')
+            if cat not in categories:
+                categories[cat] = []
+            categories[cat].append(event)
+
+        # 每类取Top3（按score.total排序）
+        result = {}
+        for cat, events in categories.items():
+            sorted_events = sorted(events, key=lambda e: e['score']['total'], reverse=True)
+            result[cat] = [e['event_id'] for e in sorted_events[:3]]
+
+        return result
 
     def _generate_summary(self, core_signals: List[Dict], actions: List[Dict]) -> List[str]:
         """生成今日结论 - 必须是完整判断句，不许截断标题"""
