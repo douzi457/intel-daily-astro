@@ -230,13 +230,14 @@ class EventCluster:
             if i in assigned:
                 continue
             neighbors = sim_pairs.get(i, [])
-            if not neighbors:
+            # 只取未分配且最相似的邻居
+            unassigned_neighbors = [(j, s) for j, s in neighbors if j not in assigned]
+            if not unassigned_neighbors:
                 groups.append([i])
                 assigned.add(i)
                 continue
-            # 取前 max_items-1 个最相似邻居
-            neighbors.sort(key=lambda x: -x[1])
-            cluster = [i] + [j for j, _ in neighbors[:4]]
+            unassigned_neighbors.sort(key=lambda x: -x[1])
+            cluster = [i] + [j for j, _ in unassigned_neighbors[:4]]
             groups.append(cluster)
             assigned.update(cluster)
 
