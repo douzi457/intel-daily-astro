@@ -331,6 +331,7 @@ class IntelligenceProcessor:
         deep_analysis_map = llm_result[6] if len(llm_result) > 6 else None
         action_script_map = llm_result[7] if len(llm_result) > 7 else None
         key_quotes_map = llm_result[8] if len(llm_result) > 8 else None
+        llm_category_map = llm_result[9] if len(llm_result) > 9 else None  # LLM分类
 
         # 更新core_signals的why_it_matters和suggested_action
         if llm_importance:
@@ -350,6 +351,11 @@ class IntelligenceProcessor:
                     event['action_script'] = action_script_map[i]
                 if key_quotes_map and i in key_quotes_map:
                     event['key_quotes'] = key_quotes_map[i]
+                # LLM分类优先，关键词兜底
+                if llm_category_map and i in llm_category_map and llm_category_map[i]:
+                    event['category'] = llm_category_map[i]
+                elif 'category' not in event or not event.get('category'):
+                    event['category'] = self._classify_event(event, [])
 
         actions = self._generate_actions(core_signals, llm_importance, llm_actions)
         executive_summary = self._generate_summary(core_signals, actions)
@@ -707,6 +713,17 @@ class IntelligenceProcessor:
                 'tags': event.get('tags', [])[:3],
             })
 
+        # 六类一句话定义（给LLM）
+        CAT_DEFS = {
+            'AI模型': '大语言模型/多模态模型发布、评测、能力对比、API升级',
+            '开源项目': 'GitHub项目、开源模型/框架/SKU/工具，含star数',
+            '大厂动态': '科技公司战略/组织/人事/诉讼/并购，不含产品发布',
+            '创业融资': '初创公司融资轮次、估值、投资人',
+            '工具应用': '面向个人/团队的生产力工具、插件、SaaS',
+            '其他': '不符合以上任何一类',
+        }
+        cat_defs_text = '\n'.join(f'- {k}: {v}' for k, v in CAT_DEFS.items())
+
         system_prompt = """你是一个专业的AI技术内容创作者顾问。你的读者是关注AI开源项目与Agent技术的创作者（做公众号/视频/开源项目推荐）。
 
 请为每条AI新闻事件提供深度分析：
@@ -734,8 +751,12 @@ class IntelligenceProcessor:
 每条约: {text: "原话或硬数字", source: "来源链接或出处"}
 ⚠️ 严禁编造引文！不确定就写{"text": "暂无可引用的公开原话", "source": ""}
 
-## 6. why_it_matters (精简版): 80-150字，保留RSS兼容性
-## 7. suggested_action (精简版): 30-80字，保留RSS兼容性
+## 6. category (必填): 从以下六选一
+{cat_defs_text}
+判断依据: 事件核心内容是什么，不是公司名称。如OpenAI被逮捕是"大厂动态"不是"AI模型"；发布新模型才是"AI模型"。
+
+## 7. why_it_matters (精简版): 80-150字，保留RSS兼容性
+## 8. suggested_action (精简版): 30-80字，保留RSS兼容性
 
 禁止空话词汇: "值得关注"、"具有重要意义"、"不容错过"
 
@@ -805,6 +826,7 @@ class IntelligenceProcessor:
                     key_quotes_map = {}
                     importance_map = {}
                     action_map = {}
+                    category_map = {}  # LLM分类
                     
                     for item in response_data:
                         idx = item['index']
@@ -816,6 +838,7 @@ class IntelligenceProcessor:
                         key_quotes_map[idx] = item.get('key_quotes', [])
                         importance_map[idx] = item.get('why_it_matters', '')
                         action_map[idx] = item.get('suggested_action', '')
+                        category_map[idx] = item.get('category', '')  # LLM分类
 
                     usage = result.get('usage', {})
                     llm_usage = {
@@ -824,7 +847,7 @@ class IntelligenceProcessor:
                         'output_tokens': usage.get('completion_tokens', 0),
                         'total_tokens': usage.get('total_tokens', 0),
                     }
-                    return importance_map, action_map, llm_usage, None,                            card_type_map, event_brief_map, deep_analysis_map, action_script_map, key_quotes_map
+                    return importance_map, action_map, llm_usage, None, card_type_map, event_brief_map, deep_analysis_map, action_script_map, key_quotes_map, category_map
 
                 except urllib.error.HTTPError as e:
                     last_error = f"HTTP {e.code}: {e.reason}"

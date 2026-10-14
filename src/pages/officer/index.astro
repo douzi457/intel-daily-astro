@@ -16,20 +16,11 @@ const date = v2Data?.date || new Date().toISOString().slice(0, 10);
 const qualityGrade = v2Data?.quality?.grade || 'pilot';
 const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pilot' ? '#f59e0b' : '#ef4444';
 
-// 分类数据
+// 分类数据（供JS使用）
 const CATEGORIES = ['AI模型', '开源项目', '大厂动态', '创业融资', '工具应用', '其他'];
 const categories = v2Data?.categories || {};
-const activeCategory = Astro.url.searchParams.get('category') || '全部';
-
-// 构建分类事件映射（event_id -> event）
-const eventsMap = new Map<string, any>();
-(v2Data?.core_signals || []).forEach((e: any) => eventsMap.set(e.event_id, e));
-(v2Data?.watchlist || []).forEach((e: any) => eventsMap.set(e.event_id, e));
-
-// 按分类过滤核心信号
-const filteredSignals = activeCategory === '全部'
-  ? (v2Data?.core_signals || [])
-  : (v2Data?.core_signals || []).filter((e: any) => e.category === activeCategory);
+// 全部信号（JS做客户端过滤，不预处理）
+const allSignals = v2Data?.core_signals || [];
 
 // 生成前一日/后一日日期（用于导航）
 const cur = new Date(date + 'T00:00:00+08:00');
@@ -353,17 +344,10 @@ function normalize(text: string): string {
 
           {/* 分类Tab */}
           {Object.keys(categories).length > 0 && (
-            <div class="category-tabs">
-              <button class={`cat-tab ${activeCategory === '全部' ? 'active' : ''}`}
-                onclick={() => Astro.navigate(`/officer/?date=${date}`)}>
-                全部
-              </button>
+            <div class="category-tabs" id="categoryTabs">
+              <button class="cat-tab active" data-cat="全部">全部</button>
               {CATEGORIES.filter(c => categories[c] && categories[c].length > 0).map(cat => (
-                <button class={`cat-tab ${activeCategory === cat ? 'active' : ''}`}
-                  onclick={() => Astro.navigate(`/officer/?date=${date}&category=${cat}`)}>
-                  {cat}
-                  <span class="cat-count">{categories[cat]?.length || 0}</span>
-                </button>
+                <button class="cat-tab" data-cat={cat}>{cat}<span class="cat-count">{categories[cat]?.length || 0}</span></button>
               ))}
             </div>
           )}
@@ -384,12 +368,12 @@ function normalize(text: string): string {
             {/* 核心信号时间线 */}
             <section class="core-signals">
               <div class="timeline">
-                {filteredSignals.map((event: any, i: number) => {
+                {allSignals.map((event: any, i: number) => {
                   const gradeClass = event.score.total >= 90 ? 'grade-high' : event.score.total >= 80 ? 'grade-mid' : 'grade-low';
                   const gradeLabel = event.score.total >= 90 ? '高价值' : event.score.total >= 80 ? '中价值' : '低价值';
                   const reportCount = event.source_count > 1 ? `📰 ${event.source_count}家报道` : null;
                   return (
-                    <div class="tl-item" key={i}>
+                    <div class="tl-item" key={i} data-category={event.category || '其他'}>
                       <div class="tl-time">{fmtTime(event.first_seen_at)}</div>
                       <article class="signal-card">
                         <div class="signal-header">
@@ -599,4 +583,21 @@ function normalize(text: string): string {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     setTheme(!isDark);
   });
+
+  // 分类Tab过滤 — show/hide，不跳转
+  (function() {
+    const tabs = document.querySelectorAll('#categoryTabs .cat-tab');
+    const items = document.querySelectorAll('.tl-item[data-category]');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const cat = tab.getAttribute('data-cat');
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        items.forEach(item => {
+          const itemCat = item.getAttribute('data-category');
+          item.style.display = (cat === '全部' || itemCat === cat) ? '' : 'none';
+        });
+      });
+    });
+  })();
 </script>
