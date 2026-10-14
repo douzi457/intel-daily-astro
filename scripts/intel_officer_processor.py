@@ -198,9 +198,9 @@ class EventCluster:
                 url_groups.setdefault(url, []).append(i)
         for group in url_groups.values():
             if len(group) > 1:
-                root = group[0]
+                root = str(group[0])
                 for idx in group[1:]:
-                    self._union(root, idx)
+                    self._union(root, str(idx))
 
         # 2. 内容相似度聚类
         texts = []
