@@ -202,13 +202,13 @@ class EventCluster:
                 for idx in group[1:]:
                     self._union(root, str(idx))
 
-        # 2. 内容相似度聚类
+        # 2. 内容相似度聚类（用 title+clean_summary，headline/summary 可能为空）
         texts = []
         for item in items:
             combined = ' '.join([
-                item.get('headline', ''),
-                item.get('summary', ''),
-                item.get('content', '')[:500],
+                item.get('title', ''),
+                item.get('clean_summary', ''),
+                item.get('raw_summary', '')[:500],
             ])
             texts.append(combined)
 
