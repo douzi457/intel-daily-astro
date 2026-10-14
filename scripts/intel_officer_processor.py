@@ -188,7 +188,10 @@ class EventCluster:
         return dot / (norm1 * norm2 + 1e-9)
 
     def cluster(self, items: List[Dict]) -> Dict[str, List[int]]:
-        self._parent = {str(i): str(i) for i in range(len(items))}
+        """事件聚类 — bigram TF-IDF 余弦相似度，星型分组（每个簇有一个中心，不传递闭包）"""
+        n = len(items)
+        if n == 0:
+            return {}
 
         # 1. URL 完全相同 → 强信号直接合并
         url_groups: dict = {}
@@ -196,13 +199,8 @@ class EventCluster:
             url = item.get('canonical_url') or item.get('url', '')
             if url:
                 url_groups.setdefault(url, []).append(i)
-        for group in url_groups.values():
-            if len(group) > 1:
-                root = str(group[0])
-                for idx in group[1:]:
-                    self._union(root, str(idx))
 
-        # 2. 内容相似度聚类（用 title+clean_summary，headline/summary 可能为空）
+        # 2. 预处理文本
         texts = []
         for item in items:
             combined = ' '.join([
@@ -211,25 +209,39 @@ class EventCluster:
                 item.get('raw_summary', '')[:500],
             ])
             texts.append(combined)
+            bf = self._tf(self._bigrams(combined))
+            item['_bf'] = bf
 
-        # 按阈值两两 union
-        for i in range(len(items)):
-            for j in range(i + 1, len(items)):
-                if self._find(str(i)) == self._find(str(j)):
-                    continue
-                sim = self._cosine(self._tf(self._bigrams(texts[i])),
-                                   self._tf(self._bigrams(texts[j])))
+        # 3. 计算每对的相似度，存储到字典
+        # 只存储 j > i 且 sim >= threshold 的对
+        sim_pairs: dict = {}  # {i: [(j, sim), ...]}
+        for i in range(n):
+            for j in range(i + 1, n):
+                sim = self._cosine(items[i]['_bf'], items[j]['_bf'])
                 if sim >= self.threshold:
-                    self._union(str(i), str(j))
+                    sim_pairs.setdefault(i, []).append((j, sim))
+                    sim_pairs.setdefault(j, []).append((i, sim))
 
-        # 3. 收集簇
-        from collections import defaultdict
-        groups: dict = defaultdict(list)
-        for i in range(len(items)):
-            groups[self._find(str(i))].append(i)
+        # 4. 星型分组：从未分配的项目开始，找出其最相似邻居组成簇
+        assigned = set()
+        groups = []
 
-        # 4. 编号（大簇优先）
-        sorted_groups = sorted(groups.values(), key=lambda g: -len(g))
+        for i in range(n):
+            if i in assigned:
+                continue
+            neighbors = sim_pairs.get(i, [])
+            if not neighbors:
+                groups.append([i])
+                assigned.add(i)
+                continue
+            # 取前 max_items-1 个最相似邻居
+            neighbors.sort(key=lambda x: -x[1])
+            cluster = [i] + [j for j, _ in neighbors[:4]]
+            groups.append(cluster)
+            assigned.update(cluster)
+
+        # 5. 编号（大簇优先）
+        sorted_groups = sorted(groups, key=lambda g: -len(g))
         result = {}
         for idx, group in enumerate(sorted_groups):
             evt_id = f"evt_{idx:04d}"
