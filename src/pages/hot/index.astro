@@ -30,10 +30,10 @@ const highScoreCount = hotItems.filter((i: any) => (i.score?.total || i.score ||
 const recentDates = allDates.slice(0, 10);
 
 const date = v2Data?.date || today;
-const y = date.slice(0, 4);
-const m = parseInt(date.slice(5, 7)).toString();
-const d = parseInt(date.slice(8, 10)).toString();
-const displayDate = `${y}年${m}月${d}日`;
+const year = date.slice(0, 4);
+const month = parseInt(date.slice(5, 7)).toString();
+const day = parseInt(date.slice(8, 10)).toString();
+const displayDate = `${year}年${month}月${day}日`;
 
 function changeClass(change: number | null | undefined): string {
   if (change === null || change === undefined) return 'stable';
