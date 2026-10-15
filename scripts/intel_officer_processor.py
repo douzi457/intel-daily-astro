@@ -364,6 +364,17 @@ class IntelligenceProcessor:
         # 构建分类精选
         categories = self._build_categories(core_signals, watchlist)
 
+        # 构建热历史
+        v2_dir = Path('public/data/v2')
+        heat_history = self._compute_heat_history(core_signals, date, v2_dir)
+        # 将热历史挂到 core_signals 上
+        for evt in core_signals:
+            eid = evt['event_id']
+            if eid in heat_history:
+                evt['heat_history'] = heat_history[eid]['heat_history']
+                evt['heat_change_6h'] = heat_history[eid]['heat_change_6h']
+                evt['heat_similar'] = heat_history[eid]['similarity']
+
         # 添加LLM用量信息
         if llm_usage:
             quality['llm_usage'] = llm_usage
@@ -1078,6 +1089,149 @@ class IntelligenceProcessor:
             result[cat] = [e['event_id'] for e in sorted_events[:3]]
 
         return result
+
+    def _compute_heat_history(self, core_signals: List[Dict], date: str, v2_dir: Path) -> Dict:
+        """跨班次事件匹配 + 热度历史计算。
+
+        逻辑：
+        - 从 v2_dir 加载近 8 个班次的 V2 数据（按 generated_at 排序）
+        - 对当前每条核心信号，在历史数据中找最相似事件（bigram TF-IDF 余弦 ≥ 0.4）
+        - 记录每条事件的历史 source_count 序列（heat_history）
+        - heat_change_6h = (当前 - 上一班) / max(上一班,1) * 100
+        """
+        from collections import Counter
+
+        # 1. 加载历史 V2 文件（最多 7 个旧班次）
+        v2_files = sorted(v2_dir.glob('daily-*-v2.json'), key=lambda f: f.name, reverse=True)
+        # 排除当天文件，取前 7 个
+        prev_runs = [f for f in v2_files if f.name != f'daily-{date}-v2.json'][:7]
+
+        if not prev_runs:
+            return {}
+
+        # 2. 构建文本哈希函数（复用 EventCluster 的 bigram 逻辑）
+        def text_hash(text: str) -> list:
+            t = re.sub(r'\s+', '', text.lower())
+            return [t[i:i+2] for i in range(len(t) - 1)]
+
+        def tf(bigrams: list) -> dict:
+            c = Counter(bigrams)
+            total = len(bigrams) or 1
+            return {b: v / total for b, v in c.items()}
+
+        def cosine(v1: dict, v2: dict) -> float:
+            common = set(v1) & set(v2)
+            if not common:
+                return 0.0
+            dot = sum(v1[b] * v2[b] for b in common)
+            n1 = (sum(v * v for v in v1.values())) ** 0.5
+            n2 = (sum(v * v for v in v2.values())) ** 0.5
+            return dot / (n1 * n2 + 1e-9)
+
+        # 3. 计算当前核心信号文本特征
+        current_features = []
+        for evt in core_signals:
+            text = ' '.join([
+                evt.get('headline', ''),
+                evt.get('clean_summary', ''),
+            ])
+            bf = tf(text_hash(text))
+            current_features.append({'evt': evt, 'bf': bf})
+
+        # 4. 对每个历史班次，构建 event_id→source_count 映射
+        #    同时构建文本特征，用于匹配
+        history_records = []  # [{date, events: [{event_id, source_count, bf, text}]}]
+        for vf in prev_runs:
+            with open(vf, encoding='utf-8') as f:
+                hd = json.load(f)
+            rec = {
+                'date': hd.get('date', vf.stem.replace('daily-', '').replace('-v2', '')),
+                'generated_at': hd.get('generated_at', ''),
+                'events': [],
+            }
+            for evt in hd.get('core_signals', []):
+                text = ' '.join([
+                    evt.get('headline', ''),
+                    evt.get('clean_summary', ''),
+                ])
+                bf = tf(text_hash(text))
+                rec['events'].append({
+                    'event_id': evt['event_id'],
+                    'source_count': evt.get('source_count', 1),
+                    'headline': evt.get('headline', ''),
+                    'bf': bf,
+                })
+            history_records.append(rec)
+
+        # 5. 匹配：对每个当前事件，找最相似的历史事件
+        HEAT_WINDOW = 8  # 保留近 8 班
+        heat_map = {}  # {event_id: {'headline', 'source_count', 'heat_history': [...], 'heat_change_6h'}}
+
+        for cur in current_features:
+            cur_evt = cur['evt']
+            cur_bf = cur['bf']
+            cur_headline = cur_evt.get('headline', '')
+            cur_src = cur_evt.get('source_count', 1)
+
+            # 找最相似的历史事件
+            best_match = None
+            best_sim = 0.0
+            best_rec = None
+
+            for rec in history_records:
+                for hevt in rec['events']:
+                    sim = cosine(cur_bf, hevt['bf'])
+                    if sim >= 0.4 and sim > best_sim:
+                        best_sim = sim
+                        best_match = hevt
+                        best_rec = rec
+
+            # 构建热历史序列（最近 8 班）
+            heat_history = []
+            prev_src = None
+            if best_match and best_rec:
+                # 找到匹配的班次
+                for rec in history_records:
+                    for hevt in rec['events']:
+                        if hevt['event_id'] == best_match['event_id']:
+                            heat_history.append({
+                                'date': rec['date'],
+                                'source_count': hevt['source_count'],
+                            })
+                            prev_src = hevt['source_count']
+                            break
+                # 补充未匹配班次为 0
+                if len(heat_history) < len(history_records):
+                    all_dates = [r['date'] for r in history_records]
+                    hist_dates = {h['date'] for h in heat_history}
+                    for d in all_dates:
+                        if d not in hist_dates:
+                            heat_history.append({'date': d, 'source_count': 0})
+                    heat_history.sort(key=lambda x: x['date'])
+            else:
+                # 全新事件，历史全 0
+                heat_history = [{'date': r['date'], 'source_count': 0} for r in history_records]
+
+            # 确保 heat_history 长度 ≤ 8
+            heat_history = heat_history[-HEAT_WINDOW:]
+
+            # heat_change_6h: 当前 vs 上一班（最近的历史记录）
+            last_hist = heat_history[-1] if heat_history else {'source_count': 0}
+            last_src = last_hist.get('source_count', 0)
+            if last_src > 0:
+                heat_change_6h = round((cur_src - last_src) / last_src * 100, 1)
+            else:
+                heat_change_6h = 100.0 if cur_src > 0 else 0.0
+
+            heat_map[cur_evt['event_id']] = {
+                'headline': cur_headline,
+                'source_count': cur_src,
+                'heat_history': heat_history,
+                'heat_change_6h': heat_change_6h,
+                'similarity': round(best_sim, 3) if best_match else None,
+            }
+
+        return heat_map
 
     def _generate_summary(self, core_signals: List[Dict], actions: List[Dict]) -> List[str]:
         """生成今日结论 - 必须是完整判断句，不许截断标题"""
