@@ -19,11 +19,14 @@ const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice
 
 const v2Items = v2Data?.items || [];
 const v2CoreSignals = v2Data?.core_signals || [];
-const hotItems = v2CoreSignals.length > 0 ? v2CoreSignals : v2Items;
+const v2Watchlist = v2Data?.watchlist || [];
+// 热点榜用 core_signals + watchlist（最多10条），不用 raw items
+const hotItems = [...v2CoreSignals, ...v2Watchlist].slice(0, 10);
 const sortedItems = [...hotItems].sort((a: any, b: any) => (b.source_count || 0) - (a.source_count || 0));
 
 const totalItems = v2Items.length || hotItems.length;
-const highScoreCount = hotItems.filter((i: any) => (i.score?.total || i.score || 0) >= 7).length;
+// highScoreCount: V2 百分制 >= 80
+const highScoreCount = hotItems.filter((i: any) => (i.score?.total || i.score || 0) >= 80).length;
 const recentDates = allDates.slice(0, 10);
 
 const date = v2Data?.date || today;

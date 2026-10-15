@@ -1094,30 +1094,14 @@ class IntelligenceProcessor:
 
     def _compute_heat_history(self, core_signals: List[Dict], date: str, heat_file: Path) -> Dict:
         """从 heat-history.json 读取跨班次热度历史。
-
-        heat-history.json 格式：
-        {
-          "event_key": {
-            "records": [
-              {"date": "2026-10-14", "source_count": 5, "timestamp": "..."},
-              ...
-            ]
-          }
-        }
-        """
+        用标题 md5 前 16 位做 key 匹配事件。"""
         from collections import Counter
+        import hashlib
 
-        # 1. 加载历史热数据
-        if not heat_file.exists():
-            return {}
+        def event_key(headline: str) -> str:
+            normalized = re.sub(r'\s+', '', headline.lower()).strip()
+            return hashlib.md5(normalized.encode('utf-8')).hexdigest()[:16]
 
-        try:
-            with open(heat_file, encoding='utf-8') as f:
-                heat_db = json.load(f)
-        except:
-            return {}
-
-        # 2. 构建文本特征函数
         def text_hash(text: str) -> list:
             t = re.sub(r'\s+', '', text.lower())
             return [t[i:i+2] for i in range(len(t) - 1)]
@@ -1131,73 +1115,75 @@ class IntelligenceProcessor:
             common = set(v1) & set(v2)
             if not common:
                 return 0.0
-            dot = sum(v1[b] * tf2[b] for b in common)
+            dot = sum(v1[b] * v2[b] for b in common)
             n1 = (sum(v * v for v in v1.values())) ** 0.5
-            n2 = (sum(v * v for v in tf2.values())) ** 0.5
+            n2 = (sum(v * v for v in v2.values())) ** 0.5
             return dot / (n1 * n2 + 1e-9)
 
-        # 3. 计算当前事件文本特征
-        current_features = []
-        for evt in core_signals:
-            text = ' '.join([
-                evt.get('headline', ''),
-                evt.get('clean_summary', ''),
-            ])
-            bf = tf(text_hash(text))
-            current_features.append({'evt': evt, 'bf': bf})
+        # 加载热历史数据库
+        if not heat_file.exists():
+            return {}
+        try:
+            with open(heat_file, encoding='utf-8') as f:
+                heat_db = json.load(f)
+        except:
+            return {}
 
-        # 4. 对每个当前事件，在历史数据库中找最相似事件
+        # 计算当前事件特征，用标题哈希匹配历史
         HEAT_WINDOW = 8
         heat_map = {}
 
-        for cur in current_features:
-            cur_evt = cur['evt']
-            cur_bf = cur['bf']
-            cur_headline = cur_evt.get('headline', '')
-            cur_src = cur_evt.get('source_count', 1)
+        for evt in core_signals:
+            cur_headline = evt.get('headline', '')
+            cur_src = evt.get('source_count', 1)
+            cur_bf = tf(text_hash(cur_headline))
+            cur_key = event_key(cur_headline)
 
             # 找最相似的历史事件
-            best_match = None
+            best_match_key = None
             best_sim = 0.0
-
-            for event_key, hist_data in heat_db.items():
-                # 计算与历史事件的相似度（使用headline）
+            for hist_key, hist_data in heat_db.items():
                 hist_headline = hist_data.get('headline', '')
                 hist_bf = tf(text_hash(hist_headline))
                 sim = cosine(cur_bf, hist_bf)
                 if sim >= 0.4 and sim > best_sim:
                     best_sim = sim
-                    best_match = event_key
+                    best_match_key = hist_key
 
-            # 构建热历史序列
-            if best_match and best_match in heat_db:
-                records = heat_db[best_match].get('records', [])
+            # 构建热历史
+            if best_match_key and best_match_key in heat_db:
+                records = heat_db[best_match_key].get('records', [])
                 heat_history = [{'date': r['date'], 'source_count': r['source_count']} for r in records[-HEAT_WINDOW:]]
                 last_src = heat_history[-1]['source_count'] if heat_history else 0
             else:
-                # 全新事件
                 heat_history = []
                 last_src = 0
 
-            # heat_change_6h
             if last_src > 0:
                 heat_change_6h = round((cur_src - last_src) / last_src * 100, 1)
             else:
                 heat_change_6h = 100.0 if cur_src > 0 else 0.0
 
-            heat_map[cur_evt['event_id']] = {
+            heat_map[evt['event_id']] = {
                 'headline': cur_headline,
                 'source_count': cur_src,
                 'heat_history': heat_history,
                 'heat_change_6h': heat_change_6h,
-                'similarity': round(best_sim, 3) if best_match else None,
+                'similarity': round(best_sim, 3) if best_match_key else None,
             }
 
         return heat_map
 
     def save_heat_snapshot(self, core_signals: List[Dict], date: str, heat_file: Path):
-        """保存当前班次热点快照到 heat-history.json"""
+        """保存当前班次热点快照到 heat-history.json。
+        用标题的 md5 前 16 位做 key，跨班次稳定追踪同一事件。"""
         from datetime import datetime
+        import hashlib
+
+        def event_key(headline: str) -> str:
+            """从标题生成稳定的 key"""
+            normalized = re.sub(r'\s+', '', headline.lower()).strip()
+            return hashlib.md5(normalized.encode('utf-8')).hexdigest()[:16]
 
         if not heat_file.exists():
             heat_db = {}
@@ -1211,25 +1197,21 @@ class IntelligenceProcessor:
         HEAT_WINDOW = 8
 
         for evt in core_signals:
-            event_key = evt.get('event_id', '')
             headline = evt.get('headline', '')
             src_count = evt.get('source_count', 1)
+            key = event_key(headline)
 
-            if event_key not in heat_db:
-                heat_db[event_key] = {'headline': headline, 'records': []}
+            if key not in heat_db:
+                heat_db[key] = {'headline': headline, 'records': []}
 
-            # 添加当前记录
             record = {
                 'date': date,
                 'source_count': src_count,
                 'timestamp': datetime.now(CST).isoformat(),
             }
-            heat_db[event_key]['records'].append(record)
+            heat_db[key]['records'].append(record)
+            heat_db[key]['records'] = heat_db[key]['records'][-HEAT_WINDOW:]
 
-            # 只保留近 8 班
-            heat_db[event_key]['records'] = heat_db[event_key]['records'][-HEAT_WINDOW:]
-
-        # 写入文件
         with open(heat_file, 'w', encoding='utf-8') as f:
             json.dump(heat_db, f, ensure_ascii=False, indent=2)
 
