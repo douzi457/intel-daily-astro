@@ -1,48 +1,35 @@
 ---
 // 热点榜页面 — AIHOT 暖纸风深度复刻，读取 V2 数据（含热历史）
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
 import { getAllDates } from '../../utils/data.ts';
-import type { V4DailyData } from '../../lib/types';
 
-let v4Data: V4DailyData | null = null;
+let v2Data: any = null;
 try {
-  const v4Index = await import('../../data/v4/index.json');
-  const latestDate = v4Index.default.latest_date;
-  if (latestDate) {
-    const mod = await import(`../../data/v4/daily-${latestDate}.json`);
-    v4Data = mod.default as V4DailyData;
+  const v2Index = await import('../../../public/data/v2/index.json').catch(() => null);
+  if (v2Index?.default?.latest_date) {
+    const mod = await import(`../../../public/data/v2/daily-${v2Index.default.latest_date}-v2.json`).catch(() => null);
+    v2Data = mod?.default;
   }
 } catch {}
 
 const allDates = getAllDates('zh');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 
-// 读取 V2 数据（含热历史）
-let v2Data: any = null;
-try {
-  const v2Mod = await import(`../../data/v2/daily-${today}-v2.json`);
-  v2Data = v2Mod.default;
-} catch {}
-
 const v2Items = v2Data?.items || [];
 const v2CoreSignals = v2Data?.core_signals || [];
-// 合并：优先使用 core_signals（已聚类的高价值事件），回退到 items
 const hotItems = v2CoreSignals.length > 0 ? v2CoreSignals : v2Items;
-
-// 按 source_count 降序排序
 const sortedItems = [...hotItems].sort((a: any, b: any) => (b.source_count || 0) - (a.source_count || 0));
 
 const totalItems = v2Items.length || hotItems.length;
 const highScoreCount = hotItems.filter((i: any) => (i.score?.total || i.score || 0) >= 7).length;
 const recentDates = allDates.slice(0, 10);
 
-const v4Date = v4Data?.date || today;
-const y = v4Date.slice(0, 4);
-const m = parseInt(v4Date.slice(5, 7)).toString();
-const d = parseInt(v4Date.slice(8, 10)).toString();
+const date = v2Data?.date || today;
+const y = date.slice(0, 4);
+const m = parseInt(date.slice(5, 7)).toString();
+const d = parseInt(date.slice(8, 10)).toString();
 const displayDate = `${y}年${m}月${d}日`;
 
 function changeClass(change: number | null | undefined): string {
@@ -191,7 +178,6 @@ function getSummary(item: any): string {
 </style>
 
 <div class="page-wrap">
-  <Header mode="home" date={v4Date} totalItems={totalItems} today={today} />
   <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
   <div class="stats-bar">
     <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
