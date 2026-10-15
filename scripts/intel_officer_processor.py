@@ -1162,7 +1162,7 @@ class IntelligenceProcessor:
             if last_src > 0:
                 heat_change_6h = round((cur_src - last_src) / last_src * 100, 1)
             else:
-                heat_change_6h = 100.0 if cur_src > 0 else 0.0
+                heat_change_6h = None  # 无历史数据，不填 100%
 
             heat_map[evt['event_id']] = {
                 'headline': cur_headline,
