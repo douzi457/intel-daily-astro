@@ -1,11 +1,11 @@
 ---
-// 热点榜页面 — AIHOT 暖纸风深度复刻
+// 热点榜页面 — AIHOT 暖纸风深度复刻，读取 V2 数据（含热历史）
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
-import { getDayData, getAllDates } from '../../utils/data.ts';
-import type { IntelItem, V4DailyData } from '../../lib/types';
+import { getAllDates } from '../../utils/data.ts';
+import type { V4DailyData } from '../../lib/types';
 
 let v4Data: V4DailyData | null = null;
 try {
@@ -19,34 +19,47 @@ try {
 
 const allDates = getAllDates('zh');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
-const dayData = getDayData(today, 'zh');
-const items: IntelItem[] = dayData.items;
-const totalItems = items.length;
+
+// 读取 V2 数据（含热历史）
+let v2Data: any = null;
+try {
+  const v2Mod = await import(`../../data/v2/daily-${today}-v2.json`);
+  v2Data = v2Mod.default;
+} catch {}
+
+const v2Items = v2Data?.items || [];
+const v2CoreSignals = v2Data?.core_signals || [];
+// 合并：优先使用 core_signals（已聚类的高价值事件），回退到 items
+const hotItems = v2CoreSignals.length > 0 ? v2CoreSignals : v2Items;
+
+// 按 source_count 降序排序
+const sortedItems = [...hotItems].sort((a: any, b: any) => (b.source_count || 0) - (a.source_count || 0));
+
+const totalItems = v2Items.length || hotItems.length;
+const highScoreCount = hotItems.filter((i: any) => (i.score?.total || i.score || 0) >= 7).length;
 const recentDates = allDates.slice(0, 10);
 
-// 排序：source_count 高的在前
-const sortedItems = [...items].sort((a, b) => (b.source_count || 0) - (a.source_count || 0));
-
-const highScoreCount = items.filter(i => i.score >= 7).length;
 const v4Date = v4Data?.date || today;
-const y = v4Date.slice(0,4);
-const m = parseInt(v4Date.slice(5,7)).toString();
-const d = parseInt(v4Date.slice(8,10)).toString();
+const y = v4Date.slice(0, 4);
+const m = parseInt(v4Date.slice(5, 7)).toString();
+const d = parseInt(v4Date.slice(8, 10)).toString();
 const displayDate = `${y}年${m}月${d}日`;
 
-function changeClass(change: number): string {
+function changeClass(change: number | null | undefined): string {
+  if (change === null || change === undefined) return 'stable';
   if (change > 50) return 'explosive';
   if (change > 0) return 'rising';
   if (change < -20) return 'falling';
   return 'stable';
 }
-function changeLabel(change: number): string {
+function changeLabel(change: number | null | undefined): string {
+  if (change === null || change === undefined) return '—';
   if (change > 50) return '爆';
-  if (change > 0) return '↑';
-  if (change < -20) return '↓';
+  if (change > 0) return `↑${change.toFixed(0)}%`;
+  if (change < -20) return `↓${Math.abs(change).toFixed(0)}%`;
   return '—';
 }
-function sparklinePath(history: Array<{source_count: number}>) {
+function sparklinePath(history: Array<{ source_count: number }>): string {
   if (!history || history.length === 0) return '';
   const max = Math.max(...history.map(h => h.source_count), 1);
   const w = 60, h = 24, pad = 2;
@@ -54,9 +67,22 @@ function sparklinePath(history: Array<{source_count: number}>) {
   const points = history.map((h, i) => {
     const x = pad + i * step;
     const y = h - pad - (h.source_count / max) * (h - pad * 2);
-    return `${x},${y}`;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
   });
   return `M${points.join(' L')}`;
+}
+
+// 获取平台标签
+function getPlatform(item: any): string {
+  if (item.platform_label) return item.platform_label;
+  if (item.source && typeof item.source === 'object') return item.source.name || item.source.id;
+  if (typeof item.source === 'string') return item.source;
+  return '';
+}
+
+// 获取摘要
+function getSummary(item: any): string {
+  return item.desc || item.clean_summary || item.title || '';
 }
 ---
 
@@ -92,7 +118,7 @@ function sparklinePath(history: Array<{source_count: number}>) {
     transition: box-shadow 0.15s;
   }
   .hot-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-  .hot-card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .hot-card-top { display: flex; align-items: flex-start; gap: 12px; }
   .hot-rank {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 24px; font-weight: 800; color: var(--ink-4);
@@ -142,9 +168,16 @@ function sparklinePath(history: Array<{source_count: number}>) {
     fill: none; stroke: var(--accent); stroke-width: 1.5;
     stroke-linecap: round; stroke-linejoin: round;
   }
-  .hot-sparkline circle {
-    fill: var(--accent); stroke: none;
+
+  /* 状态标签 */
+  .hot-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; padding: 1px 5px;
+    border-radius: 3px; margin-left: 4px;
   }
+  .hot-badge.explosive { background: rgba(239,68,68,.15); color: #dc2626; }
+  .hot-badge.rising   { background: rgba(245,158,11,.15); color: #d97706; }
+  .hot-badge.new      { background: rgba(23,107,117,.15); color: var(--accent); }
 
   /* 移动端 */
   @media (max-width: 640px) {
@@ -163,28 +196,38 @@ function sparklinePath(history: Array<{source_count: number}>) {
   <div class="stats-bar">
     <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
     <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item"><span class="stats-bar-value">{v4Data?.total_sources || recentDates.length}</span><span class="stats-bar-label">采集源</span></div>
+    <div class="stats-bar-item"><span class="stats-bar-value">{v2Data?.stats?.unique_events || recentDates.length}</span><span class="stats-bar-label">采集源</span></div>
     <div class="stats-bar-divider"></div>
     <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
   </div>
 
   <div class="hot-list">
-    {sortedItems.slice(0, 10).map((item, idx) => {
+    {sortedItems.slice(0, 10).map((item: any, idx: number) => {
       const rank = idx + 1;
       const src = item.source_count || 1;
-      const change = item.heat_change_6h || 0;
+      const change = item.heat_change_6h || null;
       const history = item.heat_history || [];
       const path = sparklinePath(history);
+      const platform = getPlatform(item);
+      const summary = getSummary(item);
+      const cat = item.category || '';
+      // 状态标签
+      const badges = [];
+      if (change !== null && change > 50) badges.push('<span class="hot-badge explosive">爆</span>');
+      else if (change !== null && change > 0) badges.push('<span class="hot-badge rising">↑</span>');
+      if (change === null || change === 100) badges.push('<span class="hot-badge new">新</span>');
+      const badgeHtml = badges.join('');
       return (
         <div class="hot-card">
           <div class="hot-card-top">
             <div class={`hot-rank ${rank <= 3 ? 'top3' : ''}`}>{rank}</div>
             <div class="hot-content">
-              <a href={item.url || '#'} target="_blank" rel="noopener" class="hot-title">{item.title}</a>
-              {item.desc && <p class="hot-summary">{item.desc.slice(0, 120)}{item.desc.length > 120 ? '…' : ''}</p>}
+              <a href={item.url || '#'} target="_blank" rel="noopener" class="hot-title">{item.title || item.headline || ''}</a>
+              {summary && summary.length > 10 && <p class="hot-summary">{summary.slice(0, 120)}{summary.length > 120 ? '…' : ''}</p>}
               <div class="hot-meta">
-                <span class="hot-source">{item.platform_label || item.source || ''}</span>
-                {item.category && <span class="hot-cat">{item.category}</span>}
+                <span class="hot-source">{platform}</span>
+                {cat && <span class="hot-cat">{cat}</span>}
+                {badgeHtml && <span dangerouslySetInnerHTML={{__html: badgeHtml}} />}
                 <div class="hot-stats">
                   <div>
                     <span class="hot-heat">{src}</span>

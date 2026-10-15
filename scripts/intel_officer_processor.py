@@ -365,7 +365,7 @@ class IntelligenceProcessor:
         categories = self._build_categories(core_signals, watchlist)
 
         # 构建热历史
-        v2_dir = Path('public/data/v2')
+        v2_dir = Path(__file__).resolve().parents[1] / 'public' / 'data' / 'v2'
         heat_history = self._compute_heat_history(core_signals, date, v2_dir)
         # 将热历史挂到 core_signals 上
         for evt in core_signals:
