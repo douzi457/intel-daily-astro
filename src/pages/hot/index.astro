@@ -185,7 +185,7 @@ function getSummary(item: any): string {
   <div class="stats-bar">
     <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
     <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item"><span class="stats-bar-value">{new Set(v2Items.map((i: any) => i.source?.name || i.source?.id || '').filter(Boolean)).size || 41}</span><span class="stats-bar-label">采集源</span></div>
+    <div class="stats-bar-item"><span class="stats-bar-value">{[...new Set(v2Items.map((i: any) => { const s = i.source; return (typeof s === 'object' && s) ? (s.name || s.id || '') : (s || '') }).filter(Boolean))].length}</span><span class="stats-bar-label">采集源</span></div>
     <div class="stats-bar-divider"></div>
     <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
   </div>
