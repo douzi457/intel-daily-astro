@@ -25,8 +25,8 @@ const hotItems = [...v2CoreSignals, ...v2Watchlist].slice(0, 10);
 const sortedItems = [...hotItems].sort((a: any, b: any) => (b.source_count || 0) - (a.source_count || 0));
 
 const totalItems = v2Items.length || hotItems.length;
-// highScoreCount: V2 百分制 >= 80
-const highScoreCount = hotItems.filter((i: any) => (i.score?.total || i.score || 0) >= 80).length;
+// highScoreCount: V2 百分制 >= 80，按全部信号统计（不只展示的10条）
+const highScoreCount = [...v2CoreSignals, ...v2Watchlist].filter((i: any) => (i.score?.total || i.score || 0) >= 80).length;
 const recentDates = allDates.slice(0, 10);
 
 const date = v2Data?.date || today;
@@ -51,12 +51,12 @@ function changeLabel(change: number | null | undefined): string {
 }
 function sparklinePath(history: Array<{ source_count: number }>): string {
   if (!history || history.length === 0) return '';
-  const max = Math.max(...history.map(h => h.source_count), 1);
-  const w = 60, h = 24, pad = 2;
+  const max = Math.max(...history.map(p => p.source_count), 1);
+  const w = 60, hh = 24, pad = 2;
   const step = (w - pad * 2) / Math.max(history.length - 1, 1);
-  const points = history.map((h, i) => {
+  const points = history.map((p, i) => {
     const x = pad + i * step;
-    const y = h - pad - (h.source_count / max) * (h - pad * 2);
+    const y = hh - pad - (p.source_count / max) * (hh - pad * 2);
     return `${x.toFixed(1)},${y.toFixed(1)}`;
   });
   return `M${points.join(' L')}`;
@@ -219,7 +219,7 @@ function getSummary(item: any): string {
               <div class="hot-meta">
                 <span class="hot-source">{platform}</span>
                 {cat && <span class="hot-cat">{cat}</span>}
-                {badgeHtml && <span dangerouslySetInnerHTML={{__html: badgeHtml}} />}
+                {badgeHtml && <span set:html={badgeHtml} />}
                 <div class="hot-stats">
                   <div>
                     <span class="hot-heat">{src}</span>
