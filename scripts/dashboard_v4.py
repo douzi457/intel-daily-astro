@@ -48,7 +48,7 @@ class NewsItem:
 
 
 # ====================================================================
-# CONFIG — 38 数据源 (from dashboard_v3)
+# CONFIG — 58 数据源 (trigger rebuild 2026-10-15) (38 from dashboard_v3 + 15 S-1 RSS 2026-10-15 + 5 S-2 weblist 2026-10-15)
 # ====================================================================
 # 每项：(category, name, type, url, extract_fn_or_None)
 # type: 'rss' | 'json' | 'raw_json' | 'html' | 'special'
@@ -129,6 +129,31 @@ SOURCES = [
      "https://aihot.virxact.com/api/public/items?limit=30",
      lambda d: [{'title': i.get("title",""), 'url': i.get("url","")}
                 for i in (d.get("data") or d.get("items") or [])[:30]]),
+
+    # ── AI Official T1 (10, S-1 2026-10-15) ──
+    ("AI/Frontier", "OpenAI News",         "rss", "https://openai.com/news/rss.xml"),
+    ("AI/Frontier", "DeepMind Blog",       "rss", "https://deepmind.google/blog/rss.xml"),
+    ("AI/Frontier", "Google Research Blog","rss", "https://research.google/blog/rss/"),
+    ("AI/Frontier", "Hugging Face Blog",   "rss", "https://huggingface.co/blog/feed.xml"),
+    ("AI/Frontier", "Microsoft Research",  "rss", "https://www.microsoft.com/en-us/research/feed/"),
+    ("AI/Frontier", "NVIDIA Blog",         "rss", "https://blogs.nvidia.com/feed/"),
+    ("AI/Frontier", "AWS ML Blog",         "rss", "https://aws.amazon.com/blogs/machine-learning/feed/"),
+    ("AI/Frontier", "GitHub Blog",         "rss", "https://github.blog/ai-and-ml/feed/"),
+    ("AI/Frontier", "Mistral AI",          "rss", "https://mistral.ai/news/rss"),
+    ("AI/Frontier", "BAIR Blog",           "rss", "https://bair.berkeley.edu/blog/feed.xml"),
+
+    # ── AI Papers (arXiv, 2026-10-15) ──
+    ("AI/Frontier", "arXiv cs.AI",        "rss", "http://export.arxiv.org/rss/cs.AI"),
+    ("AI/Frontier", "arXiv cs.LG",        "rss", "http://export.arxiv.org/rss/cs.LG"),
+    ("AI/Frontier", "arXiv cs.CL",        "rss", "http://export.arxiv.org/rss/cs.CL"),
+    ("AI/Frontier", "vLLM Blog",           "rss", "https://vllm.ai/blog/rss.xml"),
+
+    # ── AI Media/Personal T2 (5, S-1 2026-10-15) ──
+    ("AI/Frontier", "Ars Technica AI",     "rss", "https://arstechnica.com/ai/feed/"),
+    ("AI/Frontier", "The Decoder",         "rss", "https://the-decoder.com/feed/"),
+    ("AI/Frontier", "Simon Willison",      "rss", "https://simonwillison.net/atom/everything/"),
+    ("AI/Frontier", "Import AI",           "rss", "https://importai.substack.com/feed"),
+    ("AI/Frontier", "Latent Space",        "rss", "https://www.latent.space/feed"),
 
     # ── Finance (2) ──
     ("Finance", "WallstreetCN Hot", "json",
@@ -234,7 +259,22 @@ def parse_rss(body: str) -> list:
         if not title:
             continue
         link = entry.get("link", "")
-        items.append({"title": html_mod.unescape(title), "url": link})
+        # P0-2: 提取发布时间
+        published_at = ""
+        for key in ("published", "updated"):
+            if entry.get(key):
+                published_at = entry.get(key)
+                break
+        # 尝试解析为 ISO
+        if not published_at:
+            pt = entry.get("published_parsed") or entry.get("updated_parsed")
+            if pt:
+                try:
+                    from datetime import datetime
+                    published_at = datetime(*pt[:6]).isoformat()
+                except:
+                    pass
+        items.append({"title": html_mod.unescape(title), "url": link, "published_at": published_at})
     if items:
         return items
     # Fallback: regex
@@ -283,6 +323,55 @@ def parse_rss_regex(body: str) -> list:
 # ====================================================================
 # PHASE 1: CONCURRENT COLLECTION (async)
 # ====================================================================
+
+# ── S-2 网页列表源（2026-10-15）：无 RSS 的官方博客，从列表页正则提取 ──
+# 每项：(name, list_url, link_pattern, exclude_pattern_or_None)
+WEBPAGE_SOURCES = [
+    ("Anthropic News", "https://www.anthropic.com/news",
+     r'/news/[^"]+', None),
+    ("xAI News", "https://x.ai/news",
+     r'/news/[^"]+', None),
+    ("Meta AI Blog", "https://ai.meta.com/blog/",
+     r'https://ai\.meta\.com/blog/[^"]+', None),
+    ("Cohere Blog", "https://cohere.com/blog",
+     r'/blog/[^"]+', r'/tag/'),
+    ("Perplexity Blog", "https://www.perplexity.ai/hub/blog",
+     r'/hub/blog/[^"]+', r'/category/'),
+]
+
+async def fetch_weblist_source(client: httpx.AsyncClient, cat: str, name: str,
+                               list_url: str, link_pattern: str,
+                               exclude_pattern: str = None, limit: int = 15):
+    """S-2：从无 RSS 的官方博客列表页提取文章（标题+链接）"""
+    from urllib.parse import urljoin
+    body = await fetch_async(client, list_url)
+    if not body:
+        return 0
+    try:
+        pairs = re.findall(
+            r'<a[^>]+href="(' + link_pattern + r')"[^>]*>(.*?)</a>', body, re.S)
+        seen, items = set(), []
+        for href, inner in pairs:
+            if exclude_pattern and re.search(exclude_pattern, href):
+                continue
+            url = urljoin(list_url, href)
+            if url in seen:
+                continue
+            seen.add(url)
+            title = re.sub(r'<[^>]+>', '', inner)
+            title = re.sub(r'\s+', ' ', title).strip()
+            if len(title) < 5:  # 无标题则从 slug 推断
+                slug = href.rstrip('/').split('/')[-1]
+                title = slug.replace('-', ' ').title()
+            if title:
+                items.append({"title": html_mod.unescape(title[:150]), "url": url})
+            if len(items) >= limit:
+                break
+        add(cat, name, "WEBPAGE", items)
+        return len(items)
+    except Exception:
+        return 0
+
 
 async def fetch_rss_source(client: httpx.AsyncClient, cat: str, name: str, url: str, limit: int = 15):
     body = await fetch_async(client, url)
@@ -441,6 +530,13 @@ async def collect_all():
             print(f"  Queued: [{cat}] {name}", flush=True)
 
         print(f"  Executing {len(tasks)} concurrent fetches...", flush=True)
+
+        # S-2 网页列表源（无 RSS 的官方博客）
+        for wname, wurl, wpat, wexc in WEBPAGE_SOURCES:
+            tasks.append(fetch_weblist_source(
+                client, "AI/Frontier", wname, wurl, wpat, wexc))
+            print(f"  Queued: [AI/Frontier] {wname} (weblist)", flush=True)
+
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
     ok_count = sum(1 for r in results if isinstance(r, int) and r > 0)
@@ -1429,6 +1525,7 @@ def generate_rewrite_json(final: list, recommendations: dict):
             "platform_icon": "\U0001f4cc",
             "hot": int(''.join(c for c in str(item.get("heat", 0)) if c.isdigit()) or 0),
             "date": date_str,
+            "published_at": item.get("published_at", ""),  # P0-2: 条目级发布时间
             "score": int(item.get("score", 0)),
             "category": item.get("category", "其他"),
             "title": title,
