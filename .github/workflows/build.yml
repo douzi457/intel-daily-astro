@@ -39,6 +39,14 @@ jobs:
           AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
         run: python scripts/dashboard_v4.py
 
+      - name: Run Top10 summarizer (AI摘要/评分/推荐理由)
+        env:
+          AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
+          AGNES_BASE_URL: ${{ secrets.AGNES_BASE_URL || 'https://api.agnes-ai.cn/v1' }}
+          AGNES_MODEL: ${{ secrets.AGNES_MODEL || 'agnes-3.0-flash' }}
+        run: |
+          python scripts/summarize_top10.py --date $(date +%Y-%m-%d) || echo "summarizer failed, continuing"
+
       - name: Run processor for V2 data
         env:
           AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
