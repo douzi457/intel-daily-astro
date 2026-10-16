@@ -63,10 +63,10 @@ def call_agnes(title, source, desc, last_call_time):
     model = "agnes-3.0-flash"  # 老大指定写死（2026-10-15）
     if not api_key:
         return None, last_call_time
-    # 严格限速：免费档 20 RPM → 每次调用至少间隔 3.2 秒
+    # 严格限速：免费档实测易 429 → 每次调用至少间隔 6 秒
     elapsed = time.time() - last_call_time
-    if elapsed < 3.2:
-        time.sleep(3.2 - elapsed)
+    if elapsed < 6.0:
+        time.sleep(6.0 - elapsed)
     prompt = SUMMARY_PROMPT.format(
         title=title[:200], source=source[:50], desc=(desc or title)[:800])
     last_call_time = time.time()
@@ -93,7 +93,7 @@ def call_agnes(title, source, desc, last_call_time):
                 return json.loads(text.strip()), last_call_time
             except urllib.error.HTTPError as e:
                 if e.code == 429:
-                    wait = (retry + 1) * 10  # 10s, 20s, 30s
+                    wait = (retry + 1) * 20  # 20s, 40s, 60s
                     print(f"  429 限流，等待 {wait}s 后重试 ({retry+1}/3)", flush=True)
                     time.sleep(wait)
                     continue
