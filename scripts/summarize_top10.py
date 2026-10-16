@@ -163,21 +163,22 @@ def main():
     json.dump(data, open(data_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print(f"完成: {ok}/{len(targets)} 成功，已写回 {data_path}")
 
-    # 同步摘要到 v4（首页数据源）
+    # 同步摘要到 v4（首页数据源，by_category 结构）
     v4_path = Path(f"src/data/v4/daily-{args.date}.json")
     if v4_path.exists():
         v4 = json.load(open(v4_path, encoding='utf-8'))
-        v4_items = v4.get('items', [])
-        # 按 url 建索引匹配
         sum_map = {it.get('url'): it for it in items if it.get('ai_summary') and it.get('url')}
         synced = 0
-        for vi in v4_items:
-            src = sum_map.get(vi.get('url'))
-            if src:
-                for k in ('ai_summary', 'ai_title', 'ai_reason', 'ai_score', 'content_type', 'content_type_label'):
-                    if src.get(k):
-                        vi[k] = src[k]
-                synced += 1
+        for cat, v4_items in (v4.get('by_category') or {}).items():
+            if not isinstance(v4_items, list):
+                continue
+            for vi in v4_items:
+                src = sum_map.get(vi.get('url'))
+                if src:
+                    for k in ('ai_summary', 'ai_title', 'ai_reason', 'ai_score', 'content_type', 'content_type_label'):
+                        if src.get(k):
+                            vi[k] = src[k]
+                    synced += 1
         json.dump(v4, open(v4_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         print(f"已同步 {synced} 条摘要到 {v4_path}")
     else:
