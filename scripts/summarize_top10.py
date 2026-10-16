@@ -47,7 +47,7 @@ SUMMARY_PROMPT = """你是中文科技资讯编辑。给下面这条资讯写中
      * 禁止把多个普通理由堆成高分；禁止四舍五入到整十
    - 盲评：只根据标题和正文内容打分，不要因来源是大厂/知名媒体而加分
 
-只输出JSON：{"title": "中文标题", "summary": "2-3句摘要", "content_type": "7选1的英文key", "reason": "推荐理由", "score": 7.5}
+只输出JSON：{{"title": "中文标题", "summary": "2-3句摘要", "content_type": "7选1的英文key", "reason": "推荐理由", "score": 7.5}}
 不要输出其他内容。
 
 标题：{title}
