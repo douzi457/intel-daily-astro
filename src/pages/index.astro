@@ -52,9 +52,7 @@ function gradeLabel(score: number): string {
   return '普通';
 }
 function reasonText(score: number): string {
-  if (score >= 8) return '多源交叉验证，事件重要性与时效性兼备';
-  if (score >= 6) return '单一信源但内容有价值，建议持续关注';
-  return '信息量有限，仅做背景参考';
+  return '';
 }
 ---
 
@@ -141,8 +139,9 @@ function reasonText(score: number): string {
             const g = gradeBadge(item.score || 0), gLabel = gradeLabel(item.score || 0);
             const timeStr = (item.date || '').slice(11, 16);
             const platform = item.platform_label || item.source || '';
-            const summary = item.desc || item.title;
-            const reason = reasonText(item.score || 0);
+            const summary = item.ai_summary || item.desc || item.title;
+            const displayTitle = item.ai_title || item.title;
+            const reason = item.ai_reason || '';
             return (
               <article class="entry" data-category={item.category || '其他'}>
                 <div class="entry-meta">
@@ -150,8 +149,9 @@ function reasonText(score: number): string {
                   {timeStr && platform && <span class="entry-sep">·</span>}
                   {platform && <span class="entry-source">{platform}</span>}
                   <span class={`grade-pill grade-${g}`}>{gLabel}</span>
+                  {item.ai_score > 0 && <span class="score-pill" title={`AI 评分 ${item.ai_score}/10`}>AI {item.ai_score.toFixed(1)}</span>}
                 </div>
-                <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{item.title}</a>
+                <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                 {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
                 <div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>
               </article>
