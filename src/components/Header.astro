@@ -5,7 +5,7 @@ import { SITE } from '../lib/constants';
 import type { IntelItem } from '../lib/types';
 
 interface Props {
-  mode?: 'home' | 'day' | 'archive' | 'stats' | 'en-home' | 'en-day';
+  mode?: 'home' | 'day' | 'archive' | 'stats' | 'en-home' | 'en-day' | 'hot' | 'officer';
   date?: string;
   totalItems?: number;
   lang?: string;
@@ -52,7 +52,7 @@ const backLabel = (() => {
   </div>
 
   <div class="header-actions">
-    {mode === 'home' && (
+    {(mode === 'home' || mode === 'hot' || mode === 'officer') && (
       <>
         <a href="/daily/{today || date || ''}" class="lang-btn">📰 {isEn ? 'Daily' : '日报'}</a>
         <a href="/officer/" class="lang-btn">🔍 {isEn ? 'Officer' : '情报官'}</a>

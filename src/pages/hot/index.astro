@@ -161,6 +161,12 @@ function getSummary(item: any): string {
   .hot-change.rising   { background: rgba(245,158,11,.1); color: #d97706; }
   .hot-change.falling  { background: rgba(107,114,128,.1); color: #6b7280; }
   .hot-change.stable   { background: var(--paper); color: var(--ink-4); }
+  /* 展开来源 */
+  .src-expand { display: inline; font-size: 11px; }
+  .src-expand summary { cursor: pointer; color: var(--accent); list-style: none; }
+  .src-expand summary::-webkit-details-marker { display: none; }
+  .src-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .src-item { padding: 2px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); font-size: 10px; }
   .hot-sparkline {
     width: 60px; height: 24px;
   }
@@ -235,8 +241,18 @@ function getSummary(item: any): string {
                 {badgeHtml && <span set:html={badgeHtml} />}
                 <div class="hot-stats">
                   <div>
-                    <span class="hot-heat">🔥 {src}</span>
-                    <span class="hot-heat-label">家报道</span>
+                    {item.sources && item.sources.length > 0 ? (
+                      <details class="src-expand">
+                        <summary>🔥 {src}家报道</summary>
+                        <div class="src-list">
+                          {item.sources.map((s: string, si: number) => (
+                            <span class="src-item" key={si}>{s}</span>
+                          ))}
+                        </div>
+                      </details>
+                    ) : (
+                      <span class="hot-heat">🔥 {src}家报道</span>
+                    )}
                   </div>
                   <span class={`hot-change ${changeClass(change)}`}>{changeLabel(change)}</span>
                   {path && (
