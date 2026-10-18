@@ -36,6 +36,16 @@ const sortedDates = [...groupedByDate.keys()].sort().reverse();
 
 const highScoreCount = items.filter(i => i.score >= 7).length;
 
+// 格式化时间（北京时间，只显示 HH:MM）
+function fmtHM(iso?: string): string {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour: '2-digit', minute: '2-digit', hour12: false });
+  } catch { return ''; }
+}
+
 const v4Date = v4Data?.date || today;
 const y = v4Date.slice(0,4);
 const m = parseInt(v4Date.slice(5,7)).toString();
@@ -99,6 +109,7 @@ function reasonText(score: number): string {
   .entry-summary { font-size: 13px; color: var(--ink-3); line-height: 1.75; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .entry-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; padding-left: 10px; border-left: 2px solid var(--border); }
   .entry-reason-label { font-weight: 700; color: var(--ink-4); margin-right: 4px; }
+  .ai-score-badge { display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; border: 1px solid var(--border); background: var(--accent-soft); color: var(--accent); margin-left: 4px; }
   .back-to-top { position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-3); font-size: 1.2em; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.2s; z-index: 200; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
   .back-to-top.visible { opacity: 1; transform: translateY(0); }
   .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
@@ -149,9 +160,11 @@ function reasonText(score: number): string {
                   {timeStr && <span class="entry-time">{timeStr}</span>}
                   {timeStr && platform && <span class="entry-sep">·</span>}
                   {platform && <span class="entry-source">{platform}</span>}
+                  {(item as any).published_at && <span class="entry-time">·{fmtHM((item as any).published_at)}</span>}
                   {(item as any).source_count > 1 && <span class="src-count">📰 {(item as any).source_count}家报道</span>}
                   <span class={`grade-pill grade-${g}`}>{gLabel}</span>
                   {item.ai_score > 0 && <span class="score-pill" title={`AI 评分 ${item.ai_score}/10`}>AI {item.ai_score.toFixed(1)}</span>}
+                  {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
                 </div>
                 <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                 {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}

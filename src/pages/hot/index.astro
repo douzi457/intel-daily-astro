@@ -105,6 +105,8 @@ function getSummary(item: any): string {
   .stats-bar-label { display: block; font-size: 0.85em; color: var(--ink-3); margin-top: 2px; }
   .stats-bar-item.highlight .stats-bar-value { color: var(--accent); }
   .stats-bar-divider { width: 1px; height: 28px; background: var(--border); }
+  /* AI 评分徽标 */
+  .ai-score-badge { display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; border: 1px solid var(--border); background: var(--accent-soft); color: var(--accent); margin-left: 4px; }
 
   /* 热点榜卡片 */
   .hot-list { display: flex; flex-direction: column; gap: 16px; }
@@ -227,11 +229,12 @@ function getSummary(item: any): string {
               <div class="hot-meta">
                 <span class="hot-source">{platform}</span>
                 {cat && <span class="hot-cat">{cat}</span>}
+                {(item.score?.total || 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score?.total || 0)}</span>}
                 {badgeHtml && <span set:html={badgeHtml} />}
                 <div class="hot-stats">
                   <div>
-                    <span class="hot-heat">{src}</span>
-                    <span class="hot-heat-label">来源</span>
+                    <span class="hot-heat">🔥 {src}</span>
+                    <span class="hot-heat-label">家报道</span>
                   </div>
                   <span class={`hot-change ${changeClass(change)}`}>{changeLabel(change)}</span>
                   {path && (

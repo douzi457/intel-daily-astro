@@ -1489,6 +1489,7 @@ def generate_v4_json(final: list, recommendations: dict, cache: dict):
             "source": item.get("source", ""),
             "score": round(item.get("score", 0), 1),
             "heat": str(item.get("heat", "")),
+            "published_at": item.get("published_at", ""),
         })
 
     data = {
