@@ -45,7 +45,7 @@ jobs:
           AGNES_BASE_URL: ${{ secrets.AGNES_BASE_URL || 'https://api.agnes-ai.cn/v1' }}
           AGNES_MODEL: ${{ secrets.AGNES_MODEL || 'agnes-3.0-flash' }}
         run: |
-          python scripts/summarize_top10.py --date $(date +%Y-%m-%d) || echo "summarizer failed, continuing"
+          python scripts/summarize_top10.py --date $(TZ='Asia/Shanghai' date +%Y-%m-%d) || echo "summarizer failed, continuing"
 
       - name: Run processor for V2 data
         env:
