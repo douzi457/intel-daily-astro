@@ -149,6 +149,7 @@ function reasonText(score: number): string {
                   {timeStr && <span class="entry-time">{timeStr}</span>}
                   {timeStr && platform && <span class="entry-sep">·</span>}
                   {platform && <span class="entry-source">{platform}</span>}
+                  {(item as any).source_count > 1 && <span class="src-count">📰 {(item as any).source_count}家报道</span>}
                   <span class={`grade-pill grade-${g}`}>{gLabel}</span>
                   {item.ai_score > 0 && <span class="score-pill" title={`AI 评分 ${item.ai_score}/10`}>AI {item.ai_score.toFixed(1)}</span>}
                 </div>

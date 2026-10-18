@@ -605,6 +605,27 @@ def _truncate_similar_title_summary(title: str, summary: str) -> tuple[str, str]
     return title, summary
 
 
+def _clean_title(title: str, source: str) -> str:
+    """标题规范化：去除来源名前缀重复、GitHub Star 残留、多余空白"""
+    import re
+    t = title.strip()
+    # 1. 去来源名前缀重复
+    if source:
+        prefix1 = source + '：'
+        prefix2 = source + ':'
+        if t.lower().startswith(prefix1.lower()):
+            t = t[len(prefix1):]
+        elif t.lower().startswith(prefix2.lower()):
+            t = t[len(prefix2):]
+    # 2. GitHub Star 残留清理
+    star_match = re.match(r'^([\w\-\.]+/[\w\-\.]+)\s*-\s*Star\s', t, re.IGNORECASE)
+    if star_match:
+        t = star_match.group(1)
+    # 3. 首尾空白与多余空格
+    t = ' '.join(t.split())
+    return t
+
+
 def deduplicate():
     """Phase 2: Per-source + cross-source dedup"""
     print("\n=== PHASE 2: Deduplication ===")
@@ -620,7 +641,9 @@ def deduplicate():
             # 过滤垃圾标题
             if not _filter_garbage_title(t):
                 continue
-            n = normalize(t)
+            # 标题规范化（去来源名前缀、GitHub Star 残留）
+            item["title"] = _clean_title(t, s["name"])
+            n = normalize(item["title"])
             if n and n not in seen:
                 seen.add(n)
                 deduped.append(item)
@@ -638,9 +661,17 @@ def deduplicate():
         dup = False
         for ex in final[-50:]:
             if is_similar(item["title"], ex["title"]):
+                # 聚合：增加 source_count，记录 sources
+                ex["source_count"] = ex.get("source_count", 1) + 1
+                sources = ex.get("sources", [ex["source"]])
+                if item["source"] not in sources:
+                    sources.append(item["source"])
+                ex["sources"] = sources
                 dup = True
                 break
         if not dup:
+            item["source_count"] = 1
+            item["sources"] = [item["source"]]
             final.append(item)
 
     print(f"  Raw: {raw_total} -> Per-source: {len(all_items)} -> Cross-dedup: {len(final)}")
