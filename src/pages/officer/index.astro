@@ -546,7 +546,6 @@ function normalize(text: string): string {
                     <dl>
                       <dt>空摘要率</dt><dd>{(v2Data.quality.metrics.empty_summary_rate * 100).toFixed(1)}%</dd>
                       <dt>重复率</dt><dd>{(v2Data.quality.metrics.exact_duplicate_rate * 100).toFixed(1)}%</dd>
-                      <dt>LLM 模型</dt><dd>{v2Data.quality.llm_usage?.model || '降级模板'}</dd>
                       <dt>Token 消耗</dt><dd>{v2Data.quality.llm_usage?.total_tokens || 0}</dd>
                       <dt>质量等级</dt><dd>{v2Data.quality.grade}</dd>
                     </dl>
