@@ -54,7 +54,7 @@ const backLabel = (() => {
   <div class="header-actions">
     {(mode === 'home' || mode === 'hot' || mode === 'officer') && (
       <>
-        <a href="/daily/{today || date || ''}" class="lang-btn">📰 {isEn ? 'Daily' : '日报'}</a>
+        <a href={`/daily/${today || date || ''}`} class="lang-btn">📰 {isEn ? 'Daily' : '日报'}</a>
         <a href="/officer/" class="lang-btn">🔍 {isEn ? 'Officer' : '情报官'}</a>
         <a href="/hot/" class="lang-btn">🔥 {isEn ? 'Hot' : '热点榜'}</a>
         <a href="/stats" class="lang-btn">📊 {isEn ? 'Stats' : '统计'}</a>
