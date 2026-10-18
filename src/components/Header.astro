@@ -56,6 +56,7 @@ const backLabel = (() => {
       <>
         <a href="/daily/{today || date || ''}" class="lang-btn">📰 {isEn ? 'Daily' : '日报'}</a>
         <a href="/officer/" class="lang-btn">🔍 {isEn ? 'Officer' : '情报官'}</a>
+        <a href="/hot/" class="lang-btn">🔥 {isEn ? 'Hot' : '热点榜'}</a>
         <a href="/stats" class="lang-btn">📊 {isEn ? 'Stats' : '统计'}</a>
         <a href="/archive" class="lang-btn">📁 {isEn ? 'Archive' : '归档'}</a>
         <a href="/en/" class="lang-btn">English</a>
@@ -196,6 +197,12 @@ const backLabel = (() => {
 .lang-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .theme-btn {
