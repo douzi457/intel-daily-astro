@@ -565,6 +565,46 @@ def is_similar(a: str, b: str, threshold: float = 0.75) -> bool:
     return len(sa & sb) / len(sa | sb) > threshold
 
 
+def _filter_garbage_title(title: str) -> bool:
+    """返回 True 表示标题合法，False 表示垃圾应丢弃"""
+    t = title.strip()
+    # 1. 超短无意义标题：<10字符且不含中文
+    if len(t.replace(' ', '')) < 10 and not re.search(r'[\u4e00-\u9fff]', t):
+        return False
+    # 4. 半单词截断：英文标题以小写字母结尾且最后单词 <4 字符
+    if t and t[-1].islower():
+        words = t.split()
+        if words and len(words[-1]) < 4 and len(t) > 20:
+            return False
+    return True
+
+
+def _clean_paywall_text(text: str) -> str:
+    """移除订阅墙文本"""
+    if not text:
+        return text
+    patterns = [
+        r'仅适用于《麻省理工科技评论》订阅者.*',
+        r'Subscribe to continue.*',
+        r'paywall.*',
+    ]
+    for pat in patterns:
+        text = re.sub(pat, '', text, flags=re.IGNORECASE)
+    return text.strip()
+
+
+def _truncate_similar_title_summary(title: str, summary: str) -> tuple[str, str]:
+    """标题与摘要相似度>0.9时清空摘要"""
+    from difflib import SequenceMatcher
+    t, s = title.strip(), (summary or '').strip()
+    if not t or not s or len(t) < 5 or len(s) < 5:
+        return title, summary
+    sim = SequenceMatcher(None, t, s).ratio()
+    if sim > 0.9:
+        return t, ''
+    return title, summary
+
+
 def deduplicate():
     """Phase 2: Per-source + cross-source dedup"""
     print("\n=== PHASE 2: Deduplication ===")
@@ -576,7 +616,11 @@ def deduplicate():
         seen = set()
         deduped = []
         for item in s["items"]:
-            n = normalize(item["title"])
+            t = item["title"]
+            # 过滤垃圾标题
+            if not _filter_garbage_title(t):
+                continue
+            n = normalize(t)
             if n and n not in seen:
                 seen.add(n)
                 deduped.append(item)
@@ -1512,7 +1556,12 @@ def generate_rewrite_json(final: list, recommendations: dict):
         platform_key = SOURCE_PLATFORM.get(source_name, source_name.lower().replace(" ", ""))
         
         title = item.get("title_cn", item.get("title", ""))
-        desc = item.get("summary", "")[:200] if item.get("summary") else title[:200]
+        summary = item.get("summary", "") or ""
+        # 清理订阅墙文本
+        summary = _clean_paywall_text(summary)
+        # 标题与摘要相似度>0.9时清空摘要
+        title, summary = _truncate_similar_title_summary(title, summary)
+        desc = summary[:200] if summary else title[:200]
         if desc == title:
             desc = ""
         

@@ -12,7 +12,14 @@ try {
   }
 } catch {}
 
-const date = v2Data?.date || new Date().toISOString().slice(0, 10);
+// 统一使用 v4 的日期（v4 总是最新）
+let v4Date: string | null = null;
+try {
+  const v4Index = await import('../../data/v4/index.json').catch(() => null);
+  v4Date = v4Index?.default?.latest_date || null;
+} catch {}
+
+const date = v4Date || v2Data?.date || new Date().toISOString().slice(0, 10);
 const qualityGrade = v2Data?.quality?.grade || 'pilot';
 const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pilot' ? '#f59e0b' : '#ef4444';
 

@@ -22,7 +22,8 @@ const allDates = getAllDates('zh');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
 const items: IntelItem[] = dayData.items;
-const totalItems = items.length;
+// 今日情报统一用 v4 的 total_items（更准确）
+const totalItems = v4Data?.total_items || items.length;
 const recentDates = allDates.slice(0, 10);
 
 const groupedByDate = new Map<string, IntelItem[]>();
