@@ -1,6 +1,7 @@
 ---
 // 热点榜页面 — AIHOT 暖纸风深度复刻，读取 V2 数据（含热历史）
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
 import { getAllDates } from '../../utils/data.ts';
@@ -88,13 +89,13 @@ function getSummary(item: any): string {
 <style>
   :root {
     --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
-    --accent: #176b75; --surface: #fff; --border: #d4d0c8; --paper: #f5f3ee; --line: #e0dcd4;
-    --accent-soft: rgba(23,107,117,.08);
+    --accent: #c73e3a; --surface: #fff; --border: #d4d0c8; --paper: #f5f3ee; --line: #e0dcd4;
+    --accent-soft: rgba(199,62,58,.08);
   }
   [data-theme="dark"] {
     --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
-    --accent: #12ccd8; --surface: #1a2227; --border: #2a3539; --paper: #171e22; --line: #252e33;
-    --accent-soft: rgba(18,204,216,.08);
+    --accent: #e85d59; --surface: #1a2227; --border: #2a3539; --paper: #171e22; --line: #252e33;
+    --accent-soft: rgba(232,93,89,.08);
   }
   body { background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -191,6 +192,7 @@ function getSummary(item: any): string {
 </style>
 
 <div class="page-wrap">
+  <Header mode="hot" date={date} totalItems={hotItems.length} today={today} />
   <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
   <div class="stats-bar">
     <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>

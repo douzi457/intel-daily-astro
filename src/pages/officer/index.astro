@@ -1,6 +1,7 @@
 ---
 // Intel Officer Dashboard — AI 情报官驾驶舱
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
 import type { V2DailyData } from '../../lib/types-v2.ts';
 
 let v2Data: V2DailyData | null = null;
@@ -20,6 +21,7 @@ try {
 } catch {}
 
 const date = v4Date || v2Data?.date || new Date().toISOString().slice(0, 10);
+const today = new Date().toISOString().slice(0, 10);
 const qualityGrade = v2Data?.quality?.grade || 'pilot';
 const qualityColor = qualityGrade === 'pass' ? '#10b981' : qualityGrade === 'pilot' ? '#f59e0b' : '#ef4444';
 
@@ -100,18 +102,18 @@ function normalize(text: string): string {
   <style>
     :root {
       --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
-      --accent: #176b75; --surface: #fff; --border: #d4d0c8; --muted: #8a8578;
+      --accent: #c73e3a; --surface: #fff; --border: #d4d0c8; --muted: #8a8578;
       --paper: #f5f3ee; --line: #e0dcd4;
       --color-bg: #faf9f6; --color-surface: #fff; --color-border: #d4d0c8;
-      --color-text: #202a30; --color-text-muted: #59656b; --color-accent: #176b75;
+      --color-text: #202a30; --color-text-muted: #59656b; --color-accent: #c73e3a;
       --color-core: #10b981; --color-watch: #f59e0b; --color-action: #8b5cf6;
     }
     [data-theme="dark"] {
       --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
-      --accent: #12ccd8; --surface: #1a2227; --border: #2a3539; --muted: #5a6a6a;
+      --accent: #e85d59; --surface: #1a2227; --border: #2a3539; --muted: #5a6a6a;
       --paper: #171e22; --line: #252e33;
       --color-bg: #13191c; --color-surface: #1a2227; --color-border: #2a3539;
-      --color-text: #e7eceb; --color-text-muted: #8a9a9a; --color-accent: #12ccd8;
+      --color-text: #e7eceb; --color-text-muted: #8a9a9a; --color-accent: #e85d59;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
@@ -305,6 +307,7 @@ function normalize(text: string): string {
     }
   </style>
 
+  <Header mode="officer" date={date} totalItems={v2Data?.stats?.raw_items || 0} today={today} />
   <div class="topbar">
     <div class="container topbar-inner" style={{'--quality-color': qualityColor}}>
       <div class="brand">豆子实验室 · <span>AI 情报官</span></div>
