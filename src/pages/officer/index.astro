@@ -54,7 +54,7 @@ const topCategories = [...categoryCounts.entries()]
 function fmtTime(iso?: string) {
   if (!iso) return '未知';
   try {
-    return new Date(iso).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+    return new Date(iso).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
   } catch { return '未知'; }
 }
 
@@ -67,6 +67,15 @@ const DEEP_LABELS: Record<string, string> = {
 
 function cardTypeColor(t: string): string {
   return t === '观点型' ? '#c0392b' : t === '教程型' ? '#2980b9' : t === '资讯型' ? '#27ae60' : '#8e44ad';
+}
+
+// 判断是否有真实引文（过滤占位语）
+function hasRealQuotes(quotes: any): boolean {
+  if (!quotes || !Array.isArray(quotes) || quotes.length === 0) return false;
+  return quotes.some((q: any) => {
+    const t = (q && q.text ? String(q.text) : '').trim();
+    return t !== '' && t !== '暂无可引用的公开原话' && !t.startsWith('暂无');
+  });
 }
 
 // 归一化英文标点（修复弯引号渲染问题）
@@ -426,7 +435,7 @@ function normalize(text: string): string {
                           </details>
                         )}
                         {/* 关键引文 */}
-                        {event.key_quotes && event.key_quotes.length > 0 && (
+                        {hasRealQuotes(event.key_quotes) && (
                           <details class="quotes-block">
                             <summary>关键引文</summary>
                             <div class="quotes-list">
