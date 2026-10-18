@@ -125,6 +125,17 @@ function reasonText(score: number): string {
   .featured-card h3 a:hover { color: var(--accent); }
   .featured-summary { font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .featured-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 11px; color: var(--ink-4); }
+  /* 分类筛选 */
+  .cat-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
+  .cat-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-3); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+  .cat-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  /* 展开来源 */
+  .src-expand { display: inline; font-size: 11px; }
+  .src-expand summary { cursor: pointer; color: var(--accent); list-style: none; }
+  .src-expand summary::-webkit-details-marker { display: none; }
+  .src-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .src-item { padding: 2px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); font-size: 10px; }
   @media (max-width: 640px) {
     .page-wrap { padding: 0 14px 40px; }
     .stats-bar { padding: 10px 12px; }
@@ -146,6 +157,36 @@ function reasonText(score: number): string {
     <div class="stats-bar-divider"></div>
     <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
   </div>
+
+  {/* 分类筛选 */}
+  {v4Data?.by_category && (
+    <div class="cat-filter" id="catFilter">
+      <button class="cat-pill active" data-cat="all">全部</button>
+      {Object.keys(v4Data.by_category).map((cat) => (
+        <button class="cat-pill" data-cat={cat}>{cat}</button>
+      ))}
+    </div>
+  )}
+
+  <script>
+    const catFilter = document.getElementById('catFilter');
+    if (catFilter) {
+      catFilter.addEventListener('click', (e: Event) => {
+        const btn = (e.target as HTMLElement).closest('.cat-pill') as HTMLElement | null;
+        if (!btn) return;
+        const cat = btn.dataset.cat || 'all';
+        catFilter.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.entry-item').forEach(el => {
+          if (cat === 'all') {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.toggle('hidden', (el as HTMLElement).dataset.category !== cat);
+          }
+        });
+      });
+    }
+  </script>
 
   {(() => {
     const featuredItems: any[] = [];
@@ -205,13 +246,24 @@ function reasonText(score: number): string {
             const displayTitle = item.ai_title || item.title;
             const reason = item.ai_reason || '';
             return (
-              <article class="entry" data-category={item.category || '其他'}>
+              <article class="entry entry-item" data-category={item.category || '其他'}>
                 <div class="entry-meta">
                   {timeStr && <span class="entry-time">{timeStr}</span>}
                   {timeStr && platform && <span class="entry-sep">·</span>}
                   {platform && <span class="entry-source">{platform}</span>}
                   {(item as any).published_at && <span class="entry-time">·{fmtHM((item as any).published_at)}</span>}
-                  {(item as any).source_count > 1 && <span class="src-count">📰 {(item as any).source_count}家报道</span>}
+                  {(item as any).source_count > 1 ? (
+                    <details class="src-expand">
+                      <summary>📰 {(item as any).source_count}家报道</summary>
+                      <div class="src-list">
+                        {(item as any).sources?.map((s: string, si: number) => (
+                          <span class="src-item" key={si}>{s}</span>
+                        ))}
+                      </div>
+                    </details>
+                  ) : (item as any).source_count > 0 && (
+                    <span class="src-count">📰 {(item as any).source_count}家报道</span>
+                  )}
                   <span class={`grade-pill grade-${g}`}>{gLabel}</span>
                   {item.ai_score > 0 && <span class="score-pill" title={`AI 评分 ${item.ai_score}/10`}>AI {item.ai_score.toFixed(1)}</span>}
                   {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}

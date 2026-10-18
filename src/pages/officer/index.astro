@@ -67,6 +67,26 @@ function fmtTime(iso?: string) {
   } catch { return '未知'; }
 }
 
+// 判断是否有真实引文（过滤占位语）
+function hasRealQuotes(quotes: any[]): boolean {
+  if (!quotes || !Array.isArray(quotes) || quotes.length === 0) return false;
+  return quotes.some((q: any) => {
+    const t = (q && q.text ? String(q.text) : '').trim();
+    return t !== '' && t !== '暂无可引用的公开原话' && !t.startsWith('暂无');
+  });
+}
+
+// 判断是否重复于今日结论
+function isDupOfSummary(text: string, summaries: string[]): boolean {
+  if (!text) return false;
+  const t = text.trim().toLowerCase();
+  if (!t) return false;
+  return (summaries || []).some(s => {
+    const st = (s || '').trim().toLowerCase();
+    return st && (st.includes(t) || t.includes(st));
+  });
+}
+
 const DEEP_LABELS: Record<string, string> = {
   background: '背景', divergence: '分歧', comparison: '对照',
   principle: '原理', impact: '影响', solution: '解法',
@@ -470,7 +490,7 @@ function normalize(text: string): string {
                           </div>
                         )}
                         {/* 建议动作 */}
-                        {event.suggested_action?.text && (
+                        {event.suggested_action?.text && !isDupOfSummary(event.suggested_action.text, v2Data?.executive_summary || []) && (
                           <div class="signal-section">
                             <div class="signal-label">建议动作</div>
                             <div class="signal-value">{normalize(event.suggested_action.text)}</div>
