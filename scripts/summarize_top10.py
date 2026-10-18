@@ -60,7 +60,7 @@ def call_agnes(title, source, desc, last_call_time):
     import urllib.request
     api_key = os.environ.get('AGNES_API_KEY', '')
     base_url = os.environ.get('AGNES_BASE_URL', 'https://api.agnes-ai.cn/v1')
-    model = "agnes-3.0-flash"  # 老大指定写死（2026-10-15）
+    model = os.environ.get('AGNES_MODEL') or "agnes-3.0-flash"
     if not api_key:
         return None, last_call_time
     # 严格限速：免费档实测易 429 → 每次调用至少间隔 6 秒
