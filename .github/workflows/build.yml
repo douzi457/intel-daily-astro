@@ -54,8 +54,8 @@ jobs:
           AGNES_MODEL: ${{ secrets.AGNES_MODEL || 'agnes-3.0-flash' }}
         run: |
           python scripts/intel_officer_processor.py \
-            --date $(date +%Y-%m-%d) \
-            --input public/data/daily-$(date +%Y-%m-%d).json \
+            --date $(TZ='Asia/Shanghai' date +%Y-%m-%d) \
+            --input public/data/daily-$(TZ='Asia/Shanghai' date +%Y-%m-%d).json \
             --output public/data/v2
 
       # ── 先提交数据，确保构建使用最新数据 ──
