@@ -661,12 +661,12 @@ def deduplicate():
         dup = False
         for ex in final[-50:]:
             if is_similar(item["title"], ex["title"]):
-                # 聚合：增加 source_count，记录 sources
-                ex["source_count"] = ex.get("source_count", 1) + 1
+                # 只在新来源时才增加 source_count
                 sources = ex.get("sources", [ex["source"]])
                 if item["source"] not in sources:
+                    ex["source_count"] = ex.get("source_count", 1) + 1
                     sources.append(item["source"])
-                ex["sources"] = sources
+                    ex["sources"] = sources
                 dup = True
                 break
         if not dup:

@@ -33,8 +33,19 @@ const hotItems = [...v2CoreSignals, ...v2Watchlist].slice(0, 10);
 const sortedItems = [...hotItems].sort((a: any, b: any) => (b.source_count || 0) - (a.source_count || 0));
 
 const totalItems = v2Items.length || hotItems.length;
-// highScoreCount: V2 百分制 >= 70（等价于 10 分制 >= 7），按全部信号统计
-const highScoreCount = [...v2CoreSignals, ...v2Watchlist].filter((i: any) => (i.score?.total || i.score || 0) >= 70).length;
+// 高价值数统一从 V4 数据计算（10分制 >= 7），与首页口径一致
+let highScoreCount = 0;
+try {
+  const v4Mod = await import('../../data/v4/daily-' + (v4Date || today) + '.json').catch(() => null);
+  const v4d = v4Mod?.default;
+  if (v4d?.by_category) {
+    for (const cat of Object.values(v4d.by_category)) {
+      for (const it of (cat as any[])) {
+        if ((it.score || 0) >= 7) highScoreCount++;
+      }
+    }
+  }
+} catch {}
 const recentDates = allDates.slice(0, 10);
 
 // 日期统一：优先 v4，fallback v2
