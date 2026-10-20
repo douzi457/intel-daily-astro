@@ -1,0 +1,227 @@
+---
+// 新词榜页面 — 展示每日自动发现的新名词候选
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+let newTermsData: any = null;
+try {
+  const mod = await import('../../data/v4/new-terms-latest.json').catch(() => null);
+  newTermsData = mod?.default;
+} catch {}
+
+const terms = newTermsData?.terms || [];
+const generatedAt = newTermsData?.generated_at || '';
+const targetDate = newTermsData?.target_date || '';
+const windowDays = newTermsData?.window_days || 14;
+
+// 分类
+const strongTerms = terms.filter((t: any) => t.strong);
+const newTerms = terms.filter((t: any) => t.status === 'new' && !t.strong);
+const risingTerms = terms.filter((t: any) => t.status === 'rising' && !t.strong);
+
+function kindLabel(kind: string): string {
+  switch (kind) {
+    case 'repo': return '开源项目';
+    case 'latin': return '产品/模型';
+    case 'zh': return '中文新词';
+    default: return kind;
+  }
+}
+
+function statusBadge(status: string): string {
+  switch (status) {
+    case 'new': return '<span class="nt-badge new">全新</span>';
+    case 'rising': return '<span class="nt-badge rising">升温</span>';
+    default: return '';
+  }
+}
+---
+
+<BaseLayout title="新词榜" description="每日自动发现冒头的新名词" lang="zh-CN">
+<style>
+  :root {
+    --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
+    --accent: #c73e3a; --surface: #fff; --border: #d4d0c8; --paper: #f5f3ee;
+    --accent-soft: rgba(199,62,58,.08);
+  }
+  [data-theme="dark"] {
+    --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
+    --accent: #e85d59; --surface: #1a2227; --border: #2a3539; --paper: #171e22;
+    --accent-soft: rgba(232,93,89,.08);
+  }
+  body { background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* 页头说明 */
+  .nt-header { margin: 20px 0 28px; }
+  .nt-header h1 { font-size: 1.05em; font-weight: 700; letter-spacing: -.3px; margin-bottom: 6px; }
+  .nt-header p { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
+  .nt-header .nt-meta { font-size: 11px; color: var(--ink-4); margin-top: 6px; }
+
+  /* 分组标题 */
+  .nt-section-title { font-size: 13px; font-weight: 700; color: var(--ink-3); margin: 28px 0 12px; padding-left: 8px; border-left: 3px solid var(--accent); }
+  .nt-section-title strong { color: var(--accent); }
+
+  /* 词条卡片 */
+  .nt-list { display: flex; flex-direction: column; gap: 12px; }
+  .nt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: box-shadow 0.15s;
+  }
+  .nt-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+  .nt-card.strong { border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+
+  .nt-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+  .nt-term { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -.2px; }
+  .nt-badges { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; margin-left: auto; }
+  .nt-badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 3px; }
+  .nt-badge.new { background: rgba(23,107,117,.12); color: #176b75; }
+  .nt-badge.rising { background: rgba(245,158,11,.12); color: #d97706; }
+  .nt-kind { font-size: 10px; padding: 1px 6px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); }
+  .nt-strong-star { font-size: 12px; }
+
+  .nt-stats { display: flex; gap: 12px; font-size: 11px; color: var(--ink-4); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; margin-bottom: 8px; }
+  .nt-stats span { display: inline-flex; align-items: center; gap: 3px; }
+  .nt-score { color: var(--accent); font-weight: 700; }
+
+  .nt-samples { display: flex; flex-direction: column; gap: 4px; }
+  .nt-sample { display: flex; align-items: baseline; gap: 6px; font-size: 12px; }
+  .nt-sample-num { color: var(--ink-4); min-width: 14px; }
+  .nt-sample a { color: var(--ink-2); text-decoration: none; line-height: 1.5; }
+  .nt-sample a:hover { color: var(--accent); text-decoration: underline; }
+
+  /* 空状态 */
+  .nt-empty { text-align: center; padding: 48px 20px; color: var(--ink-4); font-size: 14px; }
+
+  /* 移动端 */
+  @media (max-width: 640px) {
+    .page-wrap { padding: 0 14px 40px; }
+    .nt-card { padding: 12px; }
+    .nt-term { font-size: 15px; }
+    .nt-stats { flex-wrap: wrap; gap: 8px; }
+  }
+</style>
+
+<div class="page-wrap">
+  <Header mode="hot" today={targetDate} />
+
+  <div class="nt-header">
+    <h1>🔎 新词榜 · {targetDate || '加载中...'}</h1>
+    <p>系统每天从全部信源标题中自动筛出刚冒头的新名词——新工具、新模型、新开源项目。回溯窗口 {windowDays} 天，判定全新或升温信号。</p>
+    <div class="nt-meta">更新于 {generatedAt || '—'}</div>
+  </div>
+
+  {terms.length === 0 ? (
+    <div class="nt-empty">今日暂无新词候选</div>
+  ) : (
+    <>
+      {/* 强信号区 */}
+      {strongTerms.length > 0 && (
+        <>
+          <div class="nt-section-title"><strong>★ 强信号</strong>（{strongTerms.length} 条）</div>
+          <div class="nt-list">
+            {strongTerms.map((t: any, i: number) => (
+              <div class="nt-card strong">
+                <div class="nt-top">
+                  <span class="nt-term">{t.term}</span>
+                  <span class="nt-kind">{kindLabel(t.kind)}</span>
+                  <span set:html={statusBadge(t.status)} />
+                  <span class="nt-strong-star">★</span>
+                </div>
+                <div class="nt-stats">
+                  <span>提及 <b class="nt-score">{t.today_count}</b> 次</span>
+                  <span>最高分 <b class="nt-score">{t.max_score}</b></span>
+                  <span>首现 {t.first_seen}</span>
+                </div>
+                {t.samples && t.samples.length > 0 && (
+                  <div class="nt-samples">
+                    {t.samples.map((s: any, si: number) => (
+                      <div class="nt-sample" key={si}>
+                        <span class="nt-sample-num">{si + 1}.</span>
+                        <a href={s.url} target="_blank" rel="noopener">{s.title}</a>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* 全新组 */}
+      {newTerms.length > 0 && (
+        <>
+          <div class="nt-section-title">全新 <span style={{color:'var(--ink-4);font-weight:400'}}>({newTerms.length})</span></div>
+          <div class="nt-list">
+            {newTerms.map((t: any, i: number) => (
+              <div class="nt-card">
+                <div class="nt-top">
+                  <span class="nt-term">{t.term}</span>
+                  <span class="nt-kind">{kindLabel(t.kind)}</span>
+                  <span set:html={statusBadge(t.status)} />
+                </div>
+                <div class="nt-stats">
+                  <span>提及 <b class="nt-score">{t.today_count}</b> 次</span>
+                  <span>最高分 <b class="nt-score">{t.max_score}</b></span>
+                  <span>首现 {t.first_seen}</span>
+                </div>
+                {t.samples && t.samples.length > 0 && (
+                  <div class="nt-samples">
+                    {t.samples.map((s: any, si: number) => (
+                      <div class="nt-sample" key={si}>
+                        <span class="nt-sample-num">{si + 1}.</span>
+                        <a href={s.url} target="_blank" rel="noopener">{s.title}</a>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* 升温组 */}
+      {risingTerms.length > 0 && (
+        <>
+          <div class="nt-section-title">升温 <span style={{color:'var(--ink-4);font-weight:400'}}>({risingTerms.length})</span></div>
+          <div class="nt-list">
+            {risingTerms.map((t: any, i: number) => (
+              <div class="nt-card">
+                <div class="nt-top">
+                  <span class="nt-term">{t.term}</span>
+                  <span class="nt-kind">{kindLabel(t.kind)}</span>
+                  <span set:html={statusBadge(t.status)} />
+                </div>
+                <div class="nt-stats">
+                  <span>提及 <b class="nt-score">{t.today_count}</b> 次</span>
+                  <span>最高分 <b class="nt-score">{t.max_score}</b></span>
+                  <span>首现 {t.first_seen}</span>
+                </div>
+                {t.samples && t.samples.length > 0 && (
+                  <div class="nt-samples">
+                    {t.samples.map((s: any, si: number) => (
+                      <div class="nt-sample" key={si}>
+                        <span class="nt-sample-num">{si + 1}.</span>
+                        <a href={s.url} target="_blank" rel="noopener">{s.title}</a>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </>
+  )}
+
+  <Footer />
+</div>
+</BaseLayout>
