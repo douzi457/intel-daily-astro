@@ -34,9 +34,13 @@ const sortedItems = [...hotItems].sort((a: any, b: any) => (b.source_count || 0)
 
 const totalItems = v2Items.length || hotItems.length;
 // 高价值数统一从 V4 数据计算（10分制 >= 7），与首页口径一致
+// 注意：import() 内不能写 (v4Date || today) 这类复杂表达式，
+// Vite 构建期无法静态分析会导致导入静默失败（被 .catch 吞掉后计数为 0）。
+// 先算好日期字符串再用模板字面量 —— 与本页 v2 导入、首页 v4 导入写法一致（均已验证可用）。
 let highScoreCount = 0;
 try {
-  const v4Mod = await import('../../data/v4/daily-' + (v4Date || today) + '.json').catch(() => null);
+  const v4FileDate = v4Date || today;
+  const v4Mod = await import(`../../data/v4/daily-${v4FileDate}.json`).catch(() => null);
   const v4d = v4Mod?.default;
   if (v4d?.by_category) {
     for (const cat of Object.values(v4d.by_category)) {
