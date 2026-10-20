@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-10-20 23:26:18",
+  "window_days": 14,
+  "target_date": "2026-10-20",
+  "total_candidates": 8,
+  "terms": [
+    {
+      "term": "deepseek",
+      "kind": "latin",
+      "status": "rising",
+      "first_seen": "2026-10-06",
+      "today_count": 17,
+      "max_score": 10.0,
+      "avg_score_today": 8.9,
+      "strong": true,
+      "samples": [
+        {
+          "title": "DeepSeek-V4.1-Flash on vLLM: 5x Agentic Throughput Since Day 0",
+          "url": "https://vllm.ai/blog/2026-10-07-deepseek-v41-flash"
+        },
+        {
+          "title": "DeepSeek-V4.1-Flash-20261017 (Max) 登顶 Agent Arena 开源模型第一",
+          "url": "https://x.com/arena/status/2112247114944360666"
+        },
+        {
+          "title": "DeepSeek V4.1 Flash 1017 发布，Artificial Analysis 智能指数得分 45 并列开源模型第二",
+          "url": "https://x.com/ArtificialAnlys/status/2112218661432000694"
+        }
+      ]
+    },
+    {
+      "term": "aws",
+      "kind": "latin",
+      "status": "rising",
+      "first_seen": "2026-10-07",
+      "today_count": 6,
+      "max_score": 10.0,
+      "avg_score_today": 8.7,
+      "strong": true,
+      "samples": [
+        {
+          "title": "TorchNeuron: running HF models on AWS Trainium is easier than ever",
+          "url": "https://huggingface.co/blog/hf-torchneuron"
+        },
+        {
+          "title": "How Deepgram optimized voice AI at scale with AWS Trainium",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-deepgram-optimized-voice-ai-at-scale-with-aws-trainium/"
+        },
+        {
+          "title": "AWS 发布 TorchNeuron：Trainium 的原生 PyTorch 后端",
+          "url": "https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/"
+        }
+      ]
+    },
+    {
+      "term": "minimax",
+      "kind": "latin",
+      "status": "rising",
+      "first_seen": "2026-10-06",
+      "today_count": 6,
+      "max_score": 10.0,
+      "avg_score_today": 6.8,
+      "strong": true,
+      "samples": [
+        {
+          "title": "MiniMax M3.1 Flash shows China's AI price race has no floor in sight",
+          "url": "https://the-decoder.com/minimax-m3-1-flash-shows-chinas-ai-price-race-has-no-floor-in-sight/"
+        },
+        {
+          "title": "MiniMax 发布 M3.1 Flash，推理提速近三倍、用量成本降低 70%",
+          "url": "https://www.minimax.io/blog/minimax-m31f"
+        },
+        {
+          "title": "MiniMax M3.1 Flash",
+          "url": "https://www.minimax.io/blog/minimax-m31f"
+        }
+      ]
+    },
+    {
+      "term": "torchneuron",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 3,
+      "max_score": 10.0,
+      "avg_score_today": 9.7,
+      "strong": false,
+      "samples": [
+        {
+          "title": "TorchNeuron: running HF models on AWS Trainium is easier than ever",
+          "url": "https://huggingface.co/blog/hf-torchneuron"
+        },
+        {
+          "title": "AWS 发布 TorchNeuron：Trainium 的原生 PyTorch 后端",
+          "url": "https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/"
+        },
+        {
+          "title": "Amazon is taking its biggest shot at Nvidia yet with new TorchNeuron dev tool",
+          "url": "https://techcrunch.com/2026/10/19/amazon-is-taking-its-biggest-shot-at-nvidia-yet-with-new-torchneuron-dev-tool/"
+        }
+      ]
+    },
+    {
+      "term": "sharkninja",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 10,
+      "avg_score_today": 9.5,
+      "strong": false,
+      "samples": [
+        {
+          "title": "黑客用 AI 智能体入侵 John Deere、SharkNinja 等超 100 家网站",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins"
+        },
+        {
+          "title": "A Hacker Broke Into John Deere, SharkNinja With an Army of AI Agents",
+          "url": "https://it.slashdot.org/story/26/10/19/1746204/a-hacker-broke-into-john-deere-sharkninja-with-an-army-of-ai-agents?utm_source=rss1.0mainlinkanon&utm_medium=feed"
+        }
+      ]
+    },
+    {
+      "term": "xrpl",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 9.0,
+      "avg_score_today": 9.0,
+      "strong": false,
+      "samples": [
+        {
+          "title": "XRPL Commons Hosts 36-Hour NYC Hackathon to Build On-Chain Lending and AI Paymen",
+          "url": "https://hackernoon.com/xrpl-commons-hosts-36-hour-nyc-hackathon-to-build-on-chain-lending-and-ai-payments-on-xrpl?source=rss"
+        },
+        {
+          "title": "XRPL Commons Hosts 36-Hour NYC Hackathon to Build On-Chain Lending and AI Paymen",
+          "url": "https://hackernoon.com/xrpl-commons-hosts-36-hour-nyc-hackathon-to-build-on-chain-lending-and-ai-payments-on-xrpl?source=rss"
+        }
+      ]
+    },
+    {
+      "term": "liveramp",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 7.5,
+      "avg_score_today": 7.5,
+      "strong": false,
+      "samples": [
+        {
+          "title": "The US FTC clears Publicis' $2.2B LiveRamp acquisition, subject to a consent dec",
+          "url": "https://www.techmeme.com/261019/p44#a261019p44"
+        },
+        {
+          "title": "The US FTC clears Publicis' $2.2B LiveRamp acquisition, subject to a consent dec",
+          "url": "https://www.techmeme.com/261019/p44#a261019p44"
+        }
+      ]
+    },
+    {
+      "term": "dmv",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 6.0,
+      "avg_score_today": 6.0,
+      "strong": false,
+      "samples": [
+        {
+          "title": "Florida DMV hacked after police dept insecurely stored login info",
+          "url": "https://arstechnica.com/tech-policy/2026/10/huge-dmv-data-breach-impacted-current-and-former-florida-residents/"
+        },
+        {
+          "title": "Florida DMV Hacked After Police Dept Insecurely Stored Login Info",
+          "url": "https://yro.slashdot.org/story/26/10/19/1726218/florida-dmv-hacked-after-police-dept-insecurely-stored-login-info?utm_source=rss1.0mainlinkanon&utm_medium=feed"
+        }
+      ]
+    }
+  ]
+}
