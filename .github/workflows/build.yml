@@ -82,6 +82,12 @@ jobs:
           npm run build
           npx wrangler pages deploy dist/ --project-name=intel-daily-astro --branch=main
 
-      # ── 清理旧数据（保留最近7天） ──
+      # ── 新词监测（可选，失败不影响主线）──
+      - name: Run new terms detection
+        continue-on-error: true
+        run: |
+          python scripts/new_terms.py --date $(TZ='Asia/Shanghai' date +%Y-%m-%d) || echo "New terms detection failed, continuing"
+
+      # ── 清理旧数据（保留最近7天）──
       - name: Clean up old data (>7 days)
         run: python scripts/cleanup_data.py
