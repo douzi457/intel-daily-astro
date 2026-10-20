@@ -1,5 +1,5 @@
 ## 选题1：Microsoft says AI agents are like inside
-- 角度：微软将AI Agent定性为内部威胁，推动企业级Agent框架转向安全优先。开源开发者需重新设计权限
+- 角度：微软作为云与AI巨头，其表态直接影响企业级Agent部署的安全合规标准。此观点揭示了当前LLM在自主
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第1条，5家媒体
 - 验证：查阅原文[Microsoft says AI agents are l...]
@@ -8,18 +8,18 @@
 
 ---
 
-## 选题2：AI assistant startup Town nabs unicorn v
-- 角度：Town的融资节奏显示AI Agent商业闭环加速，开源社区需关注其产品化路径中的工具缺口。
+## 选题2：Recording device hidden in toilet paper 
+- 角度：该事件暴露了AI军备竞赛下的人才流动与信息安全矛盾。对于公众而言，这削弱了对OpenAI神秘感的信任
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第2条，5家媒体
-- 验证：查阅原文[AI assistant startup Town nabs...]
+- 验证：查阅原文[Recording device hidden in toi...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
 
 ---
 
 ## 选题3：AI game clones are making indie develope
-- 角度：游戏克隆直接威胁独立创作者生存，开源社区可提供技术性防护工具。
+- 角度：这是生成式AI伦理中最具即时伤害性的领域之一。如果创作者无法保护IP，AI工具将沦为单纯的掠夺工具，
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第3条，5家媒体
 - 验证：查阅原文[AI game clones are making indi...]
