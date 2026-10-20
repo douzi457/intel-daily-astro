@@ -173,16 +173,22 @@ def test_new_term_detection():
     print("✓ test_new_term_detection passed")
 
 
-    # 构造简单数据：过去2天每天出现1次，今天出现3次（3x增长）
-    history = [
-        ('2026-10-17', {'date': '2026-10-17', 'by_category': {'AI': [{'title': 'ZZZ day1', 'title_cn': '', 'url': '', 'score': 7.0, 'source': 'Ex', 'source_count': 1, 'sources': ['Ex']}]}}),
-        ('2026-10-18', {'date': '2026-10-18', 'by_category': {'AI': [{'title': 'ZZZ day2', 'title_cn': '', 'url': '', 'score': 7.0, 'source': 'Ex', 'source_count': 1, 'sources': ['Ex']}]}}),
-    ]
-    today_data = {'date': '2026-10-20', 'by_category': {
+def test_rising_detection():
+    """测试升温词判定：过去每天出现1次，今天暴增至6次"""
+    history = []
+    for i in range(1, 6):
+        history.append((f'2026-10-{15+i:02d}', {
+            'date': f'2026-10-{15+i:02d}',
+            'by_category': {'AI': [{'title': 'ZZZ day', 'title_cn': '', 'url': '', 'score': 7.0, 'source': 'Ex', 'source_count': 1, 'sources': ['Ex']}]}})
+        )
+    today_data = {'date': '2026-10-21', 'by_category': {
         'AI': [
             {'title': 'ZZZ major', 'title_cn': '', 'url': '', 'score': 9.0, 'source': 'TC', 'source_count': 1, 'sources': ['TC']},
             {'title': 'ZZZ benchmark', 'title_cn': '', 'url': '', 'score': 8.5, 'source': 'ArXiv', 'source_count': 1, 'sources': ['ArXiv']},
             {'title': 'ZZZ guide', 'title_cn': '', 'url': '', 'score': 8.0, 'source': 'Medium', 'source_count': 1, 'sources': ['Medium']},
+            {'title': 'ZZZ update', 'title_cn': '', 'url': '', 'score': 7.5, 'source': 'Blog', 'source_count': 1, 'sources': ['Blog']},
+            {'title': 'ZZZ release', 'title_cn': '', 'url': '', 'score': 7.0, 'source': 'News', 'source_count': 1, 'sources': ['News']},
+            {'title': 'ZZZ announcement', 'title_cn': '', 'url': '', 'score': 6.5, 'source': 'PR', 'source_count': 1, 'sources': ['PR']},
         ]
     }}
 
@@ -191,7 +197,7 @@ def test_new_term_detection():
 
     assert len(zzz) == 1, f"Expected zzz, got: {[c['term'] for c in candidates]}"
     assert zzz[0]['status'] == 'rising', f"Expected 'rising', got: {zzz[0]['status']}"
-    assert zzz[0]['today_count'] == 3
+    assert zzz[0]['today_count'] == 6
     print("✓ test_rising_detection passed")
 
 

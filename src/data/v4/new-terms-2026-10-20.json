@@ -1,30 +1,30 @@
 {
-  "generated_at": "2026-10-20 23:26:18",
+  "generated_at": "2026-10-20 23:33:44",
   "window_days": 14,
   "target_date": "2026-10-20",
-  "total_candidates": 8,
+  "total_candidates": 13,
   "terms": [
     {
       "term": "deepseek",
       "kind": "latin",
       "status": "rising",
       "first_seen": "2026-10-06",
-      "today_count": 17,
+      "today_count": 18,
       "max_score": 10.0,
-      "avg_score_today": 8.9,
+      "avg_score_today": 8.7,
       "strong": true,
       "samples": [
         {
+          "title": "DeepSeek just open-sourced its inference engine",
+          "url": "https://github.com/deepseek-ai/DeepInfer"
+        },
+        {
+          "title": "DeepSeek banned from U.S. federal civilian agencies under new DHS order",
+          "url": "https://www.reuters.com/technology/us-banning-chinese-ai-deepseek-government-agency-it-systems-2026-10-19/"
+        },
+        {
           "title": "DeepSeek-V4.1-Flash on vLLM: 5x Agentic Throughput Since Day 0",
           "url": "https://vllm.ai/blog/2026-10-07-deepseek-v41-flash"
-        },
-        {
-          "title": "DeepSeek-V4.1-Flash-20261017 (Max) 登顶 Agent Arena 开源模型第一",
-          "url": "https://x.com/arena/status/2112247114944360666"
-        },
-        {
-          "title": "DeepSeek V4.1 Flash 1017 发布，Artificial Analysis 智能指数得分 45 并列开源模型第二",
-          "url": "https://x.com/ArtificialAnlys/status/2112218661432000694"
         }
       ]
     },
@@ -35,7 +35,7 @@
       "first_seen": "2026-10-07",
       "today_count": 6,
       "max_score": 10.0,
-      "avg_score_today": 8.7,
+      "avg_score_today": 9.2,
       "strong": true,
       "samples": [
         {
@@ -49,30 +49,6 @@
         {
           "title": "AWS 发布 TorchNeuron：Trainium 的原生 PyTorch 后端",
           "url": "https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/"
-        }
-      ]
-    },
-    {
-      "term": "minimax",
-      "kind": "latin",
-      "status": "rising",
-      "first_seen": "2026-10-06",
-      "today_count": 6,
-      "max_score": 10.0,
-      "avg_score_today": 6.8,
-      "strong": true,
-      "samples": [
-        {
-          "title": "MiniMax M3.1 Flash shows China's AI price race has no floor in sight",
-          "url": "https://the-decoder.com/minimax-m3-1-flash-shows-chinas-ai-price-race-has-no-floor-in-sight/"
-        },
-        {
-          "title": "MiniMax 发布 M3.1 Flash，推理提速近三倍、用量成本降低 70%",
-          "url": "https://www.minimax.io/blog/minimax-m31f"
-        },
-        {
-          "title": "MiniMax M3.1 Flash",
-          "url": "https://www.minimax.io/blog/minimax-m31f"
         }
       ]
     },
@@ -101,6 +77,30 @@
       ]
     },
     {
+      "term": "deepinfer",
+      "kind": "repo",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 3,
+      "max_score": 10.0,
+      "avg_score_today": 8.7,
+      "strong": true,
+      "samples": [
+        {
+          "title": "DeepSeek just open-sourced its inference engine",
+          "url": "https://github.com/deepseek-ai/DeepInfer"
+        },
+        {
+          "title": "DeepSeek 全面开源内部推理框架 DeepInfer",
+          "url": "https://mp.weixin.qq.com/s?__biz=Mzk0OTYwNzc3NQ%3D%3D&mid=2247485884&idx=1&sn=d457981abe7db1f1b5d600fc109dc836"
+        },
+        {
+          "title": "如何看待 DeepSeek 开源的大规模云服务推理框架 DeepInfer ？",
+          "url": "https://www.zhihu.com/question/2095922064804636469"
+        }
+      ]
+    },
+    {
       "term": "sharkninja",
       "kind": "latin",
       "status": "new",
@@ -121,42 +121,122 @@
       ]
     },
     {
-      "term": "xrpl",
+      "term": "cobol",
       "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 10,
+      "avg_score_today": 9.5,
+      "strong": false,
+      "samples": [
+        {
+          "title": "OpenAI 发布 GPT-6 系列模型，提升 COBOL 等低资源编程语言编码能力",
+          "url": "https://openai.com/index/low-resource-programming-languages"
+        },
+        {
+          "title": "OpenAI says its new models show major performance leaps in low-resource legacy l",
+          "url": "https://www.techmeme.com/261020/p5#a261020p5"
+        }
+      ]
+    },
+    {
+      "term": "afd",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 10.0,
+      "avg_score_today": 9.0,
+      "strong": false,
+      "samples": [
+        {
+          "title": "AfD Leak: What 421,179 Hacked Emails Show about the German Far Right",
+          "url": "https://www.heistberlin.com/news/afd-leak-what-421-179-hacked-emails-show-about-the-german-far-right/"
+        },
+        {
+          "title": "Hackers steal 421,000 emails belonging to members of Germany's far-right AfD par",
+          "url": "https://www.euronews.com/2026/10/20/hackers-steal-421000-emails-belonging-to-members-of-germanys-far-right-afd-party"
+        }
+      ]
+    },
+    {
+      "term": "xscreensaver",
+      "kind": "repo",
       "status": "new",
       "first_seen": "2026-10-20",
       "today_count": 2,
       "max_score": 9.0,
       "avg_score_today": 9.0,
-      "strong": false,
+      "strong": true,
       "samples": [
         {
-          "title": "XRPL Commons Hosts 36-Hour NYC Hackathon to Build On-Chain Lending and AI Paymen",
-          "url": "https://hackernoon.com/xrpl-commons-hosts-36-hour-nyc-hackathon-to-build-on-chain-lending-and-ai-payments-on-xrpl?source=rss"
+          "title": "There is no official XScreenSaver GitHub repository",
+          "url": "https://github.com/xscreensaver-official/xscreensaver"
         },
         {
-          "title": "XRPL Commons Hosts 36-Hour NYC Hackathon to Build On-Chain Lending and AI Paymen",
-          "url": "https://hackernoon.com/xrpl-commons-hosts-36-hour-nyc-hackathon-to-build-on-chain-lending-and-ai-payments-on-xrpl?source=rss"
+          "title": "There is no official XScreenSaver GitHub repository",
+          "url": "https://github.com/xscreensaver-official/xscreensaver"
         }
       ]
     },
     {
-      "term": "liveramp",
+      "term": "dietrichgebert",
+      "kind": "repo",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 8.5,
+      "avg_score_today": 8.5,
+      "strong": true,
+      "samples": [
+        {
+          "title": "sponsors/DietrichGebert - Sponsor Star",
+          "url": "https://github.com/sponsors/DietrichGebert"
+        },
+        {
+          "title": "sponsors/DietrichGebert - Sponsor Star",
+          "url": "https://github.com/sponsors/DietrichGebert"
+        }
+      ]
+    },
+    {
+      "term": "sickn33",
+      "kind": "repo",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 8.5,
+      "avg_score_today": 8.5,
+      "strong": true,
+      "samples": [
+        {
+          "title": "sponsors/sickn33 - Sponsor Star",
+          "url": "https://github.com/sponsors/sickn33"
+        },
+        {
+          "title": "sponsors/sickn33 - Sponsor Star",
+          "url": "https://github.com/sponsors/sickn33"
+        }
+      ]
+    },
+    {
+      "term": "risc",
       "kind": "latin",
       "status": "new",
       "first_seen": "2026-10-20",
       "today_count": 2,
-      "max_score": 7.5,
+      "max_score": 9.0,
       "avg_score_today": 7.5,
       "strong": false,
       "samples": [
         {
-          "title": "The US FTC clears Publicis' $2.2B LiveRamp acquisition, subject to a consent dec",
-          "url": "https://www.techmeme.com/261019/p44#a261019p44"
+          "title": "RISC-V 加速进入 AI 与高性能计算：玄铁车规 IP、服务器芯片等新进展亮相",
+          "url": "https://www.infoq.cn/article/J1Z3RYgH3Vyd9LFEfmlF?utm_source=rss&utm_medium=article"
         },
         {
-          "title": "The US FTC clears Publicis' $2.2B LiveRamp acquisition, subject to a consent dec",
-          "url": "https://www.techmeme.com/261019/p44#a261019p44"
+          "title": "达摩院玄铁出席RISC-V中国峰会，首发车规产品路线图",
+          "url": "https://www.qbitai.com/2026/10/504238.html"
         }
       ]
     },
@@ -171,12 +251,32 @@
       "strong": false,
       "samples": [
         {
-          "title": "Florida DMV hacked after police dept insecurely stored login info",
-          "url": "https://arstechnica.com/tech-policy/2026/10/huge-dmv-data-breach-impacted-current-and-former-florida-residents/"
-        },
-        {
           "title": "Florida DMV Hacked After Police Dept Insecurely Stored Login Info",
           "url": "https://yro.slashdot.org/story/26/10/19/1726218/florida-dmv-hacked-after-police-dept-insecurely-stored-login-info?utm_source=rss1.0mainlinkanon&utm_medium=feed"
+        },
+        {
+          "title": "Florida DMV hacked after police dept insecurely stored login info",
+          "url": "https://arstechnica.com/tech-policy/2026/10/huge-dmv-data-breach-impacted-current-and-former-florida-residents/"
+        }
+      ]
+    },
+    {
+      "term": "cuimao",
+      "kind": "latin",
+      "status": "new",
+      "first_seen": "2026-10-20",
+      "today_count": 2,
+      "max_score": 3.0,
+      "avg_score_today": 3.0,
+      "strong": false,
+      "samples": [
+        {
+          "title": "CuiMao (@CuiMao)",
+          "url": "https://sopilot.net/hot-tweets?tweetId=2112445966427332993"
+        },
+        {
+          "title": "CuiMao (@CuiMao)",
+          "url": "https://sopilot.net/hot-tweets?tweetId=2112445966427332993"
         }
       ]
     }
