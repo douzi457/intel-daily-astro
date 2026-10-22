@@ -297,6 +297,10 @@ class IntelligenceProcessor:
     def __init__(self, profile_config: Dict[str, Any]):
         self.profile = profile_config
         self.cluster = EventCluster()
+        # Batch 14: LLM budget tracking (≤80 calls/day)
+        self._llm_budget_limit = 80
+        self._llm_calls_used = 0
+        self._llm_usage_accum = {'model': '', 'calls': 0, 'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0}
     
     def process(self, raw_data: Dict[str, Any]) -> Dict[str, Any]:
         date = raw_data.get('date', datetime.now(CST).strftime('%Y-%m-%d'))
@@ -332,6 +336,7 @@ class IntelligenceProcessor:
         action_script_map = llm_result[7] if len(llm_result) > 7 else None
         key_quotes_map = llm_result[8] if len(llm_result) > 8 else None
         llm_category_map = llm_result[9] if len(llm_result) > 9 else None  # LLM分类
+        signals_to_process = llm_result[10] if len(llm_result) > 10 else None  # Batch 14: 实际处理的信号
 
         # 更新core_signals的why_it_matters和suggested_action
         if llm_importance:
@@ -359,6 +364,10 @@ class IntelligenceProcessor:
 
         actions = self._generate_actions(core_signals, llm_importance, llm_actions)
         executive_summary = self._generate_summary(core_signals, actions)
+
+        # Batch 14: 为露出层条目生成真摘要（core_signals + watchlist）
+        self._generate_exposed_summaries(core_signals, signals_to_process or core_signals)
+        self._generate_exposed_summaries(watchlist, signals_to_process or core_signals)
         quality = self._calculate_quality(normalized_items, events, core_signals, len(watchlist), len(actions))
 
         # 构建分类精选
@@ -378,8 +387,15 @@ class IntelligenceProcessor:
         self.save_heat_snapshot(core_signals, date, heat_file)
 
         # 添加LLM用量信息
-        if llm_usage:
-            quality['llm_usage'] = llm_usage
+        if self._llm_calls_used > 0:
+            # 使用累计值而非单次调用值
+            result['llm_usage'] = {
+                'model': self._llm_usage_accum.get('model', ''),
+                'calls': self._llm_calls_used,
+                'input_tokens': self._llm_usage_accum.get('input_tokens', 0),
+                'output_tokens': self._llm_usage_accum.get('output_tokens', 0),
+                'total_tokens': self._llm_usage_accum.get('total_tokens', 0),
+            }
         if llm_error:
             quality['warnings'].append(llm_error)
 
@@ -442,8 +458,7 @@ class IntelligenceProcessor:
         # 规范化标点
         title = self._normalize_punctuation(title)
         raw_summary = item.get('summary') or ''
-        if not raw_summary or len(raw_summary) < 10:
-            raw_summary = title
+        # Batch 14: 禁止标题冒充摘要——无源摘要时留空，不回填title
         raw_summary = self._normalize_punctuation(raw_summary)
         
         clean_summary = SummaryCleaner.clean(raw_summary)
@@ -493,11 +508,23 @@ class IntelligenceProcessor:
         return 'unknown'
     
     def _extract_entities(self, item: Dict) -> List[Dict]:
+        """实体抽取：使用词边界匹配，禁止子串误命中（如 metalloenzyme→Meta）"""
         entities = []
-        text = f"{item.get('title', '')} {item.get('summary', '')}".lower()
-        known = {'openai': 'OpenAI', 'anthropic': 'Anthropic', 'google': 'Google', 'meta': 'Meta', 'microsoft': 'Microsoft', 'amazon': 'Amazon', 'apple': 'Apple', 'gpt': 'GPT', 'claude': 'Claude', 'gemini': 'Gemini', 'llama': 'Llama', 'github': 'GitHub', 'chatgpt': 'ChatGPT', 'deepseek': 'DeepSeek', 'qwen': 'Qwen'}
+        title = item.get('title', '')
+        summary = item.get('summary', '') or ''
+        # 用词边界检查：在首尾加空格，确保不会子串匹配
+        check_text = f' {title.lower()} {summary.lower()} '
+        known = {
+            'openai': 'OpenAI', 'anthropic': 'Anthropic', 'google': 'Google',
+            'meta': 'Meta', 'microsoft': 'Microsoft', 'amazon': 'Amazon',
+            'apple': 'Apple', 'gpt': 'GPT', 'claude': 'Claude',
+            'gemini': 'Gemini', 'llama': 'Llama', 'github': 'GitHub',
+            'chatgpt': 'ChatGPT', 'deepseek': 'DeepSeek', 'qwen': 'Qwen',
+        }
         for key, name in known.items():
-            if key in text:
+            # 词边界匹配：key前后必须是空白/标点/字符串边界
+            import re
+            if re.search(rf'(?i)(?<!\w){re.escape(key)}(?!\w)', check_text):
                 entities.append({'name': name, 'type': 'company' if key in ['openai', 'anthropic', 'google', 'meta', 'microsoft', 'amazon', 'apple'] else 'product'})
         return entities[:3]
     
@@ -517,62 +544,19 @@ class IntelligenceProcessor:
         return tags[:5]
     
     def _analyze_importance(self, item: Dict, entities: List[Dict], tags: List[str], seen_texts: set = None) -> str:
-        """分析重要性 - 针对AI开源与Agent创作者画像，确保不重复"""
-        title = item.get('title', '').lower()
-        summary = item.get('summary', '').lower()
-        text = f"{title} {summary}"
-        if seen_texts is None:
-            seen_texts = set()
+        """分析重要性 - 针对AI开源与Agent创作者画像，确保不重复
 
-        # 开源模型相关
-        if any(kw in text for kw in ['open source', '开源', 'release', 'v1.0', 'launch']):
-            if 'model' in text or '模型' in text:
-                result = "新开源模型可能降低API依赖，建议评估本地部署可行性和许可证兼容性。"
-            elif 'agent' in text or 'coding' in text:
-                result = "开源Agent框架直接影响工作流自动化建设，建议实测并评估迁移成本。"
-            else:
-                result = "开源项目更新，建议关注Release Notes中的Breaking Changes。"
-        # Agent/编程助手相关
-        elif any(kw in text for kw in ['agent', 'autogpt', 'coding assistant', '编程助手']):
-            if 'benchmark' in text or '评测' in text:
-                result = "Agent能力评测结果影响技术选型，建议关注测试基线和复现性。"
-            elif 'security' in text or '安全' in text:
-                result = "Agent安全问题可能影响生产部署策略，建议关注漏洞报告和补丁情况。"
-            else:
-                result = "Agent领域进展，建议了解最新功能和对现有工作流的影响。"
-        # 大厂动态
-        elif entities:
-            company_names = [e['name'] for e in entities if e['type'] == 'company']
-            if 'OpenAI' in company_names:
-                result = "OpenAI战略调整可能影响生态格局，建议关注API定价和产品路线变化。"
-            elif 'Anthropic' in company_names:
-                result = "Anthropic动态反映Agent安全方向，建议关注Constitutional AI实践。"
-            elif 'Google' in company_names or 'DeepMind' in company_names:
-                result = "Google AI进展可能影响开源生态，建议关注Gemini和多模态能力。"
-            elif 'Meta' in company_names or 'Llama' in text:
-                result = "Meta开源策略影响LLM生态，建议关注Llama许可变化和商业化路径。"
-            else:
-                result = f"{'、'.join(company_names[:2])}动态，建议关注对开发者工具链的影响。"
-        # 工具/基础设施
-        elif any(kw in text for kw in ['github', 'ide', 'editor', 'plugin', 'tool']):
-            result = "开发者工具更新，建议评估是否能提升编码效率或改善开发体验。"
-        # 评测/基准
-        elif any(kw in text for kw in ['benchmark', '评测', 'test', 'evaluation']):
-            result = "模型评测结果，建议关注测试方法和结论的可复现性。"
-        else:
-            result = "该信息与AI开源和Agent方向相关，建议持续关注后续进展。"
-
-        # 去重：如果结果与已输出文本重复，添加差异化后缀
-        if result in seen_texts:
-            suffixes = ["（本文侧重部署层面）", "（本文关注技术细节）", "（本文分析商业影响）"]
-            for s in suffixes:
-                candidate = result + s
-                if candidate not in seen_texts:
-                    result = candidate
-                    break
-
-        seen_texts.add(result)
-        return result
+        Batch 14: 非露出层条目返回空字符串，由LLM为露出层生成真正相关的判断
+        停用写死模板返回
+        """
+        title = item.get('title', '')
+        summary = item.get('summary', '') or ''
+        # 如果没有摘要且标题过短，说明是低质量条目，返回空
+        if not summary and len(title) < 15:
+            return ''
+        # 非露出层条目统一返回空，由上层决定是否填充
+        # 露出层的 why_it_matters 由 LLM 生成
+        return ''
 
     def _analyze_importance_event(self, main_item: Dict, all_items: List[Dict], indices: List[int], seen_texts: set = None) -> str:
         """事件级重要性分析（考虑多来源）"""
@@ -584,7 +568,10 @@ class IntelligenceProcessor:
         return base_importance
 
     def _suggest_action(self, item: Dict, seen_actions: set = None) -> Dict:
-        """生成具体动作建议，确保不重复"""
+        """生成具体动作建议，确保不重复
+
+        Batch 14: 单源条目不得给 write 型建议
+        """
         title = item.get('title', '').lower()
         summary = item.get('summary', '').lower()
         text = f"{title} {summary}"
@@ -592,20 +579,24 @@ class IntelligenceProcessor:
         if seen_actions is None:
             seen_actions = set()
 
+        # 单源/未核实条目：只能给 watch/decide 型，不得给 write/try
+        source_count = item.get('source_count', 1)
+        is_unverified = (source_count == 1) or (isinstance(item.get('source'), dict) and not item.get('source').get('home_url'))
+
         # 开源项目发布
         if any(kw in text for kw in ['open source', '开源', 'release', 'v1.0', 'launch']):
             if 'model' in text or '模型' in text:
-                result = {'type': 'try', 'text': '克隆官方仓库，在本地环境测试基础功能和API调用'}
+                result = {'type': 'watch', 'text': '关注该开源模型的里程碑进展，待多源报道后再评估'}
             elif 'agent' in text or 'coding' in text:
-                result = {'type': 'try', 'text': '搭建最小Demo验证Agent工作流，评估与现有系统的集成成本'}
+                result = {'type': 'watch', 'text': '追踪该Agent框架的社区活跃度，等待第三方评测'}
             else:
-                result = {'type': 'write', 'text': '整理Release Notes，撰写功能对比和功能演示文章'}
+                result = {'type': 'watch', 'text': '记录该开源项目更新，纳入选题观察池'}
         # 重大发布/产品更新
         elif any(kw in text for kw in ['new', '推出', '发布', 'launch', 'announced']):
-            result = {'type': 'write', 'text': '追踪产品详情和技术方案，准备第一时间解读文章'}
+            result = {'type': 'watch', 'text': '等待多源交叉验证后，再决定是否深入报道'}
         # 评测/基准测试
         elif any(kw in text for kw in ['benchmark', '评测', 'test', 'evaluation']):
-            result = {'type': 'write', 'text': '整理评测数据，撰写横向对比和选型建议文章'}
+            result = {'type': 'watch', 'text': '核查评测方法学，等复现结果后再做判断'}
         # 安全问题
         elif any(kw in text for kw in ['security', '安全', 'vulnerability', '漏洞', 'breach']):
             result = {'type': 'decide', 'text': '评估当前系统是否存在类似风险，制定加固和监控方案'}
@@ -707,7 +698,17 @@ class IntelligenceProcessor:
         model = os.environ.get("AGNES_MODEL") or "agnes-3.0-flash"
 
         if not api_key:
-            return None, None, None, "llm_judgment_skipped_no_key"
+            return None, None, None, "llm_judgment_skipped_no_key", None, None, None, None, None, None, None
+
+        # Batch 14: 预算检查
+        budget_remaining = self._llm_budget_limit - self._llm_calls_used
+        if budget_remaining <= 0:
+            print(f"[LLM] 预算已耗尽({self._llm_calls_used}/{self._llm_budget_limit})，跳过 judgment 调用", file=sys.stderr)
+            return None, None, None, "llm_judgment_skipped_budget_exhausted", None, None, None, None, None, None, None
+
+        # 只处理预算内的核心信号
+        max_signals = min(len(core_signals), budget_remaining, 5)
+        signals_to_process = core_signals[:max_signals]
 
         # 尝试主模型，如失败则降级到2.5-flash
         models_to_try = [model]
@@ -715,7 +716,7 @@ class IntelligenceProcessor:
             models_to_try.append("agnes-2.5-flash")
 
         events_data = []
-        for i, event in enumerate(core_signals[:5], 1):
+        for i, event in enumerate(signals_to_process, 1):
             events_data.append({
                 'index': i,
                 'event_id': event.get('event_id', ''),
@@ -860,7 +861,14 @@ class IntelligenceProcessor:
                         'output_tokens': usage.get('completion_tokens', 0),
                         'total_tokens': usage.get('total_tokens', 0),
                     }
-                    return importance_map, action_map, llm_usage, None, card_type_map, event_brief_map, deep_analysis_map, action_script_map, key_quotes_map, category_map
+                    # Batch 14: 累计记账
+                    self._llm_calls_used += 1
+                    self._llm_usage_accum['calls'] += 1
+                    self._llm_usage_accum['model'] = try_model
+                    self._llm_usage_accum['input_tokens'] += usage.get('prompt_tokens', 0)
+                    self._llm_usage_accum['output_tokens'] += usage.get('completion_tokens', 0)
+                    self._llm_usage_accum['total_tokens'] += usage.get('total_tokens', 0)
+                    return importance_map, action_map, llm_usage, None, card_type_map, event_brief_map, deep_analysis_map, action_script_map, key_quotes_map, category_map, signals_to_process
 
                 except urllib.error.HTTPError as e:
                     last_error = f"HTTP {e.code}: {e.reason}"
@@ -886,7 +894,7 @@ class IntelligenceProcessor:
                     print(f"[LLM] 未预期异常: {last_error}", file=sys.stderr)
                     continue
 
-        return None, None, None, f"llm_call_failed: {last_error}"
+        return None, None, None, f"llm_call_failed: {last_error}", None, None, None, None, None, None, None
 
     def _generate_actions(self, core_signals: List[Dict], llm_importance: Dict = None, llm_actions: Dict = None) -> List[Dict]:
         """生成动作列表，带跨日去重和有效性过滤"""
@@ -1259,7 +1267,81 @@ class IntelligenceProcessor:
             summary.append("当前无明确可执行动作，建议持续观察后续进展。")
 
         return summary[:3]
-    
+
+    def _generate_exposed_summaries(self, items: List[Dict], signals_context: List[Dict]):
+        """Batch 14: 为露出层条目生成真摘要（core_signals + watchlist），不复用标题"""
+        import os
+        api_key = os.environ.get("AGNES_API_KEY", "").strip()
+        if not api_key:
+            return  # 无API key则跳过，摘要留空
+
+        # 只处理没有clean_summary的条目
+        empty_items = [it for it in items if not it.get('clean_summary')]
+        if not empty_items:
+            return
+
+        # 限制调用次数：每天最多20条露出层摘要
+        max_summaries = min(len(empty_items), self._llm_budget_limit - self._llm_calls_used)
+        if max_summaries <= 0:
+            print("[LLM] 预算已耗尽，跳过露出层摘要生成", file=sys.stderr)
+            return
+
+        import urllib.request
+        import urllib.error
+
+        base_url = os.environ.get("AGNES_BASE_URL") or "https://api.agnes-ai.cn/v1"
+        model = os.environ.get("AGNES_MODEL") or "agnes-3.0-flash"
+
+        for i, item in enumerate(empty_items[:max_summaries]):
+            headline = item.get('headline', item.get('title', ''))
+            entities = item.get('entities', [])
+            entity_names = [e['name'] for e in entities]
+
+            prompt = f"""请用一句话（≤60字）概括以下科技资讯的核心内容。只陈述事实，不加评价。
+
+标题：{headline}
+相关实体：{', '.join(entity_names) if entity_names else '无'}
+
+一句话摘要："""
+
+            try:
+                payload = {
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "temperature": 0.3,
+                    "max_tokens": 100,
+                }
+                req = urllib.request.Request(
+                    f"{base_url}/chat/completions",
+                    data=json.dumps(payload).encode('utf-8'),
+                    headers={'Content-Type': 'application/json', 'Authorization': f'Bearer {api_key}'},
+                    method='POST'
+                )
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    if resp.status == 200:
+                        result = json.loads(resp.read().decode('utf-8'))
+                        summary = result['choices'][0]['message']['content'].strip()
+                        usage = result.get('usage', {})
+                        # 记账
+                        self._llm_calls_used += 1
+                        self._llm_usage_accum['calls'] += 1
+                        self._llm_usage_accum['model'] = model
+                        self._llm_usage_accum['input_tokens'] += usage.get('prompt_tokens', 0)
+                        self._llm_usage_accum['output_tokens'] += usage.get('completion_tokens', 0)
+                        self._llm_usage_accum['total_tokens'] += usage.get('total_tokens', 0)
+
+                        # 验证摘要不是标题
+                        if summary and summary != headline and len(summary) > 10:
+                            item['clean_summary'] = summary[:200]
+                            item['uncertainty'] = 'AI-generated summary (batch 14)'
+                            print(f"  [SUMMARY] Generated for: {headline[:40]}...", file=sys.stderr)
+                        else:
+                            item['uncertainty'] = 'summary_generation_failed'
+                            print(f"  [SUMMARY] Skipping invalid summary for: {headline[:40]}...", file=sys.stderr)
+            except Exception as e:
+                print(f"  [SUMMARY] Failed for {headline[:40]}: {e}", file=sys.stderr)
+                item['uncertainty'] = f'summary_error: {type(e).__name__}'
+
     def _calculate_quality(self, items: List[Dict], events: List[Dict], core_signals: List[Dict], watch_count: int = 0, action_count: int = 0) -> Dict:
         """计算质量指标（真实计算，不硬编码）"""
         raw_items = len(items)
@@ -1598,14 +1680,14 @@ def main():
     result = processor.process(raw_data)
 
     # ── LLM 失败保护：如果本次 LLM 调用失败，但上次 V2 数据有效，保留旧数据不覆盖 ──
-    llm_ok = bool(result.get('quality', {}).get('llm_usage'))
+    llm_ok = bool(result.get('llm_usage'))
     v2_path = Path('public/data/v2') / f'daily-{args.date}-v2.json'
 
     if not llm_ok and v2_path.exists():
         try:
             with open(v2_path, encoding='utf-8') as f:
                 old = json.load(f)
-            if old.get('quality', {}).get('llm_usage'):
+            if old.get('llm_usage'):
                 print(f"LLM_FAILED_KEEP_PREVIOUS_V2: 保留上一版好数据，不覆盖 V2/brief", file=sys.stderr)
                 sys.exit(0)
         except Exception as e:

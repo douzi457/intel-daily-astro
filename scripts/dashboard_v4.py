@@ -1228,15 +1228,44 @@ def generate_summaries(candidates: dict):
 
 
 def select_recommendations(candidates: dict) -> dict:
-    """Select top 5 per category with summaries, fill gaps with high-score items"""
+    """Select top 5 per category with summaries, fill gaps with high-score items
+
+    Batch 14: 增加相关性门槛和单源拦截
+    - relevance < 40 的条目不得进入 recommendations
+    - source_count == 1 的条目打 unverified: true 标记
+    - unverified 条目不得排在首位，suggested_action 不得为 write 型
+    - 排序打破并列：v2 total → relevance → impact
+    """
     recommendations = {k: [] for k in candidates}
 
+    # 过滤：relevance < 40 的条目排除
     all_valid = []
     for cat, items in candidates.items():
         for item in items:
-            if item.get("summary"):
-                all_valid.append({**item, "original_category": cat})
-    all_valid.sort(key=lambda x: x["score"], reverse=True)
+            # Batch 14: relevance 门槛检查
+            score = item.get('score', {})
+            relevance = score.get('relevance', 0) if isinstance(score, dict) else 0
+            if relevance < 40:
+                continue
+            # 计算 source_count
+            source_count = item.get('source_count', 1)
+            if isinstance(item.get('source'), dict):
+                source_count = 1  # 单源
+            elif isinstance(item.get('source'), list):
+                source_count = len(item['source'])
+            item['_source_count'] = source_count
+            item['_unverified'] = (source_count == 1)
+            all_valid.append({**item, "original_category": cat})
+
+    # Batch 14: 排序先按 total，再按 relevance，再按 impact
+    def sort_key(x):
+        s = x.get('score', {})
+        return (
+            s.get('total', 0),
+            s.get('relevance', 0),
+            s.get('impact', 0),
+        )
+    all_valid.sort(key=sort_key, reverse=True)
 
     used_ids = set()
     for cat in recommendations:
@@ -1246,14 +1275,37 @@ def select_recommendations(candidates: dict) -> dict:
             recommendations[cat].append(item)
             used_ids.add(id(item))
 
+    # Batch 14: 填充时确保 unverified 条目不排首位
     remaining = [it for it in all_valid if id(it) not in used_ids]
+    verified_remaining = [it for it in remaining if not it.get('_unverified')]
+    unverified_remaining = [it for it in remaining if it.get('_unverified')]
+
     for _ in range(25):
         need = {k: 5 - len(v) for k, v in recommendations.items() if len(v) < 5}
-        if not need or not remaining:
+        if not need or (not verified_remaining and not unverified_remaining):
             break
         for cat in need:
-            while len(recommendations[cat]) < 5 and remaining:
-                recommendations[cat].append(remaining.pop(0))
+            while len(recommendations[cat]) < 5:
+                # 优先填 verified，最后才用 unverified
+                if verified_remaining:
+                    item = verified_remaining.pop(0)
+                elif unverified_remaining:
+                    item = unverified_remaining.pop(0)
+                else:
+                    break
+                # Batch 14: unverified 条目不得排在首位
+                if item.get('_unverified') and len(recommendations[cat]) == 0:
+                    # 暂存，后面放
+                    unverified_remaining.insert(0, item)
+                    break
+                recommendations[cat].append(item)
+                used_ids.add(id(item))
+
+    # 清理临时字段
+    for cat, items in recommendations.items():
+        for item in items:
+            item.pop('_source_count', None)
+            item.pop('_unverified', None)
 
     final_count = sum(len(v) for v in recommendations.values())
     print(f"  Final recommendations: {final_count} items")

@@ -1,0 +1,126 @@
+[
+  {
+    "title": "最好用的 sing-box 一键安装脚本 - 233Boy",
+    "url": "https://233boy.com/sing-box/sing-box-script",
+    "date": "2024-05-22",
+    "tags": [
+      "Sing-box",
+      "VPS",
+      "代理",
+      "翻墙"
+    ],
+    "content_preview": "最好用的 sing-box 一键安装脚本 2024-05-22 18:13 最好用的 sing-box 一键安装脚本 & 管理脚本，自动创建 REALITY 协议；支持 TUIC，Trojan，Hysteria2 等所有常见的协议 介绍 最好用的 sing-box 脚本 Github 地址： https://github.com/233boy/sing-box 特点 快速安装 无敌好用 零学习成本 自动化 TLS 简化所有流程 兼容 sing-box 命令 强大的快捷参数 支持所有常用协议 一键添加 VLESS-REALITY (默认) 一键添加 TUIC 一键添加 Trojan 一键添加 AnyTLS 一键添加 Hysteria2 一键添加 Shadowsocks 2022 一键添加 VMess-(TCP/HTTP/QUIC) 一键添加 VMess-(WS/H2/HTTPUpgrade)-TLS 一键添加 VLESS-(WS/H2/HTTPUpgrade)-TLS 一键添加 Trojan-(WS/H2/HTTPUpgrade)-TLS 一键启用 BBR 一键更改伪装网站 一键更改 (端口/UUID/密码/域名/路径/加密方式/SNI/等&mldr;) 还有更多&mldr; 设计理念 设计理念为： 高效率，超快速，极易用 脚本基于作者的自身使用需求，以 多配置同时运行 为核心设计 并且专门优化了，添加、更改、查看、删除、这四项常用功能 你只需要一条命令即可完成 添加、更改、查看、删除、等操作 例如，添加一个配置仅需不到 1 秒！瞬间完成添加！其他操作亦是如此！ 脚本的参数非常高效率并且超级易用，请掌握参数的使用 请认真往下阅读脚本的参数使用，你就会发现可以如此美妙 支持协议列表 TUIC Trojan Hysteria2 VMess-WS VMess-TCP VMess-H",
+    "full_content": "最好用的 sing-box 一键安装脚本 2024-05-22 18:13 最好用的 sing-box 一键安装脚本 & 管理脚本，自动创建 REALITY 协议；支持 TUIC，Trojan，Hysteria2 等所有常见的协议 介绍 最好用的 sing-box 脚本 Github 地址： https://github.com/233boy/sing-box 特点 快速安装 无敌好用 零学习成本 自动化 TLS 简化所有流程 兼容 sing-box 命令 强大的快捷参数 支持所有常用协议 一键添加 VLESS-REALITY (默认) 一键添加 TUIC 一键添加 Trojan 一键添加 AnyTLS 一键添加 Hysteria2 一键添加 Shadowsocks 2022 一键添加 VMess-(TCP/HTTP/QUIC) 一键添加 VMess-(WS/H2/HTTPUpgrade)-TLS 一键添加 VLESS-(WS/H2/HTTPUpgrade)-TLS 一键添加 Trojan-(WS/H2/HTTPUpgrade)-TLS 一键启用 BBR 一键更改伪装网站 一键更改 (端口/UUID/密码/域名/路径/加密方式/SNI/等&mldr;) 还有更多&mldr; 设计理念 设计理念为： 高效率，超快速，极易用 脚本基于作者的自身使用需求，以 多配置同时运行 为核心设计 并且专门优化了，添加、更改、查看、删除、这四项常用功能 你只需要一条命令即可完成 添加、更改、查看、删除、等操作 例如，添加一个配置仅需不到 1 秒！瞬间完成添加！其他操作亦是如此！ 脚本的参数非常高效率并且超级易用，请掌握参数的使用 请认真往下阅读脚本的参数使用，你就会发现可以如此美妙 支持协议列表 TUIC Trojan Hysteria2 VMess-WS VMess-TCP VMess-HTTP VMess-QUIC Shadowsocks VMess-H2-TLS VMess-WS-TLS VLESS-H2-TLS VLESS-WS-TLS Trojan-H2-TLS Trojan-WS-TLS VMess-HTTPUpgrade-TLS VLESS-HTTPUpgrade-TLS Trojan-HTTPUpgrade-TLS VLESS-REALITY VLESS-HTTP2-REALITY Socks 机场推荐 如果你只是单纯的翻，墙需求，可以购买机场的，不用自己搭建什么的，省心省力。 机场推荐： Just My Socks Just My Socks 是搬瓦工提供的 Shadowsocks & V2Ray 服务，不怕跑路，非国人商家，无须担心 IP 被墙问题。 购买教程： Just My Socks 详细图文购买教程 搭建教程 如果是新手，请看： sing-box 一键搭建详细图文教程 安装 系统支持：Ubuntu，Debian，CentOS，推荐使用 Ubuntu 22，谨慎使用 CentOS，脚本可能无法正常运行！ 执行如下命令： bash &lt; ( wget -qO- -o- https://github.com/233boy/sing-box/raw/main/install.sh ) 如果需要指定 sing-box 版本，请在安装命令后面加 -v ver 参数 如需查看安装命令帮助，在安装命令后面加 -h 即可 安装完成 当你执行了上面的安装命令，并且没有错误提示的话，那么你就能看到类似下面的图片 脚本特意弄了一个时间显示，给反馈用来检测安装时间的&mldr; 理论上，绝大多数情况下 15 秒内会安装完成，条件允许的情况下仅需一秒即可完成安装！ 超过 15 秒的你应该考虑换 VPS 了，推荐使用 搬瓦工 VPS 为方便你快速使用，脚本在安装完成后会自动创建一个 VLESS-REALITY 配置 此时你可以复制 URL 到相关软件 (例如 v2rayN) 去测试一下是否正常使用。 如果无法正常使用，请尝试使用 sing-box add ss auto auto aes-256-gcm 添加一个 SS 来再测试一下 管理面板 安装完成后，输入 sing-box 或者 sb 就能看到管理面板，如下图片所示 提示，如果你不想执行任何功能，直接按 Enter 回车退出即可。 为方便输入，脚本自动创建 sb 快捷输入命令用来代替 sing-box （sing-box 太长了都 无法使用 无法使用一般都是两种情况，一是无法连接上端口，二是客户端内核支持有问题。 如果你的 VPS 有外部防火墙，请确保你已经开放了端口 测试端口是否能连接上： 打开： https://tcp.ping.pe/ 写上你的 VPS IP 跟端口；内容为 ip:端口，示例： 1.1.1.1:443 ，然后点击 Go ；或者直接回车 如果显示 successful；证明端口能连接；如果显示 failed；那是无法连接上端口。 提醒，你可以使用 sb ip 查看 VPS IP。 关闭防火墙，执行如下命令： systemctl stop firewalld; systemctl disable firewalld; ufw disable 关闭防火墙之后再测试一下端口是否通，如果不通，你可能还有外部防火墙没关， 必须要能连接上端口才能正常使用 。 如果能连接上端口，那就继续 使用 sb add ss auto auto aes-256-gcm 添加一个 SS 看看能不能正常使用，如果正常使用，证明运行没有问题。 提醒，默认安装的 sing-box 内核为最新版本 如果无法使用，可能是你客户端的内核太旧 请尝试使用不同的客户端进行测试；比如 v2rayN；v2rayNG 等 请尝试设置 VMessAEAD，某些客户端会有相关选项 某些客户端得把 额外id(alterid) 填写为 0；比如垃圾苹果那边的东西 请更新你的客户端 sing-box 内核跟服务器端版本保持一致！ 快速入门 sing-box 脚本简化了很多流程，例如我们常用的是 (添加、更改、查看、删除) 配置，以下内容让你可以快速掌握使用 添加配置： sb add -> 添加配置 sb add reality -> 添加一个 VLESS-REALITY 配置 sb add reality 443 auto dl.google.com -> 同上，自定义参数：端口使用 443， SNI 使用 dl.google.com sb add hy -> 添加一个 Hysteria2 配置 sb add ss -> 添加一个 Shadowsocks 2022 配置 sb add tcp -> 添加一个 VMess-TCP 配置 备注，使用 sb add 添加配置的时候，仅 *TLS 相关协议配置必须提供域名，其他均可自动化处理。 如需查看更多 add 参数用法，请查看下面的 add 说明 &ndash; 更改配置： sb change -> 更改配置 sb change reality -> 更改 REALITY 相关配置 sb change reality sni 1.1.1.1",
+    "crawled_at": "2026-10-22T21:16:21.974520",
+    "source": "blog",
+    "blog_source": "233boy"
+  },
+  {
+    "title": "sing-box 一键搭建详细图文教程 - 233Boy",
+    "url": "https://233boy.com/sing-box/sing-box-server",
+    "date": "2024-05-22",
+    "tags": [
+      "Sing-box",
+      "VPS",
+      "代理",
+      "翻墙"
+    ],
+    "content_preview": "sing-box 一键搭建详细图文教程 2024-05-22 18:13 搭建 sing-box 翻墙看这篇文章教程就够了！百分百成功搭建 REALITY、Hysteria2、TUIC、 Trojan、VLESS-WS-TLS等协议使用。 前言 此 sing-box 翻墙教程完完全全是为小白准备的，从购买 VPS 到使用 SSH 登录并使用 sing-box 一键安装脚本配置 sing-box 详细的图文教程确保你可以百分百成功搭建 sing-box 使用，哪怕你是第一次接触这些陌生的东西。 由于 sing-box 的配置对于小白来说是非常不友好的， 所以此 sing-box 教程的 sing-box 服务器端配置将会使用我本人撰写的 最好用的 sing-box 一键安装脚本 这是一个对小白友好的 sing-box 一键脚本，简化 sing-box 安装和管理 sing-box sing-box 无敌好用！ 官网： https://sing-box.sagernet.org/zh/ 手动配置 sing-box 可能稍微会有亿点点复杂和麻烦 但是有了本人所写的 最好用的 sing-box 一键安装脚本 加持下，使用 sing-box 明显轻松多了。 流程 总结一下此文章的大致流程，此 sing-box 教程可百分百帮助你搭建 sing-box 使用，哪怕你是第一次接触这些陌生的东西。 购买一个 VPS 想要搭建 V2Ray，就必须要拥有一台 VPS。 获取 VPS 信息 我们必须要知道 VPS IP 地址，root 用户密码，SSH 端口 安装 Xshell Xshell 是一个 SSH 客户端，要登录 VPS，当然需要 SSH 客户端 登录 VPS 使用 Xshell 配置 VPS SSH 信息，然后登录 安装 sing-box 极速安装，全程自动 sing-box 安装完",
+    "full_content": "sing-box 一键搭建详细图文教程 2024-05-22 18:13 搭建 sing-box 翻墙看这篇文章教程就够了！百分百成功搭建 REALITY、Hysteria2、TUIC、 Trojan、VLESS-WS-TLS等协议使用。 前言 此 sing-box 翻墙教程完完全全是为小白准备的，从购买 VPS 到使用 SSH 登录并使用 sing-box 一键安装脚本配置 sing-box 详细的图文教程确保你可以百分百成功搭建 sing-box 使用，哪怕你是第一次接触这些陌生的东西。 由于 sing-box 的配置对于小白来说是非常不友好的， 所以此 sing-box 教程的 sing-box 服务器端配置将会使用我本人撰写的 最好用的 sing-box 一键安装脚本 这是一个对小白友好的 sing-box 一键脚本，简化 sing-box 安装和管理 sing-box sing-box 无敌好用！ 官网： https://sing-box.sagernet.org/zh/ 手动配置 sing-box 可能稍微会有亿点点复杂和麻烦 但是有了本人所写的 最好用的 sing-box 一键安装脚本 加持下，使用 sing-box 明显轻松多了。 流程 总结一下此文章的大致流程，此 sing-box 教程可百分百帮助你搭建 sing-box 使用，哪怕你是第一次接触这些陌生的东西。 购买一个 VPS 想要搭建 V2Ray，就必须要拥有一台 VPS。 获取 VPS 信息 我们必须要知道 VPS IP 地址，root 用户密码，SSH 端口 安装 Xshell Xshell 是一个 SSH 客户端，要登录 VPS，当然需要 SSH 客户端 登录 VPS 使用 Xshell 配置 VPS SSH 信息，然后登录 安装 sing-box 极速安装，全程自动 sing-box 安装完成 此时你可以使用客户端配置 sing-box 使用了 sing-box 高级玩法 配置 VLESS-REALITY ，TUIC，Trojan，Hysteria2，VMess-WS-TLS ， VLESS-WS-TLS等 机场推荐 如果你只是单纯的翻，墙需求，可以购买机场的，不用自己搭建什么的，省心省力。 机场推荐： Just My Socks Just My Socks 是搬瓦工提供的服务，不怕跑路，非国人商家，无须担心 IP 被墙问题。 购买教程： Just My Socks 详细图文购买教程 购买一个VPS 想要搭建 V2Ray， 拥有一个 VPS 是必需的。 我们推荐使用： 搬瓦工（Bandwagon Host） VPS 来搭建 sing-box 搬瓦工是一个对中国用户极度友好的 VPS 商家，有香港，CN2 GIA 优化线路，并且支持支付宝付款，当然也是支持退款的！ 推荐购买的搬瓦工套餐如下 线路 CPU 内存 硬盘 带宽 流量 价格 链接 香港 2 核 2G 40 GB 1 G 500GB / 月 $89.99 / 月 购买 香港 4 核 4G 80 GB 1 G 1000GB / 月 $155.99 / 月 购买 香港 6 核 8G 160 GB 1 G 2000GB / 月 $299.99 / 月 购买 香港 8 核 16G 320 GB 1 G 4000GB / 月 $589.99 / 月 购买 香港 10 核 32G 640 GB 1 G 6000GB / 月 $989.99 / 月 购买 香港 12 核 64G 1280 GB 1 G 8000GB / 月 $1889.99 / 月 购买 - - - - - - - - 新加坡 2 核 2G 40 GB 1.5 G 500GB / 月 $49.99 / 月 购买 新加坡 4 核 4G 80 GB 1.5 G 1000GB / 月 $86.99 / 月 购买 新加坡 6 核 8G 160 GB 2.5 G 2000GB / 月 $165.99 / 月 购买 新加坡 8 核 16G 320 GB 2.5 G 4000GB / 月 $329.99 / 月 购买 新加坡 10 核 32G 640 GB 5 G 6000GB / 月 $549.99 / 月 购买 新加坡 12 核 64G 1280 GB 5 G 8000GB / 月 $1059.99 / 月 购买 - - - - - - - - 日本大阪 2 核 2 GB 40 GB 1.5G 500GB / 月 $49.99 / 月 购买 日本大阪 4 核 4 GB 80 GB 1.5G 1000GB / 月 $86.99 / 月 购买 日本大阪 6 核 8 GB 160 GB 1.5G 2000GB / 月 $165.99 / 月 购买 日本大阪 8 核 16 GB 320 GB 1.5 G 4000GB / 月 $329.99 / 月 购买 日本大阪 10 核 32G 640 GB 1.5 G 6000GB / 月 $549.99 / 月 购买 日本大阪 12 核 64G 1280 GB 1.5 G 8000GB / 月 $1059.99 / 月 购买 - - - - - - - - 日本东京 2 核 2 GB 40 GB 1.2 G 500GB / 月 $89.99 / 月 购买 日本东京 4 核 4 GB 80 GB 1.2 G 1000GB / 月 $159.99 / 月 购买 日本东京 6 核 8 GB 160 GB 1.2G 2000GB / 月 $299.99 / 月 购买 日本东京 8 核 16 GB 320 GB 1.2 G 4000GB / 月 $589.99 / 月 购买 日本东京 10 核 32G 640 GB 1.2 G 6000GB / 月 $989.99 / 月 购买 日本东京 12 核 64G 1280 GB 1.2 G 8000GB / 月 $1889.99 / 月 购买 - - - - - - - - 美国三网优化 2 核 1GB 20 GB 2.5G 1000GB / 月 $65.89 / 季 购买 美国三网优化 3 核 2GB 40 GB 2.5G 2000GB / 月 $116.99 / 季 购买 美国三网优化 4 核 4GB 80 GB 2.5G 3000GB / 月 $69.99 / 月 购买 美国三网优化 6 核 8GB 160 GB 5G 5000GB / 月 $109.99 / 月 购买 美国三网优化 8 核 16GB 320 GB 5G 8000GB / 月 $199.99 / 月 购买 美国三网优化 10 核 32GB 640 GB 10G 10000GB / 月 $369.99 / 月 购买 美国三网优化 12 核 64GB 1280 GB 10G 12000GB / 月 $699.99 / 月 购买 美国三网优化 12 核 64GB 1280 GB 10G 15000GB / 月 $879.99 / 月 购买 美国三网优化 12 核 64GB 1280 GB 10G 20000GB / 月 $1159.99 / 月 购买 - - - - - -",
+    "crawled_at": "2026-10-22T21:16:23.344741",
+    "source": "blog",
+    "blog_source": "233boy"
+  },
+  {
+    "title": "使用 Cloudflare 中转 sing-box 流量 - 233Boy",
+    "url": "https://233boy.com/sing-box/sing-box-cloudflare",
+    "date": "2024-05-22",
+    "tags": [
+      "Sing-box",
+      "VPS",
+      "代理",
+      "翻墙"
+    ],
+    "content_preview": "使用 Cloudflare 中转 sing-box 流量 2024-05-22 18:13 使用 Cloudflare 中转 sing-box 流量可以避免 IP 被墙，也可以拯救被封的 IP。 前言 一般而言，除非真的有需求，要不然不建议套 CF，因为套 CF 中转速度太慢了 使用 Cloudflare 中转的速度相对来说是比较慢的，这个是因为线路的问题，无解。 但是使用移动网络的话，可能会使用 Cloudflare 香港节点，理论上会有不错的速度 只有担心 IP 被墙或者 IP 已经被封了，才建议套 CF 中转流量。 安装脚本 如果已安装，跳过此部分 登录你的 VPS；执行下面的命令： bash &lt;(wget -qO- -o- https://github.com/233boy/sing-box/raw/main/install.sh) 如果安装成功，继续 准备 必须拥有一个域名。 打开： https://dash.cloudflare.com/sign-up 注册一个 Cloudflare 账号，有账号的话你就登录啊 添加域名 注册成功后，登录 为方便理解，可以在 Cloudflare 后台将语言切换成简体中文；并点击添加站点 然后，输入你的域名，添加站点 选择 Free 计划，继续 我们现在就添加一个 DNS 记录，名称： ai ，IPv4 地址： 写你的 VPS IP ，代理状态必须关闭，云朵图标为灰色。 提示：你可以使用 sing-box ip 查看你的 VPS IP。 Cloudflare 会自动扫描域名的 DNS，此处可能会不同的显示，反正确保刚才添加的记录，代理状态为关闭即可，继续 更改域名的 Name Servers 服务器为 Cloudflare 给出两组服务器，不同的域名服务商的操作会有一些不同，此处自己弄 改完域名的 Name Servers",
+    "full_content": "使用 Cloudflare 中转 sing-box 流量 2024-05-22 18:13 使用 Cloudflare 中转 sing-box 流量可以避免 IP 被墙，也可以拯救被封的 IP。 前言 一般而言，除非真的有需求，要不然不建议套 CF，因为套 CF 中转速度太慢了 使用 Cloudflare 中转的速度相对来说是比较慢的，这个是因为线路的问题，无解。 但是使用移动网络的话，可能会使用 Cloudflare 香港节点，理论上会有不错的速度 只有担心 IP 被墙或者 IP 已经被封了，才建议套 CF 中转流量。 安装脚本 如果已安装，跳过此部分 登录你的 VPS；执行下面的命令： bash &lt;(wget -qO- -o- https://github.com/233boy/sing-box/raw/main/install.sh) 如果安装成功，继续 准备 必须拥有一个域名。 打开： https://dash.cloudflare.com/sign-up 注册一个 Cloudflare 账号，有账号的话你就登录啊 添加域名 注册成功后，登录 为方便理解，可以在 Cloudflare 后台将语言切换成简体中文；并点击添加站点 然后，输入你的域名，添加站点 选择 Free 计划，继续 我们现在就添加一个 DNS 记录，名称： ai ，IPv4 地址： 写你的 VPS IP ，代理状态必须关闭，云朵图标为灰色。 提示：你可以使用 sing-box ip 查看你的 VPS IP。 Cloudflare 会自动扫描域名的 DNS，此处可能会不同的显示，反正确保刚才添加的记录，代理状态为关闭即可，继续 更改域名的 Name Servers 服务器为 Cloudflare 给出两组服务器，不同的域名服务商的操作会有一些不同，此处自己弄 改完域名的 Name Servers 就点击， 完成，检查名称服务器 等待生效 更改域名的 Name Servers 服务器生效的时间会有延迟的，耐心等待即可 在 Cloudflare 后台主页，如果能看到域名下面显示有 有效 ，那就是生效了 域名生效了，那就是域名正式托管在 Cloudflare 管理。 添加中转配置 登录你的 VPS 使用 sing-box add wss ai.233boy.com 添加一个 vmess-ws-tls 配置；记得把 ai.233boy.com 改成你的域名 就是刚才添加记录的那个域名，假设你的域名是 233boy.com ，添加的名称是 ai，域名就是 ai.233boy.com 添加成功的话，会显示类似图片的配置 开启中转 在 Cloudflare 后台主页，点击你的域名进去，在左侧选项菜单选择 SSL/TLS 将 SSL/TLS 加密模式更改为 完全 然后在左侧选项菜单选择 DNS 编辑添加的那个记录，把代理状态打开，即是 已代理 ，云朵图标为点亮状态，然后保存 这是更改后的样子，代理状态，已代理，云朵图标点亮。 好了 把云朵点亮之后，流量就是走的 Cloudflare 中转了。 提醒，把云朵点亮就是流量通过 Cloudflare 中转，点灰云朵图标就是直连，不走 Cloudflare 中转。 获取真实客户端IP 考虑到有些人会有某些特殊需求，因为套 CF 了默认情况在查看日志的时候会显示客户端 IP 是 CF 的。 如果你需要获取真实的客户端IP，得更改一下 Caddy 的配置 在 /etc/caddy/233boy/xxx.conf 找到你的 caddy 配置文件，（xxx 指的是你的域名） 默认配置类似如下： xxx:443 { reverse_proxy /56f7be67-809f-4f47-8cae-9bffa908adf5 127.0.0.1:2333 import /etc/caddy/233boy/xxx.conf.add } 最终更改的配置如下： xxx:443 { reverse_proxy /56f7be67-809f-4f47-8cae-9bffa908adf5 127.0.0.1:2333 { header_up X-Real-IP {header.CF-Connecting-IP} header_up X-Forwarded-For {header.CF-Connecting-IP} } import /etc/caddy/233boy/xxx.conf.add } 原则上，你仅需要更改增加一下 header_up 选项指定 IP 为 CF 转发就好了， 记得不要瞎改别的啊！ 改好了要重启一下 Caddy： sing-box restart caddy 测速 你看这速度还行吧 不可能，绝对不可能（假的 备注 如果你的 VPS 位置是在美国西海岸的话，速度应该还算可以吧，如果不是在美国西海岸，那么也许速度会很慢 不过好在能防止 IP 被墙，或者让 IP 起死回生，也挺好的，难道不是么？ 如果你使用移动网络的话，那么 Cloudflare 的中转节点可能会在香港，速度也许会不错 (不完全保证)。 其他 添加 DNS 记录的时候，那个名称你可以随便起的，只要解析到你的 VPS IP，添加中转配置时写上你的域名即可 我们只是用了 ai 名称做为示例 懂的都懂 文章只是示例了使用 vmess-ws-tls 中转，其他 *TLS 协议也可以中转的，但是我不想写了，拜托兄弟你头脑灵光一点！星不星呀 提示：记得要在左侧选项菜单 网络 里面把所有的选项都打开，比如说 gRPC 你也可以换成 vless-ws-tls 协议，可能速度会快一亿亿点哦！ 不懂就算了！真是的 优化速度 你可以弄优选 Cloudflare IP 啊，我没弄过，也不需要弄，毕竟你看我测速也还行，够用了。 sing-box 脚本说明 请看： 最好用的 sing-box 一键安装脚本 哎呀，虽然脚本很好用，但是为了你能更加了解掌握各种使用技巧，还是建议看一虾吧！ 结束 明明这么简单的东西，看不懂的建议把电脑砸了，然后去报读幼儿园。 复制粘贴我文章的抄袭狗没鸡鸡！ #sing-box #Cloudflare #教程 上一篇： sing-box 脚本 no-auto-tls 参数帮助说明 下一篇： sing-box 脚本中转教程 广而告之：推荐购买 Just My Socks 机场 备用以防止失联，CN2 GIA 线路不会被墙也不会跑路。",
+    "crawled_at": "2026-10-22T21:16:24.623187",
+    "source": "blog",
+    "blog_source": "233boy"
+  },
+  {
+    "title": "sing-box 脚本中转教程 - 233Boy",
+    "url": "https://233boy.com/sing-box/sing-box-direct",
+    "date": "2024-05-22",
+    "tags": [
+      "Sing-box",
+      "VPS",
+      "代理",
+      "翻墙"
+    ],
+    "content_preview": "sing-box 脚本中转教程 2024-05-22 18:13 使用 sing-box 脚本中转流量超级简单，利用 Direct 进行转发，详细教程一分钟学会 前言 考虑到有些人需要中转，特此写个教程，其实超级简单的好吧，真的！ 先说逻辑，假设你有 A-B 两台 VPS，打算使用 A 机器转发流量到 B 机器。 常见的用途是国内连接到 A 机器的网络比较好，然后希望通过 A 机器转发数据到 B 机器，再通过 B 机器干坏事（ 又或者是 B 机器可以解锁一些在线服务之类，但是直连效果不好，甚至 IP 都被墙了，想要使用 A 机器做前置转发。 缺点是，只能转发 TCP 或 UDP 流量，带 TLS 的不行 前提 肯定要已经安装了棒棒的 sing-box 脚本 才可以啊。 流程 你得先这样，然后再这样，最后你再这样，听明白了没有！哎，你怎么就听不懂，我是不是说得不够清楚？ 添加配置 先在 B 机器添加一个 sing-box 配置，举例： sing-box add tcp 233 这样来就是添加了一个 VMESS-TCP 的配置，并且端口是 233 如果你已经有配置就不用再添加了，反正记下 B 机器的 IP 和配置的 端口 即可 因为利用 A 机器转发的时候必须要填写上 B 机器的 IP，以及要转到到 B 机器的哪个端口 door 使用方法： sing-box add door [port] [remote-addr] [remote-port] 在 A 机器执行： sing-box add door ，然后输入 B 机器的 IP 和端口 图片仅供参考 默认情况下 sing-box 脚本会随机生成一个端口，如果你需要自定义端口请使用 sing-box add door 需要自定义的端口 测试 把 B 机器给出的配置里面的地址和端口，改成 A 机器的 IP 和端口即可 就是 B 机",
+    "full_content": "sing-box 脚本中转教程 2024-05-22 18:13 使用 sing-box 脚本中转流量超级简单，利用 Direct 进行转发，详细教程一分钟学会 前言 考虑到有些人需要中转，特此写个教程，其实超级简单的好吧，真的！ 先说逻辑，假设你有 A-B 两台 VPS，打算使用 A 机器转发流量到 B 机器。 常见的用途是国内连接到 A 机器的网络比较好，然后希望通过 A 机器转发数据到 B 机器，再通过 B 机器干坏事（ 又或者是 B 机器可以解锁一些在线服务之类，但是直连效果不好，甚至 IP 都被墙了，想要使用 A 机器做前置转发。 缺点是，只能转发 TCP 或 UDP 流量，带 TLS 的不行 前提 肯定要已经安装了棒棒的 sing-box 脚本 才可以啊。 流程 你得先这样，然后再这样，最后你再这样，听明白了没有！哎，你怎么就听不懂，我是不是说得不够清楚？ 添加配置 先在 B 机器添加一个 sing-box 配置，举例： sing-box add tcp 233 这样来就是添加了一个 VMESS-TCP 的配置，并且端口是 233 如果你已经有配置就不用再添加了，反正记下 B 机器的 IP 和配置的 端口 即可 因为利用 A 机器转发的时候必须要填写上 B 机器的 IP，以及要转到到 B 机器的哪个端口 door 使用方法： sing-box add door [port] [remote-addr] [remote-port] 在 A 机器执行： sing-box add door ，然后输入 B 机器的 IP 和端口 图片仅供参考 默认情况下 sing-box 脚本会随机生成一个端口，如果你需要自定义端口请使用 sing-box add door 需要自定义的端口 测试 把 B 机器给出的配置里面的地址和端口，改成 A 机器的 IP 和端口即可 就是 B 机器的配置，假设你用 v2rayN 通过 URL 导入了配置，把配置的地址和端口改成 A 机器的 IP 和 Dokodemo-door 端口。 看看是不是能使用了？ 一键添加 快速添加一个中转配置： sing-box add door 233 b.233boy.com 443 解释：添加一个 Direct 配置，端口 233，目标地址 b.233boy.com，目标端口 443。 是的，目标地址你也可以使用域名。 机智如你 虽然说上面的例子是来中转 sing-box 配置使用，但是你也可以做一下跳板机，用来搞一下骚操作 比如说，转发数据到 1.1.1.1 DNS： sing-box add door 53 1.1.1.1 53 ，这样来就是你的 53 端口也可以做 DNS 啦 至于其他的操作，自行发挥！ 结束 就是如此简单~ 呀，不要好奇为什么不在脚本选项里面显示，因为所以。 #sing-box #中转 #教程 上一篇： 使用 Cloudflare 中转 sing-box 流量 下一篇： sing-box 脚本 DNS 设置 广而告之：推荐购买 Just My Socks 机场 备用以防止失联，CN2 GIA 线路不会被墙也不会跑路。",
+    "crawled_at": "2026-10-22T21:16:25.932852",
+    "source": "blog",
+    "blog_source": "233boy"
+  },
+  {
+    "title": "RackNerd VPS 最具性价比的服务器，约10美金/年 1Gbps/2000G/月 &#8211; 科技老王",
+    "url": "https://kejilaowang.com/racknerd-vps-1gbps-2000g-month",
+    "date": "2026-10-22",
+    "tags": [
+      "VPS",
+      "评测",
+      "推荐"
+    ],
+    "content_preview": "",
+    "full_content": "",
+    "crawled_at": "2026-10-22T21:16:28.214522",
+    "source": "blog",
+    "blog_source": "kejilaowang"
+  },
+  {
+    "title": "搬瓦工 VPS 使用体验分享：稳定、安全、灵活，十年如一日的优选之道 &#8211; 科技老王",
+    "url": "https://kejilaowang.com/vps-bandwagonhost",
+    "date": "2026-10-22",
+    "tags": [
+      "VPS",
+      "评测",
+      "推荐"
+    ],
+    "content_preview": "",
+    "full_content": "",
+    "crawled_at": "2026-10-22T21:16:29.668808",
+    "source": "blog",
+    "blog_source": "kejilaowang"
+  },
+  {
+    "title": "一台 VPS 装 H-UI/S-UI/3X-UI 面板 + Hysteria2 流量循环控制",
+    "url": "https://kejilaowang.com/h-ui-面板安装-hysteria2-协议的完整教程",
+    "date": "2026-10-22",
+    "tags": [
+      "VPS",
+      "评测",
+      "推荐"
+    ],
+    "content_preview": "",
+    "full_content": "",
+    "crawled_at": "2026-10-22T21:16:32.275330",
+    "source": "blog",
+    "blog_source": "kejilaowang"
+  },
+  {
+    "title": "翻墙科学上网VPS怎么选？从折腾服务器到顶级 VPN，一篇讲透所有方案 &#8211; 科技老王",
+    "url": "https://kejilaowang.com/scientific-internet-access-vps-vpn-guide",
+    "date": "2026-10-22",
+    "tags": [
+      "VPS",
+      "评测",
+      "推荐"
+    ],
+    "content_preview": "",
+    "full_content": "",
+    "crawled_at": "2026-10-22T21:16:34.536030",
+    "source": "blog",
+    "blog_source": "kejilaowang"
+  }
+]

@@ -1,0 +1,295 @@
+{
+  "version": "4.0",
+  "updated_at": "2026-10-22T21:37:10.809319",
+  "description": "技术博客知识库 - VPS代理、翻墙技术、服务器管理、节点配置",
+  "sources": {
+    "ygkkk_blog": {
+      "name": "甬哥侃侃侃",
+      "url": "https://ygkkk.blogspot.com",
+      "youtube": "https://www.youtube.com/@ygkkk",
+      "github": "https://github.com/yonggekkk",
+      "articles_count": 4,
+      "topics": [
+        "Sing-box",
+        "Argo隧道",
+        "VPS推荐",
+        "Cloudflare代理"
+      ],
+      "update_frequency": "不定期",
+      "key_resources": [
+        "sing-box-yg脚本",
+        "ArgoSBX脚本",
+        "CF代理脚本"
+      ]
+    },
+    "233boy": {
+      "name": "233Boy",
+      "url": "https://233boy.com",
+      "articles_count": 4,
+      "topics": [
+        "Sing-box教程",
+        "Cloudflare中转",
+        "DNS配置"
+      ],
+      "update_frequency": "每月",
+      "highlights": "图文教程详细，适合小白入门"
+    },
+    "kejilaowang": {
+      "name": "科技老王",
+      "url": "https://kejilaowang.com",
+      "youtube": "https://www.youtube.com/@kejilaowang",
+      "articles_count": 8,
+      "topics": [
+        "VPS评测",
+        "面板配置",
+        "Hysteria2",
+        "TUIC",
+        "3X-UI",
+        "S-UI"
+      ],
+      "update_frequency": "每周",
+      "highlights": "实测数据详细，视频教程配套"
+    },
+    "github_scripts": {
+      "name": "GitHub脚本集合",
+      "urls": [
+        "https://github.com/yonggekkk/Cloudflare-vless-trojan",
+        "https://github.com/mack-a/v2ray-agent",
+        "https://github.com/SagerNet/sing-box",
+        "https://github.com/MHSanaei/3x-ui",
+        "https://github.com/sprov065/s-ui"
+      ],
+      "topics": [
+        "Workers代理",
+        "一键脚本",
+        "多协议支持"
+      ],
+      "latest_versions": {
+        "3x-ui": "v3.6.0",
+        "sing-box": "最新稳定版",
+        "s-ui": "持续更新"
+      }
+    }
+  },
+  "docs": {
+    "protocol_guide": "PROTOCOL_GUIDE.md",
+    "panel_config_guide": "PANEL_CONFIG_GUIDE.md",
+    "panel_guide": "PANEL_GUIDE.md",
+    "workers_pages_guide": "WORKERS_PAGES_GUIDE.md",
+    "domain_guide": "DOMAIN_GUIDE.md",
+    "vps_guide": "VPS_GUIDE.md",
+    "search_guide": "SEARCH_GUIDE.md",
+    "usage_guide": "USAGE_GUIDE.md",
+    "youtube_tutorials": "YOUTUBE_TUTORIALS.md",
+    "open_source_tools": "OPEN_SOURCE_TOOLS.md",
+    "markdown_editor_comparison": "MARKDOWN_EDITORS_COMPARISON.md"
+  },
+  "data_files": {
+    "crawled_articles": "crawled_articles.json",
+    "extra_articles": "extra_articles.json",
+    "blog_discovery": "blog_discovery.json"
+  },
+  "topics_covered": {
+    "VPS购买": [
+      "RackNerd",
+      "搬瓦工",
+      "DMIT",
+      "CloudCone",
+      "Vultr",
+      "RAKsmart"
+    ],
+    "代理协议": [
+      "VLESS",
+      "Reality",
+      "Hysteria2",
+      "Tuic5",
+      "VMess",
+      "Trojan"
+    ],
+    "面板管理": [
+      "3X-UI",
+      "S-UI",
+      "H-UI"
+    ],
+    "CDN加速": [
+      "Cloudflare",
+      "Argo隧道",
+      "优选IP",
+      "Workers",
+      "Pages"
+    ],
+    "域名注册": [
+      "免费域名",
+      "便宜域名",
+      "Cloudflare Registrar",
+      "NameSilo"
+    ],
+    "故障排查": [
+      "IP被封",
+      "端口被封",
+      "速度缓慢",
+      "证书问题"
+    ]
+  },
+  "auto_update": {
+    "enabled": true,
+    "script": "auto_update.sh",
+    "schedule": "monthly",
+    "sources": [
+      "ygkkk_blog",
+      "233boy",
+      "kejilaowang"
+    ]
+  },
+  "youtube_videos": {
+    "total_videos_identified": 7,
+    "status": "partial_success",
+    "note": "因YouTube API限制，无法直接下载字幕，已通过搜索获取视频描述和时间戳信息",
+    "videos": [
+      {
+        "name": "ygkkk_protocol_ranking",
+        "id": "IoFtykGXDao",
+        "views": 131044
+      },
+      {
+        "name": "ygkkk_serv00_tutorial",
+        "id": "x3sW-6mogyw",
+        "views": null
+      },
+      {
+        "name": "kejilaowang_singbox",
+        "id": "RrBYepAcxrk",
+        "views": 5613
+      },
+      {
+        "name": "kejilaowang_sui_3xui",
+        "id": "I1CJoTC79Jo",
+        "views": 21291
+      },
+      {
+        "name": "datou_sui_full",
+        "id": "6l01iAgKglY",
+        "views": 105192
+      },
+      {
+        "name": "jolly_hysteria2",
+        "id": "nA1YQFrt9UY",
+        "views": 22844
+      },
+      {
+        "name": "yiping_sui_advanced",
+        "id": "BXZwZNjeaN8",
+        "views": null
+      }
+    ],
+    "channels": [
+      "甬哥侃侃侃",
+      "科技老王",
+      "大头柴Studio",
+      "JollyRoger",
+      "一瓶奶油"
+    ]
+  },
+  "tools": {
+    "filee": {
+      "name": "Filee",
+      "category": "文件格式转换",
+      "github": "https://github.com/JoveManuscript/Filee",
+      "stars": "~4.3K+",
+      "formats": 244,
+      "key_features": [
+        "环形菜单交互",
+        "批量转换",
+        "右键集成",
+        "按需引擎"
+      ],
+      "use_case": "办公文档/多媒体批量格式转换"
+    },
+    "cn_math_taxonomy": {
+      "name": "cn-math-taxonomy",
+      "category": "教育知识图谱",
+      "github": "https://github.com/haojing8312/cn-k12-math-knowledge-graph",
+      "topics": 1327,
+      "prerequisite_edges": 1204,
+      "key_features": [
+        "3D可视化",
+        "先修关系",
+        "本地运行"
+      ],
+      "use_case": "数学教学路径规划"
+    },
+    "video2x": {
+      "name": "video2x",
+      "category": "视频AI增强",
+      "github": "https://github.com/k4yt3x/video2x",
+      "stars": "~17K+",
+      "models": [
+        "Anime4K v4",
+        "Real-ESRGAN",
+        "Real-CUGAN",
+        "RIFE"
+      ],
+      "key_features": [
+        "超分辨率",
+        "补帧插值",
+        "多模型可选"
+      ],
+      "use_case": "老视频修复/动漫高清化"
+    },
+    "edulab": {
+      "name": "edulab",
+      "category": "教育AI技能",
+      "github": "https://github.com/wy51ai/edulab",
+      "stars": "~1.4K+",
+      "skills": [
+        "edu-solid-geometry",
+        "edu-chem-video",
+        "edu-physics-video"
+      ],
+      "key_features": [
+        "题目→交互网页",
+        "配音讲解视频",
+        "学科针对性"
+      ],
+      "use_case": "教师备课/学生自学"
+    },
+    "yovoice": {
+      "name": "yovoice",
+      "category": "语音创作",
+      "github": "https://github.com/leemysw/yovoice",
+      "features": [
+        "本地TTS",
+        "声音克隆",
+        "AI音乐生成",
+        "多轨编曲"
+      ],
+      "models": [
+        "IndexTTS 2.5",
+        "Qwen3-TTS",
+        "ACE-Step",
+        "YuE2"
+      ],
+      "key_features": [
+        "完全本地",
+        "零API费用",
+        "音乐创作"
+      ],
+      "use_case": "有声书/配音/AI音乐"
+    },
+    "marka_md": {
+      "name": "marka.md",
+      "category": "Markdown编辑器/AI工具",
+      "github": "https://github.com/mattenarle10/markamd",
+      "stars": "~500+",
+      "key_features": [
+        "Context Tray",
+        "AI上下文打包",
+        "Token计数",
+        "Tauri架构"
+      ],
+      "use_case": "AI工作者、技术文档维护者",
+      "size": "8-12MB",
+      "license": "MIT"
+    }
+  }
+}
