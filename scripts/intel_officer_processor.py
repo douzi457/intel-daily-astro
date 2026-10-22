@@ -981,7 +981,9 @@ class IntelligenceProcessor:
             event = {
                 'event_id': event_id,
                 'headline': self._normalize_punctuation(main_item['title']),
-                'clean_summary': main_item['clean_summary'] or main_item['raw_summary'][:100],
+                # Batch 14: clean_summary优先使用清洗后的摘要，而非raw_summary
+                # 如果clean_summary为空，保留空字符串，由后续_generate_exposed_summaries生成真摘要
+                'clean_summary': main_item.get('clean_summary') or '',
                 'primary_item_id': main_item['id'],
                 'url': main_item['url'],
                 'supporting_item_ids': [i['id'] for i in supporting_items],
