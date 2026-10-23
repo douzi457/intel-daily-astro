@@ -345,7 +345,7 @@ function normalize(text: string): string {
   </div>
 
   <div class="shell">
-    <div slot="left">
+    <div class="shell-main">
       <main>
         <div class="container">
           {!v2Data ? (
@@ -588,7 +588,7 @@ function normalize(text: string): string {
   </main>
     </div>
     
-    <div slot="right">
+    <aside class="shell-right">
       {/* 数据来源 */}
       <section class="data-source-section">
         <div class="section-title">数据来源</div>
@@ -647,8 +647,8 @@ function normalize(text: string): string {
           </ul>
         </section>
       )}
-    </div>
-  
+    </aside>
+  </div>
 </BaseLayout>
 
 <script is:inline>
