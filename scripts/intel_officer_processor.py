@@ -386,16 +386,6 @@ class IntelligenceProcessor:
         # 保存当前班次快照（供下次使用）
         self.save_heat_snapshot(core_signals, date, heat_file)
 
-        # 添加LLM用量信息
-        if self._llm_calls_used > 0:
-            # 使用累计值而非单次调用值
-            result['llm_usage'] = {
-                'model': self._llm_usage_accum.get('model', ''),
-                'calls': self._llm_calls_used,
-                'input_tokens': self._llm_usage_accum.get('input_tokens', 0),
-                'output_tokens': self._llm_usage_accum.get('output_tokens', 0),
-                'total_tokens': self._llm_usage_accum.get('total_tokens', 0),
-            }
         if llm_error:
             quality['warnings'].append(llm_error)
 
@@ -429,7 +419,17 @@ class IntelligenceProcessor:
             'items': normalized_items,
             'events': events,
         }
-        
+
+        # 添加LLM用量信息
+        if self._llm_calls_used > 0:
+            # 使用累计值而非单次调用值
+            result['llm_usage'] = {
+                'model': self._llm_usage_accum.get('model', ''),
+                'calls': self._llm_calls_used,
+                'input_tokens': self._llm_usage_accum.get('input_tokens', 0),
+                'output_tokens': self._llm_usage_accum.get('output_tokens', 0),
+                'total_tokens': self._llm_usage_accum.get('total_tokens', 0),
+            }
         return result
     
     def _normalize_items(self, items: List[Dict]) -> List[Dict]:
