@@ -41,7 +41,7 @@ function statusBadge(status: string): string {
 
 <BaseLayout title="新词榜" description="每日自动发现冒头的新名词" lang="zh-CN">
 <div class="shell">
-  <div slot="left">
+  <div class="shell-main">
 <style>
   :root {
     --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
@@ -226,7 +226,8 @@ function statusBadge(status: string): string {
   )}
 
   </div>
-  <div slot="right">
+  </div>
+  <aside class="shell-right">
     <div class="nt-info-card">
       <div class="nt-section-title">监测说明</div>
       <p>新词榜基于近14天数据自动发现冒头的新名词。</p>
@@ -237,8 +238,8 @@ function statusBadge(status: string): string {
       </ul>
       {generatedAt && <p class="nt-meta">生成时间：{generatedAt}</p>}
     </div>
-  </div>
+  </aside>
+</div>
 
   <Footer />
-</div>
 </BaseLayout>
