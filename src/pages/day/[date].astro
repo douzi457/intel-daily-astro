@@ -80,7 +80,7 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
 >
 <div class="page">
   <div class="shell">
-    <div slot="left">
+    <div class="shell-main">
       <Header mode="day" date={date} totalItems={totalItems} />
 
       <!-- 日期导航 -->
@@ -91,7 +91,7 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
       </div>
     </div>
 
-    <div slot="right">
+    <aside class="shell-right">
       <SectionNav activeSections={activeSections} locale="zh" />
       
       {/* 今日重点（仅当日匹配时显示） */}
@@ -149,7 +149,8 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
       filteredArticles={filteredArticles}
       locale="zh"
     />
-  </div>
+  </aside>
+</div>
 
   <Footer />
 </div>
