@@ -344,69 +344,71 @@ function normalize(text: string): string {
     </div>
   </div>
 
-  <main>
-    <div class="container">
-      {!v2Data ? (
-        <div class="empty-state">
-          <h2>暂无情报数据</h2>
-          <p>请稍后再试，或检查数据采集状态</p>
-        </div>
-      ) : (
-        <>
-          {/* 日期导航 */}
-          <div class="date-nav">
-            <a href={`/officer/?date=${prevDate}`} class={`date-nav-btn ${date === prevDate ? 'current' : ''}`} title="前一天">
-              ← 前一天
-            </a>
-            <span class="date-nav-sep">|</span>
-            <span class="date-nav-btn current" style={{cursor:'default'}}>{date}</span>
-            <span class="date-nav-sep">|</span>
-            <a href={`/officer/?date=${nextDate}`} class="date-nav-btn" title="下一天">
-              下一天 →
-            </a>
-            <div class="archive-dropdown">
-              <button class="date-nav-btn">📅 近7天</button>
-              <div class="archive-menu">
-                {datesList.map(d => (
-                  <a href={`/officer/?date=${d}`} class={d === date ? 'current' : ''}>{d}</a>
-                ))}
+  <div class="shell">
+    <div slot="left">
+      <main>
+        <div class="container">
+          {!v2Data ? (
+            <div class="empty-state">
+              <h2>暂无情报数据</h2>
+              <p>请稍后再试，或检查数据采集状态</p>
+            </div>
+          ) : (
+            <>
+              {/* 日期导航 */}
+              <div class="date-nav">
+                <a href={`/officer/?date=${prevDate}`} class={`date-nav-btn ${date === prevDate ? 'current' : ''}`} title="前一天">
+                  ← 前一天
+                </a>
+                <span class="date-nav-sep">|</span>
+                <span class="date-nav-btn current" style={{cursor:'default'}}>{date}</span>
+                <span class="date-nav-sep">|</span>
+                <a href={`/officer/?date=${nextDate}`} class="date-nav-btn" title="下一天">
+                  下一天 →
+                </a>
+                <div class="archive-dropdown">
+                  <button class="date-nav-btn">📅 近7天</button>
+                  <div class="archive-menu">
+                    {datesList.map(d => (
+                      <a href={`/officer/?date=${d}`} class={d === date ? 'current' : ''}>{d}</a>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div class="funnel">
-            <div class="funnel-item"><span class="funnel-number">{v2Data.stats.raw_items}</span> 条原料</div>
-            <span>→</span>
-            <div class="funnel-item"><span class="funnel-number">{v2Data.stats.unique_events}</span> 个事件</div>
-            <span>→</span>
-            <div class="funnel-item"><span class="funnel-number">{v2Data.stats.core_signals}</span> 条核心</div>
-          </div>
+              <div class="funnel">
+                <div class="funnel-item"><span class="funnel-number">{v2Data.stats.raw_items}</span> 条原料</div>
+                <span>→</span>
+                <div class="funnel-item"><span class="funnel-number">{v2Data.stats.unique_events}</span> 个事件</div>
+                <span>→</span>
+                <div class="funnel-item"><span class="funnel-number">{v2Data.stats.core_signals}</span> 条核心</div>
+              </div>
 
-          {/* 分类Tab */}
-          {Object.keys(categories).length > 0 && (
-            <div class="category-tabs" id="categoryTabs">
-              <button class="cat-tab active" data-cat="全部">全部</button>
-              {CATEGORIES.filter(c => categories[c] && categories[c].length > 0).map(cat => (
-                <button class="cat-tab" data-cat={cat}>{cat}<span class="cat-count">{categories[cat]?.length || 0}</span></button>
-              ))}
-            </div>
-          )}
+              {/* 分类Tab */}
+              {Object.keys(categories).length > 0 && (
+                <div class="category-tabs" id="categoryTabs">
+                  <button class="cat-tab active" data-cat="全部">全部</button>
+                  {CATEGORIES.filter(c => categories[c] && categories[c].length > 0).map(cat => (
+                    <button class="cat-tab" data-cat={cat}>{cat}<span class="cat-count">{categories[cat]?.length || 0}</span></button>
+                  ))}
+                </div>
+              )}
 
-          {/* 今日结论 */}
-          <section class="executive-summary">
-            <div class="section-title">今日结论</div>
-            <ol class="summary-list">
-              {v2Data.executive_summary.map((text: string, i: number) => (
-                <li class="summary-item">
-                  <span class="summary-text">{normalize(text)}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
+              {/* 今日结论 */}
+              <section class="executive-summary">
+                <div class="section-title">今日结论</div>
+                <ol class="summary-list">
+                  {v2Data.executive_summary.map((text: string, i: number) => (
+                    <li class="summary-item">
+                      <span class="summary-text">{normalize(text)}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
 
-          <div class="dashboard-grid">
-            {/* 核心信号时间线 */}
-            <section class="core-signals">
+              <div class="dashboard-grid">
+                {/* 核心信号时间线 */}
+                <section class="core-signals">
               <div class="timeline">
                 {allSignals.map((event: any, i: number) => {
                   const gradeClass = event.score.total >= 90 ? 'grade-high' : event.score.total >= 80 ? 'grade-mid' : 'grade-low';
@@ -584,6 +586,69 @@ function normalize(text: string): string {
       )}
     </div>
   </main>
+    </div>
+    
+    <div slot="right">
+      {/* 数据来源 */}
+      <section class="data-source-section">
+        <div class="section-title">数据来源</div>
+        <div class="data-source-grid">
+          <div class="data-source-item">
+            <span>采集源数</span>
+            <span>{v2Data.source_health?.length || 0}</span>
+          </div>
+          <div class="data-source-item">
+            <span>当日原料</span>
+            <span>{v2Data.stats.raw_items}</span>
+          </div>
+          <div class="data-source-full">
+            <span>Top 5 来源</span>
+            <span>{sourceStats}</span>
+          </div>
+          <div class="data-source-full">
+            <span>分类分布</span>
+            <span>{topCategories}</span>
+          </div>
+        </div>
+        <details class="tech-d">
+          <summary>📊 技术指标</summary>
+          <div class="tech-d-content">
+            <dl>
+              <dt>空摘要率</dt><dd>{(v2Data.quality.metrics.empty_summary_rate * 100).toFixed(1)}%</dd>
+              <dt>重复率</dt><dd>{(v2Data.quality.metrics.exact_duplicate_rate * 100).toFixed(1)}%</dd>
+              <dt>Token 消耗</dt><dd>{v2Data.quality.llm_usage?.total_tokens || 0}</dd>
+              <dt>质量等级</dt><dd>{v2Data.quality.grade}</dd>
+            </dl>
+          </div>
+        </details>
+      </section>
+      
+      {/* 观察名单 */}
+      {v2Data.watchlist.length > 0 && (
+        <section class="watchlist-section">
+          <div class="section-title">观察名单 ({v2Data.watchlist.length})</div>
+          <ul class="watchlist-list">
+            {v2Data.watchlist.slice(0, 10).map((event, i: number) => {
+              const score = event.score.total;
+              let dots: any[] = [];
+              if (score >= 90) dots = [<span class="dot dot-h" key="h"/>,<span class="dot dot-h" key="h2"/>,<span class="dot dot-h" key="h3"/>];
+              else if (score >= 80) dots = [<span class="dot dot-m" key="m"/>,<span class="dot dot-m" key="m2"/>,<span class="dot dot-l" key="l"/>];
+              else dots = [<span class="dot dot-l" key="l"/>,<span class="dot dot-l" key="l2"/>,<span class="dot dot-l" key="l3"/>];
+              return (
+                <li class="watchlist-item" key={i}>
+                  <span class="watchlist-rank">{i + 1}</span>
+                  <span class="watchlist-title">
+                    {event.url ? <a href={event.url} target="_blank" rel="noopener">{normalize(event.headline)}</a> : normalize(event.headline)}
+                  </span>
+                  <div class="watch-dots">{dots}</div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+    </div>
+  
 </BaseLayout>
 
 <script is:inline>

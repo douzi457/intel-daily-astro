@@ -158,137 +158,144 @@ function reasonText(score: number): string {
 </style>
 
 <div class="page-wrap">
-  <Header mode="home" date={v4Date} totalItems={totalItems} today={today} />
-  <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 情报日报</h1>
-  <div class="stats-bar">
-    <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
-    <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item"><span class="stats-bar-value">{v4Data?.total_sources || recentDates.length}</span><span class="stats-bar-label">采集源</span></div>
-    <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
-  </div>
+  <div class="shell">
+    <div slot="left">
+      <Header mode="home" date={v4Date} totalItems={totalItems} today={today} />
+      <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 情报日报</h1>
+      <div class="stats-bar">
+        <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
+        <div class="stats-bar-divider"></div>
+        <div class="stats-bar-item"><span class="stats-bar-value">{v4Data?.total_sources || recentDates.length}</span><span class="stats-bar-label">采集源</span></div>
+        <div class="stats-bar-divider"></div>
+        <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
+      </div>
 
-  {/* 分类筛选 */}
-  {v4Data?.by_category && (
-    <div class="cat-filter" id="catFilter">
-      <button class="cat-pill active" data-cat="all">全部</button>
-      {Object.keys(v4Data.by_category).map((cat) => (
-        <button class="cat-pill" data-cat={cat}>{cat}</button>
-      ))}
-    </div>
-  )}
-
-  <script>
-    const catFilter = document.getElementById('catFilter');
-    if (catFilter) {
-      catFilter.addEventListener('click', (e: Event) => {
-        const btn = (e.target as HTMLElement).closest('.cat-pill') as HTMLElement | null;
-        if (!btn) return;
-        const cat = btn.dataset.cat || 'all';
-        catFilter.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.entry-item').forEach(el => {
-          if (cat === 'all') {
-            el.classList.remove('hidden');
-          } else {
-            el.classList.toggle('hidden', (el as HTMLElement).dataset.category !== cat);
-          }
-        });
-      });
-    }
-  </script>
-
-  {(() => {
-    const featuredItems: any[] = [];
-    if (v4Data?.by_category) {
-      for (const cat of Object.values(v4Data.by_category)) {
-        for (const it of (cat as any[])) {
-          if (it.ai_summary && String(it.ai_summary).trim()) {
-            featuredItems.push(it);
-          }
-        }
-      }
-    }
-    featuredItems.sort((a, b) => (b.score || 0) - (a.score || 0));
-    const topFeatured = featuredItems.slice(0, 10);
-    
-    if (topFeatured.length === 0) return null;
-    
-    return (
-      <>
-        <h2 class="featured-title">⭐ 今日精选 <span class="featured-count">{topFeatured.length}</span></h2>
-        <div class="featured-grid">
-          {topFeatured.map((item: any, i: number) => (
-            <article class="featured-card" key={i}>
-              <div class="featured-rank">{i + 1}</div>
-              <h3><a href={item.url} target="_blank" rel="noopener">{item.ai_title || item.title}</a></h3>
-              <p class="featured-summary">{item.ai_summary}</p>
-              <div class="featured-meta">
-                <span>{item.source}</span>
-                {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
-                {(item.source_count || 0) > 1 && <span>📰 {item.source_count}家报道</span>}
-              </div>
-            </article>
+      {/* 分类筛选 */}
+      {v4Data?.by_category && (
+        <div class="cat-filter" id="catFilter">
+          <button class="cat-pill active" data-cat="all">全部</button>
+          {Object.keys(v4Data.by_category).map((cat) => (
+            <button class="cat-pill" data-cat={cat}>{cat}</button>
           ))}
         </div>
-      </>
-    );
-  })()}
+      )}
 
-  <div class="timeline-wrap">
-    {sortedDates.map(dateStr => {
-      const dayItems = groupedByDate.get(dateStr) || [];
-      const sorted = [...dayItems].sort((a, b) => (b.score || 0) - (a.score || 0));
-      const dy = dateStr.slice(0,4), dm = dateStr.slice(5,7), dd = dateStr.slice(8,10);
-      const dayLabel = dateStr === today ? '今天' : `${dm}月${dd}日`;
-      return (
-        <section>
-          <div class="day-header">
-            <span class="day-label">{dayLabel}</span>
-            <span class="day-date">{dy}-{dm}-{dd}</span>
-            <span class="day-count">{sorted.length} 条</span>
-          </div>
-          {sorted.map(item => {
-            const g = gradeBadge(item.score || 0), gLabel = gradeLabel(item.score || 0);
-            const timeStr = (item.date || '').slice(11, 16);
-            const platform = item.platform_label || item.source || '';
-            const summary = item.ai_summary || item.desc || item.title;
-            const displayTitle = item.ai_title || item.title;
-            const reason = item.ai_reason || '';
-            return (
-              <article class="entry entry-item" data-category={item.category || '其他'}>
-                <div class="entry-meta">
-                  {timeStr && <span class="entry-time">{timeStr}</span>}
-                  {timeStr && platform && <span class="entry-sep">·</span>}
-                  {platform && <span class="entry-source">{platform}</span>}
-                  {(item as any).published_at && <span class="entry-time">·{fmtHM((item as any).published_at)}</span>}
-                  {(item as any).source_count > 1 ? (
-                    <details class="src-expand">
-                      <summary>📰 {(item as any).source_count}家报道</summary>
-                      <div class="src-list">
-                        {(item as any).sources?.map((s: string, si: number) => (
-                          <span class="src-item" key={si}>{s}</span>
-                        ))}
-                      </div>
-                    </details>
-                  ) : (item as any).source_count > 0 && (
-                    <span class="src-count">📰 {(item as any).source_count}家报道</span>
-                  )}
-                  <span class={`grade-pill grade-${g}`}>{gLabel}</span>
-                  {item.ai_score > 0 && <span class="score-pill" title={`AI 评分 ${item.ai_score}/10`}>AI {item.ai_score.toFixed(1)}</span>}
-                  {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
-                </div>
-                <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
-                {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
-                <div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>
-              </article>
-            );
-          })}
-        </section>
-      );
-    })}
-  </div>
-  {allDates.length > 0 && <section style={{marginTop:'32px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+      <script>
+        const catFilter = document.getElementById('catFilter');
+        if (catFilter) {
+          catFilter.addEventListener('click', (e: Event) => {
+            const btn = (e.target as HTMLElement).closest('.cat-pill') as HTMLElement | null;
+            if (!btn) return;
+            const cat = btn.dataset.cat || 'all';
+            catFilter.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.entry-item').forEach(el => {
+              if (cat === 'all') {
+                el.classList.remove('hidden');
+              } else {
+                el.classList.toggle('hidden', (el as HTMLElement).dataset.category !== cat);
+              }
+            });
+          });
+        }
+      </script>
+
+      {(() => {
+        const featuredItems: any[] = [];
+        if (v4Data?.by_category) {
+          for (const cat of Object.values(v4Data.by_category)) {
+            for (const it of (cat as any[])) {
+              if (it.ai_summary && String(it.ai_summary).trim()) {
+                featuredItems.push(it);
+              }
+            }
+          }
+        }
+        featuredItems.sort((a, b) => (b.score || 0) - (a.score || 0));
+        const topFeatured = featuredItems.slice(0, 10);
+        
+        if (topFeatured.length === 0) return null;
+        
+        return (
+          <>
+            <h2 class="featured-title">⭐ 今日精选 <span class="featured-count">{topFeatured.length}</span></h2>
+            <div class="featured-grid">
+              {topFeatured.map((item: any, i: number) => (
+                <article class="featured-card" key={i}>
+                  <div class="featured-rank">{i + 1}</div>
+                  <h3><a href={item.url} target="_blank" rel="noopener">{item.ai_title || item.title}</a></h3>
+                  <p class="featured-summary">{item.ai_summary}</p>
+                  <div class="featured-meta">
+                    <span>{item.source}</span>
+                    {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
+                    {(item.source_count || 0) > 1 && <span>📰 {item.source_count}家报道</span>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </>
+        );
+      })()}
+
+      <div class="timeline-wrap">
+        {sortedDates.map(dateStr => {
+          const dayItems = groupedByDate.get(dateStr) || [];
+          const sorted = [...dayItems].sort((a, b) => (b.score || 0) - (a.score || 0));
+          const dy = dateStr.slice(0,4), dm = dateStr.slice(5,7), dd = dateStr.slice(8,10);
+          const dayLabel = dateStr === today ? '今天' : `${dm}月${dd}日`;
+          return (
+            <section>
+              <div class="day-header">
+                <span class="day-label">{dayLabel}</span>
+                <span class="day-date">{dy}-{dm}-{dd}</span>
+                <span class="day-count">{sorted.length} 条</span>
+              </div>
+              {sorted.map(item => {
+                const g = gradeBadge(item.score || 0), gLabel = gradeLabel(item.score || 0);
+                const timeStr = (item.date || '').slice(11, 16);
+                const platform = item.platform_label || item.source || '';
+                const summary = item.ai_summary || item.desc || item.title;
+                const displayTitle = item.ai_title || item.title;
+                const reason = item.ai_reason || '';
+                return (
+                  <article class="entry entry-item" data-category={item.category || '其他'}>
+                    <div class="entry-meta">
+                      {timeStr && <span class="entry-time">{timeStr}</span>}
+                      {timeStr && platform && <span class="entry-sep">·</span>}
+                      {platform && <span class="entry-source">{platform}</span>}
+                      {(item as any).published_at && <span class="entry-time">·{fmtHM((item as any).published_at)}</span>}
+                      {(item as any).source_count > 1 ? (
+                        <details class="src-expand">
+                          <summary>📰 {(item as any).source_count}家报道</summary>
+                          <div class="src-list">
+                            {(item as any).sources?.map((s: string, si: number) => (
+                              <span class="src-item" key={si}>{s}</span>
+                            ))}
+                          </div>
+                        </details>
+                      ) : (item as any).source_count > 0 && (
+                        <span class="src-count">📰 {(item as any).source_count}家报道</span>
+                      )}
+                      <span class={`grade-pill grade-${g}`}>{gLabel}</span>
+                      {item.ai_score > 0 && <span class="score-pill" title={`AI 评分 ${item.ai_score}/10`}>AI {item.ai_score.toFixed(1)}</span>}
+                      {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
+                    </div>
+                    <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
+                    {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
+                    <div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>
+                  </article>
+                );
+              })}
+            </section>
+          );
+        })}
+      </div>
+    </div>
+    
+    <div slot="right">
+      {allDates.length > 0 && <section><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+    </div>
+  
   <Footer />
 </div>
 <button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>

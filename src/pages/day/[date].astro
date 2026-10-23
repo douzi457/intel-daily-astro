@@ -79,28 +79,33 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
   nextUrl={nextUrl}
 >
 <div class="page">
-  <Header mode="day" date={date} totalItems={totalItems} />
+  <div class="shell">
+    <div slot="left">
+      <Header mode="day" date={date} totalItems={totalItems} />
 
-  <!-- 日期导航 -->
-  <div class="day-nav">
-    {prevDay ? <a href={`/day/${prevDay}`} class="day-nav-link">← {prevDay}</a> : <span class="day-nav-spacer"></span>}
-    <span class="day-nav-current">{date} {getDow(date, 'zh')}</span>
-    {nextDay ? <a href={`/day/${nextDay}`} class="day-nav-link">{nextDay} →</a> : <span class="day-nav-spacer"></span>}
-  </div>
-</div>
+      <!-- 日期导航 -->
+      <div class="day-nav">
+        {prevDay ? <a href={`/day/${prevDay}`} class="day-nav-link">← {prevDay}</a> : <span class="day-nav-spacer"></span>}
+        <span class="day-nav-current">{date} {getDow(date, 'zh')}</span>
+        {nextDay ? <a href={`/day/${nextDay}`} class="day-nav-link">{nextDay} →</a> : <span class="day-nav-spacer"></span>}
+      </div>
+    </div>
 
-<SectionNav activeSections={activeSections} locale="zh" />
+    <div slot="right">
+      <SectionNav activeSections={activeSections} locale="zh" />
+      
+      {/* 今日重点（仅当日匹配时显示） */}
+      {focusData && focusData.date === date && (
+        <FocusSection focusData={focusData} today={date} />
+      )}
+    </div>
+  
 
-<div class="page">
-  <!-- 今日重点（仅当日匹配时显示） -->
-  {focusData && focusData.date === date && (
-    <FocusSection focusData={focusData} today={date} />
-  )}
-
-  <div class="content-grid">
-    <div class="main-content">
-      <PlatformSection grouped={grouped} locale="zh" />
-      <FeaturedSection featured={featured} locale="zh" />
+  <div class="page">
+    <div class="content-grid">
+      <div class="main-content">
+        <PlatformSection grouped={grouped} locale="zh" />
+        <FeaturedSection featured={featured} locale="zh" />
 
       <!-- 原生推广卡片 -->
       {totalItems > 0 && (

@@ -159,7 +159,7 @@ function getSummary(item: any): string {
   .hot-cat {
     font-size: 10px; padding: 1px 6px; border-radius: 3px;
     background: var(--accent-soft); color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    border: 1px solid rgba(199,62,58,0.2);
   }
   .hot-stats {
     display: flex; align-items: center; gap: 12px;
@@ -214,80 +214,86 @@ function getSummary(item: any): string {
 </style>
 
 <div class="page-wrap">
-  <Header mode="hot" date={date} totalItems={hotItems.length} today={today} />
-  <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
-  <div class="stats-bar">
-    <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
-    <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item"><span class="stats-bar-value">{[...new Set(v2Items.map((i: any) => { const s = i.source; return (typeof s === 'object' && s) ? (s.name || s.id || '') : (s || '') }).filter(Boolean))].length}</span><span class="stats-bar-label">采集源</span></div>
-    <div class="stats-bar-divider"></div>
-    <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
-  </div>
+  <div class="shell">
+    <div slot="left">
+      <Header mode="hot" date={date} totalItems={hotItems.length} today={today} />
+      <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
+      <div class="stats-bar">
+        <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
+        <div class="stats-bar-divider"></div>
+        <div class="stats-bar-item"><span class="stats-bar-value">{[...new Set(v2Items.map((i: any) => { const s = i.source; return (typeof s === 'object' && s) ? (s.name || s.id || '') : (s || '') }).filter(Boolean))].length}</span><span class="stats-bar-label">采集源</span></div>
+        <div class="stats-bar-divider"></div>
+        <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
+      </div>
 
-  <div class="hot-list">
-    {sortedItems.slice(0, 10).map((item: any, idx: number) => {
-      const rank = idx + 1;
-      const src = item.source_count || 1;
-      const change = item.heat_change_6h || null;
-      const history = item.heat_history || [];
-      const path = sparklinePath(history);
-      const platform = getPlatform(item);
-      const summary = getSummary(item);
-      const cat = item.category || '';
-      // 状态标签：只有真涨超50%才显示"爆"，新事件显示"新"
-      const badges = [];
-      if (change !== null && change > 50) badges.push('<span class="hot-badge explosive">爆</span>');
-      else if (change !== null && change > 0) badges.push('<span class="hot-badge rising">↑</span>');
-      // 新事件：heat_change_6h 为 null（无历史）且 first_seen_at 在 6h 内
-      const firstSeen = item.first_seen_at;
-      const isNew = (change === null || change === undefined) && firstSeen;
-      if (isNew) badges.push('<span class="hot-badge new">新</span>');
-      const badgeHtml = badges.join('');
-      return (
-        <div class="hot-card">
-          <div class="hot-card-top">
-            <div class={`hot-rank ${rank <= 3 ? 'top3' : ''}`}>{rank}</div>
-            <div class="hot-content">
-              <a href={item.url || '#'} target="_blank" rel="noopener" class="hot-title">{item.title || item.headline || ''}</a>
-              {summary && summary.length > 10 && <p class="hot-summary">{summary.slice(0, 120)}{summary.length > 120 ? '…' : ''}</p>}
-              <div class="hot-meta">
-                <span class="hot-source">{platform}</span>
-                {cat && <span class="hot-cat">{cat}</span>}
-                {(item.score?.total || 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score?.total || 0)}</span>}
-                {badgeHtml && <span set:html={badgeHtml} />}
-                <div class="hot-stats">
-                  <div>
-                    {item.sources && item.sources.length > 0 ? (
-                      <details class="src-expand">
-                        <summary>🔥 {src}家报道</summary>
-                        <div class="src-list">
-                          {item.sources.map((s: string, si: number) => (
-                            <span class="src-item" key={si}>{s}</span>
-                          ))}
+      <div class="hot-list">
+        {sortedItems.slice(0, 10).map((item: any, idx: number) => {
+          const rank = idx + 1;
+          const src = item.source_count || 1;
+          const change = item.heat_change_6h || null;
+          const history = item.heat_history || [];
+          const path = sparklinePath(history);
+          const platform = getPlatform(item);
+          const summary = getSummary(item);
+          const cat = item.category || '';
+          // 状态标签：只有真涨超50%才显示"爆"，新事件显示"新"
+          const badges = [];
+          if (change !== null && change > 50) badges.push('<span class="hot-badge explosive">爆</span>');
+          else if (change !== null && change > 0) badges.push('<span class="hot-badge rising">↑</span>');
+          // 新事件：heat_change_6h 为 null（无历史）且 first_seen_at 在 6h 内
+          const firstSeen = item.first_seen_at;
+          const isNew = (change === null || change === undefined) && firstSeen;
+          if (isNew) badges.push('<span class="hot-badge new">新</span>');
+          const badgeHtml = badges.join('');
+          return (
+            <div class="hot-card">
+              <div class="hot-card-top">
+                <div class={`hot-rank ${rank <= 3 ? 'top3' : ''}`}>{rank}</div>
+                <div class="hot-content">
+                  <a href={item.url || '#'} target="_blank" rel="noopener" class="hot-title">{item.title || item.headline || ''}</a>
+                  {summary && summary.length > 10 && <p class="hot-summary">{summary.slice(0, 120)}{summary.length > 120 ? '…' : ''}</p>}
+                  <div class="hot-meta">
+                    <span class="hot-source">{platform}</span>
+                    {cat && <span class="hot-cat">{cat}</span>}
+                    {(item.score?.total || 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score?.total || 0)}</span>}
+                    {badgeHtml && <span set:html={badgeHtml} />}
+                    <div class="hot-stats">
+                      <div>
+                        {item.sources && item.sources.length > 0 ? (
+                          <details class="src-expand">
+                            <summary>🔥 {src}家报道</summary>
+                            <div class="src-list">
+                              {item.sources.map((s: string, si: number) => (
+                                <span class="src-item" key={si}>{s}</span>
+                              ))}
+                            </div>
+                          </details>
+                        ) : (
+                          <span class="hot-heat">🔥 {src}家报道</span>
+                        )}
+                      </div>
+                      <span class={`hot-change ${changeClass(change)}`}>{changeLabel(change)}</span>
+                      {path && (
+                        <div class="hot-sparkline">
+                          <svg viewBox="0 0 60 24" preserveAspectRatio="none">
+                            <path d={path} />
+                          </svg>
                         </div>
-                      </details>
-                    ) : (
-                      <span class="hot-heat">🔥 {src}家报道</span>
-                    )}
-                  </div>
-                  <span class={`hot-change ${changeClass(change)}`}>{changeLabel(change)}</span>
-                  {path && (
-                    <div class="hot-sparkline">
-                      <svg viewBox="0 0 60 24" preserveAspectRatio="none">
-                        <path d={path} />
-                      </svg>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      );
-    })}
-  </div>
-
-  {allDates.length > 0 && <section style={{marginTop:'32px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+          );
+        })}
+      </div>
+    </div>
+    
+    <div slot="right">
+      {allDates.length > 0 && <section style={{marginTop:'32px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+    </div>
+  
   <Footer />
 </div>
 </BaseLayout>

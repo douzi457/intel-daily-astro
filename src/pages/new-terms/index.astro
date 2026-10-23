@@ -40,6 +40,8 @@ function statusBadge(status: string): string {
 ---
 
 <BaseLayout title="新词榜" description="每日自动发现冒头的新名词" lang="zh-CN">
+<div class="shell">
+  <div slot="left">
 <style>
   :root {
     --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
@@ -222,6 +224,20 @@ function statusBadge(status: string): string {
       )}
     </>
   )}
+
+  </div>
+  <div slot="right">
+    <div class="nt-info-card">
+      <div class="nt-section-title">监测说明</div>
+      <p>新词榜基于近14天数据自动发现冒头的新名词。</p>
+      <ul>
+        <li><b>★ 强信号</b>：近期频繁出现的高价值候选</li>
+        <li><b>全新</b>：14天内首次出现，≥2篇报道</li>
+        <li><b>升温</b>：日均提及量3倍以上增长，≥3篇</li>
+      </ul>
+      {generatedAt && <p class="nt-meta">生成时间：{generatedAt}</p>}
+    </div>
+  </div>
 
   <Footer />
 </div>

@@ -1,28 +1,15 @@
 ---
-// ── Layout Shell ─────────────────────────────────────────────────────────────
-// 多栏布局入口：桌面 ≥1280px 主列 2/3 + 右栏 1/3，桌面以下单列
-// 用法：<Shell showRight>  <LeftColumn>...</LeftColumn>  <RightColumn>...</RightColumn>  </Shell>
-// 不传 showRight 或 right=null 时退化为满宽单列
----
-
-const { showRight = false } = Astro.props;
-
-let left: any = null;
-let right: any = null;
-
-for (const child of Astro.children ?? []) {
-  if (child?.tag === 'LeftColumn') left = child;
-  else if (child?.tag === 'RightColumn') right = child;
-}
+// ── LayoutShell: 多栏布局壳 ────────────────────────────────────────────────────
+// 注意：此组件不接收子元素，直接由各页面内联使用 shell shell-main shell-right 类
 ---
 
 <div class="shell" client:load>
-  {left && <div class="shell-main">{left}</div>}
-  {showRight && right && <aside class="shell-right">{right}</aside>}
+  <div class="shell-main">
+    <slot />
+  </div>
 </div>
 
 <style>
-  /* ── Shell: desktop multi-column ── */
   .shell {
     display: grid;
     grid-template-columns: 1fr;
@@ -48,19 +35,15 @@ for (const child of Astro.children ?? []) {
       max-height: calc(100vh - 96px);
       overflow-y: auto;
       scrollbar-width: thin;
+      scrollbar-color: var(--border, #d4d0c8) transparent;
     }
-    /* 隐藏滚动条但保持可滚动 */
     .shell-right::-webkit-scrollbar { width: 4px; }
     .shell-right::-webkit-scrollbar-track { background: transparent; }
     .shell-right::-webkit-scrollbar-thumb { background: var(--border, #d4d0c8); border-radius: 2px; }
   }
 
-  /* ── Tablet: 768–1280px ── */
   @media (min-width: 768px) and (max-width: 1279px) {
-    .shell {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
+    .shell { grid-template-columns: 1fr; gap: 24px; }
     .shell-right {
       display: block;
       order: 2;
@@ -68,10 +51,8 @@ for (const child of Astro.children ?? []) {
       padding-top: 24px;
       margin-top: 24px;
     }
-    .shell-main { min-width: 0; }
   }
 
-  /* ── Mobile: <768px ── */
   @media (max-width: 767px) {
     .shell { padding: 0 14px 40px; }
     .shell-right { display: block; order: 2; }
