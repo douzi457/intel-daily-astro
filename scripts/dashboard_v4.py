@@ -1227,6 +1227,49 @@ def generate_summaries(candidates: dict):
     return count
 
 
+def _v2_style_breakdown(item: dict) -> dict:
+    """把 dashboard 的 0-10 浮点分映射为 v2 同口径分项（百分制）。
+
+    口径与 intel_officer_processor._calculate_score 一致：先按权重计分
+    （relevance 30 / impact 20 / novelty 15 / source_authority 15 / actionability 15），
+    total 为计分之和，各维度对外为百分制达成率（计分/满分×100）。
+    批次14 的 relevance ≥ 40 门槛是百分制；dashboard 条目的 score 是 0-10 浮点，
+    不先映射成同量纲分项，门槛会因类型不符把全部条目误杀。
+    """
+    s = item.get("score", 0)
+    if isinstance(s, dict):
+        return s
+    s = float(s or 0)
+    rel_pts = min(30, int(s * 3))
+    imp_pts = min(20, int(s * 2))
+    nov_pts = 15 if s >= 8 else 10
+    auth_pts = min(15, int(s * 1.5))
+    act_pts = min(15, int(s * 1.2))
+
+    source_lower = str(item.get("source", "")).lower()
+    if any(x in source_lower for x in ['techcrunch', 'the verge', 'ars technica', 'wired']):
+        auth_pts += 3
+    elif any(x in source_lower for x in ['hacker news', 'github', 'reddit']):
+        auth_pts += 2
+    if item.get("entities"):
+        imp_pts += 3
+
+    total = min(100, rel_pts + imp_pts + nov_pts + auth_pts + act_pts)
+
+    def _pct(pts, mx):
+        return min(100, round(pts / mx * 100))
+
+    return {
+        'total': total,
+        'relevance': _pct(rel_pts, 30),
+        'impact': _pct(imp_pts, 20),
+        'novelty': _pct(nov_pts, 15),
+        'source_authority': _pct(auth_pts, 15),
+        'actionability': _pct(act_pts, 15),
+        'penalties': 0,
+    }
+
+
 def select_recommendations(candidates: dict) -> dict:
     """Select top 5 per category with summaries, fill gaps with high-score items
 
@@ -1243,9 +1286,10 @@ def select_recommendations(candidates: dict) -> dict:
     for cat, items in candidates.items():
         for item in items:
             # Batch 14: relevance 门槛检查
-            score = item.get('score', {})
-            relevance = score.get('relevance', 0) if isinstance(score, dict) else 0
-            if relevance < 40:
+            # score 在 dashboard 里是 0-10 浮点，先映射为百分制分项再比门槛（同量纲）
+            breakdown = _v2_style_breakdown(item)
+            item['_breakdown'] = breakdown
+            if breakdown.get('relevance', 0) < 40:
                 continue
             # 计算 source_count
             source_count = item.get('source_count', 1)
@@ -1259,7 +1303,7 @@ def select_recommendations(candidates: dict) -> dict:
 
     # Batch 14: 排序先按 total，再按 relevance，再按 impact
     def sort_key(x):
-        s = x.get('score', {})
+        s = x.get('_breakdown') or _v2_style_breakdown(x)
         return (
             s.get('total', 0),
             s.get('relevance', 0),
@@ -1306,6 +1350,7 @@ def select_recommendations(candidates: dict) -> dict:
         for item in items:
             item.pop('_source_count', None)
             item.pop('_unverified', None)
+            item.pop('_breakdown', None)
 
     final_count = sum(len(v) for v in recommendations.values())
     print(f"  Final recommendations: {final_count} items")

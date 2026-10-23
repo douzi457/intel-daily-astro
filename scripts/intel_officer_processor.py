@@ -941,25 +941,32 @@ class IntelligenceProcessor:
         return actions[:action_limit]
 
     def _calculate_score(self, original_score: float, entities: List[Dict], source_name: str) -> Dict:
-        relevance = min(30, int(original_score * 3))
-        impact = min(20, int(original_score * 2))
-        novelty = 15 if original_score >= 8 else 10
-        source_authority = min(15, int(original_score * 1.5))
-        actionability = min(15, int(original_score * 1.2))
+        # 各维度先按权重计分（满分 relevance 30 / impact 20 / novelty 15 / source_authority 15 / actionability 15）
+        rel_pts = min(30, int(original_score * 3))
+        imp_pts = min(20, int(original_score * 2))
+        nov_pts = 15 if original_score >= 8 else 10
+        auth_pts = min(15, int(original_score * 1.5))
+        act_pts = min(15, int(original_score * 1.2))
         penalties = 0
-        
+
         source_lower = source_name.lower()
         if any(x in source_lower for x in ['techcrunch', 'the verge', 'ars technica', 'wired']):
-            source_authority += 3
+            auth_pts += 3
         elif any(x in source_lower for x in ['hacker news', 'github', 'reddit']):
-            source_authority += 2
-        
+            auth_pts += 2
+
         if entities:
-            impact += 3
-        
-        total = min(100, relevance + impact + novelty + source_authority + actionability - penalties)
-        
-        return {'total': total, 'relevance': relevance, 'impact': impact, 'novelty': novelty, 'source_authority': source_authority, 'actionability': actionability, 'penalties': penalties, 'reason': f'原始分{original_score}映射'}
+            imp_pts += 3
+
+        # total 保持旧口径（权重计分之和），核心≥80/观察≥60 的分层行为不变
+        total = min(100, rel_pts + imp_pts + nov_pts + auth_pts + act_pts - penalties)
+
+        # 对外维度统一为百分制达成率（计分/满分×100），与批次14「relevance ≥ 40」门槛同量纲。
+        # 旧口径直接输出权重计分（relevance 封顶 30），与百分制门槛混用，任何条目都过不了 40。
+        def _pct(pts: float, mx: int) -> int:
+            return min(100, round(pts / mx * 100))
+
+        return {'total': total, 'relevance': _pct(rel_pts, 30), 'impact': _pct(imp_pts, 20), 'novelty': _pct(nov_pts, 15), 'source_authority': _pct(auth_pts, 15), 'actionability': _pct(act_pts, 15), 'penalties': penalties, 'reason': f'原始分{original_score}映射（维度为百分制达成率）'}
     
     def _build_events(self, items: List[Dict], cluster_result: Dict[str, List[int]]) -> List[Dict]:
         """构建事件对象"""
@@ -1035,14 +1042,17 @@ class IntelligenceProcessor:
         watch_limit = self.profile.get('watch_limit', 12)
         confidence_threshold = self.profile.get('confidence_threshold', 0.65)
 
-        # 为AI模型和开源项目增加relevance权重（老大画像）
+        # 为AI模型和开源项目增加relevance权重（老大画像）：等效旧档（2026-10-23 老大拍板）——
+        # 旧口径 relevance 权重分封顶 30、加成为 +10 分（≈总分 +10）；百分制下等效 +33 点，
+        # 总分按 relevance 的权重（0.30）折算增量（33×0.30≈+9.9），保持原有提升力度不变。
         for event in events:
             cat = event.get('category', '')
             if cat in ('AI模型', '开源项目'):
-                event['score']['relevance'] = min(40, event['score'].get('relevance', 0) + 10)
-                # 重新计算总分
                 s = event['score']
-                event['score']['total'] = min(100, s['relevance'] + s.get('impact', 0) + s.get('novelty', 0) + s.get('source_authority', 0) + s.get('actionability', 0) - s.get('penalties', 0))
+                old_rel = s.get('relevance', 0)
+                new_rel = min(100, old_rel + 33)
+                s['relevance'] = new_rel
+                s['total'] = min(100, round(s['total'] + (new_rel - old_rel) * 0.30))
 
         # 按总分排序
         sorted_events = sorted(events, key=lambda e: e['score']['total'], reverse=True)
