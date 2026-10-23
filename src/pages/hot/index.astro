@@ -215,7 +215,7 @@ function getSummary(item: any): string {
 
 <div class="page-wrap">
   <div class="shell">
-    <div slot="left">
+    <div class="shell-main">
       <Header mode="hot" date={date} totalItems={hotItems.length} today={today} />
       <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
       <div class="stats-bar">
@@ -290,10 +290,10 @@ function getSummary(item: any): string {
       </div>
     </div>
     
-    <div slot="right">
+    <aside class="shell-right">
       {allDates.length > 0 && <section style={{marginTop:'32px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
-    </div>
-  
+    </aside>
+</div>
   <Footer />
 </div>
 </BaseLayout>
