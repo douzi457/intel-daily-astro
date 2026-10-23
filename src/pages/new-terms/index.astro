@@ -4,6 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import LayoutShell from '../../components/LayoutShell.astro';
+import CalendarWidget from '../../components/CalendarWidget.astro';
+import { getAllDates } from '../../utils/data.ts';
 
 let newTermsData: any = null;
 try {
@@ -14,6 +16,7 @@ try {
 const terms = newTermsData?.terms || [];
 const generatedAt = newTermsData?.generated_at || '';
 const targetDate = newTermsData?.target_date || '';
+const allDates = getAllDates('zh');
 const windowDays = newTermsData?.window_days || 14;
 
 // 分类
@@ -40,6 +43,9 @@ function statusBadge(status: string): string {
 ---
 
 <BaseLayout title="新词榜" description="每日自动发现冒头的新名词" lang="zh-CN">
+<div class="page-head">
+  <Header mode="hot" today={targetDate} />
+</div>
 <div class="shell">
   <div class="shell-main">
 <style>
@@ -111,7 +117,6 @@ function statusBadge(status: string): string {
 </style>
 
 <div class="page-wrap">
-  <Header mode="hot" today={targetDate} />
 
   <div class="nt-header">
     <h1>🔎 新词榜 · {targetDate || '加载中...'}</h1>
@@ -228,6 +233,7 @@ function statusBadge(status: string): string {
   </div>
   </div>
   <aside class="shell-right">
+    {allDates.length > 0 && <section style={{marginBottom:'20px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
     <div class="nt-info-card">
       <div class="nt-section-title">监测说明</div>
       <p>新词榜基于近14天数据自动发现冒头的新名词。</p>

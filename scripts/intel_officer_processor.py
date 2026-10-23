@@ -366,6 +366,7 @@ class IntelligenceProcessor:
         executive_summary = self._generate_summary(core_signals, actions)
 
         # Batch 14: 为露出层条目生成真摘要（core_signals + watchlist）
+        self._fill_watchlist_why(watchlist)
         self._generate_exposed_summaries(core_signals, signals_to_process or core_signals)
         self._generate_exposed_summaries(watchlist, signals_to_process or core_signals)
         quality = self._calculate_quality(normalized_items, events, core_signals, len(watchlist), len(actions))
@@ -563,7 +564,7 @@ class IntelligenceProcessor:
         source_count = len(indices)
         base_importance = self._analyze_importance(main_item, main_item.get('entities', []), main_item.get('tags', []), seen_texts)
 
-        if source_count > 2:
+        if source_count > 2 and base_importance:
             return f"多源报道（{source_count}家媒体），{base_importance}"
         return base_importance
 
@@ -1269,6 +1270,87 @@ class IntelligenceProcessor:
             summary.append("当前无明确可执行动作，建议持续观察后续进展。")
 
         return summary[:3]
+
+    def _fill_watchlist_why(self, watchlist: List[Dict]):
+        """Batch 16: 为 watchlist 事件生成 why_it_matters（精简版判断调用，+1 次/天，失败留空不崩）"""
+        import os
+        import urllib.request
+        import urllib.error
+        if not watchlist:
+            return
+        api_key = os.environ.get("AGNES_API_KEY", "").strip()
+        if not api_key:
+            return
+        if self._llm_calls_used >= self._llm_budget_limit:
+            print("[LLM] 预算已耗尽，跳过 watchlist 判断生成", file=sys.stderr)
+            return
+        base_url = os.environ.get("AGNES_BASE_URL") or "https://api.agnes-ai.cn/v1"
+        model = os.environ.get("AGNES_MODEL") or "agnes-3.0-flash"
+        models_to_try = [model]
+        if model != "agnes-2.5-flash":
+            models_to_try.append("agnes-2.5-flash")
+        events_data = [
+            {
+                'index': i,
+                'headline': (evt.get('headline') or '')[:80],
+                'summary': (evt.get('clean_summary') or evt.get('summary') or '')[:200],
+                'source_count': evt.get('source_count', 1),
+            }
+            for i, evt in enumerate(watchlist, 1)
+        ]
+        system_prompt = """你是一个专业的AI技术内容创作者顾问。请为每条AI新闻事件写一句"为什么重要"（why_it_matters）：30-60字，必须具体到这条事件本身的技术、生态或竞争含义，禁止空话（值得关注、具有重要意义、不容错过）。
+输出JSON数组：[{"index": 事件序号, "why_it_matters": "..."}]"""
+        user_message = "请为以下事件逐条生成 why_it_matters：\n\n" + json.dumps(events_data, ensure_ascii=False, indent=2)
+        for try_model in models_to_try:
+            for attempt in range(3):
+                try:
+                    payload = {
+                        "model": try_model,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_message},
+                        ],
+                        "temperature": 0.3,
+                        "max_tokens": 1200,
+                    }
+                    req = urllib.request.Request(
+                        f"{base_url}/chat/completions",
+                        data=json.dumps(payload).encode('utf-8'),
+                        headers={'Content-Type': 'application/json', 'Authorization': f'Bearer {api_key}'},
+                        method='POST'
+                    )
+                    with urllib.request.urlopen(req, timeout=60) as resp:
+                        if resp.status != 200:
+                            wait = 2 ** attempt
+                            print(f"[LLM] watchlist判断 HTTP {resp.status}，等待 {wait}s 后重试", file=sys.stderr)
+                            time.sleep(wait)
+                            continue
+                        result = json.loads(resp.read().decode('utf-8'))
+                    content = result['choices'][0]['message']['content']
+                    stripped = content.strip()
+                    if stripped.startswith('```'):
+                        stripped = stripped.split('\n', 1)[1].rsplit('```', 1)[0].strip()
+                    response_data = json.loads(stripped)
+                    filled = 0
+                    for item in response_data:
+                        idx = item.get('index')
+                        why = (item.get('why_it_matters') or '').strip()
+                        if idx and why and 1 <= idx <= len(watchlist):
+                            watchlist[idx - 1]['why_it_matters'] = why
+                            filled += 1
+                    usage = result.get('usage', {})
+                    self._llm_calls_used += 1
+                    self._llm_usage_accum['calls'] += 1
+                    self._llm_usage_accum['model'] = try_model
+                    self._llm_usage_accum['input_tokens'] += usage.get('prompt_tokens', 0)
+                    self._llm_usage_accum['output_tokens'] += usage.get('completion_tokens', 0)
+                    self._llm_usage_accum['total_tokens'] += usage.get('total_tokens', 0)
+                    print(f"[LLM] watchlist判断完成：{filled}/{len(watchlist)} 条", file=sys.stderr)
+                    return
+                except Exception as e:
+                    print(f"[LLM] watchlist判断失败（model={try_model}, attempt={attempt+1}）: {e}", file=sys.stderr)
+                    time.sleep(2 ** attempt)
+        print("[LLM] watchlist判断全部尝试失败，why_it_matters 留空", file=sys.stderr)
 
     def _generate_exposed_summaries(self, items: List[Dict], signals_context: List[Dict]):
         """Batch 14: 为露出层条目生成真摘要（core_signals + watchlist），不复用标题"""

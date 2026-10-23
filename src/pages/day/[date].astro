@@ -79,9 +79,11 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
   nextUrl={nextUrl}
 >
 <div class="page">
+  <div class="page-head">
+      <Header mode="day" date={date} totalItems={totalItems} />
+  </div>
   <div class="shell">
     <div class="shell-main">
-      <Header mode="day" date={date} totalItems={totalItems} />
 
       <!-- 日期导航 -->
       <div class="day-nav">

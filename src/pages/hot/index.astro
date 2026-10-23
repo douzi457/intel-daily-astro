@@ -59,6 +59,13 @@ const year = date.slice(0, 4);
 const month = parseInt(date.slice(5, 7)).toString();
 const day = parseInt(date.slice(8, 10)).toString();
 const displayDate = `${year}年${month}月${day}日`;
+// 右栏热词 Top5（复用新词榜同一数据文件）
+let hotTerms: any[] = [];
+try {
+  const nt = await import('../../data/v4/new-terms-latest.json');
+  const ts: any[] = (nt as any).default?.terms || [];
+  hotTerms = [...ts].sort((a, b) => (b.max_score || 0) - (a.max_score || 0)).slice(0, 5);
+} catch {}
 
 function changeClass(change: number | null | undefined): string {
   if (change === null || change === undefined) return 'stable';
@@ -214,8 +221,7 @@ function getSummary(item: any): string {
 </style>
 
 <div class="page-wrap">
-  <div class="shell">
-    <div class="shell-main">
+  <div class="page-head">
       <Header mode="hot" date={date} totalItems={hotItems.length} today={today} />
       <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
       <div class="stats-bar">
@@ -225,7 +231,9 @@ function getSummary(item: any): string {
         <div class="stats-bar-divider"></div>
         <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
       </div>
-
+  </div>
+  <div class="shell">
+    <div class="shell-main">
       <div class="hot-list">
         {sortedItems.slice(0, 10).map((item: any, idx: number) => {
           const rank = idx + 1;
@@ -291,7 +299,17 @@ function getSummary(item: any): string {
     </div>
     
     <aside class="shell-right">
-      {allDates.length > 0 && <section style={{marginTop:'32px'}}><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+      {allDates.length > 0 && <section><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
+      {hotTerms.length > 0 && (
+        <section class="rail-card">
+          <div class="rail-title">🔎 今日新词 <a href="/new-terms/" class="rail-more">全部 →</a></div>
+          <ul class="rail-terms">
+            {hotTerms.map((t: any) => (
+              <li><span class="rail-term">{t.term}</span><span class="rail-count">{t.today_count || 0} 篇</span></li>
+            ))}
+          </ul>
+        </section>
+      )}
     </aside>
 </div>
   <Footer />

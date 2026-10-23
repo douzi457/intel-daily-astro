@@ -1417,3 +1417,14 @@ a { color: inherit; text-decoration: none; }
   .shell { padding: 0 14px 40px; }
   .shell-right { display: block; order: 2; }
 }
+
+/* Batch 15.1: 通栏页头 / 右栏卡片 / 更多链接 */
+.page-head { max-width: 1320px; margin: 0 auto; padding: 16px 20px 0; }
+.rail-card { margin-top: 24px; border-top: 1px solid var(--border, #e0dcd4); padding-top: 16px; }
+.rail-title { font-weight: 700; font-size: .95em; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline; }
+.rail-more { font-size: .8em; font-weight: 400; color: var(--accent, #c73e3a); text-decoration: none; }
+.rail-terms { list-style: none; margin: 0; padding: 0; }
+.rail-terms li { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px dashed var(--border, #e0dcd4); }
+.rail-term { font-weight: 600; }
+.rail-count { color: var(--muted, #8a8378); font-size: .85em; white-space: nowrap; }
+.more-link { display: block; text-align: center; padding: 14px; margin-top: 12px; border: 1px solid var(--border, #e0dcd4); border-radius: 10px; color: var(--accent, #c73e3a); text-decoration: none; font-weight: 600; }
