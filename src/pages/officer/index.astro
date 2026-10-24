@@ -442,6 +442,11 @@ function normalize(text: string): string {
                             信源：<a href={event.provenance.origin.url} target="_blank" rel="noopener">{event.provenance.origin.source_name}</a>{event.provenance.corroborated_by?.length > 0 && <span> · 另 {event.provenance.corroborated_by.length} 家跟进</span>}<span> · {event.provenance.verification === 'multi-source' ? '多源核实' : '单源 · 未核实'}</span>
                           </div>
                         )}
+                        {event.continuity?.days_tracked >= 2 && (
+                          <div class="prov-line">
+                            事件线：第 {event.continuity.days_tracked} 天{event.continuity.previous && <span> · 上次 {event.continuity.previous.source_count} 家报道 → 今日 {event.source_count} 家</span>}{event.continuity.relation === 'cooling' && <span> · 热度下降</span>}
+                          </div>
+                        )}
                         {event.card_type && (
                           <span class="card-type-badge" style={{background: `${cardTypeColor(event.card_type)}18`, color: cardTypeColor(event.card_type), border: `1px solid ${cardTypeColor(event.card_type)}40`}}>
                             {event.card_type}

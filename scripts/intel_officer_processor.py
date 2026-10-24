@@ -385,7 +385,7 @@ class IntelligenceProcessor:
 
         # 构建热历史
         heat_file = Path(__file__).resolve().parents[1] / 'public' / 'data' / 'v2' / 'heat-history.json'
-        heat_history = self._compute_heat_history(core_signals, date, heat_file)
+        heat_history = self._compute_heat_history(core_signals + watchlist, date, heat_file)
         # 将热历史挂到 core_signals 上
         for evt in core_signals:
             eid = evt['event_id']
@@ -393,8 +393,13 @@ class IntelligenceProcessor:
                 evt['heat_history'] = heat_history[eid]['heat_history']
                 evt['heat_change_6h'] = heat_history[eid]['heat_change_6h']
                 evt['heat_similar'] = heat_history[eid]['similarity']
+        # Batch 18: 事件线（continuity）挂到 core + watchlist
+        for evt in core_signals + watchlist:
+            eid = evt['event_id']
+            if eid in heat_history and heat_history[eid].get('continuity'):
+                evt['continuity'] = heat_history[eid]['continuity']
         # 保存当前班次快照（供下次使用）
-        self.save_heat_snapshot(core_signals, date, heat_file)
+        self.save_heat_snapshot(core_signals + watchlist, date, heat_file)
 
         if llm_error:
             quality['warnings'].append(llm_error)
@@ -1267,12 +1272,31 @@ class IntelligenceProcessor:
             else:
                 heat_change_6h = None  # 无历史数据，不填 100%
 
+            # Batch 18: 事件线（continuity）——全部由历史记录数据判定，不用 LLM
+            _all_records = heat_db[best_match_key].get('records', []) if (best_match_key and best_match_key in heat_db) else []
+            _dates = sorted({r['date'] for r in _all_records} | {date})
+            if not best_match_key or not _all_records:
+                _relation = 'new'
+            elif cur_src >= _all_records[-1]['source_count']:
+                _relation = 'continuing'
+            else:
+                _relation = 'cooling'
+            continuity = {
+                'thread_key': best_match_key or cur_key,
+                'relation': _relation,
+                'first_tracked_date': _dates[0],
+                'days_tracked': len(_dates),
+                'previous': ({'date': _all_records[-1]['date'], 'source_count': _all_records[-1]['source_count'], 'headline': heat_db[best_match_key].get('headline')} if _all_records and best_match_key else None),
+                'source_trend': [r['source_count'] for r in _all_records[-7:]] + [cur_src],
+            }
+
             heat_map[evt['event_id']] = {
                 'headline': cur_headline,
                 'source_count': cur_src,
                 'heat_history': heat_history,
                 'heat_change_6h': heat_change_6h,
                 'similarity': round(best_sim, 3) if best_match_key else None,
+                'continuity': continuity,
             }
 
         return heat_map
@@ -1297,7 +1321,7 @@ class IntelligenceProcessor:
             except:
                 heat_db = {}
 
-        HEAT_WINDOW = 8
+        HEAT_WINDOW = 40  # Batch 18: 保存窗口扩到 40 条班次记录（约 10 天），事件线才有足够纵深
 
         for evt in core_signals:
             headline = evt.get('headline', '')

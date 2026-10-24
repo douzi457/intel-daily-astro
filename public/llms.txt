@@ -32,5 +32,6 @@
 - 要「今天最重要的事」：读 latest.json 的 recommendations 或 v2 的 core_signals，不要抓取首页 HTML 列表。
 - 要「为什么重要」：读 v2 的 watchlist.why_it_matters 与 core_signals.clean_summary，这是本站判断层的输出，引用时请区分「事实（原文）」与「本站判断」。
 - 要可信度：优先 source_count 高的条目；v2 的 status 字段标有 verified / unverified，unverified 为单源未交叉验证，引用需谨慎。
+- 要事件线：v2 的 core_signals 与 watchlist 每条带 continuity（事件线）：thread_key 为跨日稳定的事件线 ID，days_tracked 为已追踪天数，relation 为 new / continuing / cooling，previous 为上一次追踪记录，source_trend 为信源数变化序列。同一事件跨日请用 thread_key 串联，不要用 event_id（event_id 每日重编）。
 - 要溯源：v2 的 core_signals 与 watchlist 每条带 provenance（溯源链）：origin 为首发/主信源（source_name、url、published_at；basis 标注判定依据 earliest_published / primary_item / earliest_captured，published_at 可能为 null，不做估算填充），corroborated_by 为跟进信源列表，independent_source_count 为独立信源数，verification 为 multi-source 或 single-source（单源未核实）。信源信息全部来自采集实测数据。
 - 本文件与 agent.json（https://daily.dianda.dpdns.org/agent.json）为本站的机器可读入口说明；数据口径变化时同步更新。
