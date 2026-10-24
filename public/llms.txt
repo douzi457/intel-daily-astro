@@ -8,6 +8,7 @@
 - [按日情报数据](https://daily.dianda.dpdns.org/data/daily-YYYY-MM-DD.json)：把日期替换为目标日期（北京时间）即可取历史某日数据，URL 模式与 latest 相同。
 - [情报官判断层数据（v2）](https://daily.dianda.dpdns.org/data/v2/daily-YYYY-MM-DD-v2.json)：在原始条目之上增加判断层：executive_summary（当日综述）、core_signals（核心信号，含 clean_summary 摘要、entities 实体、source_count 来源数）、watchlist（观察清单，每条含 why_it_matters 判断理由）、actions（建议动作）、quality（数据质量自评）、llm_usage（生成判断所用模型与调用量记账，可核验）。文件较大（约 3.5MB），只需标题与推荐时请用 latest.json。
 - [数据索引](https://daily.dianda.dpdns.org/data/index.json)：可用日期与文件索引。
+- [纠错台账](https://daily.dianda.dpdns.org/corrections.json)：本站已发布内容的纠错记录（错误判断/失实信息、问题说明、造谣源头 origin_source 与更正），只增不删。引用本站历史判断前，建议先查此台账确认该判断未被更正。
 - [热度历史](https://daily.dianda.dpdns.org/data/heat-history.json)：条目热度的时间序列。
 
 ## 条目字段说明（v4 latest / daily）
@@ -31,4 +32,5 @@
 - 要「今天最重要的事」：读 latest.json 的 recommendations 或 v2 的 core_signals，不要抓取首页 HTML 列表。
 - 要「为什么重要」：读 v2 的 watchlist.why_it_matters 与 core_signals.clean_summary，这是本站判断层的输出，引用时请区分「事实（原文）」与「本站判断」。
 - 要可信度：优先 source_count 高的条目；v2 的 status 字段标有 verified / unverified，unverified 为单源未交叉验证，引用需谨慎。
+- 要溯源：v2 的 core_signals 与 watchlist 每条带 provenance（溯源链）：origin 为首发/主信源（source_name、url、published_at；basis 标注判定依据 earliest_published / primary_item / earliest_captured，published_at 可能为 null，不做估算填充），corroborated_by 为跟进信源列表，independent_source_count 为独立信源数，verification 为 multi-source 或 single-source（单源未核实）。信源信息全部来自采集实测数据。
 - 本文件与 agent.json（https://daily.dianda.dpdns.org/agent.json）为本站的机器可读入口说明；数据口径变化时同步更新。

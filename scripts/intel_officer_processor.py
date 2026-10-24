@@ -322,6 +322,11 @@ class IntelligenceProcessor:
         # 跨日去重
         events = self._check_cross_day_dedup(events, date)
 
+        # Batch 17: 溯源链——纯装配（零 LLM 调用），信源信息只来自采集实测数据
+        items_by_id = {it['id']: it for it in normalized_items if it.get('id')}
+        for evt in events:
+            evt['provenance'] = self._build_provenance(evt, items_by_id)
+
         core_signals, watchlist, ignored = self._categorize(events)
 
         # 调用大模型生成个性化评价（如果配置了Key）
@@ -341,7 +346,7 @@ class IntelligenceProcessor:
         # 更新core_signals的why_it_matters和suggested_action
         if llm_importance:
             for i, event in enumerate(core_signals, 1):
-                if i in llm_importance:
+                if i in llm_importance and (llm_importance[i] or '').strip():
                     event['why_it_matters'] = llm_importance[i]
                 if llm_actions and i in llm_actions:
                     event['suggested_action'] = {'type': 'try', 'text': llm_actions[i]}
@@ -367,6 +372,10 @@ class IntelligenceProcessor:
 
         # Batch 14: 为露出层条目生成真摘要（core_signals + watchlist）
         self._fill_watchlist_why(watchlist)
+        # Batch 17: 核心 why 兜底——主判断未回填的核心条目，用精简调用只补空缺
+        _core_missing_why = [e for e in core_signals if not (e.get('why_it_matters') or '').strip()]
+        if _core_missing_why:
+            self._fill_watchlist_why(_core_missing_why)
         self._generate_exposed_summaries(core_signals, signals_to_process or core_signals)
         self._generate_exposed_summaries(watchlist, signals_to_process or core_signals)
         quality = self._calculate_quality(normalized_items, events, core_signals, len(watchlist), len(actions))
@@ -389,6 +398,13 @@ class IntelligenceProcessor:
 
         if llm_error:
             quality['warnings'].append(llm_error)
+
+        # Batch 17: 主判断无产物/核心 why 缺失必须可见，不许静默
+        if not llm_importance:
+            quality['warnings'].append('llm_judgment_not_applied: 主判断调用未产出，核心深度字段缺失')
+        _missing_why = sum(1 for e in core_signals if not (e.get('why_it_matters') or '').strip())
+        if _missing_why:
+            quality['warnings'].append(f'core_why_missing: {_missing_why} 条核心情报 why 为空')
 
         # freshness固定值标注
         quality['warnings'].append("freshness: 暂用固定值70（published_at全部unknown，无法判断真实新鲜度）")
@@ -968,6 +984,72 @@ class IntelligenceProcessor:
 
         return {'total': total, 'relevance': _pct(rel_pts, 30), 'impact': _pct(imp_pts, 20), 'novelty': _pct(nov_pts, 15), 'source_authority': _pct(auth_pts, 15), 'actionability': _pct(act_pts, 15), 'penalties': penalties, 'reason': f'原始分{original_score}映射（维度为百分制达成率）'}
     
+    def _build_provenance(self, event: Dict, items_by_id: Dict[str, Dict]) -> Dict:
+        """Batch 17: 组装溯源链（纯装配，零 LLM 调用）。
+
+        口径纪律：信源/时间只来自采集实测数据，禁止生成或补全；
+        published_at 缺失就留 null；首发判定优先 published_at 最早者，
+        其次主条目，并以 basis 字段标注判定依据，不冒充。
+        """
+        def _brief(item):
+            if not item:
+                return None
+            src = item.get('source') or {}
+            if not isinstance(src, dict):
+                src = {'name': str(src)}
+            return {
+                'source_name': src.get('name') or 'unknown',
+                'source_id': src.get('id'),
+                'tier': src.get('tier'),
+                'url': item.get('url'),
+                'published_at': item.get('published_at'),
+                'first_seen_at': item.get('first_seen_at'),
+            }
+
+        primary = items_by_id.get(event.get('primary_item_id'))
+        supporting = [items_by_id[i] for i in event.get('supporting_item_ids', []) if i in items_by_id]
+        cluster = ([primary] if primary else []) + supporting
+
+        origin_item, basis = primary, 'primary_item'
+        with_pub = [it for it in cluster if it.get('published_at')]
+        if with_pub:
+            origin_item = min(with_pub, key=lambda it: it['published_at'])
+            basis = 'earliest_published'
+        elif primary is None and cluster:
+            origin_item = min(cluster, key=lambda it: it.get('first_seen_at') or '9999')
+            basis = 'earliest_captured'
+
+        origin = _brief(origin_item)
+        if origin is not None:
+            origin['basis'] = basis
+
+        corroborated = []
+        _seen_urls = {origin_item.get('url')} if origin_item else set()
+        for it in cluster:
+            if it is None or it is origin_item:
+                continue
+            if it.get('url') in _seen_urls:
+                continue
+            _seen_urls.add(it.get('url'))
+            b = _brief(it)
+            if b:
+                corroborated.append(b)
+
+        source_ids = set()
+        for it in cluster:
+            src = it.get('source') or {}
+            sid = (src.get('id') or src.get('name')) if isinstance(src, dict) else str(src)
+            if sid:
+                source_ids.add(sid)
+
+        return {
+            'origin': origin,
+            'corroborated_by': corroborated,
+            'independent_source_count': len(source_ids),
+            'verification': 'multi-source' if len(source_ids) >= 2 else 'single-source',
+            'evidence_points': (primary or {}).get('evidence_points') or [],
+        }
+
     def _build_events(self, items: List[Dict], cluster_result: Dict[str, List[int]]) -> List[Dict]:
         """构建事件对象"""
         events = []
