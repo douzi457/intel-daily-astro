@@ -177,8 +177,23 @@ function reasonText(score: number): string {
         <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
       </div>
   </div>
+  <input type="checkbox" id="drawerToggle" class="drawer-toggle" aria-label="开关手机菜单" />
+  <label class="drawer-overlay" for="drawerToggle" aria-label="关闭菜单"></label>
+  <aside class="drawer" id="mobileDrawer" aria-label="手机站内导航">
+    <div class="drawer-head"><b>豆子实验室</b><label for="drawerToggle" class="drawer-close" aria-label="关闭菜单">✕</label></div>
+    <nav class="drawer-group"><h4>导航</h4><a class="active" href="/">今日精选</a><a href={`/day/${today}/`}>今日全部</a><a href="/hot/">热点榜</a><a href="/officer/">情报官</a><a href="/new-terms/">新词榜</a></nav>
+    <nav class="drawer-group"><h4>更多</h4><a href="/archive">归档</a><a href="/stats">统计</a><a href="/rss.xml">RSS</a><a href="/en/">English</a></nav>
+    <p class="drawer-note">与桌面左栏同一组链接，只链现有页面。</p>
+  </aside>
   <div class="shell">
+    <aside class="home-nav" aria-label="站内导航">
+      <div class="home-brand">豆子实验室<span>每日情报 · 把 AI 讲成人话</span></div>
+      <nav class="home-group"><h4>导航</h4><a class="active" href="/">今日精选</a><a href={`/day/${today}/`}>今日全部</a><a href="/hot/">热点榜</a><a href="/officer/">情报官</a><a href="/new-terms/">新词榜</a></nav>
+      <nav class="home-group"><h4>更多</h4><a href="/archive">归档</a><a href="/stats">统计</a><a href="/rss.xml">RSS</a><a href="/en/">English</a></nav>
+      <p class="home-note">只链现有页面，不新增搜索、收藏、模型榜。</p>
+    </aside>
     <div class="shell-main">
+      <div class="mobiletop"><label for="drawerToggle" class="drawer-btn" id="drawerBtn" aria-controls="mobileDrawer">☰ 菜单</label><b>豆子实验室 · 每日情报</b><nav><a href="/hot/">热点榜</a><a href="/officer/">情报官</a><a href="/new-terms/">新词榜</a><a href="/archive">归档</a></nav></div>
       {/* 分类筛选 */}
       {v4Data?.by_category && (
         <div class="cat-filter" id="catFilter">
@@ -236,7 +251,7 @@ function reasonText(score: number): string {
                   <p class="featured-summary">{item.ai_summary}</p>
                   <div class="featured-meta">
                     <span>{item.source}</span>
-                    {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
+                    {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score).toFixed(1)}</span>}
                     {(item.source_count || 0) > 1 && <span>📰 {item.source_count}家报道</span>}
                   </div>
                 </article>
@@ -262,7 +277,7 @@ function reasonText(score: number): string {
               </div>
               {sorted.slice(0, 30).map(item => {
                 const g = gradeBadge(item.score || 0), gLabel = gradeLabel(item.score || 0);
-                const timeStr = (item.date || '').slice(11, 16);
+                const timeStr = fmtHM((item as any).published_at);
                 const platform = item.platform_label || item.source || '';
                 const summary = item.ai_summary || item.desc || item.title;
                 const displayTitle = item.ai_title || item.title;
@@ -273,7 +288,6 @@ function reasonText(score: number): string {
                       {timeStr && <span class="entry-time">{timeStr}</span>}
                       {timeStr && platform && <span class="entry-sep">·</span>}
                       {platform && <span class="entry-source">{platform}</span>}
-                      {(item as any).published_at && <span class="entry-time">·{fmtHM((item as any).published_at)}</span>}
                       {(item as any).source_count > 1 ? (
                         <details class="src-expand">
                           <summary>📰 {(item as any).source_count}家报道</summary>
@@ -288,11 +302,11 @@ function reasonText(score: number): string {
                       )}
                       <span class={`grade-pill grade-${g}`}>{gLabel}</span>
                       
-                      {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {Math.round(item.score * 10)}</span>}
+                      {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score).toFixed(1)}</span>}
                     </div>
                     <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                     {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
-                    <div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>
+                    {reason && (<div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>)}
                   </article>
                 );
               })}
@@ -321,6 +335,21 @@ function reasonText(score: number): string {
   <Footer />
 </div>
 <button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
+<script>
+  const drawerToggle = document.getElementById('drawerToggle') as HTMLInputElement | null;
+  const drawerEl = document.getElementById('mobileDrawer');
+  const drawerBtn = document.getElementById('drawerBtn');
+  function syncDrawer() {
+    if (!drawerToggle) return;
+    document.body.style.overflow = drawerToggle.checked ? 'hidden' : '';
+    if (drawerBtn) drawerBtn.setAttribute('aria-expanded', String(drawerToggle.checked));
+  }
+  if (drawerToggle) {
+    drawerToggle.addEventListener('change', syncDrawer);
+    drawerEl?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawerToggle.checked = false; syncDrawer(); }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { drawerToggle.checked = false; syncDrawer(); } });
+  }
+</script>
 <script>
   const backBtn = document.getElementById('backToTop');
   if (backBtn) {
