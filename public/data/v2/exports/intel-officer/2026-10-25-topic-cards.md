@@ -1,5 +1,5 @@
 ## 选题1：Meta drops the word "train" from its com
-- 角度：Meta在商用条款中删除“训练”一词，直接回应了关于其AI模型抓取用户数据进行商业训练的激烈批评，此
+- 角度：Meta删除商业条款中的“训练”一词，直接削弱了AI公司利用用户数据优化模型的合规基础，标志着数据授
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第1条，1家媒体
 - 验证：查阅原文[Meta drops the word "train" fr...]
@@ -9,7 +9,7 @@
 ---
 
 ## 选题2：Accused OpenAI spy had folder called “Sa
-- 角度：FBI指控前OpenAI员工涉嫌向沙特政府出售内部文件，暴露出顶级AI实验室在地缘政治敏感领域的内部
+- 角度：被指控间谍持有沙特政府文件，揭示顶级AI实验室面临的地缘政治情报风险，可能触发更严格的出口管制与数据
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第2条，1家媒体
 - 验证：查阅原文[Accused OpenAI spy had folder ...]
@@ -19,7 +19,7 @@
 ---
 
 ## 选题3：AI-powered fuzzing with the GitHub Secur
-- 角度：GitHub Security Lab将Taskflow Agent应用于模糊测试，标志着AI代理开
+- 角度：利用AI Agent自动执行模糊测试，大幅提升漏洞发现效率，推动安全修复从人工驱动转向自主代理驱动，
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第3条，1家媒体
 - 验证：查阅原文[AI-powered fuzzing with the Gi...]
