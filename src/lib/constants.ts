@@ -144,7 +144,7 @@ export function getPlatformMeta(platform: string, locale: 'zh' | 'en' = 'zh'): P
 
 /** 网站基础信息 */
 export const SITE = {
-  url: 'https://dianda.dpdns.org',
+  url: 'https://daily.dianda.dpdns.org',
   name: '豆子实验室',
   nameEn: 'Douzi Lab',
   description: '每日自动采集全球科技资讯，AI 智能评分 · 双语播报 · 开发者情报枢纽',

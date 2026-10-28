@@ -2,9 +2,10 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://dianda.dpdns.org',
+  site: 'https://daily.dianda.dpdns.org',
   output: 'static',
   integrations: [sitemap({
+    filter: (page) => !page.includes('/daily/'),
     i18n: {
       defaultLocale: 'zh',
       locales: {

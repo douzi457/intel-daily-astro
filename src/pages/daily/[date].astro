@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getDayData, getAllDates } from '../../utils/data.ts';
-import { getPlatformMeta } from '../../lib/constants';
+import { getPlatformMeta, SITE } from '../../lib/constants';
 import type { IntelItem, FocusData } from '../../lib/types';
 
 export async function getStaticPaths() {
@@ -41,7 +41,11 @@ const prevDate = dateIdx < allDates.length - 1 ? allDates[dateIdx + 1] : null;
 const nextDate = dateIdx > 0 ? allDates[dateIdx - 1] : null;
 ---
 
-<BaseLayout title={`日报 | ${date}`} lang="zh-CN">
+<BaseLayout
+  title={`日报 | ${date}`}
+  lang="zh-CN"
+  canonicalUrl={`${SITE.url}/day/${date}`}
+>
 <div class="page">
   <Header mode="day" date={date} totalItems={stats.total} />
 
