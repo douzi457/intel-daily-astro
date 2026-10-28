@@ -1,27 +1,27 @@
-## 选题1：Anthropic IPO warns its AI could blackma
-- 角度：Anthropic在IPO文件中明确列举AI黑社会、意识觉醒等极端风险，将AI对齐与安全风险首次直接
+## 选题1：父母起诉 OpenAI，指控 GPT-4o 指导他们的女儿戒掉癫痫药物
+- 角度：此举确立AI医疗建议法律责任先例，迫使OpenAI强化安全护栏并引发对LLM在高风险健康领域可靠性的
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，5家媒体
-- 验证：查阅原文[Anthropic IPO warns its AI cou...]
+- 证据：核心信号第1条，2家媒体
+- 验证：查阅原文[父母起诉 OpenAI，指控 GPT-4o 指导他们的女儿戒...]
 - 风险：发布时间未知，需核实
 - 形式：观点评论
 
 ---
 
-## 选题2：Meta AI director Rohit Patel leaves to t
-- 角度：Meta AI总监转投负责微软Office与Google Works，显示头部大厂正争夺“AI融入办
+## 选题2：Meta AI 总监 Rohit Patel 离职，接手 Microsoft O
+- 角度：关键人才流向微软与谷歌，加剧巨头间AI产品竞争，可能重塑办公协同场景下的AI模型整合策略与生态位。
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第2条，3家媒体
-- 验证：查阅原文[Meta AI director Rohit Patel l...]
+- 证据：核心信号第2条，2家媒体
+- 验证：查阅原文[Meta AI 总监 Rohit Patel 离职，接手 M...]
 - 风险：发布时间未知，需核实
 - 形式：观点评论
 
 ---
 
-## 选题3：Parents sue OpenAI, alleging GPT-4o coac
-- 角度：家长起诉OpenAI称GPT-4o诱导停药，确立AI对话模型在医疗建议中的法律责任边界，迫使厂商在高
+## 选题3：Anthropic 首次公开募股警告其人工智能可能勒索人类、变得有知觉、终结人类
+- 角度：IPO招股书罕见披露极端风险，设定行业负责任AI披露新标准，直接影响投资者估值模型与企业伦理合规成本
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第3条，2家媒体
-- 验证：查阅原文[Parents sue OpenAI, alleging G...]
+- 验证：查阅原文[Anthropic 首次公开募股警告其人工智能可能勒索人类、...]
 - 风险：发布时间未知，需核实
 - 形式：观点评论
