@@ -56,6 +56,130 @@ def normalize_deep_analysis(da: dict) -> dict:
     return result
 
 
+def _extract_json_block(text: str):
+    """从模型输出中提取第一个 JSON 块（数组或对象），找不到返回 None。
+
+    兼容：围栏包裹（```json / ``` 无换行）、正文前后散文包裹、多个围栏（取第一个含 JSON 的块）、
+    未闭合围栏（截断场景，取围栏内剩余部分，靠后续补括号兜底）。
+    """
+    s = text.strip()
+    if not s:
+        return None
+    if '```' in s:
+        parts = s.split('```')
+        for i in range(1, len(parts), 2):
+            block = parts[i]
+            if '\n' in block:
+                first, rest = block.split('\n', 1)
+                if first.strip().lower() in ('json', ''):
+                    block = rest
+            block = block.strip()
+            if block and block[0] in '[{':
+                return block
+    for i, ch in enumerate(s):
+        if ch in '[{':
+            return s[i:]
+    return None
+
+
+def _strip_trailing_commas(s: str) -> str:
+    """去掉字符串外的尾逗号（逗号后仅空白即为 } 或 ]），字符串内的逗号不动。"""
+    out = []
+    i, n = 0, len(s)
+    in_str = False
+    esc = False
+    while i < n:
+        ch = s[i]
+        if in_str:
+            out.append(ch)
+            if esc:
+                esc = False
+            elif ch == '\\':
+                esc = True
+            elif ch == '"':
+                in_str = False
+            i += 1
+        else:
+            if ch == '"':
+                in_str = True
+                out.append(ch)
+                i += 1
+            elif ch == ',':
+                j = i + 1
+                while j < n and s[j] in ' \t\r\n':
+                    j += 1
+                if j < n and s[j] in '}]':
+                    i += 1
+                else:
+                    out.append(ch)
+                    i += 1
+            else:
+                out.append(ch)
+                i += 1
+    return ''.join(out)
+
+
+def _repair_json_text(s: str) -> str:
+    """宽松修复：去尾逗号、去控制字符、截断补括号（字符串未闭合先补引号）。"""
+    s = _strip_trailing_commas(s)
+    s = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', s)
+    stack = []
+    in_str = False
+    esc = False
+    for ch in s:
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == '\\':
+                esc = True
+            elif ch == '"':
+                in_str = False
+        else:
+            if ch == '"':
+                in_str = True
+            elif ch in '[{':
+                stack.append(ch)
+            elif ch in ']}':
+                if stack and ((stack[-1] == '[' and ch == ']') or (stack[-1] == '{' and ch == '}')):
+                    stack.pop()
+    if in_str:
+        s += '"'
+    closers = {'[': ']', '{': '}'}
+    while stack:
+        s += closers[stack.pop()]
+    return s
+
+
+def _parse_llm_json(content):
+    """容错解析模型输出的 JSON。返回 (data, diag)，失败时 data 为 None。
+
+    diag: {'ok': bool, 'method': 'strict'|'repaired'|'none', 'error': str,
+           'raw_len': int, 'raw_head': str(前200字), 'dropped': int(调用方填按条目丢弃数)}
+    """
+    raw = content if isinstance(content, str) else ''
+    diag = {'ok': False, 'method': 'none', 'error': '', 'raw_len': len(raw),
+            'raw_head': raw[:200], 'dropped': 0}
+    block = _extract_json_block(raw)
+    if block is None:
+        diag['error'] = '未找到 JSON 块'
+        return None, diag
+    try:
+        data = json.loads(block)
+        diag['ok'] = True
+        diag['method'] = 'strict'
+        return data, diag
+    except json.JSONDecodeError as e:
+        last_err = str(e)
+    try:
+        data = json.loads(_repair_json_text(block))
+        diag['ok'] = True
+        diag['method'] = 'repaired'
+        return data, diag
+    except json.JSONDecodeError as e:
+        diag['error'] = f'JSON解析错误: {e}（strict 失败：{last_err}）'
+        return None, diag
+
+
 # 分类规则：根据标题、来源、标签推断事件类别
 CATEGORY_RULES = {
     'AI模型': [
@@ -301,6 +425,10 @@ class IntelligenceProcessor:
         self._llm_budget_limit = 80
         self._llm_calls_used = 0
         self._llm_usage_accum = {'model': '', 'calls': 0, 'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0}
+        # 解析容错批次：尝试次数（含失败）与解析失败次数分开记，calls 保持原义（成功次数）
+        self._llm_attempts = 0
+        self._llm_parse_failed = 0
+        self._llm_diag = None  # 最近一次解析失败的 diag
     
     def process(self, raw_data: Dict[str, Any]) -> Dict[str, Any]:
         date = raw_data.get('date', datetime.now(CST).strftime('%Y-%m-%d'))
@@ -404,6 +532,18 @@ class IntelligenceProcessor:
         if llm_error:
             quality['warnings'].append(llm_error)
 
+        # 解析容错批次：诊断进 quality（公开 v2 JSON 内，内容限定为失败类型/错误串/输出长度/前 200 字，严禁含 key）
+        if self._llm_diag is not None or self._llm_parse_failed > 0:
+            diag = self._llm_diag or {}
+            quality['llm_diagnostics'] = {
+                'attempts': self._llm_attempts,
+                'parse_failed': self._llm_parse_failed,
+                'last_error': diag.get('error', ''),
+                'last_raw_len': diag.get('raw_len', 0),
+                'last_raw_head': diag.get('raw_head', ''),
+                'last_dropped': diag.get('dropped', 0),
+            }
+
         # Batch 17: 主判断无产物/核心 why 缺失必须可见，不许静默
         if not llm_importance:
             quality['warnings'].append('llm_judgment_not_applied: 主判断调用未产出，核心深度字段缺失')
@@ -442,12 +582,14 @@ class IntelligenceProcessor:
             'events': events,
         }
 
-        # 添加LLM用量信息
-        if self._llm_calls_used > 0:
+        # 添加LLM用量信息（失败时 attempts>0 也要落盘，否则 attempts>0 且 calls==0 的关键信号会丢失）
+        if self._llm_calls_used > 0 or self._llm_attempts > 0:
             # 使用累计值而非单次调用值
             result['llm_usage'] = {
                 'model': self._llm_usage_accum.get('model', ''),
                 'calls': self._llm_calls_used,
+                'attempts': self._llm_attempts,
+                'parse_failed': self._llm_parse_failed,
                 'input_tokens': self._llm_usage_accum.get('input_tokens', 0),
                 'output_tokens': self._llm_usage_accum.get('output_tokens', 0),
                 'total_tokens': self._llm_usage_accum.get('total_tokens', 0),
@@ -813,6 +955,7 @@ class IntelligenceProcessor:
 {json.dumps(events_data, ensure_ascii=False, indent=2)}"""
 
         last_error = None
+        last_was_parse = False
         for try_model in models_to_try:
             for attempt in range(3):  # 最多重试3次
                 try:
@@ -837,9 +980,11 @@ class IntelligenceProcessor:
                         method='POST'
                     )
 
+                    self._llm_attempts += 1
                     with urllib.request.urlopen(req, timeout=60) as resp:
                         if resp.status != 200:
                             # 指数退避 + 尊重 Retry-After 头
+                            last_was_parse = False
                             retry_after = resp.headers.get('Retry-After')
                             wait = (2 ** attempt) if retry_after is None else int(retry_after)
                             print(f"[LLM] HTTP {resp.status} (model={try_model}, attempt={attempt+1})，等待 {wait}s 后重试", file=sys.stderr)
@@ -848,11 +993,27 @@ class IntelligenceProcessor:
                         result = json.loads(resp.read().decode('utf-8'))
 
                     content = result['choices'][0]['message']['content']
-                    # 去除可能的 markdown 代码块包裹（如 ```json ... ```）
-                    stripped = content.strip()
-                    if stripped.startswith('```'):
-                        stripped = stripped.split('\n', 1)[1].rsplit('```', 1)[0].strip()
-                    response_data = json.loads(stripped)
+                    # 解析容错：共用解析函数（围栏/散文包裹/尾逗号/截断补括号）
+                    response_data, pdiag = _parse_llm_json(content)
+                    if response_data is None or not isinstance(response_data, list):
+                        self._llm_parse_failed += 1
+                        self._llm_diag = pdiag
+                        last_error = pdiag['error'] or 'JSON解析失败'
+                        last_was_parse = True
+                        print(f"[LLM] 响应解析失败: {last_error}", file=sys.stderr)
+                        continue
+                    # 按条目降级：缺 index 的坏条目跳过，好条目照常产出
+                    valid_items = [it for it in response_data
+                                   if isinstance(it, dict) and isinstance(it.get('index'), int)]
+                    pdiag['dropped'] = len(response_data) - len(valid_items)
+                    if not valid_items:
+                        self._llm_parse_failed += 1
+                        self._llm_diag = pdiag
+                        last_error = 'JSON解析失败: 全部条目缺 index，已丢弃'
+                        last_was_parse = True
+                        print(f"[LLM] 响应解析失败: {last_error}", file=sys.stderr)
+                        continue
+                    response_data = valid_items
 
                     # Parse new deep analysis fields
                     card_type_map = {}
@@ -893,6 +1054,7 @@ class IntelligenceProcessor:
                     return importance_map, action_map, llm_usage, None, card_type_map, event_brief_map, deep_analysis_map, action_script_map, key_quotes_map, category_map, signals_to_process
 
                 except urllib.error.HTTPError as e:
+                    last_was_parse = False
                     last_error = f"HTTP {e.code}: {e.reason}"
                     try:
                         error_body = json.loads(e.read().decode('utf-8'))
@@ -904,18 +1066,18 @@ class IntelligenceProcessor:
                     print(f"[LLM] 模型 {try_model} 第{attempt+1}次尝试失败: {last_error}", file=sys.stderr)
                     continue
                 except urllib.error.URLError as e:
+                    last_was_parse = False
                     last_error = f"网络错误: {e.reason} (attempt={attempt+1})"
                     print(f"[LLM] 网络异常: {last_error}", file=sys.stderr)
                     continue
-                except json.JSONDecodeError as e:
-                    last_error = f"JSON解析错误: {str(e)}"
-                    print(f"[LLM] 响应解析失败: {last_error}", file=sys.stderr)
-                    continue
                 except Exception as e:
+                    last_was_parse = False
                     last_error = f"{type(e).__name__}: {str(e)[:100]}"
                     print(f"[LLM] 未预期异常: {last_error}", file=sys.stderr)
                     continue
 
+        if last_was_parse:
+            return None, None, None, f"llm_parse_failed: {last_error}", None, None, None, None, None, None, None
         return None, None, None, f"llm_call_failed: {last_error}", None, None, None, None, None, None, None
 
     def _generate_actions(self, core_signals: List[Dict], llm_importance: Dict = None, llm_actions: Dict = None) -> List[Dict]:
@@ -1435,6 +1597,7 @@ class IntelligenceProcessor:
                         headers={'Content-Type': 'application/json', 'Authorization': f'Bearer {api_key}'},
                         method='POST'
                     )
+                    self._llm_attempts += 1
                     with urllib.request.urlopen(req, timeout=60) as resp:
                         if resp.status != 200:
                             wait = 2 ** attempt
@@ -1443,10 +1606,13 @@ class IntelligenceProcessor:
                             continue
                         result = json.loads(resp.read().decode('utf-8'))
                     content = result['choices'][0]['message']['content']
-                    stripped = content.strip()
-                    if stripped.startswith('```'):
-                        stripped = stripped.split('\n', 1)[1].rsplit('```', 1)[0].strip()
-                    response_data = json.loads(stripped)
+                    response_data, pdiag = _parse_llm_json(content)
+                    if response_data is None or not isinstance(response_data, list):
+                        self._llm_parse_failed += 1
+                        self._llm_diag = pdiag
+                        print(f"[LLM] watchlist判断解析失败（model={try_model}, attempt={attempt+1}）: {pdiag['error']}", file=sys.stderr)
+                        time.sleep(2 ** attempt)
+                        continue
                     filled = 0
                     for item in response_data:
                         idx = item.get('index')
@@ -1517,6 +1683,7 @@ class IntelligenceProcessor:
                     headers={'Content-Type': 'application/json', 'Authorization': f'Bearer {api_key}'},
                     method='POST'
                 )
+                self._llm_attempts += 1
                 with urllib.request.urlopen(req, timeout=30) as resp:
                     if resp.status == 200:
                         result = json.loads(resp.read().decode('utf-8'))
