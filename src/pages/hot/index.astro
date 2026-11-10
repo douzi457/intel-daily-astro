@@ -5,6 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
 import LayoutShell from '../../components/LayoutShell.astro';
+import SiteNav from '../../components/SiteNav.astro';
 import { getAllDates } from '../../utils/data.ts';
 
 let v2Data: any = null;
@@ -110,16 +111,7 @@ function getSummary(item: any): string {
 
 <BaseLayout title={`${displayDate} 热点榜`} description={`${displayDate} AI/科技情报热度排行`} lang="zh-CN">
 <style>
-  :root {
-    --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
-    --accent: #c73e3a; --surface: #fff; --border: #d4d0c8; --paper: #f5f3ee; --line: #e0dcd4;
-    --accent-soft: rgba(199,62,58,.08);
-  }
-  [data-theme="dark"] {
-    --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
-    --accent: #e85d59; --surface: #1a2227; --border: #2a3539; --paper: #171e22; --line: #252e33;
-    --accent-soft: rgba(232,93,89,.08);
-  }
+  /* token 见 src/styles/tokens.css（全站唯一来源） */
   body { background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .page-wrap { max-width: 100%; margin: 0; padding: 0; }
@@ -233,6 +225,7 @@ function getSummary(item: any): string {
       </div>
   </div>
   <div class="shell">
+    <SiteNav active="hot" today={today} />
     <div class="shell-main">
       <div class="hot-list">
         {sortedItems.slice(0, 10).map((item: any, idx: number) => {

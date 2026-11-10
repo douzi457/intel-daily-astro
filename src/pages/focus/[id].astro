@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteNav from '../../components/SiteNav.astro';
 
 export async function getStaticPaths() {
   let focusData: any = null;
@@ -34,6 +35,9 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://daily.dianda.dpdns.org/" }
 })}></script>
 
+<div class="shell shell--flush">
+  <SiteNav active="none" today={date} />
+  <div class="shell-main">
 <div class="focus-page">
   <header class="focus-header-bar">
     <a href="/" class="focus-logo"><img src="/icon.svg" alt="" width="24" height="24" style="vertical-align:middle;"> 豆子实验室</a>
@@ -115,6 +119,8 @@ const pageUrl = `https://daily.dianda.dpdns.org/focus/${item.rank}/`;
         <span>📱 公众号：豆子实验室</span>
       </div>
     </div>
+  </div>
+</div>
   </div>
 </div>
 

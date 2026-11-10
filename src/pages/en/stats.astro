@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import SiteNav from '../../components/SiteNav.astro';
 import { PLATFORMS, PLATFORMS_EN, getDayData, getAllDates } from '../../utils/data.ts';
 import fs from 'fs';
 import path from 'path';
@@ -54,6 +55,9 @@ const SOURCE_LABELS: Record<string, { label: string; icon: string }> = {
 <div class="page">
 
   <Header mode="stats" lang="en" />
+  <div class="shell shell--flush">
+    <SiteNav lang="en" active="stats" today={new Date().toISOString().slice(0, 10)} />
+    <div class="shell-main">
 
   <div style="margin-bottom:40px;">
     <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📊 Data Stats</h1>
@@ -144,6 +148,8 @@ const SOURCE_LABELS: Record<string, { label: string; icon: string }> = {
     </div>
   )}
 
+    </div>
+  </div>
   <Footer />
 
 </div>

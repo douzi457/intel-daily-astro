@@ -1,0 +1,77 @@
+/* ============================================================
+   全站设计 token（v3，2026-11-10）
+   来源：Astryx neutral 主题（meta/astryx，MIT，
+   packages/themes/neutral/src/neutralTheme.ts，v0.7.12）
+   “克制的暖灰，内容是主角”——强调色只在需要强调处出现。
+   本文件是全站唯一 token 来源：浅色 / 深色各一套，
+   各页面不再自写 :root 暖纸变量（AIHOT 样式已停用）。
+   旧变量名（--bg/--ink/--text-h/--accent 等）全部保留作别名，
+   让 Header/Footer/日历等共用组件不用改代码就能走新色。
+   ============================================================ */
+:root {
+  /* —— 颜色：浅色（neutral 暖灰） —— */
+  --bg: #f6f4f1; --ink: #1c1917; --ink-2: #44403a; --ink-3: #57534a; --ink-4: #8a8378;
+  --accent: #76654f; --accent-alt: #8a755f; --surface: #fff; --border: #e0d9cf;
+  --paper: #efece6; --line: #e8e2d9; --muted: #8a8378;
+  --accent-soft: rgba(118,101,79,.10);
+  --accent-glow: rgba(118,101,79,.08);
+  --accent-gradient: linear-gradient(135deg, #76654f, #8a755f);
+  --text-h: #1c1917; --text-p: #57534a; --text-m: #8a8378;
+  --bg-card: #fff; --bg-hover: #ece9e3;
+  /* 情报官用的语义色（状态色，不是品牌色，沿用原值） */
+  --color-core: #10b981; --color-watch: #f59e0b; --color-action: #8b5cf6;
+  /* —— Astryx 语义 token —— */
+  --color-background-body: var(--bg); --color-background-surface: var(--surface);
+  --color-background-surface-2: #ece9e3; --color-background-card: var(--surface);
+  --color-background-page: var(--bg);
+  --color-text-primary: var(--ink); --color-text-secondary: var(--ink-3);
+  --color-text-tertiary: var(--ink-4); --color-border: var(--border);
+  --color-accent: var(--accent); --color-on-accent: #fff;
+  --color-focus-ring: var(--accent);
+  --color-bg: var(--bg); --color-surface: var(--surface);
+  --color-text: var(--ink); --color-text-muted: var(--ink-3);
+  /* —— 间距刻度（4px 底） —— */
+  --spacing-0: 0; --spacing-0-5: 2px; --spacing-1: 4px; --spacing-1-5: 6px;
+  --spacing-2: 8px; --spacing-3: 12px; --spacing-4: 16px; --spacing-5: 20px;
+  --spacing-6: 24px; --spacing-8: 32px; --spacing-12: 48px;
+  /* —— 圆角刻度（neutral 主题） —— */
+  --radius-0: 0; --radius-xs: 6px; --radius-sm: 8px; --radius-md: 10px;
+  --radius-lg: 12px; --radius-xl: 16px; --radius-2xl: 18px; --radius-3xl: 24px;
+  --radius-full: 9999px;
+  /* —— 阴影刻度 —— */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+  --shadow-lg: 0 8px 16px -4px rgba(0,0,0,.12);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,.25);
+  /* —— 字号与字距 —— */
+  --text-3xs: 10px; --text-xs: 12px; --text-sm: 14px; --text-base: 16px;
+  --text-lg: 20px; --text-xl: 24px; --text-2xl: 30px;
+  --letter-spacing-tight: -0.02em;
+  /* —— 控件高度：sm 28 / md 32 / lg 36 —— */
+  --size-element-sm: 28px; --size-element-md: 32px; --size-element-lg: 36px;
+}
+
+[data-theme="dark"] {
+  /* —— 颜色：深色（neutral darkTokens，文字近白） —— */
+  --bg: #171512; --ink: #f5f2ec; --ink-2: #d6d0c6; --ink-3: #a8a29a; --ink-4: #7a736a;
+  --accent: #b39d7f; --accent-alt: #c4b198; --surface: #1f1c18; --border: #322d26;
+  --paper: #1b1815; --line: #2a261f; --muted: #7a736a;
+  --accent-soft: rgba(179,157,127,.12);
+  --accent-glow: rgba(179,157,127,.12);
+  --accent-gradient: linear-gradient(135deg, #b39d7f, #c4b198);
+  --text-h: #f5f2ec; --text-p: #a8a29a; --text-m: #7a736a;
+  --bg-card: #1f1c18; --bg-hover: #2a261f;
+  --color-background-surface-2: #2a261f;
+  /* 深色下阴影加深 */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.35);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.45);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,.5);
+}
+
+/* Astryx 无障碍：所有可交互元素统一焦点环 */
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--color-focus-ring); outline-offset: 2px; border-radius: var(--radius-xs);
+}

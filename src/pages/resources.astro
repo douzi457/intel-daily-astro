@@ -3,6 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SiteNav from '../components/SiteNav.astro';
 import { SITE } from '../lib/constants';
 
 // ── 资源分类数据 ──
@@ -56,6 +57,9 @@ const pageDesc = '精选幼小初教辅资料、高清壁纸合集，夸克网�
 >
 <div class="page">
   <Header mode="archive" />
+  <div class="shell shell--flush">
+    <SiteNav active="none" today={new Date().toISOString().slice(0, 10)} />
+    <div class="shell-main">
 
   <!-- Hero -->
   <div class="hero">
@@ -155,6 +159,8 @@ const pageDesc = '精选幼小初教辅资料、高清壁纸合集，夸克网�
     </div>
   </section>
 
+    </div>
+  </div>
   <Footer />
 </div>
 </BaseLayout>

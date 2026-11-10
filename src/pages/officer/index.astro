@@ -3,6 +3,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import LayoutShell from '../../components/LayoutShell.astro';
+import SiteNav from '../../components/SiteNav.astro';
 import type { V2DailyData } from '../../lib/types-v2.ts';
 
 let v2Data: V2DailyData | null = null;
@@ -121,21 +122,7 @@ function normalize(text: string): string {
 
 <BaseLayout title="AI 情报官 | 豆子实验室">
   <style>
-    :root {
-      --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
-      --accent: #c73e3a; --surface: #fff; --border: #d4d0c8; --muted: #8a8578;
-      --paper: #f5f3ee; --line: #e0dcd4;
-      --color-bg: #faf9f6; --color-surface: #fff; --color-border: #d4d0c8;
-      --color-text: #202a30; --color-text-muted: #59656b; --color-accent: #c73e3a;
-      --color-core: #10b981; --color-watch: #f59e0b; --color-action: #8b5cf6;
-    }
-    [data-theme="dark"] {
-      --bg: #13191c; --ink: #e7eceb; --ink-2: #c8d0cf; --ink-3: #8a9a9a; --ink-4: #6a7a7a;
-      --accent: #e85d59; --surface: #1a2227; --border: #2a3539; --muted: #5a6a6a;
-      --paper: #171e22; --line: #252e33;
-      --color-bg: #13191c; --color-surface: #1a2227; --color-border: #2a3539;
-      --color-text: #e7eceb; --color-text-muted: #8a9a9a; --color-accent: #e85d59;
-    }
+  /* token 见 src/styles/tokens.css（全站唯一来源） */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
@@ -350,6 +337,7 @@ function normalize(text: string): string {
   </div>
 
   <div class="shell">
+    <SiteNav active="officer" today={today} />
     <div class="shell-main">
       <main>
         <div class="container">

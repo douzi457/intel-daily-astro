@@ -1,10 +1,11 @@
 ---
-// 首页 — AIHOT 暖纸风深度复刻
+// 首页 — Astryx v2（2026-11-10）：按 Astryx neutral 主题整套布局与配色，不再用 AIHOT 样式，见下方 <style> 注释
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CalendarWidget from '../components/CalendarWidget.astro';
 import LayoutShell from '../components/LayoutShell.astro';
+import SiteNav from '../components/SiteNav.astro';
 import { getDayData, getAllDates } from '../utils/data.ts';
 import { SITE } from '../lib/constants';
 import type { IntelItem, V4DailyData } from '../lib/types';
@@ -86,73 +87,68 @@ function reasonText(score: number): string {
 
 <BaseLayout title={`${displayDate} AI/科技情报`} description={`${displayDate} 全球科技资讯聚合，AI智能评分精选`} lang="zh-CN">
 <style>
-  :root {
-    --bg: #faf9f6; --ink: #202a30; --ink-2: #303c42; --ink-3: #59656b; --ink-4: #657176;
-    --accent: #c73e3a; --surface: #fff; --border: #d4d0c8; --paper: #f5f3ee; --line: #e0dcd4;
-    --accent-soft: rgba(199,62,58,.08);
-  }
-  [data-theme="dark"] {
-    --bg: #13191c; --ink: #e2e8f0; --ink-2: #a0aec0; --ink-3: #718096; --ink-4: #657176;
-    --accent: #e85d59; --surface: #1a202c; --border: #2d3748; --paper: #171e22; --line: #252e33;
-    --accent-soft: rgba(232,93,89,.08);
-  }
+  /* token 见 src/styles/tokens.css（全站唯一来源） */
   body { background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .page-wrap { max-width: 100%; margin: 0; padding: 0; }
-  .stats-bar { display: flex; align-items: center; justify-content: center; gap: 0; padding: 14px 20px; margin: 20px 0 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; }
-  .stats-bar-item { text-align: center; padding: 0 24px; }
+  .stats-bar { display: flex; align-items: center; justify-content: center; gap: 0; padding: var(--spacing-4) var(--spacing-5); margin: var(--spacing-5) 0 28px; background: var(--color-background-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); font-size: 13px; }
+  .stats-bar-item { text-align: center; padding: 0 var(--spacing-6); }
   .stats-bar-value { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.3em; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
   .stats-bar-label { display: block; font-size: 0.85em; color: var(--ink-3); margin-top: 2px; }
   .stats-bar-item.highlight .stats-bar-value { color: var(--accent); }
   .stats-bar-divider { width: 1px; height: 28px; background: var(--border); }
-  .timeline-wrap { display: flex; flex-direction: column; gap: 32px; }
-  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .timeline-wrap { display: flex; flex-direction: column; gap: var(--spacing-8); }
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--spacing-4); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); }
   .day-label { font-size: 11px; font-weight: 700; color: var(--ink-4); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
   .day-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; }
-  .day-count { margin-left: auto; font-size: 11px; color: var(--ink-4); background: var(--paper); border: 1px solid var(--border); border-radius: 10px; padding: 1px 8px; }
-  .entry { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .day-count { margin-left: auto; font-size: 11px; color: var(--color-text-tertiary); background: var(--paper); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1px var(--spacing-2); }
+  .entry { padding: var(--spacing-4) 0; border-bottom: 1px solid var(--line); }
   .entry:last-child { border-bottom: none; }
-  .entry:hover { background: var(--paper); margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 6px; }
-  .entry-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 5px; }
+  .entry:hover { background: var(--paper); margin: 0 calc(var(--spacing-2) * -1); padding-left: var(--spacing-2); padding-right: var(--spacing-2); border-radius: var(--radius-sm); }
+  .entry-meta { display: flex; align-items: center; gap: var(--spacing-1-5); flex-wrap: wrap; margin-bottom: var(--spacing-1-5); }
   .entry-time { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--ink-4); font-variant-numeric: tabular-nums; }
   .entry-sep { color: var(--ink-4); font-size: 11px; }
   .entry-source { font-size: 11px; color: var(--ink-3); font-weight: 500; }
-  .grade-pill { display: inline-flex; align-items: center; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; border: 1px solid transparent; }
+  /* Astryx Badge：两类徽章统一为同一高度/内边距/圆角，只换颜色 */
+  .grade-pill { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; border: 1px solid transparent; }
   .grade-elite { background: rgba(239,68,68,.08); color: #dc2626; border-color: rgba(239,68,68,.2); }
   .grade-high { background: rgba(245,158,11,.08); color: #d97706; border-color: rgba(245,158,11,.2); }
   .grade-normal { background: var(--accent-soft); color: var(--accent); }
-  .entry-title { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 7px; display: block; text-decoration: none; }
+  .entry-title { font-size: var(--text-base); font-weight: 700; color: var(--color-text-primary); line-height: 1.4; letter-spacing: var(--letter-spacing-tight); margin-bottom: 7px; display: block; text-decoration: none; }
   .entry-title:hover { color: var(--accent); }
   .entry-summary { font-size: 13px; color: var(--ink-3); line-height: 1.75; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .entry-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; padding-left: 10px; border-left: 2px solid var(--border); }
   .entry-reason-label { font-weight: 700; color: var(--ink-4); margin-right: 4px; }
-  .ai-score-badge { display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; border: 1px solid var(--border); background: var(--accent-soft); color: var(--accent); margin-left: 4px; }
-  .back-to-top { position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-3); font-size: 1.2em; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.2s; z-index: 200; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .ai-score-badge { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; border: 1px solid var(--color-border); background: var(--accent-soft); color: var(--color-accent); margin-left: var(--spacing-1); }
+  .back-to-top { position: fixed; bottom: var(--spacing-8); right: var(--spacing-8); width: 44px; height: 44px; border-radius: var(--radius-lg); border: 1px solid var(--color-border); background: var(--color-background-surface); color: var(--color-text-secondary); font-size: 1.2em; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.2s; z-index: 200; box-shadow: var(--shadow-md); }
   .back-to-top.visible { opacity: 1; transform: translateY(0); }
   .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
   /* 精选区样式 */
-  .featured-title { font-size: 1.1em; font-weight: 700; color: var(--ink); margin: 24px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-  .featured-count { font-size: 0.85em; font-weight: 400; color: var(--ink-3); margin-left: 8px; }
-  .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
-  .featured-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; transition: box-shadow 0.15s; }
-  .featured-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+  .featured-title { font-size: 1.1em; font-weight: 700; color: var(--color-text-primary); margin: var(--spacing-6) 0 var(--spacing-3); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); letter-spacing: var(--letter-spacing-tight); }
+  .featured-count { font-size: 0.85em; font-weight: 400; color: var(--color-text-secondary); margin-left: var(--spacing-2); }
+  .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--spacing-4); margin-bottom: var(--spacing-6); }
+  .featured-card { background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4); transition: box-shadow 0.15s; }
+  .featured-card:hover { box-shadow: var(--shadow-md); }
   .featured-rank { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; }
-  .featured-card h3 { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 6px 0; }
+  .featured-card h3 { font-size: var(--text-sm); font-weight: 700; color: var(--color-text-primary); line-height: 1.4; letter-spacing: var(--letter-spacing-tight); margin: var(--spacing-1-5) 0; }
   .featured-card h3 a { color: inherit; text-decoration: none; }
   .featured-card h3 a:hover { color: var(--accent); }
   .featured-summary { font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .featured-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 11px; color: var(--ink-4); }
   /* 分类筛选 */
-  .cat-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
-  .cat-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-3); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
-  .cat-pill:hover { border-color: var(--accent); color: var(--accent); }
-  .cat-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  /* Astryx Tabs（v3）：分类是一排文字标签，不是药丸；当前项只用一条强调色下划线，不再用灰底整条 */
+  .cat-filter { display: flex; gap: var(--spacing-1); margin: var(--spacing-4) 0 var(--spacing-5); padding: 0; background: transparent; border-bottom: 1px solid var(--color-border); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cat-filter::-webkit-scrollbar { display: none; }
+  .cat-pill { flex-shrink: 0; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 0; background: transparent; color: var(--color-text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+  .cat-pill.active { background: transparent; color: var(--color-accent); border-bottom-color: var(--color-accent); box-shadow: none; }
+  .cat-pill:hover { color: var(--color-text-primary); }
+  .cat-pill.active { background: transparent; color: var(--color-accent); border-bottom-color: var(--color-accent); box-shadow: none; }
   /* 展开来源 */
   .src-expand { display: inline; font-size: 11px; }
   .src-expand summary { cursor: pointer; color: var(--accent); list-style: none; }
   .src-expand summary::-webkit-details-marker { display: none; }
   .src-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-  .src-item { padding: 2px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); font-size: 10px; }
+  .src-item { padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); background: var(--accent-soft); color: var(--color-accent); font-size: 10px; }
   .hidden { display: none !important; }
   @media (max-width: 640px) {
     .page-wrap { padding: 0 14px 40px; }
@@ -177,27 +173,13 @@ function reasonText(score: number): string {
         <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
       </div>
   </div>
-  <input type="checkbox" id="drawerToggle" class="drawer-toggle" aria-label="开关手机菜单" />
-  <label class="drawer-overlay" for="drawerToggle" aria-label="关闭菜单"></label>
-  <aside class="drawer" id="mobileDrawer" aria-label="手机站内导航">
-    <div class="drawer-head"><b>豆子实验室</b><label for="drawerToggle" class="drawer-close" aria-label="关闭菜单">✕</label></div>
-    <nav class="drawer-group"><h4>导航</h4><a class="active" href="/">今日精选</a><a href={`/day/${today}/`}>今日全部</a><a href="/hot/">热点榜</a><a href="/officer/">情报官</a><a href="/new-terms/">新词榜</a></nav>
-    <nav class="drawer-group"><h4>更多</h4><a href="/archive">归档</a><a href="/stats">统计</a><a href="/rss.xml">RSS</a><a href="/en/">English</a></nav>
-    <p class="drawer-note">与桌面左栏同一组链接，只链现有页面。</p>
-  </aside>
   <div class="shell">
-    <aside class="home-nav" aria-label="站内导航">
-      <div class="home-brand">豆子实验室<span>每日情报 · 把 AI 讲成人话</span></div>
-      <nav class="home-group"><h4>导航</h4><a class="active" href="/">今日精选</a><a href={`/day/${today}/`}>今日全部</a><a href="/hot/">热点榜</a><a href="/officer/">情报官</a><a href="/new-terms/">新词榜</a></nav>
-      <nav class="home-group"><h4>更多</h4><a href="/archive">归档</a><a href="/stats">统计</a><a href="/rss.xml">RSS</a><a href="/en/">English</a></nav>
-      <p class="home-note">只链现有页面，不新增搜索、收藏、模型榜。</p>
-    </aside>
+    <SiteNav active="home" today={today} />
     <div class="shell-main">
-      <div class="mobiletop"><label for="drawerToggle" class="drawer-btn" id="drawerBtn" aria-controls="mobileDrawer">☰ 菜单</label><b>豆子实验室 · 每日情报</b><nav><a href="/hot/">热点榜</a><a href="/officer/">情报官</a><a href="/new-terms/">新词榜</a><a href="/archive">归档</a></nav></div>
       {/* 分类筛选 */}
       {v4Data?.by_category && (
         <div class="cat-filter" id="catFilter">
-          <button class="cat-pill active" data-cat="all">全部</button>
+          <button class="cat-pill active" data-cat="all">全部情报</button>
           {Object.keys(v4Data.by_category).map((cat) => (
             <button class="cat-pill" data-cat={cat}>{cat}</button>
           ))}
@@ -242,7 +224,7 @@ function reasonText(score: number): string {
         
         return (
           <>
-            <h2 class="featured-title">⭐ 今日精选 <span class="featured-count">{topFeatured.length}</span></h2>
+            <h2 class="featured-title">今日精选 <span class="featured-count">{topFeatured.length}</span></h2>
             <div class="featured-grid">
               {topFeatured.map((item: any, i: number) => (
                 <article class="featured-card" key={i}>
@@ -335,21 +317,6 @@ function reasonText(score: number): string {
   <Footer />
 </div>
 <button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
-<script>
-  const drawerToggle = document.getElementById('drawerToggle') as HTMLInputElement | null;
-  const drawerEl = document.getElementById('mobileDrawer');
-  const drawerBtn = document.getElementById('drawerBtn');
-  function syncDrawer() {
-    if (!drawerToggle) return;
-    document.body.style.overflow = drawerToggle.checked ? 'hidden' : '';
-    if (drawerBtn) drawerBtn.setAttribute('aria-expanded', String(drawerToggle.checked));
-  }
-  if (drawerToggle) {
-    drawerToggle.addEventListener('change', syncDrawer);
-    drawerEl?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawerToggle.checked = false; syncDrawer(); }));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { drawerToggle.checked = false; syncDrawer(); } });
-  }
-</script>
 <script>
   const backBtn = document.getElementById('backToTop');
   if (backBtn) {

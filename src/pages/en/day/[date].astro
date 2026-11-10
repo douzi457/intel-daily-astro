@@ -8,6 +8,7 @@ import PlatformSection from '../../../components/PlatformSection.astro';
 import Sidebar from '../../../components/Sidebar.astro';
 import SectionNav from '../../../components/SectionNav.astro';
 import CalendarWidget from '../../../components/CalendarWidget.astro';
+import SiteNav from '../../../components/SiteNav.astro';
 import { getDayData, getAllDates } from '../../../utils/data.ts';
 import { SITE, SECTION_ORDER, getDow } from '../../../lib/constants';
 import type { IntelItem, GzhArticle } from '../../../lib/types';
@@ -73,7 +74,9 @@ const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
 
 <SectionNav activeSections={activeSections} locale="en" />
 
-<div class="page">
+<div class="shell">
+  <SiteNav lang="en" active="day" today={date} />
+  <div class="shell-main">
   <div class="content-grid">
     <div class="main-content">
       <PlatformSection grouped={grouped} locale="en" />
@@ -118,6 +121,7 @@ const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
       filteredArticles={filteredArticles}
       locale="en"
     />
+  </div>
   </div>
 
   <Footer />

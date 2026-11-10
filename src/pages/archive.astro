@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getAllDates } from '../utils/data.ts';
 import CalendarWidget from '../components/CalendarWidget.astro';
+import SiteNav from '../components/SiteNav.astro';
 
 const dates = getAllDates('zh');
 ---
@@ -12,6 +13,9 @@ const dates = getAllDates('zh');
 <BaseLayout title="📁 历史归档 · 豆子实验室">
 <div class="page">
   <Header mode="archive" />
+  <div class="shell shell--flush">
+    <SiteNav active="archive" today={dates[0]} />
+    <div class="shell-main">
 
   <div style="margin-bottom:40px;">
     <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 历史归档</h1>
@@ -20,6 +24,8 @@ const dates = getAllDates('zh');
 
   <CalendarWidget dates={dates} basePath="/day/" locale="zh" />
 
+    </div>
+  </div>
   <Footer />
 </div>
 </BaseLayout>

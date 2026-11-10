@@ -3,6 +3,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import SiteNav from '../../components/SiteNav.astro';
 import { getDayData, getAllDates } from '../../utils/data.ts';
 import { getPlatformMeta, SITE } from '../../lib/constants';
 import type { IntelItem, FocusData } from '../../lib/types';
@@ -48,6 +49,9 @@ const nextDate = dateIdx > 0 ? allDates[dateIdx - 1] : null;
 >
 <div class="page">
   <Header mode="day" date={date} totalItems={stats.total} />
+  <div class="shell shell--flush">
+    <SiteNav active="day" today={date} />
+    <div class="shell-main">
 
   <!-- 日期导航 -->
   <nav class="date-nav">
@@ -166,6 +170,8 @@ const nextDate = dateIdx > 0 ? allDates[dateIdx - 1] : null;
     </div>
   )}
 
+    </div>
+  </div>
   <Footer />
 </div>
 </BaseLayout>

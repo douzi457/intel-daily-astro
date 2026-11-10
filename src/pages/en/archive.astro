@@ -5,6 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getAllDates } from '../../utils/data.ts';
 import CalendarWidget from '../../components/CalendarWidget.astro';
+import SiteNav from '../../components/SiteNav.astro';
 
 const dates = getAllDates('en');
 ---
@@ -12,6 +13,9 @@ const dates = getAllDates('en');
 <BaseLayout title="📁 History Archive · Douzi Labs" lang="en">
 <div class="page">
   <Header mode="archive" lang="en" />
+  <div class="shell shell--flush">
+    <SiteNav lang="en" active="archive" today={dates[0]} />
+    <div class="shell-main">
 
   <div style="margin-bottom:40px;">
     <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📁 History Archive</h1>
@@ -20,6 +24,8 @@ const dates = getAllDates('en');
 
   <CalendarWidget dates={dates} basePath="/en/day/" locale="en" />
 
+    </div>
+  </div>
   <Footer />
 </div>
 </BaseLayout>

@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+/* 全站 token 在 global.css 之后引入，后引入的同名变量获胜 */
+import '../styles/tokens.css';
 import { SITE } from '../lib/constants';
 
 interface Props {

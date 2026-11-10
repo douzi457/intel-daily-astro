@@ -1370,6 +1370,8 @@ a { color: inherit; text-decoration: none; }
 }
 .shell-main { min-width: 0; }
 .shell-right { display: none; }
+/* .page 页面里嵌套 .shell 时去两侧内边距，避免 .page 与 .shell 的 padding 叠加 */
+.shell--flush { padding-left: 0; padding-right: 0; }
 
 @media (min-width: 1280px) {
   .shell {
@@ -1422,12 +1424,13 @@ a { color: inherit; text-decoration: none; }
 .page-head { max-width: 1320px; margin: 0 auto; padding: 16px 20px 0; }
 .rail-card { margin-top: 24px; border-top: 1px solid var(--border, #e0dcd4); padding-top: 16px; }
 .rail-title { font-weight: 700; font-size: .95em; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline; }
-.rail-more { font-size: .8em; font-weight: 400; color: var(--accent, #c73e3a); text-decoration: none; }
+.rail-more { font-size: .8em; font-weight: 400; color: var(--accent, #76654f); text-decoration: none; }
 .rail-terms { list-style: none; margin: 0; padding: 0; }
 .rail-terms li { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px dashed var(--border, #e0dcd4); }
 .rail-term { font-weight: 600; }
 .rail-count { color: var(--muted, #8a8378); font-size: .85em; white-space: nowrap; }
-.more-link { display: block; text-align: center; padding: 14px; margin-top: 12px; border: 1px solid var(--border, #e0dcd4); border-radius: 10px; color: var(--accent, #c73e3a); text-decoration: none; font-weight: 600; }
+.more-link { display: block; text-align: center; padding: 12px; margin-top: 12px; border: 1px solid var(--border, #e0dcd4); border-radius: 12px; color: var(--accent, #76654f); text-decoration: none; font-weight: 600; }
+.more-link:hover { background: var(--accent-soft, rgba(118,101,79,.1)); }
 
 /* ── 首页左栏 + 手机抽屉（2026-10-25 干净 diff，v5 预览落到仓库版）── */
 /* 桌面左栏：200px sticky；手机：隐藏左栏，改用顶部条 + CSS checkbox 抽屉 */
@@ -1441,9 +1444,10 @@ a { color: inherit; text-decoration: none; }
   .home-brand { font-size: 16px; font-weight: 800; line-height: 1.3; }
   .home-brand span { display: block; font-size: 12px; font-weight: 600; color: var(--ink-4, #657176); margin-top: 2px; }
   .home-group h4 { font-size: 11px; letter-spacing: .12em; color: var(--ink-4, #657176); margin-bottom: 6px; }
-  .home-group a { display: block; padding: 8px 10px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--ink-2, #303c42); text-decoration: none; }
-  .home-group a:hover { color: var(--accent, #c73e3a); }
-  .home-group a.active { background: var(--accent, #c73e3a); color: #fff; }
+  /* Astryx v2：左栏链接统一 32px 高，当前项是浅色底 + 强调色字，不再整块填色 */
+  .home-group a { display: flex; align-items: center; height: 32px; padding: 0 10px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--ink-2, #303c42); text-decoration: none; }
+  .home-group a:hover { background: var(--bg-hover, rgba(0,0,0,.04)); color: var(--ink, #202a30); }
+  .home-group a.active { background: var(--accent-soft, rgba(118,101,79,.1)); color: var(--accent, #76654f); }
   .home-note { font-size: 12px; color: var(--ink-4, #657176); margin-top: auto; }
 }
 @media (min-width: 1280px) {
@@ -1451,17 +1455,21 @@ a { color: inherit; text-decoration: none; }
   .shell { grid-template-columns: 200px minmax(0, 1fr) 320px; gap: 32px; }
 }
 @media (max-width: 1099px) {
-  .mobiletop { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 2px solid var(--ink, #202a30); font-size: 13px; margin-bottom: 16px; }
-  .mobiletop nav { display: flex; gap: 14px; flex-wrap: wrap; }
-  .mobiletop nav a { color: var(--ink-2, #303c42); font-weight: 600; text-decoration: none; }
-  .drawer-btn, .drawer-close { border: 1px solid var(--border, #d4d0c8); background: var(--surface, #fff); color: var(--ink-2, #303c42); border-radius: 999px; padding: 5px 11px; cursor: pointer; font-size: 12px; display: inline-block; text-decoration: none; }
+  /* Astryx v2：手机顶条细分隔线、导航单行横滑，不再换行乱排 */
+  .mobiletop { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border, #e0d9cf); font-size: 13px; margin-bottom: 16px; }
+  .mobiletop nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .mobiletop nav::-webkit-scrollbar { display: none; }
+  .mobiletop nav a { display: inline-flex; align-items: center; flex-shrink: 0; height: 32px; padding: 0 10px; border-radius: 8px; color: var(--ink-2, #303c42); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .mobiletop nav a:hover { background: var(--bg-hover, rgba(0,0,0,.04)); }
+  .drawer-btn, .drawer-close { display: inline-flex; align-items: center; flex-shrink: 0; height: 32px; padding: 0 12px; border: 1px solid var(--border, #d4d0c8); background: var(--surface, #fff); color: var(--ink-2, #303c42); border-radius: 8px; cursor: pointer; font-size: 12px; text-decoration: none; }
   .drawer { display: block; position: fixed; top: 0; left: 0; bottom: 0; width: min(280px, 82vw); background: var(--surface, #fff); border-right: 1px solid var(--border, #d4d0c8); padding: 20px; z-index: 300; transform: translateX(-105%); transition: transform .2s ease; visibility: hidden; overflow-y: auto; }
   .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 250; }
   #drawerToggle:checked ~ .drawer { transform: translateX(0); visibility: visible; }
   #drawerToggle:checked ~ .drawer-overlay { display: block; }
   .drawer-head { display: flex; justify-content: space-between; align-items: center; }
   .drawer-group h4 { font-size: 11px; letter-spacing: .12em; color: var(--ink-4, #657176); margin: 16px 0 6px; }
-  .drawer-group a { display: block; padding: 10px; border-radius: 8px; font-size: 15px; font-weight: 600; color: var(--ink-2, #303c42); text-decoration: none; }
-  .drawer-group a.active { background: var(--accent, #c73e3a); color: #fff; }
+  .drawer-group a { display: flex; align-items: center; height: 40px; padding: 0 10px; border-radius: 8px; font-size: 15px; font-weight: 600; color: var(--ink-2, #303c42); text-decoration: none; }
+  .drawer-group a:hover { background: var(--bg-hover, rgba(0,0,0,.04)); }
+  .drawer-group a.active { background: var(--accent-soft, rgba(118,101,79,.1)); color: var(--accent, #76654f); }
   .drawer-note { font-size: 12px; color: var(--ink-4, #657176); margin-top: 16px; }
 }

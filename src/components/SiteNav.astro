@@ -1,0 +1,84 @@
+---
+// SiteNav：全站统一导航（v3，2026-11-10）
+// 桌面端左栏 + 手机端抽屉 + 手机顶条，三者是同一组链接，只在不同宽度下换形态。
+// Header 不再重复列这组链接（见 Header.astro），各页 .shell 的第一个孩子就是它，
+// 正好填进 global.css 里 .shell 在 ≥1100px 的 200px 左列。
+// 用法：<SiteNav active="home" today={today} />，放在 <div class="shell"> 内最前面。
+interface Props {
+  active?: 'home' | 'day' | 'hot' | 'officer' | 'new-terms' | 'archive' | 'stats' | 'none';
+  today?: string;
+  lang?: 'zh' | 'en';
+}
+const { active = 'home', today = '', lang = 'zh' } = Astro.props;
+const isActive = (key: string) => (active === key ? 'active' : '');
+const t = lang === 'en' ? {
+  brand: 'Douzi Labs', tagline: 'Daily Intel · AI explained simply',
+  nav: 'Navigate', more: 'More', note: 'Same links as the desktop sidebar. Only existing pages.',
+  home: "Today's Picks", day: 'Today', hot: 'Hot', officer: 'Officer', newTerms: 'New Terms',
+  archive: 'Archive', stats: 'Stats', rss: 'RSS', top: 'Douzi Labs · Daily Intel',
+} : {
+  brand: '豆子实验室', tagline: '每日情报 · 把 AI 讲成人话',
+  nav: '导航', more: '更多', note: '与桌面左栏同一组链接，只链现有页面。',
+  home: '今日精选', day: '今日全部', hot: '热点榜', officer: '情报官', newTerms: '新词榜',
+  archive: '归档', stats: '统计', rss: 'RSS', top: '豆子实验室 · 每日情报',
+};
+const langHref = lang === 'en' ? '/' : '/en/';
+const langLabel = lang === 'en' ? '中文' : 'English';
+---
+
+<input type="checkbox" id="drawerToggle" class="drawer-toggle" aria-label="开关手机菜单" />
+<label class="drawer-overlay" for="drawerToggle" aria-label="关闭菜单"></label>
+<aside class="drawer" id="mobileDrawer" aria-label="手机站内导航">
+  <div class="drawer-head"><b>{t.brand}</b><label for="drawerToggle" class="drawer-close" aria-label="关闭菜单">✕</label></div>
+  <nav class="drawer-group"><h4>{t.nav}</h4>
+    <a class={isActive('home')} href="/">{t.home}</a>
+    <a class={isActive('day')} href={`/day/${today}/`}>{t.day}</a>
+    <a class={isActive('hot')} href="/hot/">{t.hot}</a>
+    <a class={isActive('officer')} href="/officer/">{t.officer}</a>
+    <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
+  </nav>
+  <nav class="drawer-group"><h4>{t.more}</h4>
+    <a class={isActive('archive')} href="/archive">{t.archive}</a>
+    <a class={isActive('stats')} href="/stats">{t.stats}</a>
+    <a href="/rss.xml">RSS</a>
+    <a href={langHref}>{langLabel}</a>
+  </nav>
+  <p class="drawer-note">{t.note}</p>
+</aside>
+<div class="mobiletop">
+  <label for="drawerToggle" class="drawer-btn" id="drawerBtn" aria-controls="mobileDrawer" aria-label="打开菜单">☰</label>
+  <b>{t.top}</b>
+</div>
+<aside class="home-nav" aria-label="站内导航">
+  <div class="home-brand">{t.brand}<span>{t.tagline}</span></div>
+  <nav class="home-group"><h4>{t.nav}</h4>
+    <a class={isActive('home')} href="/">{t.home}</a>
+    <a class={isActive('day')} href={`/day/${today}/`}>{t.day}</a>
+    <a class={isActive('hot')} href="/hot/">{t.hot}</a>
+    <a class={isActive('officer')} href="/officer/">{t.officer}</a>
+    <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
+  </nav>
+  <nav class="home-group"><h4>{t.more}</h4>
+    <a class={isActive('archive')} href="/archive">{t.archive}</a>
+    <a class={isActive('stats')} href="/stats">{t.stats}</a>
+    <a href="/rss.xml">RSS</a>
+    <a href={langHref}>{langLabel}</a>
+  </nav>
+  <p class="home-note">{t.note}</p>
+</aside>
+
+<script>
+  const drawerToggle = document.getElementById('drawerToggle') as HTMLInputElement | null;
+  const drawerEl = document.getElementById('mobileDrawer');
+  const drawerBtn = document.getElementById('drawerBtn');
+  function syncDrawer() {
+    if (!drawerToggle) return;
+    document.body.style.overflow = drawerToggle.checked ? 'hidden' : '';
+    if (drawerBtn) drawerBtn.setAttribute('aria-expanded', String(drawerToggle.checked));
+  }
+  if (drawerToggle) {
+    drawerToggle.addEventListener('change', syncDrawer);
+    drawerEl?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawerToggle.checked = false; syncDrawer(); }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { drawerToggle.checked = false; syncDrawer(); } });
+  }
+</script>

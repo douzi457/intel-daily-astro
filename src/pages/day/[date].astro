@@ -10,6 +10,7 @@ import Sidebar from '../../components/Sidebar.astro';
 import SectionNav from '../../components/SectionNav.astro';
 import CalendarWidget from '../../components/CalendarWidget.astro';
 import LayoutShell from '../../components/LayoutShell.astro';
+import SiteNav from '../../components/SiteNav.astro';
 import { getDayData, getAllDates } from '../../utils/data.ts';
 import { SITE, SECTION_ORDER, getDow } from '../../lib/constants';
 import type { FocusData, IntelItem, GzhArticle } from '../../lib/types';
@@ -83,6 +84,7 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
       <Header mode="day" date={date} totalItems={totalItems} />
   </div>
   <div class="shell">
+    <SiteNav active="day" today={allDates[0]} />
     <div class="shell-main">
 
       <!-- 日期导航 -->
