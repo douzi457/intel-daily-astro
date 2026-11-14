@@ -1,0 +1,126 @@
+---
+// 周报入口 — 按 ISO 周（周一起）汇总历史日报：每周条数、每天入口、当周展示分最高的 5 条
+// 数据源与首页同一份：src/data/rewrite/zh/*.json，构建时生成，不用管线。
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { getAllDates } from '../utils/data.ts';
+import fs from 'fs';
+import path from 'path';
+
+const dates = getAllDates('zh');
+const DATA_ROOT = path.join(process.cwd(), 'src/data/rewrite/zh');
+
+function displayScore(it: any): number {
+  const a = it.ai_score;
+  return typeof a === 'number' && !isNaN(a) ? a : it.score || 0;
+}
+// ISO 周：周一为一周开始，返回周一日期 YYYY-MM-DD
+function mondayOf(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00Z');
+  const day = d.getUTCDay(); // 0 周日
+  const diff = (day + 6) % 7;
+  d.setUTCDate(d.getUTCDate() - diff);
+  return d.toISOString().slice(0, 10);
+}
+function fmtMD(dateStr: string): string {
+  return `${parseInt(dateStr.slice(5, 7))}月${parseInt(dateStr.slice(8, 10))}日`;
+}
+
+type WeekTop = { t: string; d: string; i: number; s: number };
+type Week = { monday: string; total: number; days: { date: string; count: number }[]; top: WeekTop[] };
+
+const weeksMap = new Map<string, Week>();
+if (fs.existsSync(DATA_ROOT)) {
+  const files = fs.readdirSync(DATA_ROOT).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().reverse();
+  for (const f of files) {
+    const date = f.replace('.json', '');
+    let raw: any = {};
+    try {
+      raw = JSON.parse(fs.readFileSync(path.join(DATA_ROOT, f), 'utf-8'));
+    } catch {
+      continue;
+    }
+    const items = raw.items || [];
+    const monday = mondayOf(date);
+    let w = weeksMap.get(monday);
+    if (!w) {
+      w = { monday, total: 0, days: [], top: [] };
+      weeksMap.set(monday, w);
+    }
+    w.total += items.length;
+    w.days.push({ date, count: items.length });
+    items.forEach((it: any, idx: number) => {
+      const title = String(it.ai_title || it.title || '').trim();
+      if (!title) return;
+      w!.top.push({ t: title, d: date, i: it.id || idx + 1, s: displayScore(it) });
+    });
+  }
+}
+const weeks = [...weeksMap.values()]
+  .map((w) => ({
+    ...w,
+    days: [...w.days].sort((a, b) => b.date.localeCompare(a.date)),
+    top: [...w.top].sort((a, b) => b.s - a.s || b.d.localeCompare(a.d)).slice(0, 5),
+  }))
+  .sort((a, b) => b.monday.localeCompare(a.monday));
+---
+
+<BaseLayout title="🗓️ 周报 · 豆子实验室" description="豆子实验室每周情报汇总：每周条数、每天入口、当周最重要的 5 条。">
+<style>
+  .weekly-page h1 { font-size: 1.3em; font-weight: 800; color: var(--text-h); }
+  .weekly-page .sub { font-size: 0.82em; color: var(--text-m); margin-top: 6px; }
+  .week-block { margin: 28px 0; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .week-block:last-child { border-bottom: none; }
+  .week-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .week-title { font-size: 1.05em; font-weight: 800; color: var(--ink); }
+  .week-count { font-size: 12px; color: var(--ink-4); font-family: var(--font-mono); }
+  .week-days { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .week-days a { font-size: 12px; color: var(--ink-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 3px 10px; text-decoration: none; font-family: var(--font-mono); }
+  .week-days a:hover { border-color: var(--accent); color: var(--accent); }
+  .week-top { list-style: none; padding: 0; margin: 0; }
+  .week-top li { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .week-top li:last-child { border-bottom: none; }
+  .week-rank { font-family: var(--font-mono); font-weight: 800; color: var(--accent); flex-shrink: 0; }
+  .week-top a { color: var(--ink); text-decoration: none; }
+  .week-top a:hover { color: var(--accent); }
+  .week-top .meta { font-size: 11px; color: var(--ink-4); font-family: var(--font-mono); margin-top: 2px; }
+</style>
+
+<div class="page">
+  <Header mode="archive" />
+  <div class="shell shell--flush">
+    <SiteNav active="none" today={dates[0]} />
+    <div class="shell-main weekly-page">
+      <h1>🗓️ 周报</h1>
+      <p class="sub">按周汇总：每周收了多少条、每天入口、当周展示分最高的 5 条。点标题跳到当天日报的对应条目。</p>
+      {weeks.map((w) => (
+        <section class="week-block">
+          <div class="week-head">
+            <span class="week-title">{fmtMD(w.monday)} – {fmtMD(w.days[0]?.date || w.monday)} 当周</span>
+            <span class="week-count">共 {w.total.toLocaleString()} 条 · {w.days.length} 天</span>
+          </div>
+          <div class="week-days">
+            {w.days.map((d) => (
+              <a href={`/day/${d.date}/`}>{d.date.slice(5)} · {d.count} 条</a>
+            ))}
+          </div>
+          <ol class="week-top">
+            {w.top.map((it, i) => (
+              <li>
+                <span class="week-rank">{i + 1}</span>
+                <div>
+                  <a href={`/day/${it.d}/#entry-${it.i}`}>{it.t}</a>
+                  <div class="meta">{it.d}{it.s > 0 ? ` · AI 评分 ${it.s.toFixed(1)}` : ''}</div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  </div>
+  <Footer />
+</div>
+</BaseLayout>
