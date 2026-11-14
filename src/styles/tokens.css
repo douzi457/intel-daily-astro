@@ -1,28 +1,32 @@
 /* ============================================================
-   全站设计 token（v3，2026-11-10）
-   来源：Astryx neutral 主题（meta/astryx，MIT，
-   packages/themes/neutral/src/neutralTheme.ts，v0.7.12）
-   “克制的暖灰，内容是主角”——强调色只在需要强调处出现。
-   本文件是全站唯一 token 来源：浅色 / 深色各一套，
-   各页面不再自写 :root 暖纸变量（AIHOT 样式已停用）。
-   旧变量名（--bg/--ink/--text-h/--accent 等）全部保留作别名，
-   让 Header/Footer/日历等共用组件不用改代码就能走新色。
+   全站设计 token（v4，2026-11-14）
+   对标：Grok / xAI 设计语言——真黑、极简、工程感、克制、信息优先。
+   原则：颜色只服务信息优先级，不服务“好看”。
+   - 深色（默认）：真黑 #0A0A0A，表面 #141414 / #1A1A1A，
+     弱边框 #27272A，几乎不用阴影，数字与评分走等宽字体。
+   - 浅色：干净纸白，高对比文字，同一套 token 换值。
+   - 全站只留一个主强调色：暖橙（深色 #EA580C / 浅色 #C2410C），
+     只用于 Logo、高价值标签、关键 CTA、评分高亮。
+   本文件是全站唯一 token 来源；旧变量名全部保留作别名，
+   各页面不再自写 :root（v3 已清完）。
+   注意：ai_score 的量纲管线侧尚未书面确认（看起来像 0-10，
+   但无文档），前端只原样展示、不做换算，见管线批次说明。
    ============================================================ */
 :root {
-  /* —— 颜色：浅色（neutral 暖灰） —— */
-  --bg: #f6f4f1; --ink: #1c1917; --ink-2: #44403a; --ink-3: #57534a; --ink-4: #8a8378;
-  --accent: #76654f; --accent-alt: #8a755f; --surface: #fff; --border: #e0d9cf;
-  --paper: #efece6; --line: #e8e2d9; --muted: #8a8378;
-  --accent-soft: rgba(118,101,79,.10);
-  --accent-glow: rgba(118,101,79,.08);
-  --accent-gradient: linear-gradient(135deg, #76654f, #8a755f);
-  --text-h: #1c1917; --text-p: #57534a; --text-m: #8a8378;
-  --bg-card: #fff; --bg-hover: #ece9e3;
+  /* —— 颜色：浅色（干净纸白） —— */
+  --bg: #fafaf9; --ink: #18181b; --ink-2: #3f3f46; --ink-3: #52525b; --ink-4: #a1a1aa;
+  --accent: #c2410c; --accent-alt: #ea580c; --surface: #fff; --border: #e4e4e7;
+  --paper: #f4f4f5; --line: #e4e4e7; --muted: #a1a1aa;
+  --accent-soft: rgba(194,65,12,.08);
+  --accent-glow: rgba(194,65,12,.06);
+  --accent-gradient: linear-gradient(135deg, #c2410c, #ea580c);
+  --text-h: #18181b; --text-p: #52525b; --text-m: #a1a1aa;
+  --bg-card: #fff; --bg-hover: #f4f4f5;
   /* 情报官用的语义色（状态色，不是品牌色，沿用原值） */
   --color-core: #10b981; --color-watch: #f59e0b; --color-action: #8b5cf6;
-  /* —— Astryx 语义 token —— */
+  /* —— Grok 语义 token —— */
   --color-background-body: var(--bg); --color-background-surface: var(--surface);
-  --color-background-surface-2: #ece9e3; --color-background-card: var(--surface);
+  --color-background-surface-2: #f4f4f5; --color-background-card: var(--surface);
   --color-background-page: var(--bg);
   --color-text-primary: var(--ink); --color-text-secondary: var(--ink-3);
   --color-text-tertiary: var(--ink-4); --color-border: var(--border);
@@ -34,44 +38,47 @@
   --spacing-0: 0; --spacing-0-5: 2px; --spacing-1: 4px; --spacing-1-5: 6px;
   --spacing-2: 8px; --spacing-3: 12px; --spacing-4: 16px; --spacing-5: 20px;
   --spacing-6: 24px; --spacing-8: 32px; --spacing-12: 48px;
-  /* —— 圆角刻度（neutral 主题） —— */
+  /* —— 圆角刻度（Grok 克制：8–12px 为主） —— */
   --radius-0: 0; --radius-xs: 6px; --radius-sm: 8px; --radius-md: 10px;
-  --radius-lg: 12px; --radius-xl: 16px; --radius-2xl: 18px; --radius-3xl: 24px;
+  --radius-lg: 12px; --radius-xl: 12px; --radius-2xl: 16px; --radius-3xl: 24px;
   --radius-full: 9999px;
-  /* —— 阴影刻度 —— */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.05);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
-  --shadow-lg: 0 8px 16px -4px rgba(0,0,0,.12);
-  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,.25);
+  /* —— 阴影刻度（克制：几乎不用阴影，卡片靠边框与间距区分） —— */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
+  --shadow-2xl: 0 16px 32px rgba(0,0,0,.10);
   /* —— 字号与字距 —— */
   --text-3xs: 10px; --text-xs: 12px; --text-sm: 14px; --text-base: 16px;
   --text-lg: 20px; --text-xl: 24px; --text-2xl: 30px;
   --letter-spacing-tight: -0.02em;
+  /* —— 字体：数字与评分走等宽（Grok 工程感），正文走系统无衬线 —— */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   /* —— 控件高度：sm 28 / md 32 / lg 36 —— */
   --size-element-sm: 28px; --size-element-md: 32px; --size-element-lg: 36px;
 }
 
 [data-theme="dark"] {
-  /* —— 颜色：深色（neutral darkTokens，文字近白） —— */
-  --bg: #171512; --ink: #f5f2ec; --ink-2: #d6d0c6; --ink-3: #a8a29a; --ink-4: #7a736a;
-  --accent: #b39d7f; --accent-alt: #c4b198; --surface: #1f1c18; --border: #322d26;
-  --paper: #1b1815; --line: #2a261f; --muted: #7a736a;
-  --accent-soft: rgba(179,157,127,.12);
-  --accent-glow: rgba(179,157,127,.12);
-  --accent-gradient: linear-gradient(135deg, #b39d7f, #c4b198);
-  --text-h: #f5f2ec; --text-p: #a8a29a; --text-m: #7a736a;
-  --bg-card: #1f1c18; --bg-hover: #2a261f;
-  --color-background-surface-2: #2a261f;
-  /* 深色下阴影加深 */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.4);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.35);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,.45);
-  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,.5);
+  /* —— 颜色：深色（Grok 真黑） —— */
+  --bg: #0a0a0a; --ink: #f5f5f5; --ink-2: #d4d4d4; --ink-3: #a1a1aa; --ink-4: #71717a;
+  --accent: #ea580c; --accent-alt: #f97316; --surface: #141414; --border: #27272a;
+  --paper: #1a1a1a; --line: #27272a; --muted: #71717a;
+  --accent-soft: rgba(234,88,12,.12);
+  --accent-glow: rgba(234,88,12,.10);
+  --accent-gradient: linear-gradient(135deg, #ea580c, #f97316);
+  --text-h: #f5f5f5; --text-p: #a1a1aa; --text-m: #71717a;
+  --bg-card: #141414; --bg-hover: #1a1a1a;
+  --color-background-surface-2: #1a1a1a;
+  /* 深色下阴影更克制，卡片主要靠 #27272a 边框区分 */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.5);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.6);
+  --shadow-2xl: 0 16px 32px rgba(0,0,0,.6);
 }
 
-/* Astryx 无障碍：所有可交互元素统一焦点环 */
-a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+/* 无障碍：所有可交互元素统一焦点环 */
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible, input:focus-visible {
   outline: 2px solid var(--color-focus-ring); outline-offset: 2px; border-radius: var(--radius-xs);
 }

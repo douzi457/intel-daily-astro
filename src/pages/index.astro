@@ -36,12 +36,20 @@ for (const item of items) {
 }
 const sortedDates = [...groupedByDate.keys()].sort().reverse();
 
-// 高价值数与热点榜统一口径：v4 by_category 下 score(10分制) >= 7 的条目数
+// 展示分（v4，2026-11-14）：有 ai_score 就用它——它是 80 条有摘要条目上
+// 唯一有真实区分度的分数（本文件：1.0–7.5）；没有 ai_score 才回落到 score。
+// ai_score 的量纲管线侧尚未书面确认（看起来像 0-10），前端只原样展示、不换算。
+function displayScore(it: any): number {
+  const a = (it as any).ai_score;
+  return (typeof a === 'number' && !isNaN(a)) ? a : (it.score || 0);
+}
+
+// 高价值数与热点榜统一口径：展示分 >= 7 的条目数
 let highScoreCount = 0;
 if (v4Data?.by_category) {
   for (const cat of Object.values(v4Data.by_category)) {
     for (const it of (cat as any[])) {
-      if ((it.score || 0) >= 7) highScoreCount++;
+      if (displayScore(it) >= 7) highScoreCount++;
     }
   }
 }
@@ -111,15 +119,16 @@ function reasonText(score: number): string {
   .entry-source { font-size: 11px; color: var(--ink-3); font-weight: 500; }
   /* Astryx Badge：两类徽章统一为同一高度/内边距/圆角，只换颜色 */
   .grade-pill { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; border: 1px solid transparent; }
-  .grade-elite { background: rgba(239,68,68,.08); color: #dc2626; border-color: rgba(239,68,68,.2); }
-  .grade-high { background: rgba(245,158,11,.08); color: #d97706; border-color: rgba(245,158,11,.2); }
-  .grade-normal { background: var(--accent-soft); color: var(--accent); }
-  .entry-title { font-size: var(--text-base); font-weight: 700; color: var(--color-text-primary); line-height: 1.4; letter-spacing: var(--letter-spacing-tight); margin-bottom: 7px; display: block; text-decoration: none; }
+  /* v4：标签色收敛——只有高价值用暖橙，其余走中性灰；评分数字走等宽字体 */
+  .grade-elite { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+  .grade-high { background: var(--paper); color: var(--ink-3); border-color: var(--color-border); }
+  .grade-normal { background: transparent; color: var(--ink-4); border-color: var(--color-border); }
+  .entry-title { font-size: var(--text-base); font-weight: 500; color: var(--color-text-primary); line-height: 1.5; letter-spacing: var(--letter-spacing-tight); margin-bottom: 7px; display: block; text-decoration: none; }
   .entry-title:hover { color: var(--accent); }
-  .entry-summary { font-size: 13px; color: var(--ink-3); line-height: 1.75; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .entry-summary { font-size: 13px; color: var(--ink-3); line-height: 1.6; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .entry-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; padding-left: 10px; border-left: 2px solid var(--border); }
   .entry-reason-label { font-weight: 700; color: var(--ink-4); margin-right: 4px; }
-  .ai-score-badge { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; border: 1px solid var(--color-border); background: var(--accent-soft); color: var(--color-accent); margin-left: var(--spacing-1); }
+  .ai-score-badge { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; font-family: var(--font-mono); font-variant-numeric: tabular-nums; border: 1px solid var(--color-border); background: transparent; color: var(--ink-3); margin-left: var(--spacing-1); }
   .back-to-top { position: fixed; bottom: var(--spacing-8); right: var(--spacing-8); width: 44px; height: 44px; border-radius: var(--radius-lg); border: 1px solid var(--color-border); background: var(--color-background-surface); color: var(--color-text-secondary); font-size: 1.2em; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.2s; z-index: 200; box-shadow: var(--shadow-md); }
   .back-to-top.visible { opacity: 1; transform: translateY(0); }
   .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
@@ -127,14 +136,39 @@ function reasonText(score: number): string {
   .featured-title { font-size: 1.1em; font-weight: 700; color: var(--color-text-primary); margin: var(--spacing-6) 0 var(--spacing-3); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); letter-spacing: var(--letter-spacing-tight); }
   .featured-count { font-size: 0.85em; font-weight: 400; color: var(--color-text-secondary); margin-left: var(--spacing-2); }
   .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--spacing-4); margin-bottom: var(--spacing-6); }
-  .featured-card { background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4); transition: box-shadow 0.15s; }
-  .featured-card:hover { box-shadow: var(--shadow-md); }
-  .featured-rank { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .featured-card { background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4); transition: border-color 0.15s; }
+  .featured-card:hover { border-color: var(--ink-4); }
+  .featured-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .featured-rank { font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
+  .featured-score { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .featured-score-num { font-family: var(--font-mono); font-size: 15px; font-weight: 800; color: var(--color-text-primary); font-variant-numeric: tabular-nums; line-height: 1; }
+  .featured-score-bar { display: block; width: 64px; height: 3px; border-radius: 9999px; background: var(--color-border); overflow: hidden; }
+  .featured-score-bar span { display: block; height: 100%; background: var(--accent); border-radius: 9999px; }
   .featured-card h3 { font-size: var(--text-sm); font-weight: 700; color: var(--color-text-primary); line-height: 1.4; letter-spacing: var(--letter-spacing-tight); margin: var(--spacing-1-5) 0; }
   .featured-card h3 a { color: inherit; text-decoration: none; }
   .featured-card h3 a:hover { color: var(--accent); }
-  .featured-summary { font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .featured-summary { font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .featured-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
+  .featured-reason.expanded { display: block; }
+  .featured-reason::before { content: '推荐理由：'; font-weight: 700; color: var(--ink-4); }
   .featured-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 11px; color: var(--ink-4); }
+  .featured-meta .featured-time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  /* 情报流标题：精选与流明确分离 */
+  .stream-title { font-size: 1.1em; font-weight: 700; color: var(--color-text-primary); margin: var(--spacing-6) 0 var(--spacing-3); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); letter-spacing: var(--letter-spacing-tight); }
+  /* 首页搜索：只搜今日已渲染的 30 条（标题 / 摘要 / 来源），不搜全库 */
+  .search-row { display: flex; align-items: center; gap: 10px; margin: var(--spacing-4) 0 0; }
+  .search-row input[type="search"] { flex: 1; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-background-surface); color: var(--color-text-primary); font-size: 13px; }
+  .search-row input[type="search"]::placeholder { color: var(--ink-4); }
+  .search-count { font-size: 12px; color: var(--ink-4); white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .search-empty { display: none; padding: var(--spacing-6) 0; text-align: center; font-size: 13px; color: var(--ink-4); }
+  /* 右栏收起：只在宽屏生效，窄屏右栏本来就是隐藏的 */
+  .rail-toggle { display: none; width: 100%; height: var(--size-element-md); margin-bottom: var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: transparent; color: var(--ink-3); font-size: 12px; font-weight: 600; cursor: pointer; }
+  .rail-toggle:hover { color: var(--color-text-primary); border-color: var(--ink-4); }
+  .rail-expand { display: none; position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 150; height: var(--size-element-lg); padding: 0 var(--spacing-2); border: 1px solid var(--color-border); border-right: none; border-radius: var(--radius-md) 0 0 var(--radius-md); background: var(--color-background-surface); color: var(--ink-3); font-size: 12px; font-weight: 600; cursor: pointer; }
+  @media (min-width: 1280px) {
+    .rail-toggle { display: block; }
+    body.rail-collapsed .rail-expand { display: block; }
+  }
   /* 分类筛选 */
   /* Astryx Tabs（v3）：分类是一排文字标签，不是药丸；当前项只用一条强调色下划线，不再用灰底整条 */
   .cat-filter { display: flex; gap: var(--spacing-1); margin: var(--spacing-4) 0 var(--spacing-5); padding: 0; background: transparent; border-bottom: 1px solid var(--color-border); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -176,6 +210,12 @@ function reasonText(score: number): string {
   <div class="shell">
     <SiteNav active="home" today={today} />
     <div class="shell-main">
+      {/* 首页搜索：只搜今日已渲染的 30 条，不搜全库；与分类筛选叠加生效 */}
+      <div class="search-row">
+        <input type="search" id="homeSearch" placeholder="搜索今日 30 条（标题 / 摘要 / 来源）" aria-label="搜索今日情报" autocomplete="off" />
+        <span class="search-count" id="searchCount"></span>
+      </div>
+      <div class="search-empty" id="searchEmpty">没有匹配的条目，换个词试试。</div>
       {/* 分类筛选 */}
       {v4Data?.by_category && (
         <div class="cat-filter" id="catFilter">
@@ -217,8 +257,10 @@ function reasonText(score: number): string {
             }
           }
         }
-        featuredItems.sort((a, b) => (b.score || 0) - (a.score || 0));
-        const topFeatured = featuredItems.slice(0, 10);
+        // v4：精选按展示分（ai_score 优先）排，取 8 条，宁缺毋滥；
+        // 原来按 score 排，前 21 条全是 10.0，并列顺序等于分类遍历顺序，是假的排序。
+        featuredItems.sort((a, b) => (displayScore(b) - displayScore(a)) || ((b.score || 0) - (a.score || 0)));
+        const topFeatured = featuredItems.slice(0, 8);
         
         if (topFeatured.length === 0) return null;
         
@@ -226,23 +268,35 @@ function reasonText(score: number): string {
           <>
             <h2 class="featured-title">今日精选 <span class="featured-count">{topFeatured.length}</span></h2>
             <div class="featured-grid">
-              {topFeatured.map((item: any, i: number) => (
+              {topFeatured.map((item: any, i: number) => {
+                const s = displayScore(item);
+                const barW = Math.min(Math.max(s / 10, 0), 1) * 100;
+                return (
                 <article class="featured-card" key={i}>
-                  <div class="featured-rank">{i + 1}</div>
+                  <div class="featured-top">
+                    <span class="featured-rank">{i + 1}</span>
+                    <span class="featured-score" title="AI 评分（ai_score 字段原值，量纲待管线确认）">
+                      <span class="featured-score-num">{s.toFixed(1)}</span>
+                      <span class="featured-score-bar"><span style={{width: `${barW}%`}}></span></span>
+                    </span>
+                  </div>
                   <h3><a href={item.url} target="_blank" rel="noopener">{item.ai_title || item.title}</a></h3>
                   <p class="featured-summary">{item.ai_summary}</p>
+                  {item.ai_reason && (<p class="featured-reason" title="点击展开 / 收起">{item.ai_reason}</p>)}
                   <div class="featured-meta">
                     <span>{item.source}</span>
-                    {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score).toFixed(1)}</span>}
+                    {fmtHM((item as any).published_at) && <span class="featured-time">{fmtHM((item as any).published_at)}</span>}
                     {(item.source_count || 0) > 1 && <span>📰 {item.source_count}家报道</span>}
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
           </>
         );
       })()}
 
+      <h2 class="stream-title">今日情报流</h2>
       <div class="timeline-wrap">
         {sortedDates.map(dateStr => {
           const dayItems = groupedByDate.get(dateStr) || [];
@@ -258,7 +312,8 @@ function reasonText(score: number): string {
                 <span class="day-count">{sorted.length} 条</span>
               </div>
               {sorted.slice(0, 30).map(item => {
-                const g = gradeBadge(item.score || 0), gLabel = gradeLabel(item.score || 0);
+                const ds = displayScore(item);
+                const g = gradeBadge(ds), gLabel = gradeLabel(ds);
                 const timeStr = fmtHM((item as any).published_at);
                 const platform = item.platform_label || item.source || '';
                 const summary = item.ai_summary || item.desc || item.title;
@@ -284,7 +339,7 @@ function reasonText(score: number): string {
                       )}
                       <span class={`grade-pill grade-${g}`}>{gLabel}</span>
                       
-                      {(item.score ?? 0) > 0 && <span class="ai-score-badge">AI 评分 {(item.score).toFixed(1)}</span>}
+                      {ds > 0 && <span class="ai-score-badge">AI 评分 {ds.toFixed(1)}</span>}
                     </div>
                     <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                     {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
@@ -300,6 +355,7 @@ function reasonText(score: number): string {
     </div>
     
     <aside class="shell-right">
+      <button class="rail-toggle" id="railCollapse" aria-label="收起右侧栏">收起右侧栏 →</button>
       {allDates.length > 0 && <section><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
       {hotTerms.length > 0 && (
         <section class="rail-card">
@@ -316,6 +372,7 @@ function reasonText(score: number): string {
 </div>
   <Footer />
 </div>
+<button class="rail-expand" id="railExpand" aria-label="展开右侧栏">← 展开</button>
 <button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
 <script>
   const backBtn = document.getElementById('backToTop');
@@ -323,6 +380,44 @@ function reasonText(score: number): string {
     window.addEventListener('scroll', () => { backBtn.classList.toggle('visible', window.scrollY > 300); });
     backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
+  // 首页搜索 + 分类叠加过滤：只动今日已渲染的 30 条
+  const searchInput = document.getElementById('homeSearch') as HTMLInputElement | null;
+  const searchCount = document.getElementById('searchCount');
+  const searchEmpty = document.getElementById('searchEmpty');
+  const entryItems = Array.from(document.querySelectorAll('.entry-item')) as HTMLElement[];
+  let activeCat = 'all';
+  function applyHomeFilters() {
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    let shown = 0;
+    entryItems.forEach(el => {
+      const catOk = activeCat === 'all' || el.dataset.category === activeCat;
+      const qOk = !q || (el.textContent || '').toLowerCase().includes(q);
+      const vis = catOk && qOk;
+      el.classList.toggle('hidden', !vis);
+      if (vis) shown++;
+    });
+    if (searchCount) searchCount.textContent = q ? `${shown} / ${entryItems.length}` : '';
+    if (searchEmpty) searchEmpty.style.display = (q && shown === 0) ? 'block' : 'none';
+  }
+  searchInput?.addEventListener('input', applyHomeFilters);
+  document.querySelectorAll('#catFilter .cat-pill').forEach(btn => {
+    btn.addEventListener('click', () => { activeCat = (btn as HTMLElement).dataset.cat || 'all'; applyHomeFilters(); });
+  });
+  // 精选推荐理由：默认一行，点击展开 / 收起
+  document.querySelectorAll('.featured-reason').forEach(el => {
+    el.addEventListener('click', () => el.classList.toggle('expanded'));
+  });
+  // 右栏收起：宽屏才有右栏，选了就记住
+  const railKey = 'daily-rail-collapsed';
+  if (localStorage.getItem(railKey) === '1') document.body.classList.add('rail-collapsed');
+  document.getElementById('railCollapse')?.addEventListener('click', () => {
+    document.body.classList.add('rail-collapsed');
+    localStorage.setItem(railKey, '1');
+  });
+  document.getElementById('railExpand')?.addEventListener('click', () => {
+    document.body.classList.remove('rail-collapsed');
+    localStorage.setItem(railKey, '0');
+  });
 </script>
 </BaseLayout>
 
