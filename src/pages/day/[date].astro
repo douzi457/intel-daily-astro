@@ -75,6 +75,7 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
   title={`📡 ${date} 情报日报 · ${SITE.name}`}
   lang="zh-CN"
   description={metaDesc}
+  ogImage={idx < 60 ? `/og/${date}.png` : '/og/default.png'}
   canonicalUrl={pageUrl}
   prevUrl={prevUrl}
   nextUrl={nextUrl}

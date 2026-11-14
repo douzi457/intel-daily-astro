@@ -18,7 +18,7 @@ interface Props {
 const {
   title, lang = 'zh-CN',
   description = SITE.description,
-  ogImage = '/icon.svg',
+  ogImage = '/og/default.png',
   canonicalUrl,
   structuredData,
   prevUrl,
@@ -68,7 +68,8 @@ const defaultSchema = JSON.stringify({
   {nextUrl && <link rel="next" href={nextUrl} />}
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={new URL(ogImage, SITE.url).href} />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={siteDescription} />
 

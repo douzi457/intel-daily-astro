@@ -11,11 +11,12 @@
     "preview": "astro preview",
     "astro": "astro",
     "deploy-local": "astro build && git add dist/ -f && git commit -m \"build: local deploy $(date +%Y-%m-%d)\" && git push",
-    "prebuild": "node scripts/generate-geo.mjs"
+    "prebuild": "node scripts/generate-geo.mjs && node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
+    "@resvg/resvg-js": "^2.6.2",
     "astro": "^6.3.7"
   },
   "optionalDependencies": {
