@@ -34,7 +34,10 @@ const filteredArticles: GzhArticle[] = articles.filter((a: GzhArticle) => a.titl
 const { date } = Astro.params as { date: string };
 const dayData = getDayData(date, 'zh');
 const items: IntelItem[] = dayData.items;
-const totalItems = items.length;
+// v4.7：口径统一——用当日 dated 组计数（与首页时间线/“查看今日全部”同一口径），
+// 不再用文件总数（文件可能含跨日期溢出，曾导致顶栏 899 与“查看今日全部”830 打架）；
+// 无 dated 项时回落文件数。
+const totalItems = items.filter((i) => (i.date || date) === date).length || items.length;
 
 // ── 分组排序 ──
 const grouped: Record<string, IntelItem[]> = {};
@@ -82,80 +85,78 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
 >
 <div class="page">
   <div class="page-head">
-      <Header mode="day" date={date} totalItems={totalItems} />
+    <Header mode="day" date={date} totalItems={totalItems} />
   </div>
   <div class="shell">
     <SiteNav active="day" today={allDates[0]} />
     <div class="shell-main">
-
       <!-- 日期导航 -->
       <div class="day-nav">
         {prevDay ? <a href={`/day/${prevDay}`} class="day-nav-link">← {prevDay}</a> : <span class="day-nav-spacer"></span>}
         <span class="day-nav-current">{date} {getDow(date, 'zh')}</span>
         {nextDay ? <a href={`/day/${nextDay}`} class="day-nav-link">{nextDay} →</a> : <span class="day-nav-spacer"></span>}
       </div>
-    </div>
 
-    <aside class="shell-right">
-      <SectionNav activeSections={activeSections} locale="zh" />
-      
-      {/* 今日重点（仅当日匹配时显示） */}
-      {focusData && focusData.date === date && (
-        <FocusSection focusData={focusData} today={date} />
-      )}
-    </div>
-  
-
-  <div class="page">
-    <div class="content-grid">
+      <!-- v4.7：主内容移入 shell-main（此前在 shell 外的兄弟 .page 里，
+           左栏 100vh 高把 shell 行撑到约 1018px，日报页顶部出现约 1000px 白空；
+           另顺手修掉原来错配的 </div> / </aside> 标签） -->
       <div class="main-content">
         <PlatformSection grouped={grouped} locale="zh" date={date} />
         <FeaturedSection featured={featured} locale="zh" />
 
-      <!-- 原生推广卡片 -->
-      {totalItems > 0 && (
-        <div class="section" style="margin-bottom:0;">
-          <div class="section-header">
-            <div class="section-title" style="font-size:0.9em;">💡 推荐</div>
-          </div>
-          <div class="news-list">
-            <div class="news-item" style="--tag-color:#3395FF">
-              <span class="news-idx" style="color:var(--accent);">💡</span>
-              <div class="news-body">
-                <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="news-title">腾讯云 AI 焕新季 · 2核2G4M 新客仅 99元/年</a>
-                <div class="news-footer">
-                  <span class="platform-tag" style="--tag-color:#3395FF">☁️ 腾讯云</span>
-                  <span class="news-hot" style="color:var(--accent);">推广</span>
+        <!-- 原生推广卡片 -->
+        {totalItems > 0 && (
+          <div class="section" style="margin-bottom:0;">
+            <div class="section-header">
+              <div class="section-title" style="font-size:0.9em;">💡 推荐</div>
+            </div>
+            <div class="news-list">
+              <div class="news-item" style="--tag-color:#3395FF">
+                <span class="news-idx" style="color:var(--accent);">💡</span>
+                <div class="news-body">
+                  <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="news-title">腾讯云 AI 焕新季 · 2核2G4M 新客仅 99元/年</a>
+                  <div class="news-footer">
+                    <span class="platform-tag" style="--tag-color:#3395FF">☁️ 腾讯云</span>
+                    <span class="news-hot" style="color:var(--accent);">推广</span>
+                  </div>
+                  <div class="news-desc">轻量应用服务器 4核4G3M 首年 79元，限时特惠中</div>
                 </div>
-                <div class="news-desc">轻量应用服务器 4核4G3M 首年 79元，限时特惠中</div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <!-- 日历 -->
-      {allDates.length > 0 && (
-        <section class="section section-full">
-          <CalendarWidget dates={allDates} basePath="/day/" locale="zh" currentDate={date} />
-        </section>
-      )}
+        <!-- 日历 -->
+        {allDates.length > 0 && (
+          <section class="section section-full">
+            <CalendarWidget dates={allDates} basePath="/day/" locale="zh" currentDate={date} />
+          </section>
+        )}
+      </div>
     </div>
 
-    <!-- 侧边栏 -->
-    <Sidebar
-      totalItems={totalItems}
-      activeSectionCount={activeSections.length}
-      coverageDays={recentDates.length}
-      highScoreCount={highScoreCount}
-      grouped={grouped}
-      featured={featured}
-      trending={trending}
-      filteredArticles={filteredArticles}
-      locale="zh"
-    />
-  </aside>
-</div>
+    <aside class="shell-right">
+      <SectionNav activeSections={activeSections} locale="zh" />
+
+      {/* 今日重点（仅当日匹配时显示） */}
+      {focusData && focusData.date === date && (
+        <FocusSection focusData={focusData} today={date} />
+      )}
+
+      <!-- 侧边栏（v4.7：从 content-grid 右列移入右栏，与首页结构对齐） -->
+      <Sidebar
+        totalItems={totalItems}
+        activeSectionCount={activeSections.length}
+        coverageDays={recentDates.length}
+        highScoreCount={highScoreCount}
+        grouped={grouped}
+        featured={featured}
+        trending={trending}
+        filteredArticles={filteredArticles}
+        locale="zh"
+      />
+    </aside>
+  </div>
 
   <Footer />
 </div>
@@ -166,14 +167,19 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
 <style>
 html { scroll-behavior: smooth; }
 
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-}
-
+/* v4.7：Sidebar 移入右栏后——右栏本身已是滚动容器（≥1280px），
+   取消 Sidebar 自带的 sticky；1024–1279px 段右栏是通栏块，
+   沿用两列网格，避免单列拉满 */
 @media (min-width: 1024px) {
-  .content-grid { grid-template-columns: 1fr 300px; }
+  .shell-right :global(.sidebar) { position: static; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .shell-right :global(.sidebar) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .shell-right :global(.sidebar .promo-block) { grid-column: 1 / -1; }
 }
 
 .main-content {
