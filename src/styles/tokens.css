@@ -53,8 +53,8 @@
   --text-lg: 20px; --text-xl: 24px; --text-2xl: 30px;
   --letter-spacing-tight: -0.02em;
   /* —— 字体：数字与评分走等宽（Grok 工程感），正文走系统无衬线 —— */
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: 'Geist Sans', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   /* —— 控件高度：sm 28 / md 32 / lg 36 —— */
   --size-element-sm: 28px; --size-element-md: 32px; --size-element-lg: 36px;
 }

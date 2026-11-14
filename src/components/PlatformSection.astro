@@ -48,7 +48,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
             const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
             const extraSources = sources.slice(1);
             return (
-              <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
+              <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
                 <span class="news-idx">{idx + 1}</span>
                 <div class="news-body">
                   <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
@@ -111,7 +111,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                 const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
                 const extraSources = sources.slice(1);
                 return (
-                  <div class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
+                  <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
                     <span class="news-idx">{idx + 1}</span>
                     <div class="news-body">
                       <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>

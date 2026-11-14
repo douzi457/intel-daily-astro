@@ -244,6 +244,24 @@ html { scroll-behavior: smooth; }
 </style>
 
 <script>
+  // 搜索结果锚点：如果 hash 指向某条目，先展开“更多来源”再滚过去
+  (function () {
+    const m = location.hash.match(/^#entry-(\d+)$/);
+    if (!m) return;
+    const hs = document.getElementById('hiddenSources');
+    const btn = document.getElementById('moreSourcesBtn');
+    if (hs && !hs.classList.contains('visible')) {
+      hs.classList.add('visible');
+      if (btn) {
+        btn.classList.add('expanded');
+        if (btn.childNodes[0]) btn.childNodes[0].textContent = btn.getAttribute('data-show-less') || '收起';
+      }
+    }
+    requestAnimationFrame(() => {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+
   const nav = document.getElementById('sectionNav');
   if (nav) {
     const links = nav.querySelectorAll('a[data-target]');

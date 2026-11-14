@@ -15,12 +15,12 @@ const t = lang === 'en' ? {
   brand: 'Douzi Labs', tagline: 'Daily Intel · AI explained simply',
   nav: 'Navigate', more: 'More',
   home: "Today's Picks", day: 'Today', hot: 'Hot', officer: 'Officer', newTerms: 'New Terms',
-  archive: 'Archive', stats: 'Stats', rss: 'RSS', top: 'Douzi Labs · Daily Intel',
+  archive: 'Archive', stats: 'Stats', search: 'Search', rss: 'RSS', top: 'Douzi Labs · Daily Intel',
 } : {
   brand: '豆子实验室', tagline: '每日情报 · 把 AI 讲成人话',
   nav: '导航', more: '更多',
   home: '今日精选', day: '今日全部', hot: '热点榜', officer: '情报官', newTerms: '新词榜',
-  archive: '归档', stats: '统计', rss: 'RSS', top: '豆子实验室 · 每日情报',
+  archive: '归档', stats: '统计', search: '搜索', rss: 'RSS', top: '豆子实验室 · 每日情报',
 };
 const langHref = lang === 'en' ? '/' : '/en/';
 const langLabel = lang === 'en' ? '中文' : 'English';
@@ -38,6 +38,7 @@ const langLabel = lang === 'en' ? '中文' : 'English';
     <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
   </nav>
   <nav class="drawer-group"><h4>{t.more}</h4>
+    <a href="/search/">{t.search}</a>
     <a class={isActive('archive')} href="/archive">{t.archive}</a>
     <a class={isActive('stats')} href="/stats">{t.stats}</a>
     <a href="/rss.xml">RSS</a>
@@ -58,6 +59,7 @@ const langLabel = lang === 'en' ? '中文' : 'English';
     <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
   </nav>
   <nav class="home-group"><h4>{t.more}</h4>
+    <a href="/search/">{t.search}</a>
     <a class={isActive('archive')} href="/archive">{t.archive}</a>
     <a class={isActive('stats')} href="/stats">{t.stats}</a>
     <a href="/rss.xml">RSS</a>

@@ -98,25 +98,25 @@ function reasonText(score: number): string {
 <BaseLayout title={`${displayDate} AI/科技情报`} description={`${displayDate} 全球科技资讯聚合，AI智能评分精选`} lang="zh-CN">
 <style>
   /* token 见 src/styles/tokens.css（全站唯一来源） */
-  body { background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Geist Sans', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .page-wrap { max-width: 100%; margin: 0; padding: 0; }
   .stats-bar { display: flex; align-items: center; justify-content: center; gap: 0; padding: var(--spacing-4) var(--spacing-5); margin: var(--spacing-5) 0 28px; background: var(--color-background-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); font-size: 13px; }
   .stats-bar-item { text-align: center; padding: 0 var(--spacing-6); }
-  .stats-bar-value { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.3em; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .stats-bar-value { display: block; font-family: var(--font-mono); font-size: 1.3em; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
   .stats-bar-label { display: block; font-size: 0.85em; color: var(--ink-3); margin-top: 2px; }
   .stats-bar-item.highlight .stats-bar-value { color: var(--accent); }
   .stats-bar-divider { width: 1px; height: 28px; background: var(--border); }
   .timeline-wrap { display: flex; flex-direction: column; gap: var(--spacing-8); }
   .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--spacing-4); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); }
   .day-label { font-size: 11px; font-weight: 700; color: var(--ink-4); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
-  .day-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; }
+  .day-date { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); font-weight: 600; }
   .day-count { margin-left: auto; font-size: 11px; color: var(--color-text-tertiary); background: var(--paper); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1px var(--spacing-2); }
   .entry { padding: var(--spacing-4) 0; border-bottom: 1px solid var(--line); }
   .entry:last-child { border-bottom: none; }
   .entry:hover { background: var(--paper); margin: 0 calc(var(--spacing-2) * -1); padding-left: var(--spacing-2); padding-right: var(--spacing-2); border-radius: var(--radius-sm); }
   .entry-meta { display: flex; align-items: center; gap: var(--spacing-1-5); flex-wrap: wrap; margin-bottom: var(--spacing-1-5); }
-  .entry-time { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--ink-4); font-variant-numeric: tabular-nums; }
+  .entry-time { font-family: var(--font-mono); font-size: 11px; color: var(--ink-4); font-variant-numeric: tabular-nums; }
   .entry-sep { color: var(--ink-4); font-size: 11px; }
   .entry-source { font-size: 11px; color: var(--ink-3); font-weight: 500; }
   /* Astryx Badge：两类徽章统一为同一高度/内边距/圆角，只换颜色 */
@@ -162,6 +162,7 @@ function reasonText(score: number): string {
   .search-row input[type="search"] { flex: 1; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-background-surface); color: var(--color-text-primary); font-size: 13px; }
   .search-row input[type="search"]::placeholder { color: var(--ink-4); }
   .search-count { font-size: 12px; color: var(--ink-4); white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .search-all-link { font-size: 12px; color: var(--accent); white-space: nowrap; align-self: center; text-decoration: none; }
   .search-empty { display: none; padding: var(--spacing-6) 0; text-align: center; font-size: 13px; color: var(--ink-4); }
   /* 右栏收起：只在宽屏生效，窄屏右栏本来就是隐藏的 */
   .rail-toggle { display: none; width: 100%; height: var(--size-element-md); margin-bottom: var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: transparent; color: var(--ink-3); font-size: 12px; font-weight: 600; cursor: pointer; }
@@ -217,6 +218,7 @@ function reasonText(score: number): string {
       <div class="search-row">
         <input type="search" id="homeSearch" placeholder="搜索今日 30 条（标题 / 摘要 / 来源）" aria-label="搜索今日情报" autocomplete="off" />
         <span class="search-count" id="searchCount"></span>
+        <a class="search-all-link" href="/search/">搜全站 →</a>
       </div>
       <div class="search-empty" id="searchEmpty">没有匹配的条目，换个词试试。</div>
       {/* 分类筛选 */}
@@ -323,7 +325,7 @@ function reasonText(score: number): string {
                 const displayTitle = item.ai_title || item.title;
                 const reason = item.ai_reason || '';
                 return (
-                  <article class="entry entry-item" data-category={item.category || '其他'}>
+                  <article class="entry entry-item" id={`entry-${item.id}`} data-category={item.category || '其他'}>
                     <div class="entry-meta">
                       {timeStr && <span class="entry-time">{timeStr}</span>}
                       {timeStr && platform && <span class="entry-sep">·</span>}
