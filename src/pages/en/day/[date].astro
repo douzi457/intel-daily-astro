@@ -79,7 +79,7 @@ const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
   <div class="shell-main">
   <div class="content-grid">
     <div class="main-content">
-      <PlatformSection grouped={grouped} locale="en" />
+      <PlatformSection grouped={grouped} locale="en" date={date} />
       <FeaturedSection featured={featured} locale="en" />
 
       {totalItems > 0 && (

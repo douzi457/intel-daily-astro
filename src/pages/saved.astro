@@ -1,0 +1,67 @@
+---
+// 收藏页 — 只读浏览器 localStorage（daily-saved-v1），不用登录，不同步
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { getAllDates } from '../utils/data.ts';
+
+const dates = getAllDates('zh');
+---
+
+<BaseLayout title="⭐ 我的收藏 · 豆子实验室" description="我收藏的情报条目，只存在这台设备的浏览器里。">
+<style>
+  .saved-page h1 { font-size: 1.3em; font-weight: 800; color: var(--text-h); }
+  .saved-page .sub { font-size: 0.82em; color: var(--text-m); margin-top: 6px; }
+  .saved-tools { margin: 16px 0; }
+  .saved-tools button { padding: 4px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: transparent; color: var(--ink-3); cursor: pointer; font-size: 12px; }
+  .saved-item { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .saved-item:last-child { border-bottom: none; }
+  .saved-item a.saved-title { font-size: 15px; font-weight: 600; color: var(--ink); text-decoration: none; }
+  .saved-item a.saved-title:hover { color: var(--accent); }
+  .saved-meta { font-size: 11px; color: var(--ink-4); margin-top: 4px; font-family: var(--font-mono); }
+  .saved-empty { font-size: 13px; color: var(--ink-4); padding: 24px 0; }
+</style>
+
+<div class="page">
+  <Header mode="archive" />
+  <div class="shell shell--flush">
+    <SiteNav active="none" today={dates[0]} />
+    <div class="shell-main saved-page">
+      <h1>⭐ 我的收藏</h1>
+      <p class="sub">存在这台设备的浏览器里（localStorage），换设备不会同步，清空浏览器数据会丢。点条目标题回到当天日报的对应条目。</p>
+      <div class="saved-tools"><button id="clearSaved" type="button">清空全部收藏</button></div>
+      <div id="savedList"></div>
+      <div class="saved-empty" id="savedEmpty" hidden>还没有收藏。在首页或日报页点条目旁边的 ☆ 就能收藏。</div>
+    </div>
+  </div>
+  <Footer />
+</div>
+
+<script>
+  const listEl = document.getElementById('savedList');
+  const emptyEl = document.getElementById('savedEmpty');
+  const FAV_KEY = 'daily-saved-v1';
+  function esc(s: string): string {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function loadFavs(): Array<{ id: string; t: string; d: string; u: string; s: number }> {
+    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); } catch { return []; }
+  }
+  function render() {
+    const favs = loadFavs();
+    if (emptyEl) emptyEl.hidden = favs.length > 0;
+    if (!listEl) return;
+    listEl.innerHTML = favs.map(f => {
+      const score = f.s > 0 ? ` · AI 评分 ${Number(f.s).toFixed(1)}` : '';
+      return `<article class="saved-item"><a class="saved-title" href="${esc(f.u || '#')}">${esc(f.t)}</a><div class="saved-meta">${esc(f.d)}${score}</div></article>`;
+    }).join('');
+  }
+  document.getElementById('clearSaved')?.addEventListener('click', () => {
+    try { localStorage.removeItem(FAV_KEY); } catch {}
+    render();
+    (window as any).__dailyFavRefresh?.();
+  });
+  render();
+</script>
+</BaseLayout>

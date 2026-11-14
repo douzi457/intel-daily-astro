@@ -111,5 +111,75 @@ const defaultSchema = JSON.stringify({
       }
     })();
   </script>
+  <script>
+    // 收藏（localStorage，key daily-saved-v1）+ 键盘快捷键（全站）
+    (function () {
+      const FAV_KEY = 'daily-saved-v1';
+      const FAV_MAX = 200;
+      function loadFavs() { try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); } catch { return []; } }
+      function saveFavs(list) { try { localStorage.setItem(FAV_KEY, JSON.stringify(list.slice(0, FAV_MAX))); } catch {} }
+      function isFav(id) { return loadFavs().some(f => f.id === id); }
+      function refreshFavButtons(root) {
+        (root || document).querySelectorAll('.fav-btn').forEach(btn => {
+          const saved = isFav(btn.dataset.favId || '');
+          btn.classList.toggle('saved', saved);
+          btn.textContent = saved ? '★' : '☆';
+          btn.setAttribute('aria-label', saved ? '取消收藏' : '收藏');
+        });
+      }
+      window.__dailyFavRefresh = refreshFavButtons;
+      // 事件委托：服务端渲染与后续动态拼上的按钮都走这里，不用重复绑
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest ? e.target.closest('.fav-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const id = btn.dataset.favId || '';
+        if (!id) return;
+        let list = loadFavs();
+        if (list.some(f => f.id === id)) {
+          list = list.filter(f => f.id !== id);
+        } else {
+          list.unshift({ id, t: btn.dataset.favTitle || '', d: btn.dataset.favDate || '', u: btn.dataset.favUrl || '', s: Number(btn.dataset.favScore || 0) });
+        }
+        saveFavs(list);
+        refreshFavButtons();
+      });
+      refreshFavButtons();
+
+      // 快捷键：/ 搜索，j/k 移动条目，Enter/o 打开当前条目
+      let kbdIdx = -1;
+      function visibleEntries() {
+        return Array.from(document.querySelectorAll('.entry-item, .news-item'))
+          .filter(el => el.offsetParent !== null);
+      }
+      function focusEntry(i) {
+        const list = visibleEntries();
+        if (!list.length) return;
+        kbdIdx = Math.max(0, Math.min(i, list.length - 1));
+        list.forEach(el => el.classList.remove('kbd-focus'));
+        const el = list[kbdIdx];
+        el.classList.add('kbd-focus');
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      document.addEventListener('keydown', (e) => {
+        const t = e.target;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        if (e.key === '/') {
+          const home = document.getElementById('homeSearch');
+          if (home) { e.preventDefault(); home.focus(); }
+          else { location.href = '/search/'; }
+        } else if (e.key === 'j') { focusEntry(kbdIdx + 1); }
+        else if (e.key === 'k') { focusEntry(kbdIdx - 1); }
+        else if (e.key === 'Enter' || e.key === 'o') {
+          const list = visibleEntries();
+          const el = list[kbdIdx];
+          const a = el ? el.querySelector('a.entry-title, a.news-title') : null;
+          if (a && a.href) window.open(a.href, '_blank', 'noopener');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1474,3 +1474,8 @@ a { color: inherit; text-decoration: none; }
   .drawer-group a:hover { background: var(--bg-hover, rgba(0,0,0,.04)); }
   .drawer-group a.active { background: var(--accent-soft, rgba(234,88,12,.12)); color: var(--accent, #ea580c); }
 }
+
+/* v4.2：键盘快捷键焦点框 + 收藏按钮（全站通用） */
+.kbd-focus { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-sm); }
+.fav-btn { background: transparent; border: none; cursor: pointer; font-size: 13px; color: var(--ink-4); padding: 0 2px; line-height: 1; flex-shrink: 0; }
+.fav-btn:hover, .fav-btn.saved { color: var(--accent); }

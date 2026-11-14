@@ -6,9 +6,10 @@ import { getPlatformMeta, SECTION_ORDER, SECTION_CATEGORIES_ZH, SECTION_CATEGORI
 interface Props {
   grouped: Record<string, IntelItem[]>;
   locale?: 'zh' | 'en';
+  date?: string;
 }
 
-const { grouped, locale = 'zh' } = Astro.props;
+const { grouped, locale = 'zh', date = '' } = Astro.props;
 const categories = locale === 'zh' ? SECTION_CATEGORIES_ZH : SECTION_CATEGORIES_EN;
 const allActiveSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
 
@@ -67,6 +68,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                     </div>
                     {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
                     {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <strong>{item.score}</strong></span>}
+                    {date && (<button class="fav-btn" type="button" data-fav-id={`${date}:${item.id}`} data-fav-title={item.title} data-fav-date={date} data-fav-url={`/day/${date}/#entry-${item.id}`} data-fav-score={item.score || 0} aria-label="收藏">☆</button>)}
                     {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                     {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                   </div>
@@ -129,6 +131,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                         </div>
                         {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
                         {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <strong>{item.score}</strong></span>}
+                    {date && (<button class="fav-btn" type="button" data-fav-id={`${date}:${item.id}`} data-fav-title={item.title} data-fav-date={date} data-fav-url={`/day/${date}/#entry-${item.id}`} data-fav-score={item.score || 0} aria-label="收藏">☆</button>)}
                     {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                       </div>
                       {item.desc && <div class="news-desc">{item.desc}</div>}

@@ -163,6 +163,11 @@ function reasonText(score: number): string {
   .search-row input[type="search"]::placeholder { color: var(--ink-4); }
   .search-count { font-size: 12px; color: var(--ink-4); white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
   .search-all-link { font-size: 12px; color: var(--accent); white-space: nowrap; align-self: center; text-decoration: none; }
+  .kbd-hint { font-size: 11px; color: var(--ink-4); margin: 0 0 var(--spacing-4); }
+  .kbd-hint kbd { font-family: var(--font-mono); font-size: 10px; border: 1px solid var(--color-border); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--bg-card); }
+  .load-more-btn { display: block; width: 100%; margin: var(--spacing-4) 0; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--bg-card); color: var(--ink); font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .load-more-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .load-more-btn:disabled { opacity: .5; cursor: default; }
   .search-empty { display: none; padding: var(--spacing-6) 0; text-align: center; font-size: 13px; color: var(--ink-4); }
   /* 右栏收起：只在宽屏生效，窄屏右栏本来就是隐藏的 */
   .rail-toggle { display: none; width: 100%; height: var(--size-element-md); margin-bottom: var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: transparent; color: var(--ink-3); font-size: 12px; font-weight: 600; cursor: pointer; }
@@ -221,6 +226,7 @@ function reasonText(score: number): string {
         <a class="search-all-link" href="/search/">搜全站 →</a>
       </div>
       <div class="search-empty" id="searchEmpty">没有匹配的条目，换个词试试。</div>
+      <div class="kbd-hint">快捷键：<kbd>/</kbd> 搜索 · <kbd>j</kbd> / <kbd>k</kbd> 移动条目 · <kbd>回车</kbd> 打开当前条目</div>
       {/* 分类筛选 */}
       {v4Data?.by_category && (
         <div class="cat-filter" id="catFilter">
@@ -345,6 +351,7 @@ function reasonText(score: number): string {
                       <span class={`grade-pill grade-${g}`}>{gLabel}</span>
                       
                       {ds > 0 && <span class="ai-score-badge">AI 评分 {ds.toFixed(1)}</span>}
+                      <button class="fav-btn" type="button" data-fav-id={`${dateStr}:${item.id}`} data-fav-title={displayTitle} data-fav-date={dateStr} data-fav-url={`/day/${dateStr}/#entry-${item.id}`} data-fav-score={ds} aria-label="收藏">☆</button>
                     </div>
                     <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                     {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
@@ -352,6 +359,7 @@ function reasonText(score: number): string {
                   </article>
                 );
               })}
+              {sorted.length > 30 && (<button class="load-more-btn" id="loadMoreBtn" type="button">加载更多（还剩 {sorted.length - 30} 条）</button>)}
               {sorted.length > 30 && (<a class="more-link" href={`/day/${dateStr}/`}>查看今日全部 {sorted.length} 条 →</a>)}
             </section>
           );
@@ -389,7 +397,7 @@ function reasonText(score: number): string {
   const searchInput = document.getElementById('homeSearch') as HTMLInputElement | null;
   const searchCount = document.getElementById('searchCount');
   const searchEmpty = document.getElementById('searchEmpty');
-  const entryItems = Array.from(document.querySelectorAll('.entry-item')) as HTMLElement[];
+  let entryItems = Array.from(document.querySelectorAll('.entry-item')) as HTMLElement[];
   let activeCat = 'all';
   function applyHomeFilters() {
     const q = (searchInput?.value || '').trim().toLowerCase();
@@ -420,6 +428,70 @@ function reasonText(score: number): string {
   // 精选推荐理由：默认一行，点击展开 / 收起
   document.querySelectorAll('.featured-reason').forEach(el => {
     el.addEventListener('click', () => el.classList.toggle('expanded'));
+  });
+  // 加载更多：从构建时生成的当日余量 JSON 取下 30 条拼上去（与首页同排序：score 倒序）
+  const loadMoreBtn = document.getElementById('loadMoreBtn') as HTMLButtonElement | null;
+  let moreItems: any[] | null = null;
+  let moreShown = 0;
+  function escHtml(s: any): string {
+    return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function fmtHMClient(iso?: string): string {
+    if (!iso) return '';
+    try {
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return '';
+      return d.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour: '2-digit', minute: '2-digit', hour12: false });
+    } catch { return ''; }
+  }
+  function moreEntryHtml(it: any, dateStr: string): string {
+    const ds = it.s || 0;
+    const g = ds >= 8 ? 'elite' : ds >= 6 ? 'high' : 'normal';
+    const gLabel = ds >= 8 ? '高价值' : ds >= 6 ? '中价值' : '普通';
+    const timeStr = fmtHMClient(it.tm);
+    const srcs = (it.srcs || []).map((s: string) => `<span class="src-item">${escHtml(s)}</span>`).join('');
+    const srcHtml = it.sc > 1
+      ? `<details class="src-expand"><summary>📰 ${it.sc}家报道</summary><div class="src-list">${srcs}</div></details>`
+      : (it.sc > 0 ? `<span class="src-count">📰 ${it.sc}家报道</span>` : '');
+    const scoreHtml = ds > 0 ? `<span class="ai-score-badge">AI 评分 ${Number(ds).toFixed(1)}</span>` : '';
+    const sum = (it.sm || '').slice(0, 150);
+    const sumHtml = (it.sm || '').length > 10 ? `<p class="entry-summary">${escHtml(sum)}${(it.sm || '').length > 150 ? '…' : ''}</p>` : '';
+    const reasonHtml = it.r ? `<div class="entry-reason"><span class="entry-reason-label">推荐理由：</span>${escHtml(it.r)}</div>` : '';
+    return `<article class="entry entry-item" id="entry-${it.id}" data-category="${escHtml(it.c || '其他')}"><div class="entry-meta">${timeStr ? `<span class="entry-time">${timeStr}</span>` : ''}${timeStr && it.p ? '<span class="entry-sep">·</span>' : ''}${it.p ? `<span class="entry-source">${escHtml(it.p)}</span>` : ''}${srcHtml}<span class="grade-pill grade-${g}">${gLabel}</span>${scoreHtml}<button class="fav-btn" type="button" data-fav-id="${dateStr}:${it.id}" data-fav-title="${escHtml(it.t)}" data-fav-date="${dateStr}" data-fav-url="/day/${dateStr}/#entry-${it.id}" data-fav-score="${ds}" aria-label="收藏">☆</button></div><a href="${escHtml(it.u || '#')}" target="_blank" rel="noopener" class="entry-title">${escHtml(it.t)}</a>${sumHtml}${reasonHtml}</article>`;
+  }
+  loadMoreBtn?.addEventListener('click', async () => {
+    if (!loadMoreBtn) return;
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.textContent = '加载中…';
+    try {
+      if (!moreItems) {
+        const r = await fetch('/more-today.json');
+        const j = await r.json();
+        moreItems = j.items || [];
+      }
+      const timeline = document.querySelector('.timeline-wrap section');
+      const batch = (moreItems || []).slice(moreShown, moreShown + 30);
+      const dateStr = document.querySelector('.day-date')?.textContent?.trim() || '';
+      const html = batch.map(it => moreEntryHtml(it, dateStr)).join('');
+      const frag = document.createElement('div');
+      frag.innerHTML = html;
+      const moreLink = document.querySelector('.more-link');
+      while (frag.firstChild) timeline?.insertBefore(frag.firstChild, moreLink || null);
+      moreShown += batch.length;
+      entryItems = Array.from(document.querySelectorAll('.entry-item')) as HTMLElement[];
+      applyHomeFilters();
+      (window as any).__dailyFavRefresh?.();
+      const remain = (moreItems?.length || 0) - moreShown;
+      if (remain <= 0) {
+        loadMoreBtn.style.display = 'none';
+      } else {
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.textContent = `加载更多（还剩 ${remain} 条）`;
+      }
+    } catch {
+      loadMoreBtn.disabled = false;
+      loadMoreBtn.textContent = '加载失败，点我重试';
+    }
   });
   // 右栏收起：宽屏才有右栏，选了就记住
   const railKey = 'daily-rail-collapsed';

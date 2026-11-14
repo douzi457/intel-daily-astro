@@ -116,8 +116,9 @@ const dates = getAllDates('zh');
       const score = it.s > 0 ? ` · AI 评分 ${Number(it.s).toFixed(1)}` : '';
       const src = it.p ? ` · ${esc(it.p)}` : '';
       const snip = it.a ? `<div class="result-snippet">${esc(it.a)}</div>` : '';
-      return `<article class="search-result"><a class="result-title" href="/day/${it.d}/#entry-${it.i}">${esc(it.t)}</a><div class="result-meta">${it.d}${src}${score}</div>${snip}</article>`;
+      return `<article class="search-result"><a class="result-title" href="/day/${it.d}/#entry-${it.i}">${esc(it.t)}</a><div class="result-meta">${it.d}${src}${score} <button class="fav-btn" type="button" data-fav-id="${it.d}:${it.i}" data-fav-title="${esc(it.t)}" data-fav-date="${it.d}" data-fav-url="/day/${it.d}/#entry-${it.i}" data-fav-score="${it.s}" aria-label="收藏">☆</button></div>${snip}</article>`;
     }).join('') + (hits.length > 50 ? `<div class="search-hint">共 ${hits.length} 条，只显示前 50 条，换更具体的词缩小范围。</div>` : '');
+    (window as any).__dailyFavRefresh?.();
   }
 
   let timer: number | undefined;
