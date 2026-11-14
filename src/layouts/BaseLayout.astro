@@ -92,6 +92,7 @@ const defaultSchema = JSON.stringify({
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ad58971b03c54dab95ef71e841966a34"}'></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
   <slot />
   <script>
     // Theme system
@@ -112,6 +113,8 @@ const defaultSchema = JSON.stringify({
     })();
   </script>
   <script>
+    // 无障碍：给主内容区挂 id，供“跳到主要内容”链接定位（各页 .shell-main 是主内容区）
+    document.querySelector('.shell-main')?.setAttribute('id', 'main');
     // 收藏（localStorage，key daily-saved-v1）+ 键盘快捷键（全站）
     (function () {
       const FAV_KEY = 'daily-saved-v1';

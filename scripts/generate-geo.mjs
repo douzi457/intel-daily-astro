@@ -1,0 +1,179 @@
+// GEO 生成器（prebuild 钩子）：每次构建前从当前数据刷新 public/llms.txt 与 public/agent.json，
+// 这样 llms.txt 里的“最近 10 天 / 今日精选”与 agent.json 的 updated / version 不会停留在旧日期。
+// 只读 src/data/rewrite/zh/*.json；数据缺失时不报错、不改写原文件，构建继续。
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DATA_ROOT = path.join(ROOT, 'src/data/rewrite/zh');
+const LLMS_PATH = path.join(ROOT, 'public/llms.txt');
+const AGENT_PATH = path.join(ROOT, 'public/agent.json');
+const SITE = 'https://daily.dianda.dpdns.org';
+
+function displayScore(it) {
+  const a = it.ai_score;
+  return typeof a === 'number' && !Number.isNaN(a) ? a : it.score || 0;
+}
+function fmtMD(d) {
+  return `${parseInt(d.slice(5, 7), 10)}月${parseInt(d.slice(8, 10), 10)}日`;
+}
+
+function loadDays() {
+  const days = [];
+  if (!fs.existsSync(DATA_ROOT)) return days;
+  for (const f of fs.readdirSync(DATA_ROOT).sort().reverse()) {
+    if (!/^\d{4}-\d{2}-\d{2}\.json$/.test(f)) continue;
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(DATA_ROOT, f), 'utf-8'));
+      days.push({ date: f.replace('.json', ''), items: raw.items || [], total: (raw.items || []).length });
+    } catch {}
+  }
+  return days;
+}
+
+function buildLlms(days) {
+  const latest = days[0];
+  const latestDate = latest?.date || '';
+  const total = days.reduce((a, d) => a + d.total, 0);
+  const top = latest
+    ? [...latest.items]
+        .map((it, idx) => ({ t: String(it.ai_title || it.title || '').trim(), d: latestDate, i: it.id || idx + 1, s: displayScore(it) }))
+        .filter((x) => x.t)
+        .sort((a, b) => b.s - a.s)
+        .slice(0, 5)
+    : [];
+  const recent = days.slice(0, 10);
+  const lines = [];
+  lines.push('# 豆子实验室 · 每日情报（AI/科技情报站）');
+  lines.push('');
+  lines.push(
+    `> 本站每日自动采集、聚合并判断 AI 与科技领域的重要动态，面向人类读者与 AI agent 同时提供内容。机器可读数据（JSON/RSS）与人类页面同步更新，更新时间为北京时间（Asia/Shanghai）每日 06:00 / 10:00 / 14:00 / 20:00 共四班。引用本站数据时请注明出处「豆子实验室 · 每日情报」并保留原文链接（每条数据自带 url 字段）。本站现有 ${days.length} 天数据、共 ${total.toLocaleString()} 条情报。最新数据日期：${latestDate}。`,
+  );
+  lines.push('');
+  lines.push('## 核心数据（JSON，推荐 agent 优先使用）');
+  lines.push('');
+  lines.push(
+    '- [最新一日情报数据（latest）](https://daily.dianda.dpdns.org/data/latest.json)：最近一个完整班次的全量条目与推荐，约 400KB。字段：date、generated_at、summary、total_items、total_sources、recommendations（按 AI/大模型、数码/硬件、开源/工具、科技热点、财经/商业 五类各 5 条推荐）、by_category（按信源类目分组的全部条目）。',
+  );
+  lines.push(
+    '- [按日情报数据](https://daily.dianda.dpdns.org/data/daily-YYYY-MM-DD.json)：把日期替换为目标日期（北京时间）即可取历史某日数据，URL 模式与 latest 相同。',
+  );
+  lines.push(
+    '- [全站搜索索引清单](https://daily.dianda.dpdns.org/search-index.json)：按月分片的搜索索引清单（月份与条数）；分片地址为 /search-index/YYYY-MM.json，每条只有标题、日期、条目 id、展示分、摘要片段、来源，链回日报页对应条目锚点。',
+  );
+  lines.push(
+    '- [情报官判断层数据（v2）](https://daily.dianda.dpdns.org/data/v2/daily-YYYY-MM-DD-v2.json)：在原始条目之上增加判断层：executive_summary（当日综述）、core_signals（核心信号，含 clean_summary 摘要、entities 实体、source_count 来源数）、watchlist（观察清单，每条含 why_it_matters 判断理由）、actions（建议动作）、quality（数据质量自评）、llm_usage（生成判断所用模型与调用量记账，可核验）。文件较大（约 3.5MB），只需标题与推荐时请用 latest.json。',
+  );
+  lines.push('- [数据索引](https://daily.dianda.dpdns.org/data/index.json)：可用日期与文件索引。');
+  lines.push(
+    '- [纠错台账](https://daily.dianda.dpdns.org/corrections.json)：本站已发布内容的纠错记录（错误判断/失实信息、问题说明、造谣源头 origin_source 与更正），只增不删。引用本站历史判断前，建议先查此台账确认该判断未被更正。',
+  );
+  lines.push('- [热度历史](https://daily.dianda.dpdns.org/data/heat-history.json)：条目热度的时间序列。');
+  lines.push('');
+  lines.push('## 条目字段说明（v4 latest / daily）');
+  lines.push('');
+  lines.push(
+    '- title：标题（已翻译为中文的附带原文信息见源数据）；url：原文链接（引用时请使用此链接）；source / sources：信源名称与多源列表；score：综合评分；heat：热度；published_at：原文发布时间；source_count：报道该事件的独立信源数（多源交叉可作为可信度参考）。',
+  );
+  lines.push('');
+  lines.push('## 订阅');
+  lines.push('');
+  lines.push('- [RSS](https://daily.dianda.dpdns.org/rss.xml)：每日情报更新订阅。');
+  lines.push('');
+  lines.push('## 人类页面');
+  lines.push('');
+  lines.push('- [首页（今日精选 8 条 + 今日情报流）](https://daily.dianda.dpdns.org/)');
+  lines.push('- [全站搜索](https://daily.dianda.dpdns.org/search/)：搜全部历史日报的标题与摘要。');
+  lines.push('- [周报](https://daily.dianda.dpdns.org/weekly/)：按周汇总，每周条数、每天入口、当周最重要的 5 条。');
+  lines.push('- [热点榜](https://daily.dianda.dpdns.org/hot/)');
+  lines.push('- [情报官（判断层视图）](https://daily.dianda.dpdns.org/officer/)');
+  lines.push('- [新词榜（当日新出现的高分术语）](https://daily.dianda.dpdns.org/new-terms/)');
+  lines.push('- [按日归档](https://daily.dianda.dpdns.org/day/YYYY-MM-DD/)：把日期替换为目标日期查看某日全部条目。');
+  lines.push('');
+  if (recent.length) {
+    lines.push('## 最近 10 天');
+    lines.push('');
+    for (const d of recent) {
+      lines.push(`- [${d.date}（${fmtMD(d.date)}，${d.total} 条）](${SITE}/day/${d.date}/)`);
+    }
+    lines.push('');
+  }
+  if (top.length) {
+    lines.push(`## ${latestDate} 今日精选 Top 5（按展示分）`);
+    lines.push('');
+    for (const it of top) {
+      lines.push(`- ${it.t}（AI 评分 ${it.s.toFixed(1)}）— ${SITE}/day/${it.d}/#entry-${it.i}`);
+    }
+    lines.push('');
+  }
+  lines.push('## 给 agent 的使用说明');
+  lines.push('');
+  lines.push('- 要「今天最重要的事」：读 latest.json 的 recommendations 或 v2 的 core_signals，不要抓取首页 HTML 列表。');
+  lines.push(
+    '- 要「为什么重要」：读 v2 的 watchlist.why_it_matters 与 core_signals.clean_summary，这是本站判断层的输出，引用时请区分「事实（原文）」与「本站判断」。',
+  );
+  lines.push(
+    '- 要可信度：优先 source_count 高的条目；核实状态看每条的 provenance.verification（multi-source = 多源核实，single-source = 单源未核实，引用需谨慎）；status 字段表示事件阶段（new / developing），不是核实标记。',
+  );
+  lines.push(
+    '- 要事件线：v2 的 core_signals 与 watchlist 每条带 continuity（事件线）：thread_key 为跨日稳定的事件线 ID，days_tracked 为已追踪天数，relation 为 new / continuing / cooling，previous 为上一次追踪记录，source_trend 为信源数变化序列。同一事件跨日请用 thread_key 串联，不要用 event_id（event_id 每日重编）。',
+  );
+  lines.push(
+    '- 要溯源：v2 的 core_signals 与 watchlist 每条带 provenance（溯源链）：origin 为首发/主信源（source_name、url、published_at；basis 标注判定依据 earliest_published / primary_item / earliest_captured，published_at 可能为 null，不做估算填充），corroborated_by 为跟进信源列表，independent_source_count 为独立信源数，verification 为 multi-source 或 single-source（单源未核实）。信源信息全部来自采集实测数据。',
+  );
+  lines.push('- 本文件与 agent.json（https://daily.dianda.dpdns.org/agent.json）为本站的机器可读入口说明；数据口径变化时同步更新。');
+  lines.push('');
+  return lines.join('\n');
+}
+
+function refreshAgent(days) {
+  if (!fs.existsSync(AGENT_PATH)) return;
+  let agent;
+  try {
+    agent = JSON.parse(fs.readFileSync(AGENT_PATH, 'utf-8'));
+  } catch {
+    return;
+  }
+  const latestDate = days[0]?.date || agent.updated;
+  agent.updated = latestDate;
+  agent.version = '1.3.0';
+  const has = (name) => (agent.endpoints || []).some((e) => e.name === name);
+  const add = (ep) => {
+    if (!has(ep.name)) agent.endpoints.push(ep);
+  };
+  add({
+    name: 'search_index_manifest',
+    description: '全站搜索索引清单：按月分片（月份与条数）。',
+    format: 'application/json',
+    url: `${SITE}/search-index.json`,
+  });
+  add({
+    name: 'search_index_by_month',
+    description: '全站搜索索引月分片：每条只有标题、日期、条目 id、展示分、摘要片段、来源，链回日报页对应条目锚点。',
+    format: 'application/json',
+    url_template: `${SITE}/search-index/YYYY-MM.json`,
+  });
+  add({
+    name: 'weekly_archive',
+    description: '周报页：按周汇总，每周条数、每天入口、当周最重要的 5 条。',
+    format: 'text/html',
+    url: `${SITE}/weekly/`,
+  });
+  add({
+    name: 'site_search_page',
+    description: '全站搜索页：搜全部历史日报的标题与摘要。',
+    format: 'text/html',
+    url: `${SITE}/search/`,
+  });
+  fs.writeFileSync(AGENT_PATH, JSON.stringify(agent, null, 2) + '\n', 'utf-8');
+}
+
+const days = loadDays();
+if (days.length) {
+  fs.writeFileSync(LLMS_PATH, buildLlms(days), 'utf-8');
+  refreshAgent(days);
+  console.log(`[geo] llms.txt + agent.json refreshed from ${days.length} days, latest ${days[0].date}`);
+} else {
+  console.log('[geo] no data found, leaving llms.txt and agent.json unchanged');
+}

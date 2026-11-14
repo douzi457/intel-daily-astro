@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy-local": "astro build && git add dist/ -f && git commit -m \"build: local deploy $(date +%Y-%m-%d)\" && git push"
+    "deploy-local": "astro build && git add dist/ -f && git commit -m \"build: local deploy $(date +%Y-%m-%d)\" && git push",
+    "prebuild": "node scripts/generate-geo.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",

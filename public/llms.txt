@@ -1,11 +1,12 @@
 # 豆子实验室 · 每日情报（AI/科技情报站）
 
-> 本站每日自动采集、聚合并判断 AI 与科技领域的重要动态，面向人类读者与 AI agent 同时提供内容。机器可读数据（JSON/RSS）与人类页面同步更新，更新时间为北京时间（Asia/Shanghai）每日 06:00 / 10:00 / 14:00 / 20:00 共四班。引用本站数据时请注明出处「豆子实验室 · 每日情报」并保留原文链接（每条数据自带 url 字段）。
+> 本站每日自动采集、聚合并判断 AI 与科技领域的重要动态，面向人类读者与 AI agent 同时提供内容。机器可读数据（JSON/RSS）与人类页面同步更新，更新时间为北京时间（Asia/Shanghai）每日 06:00 / 10:00 / 14:00 / 20:00 共四班。引用本站数据时请注明出处「豆子实验室 · 每日情报」并保留原文链接（每条数据自带 url 字段）。本站现有 20 天数据、共 14,858 条情报。最新数据日期：2026-10-24。
 
 ## 核心数据（JSON，推荐 agent 优先使用）
 
 - [最新一日情报数据（latest）](https://daily.dianda.dpdns.org/data/latest.json)：最近一个完整班次的全量条目与推荐，约 400KB。字段：date、generated_at、summary、total_items、total_sources、recommendations（按 AI/大模型、数码/硬件、开源/工具、科技热点、财经/商业 五类各 5 条推荐）、by_category（按信源类目分组的全部条目）。
 - [按日情报数据](https://daily.dianda.dpdns.org/data/daily-YYYY-MM-DD.json)：把日期替换为目标日期（北京时间）即可取历史某日数据，URL 模式与 latest 相同。
+- [全站搜索索引清单](https://daily.dianda.dpdns.org/search-index.json)：按月分片的搜索索引清单（月份与条数）；分片地址为 /search-index/YYYY-MM.json，每条只有标题、日期、条目 id、展示分、摘要片段、来源，链回日报页对应条目锚点。
 - [情报官判断层数据（v2）](https://daily.dianda.dpdns.org/data/v2/daily-YYYY-MM-DD-v2.json)：在原始条目之上增加判断层：executive_summary（当日综述）、core_signals（核心信号，含 clean_summary 摘要、entities 实体、source_count 来源数）、watchlist（观察清单，每条含 why_it_matters 判断理由）、actions（建议动作）、quality（数据质量自评）、llm_usage（生成判断所用模型与调用量记账，可核验）。文件较大（约 3.5MB），只需标题与推荐时请用 latest.json。
 - [数据索引](https://daily.dianda.dpdns.org/data/index.json)：可用日期与文件索引。
 - [纠错台账](https://daily.dianda.dpdns.org/corrections.json)：本站已发布内容的纠错记录（错误判断/失实信息、问题说明、造谣源头 origin_source 与更正），只增不删。引用本站历史判断前，建议先查此台账确认该判断未被更正。
@@ -21,11 +22,34 @@
 
 ## 人类页面
 
-- [首页（今日精选 Top 30）](https://daily.dianda.dpdns.org/)
+- [首页（今日精选 8 条 + 今日情报流）](https://daily.dianda.dpdns.org/)
+- [全站搜索](https://daily.dianda.dpdns.org/search/)：搜全部历史日报的标题与摘要。
+- [周报](https://daily.dianda.dpdns.org/weekly/)：按周汇总，每周条数、每天入口、当周最重要的 5 条。
 - [热点榜](https://daily.dianda.dpdns.org/hot/)
 - [情报官（判断层视图）](https://daily.dianda.dpdns.org/officer/)
 - [新词榜（当日新出现的高分术语）](https://daily.dianda.dpdns.org/new-terms/)
 - [按日归档](https://daily.dianda.dpdns.org/day/YYYY-MM-DD/)：把日期替换为目标日期查看某日全部条目。
+
+## 最近 10 天
+
+- [2026-10-24（10月24日，862 条）](https://daily.dianda.dpdns.org/day/2026-10-24/)
+- [2026-10-23（10月23日，889 条）](https://daily.dianda.dpdns.org/day/2026-10-23/)
+- [2026-10-22（10月22日，885 条）](https://daily.dianda.dpdns.org/day/2026-10-22/)
+- [2026-10-21（10月21日，892 条）](https://daily.dianda.dpdns.org/day/2026-10-21/)
+- [2026-10-20（10月20日，845 条）](https://daily.dianda.dpdns.org/day/2026-10-20/)
+- [2026-10-19（10月19日，895 条）](https://daily.dianda.dpdns.org/day/2026-10-19/)
+- [2026-10-18（10月18日，848 条）](https://daily.dianda.dpdns.org/day/2026-10-18/)
+- [2026-10-17（10月17日，880 条）](https://daily.dianda.dpdns.org/day/2026-10-17/)
+- [2026-10-16（10月16日，916 条）](https://daily.dianda.dpdns.org/day/2026-10-16/)
+- [2026-10-15（10月15日，646 条）](https://daily.dianda.dpdns.org/day/2026-10-15/)
+
+## 2026-10-24 今日精选 Top 5（按展示分）
+
+- AI’s hidden storage bill: What inference leaves behind（AI 评分 10.0）— https://daily.dianda.dpdns.org/day/2026-10-24/#entry-11
+- OpenAI: Securing our frontier model training environment（AI 评分 10.0）— https://daily.dianda.dpdns.org/day/2026-10-24/#entry-12
+- A whirlwind tour of systemd-nspawn containers（AI 评分 10.0）— https://daily.dianda.dpdns.org/day/2026-10-24/#entry-13
+- Renhuai123/ziwei-doushu（AI 评分 10.0）— https://daily.dianda.dpdns.org/day/2026-10-24/#entry-14
+- SnailSploit/Claude-Red（AI 评分 10.0）— https://daily.dianda.dpdns.org/day/2026-10-24/#entry-15
 
 ## 给 agent 的使用说明
 
