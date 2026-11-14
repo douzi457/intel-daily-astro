@@ -1,27 +1,27 @@
-## 选题1：OpenAI board member worries an AI "takeo
-- 角度：OpenAI董事会成员将“AI社会接管”量化为“数月之内的可能事件”，并将AI列为最可能死因。这标志
+## 选题1：OpenAI 董事会成员担心人工智能“接管”社会可能需要几个月的时间
+- 角度：董事会成员公开警告AI可能在数月内引发社会失控风险，表明顶级实验室内部对安全对齐紧迫性的共识正在升温
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第1条，2家媒体
-- 验证：查阅原文[OpenAI board member worries an...]
+- 验证：查阅原文[OpenAI 董事会成员担心人工智能“接管”社会可能需要几个...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
 
 ---
 
-## 选题2：DeepMind reveals Gemini Robotics 2.5 and
-- 角度：DeepMind不仅发布了面向具身智能的Gemini Robotics 2.5，更重要的是开源了名为
+## 选题2：台湾芯片制造巨头台积电将向 Anthropic 和 OpenAI 投资 10 亿
+- 角度：台积电以投资绑定头部AI客户，将自身从纯代工厂转型为AI算力生态的核心战略伙伴，确保先进制程订单锁定
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第2条，1家媒体
-- 验证：查阅原文[DeepMind reveals Gemini Roboti...]
+- 验证：查阅原文[台湾芯片制造巨头台积电将向 Anthropic 和 Open...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
 
 ---
 
-## 选题3：openai/codex-security
-- 角度：OpenAI官方开源codex-security，表明其正将AI能力从“代码生成”向“代码安全审计”
+## 选题3：Claude Code 不小心在 GitHub 上泄露了秘密
+- 角度：Claude Code在公开代码仓库中意外泄露敏感信息，暴露了AI编程助手在自动化工作流中的安全隐患
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第3条，1家媒体
-- 验证：查阅原文[openai/codex-security...]
+- 验证：查阅原文[Claude Code 不小心在 GitHub 上泄露了秘密...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
