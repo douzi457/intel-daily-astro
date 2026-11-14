@@ -1448,7 +1448,6 @@ a { color: inherit; text-decoration: none; }
   .home-group a { display: flex; align-items: center; height: 32px; padding: 0 10px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--ink-2, #303c42); text-decoration: none; }
   .home-group a:hover { background: var(--bg-hover, rgba(0,0,0,.04)); color: var(--ink, #202a30); }
   .home-group a.active { background: var(--accent-soft, rgba(234,88,12,.12)); color: var(--accent, #ea580c); }
-  .home-note { font-size: 12px; color: var(--ink-4, #657176); margin-top: auto; }
 }
 @media (min-width: 1280px) {
   /* 已有右栏规则仍生效；左栏加入后为三栏：左 200px + 主列 + 右栏 */
@@ -1474,5 +1473,4 @@ a { color: inherit; text-decoration: none; }
   .drawer-group a { display: flex; align-items: center; height: 40px; padding: 0 10px; border-radius: 8px; font-size: 15px; font-weight: 600; color: var(--ink-2, #303c42); text-decoration: none; }
   .drawer-group a:hover { background: var(--bg-hover, rgba(0,0,0,.04)); }
   .drawer-group a.active { background: var(--accent-soft, rgba(234,88,12,.12)); color: var(--accent, #ea580c); }
-  .drawer-note { font-size: 12px; color: var(--ink-4, #657176); margin-top: 16px; }
 }

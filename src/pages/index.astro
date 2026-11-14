@@ -25,7 +25,9 @@ const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice
 const dayData = getDayData(today, 'zh');
 const items: IntelItem[] = dayData.items;
 // 今日情报统一用 v4 的 total_items（更准确）
-const totalItems = v4Data?.total_items || items.length;
+// v4.1：顶栏与统计条的“今日情报”与时间线用同一个数（当日已渲染列表），
+// 不再用 v4 总数，避免 899 与 830 打架；列表为空时才回落到 v4 总数。
+const totalItems = items.length || v4Data?.total_items || 0;
 const recentDates = allDates.slice(0, 10);
 
 const groupedByDate = new Map<string, IntelItem[]>();
@@ -171,7 +173,8 @@ function reasonText(score: number): string {
   }
   /* 分类筛选 */
   /* Astryx Tabs（v3）：分类是一排文字标签，不是药丸；当前项只用一条强调色下划线，不再用灰底整条 */
-  .cat-filter { display: flex; gap: var(--spacing-1); margin: var(--spacing-4) 0 var(--spacing-5); padding: 0; background: transparent; border-bottom: 1px solid var(--color-border); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cat-filter { display: flex; gap: var(--spacing-1); margin: var(--spacing-4) 0 var(--spacing-5); padding: 0; background: transparent; border-bottom: 1px solid var(--color-border); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 48px), transparent 100%); mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 48px), transparent 100%); }
+  .cat-filter.at-end { -webkit-mask-image: none; mask-image: none; }
   .cat-filter::-webkit-scrollbar { display: none; }
   .cat-pill { flex-shrink: 0; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 0; background: transparent; color: var(--color-text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
   .cat-pill.active { background: transparent; color: var(--color-accent); border-bottom-color: var(--color-accent); box-shadow: none; }
@@ -343,7 +346,7 @@ function reasonText(score: number): string {
                     </div>
                     <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                     {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
-                    {reason && (<div class="entry-reason"><span class="entry-reason-label">推荐理由</span>{reason}</div>)}
+                    {reason && (<div class="entry-reason"><span class="entry-reason-label">推荐理由：</span>{reason}</div>)}
                   </article>
                 );
               })}
@@ -403,6 +406,15 @@ function reasonText(score: number): string {
   document.querySelectorAll('#catFilter .cat-pill').forEach(btn => {
     btn.addEventListener('click', () => { activeCat = (btn as HTMLElement).dataset.cat || 'all'; applyHomeFilters(); });
   });
+  // 分类标签行右侧渐隐：滑到头就取消渐隐；一行放得下时也不渐隐
+  const catFilter = document.getElementById('catFilter');
+  function syncCatFade() {
+    if (!catFilter) return;
+    catFilter.classList.toggle('at-end', catFilter.scrollLeft + catFilter.clientWidth >= catFilter.scrollWidth - 2);
+  }
+  catFilter?.addEventListener('scroll', syncCatFade, { passive: true });
+  window.addEventListener('resize', syncCatFade);
+  syncCatFade();
   // 精选推荐理由：默认一行，点击展开 / 收起
   document.querySelectorAll('.featured-reason').forEach(el => {
     el.addEventListener('click', () => el.classList.toggle('expanded'));

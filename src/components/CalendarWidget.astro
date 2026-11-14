@@ -131,6 +131,8 @@ const allLabel = locale === 'zh' ? '📅 日历' : '📅 Calendar';
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 8px;
     margin-bottom: 16px;
   }
 
@@ -138,12 +140,15 @@ const allLabel = locale === 'zh' ? '📅 日历' : '📅 Calendar';
     font-size: 0.85em;
     font-weight: 700;
     color: var(--text-h);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .calendar-nav {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
   }
 
   .cal-nav-btn {
@@ -157,7 +162,11 @@ const allLabel = locale === 'zh' ? '📅 日历' : '📅 Calendar';
     cursor: pointer;
     transition: all 0.12s;
     font-family: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
+
+  .cal-month-label { white-space: nowrap; }
   .cal-nav-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
