@@ -45,6 +45,14 @@ SUMMARY_PROMPT = """你是中文科技资讯编辑。给下面这条资讯写中
      * 客户案例、PR稿无明确数据（任务/规模/成本/时间）：sig ≤ 4
      * 只有预告、抢先体验、无实质参数：nov ≤ 3 且 cred ≤ 4
      * 禁止把多个普通理由堆成高分；禁止四舍五入到整十
+   - 刻度校准（2026-11-15）：你正在给当天各分类 Top10 打分，这些已经是当天
+     最重要的 80 条，分数量纲是 0-10，应当用满刻度——真正的大事
+     （改变行业格局、时间线节点、头部公司战略转向）给 9.0-9.8；
+     重要的新能力/新产品/新研究给 7.5-8.9；一般的资讯给 6.5-7.4；
+     只有明显水的内容才低于 6.5。不要把所有分都压在 7 分以下
+     （此前实测最高分只有 7.5，刻度没用满）。9.5+ 只给当天最重磅的
+     1-2 条。压分硬规则仍然有效（营销/例行更新/无数据 PR 按上面的
+     上限压），不要为了拉开分布给水文高分。
    - 盲评：只根据标题和正文内容打分，不要因来源是大厂/知名媒体而加分
 
 只输出JSON：{{"title": "中文标题", "summary": "2-3句摘要", "content_type": "7选1的英文key", "reason": "推荐理由", "score": 7.5}}
@@ -105,6 +113,102 @@ def call_agnes(title, source, desc, last_call_time):
                 break
     return None, last_call_time
 
+def validate_ai_title(original_title, ai_title):
+    """校验 LLM 生成的中文标题是否被“截断/错字”污染。
+    抓的模式：原标题里的拉丁词被截成片段、且片段紧贴中文
+    （例：DeepSeek -> “深Seek”，2026-11-07 真实案例）。
+    通过返回 True；不通过时调用方应丢弃 ai_title、回落到原标题。
+    2026-11-15 实测：557 条真实 ai_title 里 0 条误拒，目标条被抓到。
+    """
+    import re
+    if not ai_title or not ai_title.strip():
+        return False
+    # 原标题有中文，改写后不能全丢中文
+    if re.search(r'[\u4e00-\u9fff]', original_title or '') and not re.search(r'[\u4e00-\u9fff]', ai_title):
+        return False
+
+    def _norm(t):
+        return re.sub(r'[-_.]', '', t).lower()
+
+    src_toks = re.findall(r'[A-Za-z][A-Za-z0-9\-\.]{2,}', original_title or '')
+    src_norm = {_norm(t) for t in src_toks}
+    for at in re.findall(r'[A-Za-z][A-Za-z0-9\-\.]{2,}', ai_title):
+        an = _norm(at)
+        if len(an) < 3 or an in src_norm:
+            continue  # 原样保留的词
+        for st in src_toks:
+            sn = _norm(st)
+            if len(sn) > len(an) and sn.endswith(an):
+                m = re.search(re.escape(at), ai_title)
+                if m and (m.start() == 0 or re.match(r'[\u4e00-\u9fff]', ai_title[m.start() - 1])):
+                    return False
+    return True
+
+
+EXEC_SUMMARY_PROMPT = """你是中文科技资讯编辑。今天最重要的科技新闻如下（按重要性排序，分数 0-10）：
+
+{items}
+
+用一句话写出今天最重要的一条洞察。要求：
+1. 必须具体指向一家公司、一项技术或一个数字（三者至少其一）；
+2. 不要写统计句（不要写“今天共采集XX条”“今日热点集中在XX领域”这类话）；
+3. 不要编造，不要写正确的废话。
+只输出 JSON：{"insight": "一句话"}，不要输出其他内容。
+"""
+
+
+def generate_executive_summary(items, last_call_time):
+    """今日一句话：取当日 ai_score 最高的 8 条，调一次 LLM 写洞察句。
+    无 key 或调用失败时返回 ("", last_call_time)，不让整个摘要步失败。
+    2026-11-15 新增（管线批次第 4 项）。"""
+    import urllib.request
+    api_key = os.environ.get('AGNES_API_KEY', '')
+    base_url = os.environ.get('AGNES_BASE_URL', 'https://api.agnes-ai.cn/v1')
+    model = os.environ.get('AGNES_MODEL') or "agnes-3.0-flash"
+    if not api_key:
+        return "", last_call_time
+    scored = sorted(
+        [it for it in items if isinstance(it.get('ai_score'), (int, float))],
+        key=lambda x: x.get('ai_score', 0), reverse=True)[:8]
+    if not scored:
+        return "", last_call_time
+    lines = []
+    for i, it in enumerate(scored, 1):
+        title = it.get('ai_title') or it.get('title', '')
+        lines.append(f"{i}. [{it.get('ai_score')}] {title}")
+    prompt = EXEC_SUMMARY_PROMPT.format(items="\n".join(lines))
+    elapsed = time.time() - last_call_time
+    if elapsed < 6.0:
+        time.sleep(6.0 - elapsed)
+    last_call_time = time.time()
+    for attempt_model in [model, "agnes-2.5-flash"]:
+        try:
+            data = json.dumps({
+                "model": attempt_model,
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.3,
+                "max_tokens": 200,
+            }).encode()
+            req = urllib.request.Request(
+                f"{base_url}/chat/completions", data=data,
+                headers={"Authorization": f"Bearer {api_key}",
+                         "Content-Type": "application/json"})
+            resp = urllib.request.urlopen(req, timeout=30)
+            result = json.load(resp)
+            text = result["choices"][0]["message"]["content"].strip()
+            if "```" in text:
+                text = text.split("```")[1]
+                if text.startswith("json"):
+                    text = text[4:]
+            insight = (json.loads(text.strip()).get("insight") or "").strip()
+            if insight:
+                return insight, last_call_time
+        except Exception as e:
+            print(f"  今日一句话失败 ({attempt_model}): {str(e)[:60]}", flush=True)
+            continue
+    return "", last_call_time
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser()
@@ -147,7 +251,11 @@ def main():
             continue
         if r and r.get('summary'):
             it['ai_summary'] = r['summary']
-            it['ai_title'] = r.get('title', '')
+            ai_title = r.get('title', '') or ''
+            if not validate_ai_title(it.get('title', ''), ai_title):
+                print(f"  ai_title 校验不通过，已回落原标题: {ai_title[:40]}", flush=True)
+                ai_title = it.get('title', '')
+            it['ai_title'] = ai_title
             it['ai_reason'] = r.get('reason', '')
             try:
                 it['ai_score'] = round(float(r.get('score', 0)), 1)
@@ -179,6 +287,11 @@ def main():
                         if src.get(k):
                             vi[k] = src[k]
                     synced += 1
+        # 今日一句话（执行摘要）：用当日最高分条目调一次 LLM，写进 v4 顶层
+        insight, last_call = generate_executive_summary(items, last_call)
+        if insight:
+            v4["executive_summary"] = insight
+            print(f"  今日一句话: {insight[:60]}", flush=True)
         json.dump(v4, open(v4_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         print(f"已同步 {synced} 条摘要到 {v4_path}")
     else:

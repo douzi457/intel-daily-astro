@@ -659,7 +659,9 @@ def deduplicate():
     final = []
     for item in all_items:
         dup = False
-        for ex in final[-50:]:
+        # 2026-11-15：旧版只比最后 50 条，890 条里漏了 24 对相似标题（含 4 组完全
+        # 相同的标题）；改全量比对，890 条约 5.5 秒，日量可接受。
+        for ex in final:
             if is_similar(item["title"], ex["title"]):
                 # 只在新来源时才增加 source_count
                 sources = ex.get("sources", [ex["source"]])
@@ -846,13 +848,17 @@ TECH_SOURCES = {"Hacker News", "GitHub Trending", "AI Hot",
 
 def calc_score(item: dict) -> float:
     """科技自媒体向评分 (0-10)
-    改进：按类别设基础分（重要类别即使无关键词也不会被埋没）
+    2026-11-15 重校准：旧版 AI/Frontier 基线 7.0 + 关键词满分 3 直接顶到 10.0，
+    当日 890 条里 105 条并列 10.0，排序是假的。重校准后最高分要靠热度/优质来源/
+    多源/多关键词叠加才够得着（2026-11-15 实测：10.0 从 105 条降到 0 条，
+    前 10 名 9.2/9.0/8.9 拉开，26 个不同分值）。分数仍全部来自真实信号，
+    不按名次硬凑分布。量纲与口径见 docs/scoring.md。
     """
     # 类别基础分（重要类别起点高，噪音类别起点低）
     CATEGORY_BASELINE = {
-        "AI/Frontier": 7.0,
-        "Chinese Tech": 6.0,
-        "International Tech": 6.0,
+        "AI/Frontier": 6.0,
+        "Chinese Tech": 5.5,
+        "International Tech": 5.5,
         "Chinese Hot Search": 3.0,  # 热搜含大量娱乐八卦
         "Chinese News": 4.0,
         "International News": 5.0,
@@ -860,15 +866,14 @@ def calc_score(item: dict) -> float:
         "Community": 3.0,  # 贴吧/牛客噪音多
     }
     cat = item.get("category", "")
-    score = CATEGORY_BASELINE.get(cat, 5.0)
+    score = CATEGORY_BASELINE.get(cat, 4.5)
 
-    # 关键词加分（命中即加，不重复覆盖）
+    # 关键词加分：取最高权重（封顶 2.5），命中多个关键词再加 0.2/个（封顶 0.6）
     title = item.get("title_cn", item["title"])
-    keyword_bonus = 0
-    for kw, weight in TECH_KEYWORDS.items():
-        if kw.lower() in title.lower():
-            keyword_bonus = max(keyword_bonus, weight)
-    score += min(keyword_bonus, 3)
+    hits = sorted({w for kw, w in TECH_KEYWORDS.items() if kw.lower() in title.lower()}, reverse=True)
+    if hits:
+        score += min(hits[0], 2.5)
+        score += min(0.2 * (len(hits) - 1), 0.6)
 
     # 热度加分
     heat = item.get("heat", 0)
@@ -889,6 +894,10 @@ def calc_score(item: dict) -> float:
     if source in TECH_SOURCES:
         score += 1
 
+    # 多源加分：同一事件被多家报道是重要性信号（去重阶段算出的 source_count）
+    sc = item.get("source_count", 1) or 1
+    score += min(0.4 * (sc - 1), 1.2)
+
     return round(min(max(score, 0), 10), 1)
 
 
@@ -899,6 +908,70 @@ def score_items(final: list):
         item["score"] = calc_score(item)
     final.sort(key=lambda x: x["score"], reverse=True)
     print(f"  Scored {len(final)} items")
+
+
+# ====================================================================
+# PHASE 4.5: TOPIC（同类主题聚合，最小可用版，2026-11-15）
+# ====================================================================
+# 做法：别名归一（标题/关键词归一）。同一事件多家报道标题各写各的，
+# 标题相似度聚类抓不住（2026-11-15 实测：41 条黄仁勋/英伟达分到 40 个簇，
+# 反而把“Introducing X”这类不同事件误并一组），所以用实体别名：
+# 标题里出现哪个实体的别名，就归到该实体 topic；多个实体时取标题里
+# 最先出现的那个（导语实体优先，合集标题取领衔的）。
+# 空字符串表示无主题（宁缺毋滥，不硬分组）。前端后续按 topic 折叠
+# （合并为一条 + 展开子项）、精选里同 topic 只取最高分的一条。
+TOPIC_ALIASES = {
+    "黄仁勋": ["黄仁勋", "Jensen Huang", "JensenHuang", "老黄"],
+    "英伟达": ["英伟达", "NVIDIA", "Nvidia", "NVDA"],
+    "OpenAI": ["OpenAI", "奥特曼", "Sam Altman"],
+    "ChatGPT": ["ChatGPT"],
+    "DeepSeek": ["DeepSeek", "深度求索"],
+    "Anthropic": ["Anthropic", "Claude"],
+    "Google": ["Google", "谷歌", "Gemini"],
+    "Apple": ["Apple", "苹果", "iPhone"],
+    "微软": ["微软", "Microsoft", "Copilot"],
+    "Meta": ["Meta", "扎克伯格", "Zuckerberg"],
+    "特斯拉": ["特斯拉", "Tesla", "马斯克", "Musk", "SpaceX"],
+    "华为": ["华为", "Huawei", "鸿蒙"],
+    "小米": ["小米", "Xiaomi", "雷军"],
+    "阿里": ["阿里", "Alibaba", "通义", "Qwen"],
+    "字节": ["字节", "ByteDance", "豆包", "TikTok"],
+    "腾讯": ["腾讯", "Tencent"],
+    "百度": ["百度", "Baidu", "文心"],
+    "xAI": ["xAI", "Grok"],
+    "Mistral": ["Mistral"],
+    "GitHub": ["GitHub"],
+    "Hugging Face": ["Hugging Face", "HuggingFace"],
+    "AMD": ["AMD", "苏姿丰"],
+    "英特尔": ["英特尔", "Intel"],
+    "三星": ["三星", "Samsung"],
+    "亚马逊": ["亚马逊", "Amazon", "AWS", "Bedrock"],
+}
+
+
+def topic_of(title: str) -> str:
+    """标题 -> topic（空字符串表示无主题）"""
+    low = (title or "").lower()
+    best = None  # (出现位置, topic)
+    for canon, aliases in TOPIC_ALIASES.items():
+        for a in aliases:
+            idx = low.find(a.lower())
+            if idx >= 0 and (best is None or idx < best[0]):
+                best = (idx, canon)
+    return best[1] if best else ""
+
+
+def assign_topics(final: list):
+    """Phase 4.5: 给每条打 topic（就地写 item['topic']）"""
+    print("\n=== PHASE 4.5: Topics ===")
+    n = 0
+    for item in final:
+        t = topic_of(item.get("title_cn", item.get("title", "")))
+        item["topic"] = t
+        if t:
+            n += 1
+    print(f"  Tagged {n}/{len(final)} items")
+
 
 
 # ====================================================================
@@ -1589,12 +1662,16 @@ def generate_v4_json(final: list, recommendations: dict, cache: dict):
             "published_at": item.get("published_at", ""),
             "source_count": item.get("source_count", 1),
             "sources": item.get("sources", [item.get("source", "")]),
+            "topic": item.get("topic", ""),
         })
 
     data = {
         "date": date_str,
         "generated_at": now_ts,
         "summary": f"今日采集 {len(active_sources)} 个源，共 {len(final)} 条去重数据",
+        # 今日一句话（洞察）：由 summarize_top10.py 在同步摘要时填入；
+        # 摘要步跳过/失败时留空，前端暂不渲染。
+        "executive_summary": "",
         "total_items": len(final),
         "total_sources": len(active_sources),
         "total_translated": len(cache),
@@ -1706,11 +1783,12 @@ def generate_rewrite_json(final: list, recommendations: dict):
             "hot": int(''.join(c for c in str(item.get("heat", 0)) if c.isdigit()) or 0),
             "date": date_str,
             "published_at": item.get("published_at", ""),  # P0-2: 条目级发布时间
-            "score": int(item.get("score", 0)),
+            "score": round(item.get("score", 0), 1),
             "category": item.get("category", "其他"),
             "title": title,
             "desc": desc,
             "cross_sources": 0,
+            "topic": item.get("topic", ""),
         })
     
     data = {"date": date_str, "items": items}
@@ -1752,6 +1830,9 @@ async def main():
 
     # Phase 4: Score
     score_items(final)
+
+    # Phase 4.5: Topics
+    assign_topics(final)
 
     # Phase 5: Classify + Recommend
     candidates = build_recommendations(final)
