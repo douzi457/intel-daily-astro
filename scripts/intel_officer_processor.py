@@ -2029,6 +2029,38 @@ class IntelligenceProcessor:
         }
 
 
+def _sync_executive_summary_to_latest(result, output_dir, date):
+    """交接修复（2026-11-16）：把判断层 executive_summary 写回 latest.json 与当日公开 daily 文件。
+
+    断点：dashboard_v4 写 latest.json 时 executive_summary 恒为 ""，
+    summarize_top10 的一句话只写进 src/data/v4，processor 的 3 条综述只写进 v2 文件，
+    此后没有任何一步回写 latest.json，导致首页文件里的综述永久为空。
+    仅当本次产出非空时写回；LLM 失败走 keep-previous 分支时本函数不会被调用，
+    不拿旧日综述冒充当日。
+    """
+    try:
+        items = [s.strip() for s in (result.get('executive_summary') or [])
+                 if isinstance(s, str) and s.strip()]
+        if not items:
+            print("  -> executive_summary 为空，跳过回写 latest.json", file=sys.stderr)
+            return
+        text = "\n".join(items)
+        public_dir = Path(output_dir).parent  # public/data
+        for target in (public_dir / 'latest.json',
+                       public_dir / f'daily-{date}.json'):
+            if not target.exists():
+                print(f"  -> 跳过不存在的文件: {target.name}", file=sys.stderr)
+                continue
+            with open(target, encoding='utf-8') as f:
+                data = json.load(f)
+            data['executive_summary'] = text
+            with open(target, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            print(f"  -> Synced executive_summary to {target.name}")
+    except Exception as e:
+        print(f"  -> Failed to sync executive_summary to latest.json: {e}", file=sys.stderr)
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser()
@@ -2084,7 +2116,10 @@ def main():
         print(f"  -> Updated index.json: latest_date={args.date}")
     except Exception as e:
         print(f"  -> Failed to update index.json: {e}", file=sys.stderr)
-    
+
+    # 交接修复：把本次判断层综述写回 latest.json（见 _sync_executive_summary_to_latest）
+    _sync_executive_summary_to_latest(result, output_dir, args.date)
+
     export = processor.export_markdown(result)
     exports_dir = output_dir / 'exports' / 'intel-officer'
     exports_dir.mkdir(parents=True, exist_ok=True)
