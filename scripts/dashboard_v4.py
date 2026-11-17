@@ -626,6 +626,31 @@ def _clean_title(title: str, source: str) -> str:
     return t
 
 
+# 同一 outlet 的多个 feed 只算一家（2026-11-16 实测：FAA 条
+# Ars Technica/Ars Technica AI 被数成 2 家、BBC 请愿条 BBC 三 feed
+# 被数成 3 家，source_count 注水）。只用于计数，sources 列表仍保留原始 feed 名。
+SOURCE_OUTLET_ALIASES = {
+    "Ars Technica AI": "Ars Technica",
+    "BBC News": "BBC",
+    "BBC Tech": "BBC",
+    "BBC World": "BBC",
+    "NYTimes World": "NYTimes",
+    "NYTimes Tech": "NYTimes",
+    "WallstreetCN Live": "WallstreetCN",
+    "WallstreetCN Hot": "WallstreetCN",
+    "arXiv cs.CL": "arXiv",
+    "arXiv cs.LG": "arXiv",
+    "arXiv cs.AI": "arXiv",
+    "GitHub Trending": "GitHub",
+    "GitHub Blog": "GitHub",
+}
+
+
+def canon_source(name: str) -> str:
+    """feed 名 -> outlet 名（同 outlet 多 feed 归一）"""
+    return SOURCE_OUTLET_ALIASES.get(name, name)
+
+
 def deduplicate():
     """Phase 2: Per-source + cross-source dedup"""
     print("\n=== PHASE 2: Deduplication ===")
@@ -663,12 +688,13 @@ def deduplicate():
         # 相同的标题）；改全量比对，890 条约 5.5 秒，日量可接受。
         for ex in final:
             if is_similar(item["title"], ex["title"]):
-                # 只在新来源时才增加 source_count
+                # 只在新来源时才增加 source_count；同 outlet 的多个 feed 只算一家
                 sources = ex.get("sources", [ex["source"]])
                 if item["source"] not in sources:
-                    ex["source_count"] = ex.get("source_count", 1) + 1
                     sources.append(item["source"])
                     ex["sources"] = sources
+                    if canon_source(item["source"]) not in {canon_source(s) for s in sources[:-1]}:
+                        ex["source_count"] = ex.get("source_count", 1) + 1
                 dup = True
                 break
         if not dup:
@@ -931,7 +957,10 @@ TOPIC_ALIASES = {
     "Apple": ["Apple", "苹果", "iPhone"],
     "微软": ["微软", "Microsoft", "Copilot"],
     "Meta": ["Meta", "扎克伯格", "Zuckerberg"],
-    "特斯拉": ["特斯拉", "Tesla", "马斯克", "Musk", "SpaceX"],
+    # 2026-11-16 实测：马斯克作请愿人时标题首位就是他，earliest 规则会把
+    # “马斯克请愿恢复黄仁勋”误标成特斯拉；人名别名移出，星舰/星链补进
+    # （SpaceX 产品，与已有 SpaceX 别名一致），纯马斯克个人言论宁缺毋滥。
+    "特斯拉": ["特斯拉", "Tesla", "SpaceX", "星舰", "星链"],
     "华为": ["华为", "Huawei", "鸿蒙"],
     "小米": ["小米", "Xiaomi", "雷军"],
     "阿里": ["阿里", "Alibaba", "通义", "Qwen"],
