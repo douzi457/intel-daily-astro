@@ -45,8 +45,8 @@ const sortedDates = [...groupedByDate.keys()].sort().reverse();
 const totalItems = groupedByDate.get(today)?.length || items.length || v4Data?.total_items || 0;
 
 // 展示分（v4，2026-11-14）：有 ai_score 就用它——它是 80 条有摘要条目上
-// 唯一有真实区分度的分数（本文件：1.0–7.5）；没有 ai_score 才回落到 score。
-// ai_score 的量纲管线侧尚未书面确认（看起来像 0-10），前端只原样展示、不换算。
+// 唯一有真实区分度的分数；没有 ai_score 才回落到 score。
+// ai_score 量纲见 docs/scoring.md（0–10，五轴加权），前端只原样展示、不换算。
 function displayScore(it: any): number {
   const a = (it as any).ai_score;
   return (typeof a === 'number' && !isNaN(a)) ? a : (it.score || 0);
@@ -146,6 +146,18 @@ function reasonText(score: number): string {
   .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--spacing-4); margin-bottom: var(--spacing-6); }
   .featured-card { background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4); transition: border-color 0.15s; }
   .featured-card:hover { border-color: var(--ink-4); }
+  /* v4.8：精选卡按展示分加一个视觉维度（只改渲染层；数据接口、排序、取 8 条不动） */
+  /* 尺寸：头名卡在宽屏占两列；颜色：分数越高，强调色越实（条更粗，elite 卡带暖橙底 tint） */
+  .featured-card.featured-hero { grid-column: span 2; }
+  .featured-card.featured-hero h3 { font-size: var(--text-base); }
+  .featured-card.featured-elite { background: var(--accent-soft); }
+  .featured-card.featured-elite .featured-score-bar { height: 6px; }
+  .featured-card.featured-elite .featured-score-bar span { background: var(--accent-gradient); }
+  .featured-card.featured-high .featured-score-bar { height: 4px; }
+  @media (max-width: 640px) {
+    .featured-card.featured-hero { grid-column: auto; }
+    .featured-card.featured-hero h3 { font-size: var(--text-sm); }
+  }
   .featured-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
   .featured-rank { font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
   .featured-score { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
@@ -289,10 +301,10 @@ function reasonText(score: number): string {
                 const s = displayScore(item);
                 const barW = Math.min(Math.max(s / 10, 0), 1) * 100;
                 return (
-                <article class="featured-card" key={i}>
+                <article class={`featured-card${i === 0 ? ' featured-hero' : ''}${s >= 8 ? ' featured-elite' : s >= 6 ? ' featured-high' : ''}`} key={i}>
                   <div class="featured-top">
                     <span class="featured-rank">{i + 1}</span>
-                    <span class="featured-score" title="AI 评分（ai_score 字段原值，量纲待管线确认）">
+                    <span class="featured-score" title="AI 评分 ai_score（0–10，五轴加权）">
                       <span class="featured-score-num">{s.toFixed(1)}</span>
                       <span class="featured-score-bar"><span style={{width: `${barW}%`}}></span></span>
                     </span>
