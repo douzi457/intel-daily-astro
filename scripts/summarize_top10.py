@@ -153,7 +153,7 @@ EXEC_SUMMARY_PROMPT = """你是中文科技资讯编辑。今天最重要的科�
 1. 必须具体指向一家公司、一项技术或一个数字（三者至少其一）；
 2. 不要写统计句（不要写“今天共采集XX条”“今日热点集中在XX领域”这类话）；
 3. 不要编造，不要写正确的废话。
-只输出 JSON：{"insight": "一句话"}，不要输出其他内容。
+只输出 JSON：{{"insight": "一句话"}}，不要输出其他内容。
 """
 
 
@@ -288,7 +288,15 @@ def main():
                             vi[k] = src[k]
                     synced += 1
         # 今日一句话（执行摘要）：用当日最高分条目调一次 LLM，写进 v4 顶层
-        insight, last_call = generate_executive_summary(items, last_call)
+        # 防护（2026-11-18）：这一步绝不能拖垮 v4 同步——2026-11-15 起
+        # EXEC_SUMMARY_PROMPT 里未转义的 {"insight": ...} 让 .format() 抛
+        # KeyError，异常在 v4 写回之前抛出，4 天的 v4 文件都没拿到摘要，
+        # 而 workflow 的 || echo 把失败吞掉了。先修转义，再加这层兜底。
+        try:
+            insight, last_call = generate_executive_summary(items, last_call)
+        except Exception as e:
+            print(f"  今日一句话异常，已跳过（v4 同步不受影响）: {str(e)[:60]}", flush=True)
+            insight = ""
         if insight:
             v4["executive_summary"] = insight
             print(f"  今日一句话: {insight[:60]}", flush=True)
