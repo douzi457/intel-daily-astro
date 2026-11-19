@@ -1,5 +1,5 @@
 ## 选题1：Snapchat 现在允许开发人员使用 Claude Code 和 Cursor
-- 角度：Snapchat开放AI编程助手构建AR镜头，标志着AI Agent正式深入垂直行业开发底层。对于关
+- 角度：AR开发长期受限于高门槛的3D编程与物理引擎知识。Snap引入Claude Code等Agent工具
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第1条，1家媒体
 - 验证：查阅原文[Snapchat 现在允许开发人员使用 Claude Cod...]
@@ -8,20 +8,20 @@
 
 ---
 
-## 选题2：OpenAI 首席执行官 Sam Altman 表示“很难想象没有 Jensen
-- 角度：Altman公开背书NVIDIA，在算力成本与供应链紧张的行业背景下，此言论不仅确认了NVIDIA的
+## 选题2：Google 让 Gemini 的使用变得更容易，无需对您的数据进行 AI 训练
+- 角度：大厂正在将'隐私'从道德口号转化为可配置的功能开关。Google允许用户'不训练数据但保留功能'，打
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第2条，1家媒体
-- 验证：查阅原文[OpenAI 首席执行官 Sam Altman 表示“很难想...]
+- 验证：查阅原文[Google 让 Gemini 的使用变得更容易，无需对您的...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
 
 ---
 
-## 选题3：利用 OpenAI 模型推进芯片设计
-- 角度：OpenAI将模型能力延伸至芯片设计（EDA）领域，预示着“AI设计硬件”的新范式。对技术创作者而言
+## 选题3：Le Groupe Figaro 和 OpenAI 合作将 Le Figaro 
+- 角度：传统媒体正从'被AI训练数据的素材'转变为'AI的知识供应商'。Le Figaro与OpenAI的合
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第3条，1家媒体
-- 验证：查阅原文[利用 OpenAI 模型推进芯片设计...]
+- 验证：查阅原文[Le Groupe Figaro 和 OpenAI 合作将 ...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
