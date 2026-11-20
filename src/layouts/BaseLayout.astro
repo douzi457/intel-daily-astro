@@ -76,6 +76,18 @@ const defaultSchema = JSON.stringify({
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={structuredData || defaultSchema}></script>
 
+  <!-- 主题：跟随系统，手动选择后记住（localStorage 'theme'）；放 head 里先定，避免闪烁 -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'dark' && t !== 'light') {
+        t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
   <!-- Assets -->
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
 
@@ -96,21 +108,23 @@ const defaultSchema = JSON.stringify({
   <a class="skip-link" href="#main">跳到主要内容</a>
   <slot />
   <script>
-    // Theme system
+    // Theme system：默认跟随系统；.theme-btn 在顶栏和抽屉里各有一个，点一次记一次
     (function() {
-      const theme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-
-      const themeBtn = document.getElementById('themeToggle');
-      if (themeBtn) {
-        themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
-        themeBtn.addEventListener('click', () => {
-          const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-          themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+      function currentTheme() { return document.documentElement.getAttribute('data-theme') || 'light'; }
+      function syncLabels() {
+        document.querySelectorAll('.theme-btn').forEach(function (btn) {
+          btn.textContent = currentTheme() === 'dark' ? '浅色' : '深色';
         });
       }
+      syncLabels();
+      document.querySelectorAll('.theme-btn').forEach(function (btn) {
+        btn.addEventListener('click', () => {
+          var next = currentTheme() === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) {}
+          syncLabels();
+        });
+      });
     })();
   </script>
   <script>

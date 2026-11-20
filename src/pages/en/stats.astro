@@ -51,16 +51,16 @@ const SOURCE_LABELS: Record<string, { label: string; icon: string }> = {
 };
 ---
 
-<BaseLayout title="📊 Data Stats · DOUZI LABS" lang="en">
+<BaseLayout title="Data Stats · Douzi Labs" lang="en">
 <div class="page">
 
-  <Header mode="stats" lang="en" />
   <div class="shell shell--flush">
     <SiteNav lang="en" active="stats" today={new Date().toISOString().slice(0, 10)} />
+    <Header mode="stats" lang="en" />
     <div class="shell-main">
 
   <div style="margin-bottom:40px;">
-    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📊 Data Stats</h1>
+    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">Data Stats</h1>
     <p style="font-size:0.82em;color:var(--text-m);margin-top:6px;">{totalItems.toLocaleString()} items · {dateCount} days</p>
   </div>
 

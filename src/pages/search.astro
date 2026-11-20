@@ -11,13 +11,16 @@ import { getAllDates } from '../utils/data.ts';
 const dates = getAllDates('zh');
 ---
 
-<BaseLayout title="🔍 全站搜索 · 豆子实验室" description="搜索豆子实验室全部历史情报：标题与摘要，全站可查。">
+<BaseLayout title="全站搜索 · 豆子实验室" description="搜索豆子实验室全部历史情报：标题与摘要，全站可查。">
 <style>
   .search-page h1 { font-size: 1.3em; font-weight: 800; color: var(--text-h); }
   .search-page .sub { font-size: 0.82em; color: var(--text-m); margin-top: 6px; }
   .search-box { display: flex; gap: 8px; margin: 20px 0 8px; }
   .search-box input { flex: 1; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--bg-card); color: var(--ink); font-size: 15px; font-family: inherit; }
   .search-box input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .search-range { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 8px; font-size: 13px; color: var(--text-m); }
+  .search-range input[type="date"] { height: 32px; padding: 0 8px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--bg-card); color: var(--ink); font-size: 13px; font-family: inherit; }
+  .range-hint { font-size: 12px; color: var(--ink-4); }
   .search-status { font-size: 12px; color: var(--ink-4); font-family: var(--font-mono); margin-bottom: 16px; }
   .search-status button { margin-left: 8px; padding: 2px 10px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: transparent; color: var(--accent); cursor: pointer; font-size: 12px; }
   .search-results { display: flex; flex-direction: column; }
@@ -32,14 +35,22 @@ const dates = getAllDates('zh');
 </style>
 
 <div class="page">
-  <Header mode="archive" />
   <div class="shell shell--flush">
     <SiteNav active="none" today={dates[0]} />
+    <Header mode="archive" />
     <div class="shell-main search-page">
-      <h1>🔍 全站搜索</h1>
+      <h1>全站搜索</h1>
       <p class="sub">搜全部历史日报的标题与摘要，不只搜今天。结果按日期倒序，点标题跳到当天日报的对应条目。</p>
       <div class="search-box">
         <input type="search" id="siteSearch" placeholder="输入关键词，如 黄仁勋、DeepSeek、机器人…" aria-label="全站搜索" autocomplete="off" />
+      </div>
+      <div class="search-range">
+        <label>时间范围
+          <input type="date" id="dateFrom" aria-label="开始日期" />
+          <span>—</span>
+          <input type="date" id="dateTo" aria-label="结束日期" />
+        </label>
+        <span class="range-hint">留空为全部时间；状态写进链接，可分享</span>
       </div>
       <div class="search-status" id="searchStatus">正在加载索引…</div>
       <div class="search-results" id="searchResults"></div>
@@ -52,6 +63,8 @@ const dates = getAllDates('zh');
 
 <script>
   const input = document.getElementById('siteSearch') as HTMLInputElement | null;
+  const dateFrom = document.getElementById('dateFrom') as HTMLInputElement | null;
+  const dateTo = document.getElementById('dateTo') as HTMLInputElement | null;
   const statusEl = document.getElementById('searchStatus');
   const resultsEl = document.getElementById('searchResults') as HTMLElement | null;
   const hintEl = document.getElementById('searchHint');
@@ -60,8 +73,11 @@ const dates = getAllDates('zh');
   type IdxItem = { t: string; d: string; i: number; s: number; a: string; p: string };
   let allItems: IdxItem[] = [];
   let loadedMonths: string[] = [];
+  let failedMonths: string[] = [];
   let allMonths: { month: string; count: number }[] = [];
   let total = 0;
+  let indexReady = false;
+  let indexFailed = false;
 
   function esc(s: string): string {
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -69,22 +85,42 @@ const dates = getAllDates('zh');
 
   function renderStatus() {
     if (!statusEl) return;
+    if (indexFailed) {
+      statusEl.innerHTML = `索引加载失败，请检查网络后重试。 <button id="retryIndex" type="button">重新加载索引</button>`;
+      document.getElementById('retryIndex')?.addEventListener('click', () => location.reload());
+      return;
+    }
+    if (!indexReady) {
+      statusEl.textContent = '正在加载索引…';
+      return;
+    }
     const loaded = allItems.length;
     const more = allMonths.filter(m => !loadedMonths.includes(m.month));
-    statusEl.innerHTML = `已加载 ${loadedMonths.length ? loadedMonths.join('、') : '—'}（${loaded.toLocaleString()} 条），全站共 ${total.toLocaleString()} 条。` +
-      (more.length ? ` <button id="loadAllMonths" type="button">加载全部月份（还剩 ${more.length} 个月）</button>` : ' 已全部加载。');
-    const btn = document.getElementById('loadAllMonths');
-    btn?.addEventListener('click', loadAllMonths);
+    const failed = failedMonths.length ? `（${failedMonths.join('、')} 加载失败）` : '';
+    statusEl.innerHTML = `已加载 ${loadedMonths.length ? loadedMonths.join('、') : '—'}（${loaded.toLocaleString()} 条），全站共 ${total.toLocaleString()} 条${failed}。` +
+      (more.length ? ` <button id="loadAllMonths" type="button">加载全部月份（还剩 ${more.length} 个月）</button>` : ' 已全部加载。') +
+      (failedMonths.length ? ` <button id="retryFailed" type="button">重试失败的月份</button>` : '');
+    document.getElementById('loadAllMonths')?.addEventListener('click', loadAllMonths);
+    document.getElementById('retryFailed')?.addEventListener('click', async () => {
+      const retry = [...failedMonths];
+      failedMonths = [];
+      for (const m of retry) await loadShard(m);
+      renderStatus();
+      runSearch();
+    });
   }
 
   async function loadShard(month: string) {
     try {
       const r = await fetch(`/search-index/${month}.json`);
-      if (!r.ok) return;
+      if (!r.ok) throw new Error(String(r.status));
       const j = await r.json();
       allItems = allItems.concat(j.items || []);
       loadedMonths.push(month);
-    } catch {}
+      failedMonths = failedMonths.filter(m => m !== month);
+    } catch {
+      if (!failedMonths.includes(month)) failedMonths.push(month);
+    }
   }
 
   async function loadAllMonths() {
@@ -94,24 +130,55 @@ const dates = getAllDates('zh');
     runSearch();
   }
 
+  function syncUrl() {
+    const u = new URL(location.href);
+    const q = (input?.value || '').trim();
+    const f = dateFrom?.value || '';
+    const t = dateTo?.value || '';
+    if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
+    if (f) u.searchParams.set('from', f); else u.searchParams.delete('from');
+    if (t) u.searchParams.set('to', t); else u.searchParams.delete('to');
+    history.replaceState(null, '', u.toString());
+  }
+
   function runSearch() {
     const q = (input?.value || '').trim().toLowerCase();
+    const from = dateFrom?.value || '';
+    const to = dateTo?.value || '';
     if (!resultsEl) return;
-    if (!q) {
+    if (!q && !from && !to) {
       resultsEl.innerHTML = '';
       if (hintEl) hintEl.hidden = false;
       if (emptyEl) emptyEl.hidden = true;
       return;
     }
     if (hintEl) hintEl.hidden = true;
+    if (!indexReady) {
+      if (emptyEl) {
+        emptyEl.hidden = false;
+        emptyEl.textContent = '索引尚未就绪，请稍候再搜。';
+      }
+      return;
+    }
     const tokens = q.split(/\s+/).filter(Boolean);
     const hits = allItems.filter(it => {
+      if (from && it.d < from) return false;
+      if (to && it.d > to) return false;
+      if (!tokens.length) return true;
       const hay = (it.t + ' ' + (it.a || '')).toLowerCase();
       return tokens.every(tk => hay.includes(tk));
     });
     hits.sort((a, b) => (b.d.localeCompare(a.d)) || ((b.s || 0) - (a.s || 0)));
     const top = hits.slice(0, 50);
-    if (emptyEl) emptyEl.hidden = top.length > 0;
+    if (emptyEl) {
+      emptyEl.hidden = top.length > 0;
+      if (top.length === 0) {
+        const scope = `已查 ${loadedMonths.length ? loadedMonths.join('、') : '—'}（${allItems.length.toLocaleString()} 条）`;
+        const more = allMonths.some(m => !loadedMonths.includes(m.month)) ? '，可点状态栏里的“加载全部月份”扩大范围' : '';
+        const range = (from || to) ? `，时间范围 ${from || '…'} 至 ${to || '…'}` : '';
+        emptyEl.textContent = `${scope}，没有匹配${q ? `「${input?.value.trim()}」` : ''}的条目${range}${more}。`;
+      }
+    }
     resultsEl.innerHTML = top.map(it => {
       const score = it.s > 0 ? ` · AI 评分 ${Number(it.s).toFixed(1)}` : '';
       const src = it.p ? ` · ${esc(it.p)}` : '';
@@ -122,23 +189,35 @@ const dates = getAllDates('zh');
   }
 
   let timer: number | undefined;
-  input?.addEventListener('input', () => {
+  function onInput() {
     window.clearTimeout(timer);
-    timer = window.setTimeout(runSearch, 150);
-  });
+    timer = window.setTimeout(() => { syncUrl(); runSearch(); }, 150);
+  }
+  input?.addEventListener('input', onInput);
+  dateFrom?.addEventListener('change', () => { syncUrl(); runSearch(); });
+  dateTo?.addEventListener('change', () => { syncUrl(); runSearch(); });
 
-  // 支持 ?q= 直达（可分享的搜索链接）
-  const startQ = new URLSearchParams(location.search).get('q') || '';
+  // 支持 ?q= / ?from= / ?to= 直达（可分享的搜索链接）
+  const sp = new URLSearchParams(location.search);
+  const startQ = sp.get('q') || '';
+  const startFrom = sp.get('from') || '';
+  const startTo = sp.get('to') || '';
+  if (dateFrom && startFrom) dateFrom.value = startFrom;
+  if (dateTo && startTo) dateTo.value = startTo;
   (async () => {
     try {
       const r = await fetch('/search-index.json');
+      if (!r.ok) throw new Error(String(r.status));
       const j = await r.json();
       allMonths = j.months || [];
       total = j.total || 0;
-    } catch {}
-    if (allMonths.length > 0) await loadShard(allMonths[0].month);
+      indexReady = true;
+    } catch {
+      indexFailed = true;
+    }
+    if (indexReady && allMonths.length > 0) await loadShard(allMonths[0].month);
     renderStatus();
-    if (startQ && input) {
+    if ((startQ || startFrom || startTo) && input) {
       input.value = startQ;
       runSearch();
     }

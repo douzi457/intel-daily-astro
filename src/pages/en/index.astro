@@ -43,7 +43,6 @@ const pageDesc = `Today's tech intelligence briefing from ${SITE.name}. AI-score
 
 <BaseLayout title="Douzi Labs · Daily Intel" lang="en" description={pageDesc}>
 <div class="page">
-  <Header mode="en-home" date={today} totalItems={totalItems} lang="en" />
 
   {totalItems > 0 && (
     <div class="header-ad" id="headerAd">
@@ -58,6 +57,7 @@ const pageDesc = `Today's tech intelligence briefing from ${SITE.name}. AI-score
 
 <div class="shell">
   <SiteNav lang="en" active="home" today={today} />
+  <Header mode="en-home" date={today} totalItems={totalItems} lang="en" />
   <div class="shell-main">
   <div class="content-grid">
     <div class="main-content">

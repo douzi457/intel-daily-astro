@@ -1,38 +1,75 @@
 ---
-// SiteNav：全站统一导航（v3，2026-11-10）
-// 桌面端左栏 + 手机端抽屉 + 手机顶条，三者是同一组链接，只在不同宽度下换形态。
-// Header 不再重复列这组链接（见 Header.astro），各页 .shell 的第一个孩子就是它，
-// 正好填进 global.css 里 .shell 在 ≥1100px 的 200px 左列。
+// SiteNav：全站统一导航（v5，2026-11-20，纸刊式顶栏）
+// 顶栏 64px：品牌（左）· 今日 / 周报 / 归档（中）· 搜索 / 订阅 / 更多 / 主题（右）。
+// 手机：品牌 + 搜索 + 更多（☰ 抽屉），主功能入口都在抽屉里。
+// 各页 .shell 的第一个孩子就是它，CSS 里用 grid-column: 1 / -1 让它通栏。
 // 用法：<SiteNav active="home" today={today} />，放在 <div class="shell"> 内最前面。
 interface Props {
-  active?: 'home' | 'day' | 'hot' | 'officer' | 'new-terms' | 'archive' | 'stats' | 'none';
+  active?: 'home' | 'day' | 'hot' | 'officer' | 'new-terms' | 'archive' | 'stats' | 'weekly' | 'none';
   today?: string;
   lang?: 'zh' | 'en';
 }
 const { active = 'home', today = '', lang = 'zh' } = Astro.props;
 const isActive = (key: string) => (active === key ? 'active' : '');
+const isToday = active === 'home' || active === 'day';
 const t = lang === 'en' ? {
   brand: 'Douzi Labs', tagline: 'Daily Intel · AI explained simply',
   nav: 'Navigate', more: 'More',
-  home: "Today's Picks", day: 'Today', hot: 'Hot', officer: 'Officer', newTerms: 'New Terms',
-  archive: 'Archive', stats: 'Stats', search: 'Search', saved: 'Saved', weekly: 'Weekly', rss: 'RSS', top: 'Douzi Labs · Daily Intel',
+  today: 'Today', weekly: 'Weekly', archive: 'Archive',
+  hot: 'Hot', officer: 'Officer', newTerms: 'New Terms',
+  stats: 'Stats', search: 'Search', saved: 'Saved', rss: 'RSS', subscribe: 'Subscribe',
+  top: 'Douzi Labs · Daily Intel',
 } : {
   brand: '豆子实验室', tagline: '每日情报 · 把 AI 讲成人话',
   nav: '导航', more: '更多',
-  home: '今日精选', day: '今日全部', hot: '热点榜', officer: '情报官', newTerms: '新词榜',
-  archive: '归档', stats: '统计', search: '搜索', saved: '收藏', weekly: '周报', rss: 'RSS', top: '豆子实验室 · 每日情报',
+  today: '今日', weekly: '周报', archive: '归档',
+  hot: '热点榜', officer: '情报官', newTerms: '新词榜',
+  stats: '统计', search: '搜索', saved: '收藏', rss: 'RSS', subscribe: '订阅',
+  top: '豆子实验室 · 每日情报',
 };
 const langHref = lang === 'en' ? '/' : '/en/';
 const langLabel = lang === 'en' ? '中文' : 'English';
 ---
+
+<header class="topnav">
+  <a class="topnav-brand" href="/">
+    <img src="/icon.svg" alt="" width="28" height="28" />
+    <span class="topnav-brand-text"><b>{t.brand}</b><i>{t.tagline}</i></span>
+  </a>
+  <nav class="topnav-main" aria-label={t.nav}>
+    <a class={isToday ? 'active' : ''} href="/">{t.today}</a>
+    <a class={isActive('weekly')} href="/weekly/">{t.weekly}</a>
+    <a class={isActive('archive')} href="/archive">{t.archive}</a>
+  </nav>
+  <div class="topnav-actions">
+    <a href="/search/" class="topnav-action">{t.search}</a>
+    <a href="/rss.xml" class="topnav-action">{t.subscribe}</a>
+    <details class="topnav-more">
+      <summary>{t.more}</summary>
+      <div class="topnav-more-menu">
+        <a class={isActive('hot')} href="/hot/">{t.hot}</a>
+        <a class={isActive('officer')} href="/officer/">{t.officer}</a>
+        <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
+        <a href="/saved/">{t.saved}</a>
+        <a class={isActive('stats')} href="/stats">{t.stats}</a>
+        <a href="/rss.xml">{t.rss}</a>
+        <a href={langHref}>{langLabel}</a>
+      </div>
+    </details>
+    <button class="theme-btn" type="button" aria-label="切换深色 / 浅色主题">深色</button>
+    <label for="drawerToggle" class="drawer-btn" id="drawerBtn" tabindex="0" aria-controls="mobileDrawer" aria-label="打开菜单">☰</label>
+  </div>
+</header>
 
 <input type="checkbox" id="drawerToggle" class="drawer-toggle" aria-label="开关手机菜单" />
 <label class="drawer-overlay" for="drawerToggle" aria-label="关闭菜单"></label>
 <aside class="drawer" id="mobileDrawer" aria-label="手机站内导航">
   <div class="drawer-head"><b>{t.brand}</b><label for="drawerToggle" class="drawer-close" aria-label="关闭菜单">✕</label></div>
   <nav class="drawer-group"><h4>{t.nav}</h4>
-    <a class={isActive('home')} href="/">{t.home}</a>
-    <a class={isActive('day')} href={`/day/${today}/`}>{t.day}</a>
+    <a class={isToday ? 'active' : ''} href="/">{t.today}</a>
+    <a href={`/day/${today}/`}>{lang === 'en' ? 'Today' : '今日全部'}</a>
+    <a class={isActive('weekly')} href="/weekly/">{t.weekly}</a>
+    <a class={isActive('archive')} href="/archive">{t.archive}</a>
     <a class={isActive('hot')} href="/hot/">{t.hot}</a>
     <a class={isActive('officer')} href="/officer/">{t.officer}</a>
     <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
@@ -40,36 +77,177 @@ const langLabel = lang === 'en' ? '中文' : 'English';
   <nav class="drawer-group"><h4>{t.more}</h4>
     <a href="/search/">{t.search}</a>
     <a href="/saved/">{t.saved}</a>
-    <a href="/weekly/">{t.weekly}</a>
-    <a class={isActive('archive')} href="/archive">{t.archive}</a>
     <a class={isActive('stats')} href="/stats">{t.stats}</a>
-    <a href="/rss.xml">RSS</a>
+    <a href="/rss.xml">{t.rss}</a>
     <a href={langHref}>{langLabel}</a>
   </nav>
+  <div class="drawer-group">
+    <button class="theme-btn drawer-theme-btn" type="button">深色</button>
+  </div>
 </aside>
-<div class="mobiletop">
-  <label for="drawerToggle" class="drawer-btn" id="drawerBtn" aria-controls="mobileDrawer" aria-label="打开菜单">☰</label>
-  <b>{t.top}</b>
-</div>
-<aside class="home-nav" aria-label="站内导航">
-  <div class="home-brand">{t.brand}<span>{t.tagline}</span></div>
-  <nav class="home-group"><h4>{t.nav}</h4>
-    <a class={isActive('home')} href="/">{t.home}</a>
-    <a class={isActive('day')} href={`/day/${today}/`}>{t.day}</a>
-    <a class={isActive('hot')} href="/hot/">{t.hot}</a>
-    <a class={isActive('officer')} href="/officer/">{t.officer}</a>
-    <a class={isActive('new-terms')} href="/new-terms/">{t.newTerms}</a>
-  </nav>
-  <nav class="home-group"><h4>{t.more}</h4>
-    <a href="/search/">{t.search}</a>
-    <a href="/saved/">{t.saved}</a>
-    <a href="/weekly/">{t.weekly}</a>
-    <a class={isActive('archive')} href="/archive">{t.archive}</a>
-    <a class={isActive('stats')} href="/stats">{t.stats}</a>
-    <a href="/rss.xml">RSS</a>
-    <a href={langHref}>{langLabel}</a>
-  </nav>
-</aside>
+
+<style>
+/* v5 顶栏：64px 通栏，纸面底 + 细分隔线；粘在顶部 */
+.topnav {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6, 24px);
+  height: 64px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.topnav-brand img { width: 28px; height: 28px; flex-shrink: 0; }
+.topnav-brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.topnav-brand-text b { font-size: 16px; font-weight: 800; color: var(--text-h); letter-spacing: -0.3px; }
+.topnav-brand-text i { font-style: normal; font-size: 11px; font-weight: 600; color: var(--text-m); }
+.topnav-main { display: flex; align-items: center; gap: 4px; }
+.topnav-main a {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topnav-main a:hover { color: var(--color-text-primary); background: var(--bg-hover); }
+.topnav-main a.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); border-radius: 0; }
+.topnav-actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.topnav-action {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topnav-action:hover { color: var(--color-text-primary); background: var(--bg-hover); }
+.topnav-more { position: relative; }
+.topnav-more summary {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+.topnav-more summary::-webkit-details-marker { display: none; }
+.topnav-more summary:hover { color: var(--color-text-primary); background: var(--bg-hover); }
+.topnav-more-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 160px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 6px;
+  box-shadow: var(--shadow-md);
+  z-index: 120;
+}
+.topnav-more-menu a {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+.topnav-more-menu a:hover { background: var(--bg-hover); color: var(--color-text-primary); }
+.topnav-more-menu a.active { color: var(--accent); }
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--bg-card);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+.drawer-btn { display: none; }
+.drawer-toggle { position: absolute; opacity: 0; width: 1px; height: 1px; overflow: hidden; }
+.drawer, .drawer-overlay { display: none; }
+
+@media (max-width: 1099px) {
+  .topnav { gap: 12px; height: 56px; }
+  .topnav-main, .topnav-more { display: none; }
+  .topnav-brand-text i { display: none; }
+  .topnav-action { padding: 0 8px; }
+  .theme-btn { display: none; }
+  .drawer-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm, 8px);
+    background: var(--bg-card);
+    color: var(--color-text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .drawer {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(280px, 82vw);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    z-index: 300;
+    transform: translateX(-105%);
+    transition: transform .2s ease;
+    visibility: hidden;
+    overflow-y: auto;
+  }
+  .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 250; }
+  #drawerToggle:checked ~ .drawer { transform: translateX(0); visibility: visible; }
+  #drawerToggle:checked ~ .drawer-overlay { display: block; }
+  .drawer-head { display: flex; justify-content: space-between; align-items: center; }
+  .drawer-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--border); border-radius: var(--radius-sm, 8px); background: var(--bg-card); cursor: pointer; }
+  .drawer-group h4 { font-size: 11px; letter-spacing: .12em; color: var(--ink-4); margin: 16px 0 6px; }
+  .drawer-group a { display: flex; align-items: center; height: 44px; padding: 0 10px; border-radius: 8px; font-size: 15px; font-weight: 600; color: var(--ink-2); text-decoration: none; }
+  .drawer-group a:hover { background: var(--bg-hover); }
+  .drawer-group a.active { background: var(--accent-soft); color: var(--accent); }
+  .drawer-theme-btn { display: inline-flex; margin-top: 8px; }
+}
+</style>
 
 <script>
   const drawerToggle = document.getElementById('drawerToggle') as HTMLInputElement | null;
@@ -83,6 +261,20 @@ const langLabel = lang === 'en' ? '中文' : 'English';
   if (drawerToggle) {
     drawerToggle.addEventListener('change', syncDrawer);
     drawerEl?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawerToggle.checked = false; syncDrawer(); }));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { drawerToggle.checked = false; syncDrawer(); } });
+    // label 不是原生按钮：键盘 Enter / Space 也要能开关抽屉
+    drawerBtn?.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        drawerToggle.checked = !drawerToggle.checked;
+        syncDrawer();
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawerToggle.checked) {
+        drawerToggle.checked = false;
+        syncDrawer();
+        (drawerBtn as HTMLElement | null)?.focus();
+      }
+    });
   }
 </script>

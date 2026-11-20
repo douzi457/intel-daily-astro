@@ -16,6 +16,8 @@ export interface IntelItem {
   desc: string;
   merged_sources?: MergedSource[];
   cross_sources?: number;
+  // v5：事件归一字段（650deb38 管线批次加的 topic，见 docs/scoring.md 附近说明）
+  topic?: string;
 }
 
 /** 合并来源 */

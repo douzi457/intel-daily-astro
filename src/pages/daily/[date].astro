@@ -48,9 +48,9 @@ const nextDate = dateIdx > 0 ? allDates[dateIdx - 1] : null;
   canonicalUrl={`${SITE.url}/day/${date}`}
 >
 <div class="page">
-  <Header mode="day" date={date} totalItems={stats.total} />
   <div class="shell shell--flush">
     <SiteNav active="day" today={date} />
+    <Header mode="day" date={date} totalItems={stats.total} />
     <div class="shell-main">
 
   <!-- 日期导航 -->

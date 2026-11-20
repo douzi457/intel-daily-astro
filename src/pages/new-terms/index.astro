@@ -44,11 +44,11 @@ function statusBadge(status: string): string {
 ---
 
 <BaseLayout title="新词榜" description="每日自动发现冒头的新名词" lang="zh-CN">
-<div class="page-head">
-  <Header mode="hot" today={targetDate} />
-</div>
 <div class="shell">
   <SiteNav active="new-terms" today={targetDate} />
+  <div class="page-head">
+    <Header mode="hot" today={targetDate} />
+  </div>
   <div class="shell-main">
 <style>
   /* token 见 src/styles/tokens.css（全站唯一来源） */

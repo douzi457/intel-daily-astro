@@ -37,8 +37,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
       <section class="platform-section" id={`section-${sectionKey}`} style={`--pf-color:${meta.color}`}>
         <div class="section-header">
           <div class="section-title">
-            <span>{sec.icon}</span>
-            <span style={`color:${meta.color}`}>{sec.name}</span>
+            <span>{sec.name}</span>
             <span class="section-count">{items.length}</span>
           </div>
         </div>
@@ -49,19 +48,18 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
             const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
             const extraSources = sources.slice(1);
             return (
-              <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
+              <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`} data-score={item.score || 0} data-time={item.published_at || ''}>
                 <span class="news-idx">{idx + 1}</span>
                 <div class="news-body">
                   <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
                   <div class="news-footer">
                     <div class="source-tags">
                       <span class="platform-tag" style={`--tag-color:${primarySource.color}`}>
-                        <span class="tag-icon">{primarySource.icon}</span>
                         {primarySource.label}
                       </span>
                       {extraSources.map((s: any) => (
                         <span class="platform-tag platform-tag-sm" style={`--tag-color:${s.color}`} title={s.label}>
-                          <span class="tag-icon">{s.icon}</span>
+                          {s.label}
                         </span>
                       ))}
                       {item.merged_sources && item.merged_sources.length > 0 && <span class="merge-count">+{extraSources.length}</span>}
@@ -69,7 +67,6 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                     {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
                     {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <strong>{item.score}</strong></span>}
                     {date && (<button class="fav-btn" type="button" data-fav-id={`${date}:${item.id}`} data-fav-title={item.title} data-fav-date={date} data-fav-url={`/day/${date}/#entry-${item.id}`} data-fav-score={item.score || 0} aria-label="收藏">☆</button>)}
-                    {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                     {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                   </div>
                   {item.desc && <div class="news-desc">{item.desc}</div>}
@@ -101,8 +98,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
           <section class="platform-section" id={`section-${sectionKey}`} style={`--pf-color:${meta.color}`}>
             <div class="section-header">
               <div class="section-title">
-                <span>{sec.icon}</span>
-                <span style={`color:${meta.color}`}>{sec.name}</span>
+                <span>{sec.name}</span>
                 <span class="section-count">{items.length}</span>
               </div>
             </div>
@@ -113,19 +109,18 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                 const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
                 const extraSources = sources.slice(1);
                 return (
-                  <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`}>
+                  <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`} data-score={item.score || 0} data-time={item.published_at || ''}>
                     <span class="news-idx">{idx + 1}</span>
                     <div class="news-body">
                       <a href={item.url} target="_blank" rel="noopener" class="news-title">{item.title}</a>
                       <div class="news-footer">
                         <div class="source-tags">
                           <span class="platform-tag" style={`--tag-color:${primarySource.color}`}>
-                            <span class="tag-icon">{primarySource.icon}</span>
                             {primarySource.label}
                           </span>
                           {extraSources.map((s: any) => (
                             <span class="platform-tag platform-tag-sm" style={`--tag-color:${s.color}`} title={s.label}>
-                              <span class="tag-icon">{s.icon}</span>
+                              {s.label}
                             </span>
                           ))}
                         </div>
@@ -165,16 +160,9 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
   flex-direction: column;
   max-height: 520px;
   overflow: hidden;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--pf-color, var(--accent)) 14%, transparent) 0%, color-mix(in srgb, var(--pf-color, var(--accent)) 4%, var(--bg)) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--surface);
   border-radius: var(--radius-lg);
-  border: 1px solid color-mix(in srgb, var(--pf-color, var(--border)) 15%, var(--border));
-  transition: border-color 0.2s;
-}
-
-.platform-section:hover {
-  border-color: color-mix(in srgb, var(--pf-color, var(--accent)) 30%, transparent);
+  border: 1px solid var(--border);
 }
 
 .platform-section .section-header {
@@ -303,13 +291,10 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
 
 .news-item.score-high {
   border-left-color: color-mix(in srgb, var(--tag-color, var(--accent)) 80%, transparent);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--tag-color, var(--accent)) 8%, transparent), transparent);
-  box-shadow: inset 4px 0 12px color-mix(in srgb, var(--tag-color, var(--accent)) 6%, transparent);
 }
 
 .news-item.score-med {
   border-left-color: color-mix(in srgb, var(--tag-color, rgba(251, 191, 36, 0.5)) 55%, transparent);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--tag-color, var(--accent)) 3%, transparent), transparent);
 }
 
 /* ── Cross-source badge ── */

@@ -46,6 +46,14 @@ for (const item of items) {
   if (!grouped[key]) grouped[key] = [];
   grouped[key].push(item);
 }
+// v5：默认按时间——各平台组内按原文发布时间倒序（GitHub 组除外，组件内仍按今日 star 排）
+for (const key of Object.keys(grouped)) {
+  if (key === 'github') continue;
+  grouped[key].sort((a, b) => String((b as any).published_at || '').localeCompare(String((a as any).published_at || '')));
+}
+// 事件数 vs 报道数：同一 topic 算一个事件，无 topic 的条目各算一个事件
+const topicSet = new Set(items.map(i => ((i as any).topic || '').trim()).filter(Boolean));
+const eventCount = topicSet.size + items.filter(i => !((i as any).topic || '').trim()).length;
 
 const sortedAll = [...items].sort((a, b) => (b.score || 0) - (a.score || 0));
 const featured = sortedAll.slice(0, 5);
@@ -75,7 +83,7 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
 ---
 
 <BaseLayout
-  title={`📡 ${date} 情报日报 · ${SITE.name}`}
+  title={`${date} 情报日报 · ${SITE.name}`}
   lang="zh-CN"
   description={metaDesc}
   ogImage={idx < 60 ? `/og/${date}.png` : '/og/default.png'}
@@ -84,11 +92,11 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
   nextUrl={nextUrl}
 >
 <div class="page">
-  <div class="page-head">
-    <Header mode="day" date={date} totalItems={totalItems} />
-  </div>
   <div class="shell">
     <SiteNav active="day" today={allDates[0]} />
+    <div class="page-head">
+      <Header mode="day" date={date} totalItems={totalItems} />
+    </div>
     <div class="shell-main">
       <!-- 日期导航 -->
       <div class="day-nav">
@@ -97,6 +105,20 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
         {nextDay ? <a href={`/day/${nextDay}`} class="day-nav-link">{nextDay} →</a> : <span class="day-nav-spacer"></span>}
       </div>
 
+      <!-- v5：事件数 vs 报道数 + 排序切换 + 仅搜本日报 -->
+      <div class="day-toolbar">
+        <span class="day-stats">{eventCount} 个事件 · {totalItems} 条报道 · {activeSections.length} 个来源</span>
+        <span class="day-sort" role="group" aria-label="排序">
+          <button type="button" class="sort-btn" data-sort="time">按时间</button>
+          <button type="button" class="sort-btn" data-sort="value">按价值</button>
+        </span>
+      </div>
+      <div class="day-search-row">
+        <input type="search" id="daySearch" placeholder="仅搜本日报（标题 / 描述 / 来源）" aria-label="仅搜本日报" autocomplete="off" />
+        <span class="search-count" id="daySearchCount"></span>
+      </div>
+      <div class="day-search-empty" id="daySearchEmpty"></div>
+
       <!-- v4.7：主内容移入 shell-main（此前在 shell 外的兄弟 .page 里，
            左栏 100vh 高把 shell 行撑到约 1018px，日报页顶部出现约 1000px 白空；
            另顺手修掉原来错配的 </div> / </aside> 标签） -->
@@ -104,33 +126,33 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
         <PlatformSection grouped={grouped} locale="zh" date={date} />
         <FeaturedSection featured={featured} locale="zh" />
 
-        <!-- 原生推广卡片 -->
+        <!-- 日历 -->
+        {allDates.length > 0 && (
+          <section class="section section-full">
+            <CalendarWidget dates={allDates} basePath="/day/" locale="zh" currentDate={date} />
+          </section>
+        )}
+
+        <!-- 赞助：内容之后的独立区域，明确标注，不进精选排名 -->
         {totalItems > 0 && (
           <div class="section" style="margin-bottom:0;">
             <div class="section-header">
-              <div class="section-title" style="font-size:0.9em;">💡 推荐</div>
+              <div class="section-title" style="font-size:0.9em;">赞助</div>
             </div>
             <div class="news-list">
               <div class="news-item" style="--tag-color:#3395FF">
-                <span class="news-idx" style="color:var(--accent);">💡</span>
+                <span class="news-idx" style="color:var(--accent);">赞助</span>
                 <div class="news-body">
-                  <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="noopener" class="news-title">腾讯云 AI 焕新季 · 2核2G4M 新客仅 99元/年</a>
+                  <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6544&cps_key=c7ef87056c14c6dd880836c4671d0001&from=console" target="_blank" rel="sponsored noopener" class="news-title">腾讯云 AI 焕新季 · 2核2G4M 新客仅 99元/年</a>
                   <div class="news-footer">
-                    <span class="platform-tag" style="--tag-color:#3395FF">☁️ 腾讯云</span>
-                    <span class="news-hot" style="color:var(--accent);">推广</span>
+                    <span class="platform-tag" style="--tag-color:#3395FF">腾讯云</span>
+                    <span class="news-hot" style="color:var(--accent);">赞助</span>
                   </div>
                   <div class="news-desc">轻量应用服务器 4核4G3M 首年 79元，限时特惠中</div>
                 </div>
               </div>
             </div>
           </div>
-        )}
-
-        <!-- 日历 -->
-        {allDates.length > 0 && (
-          <section class="section section-full">
-            <CalendarWidget dates={allDates} basePath="/day/" locale="zh" currentDate={date} />
-          </section>
         )}
       </div>
     </div>
@@ -216,6 +238,46 @@ html { scroll-behavior: smooth; }
   color: var(--text-h);
   font-family: var(--font-mono);
 }
+
+/* v5：日报工具条——事件数 vs 报道数 + 排序切换 + 仅搜本日报 */
+.day-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-m);
+}
+.day-stats { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.day-sort { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.sort-btn {
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-p);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.sort-btn[aria-pressed="true"] { background: var(--accent); color: var(--color-on-accent); }
+.day-search-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.day-search-row input[type="search"] {
+  flex: 1;
+  height: var(--size-element-lg);
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  font-size: 13px;
+}
+.day-search-row input[type="search"]::placeholder { color: var(--ink-4); }
+.day-search-row .search-count { font-size: 12px; color: var(--ink-4); white-space: nowrap; font-family: var(--font-mono); }
+.day-search-empty { display: none; padding: var(--spacing-6) 0; text-align: center; font-size: 13px; color: var(--ink-4); }
 
 .day-nav-spacer { width: 90px; }
 
@@ -314,4 +376,63 @@ html { scroll-behavior: smooth; }
       promoEl.href = p.href;
     }, 8000);
   }
+</script>
+
+<script>
+  // v5：日报排序切换（默认按时间）+ 仅搜本日报；排序写进 URL，返回后保留
+  (function () {
+    const params = new URLSearchParams(location.search);
+    let sortMode = params.get('sort') === 'value' ? 'value' : 'time';
+    const sortBtns = Array.from(document.querySelectorAll('.sort-btn')) as HTMLButtonElement[];
+    function renumber(list: HTMLElement) {
+      list.querySelectorAll(':scope > .news-item[data-score] .news-idx').forEach((el, i) => {
+        (el as HTMLElement).textContent = String(i + 1);
+      });
+    }
+    function applySort() {
+      sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === sortMode)));
+      document.querySelectorAll('.news-list').forEach(listEl => {
+        const list = listEl as HTMLElement;
+        // GitHub 组按今日 star 排，不参与切换；赞助卡片（无 data-score）也不参与
+        if (list.closest('#section-github')) return;
+        const items = Array.from(list.children).filter(el => el.classList.contains('news-item') && (el as HTMLElement).hasAttribute('data-score')) as HTMLElement[];
+        items.sort((a, b) => {
+          if (sortMode === 'value') return Number(b.dataset.score || 0) - Number(a.dataset.score || 0);
+          return String(b.dataset.time || '').localeCompare(String(a.dataset.time || ''));
+        });
+        items.forEach(el => list.appendChild(el));
+        renumber(list);
+      });
+    }
+    sortBtns.forEach(b => b.addEventListener('click', () => {
+      sortMode = (b.dataset.sort as 'time' | 'value') || 'time';
+      const u = new URL(location.href);
+      if (sortMode === 'value') u.searchParams.set('sort', 'value');
+      else u.searchParams.delete('sort');
+      history.replaceState(null, '', u.toString());
+      applySort();
+    }));
+    applySort();
+
+    // 仅搜本日报：只过滤已渲染条目，范围写明
+    const input = document.getElementById('daySearch') as HTMLInputElement | null;
+    const countEl = document.getElementById('daySearchCount');
+    const emptyEl = document.getElementById('daySearchEmpty') as HTMLElement | null;
+    const newsItems = Array.from(document.querySelectorAll('.news-item[data-score]')) as HTMLElement[];
+    function applyDaySearch() {
+      const q = (input?.value || '').trim().toLowerCase();
+      let shown = 0;
+      newsItems.forEach(el => {
+        const ok = !q || (el.textContent || '').toLowerCase().includes(q);
+        el.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+      if (countEl) countEl.textContent = q ? `${shown} / ${newsItems.length}` : '';
+      if (emptyEl) {
+        emptyEl.style.display = (q && shown === 0) ? 'block' : 'none';
+        if (q && shown === 0) emptyEl.textContent = `本日报内没有匹配「${input?.value.trim()}」的条目，换个词试试，或去全站搜索。`;
+      }
+    }
+    input?.addEventListener('input', applyDaySearch);
+  })();
 </script>

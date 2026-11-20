@@ -1,58 +1,64 @@
 /* ============================================================
-   全站设计 token（v4，2026-11-14）
-   对标：Grok / xAI 设计语言——真黑、极简、工程感、克制、信息优先。
-   原则：颜色只服务信息优先级，不服务“好看”。
-   - 深色（默认）：真黑 #0A0A0A，表面 #141414 / #1A1A1A，
-     弱边框 #27272A，几乎不用阴影，数字与评分走等宽字体。
-   - 浅色：干净纸白，高对比文字，同一套 token 换值。
-   - 全站只留一个主强调色：暖橙（深色 #EA580C / 浅色 #C2410C），
-     只用于 Logo、高价值标签、关键 CTA、评分高亮。
+   全站设计 token（v5，2026-11-20）
+   方向：纸刊式情报台 × 豆荚绿——暖白纸面、深墨色文字、克制的豆荚绿。
+   用排版、留白和分隔线表现编辑感，用时间、来源、标签做出工具感。
+   不像企业 SaaS 营销页，也不像监控大屏。
+   - 浅色：页面 #F7F8F4，卡片 #FFFFFF，主文字 #17231C，次文字 #536359，
+     分隔线 #DEE6DF，主色 #176447，浅绿底 #E8F4ED。
+   - 深色：页面 #101612，卡片 #17211B，主文字 #EDF4EE，次文字 #ADBDB2，
+     分隔线 #304037，主色 #82D8AA。浅绿按钮配深色文字。
+   - 对比度（实测，见 2026-11-20 审计）：正文 15.2:1 / 次文 6.0:1 /
+     主色 6.7:1（浅色）；正文 16.4:1 / 次文 9.3:1 / 主色 10.8:1（深色）。
+     白字在主色上 7.1:1，深字在浅绿按钮上 9.6:1，均 ≥ 4.5:1。
+   - 黄色只提示「待核实」等状态，红色只用于错误或必要警示；状态都有文字，
+     不只靠颜色区分。卡片圆角 12px，标签 6px；细边框 + 留白分组，
+     几乎不用阴影；只给当天主卡用浅绿底或一条细绿边。
+   - ai_score 量纲见 docs/scoring.md（0–10，五轴加权），前端只原样展示、不换算。
    本文件是全站唯一 token 来源；旧变量名全部保留作别名，
-   各页面不再自写 :root（v3 已清完）。
-   注意：ai_score 的量纲管线侧尚未书面确认（看起来像 0-10，
-   但无文档），前端只原样展示、不做换算，见管线批次说明。
+   各页面不再自写 :root。
    ============================================================ */
 :root {
-  /* —— 颜色：浅色（干净纸白） —— */
-  --bg: #fafaf9; --ink: #18181b; --ink-2: #3f3f46; --ink-3: #52525b; --ink-4: #a1a1aa;
-  --accent: #c2410c; --accent-alt: #ea580c; --surface: #fff; --border: #e4e4e7;
-  --paper: #f4f4f5; --line: #e4e4e7; --muted: #a1a1aa;
-  --accent-soft: rgba(194,65,12,.08);
-  --accent-glow: rgba(194,65,12,.06);
-  --accent-gradient: linear-gradient(135deg, #c2410c, #ea580c);
-  --text-h: #18181b; --text-p: #52525b; --text-m: #a1a1aa;
-  --bg-card: #fff; --bg-hover: #f4f4f5;
-  /* 情报官用的语义色（状态色，不是品牌色，沿用原值） */
-  --color-core: #10b981; --color-watch: #f59e0b; --color-action: #8b5cf6;
-  /* —— Grok 语义 token —— */
+  /* —— 颜色：浅色（暖白纸面） —— */
+  --bg: #f7f8f4; --ink: #17231c; --ink-2: #33413a; --ink-3: #536359; --ink-4: #7a8a80;
+  --accent: #176447; --accent-alt: #1e7a55; --surface: #ffffff; --border: #dee6df;
+  --paper: #f7f8f4; --line: #dee6df; --muted: #7a8a80;
+  --accent-soft: #e8f4ed;
+  --accent-glow: rgba(23,100,71,.06);
+  --accent-gradient: linear-gradient(135deg, #176447, #2e7d5b);
+  --text-h: #17231c; --text-p: #536359; --text-m: #7a8a80;
+  --bg-card: #ffffff; --bg-hover: #eef2ee;
+  /* 状态色（语义色，不是品牌色）：黄只提示待核实，红只用于错误/警示 */
+  --color-core: #176447; --color-watch: #92400e; --color-action: #6d28d9;
+  --color-warn: #92400e; --color-danger: #b91c1c;
+  /* —— 纸刊语义 token —— */
   --color-background-body: var(--bg); --color-background-surface: var(--surface);
-  --color-background-surface-2: #f4f4f5; --color-background-card: var(--surface);
+  --color-background-surface-2: #eef2ee; --color-background-card: var(--surface);
   --color-background-page: var(--bg);
   --color-text-primary: var(--ink); --color-text-secondary: var(--ink-3);
   --color-text-tertiary: var(--ink-4); --color-border: var(--border);
-  --color-accent: var(--accent); --color-on-accent: #fff;
+  --color-accent: var(--accent); --color-on-accent: #ffffff;
   --color-focus-ring: var(--accent);
   --color-bg: var(--bg); --color-surface: var(--surface);
   --color-text: var(--ink); --color-text-muted: var(--ink-3);
-  /* —— 间距刻度（4px 底） —— */
+  /* —— 间距刻度（4px 底：4 / 8 / 12 / 16 / 24 / 32 / 48） —— */
   --spacing-0: 0; --spacing-0-5: 2px; --spacing-1: 4px; --spacing-1-5: 6px;
   --spacing-2: 8px; --spacing-3: 12px; --spacing-4: 16px; --spacing-5: 20px;
   --spacing-6: 24px; --spacing-8: 32px; --spacing-12: 48px;
-  /* —— 圆角刻度（Grok 克制：8–12px 为主） —— */
+  /* —— 圆角刻度（卡片 12px，标签 6px） —— */
   --radius-0: 0; --radius-xs: 6px; --radius-sm: 8px; --radius-md: 10px;
   --radius-lg: 12px; --radius-xl: 12px; --radius-2xl: 16px; --radius-3xl: 24px;
   --radius-full: 9999px;
   /* —— 阴影刻度（克制：几乎不用阴影，卡片靠边框与间距区分） —— */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
-  --shadow-2xl: 0 16px 32px rgba(0,0,0,.10);
+  --shadow-xs: 0 1px 2px rgba(23,35,28,.04);
+  --shadow-sm: 0 1px 2px rgba(23,35,28,.05);
+  --shadow-md: 0 4px 12px rgba(23,35,28,.06);
+  --shadow-lg: 0 8px 24px rgba(23,35,28,.08);
+  --shadow-2xl: 0 16px 32px rgba(23,35,28,.10);
   /* —— 字号与字距 —— */
   --text-3xs: 10px; --text-xs: 12px; --text-sm: 14px; --text-base: 16px;
-  --text-lg: 20px; --text-xl: 24px; --text-2xl: 30px;
+  --text-lg: 20px; --text-xl: 24px; --text-2xl: 30px; --text-3xl: 36px;
   --letter-spacing-tight: -0.02em;
-  /* —— 字体：数字与评分走等宽（Grok 工程感），正文走系统无衬线 —— */
+  /* —— 字体：中文系统无衬线；日期、时间和统计数字走等宽 —— */
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-sans: 'Geist Sans', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   /* —— 控件高度：sm 28 / md 32 / lg 36 —— */
@@ -60,17 +66,20 @@
 }
 
 [data-theme="dark"] {
-  /* —— 颜色：深色（Grok 真黑） —— */
-  --bg: #0a0a0a; --ink: #f5f5f5; --ink-2: #d4d4d4; --ink-3: #a1a1aa; --ink-4: #71717a;
-  --accent: #ea580c; --accent-alt: #f97316; --surface: #141414; --border: #27272a;
-  --paper: #1a1a1a; --line: #27272a; --muted: #71717a;
-  --accent-soft: rgba(234,88,12,.12);
-  --accent-glow: rgba(234,88,12,.10);
-  --accent-gradient: linear-gradient(135deg, #ea580c, #f97316);
-  --text-h: #f5f5f5; --text-p: #a1a1aa; --text-m: #71717a;
-  --bg-card: #141414; --bg-hover: #1a1a1a;
-  --color-background-surface-2: #1a1a1a;
-  /* 深色下阴影更克制，卡片主要靠 #27272a 边框区分 */
+  /* —— 颜色：深色（深墨绿纸面） —— */
+  --bg: #101612; --ink: #edf4ee; --ink-2: #d3e0d6; --ink-3: #adbdb2; --ink-4: #7e9384;
+  --accent: #82d8aa; --accent-alt: #9be3bc; --surface: #17211b; --border: #304037;
+  --paper: #101612; --line: #304037; --muted: #7e9384;
+  --accent-soft: rgba(130,216,170,.12);
+  --accent-glow: rgba(130,216,170,.10);
+  --accent-gradient: linear-gradient(135deg, #82d8aa, #5dbb8a);
+  --text-h: #edf4ee; --text-p: #adbdb2; --text-m: #7e9384;
+  --bg-card: #17211b; --bg-hover: #1e2b23;
+  --color-background-surface-2: #1e2b23;
+  --color-core: #82d8aa; --color-watch: #f2b25c; --color-action: #a78bfa;
+  --color-warn: #f2b25c; --color-danger: #f87171;
+  --color-on-accent: #17231c;
+  /* 深色下阴影更克制，卡片主要靠 #304037 边框区分 */
   --shadow-xs: 0 1px 2px rgba(0,0,0,.5);
   --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
   --shadow-md: 0 4px 12px rgba(0,0,0,.5);

@@ -330,8 +330,7 @@ function normalize(text: string): string {
           <span class="q-dot" style={{ 'background': qualityColor }}></span>
           {v2Data?.quality?.total || 0}/100 {qualityGrade.toUpperCase()}
         </span>
-        <button class="copy-btn" id="copyBtn" data-date={date} title="复制日报 Markdown">📋 复制日报</button>
-        <button class="theme-btn" id="themeBtn" title="切换主题">🌓</button>
+        <button class="copy-btn" id="copyBtn" data-date={date} title="复制日报 Markdown">复制日报</button>
       </div>
     </div>
   </div>
@@ -656,11 +655,6 @@ function normalize(text: string): string {
   </div>
 </BaseLayout>
 
-<script is:inline>
-  // Theme: prevent FOUC
-  (function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}else if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
-</script>
-
 <script>
   // 复制日报按钮 — 用 data-date 属性取值（修复 ${date} 不插值 bug）
   const copyBtn = document.getElementById('copyBtn');
@@ -671,27 +665,15 @@ function normalize(text: string): string {
         const resp = await fetch(`/data/v2/exports/intel-officer/${date}-brief.md`);
         const text = await resp.text();
         await navigator.clipboard.writeText(text);
-        copyBtn.textContent = '✅ 已复制';
+        copyBtn.textContent = '已复制';
         copyBtn.classList.add('copied');
-        setTimeout(() => { copyBtn.textContent = '📋 复制日报'; copyBtn.classList.remove('copied'); }, 2000);
+        setTimeout(() => { copyBtn.textContent = '复制日报'; copyBtn.classList.remove('copied'); }, 2000);
       } catch {
-        copyBtn.textContent = '❌ 复制失败';
-        setTimeout(() => { copyBtn.textContent = '📋 复制日报'; }, 2000);
+        copyBtn.textContent = '复制失败';
+        setTimeout(() => { copyBtn.textContent = '复制日报'; }, 2000);
       }
     });
   }
-
-  // 主题切换 — localStorage 记忆
-  const themeBtn = document.getElementById('themeBtn');
-  function setTheme(dark) {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
-    themeBtn.textContent = dark ? '☀️' : '🌓';
-  }
-  themeBtn?.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    setTheme(!isDark);
-  });
 
   // 分类Tab过滤 — show/hide，不跳转
   (function() {

@@ -40,6 +40,7 @@ export function getDayData(dateStr: string, locale: Locale = 'zh'): DayData {
         sources: item.sources || undefined,
         merged_sources: item.merged_sources || undefined,
         cross_sources: item.cross_sources || 0,
+        topic: item.topic || undefined,
       })),
     };
   }

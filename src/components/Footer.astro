@@ -1,27 +1,43 @@
 ---
-// 共享 Footer 组件
+// 共享 Footer 组件（v5，2026-11-20）
+// 订阅区写清读者会收到什么、多久一次；没有邮件服务，用 RSS / 周报 / 公众号承接，
+// 不做提交后假成功的表单。赞助只放在内容之后的独立区域并明确标注。
 import { SITE } from '../lib/constants';
 ---
 
 <footer class="footer">
-  <p>📡 智谱 GLM-5 驱动 · {SITE.name} 每日情报</p>
-  <p>每日自动采集 · AI 智能评分 · 原生广告展示</p>
+  <div class="footer-subscribe" id="subscribe">
+    <div class="footer-subscribe-title">接收每周简报</div>
+    <p>每周一期：本周三件大事、已追踪事件的新进展、下周值得关注的线索。免费，不用注册。</p>
+    <div class="footer-subscribe-links">
+      <a href="/weekly/">看本周周报 →</a>
+      <a href="/rss.xml">RSS 订阅</a>
+      <span>公众号：豆子实验室</span>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="/about/#scoring">编辑与评分说明</a>
+    <a href="/about/#feedback">纠错反馈</a>
+    <a href="/rss.xml">RSS</a>
+    <a href="/archive">历史归档</a>
+  </div>
+  <p>每日自动采集 · AI 参与摘要与评分 · 带来源、可核对</p>
   <div class="footer-ecosystem">
-    <span class="footer-brand">🌐 知能生态</span>
+    <span class="footer-brand">豆子实验室</span>
     <a href="https://news.zhinengtech.dpdns.org" target="_blank" rel="noopener">知能新闻</a>
     <a href="https://zhinengtools.pages.dev" target="_blank" rel="noopener">知能工具</a>
-    <a href="https://github.com/weixin008" target="_blank" rel="noopener">GitHub</a>
-    <span>📱 公众号：豆子实验室</span>
+    <a href="https://github.com/douzi457/intel-daily-astro" target="_blank" rel="noopener">本站仓库</a>
+    <span>公众号：豆子实验室</span>
   </div>
 
   <!-- 不蒜子统计 -->
   <div class="footer-stats">
     <span class="stat-item">
-      <span id="busuanzi_container_site_pv" style="display:inline">👁️ 浏览 <span id="busuanzi_value_site_pv"></span></span>
+      <span id="busuanzi_container_site_pv" style="display:inline">浏览 <span id="busuanzi_value_site_pv"></span></span>
     </span>
     <span class="stat-divider">·</span>
     <span class="stat-item">
-      <span id="busuanzi_container_site_uv" style="display:inline">👤 访客 <span id="busuanzi_value_site_uv"></span></span>
+      <span id="busuanzi_container_site_uv" style="display:inline">访客 <span id="busuanzi_value_site_uv"></span></span>
     </span>
   </div>
 </footer>
@@ -38,7 +54,31 @@ import { SITE } from '../lib/constants';
   color: var(--text-m);
   line-height: 1.8;
 }
-
+.footer-subscribe {
+  max-width: 640px;
+  margin: 0 auto 24px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--bg-card);
+  text-align: left;
+}
+.footer-subscribe-title { font-size: 15px; font-weight: 800; color: var(--text-h); margin-bottom: 6px; }
+.footer-subscribe p { font-size: 13px; color: var(--text-p); margin: 0 0 10px; line-height: 1.65; }
+.footer-subscribe-links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; }
+.footer-subscribe-links a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.footer-subscribe-links a:hover { text-decoration: underline; }
+.footer-subscribe-links span { color: var(--text-m); }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.footer-links a { color: var(--text-p); text-decoration: none; font-weight: 600; }
+.footer-links a:hover { color: var(--accent); }
 .footer-stats {
   margin-top: 10px;
   display: flex;

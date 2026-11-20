@@ -213,7 +213,9 @@ function getSummary(item: any): string {
 </style>
 
 <div class="page-wrap">
-  <div class="page-head">
+  <div class="shell">
+    <SiteNav active="hot" today={today} />
+    <div class="page-head">
       <Header mode="hot" date={date} totalItems={hotItems.length} today={today} />
       <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 热点榜</h1>
       <div class="stats-bar">
@@ -223,9 +225,7 @@ function getSummary(item: any): string {
         <div class="stats-bar-divider"></div>
         <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
       </div>
-  </div>
-  <div class="shell">
-    <SiteNav active="hot" today={today} />
+    </div>
     <div class="shell-main">
       <div class="hot-list">
         {sortedItems.slice(0, 10).map((item: any, idx: number) => {

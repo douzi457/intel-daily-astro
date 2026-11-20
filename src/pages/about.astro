@@ -1,0 +1,51 @@
+---
+// 关于本站：编辑与评分说明、纠错反馈（v5，2026-11-20 新建）
+// 静态页，不依赖管线数据。
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { getAllDates } from '../utils/data.ts';
+
+const dates = getAllDates('zh');
+---
+
+<BaseLayout title="关于本站 · 豆子实验室" description="豆子实验室 · 每日情报的编辑与评分说明：分数怎么来的、摘要怎么写、哪里可能出错、怎么纠错。">
+<style>
+  .about-page h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; color: var(--text-h); letter-spacing: -0.02em; margin-bottom: 8px; }
+  .about-page .sub { font-size: 15px; color: var(--text-p); margin-bottom: 24px; line-height: 1.65; }
+  .about-page h2 { font-size: 18px; font-weight: 800; color: var(--text-h); margin: 28px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .about-page p, .about-page li { font-size: 15px; color: var(--text-p); line-height: 1.65; }
+  .about-page p { margin-bottom: 10px; }
+  .about-page ul { padding-left: 20px; margin-bottom: 10px; }
+  .about-page li { margin-bottom: 6px; }
+  .about-page code { font-family: var(--font-mono); font-size: 13px; background: var(--bg-hover); padding: 1px 5px; border-radius: 4px; }
+</style>
+
+<div class="page">
+  <div class="shell shell--flush">
+    <SiteNav active="none" today={dates[0]} />
+    <div class="shell-main about-page">
+      <h1>关于本站</h1>
+      <p class="sub">豆子实验室 · 每日情报：每天自动采集 AI 与科技资讯，精选值得先读的几件，带来源、可核对。定位是「把 AI 讲成人话」。</p>
+
+      <h2 id="scoring">编辑与评分说明</h2>
+      <p>站内分数是「值得读」的排序依据，不是「准确率」。高分只代表这条更值得先读，不代表它更可信。</p>
+      <ul>
+        <li><b>AI 评分（ai_score，0–10，五轴加权）</b>：按实质份量、信息增量、证据强度、共振面、可用性五轴打分，再按内容类型加权。只对有 AI 摘要的条目打分；大事 9.0–9.8，重要新能力 7.5–8.9，一般资讯 6.5–7.4，水文才低于 6.5。9.5 分以上只给当天最重磅的一两条。</li>
+        <li><b>事实状态与价值评分是两回事</b>：「官方发布」「多源印证」必须有对应来源；只有单一报道时写「据某来源报道」；尚未核实的明确标记。没有实际人工核验，不写「已核实」或「人工精选」。</li>
+        <li><b>摘要由 AI 参与撰写</b>，要求说清楚「谁做了什么、有什么变化」；关注理由写明「对谁有什么具体影响」，不套万能句。重大消息进精选前，会核对原文标题、正文、时间和一手出处；只能拿到标题、或正文混入噪声的，降级展示。</li>
+        <li><b>事件数 vs 报道数</b>：同一事件的多篇报道归在一起算一个事件；「事件数」是去重后的事件个数，「报道数」是原始报道条数。数家转载同一篇报道不算独立印证。</li>
+        <li><b>时间</b>：条目区分原文发布时间与本站收录时间；不知道的值省略或注明未知，不拿采集时间充当新闻发布时间。</li>
+      </ul>
+
+      <h2 id="feedback">纠错反馈</h2>
+      <p>站内内容由自动采集 + AI 摘要生成，难免出错。发现事实错误、来源不对、时间有误，请通过公众号「豆子实验室」留言，写明日期和条目标题，我们核实后更正，并在原处注明更正时间。</p>
+      <p>更正记录：每次更正都会保留原文与更正说明，不悄悄改写。</p>
+
+      <h2 id="privacy">数据与隐私</h2>
+      <p>收藏只保存在当前浏览器（localStorage），不注册、不跨设备同步，清空浏览器数据会丢失。搜索只在本地索引里匹配，不上传搜索词。</p>
+    </div>
+  </div>
+  <Footer />
+</div>
+</BaseLayout>

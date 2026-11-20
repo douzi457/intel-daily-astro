@@ -61,17 +61,17 @@ const SOURCE_LABELS: Record<string, { label: string; icon: string }> = {
 };
 ---
 
-<BaseLayout title="📊 统计面板 · 豆子实验室">
+<BaseLayout title="统计面板 · 豆子实验室">
 
 <div class="page">
 
-  <Header mode="stats" />
   <div class="shell shell--flush">
     <SiteNav active="stats" today={new Date().toISOString().slice(0, 10)} />
+    <Header mode="stats" />
     <div class="shell-main">
 
   <div style="margin-bottom:40px;">
-    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">📊 统计面板</h1>
+    <h1 style="font-size:1.4em;font-weight:800;color:var(--text-h);display:flex;align-items:center;gap:8px;">统计面板</h1>
     <p style="font-size:0.82em;color:var(--text-m);margin-top:6px;">{totalItems.toLocaleString()} 条情报 · {dateCount} 天数据</p>
   </div>
 

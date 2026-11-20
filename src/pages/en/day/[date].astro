@@ -63,7 +63,6 @@ const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
   nextUrl={nextUrl}
 >
 <div class="page">
-  <Header mode="en-day" date={date} totalItems={totalItems} lang="en" />
 
   <div class="day-nav">
     {prevDay ? <a href={`/en/day/${prevDay}`} class="day-nav-link">← {prevDay}</a> : <span class="day-nav-spacer"></span>}
@@ -76,6 +75,7 @@ const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
 
 <div class="shell">
   <SiteNav lang="en" active="day" today={date} />
+  <Header mode="en-day" date={date} totalItems={totalItems} lang="en" />
   <div class="shell-main">
   <div class="content-grid">
     <div class="main-content">

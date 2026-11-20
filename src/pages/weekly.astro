@@ -67,7 +67,7 @@ const weeks = [...weeksMap.values()]
   .sort((a, b) => b.monday.localeCompare(a.monday));
 ---
 
-<BaseLayout title="🗓️ 周报 · 豆子实验室" description="豆子实验室每周情报汇总：每周条数、每天入口、当周最重要的 5 条。">
+<BaseLayout title="周报 · 豆子实验室" description="豆子实验室每周情报汇总：每周条数、每天入口、当周最重要的 5 条。">
 <style>
   .weekly-page h1 { font-size: 1.3em; font-weight: 800; color: var(--text-h); }
   .weekly-page .sub { font-size: 0.82em; color: var(--text-m); margin-top: 6px; }
@@ -89,11 +89,11 @@ const weeks = [...weeksMap.values()]
 </style>
 
 <div class="page">
-  <Header mode="archive" />
   <div class="shell shell--flush">
-    <SiteNav active="none" today={dates[0]} />
+    <SiteNav active="weekly" today={dates[0]} />
+    <Header mode="archive" />
     <div class="shell-main weekly-page">
-      <h1>🗓️ 周报</h1>
+      <h1>周报</h1>
       <p class="sub">按周汇总：每周收了多少条、每天入口、当周展示分最高的 5 条。点标题跳到当天日报的对应条目。</p>
       {weeks.map((w) => (
         <section class="week-block">

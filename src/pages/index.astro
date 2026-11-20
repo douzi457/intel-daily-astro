@@ -1,9 +1,9 @@
 ---
-// 首页 — Astryx v2（2026-11-10）：按 Astryx neutral 主题整套布局与配色，不再用 AIHOT 样式，见下方 <style> 注释
+// 首页（v5，2026-11-20）：纸刊式情报台——先给判断，再给完整情报。
+// H1「今日 AI 与科技情报」+ 一句用途；精选 5 个不同事件（topic 去重，宁缺毋滥）；
+// 更多情报默认不重复精选事件；右栏只留「值得追踪」与往期回看，日历在归档。
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import CalendarWidget from '../components/CalendarWidget.astro';
 import LayoutShell from '../components/LayoutShell.astro';
 import SiteNav from '../components/SiteNav.astro';
 import { getDayData, getAllDates } from '../utils/data.ts';
@@ -24,12 +24,6 @@ const allDates = getAllDates('zh');
 const today = allDates.length > 0 ? allDates[0] : new Date().toISOString().slice(0, 10);
 const dayData = getDayData(today, 'zh');
 const items: IntelItem[] = dayData.items;
-// 今日情报统一用 v4 的 total_items（更准确）
-// v4.1：顶栏与统计条的“今日情报”与时间线用同一个数（当日已渲染列表），
-// 不再用 v4 总数，避免 899 与 830 打架；列表为空时才回落到 v4 总数。
-// v4.7：当日已渲染列表 = 当日 dated 组（文件可能含跨日期溢出，
-// items.length 是文件总数，曾导致顶栏 899 与“查看今日全部”830 打架）。
-// totalItems 在 groupedByDate 建好后定义（见下）。
 const recentDates = allDates.slice(0, 10);
 
 const groupedByDate = new Map<string, IntelItem[]>();
@@ -40,8 +34,7 @@ for (const item of items) {
 }
 const sortedDates = [...groupedByDate.keys()].sort().reverse();
 
-// v4.7：顶栏/统计条与“查看今日全部”用同一个数——当日 dated 组；
-// 组为空时才回落文件数，再回落 v4 总数。
+// v4.7 口径：顶栏与“查看今日全部”用当日 dated 组；组为空才回落文件数，再回落 v4 总数。
 const totalItems = groupedByDate.get(today)?.length || items.length || v4Data?.total_items || 0;
 
 // 展示分（v4，2026-11-14）：有 ai_score 就用它——它是 80 条有摘要条目上
@@ -52,7 +45,7 @@ function displayScore(it: any): number {
   return (typeof a === 'number' && !isNaN(a)) ? a : (it.score || 0);
 }
 
-// 高价值数与热点榜统一口径：展示分 >= 7 的条目数
+// 高价值数：展示分 >= 7 的条目数
 let highScoreCount = 0;
 if (v4Data?.by_category) {
   for (const cat of Object.values(v4Data.by_category)) {
@@ -72,12 +65,12 @@ function fmtHM(iso?: string): string {
   } catch { return ''; }
 }
 
-// 右栏热词 Top5（复用新词榜同一数据文件）
+// 右栏热词 Top3（复用新词榜同一数据文件）
 let hotTerms: any[] = [];
 try {
   const nt = await import('../data/v4/new-terms-latest.json');
   const ts: any[] = (nt as any).default?.terms || [];
-  hotTerms = [...ts].sort((a, b) => (b.max_score || 0) - (a.max_score || 0)).slice(0, 5);
+  hotTerms = [...ts].sort((a, b) => (b.max_score || 0) - (a.max_score || 0)).slice(0, 3);
 } catch {}
 
 const v4Date = v4Data?.date || today;
@@ -86,98 +79,110 @@ const m = parseInt(v4Date.slice(5,7)).toString();
 const d = parseInt(v4Date.slice(8,10)).toString();
 const displayDate = `${y}年${m}月${d}日`;
 
-function gradeBadge(score: number): string {
-  if (score >= 8) return 'elite';
-  if (score >= 6) return 'high';
-  return 'normal';
+// 日报日期 vs 最近成功更新：generated_at 是管线写的北京时间，直接取 HH:MM，不做时区换算
+const updatedHM = (v4Data as any)?.generated_at ? String((v4Data as any).generated_at).slice(11, 16) : '';
+// 构建时的北京时间日期（构建机是 UTC，用 Asia/Shanghai 换算）
+const nowBeijing = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' });
+const isStale = v4Date !== nowBeijing;
+
+// 事件数 vs 报道数：同一 topic 算一个事件，无 topic 的条目各算一个事件
+const todayItems = groupedByDate.get(today) || items;
+const topicSet = new Set(todayItems.map(i => ((i as any).topic || '').trim()).filter(Boolean));
+const eventCount = topicSet.size + todayItems.filter(i => !((i as any).topic || '').trim()).length;
+
+// 精选 5 个不同事件：按展示分排，同一 topic 只留最高分，无 topic 的各算一个事件
+const urlToId = new Map<string, number>();
+for (const it of items) {
+  if (it.url && typeof (it as any).id === 'number') urlToId.set(it.url, (it as any).id);
 }
-function gradeLabel(score: number): string {
-  if (score >= 8) return '高价值';
-  if (score >= 6) return '中价值';
-  return '普通';
+function dayAnchor(it: any): string {
+  const id = urlToId.get(it.url);
+  return id ? `/day/${v4Date}/#entry-${id}` : `/day/${v4Date}/`;
 }
-function reasonText(score: number): string {
-  return '';
+const featuredPool: any[] = [];
+if (v4Data?.by_category) {
+  for (const cat of Object.values(v4Data.by_category)) {
+    for (const it of (cat as any[])) {
+      if (it.ai_summary && String(it.ai_summary).trim()) featuredPool.push(it);
+    }
+  }
 }
+featuredPool.sort((a, b) => (displayScore(b) - displayScore(a)) || ((b.score || 0) - (a.score || 0)));
+const seenTopics = new Set<string>();
+const topFeatured: any[] = [];
+for (const it of featuredPool) {
+  const tp = String(it.topic || '').trim();
+  if (tp && seenTopics.has(tp)) continue;
+  if (tp) seenTopics.add(tp);
+  topFeatured.push(it);
+  if (topFeatured.length >= 5) break;
+}
+const featuredUrls = new Set(topFeatured.map(it => it.url));
 ---
 
-<BaseLayout title={`${displayDate} AI/科技情报`} description={`${displayDate} 全球科技资讯聚合，AI智能评分精选`} lang="zh-CN" ogImage="/og/today.png">
+<BaseLayout title="今日 AI 与科技情报 · 豆子实验室 · 每日情报" description="看清今天的关键变化，找到值得追踪的线索。每日精选 AI 与科技情报，带来源、可核对。" lang="zh-CN" ogImage="/og/today.png">
 <style>
   /* token 见 src/styles/tokens.css（全站唯一来源） */
-  body { background: var(--bg); color: var(--ink); font-family: 'Geist Sans', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Geist Sans', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .page-wrap { max-width: 100%; margin: 0; padding: 0; }
-  .stats-bar { display: flex; align-items: center; justify-content: center; gap: 0; padding: var(--spacing-4) var(--spacing-5); margin: var(--spacing-5) 0 28px; background: var(--color-background-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); font-size: 13px; }
-  .stats-bar-item { text-align: center; padding: 0 var(--spacing-6); }
-  .stats-bar-value { display: block; font-family: var(--font-mono); font-size: 1.3em; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .stats-bar-label { display: block; font-size: 0.85em; color: var(--ink-3); margin-top: 2px; }
-  .stats-bar-item.highlight .stats-bar-value { color: var(--accent); }
-  .stats-bar-divider { width: 1px; height: 28px; background: var(--border); }
-  .timeline-wrap { display: flex; flex-direction: column; gap: var(--spacing-8); }
-  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--spacing-4); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); }
+  /* 标题区：紧凑，不做占半屏的宣传横幅 */
+  .title-block { padding: var(--spacing-6) 0 var(--spacing-4); border-bottom: 1px solid var(--line); margin-bottom: var(--spacing-4); }
+  .title-block h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; color: var(--text-h); letter-spacing: var(--letter-spacing-tight); line-height: 1.25; }
+  .title-block .subtitle { font-size: 15px; color: var(--text-p); margin-top: 8px; line-height: 1.65; }
+  .title-block .dateline { font-size: 13px; color: var(--text-m); margin-top: 12px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .title-block .stats-line { font-size: 13px; color: var(--text-m); margin-top: 4px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .stale-notice { margin-top: 12px; padding: 10px 12px; border: 1px solid var(--border); border-left: 3px solid var(--color-warn); border-radius: var(--radius-md); background: var(--bg-card); font-size: 13px; color: var(--text-p); }
+  /* 节标题 */
+  .section-title { font-size: 18px; font-weight: 800; color: var(--color-text-primary); margin: var(--spacing-6) 0 var(--spacing-4); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); letter-spacing: var(--letter-spacing-tight); }
+  .section-title .section-count { font-size: 13px; font-weight: 400; color: var(--color-text-secondary); margin-left: var(--spacing-2); font-family: var(--font-mono); }
+  /* 精选：主卡（浅绿底 + 细绿边，只给当天主卡） */
+  .featured-hero { background: var(--accent-soft); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-lg); padding: var(--spacing-5); margin-bottom: var(--spacing-4); }
+  .featured-tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .featured-hero h2 { font-size: clamp(22px, 3vw, 26px); font-weight: 800; line-height: 1.35; letter-spacing: var(--letter-spacing-tight); margin-bottom: 10px; }
+  .featured-hero h2 a { color: var(--color-text-primary); text-decoration: none; }
+  .featured-hero h2 a:hover { color: var(--accent); }
+  .featured-summary { font-size: 15px; color: var(--text-p); line-height: 1.65; margin-bottom: 10px; }
+  .featured-reason { font-size: 14px; color: var(--ink-2); line-height: 1.65; margin-bottom: 12px; }
+  .featured-reason b { color: var(--ink-4); font-weight: 700; }
+  .featured-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--ink-4); }
+  .featured-meta .featured-time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .featured-meta .featured-score { font-family: var(--font-mono); font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .featured-meta a.ext-link { color: var(--accent); text-decoration: none; font-weight: 600; white-space: nowrap; }
+  .featured-meta a.ext-link:hover { text-decoration: underline; }
+  /* 精选：2 张次卡 */
+  .featured-subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-4); margin-bottom: var(--spacing-4); }
+  .featured-sub { background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4); }
+  .featured-sub h3 { font-size: 17px; font-weight: 700; color: var(--color-text-primary); line-height: 1.4; letter-spacing: var(--letter-spacing-tight); margin-bottom: 8px; }
+  .featured-sub h3 a { color: inherit; text-decoration: none; }
+  .featured-sub h3 a:hover { color: var(--accent); }
+  .featured-sub .featured-summary { font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .featured-sub .featured-reason { font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  /* 精选：2 条紧凑精选 */
+  .featured-compact { list-style: none; margin: 0 0 var(--spacing-4); padding: 0; }
+  .featured-compact li { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .featured-compact li:last-child { border-bottom: none; }
+  .featured-compact .rank { font-family: var(--font-mono); font-size: 15px; font-weight: 800; color: var(--accent); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .featured-compact a.compact-title { font-size: 16px; font-weight: 600; color: var(--color-text-primary); text-decoration: none; line-height: 1.5; }
+  .featured-compact a.compact-title:hover { color: var(--accent); }
+  .featured-compact .compact-meta { font-size: 13px; color: var(--ink-4); white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  /* 更多情报：紧凑列表——标题 + 必要元信息，不为每条堆摘要、评分和标签 */
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--spacing-2); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); }
   .day-label { font-size: 11px; font-weight: 700; color: var(--ink-4); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
   .day-date { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); font-weight: 600; }
   .day-count { margin-left: auto; font-size: 11px; color: var(--color-text-tertiary); background: var(--paper); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1px var(--spacing-2); }
-  .entry { padding: var(--spacing-4) 0; border-bottom: 1px solid var(--line); }
+  .entry { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
   .entry:last-child { border-bottom: none; }
-  .entry:hover { background: var(--paper); margin: 0 calc(var(--spacing-2) * -1); padding-left: var(--spacing-2); padding-right: var(--spacing-2); border-radius: var(--radius-sm); }
-  .entry-meta { display: flex; align-items: center; gap: var(--spacing-1-5); flex-wrap: wrap; margin-bottom: var(--spacing-1-5); }
-  .entry-time { font-family: var(--font-mono); font-size: 11px; color: var(--ink-4); font-variant-numeric: tabular-nums; }
-  .entry-sep { color: var(--ink-4); font-size: 11px; }
-  .entry-source { font-size: 11px; color: var(--ink-3); font-weight: 500; }
-  /* Astryx Badge：两类徽章统一为同一高度/内边距/圆角，只换颜色 */
-  .grade-pill { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; border: 1px solid transparent; }
-  /* v4：标签色收敛——只有高价值用暖橙，其余走中性灰；评分数字走等宽字体 */
-  .grade-elite { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
-  .grade-high { background: var(--paper); color: var(--ink-3); border-color: var(--color-border); }
-  .grade-normal { background: transparent; color: var(--ink-4); border-color: var(--color-border); }
-  .entry-title { font-size: var(--text-base); font-weight: 500; color: var(--color-text-primary); line-height: 1.5; letter-spacing: var(--letter-spacing-tight); margin-bottom: 7px; display: block; text-decoration: none; }
+  .entry-title { font-size: 16px; font-weight: 500; color: var(--color-text-primary); line-height: 1.5; letter-spacing: var(--letter-spacing-tight); text-decoration: none; flex: 1; min-width: 0; }
   .entry-title:hover { color: var(--accent); }
-  .entry-summary { font-size: 13px; color: var(--ink-3); line-height: 1.6; margin-bottom: 7px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .entry-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; padding-left: 10px; border-left: 2px solid var(--border); }
-  .entry-reason-label { font-weight: 700; color: var(--ink-4); margin-right: 4px; }
-  .ai-score-badge { display: inline-flex; align-items: center; padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); font-size: 10px; font-weight: 700; font-family: var(--font-mono); font-variant-numeric: tabular-nums; border: 1px solid var(--color-border); background: transparent; color: var(--ink-3); margin-left: var(--spacing-1); }
+  .entry-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; font-size: 13px; color: var(--ink-4); font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .entry-source { font-family: var(--font-sans); }
   .back-to-top { position: fixed; bottom: var(--spacing-8); right: var(--spacing-8); width: 44px; height: 44px; border-radius: var(--radius-lg); border: 1px solid var(--color-border); background: var(--color-background-surface); color: var(--color-text-secondary); font-size: 1.2em; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.2s; z-index: 200; box-shadow: var(--shadow-md); }
   .back-to-top.visible { opacity: 1; transform: translateY(0); }
   .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
-  /* 精选区样式 */
-  .featured-title { font-size: 1.1em; font-weight: 700; color: var(--color-text-primary); margin: var(--spacing-6) 0 var(--spacing-3); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); letter-spacing: var(--letter-spacing-tight); }
-  .featured-count { font-size: 0.85em; font-weight: 400; color: var(--color-text-secondary); margin-left: var(--spacing-2); }
-  .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--spacing-4); margin-bottom: var(--spacing-6); }
-  .featured-card { background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4); transition: border-color 0.15s; }
-  .featured-card:hover { border-color: var(--ink-4); }
-  /* v4.8：精选卡按展示分加一个视觉维度（只改渲染层；数据接口、排序、取 8 条不动） */
-  /* 尺寸：头名卡在宽屏占两列；颜色：分数越高，强调色越实（条更粗，elite 卡带暖橙底 tint） */
-  .featured-card.featured-hero { grid-column: span 2; }
-  .featured-card.featured-hero h3 { font-size: var(--text-base); }
-  .featured-card.featured-elite { background: var(--accent-soft); }
-  .featured-card.featured-elite .featured-score-bar { height: 6px; }
-  .featured-card.featured-elite .featured-score-bar span { background: var(--accent-gradient); }
-  .featured-card.featured-high .featured-score-bar { height: 4px; }
-  @media (max-width: 640px) {
-    .featured-card.featured-hero { grid-column: auto; }
-    .featured-card.featured-hero h3 { font-size: var(--text-sm); }
-  }
-  .featured-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .featured-rank { font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
-  .featured-score { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-  .featured-score-num { font-family: var(--font-mono); font-size: 15px; font-weight: 800; color: var(--color-text-primary); font-variant-numeric: tabular-nums; line-height: 1; }
-  .featured-score-bar { display: block; width: 64px; height: 3px; border-radius: 9999px; background: var(--color-border); overflow: hidden; }
-  .featured-score-bar span { display: block; height: 100%; background: var(--accent); border-radius: 9999px; }
-  .featured-card h3 { font-size: var(--text-sm); font-weight: 700; color: var(--color-text-primary); line-height: 1.4; letter-spacing: var(--letter-spacing-tight); margin: var(--spacing-1-5) 0; }
-  .featured-card h3 a { color: inherit; text-decoration: none; }
-  .featured-card h3 a:hover { color: var(--accent); }
-  .featured-summary { font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .featured-reason { font-size: 12px; color: var(--ink-2); line-height: 1.55; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
-  .featured-reason.expanded { display: block; }
-  .featured-reason::before { content: '推荐理由：'; font-weight: 700; color: var(--ink-4); }
-  .featured-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 11px; color: var(--ink-4); }
-  .featured-meta .featured-time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  /* 情报流标题：精选与流明确分离 */
-  .stream-title { font-size: 1.1em; font-weight: 700; color: var(--color-text-primary); margin: var(--spacing-6) 0 var(--spacing-3); padding-bottom: var(--spacing-2); border-bottom: 1px solid var(--line); letter-spacing: var(--letter-spacing-tight); }
-  /* 首页搜索：只搜今日已渲染的 30 条（标题 / 摘要 / 来源），不搜全库 */
+  /* 首页搜索：只搜今日已加载条目，不搜全库；与分类筛选叠加生效 */
   .search-row { display: flex; align-items: center; gap: 10px; margin: var(--spacing-4) 0 0; }
-  .search-row input[type="search"] { flex: 1; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-background-surface); color: var(--color-text-primary); font-size: 13px; }
+  .search-row input[type="search"] { flex: 1; min-width: 0; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-background-surface); color: var(--color-text-primary); font-size: 13px; }
   .search-row input[type="search"]::placeholder { color: var(--ink-4); }
   .search-count { font-size: 12px; color: var(--ink-4); white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
   .search-all-link { font-size: 12px; color: var(--accent); white-space: nowrap; align-self: center; text-decoration: none; }
@@ -196,50 +201,40 @@ function reasonText(score: number): string {
     body.rail-collapsed .rail-expand { display: block; }
   }
   /* 分类筛选 */
-  /* Astryx Tabs（v3）：分类是一排文字标签，不是药丸；当前项只用一条强调色下划线，不再用灰底整条 */
   .cat-filter { display: flex; gap: var(--spacing-1); margin: var(--spacing-4) 0 var(--spacing-5); padding: 0; background: transparent; border-bottom: 1px solid var(--color-border); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 48px), transparent 100%); mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 48px), transparent 100%); }
   .cat-filter.at-end { -webkit-mask-image: none; mask-image: none; }
   .cat-filter::-webkit-scrollbar { display: none; }
   .cat-pill { flex-shrink: 0; height: var(--size-element-lg); padding: 0 var(--spacing-3); border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 0; background: transparent; color: var(--color-text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
   .cat-pill.active { background: transparent; color: var(--color-accent); border-bottom-color: var(--color-accent); box-shadow: none; }
   .cat-pill:hover { color: var(--color-text-primary); }
-  .cat-pill.active { background: transparent; color: var(--color-accent); border-bottom-color: var(--color-accent); box-shadow: none; }
-  /* 展开来源 */
-  .src-expand { display: inline; font-size: 11px; }
-  .src-expand summary { cursor: pointer; color: var(--accent); list-style: none; }
-  .src-expand summary::-webkit-details-marker { display: none; }
-  .src-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-  .src-item { padding: var(--spacing-0-5) var(--spacing-2); border-radius: var(--radius-xs); background: var(--accent-soft); color: var(--color-accent); font-size: 10px; }
+  .rail-terms a.rail-term { color: var(--ink); text-decoration: none; }
+  .rail-terms a.rail-term:hover { color: var(--accent); }
   .hidden { display: none !important; }
   @media (max-width: 640px) {
-    .page-wrap { padding: 0 14px 40px; }
-    .stats-bar { padding: 10px 12px; }
-    .stats-bar-item { padding: 0 12px; }
-    .stats-bar-value { font-size: 1.1em; }
-    .entry-title { font-size: 15px; }
-    .entry-summary { font-size: 12px; -webkit-line-clamp: 2; }
+    .page-wrap { padding: 0 0 40px; }
+    .featured-subgrid { grid-template-columns: 1fr; }
+    .featured-compact .compact-meta { display: none; }
+    .entry { flex-wrap: wrap; gap: 4px; }
+    .entry-title { font-size: 15px; flex-basis: 100%; }
     .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
   }
 </style>
 
 <div class="page-wrap">
-  <div class="page-head">
-      <Header mode="home" date={v4Date} totalItems={totalItems} today={today} />
-      <h1 style={{fontSize:'1.05em',fontWeight:700,color:'var(--ink)',margin:'16px 0',letterSpacing:'-.3px'}}>{displayDate} · 情报日报</h1>
-      <div class="stats-bar">
-        <div class="stats-bar-item"><span class="stats-bar-value">{totalItems}</span><span class="stats-bar-label">今日情报</span></div>
-        <div class="stats-bar-divider"></div>
-        <div class="stats-bar-item"><span class="stats-bar-value">{v4Data?.total_sources || recentDates.length}</span><span class="stats-bar-label">采集源</span></div>
-        <div class="stats-bar-divider"></div>
-        <div class="stats-bar-item highlight"><span class="stats-bar-value">{highScoreCount}</span><span class="stats-bar-label">高价值信号</span></div>
-      </div>
-  </div>
   <div class="shell">
     <SiteNav active="home" today={today} />
     <div class="shell-main">
-      {/* 首页搜索：只搜今日已渲染的 30 条，不搜全库；与分类筛选叠加生效 */}
+      <div class="title-block">
+        <h1>今日 AI 与科技情报</h1>
+        <p class="subtitle">看清今天的关键变化，找到值得追踪的线索</p>
+        <p class="dateline">{displayDate} · 日报 {v4Date}{updatedHM && ` · 最近成功更新 ${updatedHM}`}</p>
+        {isStale && <p class="stale-notice">今日尚未更新，以下为 {v4Date} 日报。</p>}
+        <p class="stats-line">今日情报 {totalItems} 条（{eventCount} 个事件） · {v4Data?.total_sources || '—'} 个来源 · 高价值信号 {highScoreCount} 个</p>
+      </div>
+
+      {/* 首页搜索：只搜今日已加载条目，不搜全库；与分类筛选叠加生效 */}
       <div class="search-row">
-        <input type="search" id="homeSearch" placeholder="搜索今日 30 条（标题 / 摘要 / 来源）" aria-label="搜索今日情报" autocomplete="off" />
+        <input type="search" id="homeSearch" placeholder="仅搜今日已加载条目（标题 / 摘要 / 来源）" aria-label="搜索今日情报" autocomplete="off" />
         <span class="search-count" id="searchCount"></span>
         <a class="search-all-link" href="/search/">搜全站 →</a>
       </div>
@@ -275,57 +270,73 @@ function reasonText(score: number): string {
         }
       </script>
 
-      {(() => {
-        const featuredItems: any[] = [];
-        if (v4Data?.by_category) {
-          for (const cat of Object.values(v4Data.by_category)) {
-            for (const it of (cat as any[])) {
-              if (it.ai_summary && String(it.ai_summary).trim()) {
-                featuredItems.push(it);
-              }
-            }
-          }
-        }
-        // v4：精选按展示分（ai_score 优先）排，取 8 条，宁缺毋滥；
-        // 原来按 score 排，前 21 条全是 10.0，并列顺序等于分类遍历顺序，是假的排序。
-        featuredItems.sort((a, b) => (displayScore(b) - displayScore(a)) || ((b.score || 0) - (a.score || 0)));
-        const topFeatured = featuredItems.slice(0, 8);
-        
-        if (topFeatured.length === 0) return null;
-        
-        return (
-          <>
-            <h2 class="featured-title">今日精选 <span class="featured-count">{topFeatured.length}</span></h2>
-            <div class="featured-grid">
-              {topFeatured.map((item: any, i: number) => {
+      {topFeatured.length > 0 && (
+        <>
+          <h2 class="section-title">今日精选 <span class="section-count">{topFeatured.length} 个事件</span></h2>
+          {(() => {
+            const hero = topFeatured[0];
+            const hs = displayScore(hero);
+            const hAnchor = dayAnchor(hero);
+            return (
+              <article class="featured-hero">
+                {(hero.topic || hero.content_type_label) && <span class="featured-tag">{hero.topic || hero.content_type_label}</span>}
+                <h2><a href={hAnchor}>{hero.ai_title || hero.title}</a></h2>
+                <p class="featured-summary">{hero.ai_summary}</p>
+                {hero.ai_reason && (<p class="featured-reason"><b>为什么值得关注：</b>{hero.ai_reason}</p>)}
+                <div class="featured-meta">
+                  <span>{hero.source}</span>
+                  {fmtHM(hero.published_at) && <span class="featured-time">{fmtHM(hero.published_at)}</span>}
+                  {(hero.source_count || 0) > 1 && <span>{hero.source_count} 家报道</span>}
+                  <span class="featured-score">{hs.toFixed(1)}</span>
+                  <a class="ext-link" href={hero.url} target="_blank" rel="noopener">查看原文 ↗</a>
+                  <button class="fav-btn" type="button" data-fav-id={`${v4Date}:${urlToId.get(hero.url) || hero.url}`} data-fav-title={hero.ai_title || hero.title} data-fav-date={v4Date} data-fav-url={hAnchor} data-fav-score={hs} aria-label="收藏">☆</button>
+                </div>
+              </article>
+            );
+          })()}
+          {topFeatured.length > 1 && (
+            <div class="featured-subgrid">
+              {topFeatured.slice(1, 3).map((item: any, i: number) => {
                 const s = displayScore(item);
-                const barW = Math.min(Math.max(s / 10, 0), 1) * 100;
+                const anchor = dayAnchor(item);
                 return (
-                <article class={`featured-card${i === 0 ? ' featured-hero' : ''}${s >= 8 ? ' featured-elite' : s >= 6 ? ' featured-high' : ''}`} key={i}>
-                  <div class="featured-top">
-                    <span class="featured-rank">{i + 1}</span>
-                    <span class="featured-score" title="AI 评分 ai_score（0–10，五轴加权）">
-                      <span class="featured-score-num">{s.toFixed(1)}</span>
-                      <span class="featured-score-bar"><span style={{width: `${barW}%`}}></span></span>
-                    </span>
-                  </div>
-                  <h3><a href={item.url} target="_blank" rel="noopener">{item.ai_title || item.title}</a></h3>
-                  <p class="featured-summary">{item.ai_summary}</p>
-                  {item.ai_reason && (<p class="featured-reason" title="点击展开 / 收起">{item.ai_reason}</p>)}
-                  <div class="featured-meta">
-                    <span>{item.source}</span>
-                    {fmtHM((item as any).published_at) && <span class="featured-time">{fmtHM((item as any).published_at)}</span>}
-                    {(item.source_count || 0) > 1 && <span>📰 {item.source_count}家报道</span>}
-                  </div>
-                </article>
+                  <article class="featured-sub" key={i}>
+                    {(item.topic || item.content_type_label) && <span class="featured-tag">{item.topic || item.content_type_label}</span>}
+                    <h3><a href={anchor}>{item.ai_title || item.title}</a></h3>
+                    <p class="featured-summary">{item.ai_summary}</p>
+                    {item.ai_reason && (<p class="featured-reason"><b>为什么值得关注：</b>{item.ai_reason}</p>)}
+                    <div class="featured-meta">
+                      <span>{item.source}</span>
+                      {fmtHM(item.published_at) && <span class="featured-time">{fmtHM(item.published_at)}</span>}
+                      {(item.source_count || 0) > 1 && <span>{item.source_count} 家报道</span>}
+                      <span class="featured-score">{s.toFixed(1)}</span>
+                      <a class="ext-link" href={item.url} target="_blank" rel="noopener">查看原文 ↗</a>
+                      <button class="fav-btn" type="button" data-fav-id={`${v4Date}:${urlToId.get(item.url) || item.url}`} data-fav-title={item.ai_title || item.title} data-fav-date={v4Date} data-fav-url={anchor} data-fav-score={s} aria-label="收藏">☆</button>
+                    </div>
+                  </article>
                 );
               })}
             </div>
-          </>
-        );
-      })()}
+          )}
+          {topFeatured.length > 3 && (
+            <ol class="featured-compact">
+              {topFeatured.slice(3, 5).map((item: any, i: number) => {
+                const s = displayScore(item);
+                return (
+                  <li key={i}>
+                    <span class="rank">{i + 4}</span>
+                    <a class="compact-title" href={dayAnchor(item)}>{item.ai_title || item.title}</a>
+                    <span class="compact-meta">{item.source}{fmtHM(item.published_at) ? ` · ${fmtHM(item.published_at)}` : ''} · {s.toFixed(1)}</span>
+                  </li>
+                );
+              })}
+            </ol>
+          )}
+          <a class="more-link" href={`/day/${v4Date}/`}>查看完整日报 →</a>
+        </>
+      )}
 
-      <h2 class="stream-title">今日情报流</h2>
+      <h2 class="section-title">更多情报</h2>
       <div class="timeline-wrap">
         {sortedDates.map(dateStr => {
           const dayItems = groupedByDate.get(dateStr) || [];
@@ -333,74 +344,63 @@ function reasonText(score: number): string {
           if (dateStr !== today) return null;
           const dy = dateStr.slice(0,4), dm = dateStr.slice(5,7), dd = dateStr.slice(8,10);
           const dayLabel = dateStr === today ? '今天' : `${dm}月${dd}日`;
+          // 更多情报默认不重复精选事件
+          const rest = sorted.filter(it => !featuredUrls.has(it.url));
           return (
             <section>
               <div class="day-header">
                 <span class="day-label">{dayLabel}</span>
                 <span class="day-date">{dy}-{dm}-{dd}</span>
-                <span class="day-count">{sorted.length} 条</span>
+                <span class="day-count">{rest.length} 条</span>
               </div>
-              {sorted.slice(0, 30).map(item => {
-                const ds = displayScore(item);
-                const g = gradeBadge(ds), gLabel = gradeLabel(ds);
+              {rest.slice(0, 30).map(item => {
                 const timeStr = fmtHM((item as any).published_at);
                 const platform = item.platform_label || item.source || '';
-                const summary = item.ai_summary || item.desc || item.title;
                 const displayTitle = item.ai_title || item.title;
-                const reason = item.ai_reason || '';
                 return (
                   <article class="entry entry-item" id={`entry-${item.id}`} data-category={item.category || '其他'}>
+                    <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
                     <div class="entry-meta">
                       {timeStr && <span class="entry-time">{timeStr}</span>}
-                      {timeStr && platform && <span class="entry-sep">·</span>}
                       {platform && <span class="entry-source">{platform}</span>}
-                      {(item as any).source_count > 1 ? (
-                        <details class="src-expand">
-                          <summary>📰 {(item as any).source_count}家报道</summary>
-                          <div class="src-list">
-                            {(item as any).sources?.map((s: string, si: number) => (
-                              <span class="src-item" key={si}>{s}</span>
-                            ))}
-                          </div>
-                        </details>
-                      ) : (item as any).source_count > 0 && (
-                        <span class="src-count">📰 {(item as any).source_count}家报道</span>
-                      )}
-                      <span class={`grade-pill grade-${g}`}>{gLabel}</span>
-                      
-                      {ds > 0 && <span class="ai-score-badge">AI 评分 {ds.toFixed(1)}</span>}
-                      <button class="fav-btn" type="button" data-fav-id={`${dateStr}:${item.id}`} data-fav-title={displayTitle} data-fav-date={dateStr} data-fav-url={`/day/${dateStr}/#entry-${item.id}`} data-fav-score={ds} aria-label="收藏">☆</button>
+                      {(item as any).source_count > 1 && <span>{(item as any).source_count} 家报道</span>}
+                      <button class="fav-btn" type="button" data-fav-id={`${dateStr}:${item.id}`} data-fav-title={displayTitle} data-fav-date={dateStr} data-fav-url={`/day/${dateStr}/#entry-${item.id}`} data-fav-score={displayScore(item)} aria-label="收藏">☆</button>
                     </div>
-                    <a href={item.url || '#'} target="_blank" rel="noopener" class="entry-title">{displayTitle}</a>
-                    {summary && summary.length > 10 && <p class="entry-summary">{summary.slice(0, 150)}{summary.length > 150 ? '…' : ''}</p>}
-                    {reason && (<div class="entry-reason"><span class="entry-reason-label">推荐理由：</span>{reason}</div>)}
                   </article>
                 );
               })}
-              {sorted.length > 30 && (<button class="load-more-btn" id="loadMoreBtn" type="button">加载更多（还剩 {sorted.length - 30} 条）</button>)}
-              {sorted.length > 30 && (<a class="more-link" href={`/day/${dateStr}/`}>查看今日全部 {sorted.length} 条 →</a>)}
+              {rest.length > 30 && (<button class="load-more-btn" id="loadMoreBtn" type="button">加载更多（还剩 {rest.length - 30} 条）</button>)}
+              {rest.length > 30 && (<a class="more-link" href={`/day/${dateStr}/`}>查看今日全部 {sorted.length} 条 →</a>)}
             </section>
           );
         })}
       </div>
     </div>
-    
+
     <aside class="shell-right">
       <button class="rail-toggle" id="railCollapse" aria-label="收起右侧栏">收起右侧栏 →</button>
-      {allDates.length > 0 && <section><CalendarWidget dates={allDates} basePath="/day/" locale="zh" /></section>}
       {hotTerms.length > 0 && (
         <section class="rail-card">
-          <div class="rail-title">🔎 今日新词 <a href="/new-terms/" class="rail-more">全部 →</a></div>
+          <div class="rail-title">值得追踪 <a href="/new-terms/" class="rail-more">全部 →</a></div>
           <ul class="rail-terms">
             {hotTerms.map((t: any) => (
-              <li><span class="rail-term">{t.term}</span><span class="rail-count">{t.today_count || 0} 篇</span></li>
+              <li><a class="rail-term" href={`/search/?q=${encodeURIComponent(t.term)}`}>{t.term}</a><span class="rail-count">今日 {t.today_count || 0} 篇 · 最高 {Number(t.max_score || 0).toFixed(1)}</span></li>
             ))}
           </ul>
         </section>
       )}
+      <section class="rail-card">
+        <div class="rail-title">往期回看</div>
+        <ul class="rail-terms">
+          {recentDates.slice(1, 4).map((dstr: string) => (
+            <li><a class="rail-term" href={`/day/${dstr}/`}>{dstr}</a><span class="rail-count">日报 →</span></li>
+          ))}
+        </ul>
+        <div style="margin-top: 10px;"><a href="/archive" class="rail-more">历史归档 →</a></div>
+      </section>
     </aside>
-  
-</div>
+
+  </div>
   <Footer />
 </div>
 <button class="rail-expand" id="railExpand" aria-label="展开右侧栏">← 展开</button>
@@ -411,7 +411,7 @@ function reasonText(score: number): string {
     window.addEventListener('scroll', () => { backBtn.classList.toggle('visible', window.scrollY > 300); });
     backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
-  // 首页搜索 + 分类叠加过滤：只动今日已渲染的 30 条
+  // 首页搜索 + 分类叠加过滤：只动今日已渲染的条目
   const searchInput = document.getElementById('homeSearch') as HTMLInputElement | null;
   const searchCount = document.getElementById('searchCount');
   const searchEmpty = document.getElementById('searchEmpty');
@@ -443,10 +443,6 @@ function reasonText(score: number): string {
   catFilter?.addEventListener('scroll', syncCatFade, { passive: true });
   window.addEventListener('resize', syncCatFade);
   syncCatFade();
-  // 精选推荐理由：默认一行，点击展开 / 收起
-  document.querySelectorAll('.featured-reason').forEach(el => {
-    el.addEventListener('click', () => el.classList.toggle('expanded'));
-  });
   // 加载更多：从构建时生成的当日余量 JSON 取下 30 条拼上去（与首页同排序：score 倒序）
   const loadMoreBtn = document.getElementById('loadMoreBtn') as HTMLButtonElement | null;
   let moreItems: any[] | null = null;
@@ -463,19 +459,10 @@ function reasonText(score: number): string {
     } catch { return ''; }
   }
   function moreEntryHtml(it: any, dateStr: string): string {
-    const ds = it.s || 0;
-    const g = ds >= 8 ? 'elite' : ds >= 6 ? 'high' : 'normal';
-    const gLabel = ds >= 8 ? '高价值' : ds >= 6 ? '中价值' : '普通';
+    // v5 紧凑列表：标题 + 必要元信息
     const timeStr = fmtHMClient(it.tm);
-    const srcs = (it.srcs || []).map((s: string) => `<span class="src-item">${escHtml(s)}</span>`).join('');
-    const srcHtml = it.sc > 1
-      ? `<details class="src-expand"><summary>📰 ${it.sc}家报道</summary><div class="src-list">${srcs}</div></details>`
-      : (it.sc > 0 ? `<span class="src-count">📰 ${it.sc}家报道</span>` : '');
-    const scoreHtml = ds > 0 ? `<span class="ai-score-badge">AI 评分 ${Number(ds).toFixed(1)}</span>` : '';
-    const sum = (it.sm || '').slice(0, 150);
-    const sumHtml = (it.sm || '').length > 10 ? `<p class="entry-summary">${escHtml(sum)}${(it.sm || '').length > 150 ? '…' : ''}</p>` : '';
-    const reasonHtml = it.r ? `<div class="entry-reason"><span class="entry-reason-label">推荐理由：</span>${escHtml(it.r)}</div>` : '';
-    return `<article class="entry entry-item" id="entry-${it.id}" data-category="${escHtml(it.c || '其他')}"><div class="entry-meta">${timeStr ? `<span class="entry-time">${timeStr}</span>` : ''}${timeStr && it.p ? '<span class="entry-sep">·</span>' : ''}${it.p ? `<span class="entry-source">${escHtml(it.p)}</span>` : ''}${srcHtml}<span class="grade-pill grade-${g}">${gLabel}</span>${scoreHtml}<button class="fav-btn" type="button" data-fav-id="${dateStr}:${it.id}" data-fav-title="${escHtml(it.t)}" data-fav-date="${dateStr}" data-fav-url="/day/${dateStr}/#entry-${it.id}" data-fav-score="${ds}" aria-label="收藏">☆</button></div><a href="${escHtml(it.u || '#')}" target="_blank" rel="noopener" class="entry-title">${escHtml(it.t)}</a>${sumHtml}${reasonHtml}</article>`;
+    const srcHtml = it.sc > 1 ? `<span>${it.sc} 家报道</span>` : '';
+    return `<article class="entry entry-item" id="entry-${it.id}" data-category="${escHtml(it.c || '其他')}"><a href="${escHtml(it.u || '#')}" target="_blank" rel="noopener" class="entry-title">${escHtml(it.t)}</a><div class="entry-meta">${timeStr ? `<span class="entry-time">${timeStr}</span>` : ''}${it.p ? `<span class="entry-source">${escHtml(it.p)}</span>` : ''}${srcHtml}<button class="fav-btn" type="button" data-fav-id="${dateStr}:${it.id}" data-fav-title="${escHtml(it.t)}" data-fav-date="${dateStr}" data-fav-url="/day/${dateStr}/#entry-${it.id}" data-fav-score="${it.s || 0}" aria-label="收藏">☆</button></div></article>`;
   }
   loadMoreBtn?.addEventListener('click', async () => {
     if (!loadMoreBtn) return;
@@ -524,5 +511,3 @@ function reasonText(score: number): string {
   });
 </script>
 </BaseLayout>
-
-
