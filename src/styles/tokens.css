@@ -30,6 +30,9 @@
   /* 状态色（语义色，不是品牌色）：黄只提示待核实，红只用于错误/警示 */
   --color-core: #176447; --color-watch: #92400e; --color-action: #6d28d9;
   --color-warn: #92400e; --color-danger: #b91c1c;
+  /* 信号金：只给 9.5+ 神级信号（主卡顶线、大号分数、徽章、OG 徽章），不用在大面积底色 */
+  --color-signal-gold: #b45309; --color-signal-gold-soft: #fdf3e3;
+  --color-signal-gold-text: #92400e;
   /* —— 纸刊语义 token —— */
   --color-background-body: var(--bg); --color-background-surface: var(--surface);
   --color-background-surface-2: #eef2ee; --color-background-card: var(--surface);
@@ -78,6 +81,8 @@
   --color-background-surface-2: #1e2b23;
   --color-core: #82d8aa; --color-watch: #f2b25c; --color-action: #a78bfa;
   --color-warn: #f2b25c; --color-danger: #f87171;
+  --color-signal-gold: #f2b25c; --color-signal-gold-soft: rgba(242,178,92,.14);
+  --color-signal-gold-text: #f2b25c;
   --color-on-accent: #17231c;
   /* 深色下阴影更克制，卡片主要靠 #304037 边框区分 */
   --shadow-xs: 0 1px 2px rgba(0,0,0,.5);

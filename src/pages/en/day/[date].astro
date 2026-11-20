@@ -52,6 +52,17 @@ const metaDesc = featured.length > 0
 const pageUrl = `${SITE.url}/en/day/${date}`;
 const prevUrl = prevDay ? `${SITE.url}/en/day/${prevDay}` : '';
 const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
+
+// Breadcrumb structured data (matches visible navigation: Home > Archive > Daily)
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Archive', item: `${SITE.url}/en/archive` },
+    { '@type': 'ListItem', position: 3, name: `${date} Daily`, item: `${pageUrl}/` },
+  ],
+});
 ---
 
 <BaseLayout
@@ -61,6 +72,8 @@ const nextUrl = nextDay ? `${SITE.url}/en/day/${nextDay}` : '';
   canonicalUrl={pageUrl}
   prevUrl={prevUrl}
   nextUrl={nextUrl}
+  structuredData={breadcrumbSchema}
+  alternates={[{ lang: 'zh-CN', href: `${SITE.url}/day/${date}/` }]}
 >
 <div class="page">
 

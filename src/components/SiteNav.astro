@@ -4,6 +4,7 @@
 // 手机：品牌 + 搜索 + 更多（☰ 抽屉），主功能入口都在抽屉里。
 // 各页 .shell 的第一个孩子就是它，CSS 里用 grid-column: 1 / -1 让它通栏。
 // 用法：<SiteNav active="home" today={today} />，放在 <div class="shell"> 内最前面。
+import BeanLogo from './BeanLogo.astro';
 interface Props {
   active?: 'home' | 'day' | 'hot' | 'officer' | 'new-terms' | 'archive' | 'stats' | 'weekly' | 'none';
   today?: string;
@@ -33,7 +34,7 @@ const langLabel = lang === 'en' ? '中文' : 'English';
 
 <header class="topnav">
   <a class="topnav-brand" href="/">
-    <img src="/icon.svg" alt="" width="28" height="28" />
+    <BeanLogo size={28} />
     <span class="topnav-brand-text"><b>{t.brand}</b><i>{t.tagline}</i></span>
   </a>
   <nav class="topnav-main" aria-label={t.nav}>
@@ -107,7 +108,7 @@ const langLabel = lang === 'en' ? '中文' : 'English';
   text-decoration: none;
   flex-shrink: 0;
 }
-.topnav-brand img { width: 28px; height: 28px; flex-shrink: 0; }
+.topnav-brand .bean-logo { width: 28px; height: 28px; }
 .topnav-brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 .topnav-brand-text b { font-size: 16px; font-weight: 800; color: var(--text-h); letter-spacing: -0.3px; }
 .topnav-brand-text i { font-style: normal; font-size: 11px; font-weight: 600; color: var(--text-m); }

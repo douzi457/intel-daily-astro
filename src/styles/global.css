@@ -1362,7 +1362,7 @@ a { color: inherit; text-decoration: none; }
 /* ── Multi-column shell layout (Batch 15) ── */
 .shell {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0;
   max-width: 1280px;
   margin: 0 auto;
@@ -1395,7 +1395,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (min-width: 768px) and (max-width: 1279px) {
-  .shell { grid-template-columns: 1fr; gap: 24px; }
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .shell-right {
     display: block;
     order: 2;
@@ -1457,3 +1457,7 @@ a { color: inherit; text-decoration: none; }
 /* v4.4：跳过导航链接（平时藏在视口外，键盘 Tab 聚焦时出现） */
 .skip-link { position: absolute; left: -9999px; top: 0; background: var(--accent); color: #fff; padding: 8px 14px; border-radius: 0 0 8px 0; z-index: 999; font-size: 13px; text-decoration: none; }
 .skip-link:focus { left: 0; }
+
+/* 分数按钮（ScoreExplainer 触发器，全站共用）：长得像原来的分数文本，实际是可点的按钮 */
+.score-btn { background: transparent; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; border-radius: 4px; }
+.score-btn:hover { text-decoration: underline; text-underline-offset: 2px; }

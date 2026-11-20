@@ -80,6 +80,17 @@ const metaDesc = featured.length > 0
 const pageUrl = `${SITE.url}/day/${date}`;
 const prevUrl = prevDay ? `${SITE.url}/day/${prevDay}` : '';
 const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
+
+// 面包屑结构化数据（与可见导航一致：首页 > 归档 > 当日日报）
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: '归档', item: `${SITE.url}/archive` },
+    { '@type': 'ListItem', position: 3, name: `${date} 日报`, item: `${pageUrl}/` },
+  ],
+});
 ---
 
 <BaseLayout
@@ -90,6 +101,8 @@ const nextUrl = nextDay ? `${SITE.url}/day/${nextDay}` : '';
   canonicalUrl={pageUrl}
   prevUrl={prevUrl}
   nextUrl={nextUrl}
+  structuredData={breadcrumbSchema}
+  alternates={[{ lang: 'en', href: `${SITE.url}/en/day/${date}/` }]}
 >
 <div class="page">
   <div class="shell">

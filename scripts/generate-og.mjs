@@ -22,11 +22,13 @@ const FONT_400_URL =
 const GARBAGE = /数据不足|未提供具体内容|无法生成|歸藏未提供/;
 
 const C = {
-  bg: '#0A0A0A',
-  text: '#F5F5F5',
-  muted: '#A1A1AA',
-  faint: '#71717A',
-  accent: '#EA580C',
+  bg: '#F7F8F4',
+  text: '#17231C',
+  muted: '#536359',
+  faint: '#7A8A80',
+  accent: '#176447',
+  gold: '#B45309',
+  goldSoft: '#FDF3E3',
 };
 
 function displayScore(it) {
@@ -96,9 +98,12 @@ function cardSVG({ dateLabel, headline, score, total, lines, bottomRight }) {
   const hl = wrapText(headline, 46, 1072, 2);
   const afterHeadline = hl.length === 2 ? 267 : 205;
   const p = [];
+  const isGod = score != null && score >= 9.5;
   p.push(`<rect width="1200" height="630" fill="${C.bg}"/>`);
+  // 豆子 Logo（与站内 BeanLogo 同形：豆形 + 信号波 + 两叶芽），36px，置于品牌字左侧
+  p.push(`<g transform="translate(64,56) scale(1.15)"><path d="M18.6 4.2 C24.5 5.6 28 10.8 27.4 16.6 C26.8 22.6 22.2 27.2 16.2 27.8 C10.2 28.4 5 24.6 3.8 18.8 C2.6 13 5.2 7.2 10.4 4.9 C13 3.7 16 3.5 18.6 4.2 Z" fill="${C.accent}"/><path d="M8.2 20.8 C10.8 17.2 13.2 18.6 15.4 15.2 C17.4 12 20 12.8 22.8 9.6" fill="none" stroke="${C.bg}" stroke-width="2" stroke-linecap="round"/><path d="M19.5 4.5 C20 1.5 22.5 0.5 24.5 1.5 C23.5 3.8 21 5 19.5 4.5 Z" fill="${C.accent}"/><path d="M19.5 4.5 C18 1.8 15.5 1.2 13.8 2.8 C15.2 4.8 17.8 5.5 19.5 4.5 Z" fill="${C.accent}"/></g>`);
   p.push(
-    `<text x="64" y="92" font-family="Noto Sans SC" font-size="30" font-weight="700" fill="${C.accent}">豆子实验室 · 每日情报</text>`,
+    `<text x="112" y="92" font-family="Noto Sans SC" font-size="30" font-weight="700" fill="${C.accent}">豆子实验室 · 每日情报</text>`,
   );
   p.push(
     `<text x="1136" y="90" font-family="Noto Sans SC" font-size="26" fill="${C.muted}" text-anchor="end">${esc(dateLabel)}</text>`,
@@ -111,10 +116,12 @@ function cardSVG({ dateLabel, headline, score, total, lines, bottomRight }) {
   });
   let secY;
   if (score != null) {
-    const label = `AI 评分 ${score.toFixed(1)}`;
+    // 9.5+ 神级信号：金色徽章；其余用豆荚绿
+    const label = isGod ? `神级信号 ${score.toFixed(1)}` : `AI 评分 ${score.toFixed(1)}`;
+    const pillFill = isGod ? C.gold : C.accent;
     const pillW = Math.round(estWidth(label, 24) + 36);
     const pillTop = afterHeadline + 38;
-    p.push(`<rect x="64" y="${pillTop}" width="${pillW}" height="44" rx="22" fill="${C.accent}"/>`);
+    p.push(`<rect x="64" y="${pillTop}" width="${pillW}" height="44" rx="22" fill="${pillFill}"/>`);
     p.push(
       `<text x="${64 + pillW / 2}" y="${pillTop + 30}" font-family="Noto Sans SC" font-size="24" font-weight="700" fill="#FFFFFF" text-anchor="middle">${esc(label)}</text>`,
     );
@@ -191,7 +198,7 @@ async function fetchFont(url, name) {
   throw lastErr;
 }
 
-// 最底层兜底：手写纯色 PNG（黑底 + 顶部橙条），零依赖
+// 最底层兜底：手写纯色 PNG（纸面 + 顶部绿条），零依赖
 function crc32(buf) {
   let table = crc32.table;
   if (!table) {
@@ -221,13 +228,13 @@ function solidPNG() {
     for (let x = 0; x < W; x++) {
       const o = y * (W * 4 + 1) + 1 + x * 4;
       if (y < 8) {
-        raw[o] = 0xea;
-        raw[o + 1] = 0x58;
-        raw[o + 2] = 0x0c;
+        raw[o] = 0x17;
+        raw[o + 1] = 0x64;
+        raw[o + 2] = 0x47;
       } else {
-        raw[o] = 0x0a;
-        raw[o + 1] = 0x0a;
-        raw[o + 2] = 0x0a;
+        raw[o] = 0xf7;
+        raw[o + 1] = 0xf8;
+        raw[o + 2] = 0xf4;
       }
       raw[o + 3] = 0xff;
     }

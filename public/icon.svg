@@ -1,19 +1,10 @@
-<svg width="153" height="153" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="153" height="153" rx="28" fill="#F14D42"/>
-  <!-- Bold "D" letters forming an abstract intelligence/radar shape -->
-  <!-- Outer circle ring -->
-  <circle cx="76.5" cy="68" r="38" stroke="white" stroke-width="5.5" fill="none" opacity="0.3"/>
-  <!-- Inner circle -->
-  <circle cx="76.5" cy="68" r="22" stroke="white" stroke-width="4" fill="none" opacity="0.5"/>
-  <!-- Center dot -->
-  <circle cx="76.5" cy="68" r="7" fill="white"/>
-  <!-- Signal lines radiating outward -->
-  <line x1="76.5" y1="22" x2="76.5" y2="10" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
-  <line x1="114" y1="46" x2="123" y2="39" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
-  <line x1="114" y1="90" x2="123" y2="97" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
-  <line x1="76.5" y1="114" x2="76.5" y2="126" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
-  <line x1="39" y1="90" x2="30" y2="97" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
-  <line x1="39" y1="46" x2="30" y2="39" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
-  <!-- Bottom bar -->
-  <rect x="50" y="127" width="53" height="4" rx="2" fill="white" opacity="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#F7F8F4"/>
+  <!-- 豆子：45° 倾斜的豆形轮廓 -->
+  <path d="M18.6 4.2 C24.5 5.6 28 10.8 27.4 16.6 C26.8 22.6 22.2 27.2 16.2 27.8 C10.2 28.4 5 24.6 3.8 18.8 C2.6 13 5.2 7.2 10.4 4.9 C13 3.7 16 3.5 18.6 4.2 Z" fill="#176447"/>
+  <!-- 豆子中间的弯曲缝隙拉长成信号波（纸色镂空） -->
+  <path d="M8.2 20.8 C10.8 17.2 13.2 18.6 15.4 15.2 C17.4 12 20 12.8 22.8 9.6" fill="none" stroke="#F7F8F4" stroke-width="2" stroke-linecap="round"/>
+  <!-- 两叶小芽 -->
+  <path d="M19.5 4.5 C20 1.5 22.5 0.5 24.5 1.5 C23.5 3.8 21 5 19.5 4.5 Z" fill="#176447"/>
+  <path d="M19.5 4.5 C18 1.8 15.5 1.2 13.8 2.8 C15.2 4.8 17.8 5.5 19.5 4.5 Z" fill="#176447"/>
 </svg>

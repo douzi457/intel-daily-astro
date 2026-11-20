@@ -2,6 +2,7 @@
 import '../styles/global.css';
 /* 全站 token 在 global.css 之后引入，后引入的同名变量获胜 */
 import '../styles/tokens.css';
+import ScoreExplainer from '../components/ScoreExplainer.astro';
 import { SITE } from '../lib/constants';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
   structuredData?: string;
   prevUrl?: string;
   nextUrl?: string;
+  alternates?: Array<{ lang: string; href: string }>;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   structuredData,
   prevUrl,
   nextUrl,
+  alternates = [],
 } = Astro.props;
 
 const isEn = lang.startsWith('en');
@@ -40,6 +43,11 @@ const defaultSchema = JSON.stringify({
   inLanguage: isEn ? 'en-US' : 'zh-CN',
   dateModified: new Date().toISOString().split('T')[0],
   datePublished: '2026-01-01',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: `${SITE.url}/search/?q={search_term_string}` },
+    'query-input': 'required name=search_term_string',
+  },
 });
 ---
 
@@ -53,6 +61,7 @@ const defaultSchema = JSON.stringify({
   <!-- SEO Meta -->
   <meta name="description" content={siteDescription} />
   <link rel="canonical" href={pageUrl} />
+  {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -107,6 +116,7 @@ const defaultSchema = JSON.stringify({
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
   <slot />
+  <ScoreExplainer />
   <script>
     // Theme system：默认跟随系统；.theme-btn 在顶栏和抽屉里各有一个，点一次记一次
     (function() {

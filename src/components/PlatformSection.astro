@@ -13,6 +13,25 @@ const { grouped, locale = 'zh', date = '' } = Astro.props;
 const categories = locale === 'zh' ? SECTION_CATEGORIES_ZH : SECTION_CATEGORIES_EN;
 const allActiveSections = SECTION_ORDER.filter(s => (grouped[s]?.length || 0) > 0);
 
+// 追踪时间线：同一 topic（同一主题/实体）的条目互为「同主题报道」，
+// 每条下面挂出同主题的其他条目（按分排，最多 2 条 + 计数），点进去跳到站内锚点。
+const topicGroups = new Map<string, IntelItem[]>();
+for (const key of Object.keys(grouped)) {
+  for (const it of grouped[key] || []) {
+    const tp = String((it as any).topic || '').trim();
+    if (!tp) continue;
+    if (!topicGroups.has(tp)) topicGroups.set(tp, []);
+    topicGroups.get(tp)!.push(it);
+  }
+}
+function siblingsOf(item: IntelItem): IntelItem[] {
+  const tp = String((item as any).topic || '').trim();
+  if (!tp) return [];
+  return (topicGroups.get(tp) || [])
+    .filter(x => x.id !== item.id)
+    .sort((a, b) => (b.score || 0) - (a.score || 0));
+}
+
 if (allActiveSections.length === 0) return null;
 
 // 默认展示前 8 个平台，其余折叠
@@ -47,6 +66,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
             const sources = item.merged_sources || [];
             const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
             const extraSources = sources.slice(1);
+            const sibs = siblingsOf(item);
             return (
               <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`} data-score={item.score || 0} data-time={item.published_at || ''}>
                 <span class="news-idx">{idx + 1}</span>
@@ -65,11 +85,18 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                       {item.merged_sources && item.merged_sources.length > 0 && <span class="merge-count">+{extraSources.length}</span>}
                     </div>
                     {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                    {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <strong>{item.score}</strong></span>}
+                    {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <button type="button" class="score-btn" data-score-btn data-score={item.score} data-ai="0" aria-label={`信号分 ${item.score}，查看评分说明`}><strong>{item.score}</strong></button></span>}
                     {date && (<button class="fav-btn" type="button" data-fav-id={`${date}:${item.id}`} data-fav-title={item.title} data-fav-date={date} data-fav-url={`/day/${date}/#entry-${item.id}`} data-fav-score={item.score || 0} aria-label="收藏">☆</button>)}
                     {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                   </div>
                   {item.desc && <div class="news-desc">{item.desc}</div>}
+                  {sibs.length > 0 && (
+                    <div class="topic-siblings">
+                      <span>同主题还有 {sibs.length} 条</span>
+                      {sibs.slice(0, 2).map((s) => (<a href={`#entry-${s.id}`} title={s.title}>{s.title}</a>))}
+                      {sibs.length > 2 && <span>…</span>}
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -108,6 +135,7 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                 const sources = item.merged_sources || [];
                 const primarySource = sources[0] || { color: meta.color, icon: meta.icon, label: meta.label };
                 const extraSources = sources.slice(1);
+                const sibs = siblingsOf(item);
                 return (
                   <div id={`entry-${item.id}`} class={`news-item ${item.score >= 7 ? 'score-high' : item.score >= 5 ? 'score-med' : ''}`} style={`--tag-color:${primarySource.color}`} data-score={item.score || 0} data-time={item.published_at || ''}>
                     <span class="news-idx">{idx + 1}</span>
@@ -125,11 +153,18 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
                           ))}
                         </div>
                         {hotValue > 0 && <span class="news-hot">🔥 {hotValue}</span>}
-                        {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <strong>{item.score}</strong></span>}
+                        {item.score > 0 && <span class="news-score">{locale === 'zh' ? '信号' : 'Sig'} <button type="button" class="score-btn" data-score-btn data-score={item.score} data-ai="0" aria-label={`信号分 ${item.score}，查看评分说明`}><strong>{item.score}</strong></button></span>}
                     {date && (<button class="fav-btn" type="button" data-fav-id={`${date}:${item.id}`} data-fav-title={item.title} data-fav-date={date} data-fav-url={`/day/${date}/#entry-${item.id}`} data-fav-score={item.score || 0} aria-label="收藏">☆</button>)}
                     {(item.cross_sources || 0) >= 3 && <span class="cross-badge">🌐 {locale === 'zh' ? '多源确认' : 'Confirmed'}</span>}
                       </div>
                       {item.desc && <div class="news-desc">{item.desc}</div>}
+                      {sibs.length > 0 && (
+                        <div class="topic-siblings">
+                          <span>同主题还有 {sibs.length} 条</span>
+                          {sibs.slice(0, 2).map((s) => (<a href={`#entry-${s.id}`} title={s.title}>{s.title}</a>))}
+                          {sibs.length > 2 && <span>…</span>}
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -289,6 +324,11 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
 
 .news-score strong { color: var(--accent); font-weight: 700; }
 
+/* ── 同主题追踪：同一 topic 的其他条目 ── */
+.topic-siblings { margin-top: 6px; font-size: 12px; color: var(--text-m); line-height: 1.6; }
+.topic-siblings a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--accent); text-decoration: none; }
+.topic-siblings a:hover { text-decoration: underline; }
+
 .news-item.score-high {
   border-left-color: color-mix(in srgb, var(--tag-color, var(--accent)) 80%, transparent);
 }
@@ -370,6 +410,20 @@ const showLessLabel = locale === 'zh' ? '收起更多' : 'Show less';
           btn.childNodes[0].textContent = isVisible ? showLess : showMore;
         });
       }
+      // 同主题链接：目标在折叠区时先展开，再让浏览器默认锚点跳转落过去
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('.topic-siblings a[href^="#entry-"]') : null;
+        if (!a) return;
+        var target = document.getElementById(a.getAttribute('href').slice(1));
+        if (!target) return;
+        if (hidden && target.closest('#hiddenSources') && !hidden.classList.contains('visible')) {
+          hidden.classList.add('visible');
+          if (btn) {
+            btn.classList.add('expanded');
+            if (btn.childNodes[0]) btn.childNodes[0].textContent = btn.getAttribute('data-show-less') || '收起';
+          }
+        }
+      });
     })();
   </script>
 )}

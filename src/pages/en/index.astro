@@ -41,7 +41,7 @@ const highScoreCount = items.filter(i => i.score >= 7).length;
 const pageDesc = `Today's tech intelligence briefing from ${SITE.name}. AI-scored news from ${activeSections.length} sources.`;
 ---
 
-<BaseLayout title="Douzi Labs · Daily Intel" lang="en" description={pageDesc}>
+<BaseLayout title="Douzi Labs · Daily Intel" lang="en" description={pageDesc} alternates={[{ lang: 'zh-CN', href: SITE.url + '/' }]}>
 <div class="page">
 
   {totalItems > 0 && (
