@@ -1,27 +1,27 @@
-## 选题1：Here are the top AI agents that can live
-- 角度：短信成为AI Agent分发入口，验证了端侧轻量级助手在即时通讯场景的落地潜力，打破传统APP孤岛壁
+## 选题1：Google 让 Gemini 的使用变得更容易，无需对您的数据进行 AI 训练
+- 角度：谷歌此举将隐私选择权下沉至基础免费层，迫使竞争者重新审视默认数据收集策略；对内容创作者而言，这是构建
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，5家媒体
-- 验证：查阅原文[Here are the top AI agents tha...]
+- 证据：核心信号第1条，1家媒体
+- 验证：查阅原文[Google 让 Gemini 的使用变得更容易，无需对您的...]
 - 风险：发布时间未知，需核实
-- 形式：观点评论
+- 形式：实测教程
 
 ---
 
-## 选题2：Startup sues Apple in India over tap-to-
-- 角度：针对Apple私有生态功能的诉讼，揭示了平台垄断边界与第三方创新在印度司法管辖区的法律博弈风险。
+## 选题2：使 AI 代理能够通过 Amazon Bedrock AgentCore 付款来
+- 角度：这是Agent从“执行器”进化为“经济主体”的关键基础设施，掌握x402集成能力的开发者将率先构建可
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第2条，2家媒体
-- 验证：查阅原文[Startup sues Apple in India ov...]
+- 证据：核心信号第2条，1家媒体
+- 验证：查阅原文[使 AI 代理能够通过 Amazon Bedrock Age...]
 - 风险：发布时间未知，需核实
-- 形式：观点评论
+- 形式：实测教程
 
 ---
 
-## 选题3：Daniel Ek backs AI researcher's fusion p
-- 角度：AI技术赋能核聚变研发加速，显示通用智能模型在复杂物理模拟中降低能源突破门槛的巨大商业价值。
+## 选题3：[AINews] Anthropic successfully complete
+- 角度：AI实验室首次以如此规模登陆公开市场，将改变行业资金获取逻辑与研发优先级；关注开源与商业平衡、安全投
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第3条，5家媒体
-- 验证：查阅原文[Daniel Ek backs AI researcher'...]
+- 证据：核心信号第3条，1家媒体
+- 验证：查阅原文[[AINews] Anthropic successfull...]
 - 风险：发布时间未知，需核实
-- 形式：观点评论
+- 形式：实测教程
