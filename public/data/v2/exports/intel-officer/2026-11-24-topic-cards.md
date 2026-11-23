@@ -1,27 +1,27 @@
-## 选题1：Google 让 Gemini 的使用变得更容易，无需对您的数据进行 AI 训练
-- 角度：数据隐私是AI Agent商业化落地的最大合规阻力。Google此举将“隐私”从被动防御转为主动功能
+## 选题1：Anthropic launches Claude Ship, letting 
+- 角度：Claude Ship标志着AI编程工具从'辅助编码'转向'自主交付'。对于开发者而言，这意味着工作
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，1家媒体
-- 验证：查阅原文[Google 让 Gemini 的使用变得更容易，无需对您的...]
+- 证据：核心信号第1条，5家媒体
+- 验证：查阅原文[Anthropic launches Claude Ship...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
 
 ---
 
-## 选题2：使 AI 代理能够通过 Amazon Bedrock AgentCore 付款来
-- 角度：Agent支付能力是AI从“对话”走向“行动”的关键里程碑。AWS将支付基础设施标准化，意味着Age
+## 选题2：Google Search's AI Mode can now tap into
+- 角度：将金融与文档数据引入搜索引擎，彻底改变了'搜索'的定义。它不仅提升了回答的准确度，更引发了用户对隐私
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第2条，1家媒体
-- 验证：查阅原文[使 AI 代理能够通过 Amazon Bedrock Age...]
+- 证据：核心信号第2条，5家媒体
+- 验证：查阅原文[Google Search's AI Mode can no...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
 
 ---
 
-## 选题3：[AINews] Anthropic successfully complete
-- 角度：AI实验室上市是行业从“补贴驱动”转向“利润驱动”的分水岭。Anthropic的IPO结果将直接影响
+## 选题3：Amazon snaps up Decart's AI optimization
+- 角度：该收购案揭示了AI基础设施竞争的焦点已从'训练算力'转向'推理效率'。对于开发者而言，这可能意味着未
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第3条，1家媒体
-- 验证：查阅原文[[AINews] Anthropic successfull...]
+- 证据：核心信号第3条，2家媒体
+- 验证：查阅原文[Amazon snaps up Decart's AI op...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
