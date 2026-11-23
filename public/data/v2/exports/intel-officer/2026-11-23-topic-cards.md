@@ -1,27 +1,27 @@
-## 选题1：Here are the top AI agents that can live
-- 角度：短信场景的Agent化是AI助理落地的新阵地，能触达更广泛的用户群，也为开发者和产品方提供新的集成思
+## 选题1：Notable Capital、GIC 和 Baillie Gifford 如何
+- 角度：顶级主权基金与私募巨头在IPO前重仓Anthropic，标志着AI头部模型公司估值进入机构化配置阶段
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，5家媒体
-- 验证：查阅原文[Here are the top AI agents tha...]
+- 证据：核心信号第1条，1家媒体
+- 验证：查阅原文[Notable Capital、GIC 和 Baillie ...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
 
 ---
 
-## 选题2：Startup sues Apple in India over tap-to-
-- 角度：此案反映了AI/技术时代平台与创业者之间的典型冲突，对创作者理解市场动态和政策环境有参考价值。
+## 选题2：OpenAI首席科学家对如何限制AI发展有思考
+- 角度：OpenAI首席科学家公开阐述AI限制策略，反映巨头在扩张算力与安全对齐间的平衡，预示AI治理框架将
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第2条，1家媒体
-- 验证：查阅原文[Startup sues Apple in India ov...]
+- 验证：查阅原文[OpenAI首席科学家对如何限制AI发展有思考...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
 
 ---
 
-## 选题3：Daniel Ek backs AI researcher's fusion p
-- 角度：AI巨头跨界投资聚变能源，体现技术融合趋势，也为AI从业者提供投资风向标。
+## 选题3：利用 OpenAI 模型推进芯片设计
+- 角度：将OpenAI模型引入芯片设计流程，验证了生成式AI在垂直工程领域的落地潜力，可能加速硬件创新周期并
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第3条，5家媒体
-- 验证：查阅原文[Daniel Ek backs AI researcher'...]
+- 证据：核心信号第3条，1家媒体
+- 验证：查阅原文[利用 OpenAI 模型推进芯片设计...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
