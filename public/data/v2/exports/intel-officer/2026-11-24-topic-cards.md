@@ -1,27 +1,27 @@
-## 选题1：Anthropic 推出 Claude Ship，让 AI 代理审查、修复和批准
-- 角度：Claude Ship 标志着 AI 从“工具”向“数字员工”的跨越。对于技术创作者，这意味着开发工
+## 选题1：Anthropic launches Claude Ship, letting 
+- 角度：Anthropic 的 Claude Ship 标志着 AI Agent 从代码生成向全流程代码交付
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，2家媒体
-- 验证：查阅原文[Anthropic 推出 Claude Ship，让 AI ...]
+- 证据：核心信号第1条，5家媒体
+- 验证：查阅原文[Anthropic launches Claude Ship...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
 
 ---
 
-## 选题2：Google 让 Gemini 的使用变得更容易，无需对您的数据进行 AI 训练
-- 角度：数据隐私是 AI 模型发展的法律基石。Google 的这一转向不仅影响用户选择，更揭示了大模型在“数
+## 选题2：Google Search's AI Mode can now tap into
+- 角度：Google AI Mode 接入 Drive 与 Wallet，将搜索引擎从通用工具升级为个人数据
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第2条，1家媒体
-- 验证：查阅原文[Google 让 Gemini 的使用变得更容易，无需对您的...]
+- 证据：核心信号第2条，5家媒体
+- 验证：查阅原文[Google Search's AI Mode can no...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
 
 ---
 
-## 选题3：亚马逊以 7.5B 美元收购 Decart 的人工智能优化技术，准备销售 Tra
-- 角度：AI 算力是基础设施的核心。Amazon 此役直接挑战 Nvidia 的统治地位，推理成本的下降将加
+## 选题3：Supertake raises $20M to let AI agents t
+- 角度：Supertake 获 2000 万美元融资，其 AI Agent 将市场预测直接转化为股票交易，打
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第3条，1家媒体
-- 验证：查阅原文[亚马逊以 7.5B 美元收购 Decart 的人工智能优化技...]
+- 证据：核心信号第3条，5家媒体
+- 验证：查阅原文[Supertake raises $20M to let A...]
 - 风险：发布时间未知，需核实
 - 形式：实测教程
