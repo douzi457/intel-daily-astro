@@ -1,27 +1,27 @@
-## 选题1：Anthropic's Dario Amodei calls accusatio
-- 角度：头部玩家对AI控制权的定义权之争，直接决定了未来监管红线与行业合规成本。创作者需要穿透公关话术，看清
+## 选题1：Anthropic 的 Dario Amodei 称将人类控制权交给人工智能的指
+- 角度：Amodei的否认旨在平息监管焦虑，确立Anthropic在安全叙事中的领导力，影响投资者对AGI风
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，5家媒体
-- 验证：查阅原文[Anthropic's Dario Amodei calls...]
+- 证据：核心信号第1条，2家媒体
+- 验证：查阅原文[Anthropic 的 Dario Amodei 称将人类控...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
 
 ---
 
-## 选题2：Amazon and Meta reportedly in talks to l
-- 角度：Agent是下一个流量入口，生态封锁的松动直接改变开发者工具链与部署成本。这是AI Agent从“单
+## 选题2：OpenAI 表示，随着 Chat 和 Work 的合并，ChatGPT 的大量
+- 角度：合并Chat与Work功能意味着资源消耗激增，更频繁的限流将倒逼企业用户调整预算，考验OpenAI商
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第2条，4家媒体
-- 验证：查阅原文[Amazon and Meta reportedly in ...]
+- 证据：核心信号第2条，1家媒体
+- 验证：查阅原文[OpenAI 表示，随着 Chat 和 Work 的合并，C...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
 
 ---
 
-## 选题3：OpenAI says heavy ChatGPT users may hit 
-- 角度：产品策略的变动直接反映大厂的算力焦虑与商业化路径。这不仅是产品问题，更是AI服务定价从“按量计费”向
+## 选题3：据报道，亚马逊和 Meta 正在谈判解除对人工智能代理 Muse 的封锁
+- 角度：巨解除封锁AI代理Muse显示科技巨头正在从模型竞争转向应用层控制权的争夺，重塑AI分发渠道格局。
 - 适合谁：AI开发者、技术决策者
 - 证据：核心信号第3条，2家媒体
-- 验证：查阅原文[OpenAI says heavy ChatGPT user...]
+- 验证：查阅原文[据报道，亚马逊和 Meta 正在谈判解除对人工智能代理 Mu...]
 - 风险：发布时间未知，需核实
-- 形式：实测教程
+- 形式：观点评论
