@@ -1,27 +1,27 @@
-## 选题1：Anthropic's Dario Amodei calls accusatio
-- 角度：Amodei公开反驳AI失控指控，旨在重塑监管机构与公众对前沿模型安全边界的认知，直接影响Anthr
+## 选题1：FCC 批准 SpaceX 将人工智能数据中心送入太空的计划
+- 角度：太空算力旨在利用星间低延迟解决地面数据瓶颈，为高延迟敏感型AI工作负载提供独特基础设施，挑战传统地面
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第1条，5家媒体
-- 验证：查阅原文[Anthropic's Dario Amodei calls...]
+- 证据：核心信号第1条，3家媒体
+- 验证：查阅原文[FCC 批准 SpaceX 将人工智能数据中心送入太空的计划...]
 - 风险：发布时间未知，需核实
 - 形式：观点评论
 
 ---
 
-## 选题2：OpenAI says heavy ChatGPT users may hit 
-- 角度：OpenAI合并聊天与工作场景并调整高频用户限制，暴露了其高昂推理算力成本下的商业权衡，预示大模型从
+## 选题2：这是您在 Android Auto 上使用全新 Gemini AI 可以做的一切
+- 角度：将前沿多模态大模型直接嵌入车载OS，实现语音到行动的无缝闭环，确立AI助手在汽车核心交互层的主导地位
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第2条，5家媒体
-- 验证：查阅原文[OpenAI says heavy ChatGPT user...]
+- 证据：核心信号第2条，1家媒体
+- 验证：查阅原文[这是您在 Android Auto 上使用全新 Gemini...]
 - 风险：发布时间未知，需核实
 - 形式：观点评论
 
 ---
 
-## 选题3：Amazon says hackers' AI agents found and
-- 角度：Amazon证实黑客利用AI代理自主发现并利用0-day漏洞，标志着网络攻击进入智能化自动化时代，迫
+## 选题3：使 AI 代理能够通过 Amazon Bedrock AgentCore 付款来
+- 角度：打通AI Agent直接调用AWS市场服务的支付链路，确立自主智能体作为经济参与者的地位，预示去中心
 - 适合谁：AI开发者、技术决策者
-- 证据：核心信号第3条，3家媒体
-- 验证：查阅原文[Amazon says hackers' AI agents...]
+- 证据：核心信号第3条，1家媒体
+- 验证：查阅原文[使 AI 代理能够通过 Amazon Bedrock Age...]
 - 风险：发布时间未知，需核实
 - 形式：观点评论
